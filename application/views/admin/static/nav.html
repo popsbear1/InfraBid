@@ -1,0 +1,121 @@
+<?php
+//$username = $_SESSION['user'];
+?>
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col" style="z-index:0;">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="home.php" class="site_title"><i class="fa fa-road"></i> <span>InfraProj <?php echo date('Y');?></span></a>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <!-- menu profile quick info -->
+          <div class="profile">
+            <div class="profile_pic">
+              <img src="public/images/ph-ben.gif" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <h2>Benguet Provincial Government</h2>
+            </div>
+          </div>
+          <!-- /menu profile quick info -->
+
+          <br>
+
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <h3>Process</h3>
+              <ul class="nav side-menu">
+                <li><a href="plan.php"><i class="fa fa-tasks"></i> Annual Procurement Plan </a></li>
+                <li><a><i class="fa fa-shopping-cart"></i> Procurement Activity <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href='_addpreproc.php'>Pre-Procurement Conference</a>
+                    </li>
+                    <li><a href='_advertisement.php'>Advertisement</a>
+                    </li>
+                    <li><a href='_prebid.php'>Pre-bid Conference</a>
+                    </li>
+                    <li><a href='_openbid.php'>Opening of Bids</a>
+                    </li>
+                    <li><a href='#.php'>Add Contractor</a>
+                    </li>
+                    <li><a href='#.php'>Bid Price/Contract Cost</a>
+                    </li>
+                    <li><a href='_bideval.php'>Bid Evaluation</a>
+                    </li>
+                    <li><a href='_postqual.php'>Post Qualification</a>
+                    </li>
+                    <li><a href='_nofaward.php'>Date Awarded</a>
+                    </li>
+                    <li><a href='_consign.php'>Contract Signing</a>
+                    </li>
+                    <li><a href='_ntoproceed.php'>Notice to Proceed</a>
+                    </li>
+                    <li><a href='_delivery.php'>Delivery/Completion</a>
+                    </li>
+                    <li><a href='_acceptance.php'>Acceptance/Turnover</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu_section">
+              <h3>Others</h3>
+              <ul class="nav side-menu">
+                <li><a href="contractor.php"><i class="fa fa-users"></i> Manage Contractor</a>
+                </li>
+                <li><a href="fund.php"><i class="fa fa-money"></i> Manage Funds </a>
+                </li>
+                <li><a href="projecttype.php"><i class="fa fa-list"></i>Manage Project Types </span></a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu_section">
+              <h3>Reports</h3>
+              <ul class="nav side-menu">
+                <li><a><i class="fa fa-folder-open"></i>Reports <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a>Reports</a>
+                    </li>
+                    <li><a>Reports</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav class="" role="navigation">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/user.png" alt=""><?php //echo $username; ?>
+                </a>
+                <ul role="menu" class="dropdown-menu">
+                  <li><a href="backres.php">Manage Database</a>
+                  </li>
+                  <li><a href="user.php">Manage Users</a>
+                  </li>
+                  <li><a href="logout.php">Log out</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
