@@ -55,9 +55,11 @@
                     <td><?php echo $plan['source'] ?></td>
                     <td><?php echo $plan['account'] ?></td>
                     <td>
-                      <a href="editplan.php" class="shortcut">
-                        <i class="btn btn-success fa fa-edit"></i>
-                      </a>
+                      <form method="POST" action="<?php echo base_url('admin/setCurrentPlanNumber') ?>">
+                        <button class="btn btn-success" type="submit" name="project_no" value="<?php echo $plan['project_no'] ?>">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                      </form>
                     </td>
                   </tr>
                 <?php endforeach ?>

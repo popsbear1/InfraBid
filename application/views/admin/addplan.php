@@ -24,7 +24,17 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <form id="addPlanForm" method="POST" class="form-horizontal form-label-left">
+            <?php if (isset($_SESSION['success'])): ?>
+              <div class="alert alert-success">
+                <p><?php echo $_SESSION['success'] ?></p>
+              </div>
+            <?php endif ?>
+            <?php if (isset($_SESSION['error'])): ?>
+              <div class="alert alert-warning">
+                <p><?php echo $_SESSION['error'] ?></p>
+              </div>
+            <?php endif ?>
+            <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addPlan') ?>">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Project No.<span class="required">*</span>
                 </label>
@@ -44,7 +54,10 @@
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="municipality" name ="municipality" onChange = "updateBarangay(this)">
-                    <option value="">Municipality</option>
+                    <option selected hidden disabled>Choose Municipality</option>
+                    <?php foreach ($municipalities as $municipality): ?>
+                      <option value="<?php echo $municipality['municipality'] . '-' . $municipality['municipalitycode'] ?>"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipalitycode'] ?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
               </div>
@@ -53,7 +66,10 @@
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="brgy" name ="barangay">
-                    <option value="">Barangay</option>
+                    <option selected disabled hidden>Choose Barangay</option>
+                    <?php foreach ($barangays as $barangay): ?>
+                      <option value="<?php echo $barangay['barangaycode'] . '-' . $barangay['barangay'] ?>"><?php echo $barangay['barangaycode'] . ' - ' . $barangay['barangay'] ?></option>
+                    <?php endforeach ?>
                   </select>
                 </div> 
               </div>
@@ -61,7 +77,10 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="type" name ="type">
-                    <option value="">Type of Project</option>
+                    <option selected disabled hidden>Choose Type of Project</option>
+                    <?php foreach ($projTypes as $projType): ?>
+                      <option value="<?php echo $projType['type'] ?>"><?php echo $projType['type'] ?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
               </div>
@@ -69,7 +88,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="mode" name ="mode">
-                    <option value="">Mode of Procurement</option>
+                    <option selected hidden disabled>Mode of Procurement</option>
                     <option value="Bidding">Bidding</option>
                     <option value="SVP">SVP</option>
                     <option value="Negotiated">Negotiated</option>
@@ -86,7 +105,10 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="source" name ="source">
-                    <option value="">Source of Fund</option>
+                    <option selected hidden disabled>Choose Source of Fund</option>
+                    <?php foreach ($sourceFunds as $sourceFund): ?>
+                      <option value="<?php echo $sourceFund['source'] ?>"><?php echo $sourceFund['source'] ?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
               </div>
@@ -94,7 +116,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="account" name ="account">
-                    <option value="">Account Classification</option>
+                    <option selected hidden disabled>Choose Account Classification</option>
                     <option value="Capital Outlay">Capital Outlay</option>
                     <option value="MOOE">MOOE</option>
                   </select>
@@ -184,7 +206,7 @@
 
 <!-- Custom Theme Scripts -->
 <script src="<?php echo base_url() ?>public/build/js/custom.min.js"></script>
-<script src = "barangay.js"></script>
+<script src = "<?php echo base_url() ?>public/barangay.js"></script>
 
 <script>
   $(document).ready(function() {
