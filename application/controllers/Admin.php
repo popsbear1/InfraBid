@@ -15,7 +15,6 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-
 		$data['procacts'] = $this->admin_model->getProcurementProjects();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -23,6 +22,15 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/home', $data);
 		$this->load->view('admin/fragments/footer');
 
+	}
+
+	public function planView(){
+		$data['plans'] = $this->admin_model->getProjectPlan();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/plan', $data);
+		$this->load->view('admin/fragments/footer');
 	}
 
 }

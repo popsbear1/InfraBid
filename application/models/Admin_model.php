@@ -15,5 +15,15 @@
 
 			return $query->result_array();
 		}
+
+		public function getProjectPlan(){
+			$this->db->select('*');
+			$this->db->from('plan');
+			$this->db->order_by('project_no', 'DESC');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
 	}
 ?>
