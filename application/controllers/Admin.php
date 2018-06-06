@@ -33,4 +33,24 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	public function addPlanView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addPlan');
+		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function addPlan(){
+		$project_no = mysql_real_escape_string(htmlspecialchars($this->input->post('project_no')));
+        $project_title = mysql_real_escape_string(htmlspecialchars($this->input->post('project_title')));
+        $municipality=mysql_real_escape_string(htmlspecialchars($this->input->post('municipality')));
+        $barangay=mysql_real_escape_string(htmlspecialchars($this->input->post('barangay')));
+        $type=mysql_real_escape_string(htmlspecialchars($this->input->post('type')));
+        $mode=mysql_real_escape_string(htmlspecialchars($this->input->post('mode')));
+        $ABC=mysql_real_escape_string(htmlspecialchars($this->input->post('ABC')));
+        $source=mysql_real_escape_string(htmlspecialchars($this->input->post('source')));
+        $account=mysql_real_escape_string(htmlspecialchars($this->input->post('account')));
+	}
+
 }

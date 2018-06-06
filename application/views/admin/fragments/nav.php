@@ -1,5 +1,5 @@
-<?php
-//$username = $_SESSION['user'];
+<?php 
+  $username = $this->session->userdata('username');
 ?>
 <body class="nav-md">
   <div class="container body">
@@ -15,7 +15,7 @@
           <!-- menu profile quick info -->
           <div class="profile">
             <div class="profile_pic">
-              <img src="public/images/ph-ben.gif" alt="..." class="img-circle profile_img">
+              <img src="<?php echo base_url() ?>public/images/ph-ben.gif" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <h2>Benguet Provincial Government</h2>
@@ -104,14 +104,14 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/user.png" alt=""><?php //echo $username; ?>
+                  <img src="<?php echo base_url() ?>public/images/user.png" alt=""><?php echo $username ?>
                 </a>
                 <ul role="menu" class="dropdown-menu">
                   <li><a href="backres.php">Manage Database</a>
                   </li>
                   <li><a href="user.php">Manage Users</a>
                   </li>
-                  <li><a href="logout.php">Log out</a>
+                  <li><a href="<?php echo base_url('user/logout') ?>">Log out</a>
                   </li>
                 </ul>
               </li>

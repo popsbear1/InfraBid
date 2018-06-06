@@ -1,19 +1,4 @@
-<?php
-  session_start();
-    if (isset($_SESSION['user'])) {
-      $user = $_SESSION['user'];
-        include 'databaseconnect.php';
-        include 'static\head.html';
-        include 'static\nav.html';
-    }else
-    {
-      header("location:..\index.php");
-    }
 
-    ?>
-<!DOCTYPE html>
-<html lang="en">
-  <?php include 'static\dashboard.html'; ?>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -38,35 +23,6 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
-      <?php
-                include 'databaseconnect.php';
-
-           if (isset($_POST['submit'])) {
-
-                            $project_no=mysql_real_escape_string(htmlspecialchars($_POST['project_no']));
-                            $project_title=mysql_real_escape_string(htmlspecialchars($_POST['project_title']));
-                            $municipality=mysql_real_escape_string(htmlspecialchars($_POST['municipality']));
-                            $barangay=mysql_real_escape_string(htmlspecialchars($_POST['barangay']));
-                            $type=mysql_real_escape_string(htmlspecialchars($_POST['type']));
-                            $mode=mysql_real_escape_string(htmlspecialchars($_POST['mode']));
-                            $ABC=mysql_real_escape_string(htmlspecialchars($_POST['ABC']));
-                            $source=mysql_real_escape_string(htmlspecialchars($_POST['source']));
-                            $account=mysql_real_escape_string(htmlspecialchars($_POST['account']));
-
-                            $query3= mysql_query("INSERT INTO plan(project_no,project_title,municipality,barangay,type,mode,ABC,source,account)VALUES
-                              ('$project_no','$project_title','$municipality','$barangay','$type','$mode','$ABC','$source','$account')");
-                            $query4 = mysql_query("INSERT INTO procact(project_no)VALUES('$project_no')");
-
-                             if (mysql_error() == true) {
-                                  echo "<div  class='alert alert-warning'><i class='fa fa-warning'></i> &nbsp;" .mysql_error()."</div>";
-                              }else
-                              {
-                                echo "<div class='alert alert-info'>Successfully Added Project !</div>";
-                                }
-                  
-                  }
-            ?>
                     <br />
                     <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
 

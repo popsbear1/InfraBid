@@ -23,11 +23,23 @@ class User extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
-		if ($this->user_model->login($username, $password)) {
+		$userData = $this->user_model->login($username, $password);
+
+		if ($userData) {
+
+			$this->session->set_userdata('id', $userData['id']);
+			$this->session->set_userdata('username', $userData['username']);
+			$this->session->set_userdata('user_type', $userData['user_type']);
+
 			redirect('admin');
 		}else{
-			redirect('index');
+			redirect('user');
 		}
 
+	}
+
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('user');
 	}
 }

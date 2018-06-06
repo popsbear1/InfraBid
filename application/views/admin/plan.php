@@ -2,7 +2,7 @@
         <!-- page content -->
     <div class="form-group no-print">
       <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-        <a href="addplan.php" type="button" class="btn btn-primary">Add New Project</a>
+        <a href="<?php echo base_url('admin/addPlanView') ?>" type="button" class="btn btn-primary">Add New Project</a>
       </div>
     </div>
     <div class="clearfix"></div>
