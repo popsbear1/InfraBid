@@ -25,25 +25,46 @@
           </div>
           <div class="x_content">
             <table class="datatable-1 table table-striped table-bordered">
-              <thead>
+              <thead style='font-size:12px;'>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th class="text-center">Procurement Program/Project</th>
+                  <th class="text-center">PMO/End-User</th>
+                  <th class="text-center">Mode of Procurement</th>
+                  <th class="text-center">Pre-Procurement Conference</th>
+                  <th class="text-center">Ads/Post of IAEB</th>
+                  <th class="text-center">Pre-bid Conference</th>
+                  <th class="text-center">Opening of Bids</th>
+                  <th class="text-center">Bid Evaluation</th>
+                  <th class="text-center">Post Qual</th>
+                  <th class="text-center">Notice of Award</th>
+                  <th class="text-center">Contract Signing/P.O.</th>
+                  <th class="text-center">Notice to Proceed</th>
+                  <th class="text-center">Delivery/Completion</th>
+                  <th class="text-center">Post Qual</th>
+                  <th class="text-center">Source of Funds</th>
+                  <th class="text-center">ABC (Php)</th>
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($procacts as $procact): ?>
                   <tr>
                     <td><?php echo $procact['project_title'] ?></td>
+                    <td></td>
                     <td><?php echo $procact['mode'] ?></td>
                     <td><?php echo $procact['pre_proc'] ?></td>
                     <td><?php echo $procact['advertisement'] ?></td>
                     <td><?php echo $procact['pre_bid'] ?></td>
                     <td><?php echo $procact['openbid'] ?></td>
+                    <td><?php echo $procact['bidevaluation'] ?></td>
+                    <td><?php echo $procact['postqual'] ?></td>
+                    <td><?php echo $procact['awarddate'] ?></td>
+                    <td><?php echo $procact['contractsigning'] ?></td>
+                    <td><?php echo $procact['proceednotice'] ?></td>
+                    <td><?php echo $procact['completion'] ?></td>
+                    <td><?php echo $procact['postqual'] ?></td>
+                    <td><?php echo $procact['source'] ?></td>
+                    <td><?php echo $procact['ABC'] ?></td>
+                    
                   </tr>
                 <?php endforeach ?>
               </tbody>
@@ -139,60 +160,3 @@
         TableManageButtons.init();
       });
     </script>
-
-
-
-<!--                 
-    $result1 = mysql_query("SELECT * FROM procact Order by project_no DESC") or die(mysql_error());
-
-    echo "<table class='datatable-1 table table-striped table-bordered' style='font-size:13px;'>";
-    echo "<thead style='font-size:12px;'>
-                    <tr>
-                      <th style='text-align: center'>Procurement Program/Project</th>
-                      <th style='text-align: center'>PMO/End-User</th>
-                      <th style='text-align: center'>Mode of Procurement</th>
-                      <th style='text-align: center'>Pre-Procurement Conference</th>
-                      <th style='text-align: center'>Ads/Post of IAEB</th>
-                      <th style='text-align: center'>Pre-bid Conference</th>
-                      <th style='text-align: center'>Opening of Bids</th>
-                      <th style='text-align: center'>Bid Evaluation</th>
-                      <th style='text-align: center'>Post Qual</th>
-                      <th style='text-align: center'>Notice of Award</th>
-                      <th style='text-align: center'>Contract Signing/P.O.</th>
-                      <th style='text-align: center'>Notice to Proceed</th>
-                      <th style='text-align: center'>Delivery/Completion</th>
-                      <th style='text-align: center'>Post Qual</th>
-                      <th style='text-align: center'>Source of Funds</th>
-                      <th style='text-align: center'>ABC (Php)</th>
-                  </thead>
-                 
-                  ";
-    while($row = mysql_fetch_array( $result1 )) {
-         $id = $row['project_no'];
-
-         $result = mysql_query("SELECT * FROM plan where project_no = '$id'") or die(mysql_error());
-
-         $row1 = mysql_fetch_array($result);
-
-      echo "<tr><td>".$row1['project_title']."</td>";
-      echo "<td></td>";
-      echo "<td>".$row1['mode']."</td>";
-      echo "<td>".$row['pre_proc']."</td>";
-      echo "<td>".$row['advertisement']."</td>";
-      echo "<td>".$row['pre_bid']."</td>";
-      echo "<td>".$row['openbid']."</td>";
-      echo "<td>".$row['bidevaluation']."</td>";
-      echo "<td>".$row['postqual']."</td>";
-      echo "<td>".$row['awarddate']."</td>";
-      echo "<td>".$row['contractsigning']."</td>";
-      echo "<td>".$row['proceednotice']."</td>";
-      echo "<td>".$row['completion']."</td>";
-      echo "<td>".$row['postqual']."</td>";
-      echo "<td>".$row1['source']."</td>";
-      echo "<td>".$row1['ABC']."</td>";
-
-
-    } 
-  echo "</table>";
-
-                    ?> -->

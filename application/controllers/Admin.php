@@ -17,11 +17,11 @@ class Admin extends CI_Controller {
 	{
 
 		$data['procacts'] = $this->admin_model->getProcurementProjects();
-		$this->load->view('admin/static/head.html');
-		$this->load->view('admin/static/nav.html');
-		$this->load->view('admin/static/dashboard.html');
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/home', $data);
-		$this->load->view('admin/static/footer.html');
+		$this->load->view('admin/fragments/footer');
 
 	}
 

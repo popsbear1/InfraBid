@@ -7,7 +7,7 @@
       <div class="col-md-3 left_col" style="z-index:0;">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="home.php" class="site_title"><i class="fa fa-road"></i> <span>InfraProj <?php echo date('Y');?></span></a>
+            <a href="<?php echo base_url('admin') ?>" class="site_title"><i class="fa fa-road"></i> <span>InfraProj <?php echo date('Y');?></span></a>
           </div>
 
           <div class="clearfix"></div>
