@@ -24,7 +24,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <form id="addPlanForm" method="POST" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
+            <form id="addPlanForm" method="POST" class="form-horizontal form-label-left">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Project No.<span class="required">*</span>
                 </label>
@@ -48,7 +48,6 @@
                   </select>
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Barangay <span class="required">*</span>
                 </label>
@@ -58,7 +57,6 @@
                   </select>
                 </div> 
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -67,7 +65,6 @@
                   </select>
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -79,23 +76,20 @@
                   </select>
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input type="text" step="any"  id="ABC" value="" name="ABC"  class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="source" name ="source">
                     <option value="">Source of Fund</option>
-                    
+                  </select>
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification <span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -106,23 +100,78 @@
                   </select>
                 </div>
               </div>
-
-
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                   <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-                  
                 </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
     </div>
+    <!-- modal for data confirmation -->
+    <div id="myModal" class="modal fade bs-example-modal-lg" role="dialog" >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+          </div>
+          <div class="modal-body">
+            <table class='table table-striped table-bordered' style='font-size:13px;'>
+              <thead>
+                <tr >
+                  <th style='text-align: center'>Attributes</th>
+                  <th style='text-align: center'>Values</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr><td>Project No.</td>
+                  <td><span id="proj"></span></td>
+                </tr>
+                <tr><td>Project Title</td>
+                  <td><span id="title"></span></td>
+                </tr>
+                <tr><td>Municipality</td>
+                  <td><span id="mun"></span></td>
+                </tr>
+                <tr><td>Barangay</td>
+                  <td><span id="bar"></span></td>
+                </tr>
+                <tr><td>Type of Project</td>
+                  <td><span id="typ"></span></td>
+                </tr>
+                <tr><td>Mode of Procurement</td>
+                  <td><span id="mod"></span></td>
+                </tr>
+                <tr><td>Approved Budget Cost(ABC)</td>
+                  <td><span id="abc"></span></td>
+                </tr>
+                <tr><td>Source of Fund</td>
+                  <td><span id="fun"></span></td>
+                </tr>
+                <tr><td>Account Classification</td>
+                  <td><span id="accoun"></span></td>
+                </tr>
+
+              </tbody>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" name="submit" form="addPlanForm"class="btn btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
   </div>
 </div>
+
 
 <!-- jQuery -->
 <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
@@ -156,59 +205,4 @@
   });
 </script>
 
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td>Project No.</td>
-              <td><span id="proj"></span></td>
-            </tr>
-            <tr><td>Project Title</td>
-              <td><span id="title"></span></td>
-            </tr>
-            <tr><td>Municipality</td>
-              <td><span id="mun"></span></td>
-            </tr>
-            <tr><td>Barangay</td>
-              <td><span id="bar"></span></td>
-            </tr>
-            <tr><td>Type of Project</td>
-              <td><span id="typ"></span></td>
-            </tr>
-            <tr><td>Mode of Procurement</td>
-              <td><span id="mod"></span></td>
-            </tr>
-            <tr><td>Approved Budget Cost(ABC)</td>
-              <td><span id="abc"></span></td>
-            </tr>
-            <tr><td>Source of Fund</td>
-              <td><span id="fun"></span></td>
-            </tr>
-            <tr><td>Account Classification</td>
-              <td><span id="accoun"></span></td>
-            </tr>
-
-          </tbody>
-        </tfoot>
-      </table>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="submit" form="addPlanForm"class="btn btn-primary">Confirm</button>
-    </div>
-  </div>
-</div>
