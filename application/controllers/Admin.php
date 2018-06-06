@@ -89,52 +89,55 @@ class Admin extends CI_Controller {
 
 	public function editPlan(){
 		$currentPlanNumer = $this->session->userdata('project_no');
+
 		if (!empty($_POST['project_no']) && $_POST != null) {
+
+			if (!empty($_POST['project_title']) && $_POST != null) {
+				$project_title = $this->input->post('project_title');
+				$this->admin_model->updateProject_title($project_title, $currentPlanNumer);
+			}
+
+			if (isset($_POST['municipality'])) {
+				$municipality = $this->input->post('municipality');
+				$this->admin_model->updateMunicipality($municipality, $currentPlanNumer);
+			}
+
+			if (isset($_POST['barangay'])) {
+				$barangay = $this->input->post('barangay');
+				$this->admin_model->updateBarangay($barangay, $currentPlanNumer);
+			}
+
+			if (isset($_POST['type'])) {
+				$type = $this->input->post('type');
+				$this->admin_model->updateType($type, $currentPlanNumer);
+			}
+
+			if (isset($_POST['mode'])) {
+				$mode = $this->input->post('mode');
+				$this->admin_model->updateMode($mode, $currentPlanNumer);
+			}
+
+			if (!empty($_POST['ABC'])) {
+				$ABC = $this->input->post('ABC');
+				$this->admin_model->updateABC($ABC, $currentPlanNumer);
+			}
+
+			if (isset($_POST['source'])) {
+				$source = $this->input->post('source');
+				$this->admin_model->updateSource($source, $currentPlanNumer);
+			}
+
+			if (isset($_POST['account'])) {
+				$account = $this->input->post('account');
+				$this->admin_model->updateAccount($account, $currentPlanNumer);
+			}
+			
 			$project_no = $this->input->post('project_no');
 			$this->admin_model->updateProject_no($project_no, $currentPlanNumer);
 			$this->session->set_userdata('project_no', $project_no);
 		}
 
-		if (!empty($_POST['project_title']) && $_POST != null) {
-			$project_title = $this->input->post('project_title');
-			$this->admin_model->updateProject_title($project_title, $currentPlanNumer);
-		}
-
-		if (isset($_POST['municipality'])) {
-			$municipality = $this->input->post('municipality');
-			$this->admin_model->updateMunicipality($municipality, $currentPlanNumer);
-		}
-
-		if (isset($_POST['barangay'])) {
-			$barangay = $this->input->post('barangay');
-			$this->admin_model->updateBarangay($barangay, $currentPlanNumer);
-		}
-
-		if (isset($_POST['type'])) {
-			$type = $this->input->post('type');
-			$this->admin_model->updateType($type, $currentPlanNumer);
-		}
-
-		if (isset($_POST['mode'])) {
-			$mode = $this->input->post('mode');
-			$this->admin_model->updateMode($mode, $currentPlanNumer);
-		}
-
-		if (!empty($_POST['ABC'])) {
-			$ABC = $this->input->post('ABC');
-			$this->admin_model->updateABC($ABC, $currentPlanNumer);
-		}
-
-		if (isset($_POST['source'])) {
-			$source = $this->input->post('source');
-			$this->admin_model->updateSource($source, $currentPlanNumer);
-		}
-
-		if (isset($_POST['account'])) {
-			$account = $this->input->post('account');
-			$this->admin_model->updateAccount($account, $currentPlanNumer);
-		}
-
+			
 		$this->session->set_flashdata('success', 'Plan Details Updated.');
 
 		redirect('admin/editPlanView');
