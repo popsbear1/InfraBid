@@ -1,19 +1,3 @@
-<?php
-  session_start();
-    if (isset($_SESSION['user'])) {
-      $user = $_SESSION['user'];
-        include 'databaseconnect.php';
-        include 'static\head.html';
-        include 'static\nav.html';
-    }else
-    {
-      header("location:..\index.php");
-    }
-
-    ?>
-<!DOCTYPE html>
-<html lang="en">
-  <?php include 'static\dashboard.html'; ?>
         <!-- page content -->
             <div class="clearfix"></div>
             <div class="row">
@@ -39,7 +23,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
+<!-- 
                     <?php
     include('conn.php'); 
     require_once('backup_restore.class.php'); 
@@ -63,7 +47,7 @@
         echo "<div class='alert alert-info'>Successfully Uploaded.  You can now <a href=backres.php?process=restore>restore</a></div>";
         $message = 'Successfully uploaded. You can now <a href=backres.php?process=restore>restore</a>';
     }
-?>
+?> -->
 
 
 <br>
@@ -71,7 +55,7 @@
                <center> <h2></h2>
            
              
-                        <?php if(isset($_GET['process'])): ?>
+<!--                         <?php if(isset($_GET['process'])): ?>
                             <?php 
                                 $msg = $_GET['process'];   
                                 $class = 'text-center';
@@ -92,7 +76,7 @@
                                 }                                
                             ?>
                                 <strong><?php echo $msg; ?></strong><br>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
                         
         
                 <br>
@@ -131,16 +115,16 @@
     </div>
     <?php  include 'static\footer.html';?>
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>public/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="<?php echo base_url() ?>public/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="<?php echo base_url() ?>public/vendors/nprogress/nprogress.js"></script>
     
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="<?php echo base_url() ?>public/build/js/custom.min.js"></script>
 
 
     
