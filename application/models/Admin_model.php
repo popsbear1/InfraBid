@@ -72,6 +72,45 @@
 			return $query->row_array();
 		}
 
+		public function getContractors(){
+			$this->db->select('*');
+			$this->db->from('contractors');
+			$this->db->order_by('id', 'DESC');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getContractorDetails($currentContractorID){
+			$this->db->select('*');
+			$this->db->from('contractors');
+			$this->db->where('id', $currentContractorID);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
+		public function getFunds(){
+			$this->db->select('*');
+			$this->db->from('funds');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getFundsDetails($fundID){
+			$this->db->select('*');
+			$this->db->from('funds');
+			$this->db->where('id', $fundID);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
 
 	/**
 	* All functions bellow are used to insert data on Database.
@@ -105,6 +144,34 @@
 				return false;
 			}	
 
+		}
+
+		public function insertNewContractor($businessname, $owner, $address, $contactnumber){
+			$data = array(
+				'businessname' => $businessname,
+				'owner' => $owner,
+				'address' => $address,
+				'contactnumber' => $contactnumber
+			);
+
+			if ($this->db->insert('contractors', $data)) {
+				return true;
+			}else{
+				return false;
+			}
+
+		}
+
+		public function insertNewFunds($source){
+			$data = array(
+				'source' => $source
+			);
+
+			if ($this->db->insert('funds', $data)) {
+				return true;
+			}else{
+				return false;
+			}
 		}
 	/**
 	* All functions bellow are used to insert data on Database.
@@ -190,6 +257,51 @@
 
 			$this->db->where('project_no', $currentProjNum);
 			$this->db->update('plan', $data);
+		}
+
+		public function updateBusinessName($businessname, $currentContractorID){
+			$data = array(
+				'businessname' => $businessname
+			);
+
+			$this->db->where('id', $currentContractorID);
+			$this->db->update('contractors', $data);
+		}
+
+		public function updateOwner($owner, $currentContractorID){
+			$data = array(
+				'owner' => $owner
+			);
+
+			$this->db->where('id', $currentContractorID);
+			$this->db->update('contractors', $data);
+		}
+
+		public function updateAddress($address, $currentContractorID){
+			$data = array(
+				'address' => $address
+			);
+
+			$this->db->where('id', $currentContractorID);
+			$this->db->update('contractors', $data);
+		}
+
+		public function updateContactnumber($contactnumber, $currentContractorID){
+			$data = array(
+				'contactnumber' => $contactnumber
+			);
+
+			$this->db->where('id', $currentContractorID);
+			$this->db->update('contractors', $data);
+		}
+
+		public function updateFundSource($source, $fundID){
+			$data = array(
+				'source' => $source
+			);
+
+			$this->db->where('id', $fundID);
+			$this->db->update('funds', $data);
 		}
 	}
 ?>

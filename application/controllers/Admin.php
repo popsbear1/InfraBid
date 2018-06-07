@@ -143,4 +143,146 @@ class Admin extends CI_Controller {
 		redirect('admin/editPlanView');
 	}
 
+
+	/**
+	*Bellow are the functions for loading management of data...
+	**/
+
+	public function manageConstractorsView(){
+		$data['contructors'] = $this->admin_model->getContractors();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/contractor', $data);
+		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function addNewContractorView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addcontractor');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addNewContractor(){
+		$businessname = $this->input->post('businessname');
+		$owner = $this->input->post('owner');
+		$address = $this->input->post('address');
+		$contactnumber = $this->input->post('contactnumber');
+
+		if ($this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber)) {
+			$this->session->set_flashdata('success', 'The new contructor has been added to the database.');
+		}else{
+			$this->session->set_flashdata('error', 'There was an error. The new contructor is not added to the database.');
+		}
+
+		redirect('admin/addNewContractorView');
+	}
+
+	public function editContractorView(){
+		$currentContractorID = $this->session->userdata('contractorID');
+
+		$data['contractorDetails'] = $this->admin_model->getContractorDetails($currentContractorID);
+
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/editcontractor', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function setCurrentContractorID(){
+		$contractorID = $this->input->post('contractorID');
+
+		$this->session->set_userdata('contractorID', $contractorID);
+
+		redirect('admin/editContractorView');
+	}
+
+	public function editContractor(){
+		$currentContractorID = $this->session->userdata('contractorID');
+		if (!empty($_POST['businessname'])) {
+			$businessname = $this->input->post('businessname');
+			$this->admin_model->updateBusinessName($businessname, $currentContractorID);
+		}
+
+		if (!empty($_POST['owner'])) {
+			$owner = $this->input->post('owner');
+			$this->admin_model->updateOwner($owner, $currentContractorID);
+		}
+
+		if (!empty($_POST['address'])) {
+			$address = $this->input->post('address');
+			$this->admin_model->updateAddress($address, $currentContractorID);
+		}
+
+		if (!empty($_POST['contactnumber'])) {
+			$contactnumber = $this->input->post('contactnumber');
+			$this->admin_model->updateContactnumber($contactnumber, $currentContractorID);
+		}
+
+		$this->session->set_flashdata('success', 'Constructor Details Successfully Updated.');
+		redirect('admin/editContractorView');
+
+	}
+
+	public function manageFundsView(){
+		$data['funds'] = $this->admin_model->getFunds();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/fund', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addFundsView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addfund');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addFunds(){
+		$source = $this->input->post('source');
+
+		if ($this->admin_model->insertNewFunds($source)) {
+			$this->session->set_flashdata('success', 'New Funds Successfully Added.');
+		}else{
+			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
+		}
+		redirect('admin/addFundsView');
+	}
+
+	public function editFundsView(){
+		$fundID = $this->session->userdata('fundID');
+		$data['fundDetail'] = $this->admin_model->getFundsDetails($fundID);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/editfund', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function setCurrentFundID(){
+		$fundID = $this->input->post('source');
+
+		$this->session->set_userdata('fundID', $fundID);
+
+		redirect('admin/editFundsView');
+	}
+
+	public function editFunds(){
+		$fundID = $this->session->userdata('fundID');
+		if (!empty($_POST['source'])) {
+			$source = $this->input->post('source');
+			$this->admin_model->updateFundSource($source, $fundID);
+		}
+
+		$this->session->set_flashdata('success', 'Funds Details Updated.');
+
+		redirect('admin/editFundsView');
+	}
+
 }

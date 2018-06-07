@@ -67,9 +67,9 @@
             <div class="menu_section">
               <h3>Others</h3>
               <ul class="nav side-menu">
-                <li><a href="contractor.php"><i class="fa fa-users"></i> Manage Contractor</a>
+                <li><a href="<?php echo base_url('admin/manageConstractorsView') ?>"><i class="fa fa-users"></i> Manage Contractor</a>
                 </li>
-                <li><a href="fund.php"><i class="fa fa-money"></i> Manage Funds </a>
+                <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Manage Funds </a>
                 </li>
                 <li><a href="projecttype.php"><i class="fa fa-list"></i>Manage Project Types </span></a>
                 </li>
