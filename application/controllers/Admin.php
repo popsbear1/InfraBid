@@ -47,22 +47,22 @@ class Admin extends CI_Controller {
 
 	public function addPlan(){
 		$project_no = htmlspecialchars($this->input->post('project_no'));
-        $project_title = htmlspecialchars($this->input->post('project_title'));
-        $municipality=htmlspecialchars($this->input->post('municipality'));
-        $barangay=htmlspecialchars($this->input->post('barangay'));
-        $type=htmlspecialchars($this->input->post('type'));
-        $mode=htmlspecialchars($this->input->post('mode'));
-        $ABC=htmlspecialchars($this->input->post('ABC'));
-        $source=htmlspecialchars($this->input->post('source'));
-        $account=htmlspecialchars($this->input->post('account'));
+		$project_title = htmlspecialchars($this->input->post('project_title'));
+		$municipality=htmlspecialchars($this->input->post('municipality'));
+		$barangay=htmlspecialchars($this->input->post('barangay'));
+		$type=htmlspecialchars($this->input->post('type'));
+		$mode=htmlspecialchars($this->input->post('mode'));
+		$ABC=htmlspecialchars($this->input->post('ABC'));
+		$source=htmlspecialchars($this->input->post('source'));
+		$account=htmlspecialchars($this->input->post('account'));
 
-        if ($this->admin_model->insertNewProject($project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
-        	$this->session->set_flashdata('success', 'The new project has been added to the database.');
-        }else{
-        	$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
-        }
+		if ($this->admin_model->insertNewProject($project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
+			$this->session->set_flashdata('success', 'The new project has been added to the database.');
+		}else{
+			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
+		}
 
-        redirect('admin/addPlanView');
+		redirect('admin/addPlanView');
 	}
 
 	public function editPlanView(){
@@ -137,7 +137,7 @@ class Admin extends CI_Controller {
 			$this->session->set_userdata('project_no', $project_no);
 		}
 
-			
+		
 		$this->session->set_flashdata('success', 'Plan Details Updated.');
 
 		redirect('admin/editPlanView');
@@ -344,6 +344,77 @@ class Admin extends CI_Controller {
 		$this->session->set_flashdata('success', 'Successfully Updated.');
 
 		redirect('admin/editProjectTypeView');
+	}
+
+	public function manageUsers(){
+		$data['users'] = $this->admin_model->getUsers();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/user', $data);
+		$this->load->view('admin/fragments/footer');
 	}	
+
+	public function editUsersView(){
+		$userID = $this->session->userdata('userID');
+		$data['userDetails'] = $this->admin_model->getUserDetails($userID);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/edituser', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function editUsers(){
+		$userID = $this->session->userdata('userID');
+		if(!empty($_POST['username'])) {
+			$username = $this->input->post('username');
+			$this->admin_model->updateUsername($username, $userID);
+		}
+		if(!empty($_POST['password'])) {
+			$password = $this->input->post('password');
+			$this->admin_model->updatePassword($password, $userID);
+		}
+		if(!empty($_POST['usertype'])) {
+			$usertype = $this->input->post('usertype');
+			$this->admin_model->updateUserType($usertype, $userID);
+		}
+
+		$this->session->set_flashdata('success', 'Successfully Updated.');
+
+		redirect('admin/editUsersView');
+	}
+
+	public function setUsersID(){
+		$userID = $this->input->post('userID');
+
+		$this->session->set_userdata('userID', $userID);
+
+		redirect('admin/editUsersView');
+	}
+
+
+	public function addUsersView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/adduser');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addUsers(){
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$usertype = $this->input->post('usertype');
+
+		if ($this->admin_model->insertUsers($username, $password, $usertype)) {
+			$this->session->set_flashdata('success', 'New User Added!');
+		}else{
+			$this->session->set_flashdata('error', 'ERROR!.');
+		}
+
+		redirect('admin/addUsersView');
+	}
+
 
 }

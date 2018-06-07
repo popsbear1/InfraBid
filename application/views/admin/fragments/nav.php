@@ -109,7 +109,7 @@
                 <ul role="menu" class="dropdown-menu">
                   <li><a href="backres.php">Manage Database</a>
                   </li>
-                  <li><a href="user.php">Manage Users</a>
+                  <li><a href="<?php echo base_url('admin/manageUsers') ?>">Manage Users</a>
                   </li>
                   <li><a href="<?php echo base_url('user/logout') ?>">Log out</a>
                   </li>

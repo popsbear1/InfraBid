@@ -109,7 +109,7 @@
 <script>
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-     $('#usernam').html($('#type').val());
+     $('#username').html($('#type').val());
    });
     
   });
