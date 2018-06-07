@@ -315,4 +315,35 @@ class Admin extends CI_Controller {
 		redirect('admin/addProjectView');
 	}
 
+	public function editProjectTypeView(){
+		$projectID = $this->session->userdata('projectTypeID');
+		$data['projectTypeDetails'] = $this->admin_model->getProjectDetails($projectID);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/editproject', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+	
+	public function setCurrentProjectTypeID(){
+		$projectTypeID = $this->input->post('type');
+
+		$this->session->set_userdata('projectTypeID', $projectTypeID);
+
+		redirect('admin/editProjectTypeView');
+	}
+
+
+	public function editProjectType(){
+		$projectID = $this->session->userdata('projectTypeID');
+		if(!empty($_POST['type'])) {
+			$type = $this->input->post('type');
+			$this->admin_model->updateProjectType($type, $projectID);
+		}
+
+		$this->session->set_flashdata('success', 'Successfully Updated.');
+
+		redirect('admin/editProjectTypeView');
+	}	
+
 }

@@ -43,8 +43,8 @@
                     <td><?php echo $projectType['id'] ?></td>
                     <td><?php echo $projectType['type'] ?></td>
                     <td>
-                      <form action="">
-                        <button class="btn btn-success">
+                      <form action="<?php echo base_url('admin/setCurrentProjectTypeID') ?>" method="post">
+                        <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['id'] ?>"> 
                           <i class="fa fa-edit"></i>
                         </button>
                       </form>

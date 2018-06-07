@@ -120,6 +120,27 @@
 			return $query->result_array();
 		}
 
+		// //	public function getContractorDetails($currentContractorID){
+		// 	$this->db->select('*');
+		// 	$this->db->from('contractors');
+		// 	$this->db->where('id', $currentContractorID);
+
+		// 	$query = $this->db->get();
+
+		// 	return $query->row_array();
+		// }
+
+		public function getProjectDetails($projectID){
+			$this->db->select('*');
+			$this->db->from('projtype');
+			$this->db->where('id', $projectID);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
+
 
 	/**
 	* All functions bellow are used to insert data on Database.
@@ -323,6 +344,15 @@
 
 			$this->db->where('id', $fundID);
 			$this->db->update('funds', $data);
+		}
+
+		public function updateProjectType($type, $projectID){
+			$data = array(
+				'type' => $type
+			);
+
+			$this->db->where('id', $projectID);
+			$this->db->update('projtype', $data);
 		}
 	}
 ?>
