@@ -61,6 +61,12 @@
                     </li>
                   </ul>
                 </li>
+                <li>
+                  <a href="#"><i class="fa fa-calendar"></i>Project Timeline</a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-file"></i>Doc Track</a>
+                </li>
               </ul>
             </div>
 
