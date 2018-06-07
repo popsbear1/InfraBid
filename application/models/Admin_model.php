@@ -111,6 +111,15 @@
 			return $query->row_array();
 		}
 
+		public function getProjectTypes(){
+			$this->db->select('*');
+			$this->db->from('projtype');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 
 	/**
 	* All functions bellow are used to insert data on Database.
@@ -168,6 +177,18 @@
 			);
 
 			if ($this->db->insert('funds', $data)) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		public function insertNewProjectType($type){
+			$data = array(
+				'type' => $type
+			);
+
+			if ($this->db->insert('projtype', $data)) {
 				return true;
 			}else{
 				return false;

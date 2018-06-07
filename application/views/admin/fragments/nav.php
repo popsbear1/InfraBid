@@ -71,7 +71,7 @@
                 </li>
                 <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Manage Funds </a>
                 </li>
-                <li><a href="projecttype.php"><i class="fa fa-list"></i>Manage Project Types </span></a>
+                <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </span></a>
                 </li>
               </ul>
             </div>

@@ -285,4 +285,34 @@ class Admin extends CI_Controller {
 		redirect('admin/editFundsView');
 	}
 
+	public function manageProjectTypeView(){
+
+		$data['projectTypes'] = $this->admin_model->getProjectTypes();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/projecttype', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addProjectView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addproject');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addProject(){
+		$type = $this->input->post('type');
+
+		if ($this->admin_model->insertNewProjectType($type)) {
+			$this->session->set_flashdata('success', 'New Project Type Recorded.');
+		}else{
+			$this->session->set_flashdata('error', 'Error! Project Type Not Recorded.');
+		}
+
+		redirect('admin/addProjectView');
+	}
+
 }
