@@ -137,7 +137,7 @@ class Admin extends CI_Controller {
 			$this->session->set_userdata('project_no', $project_no);
 		}
 
-		
+
 		$this->session->set_flashdata('success', 'Plan Details Updated.');
 
 		redirect('admin/editPlanView');
@@ -416,5 +416,12 @@ class Admin extends CI_Controller {
 		redirect('admin/addUsersView');
 	}
 
+	public function manageDatabaseView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/backres');
+		$this->load->view('admin/fragments/footer');
+	}
 
 }

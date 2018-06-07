@@ -107,7 +107,7 @@
                   <img src="<?php echo base_url() ?>public/images/user.png" alt=""><?php echo $username ?>
                 </a>
                 <ul role="menu" class="dropdown-menu">
-                  <li><a href="backres.php">Manage Database</a>
+                  <li><a href="<?php echo base_url('admin/manageDatabaseView')?>">Manage Database</a>
                   </li>
                   <li><a href="<?php echo base_url('admin/manageUsers') ?>">Manage Users</a>
                   </li>
