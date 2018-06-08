@@ -1,16 +1,11 @@
 
         <!-- page content -->
-    <div class="form-group no-print">
-      <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-        <a href="<?php echo base_url('admin/addProjectView') ?>" type="button" class="btn btn-primary">Add New Project Type</a>
-      </div>
-    </div>
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Manage Project Types<small></small></h2>
+            <h2>Procurement  Monitoring Report for Public Bidding and Negotiated<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -32,23 +27,44 @@
             <table class="datatable-1 table table-striped table-bordered">
               <thead style='font-size:12px;'>
                 <tr>
-                  <th style='text-align: center'>ID</th>
-                  <th style='text-align: center'>Project Type</th>
-                  <th style='text-align: center'>Edit</th>
+                  <th class="text-center">Procurement Program/Project</th>
+                  <th class="text-center">PMO/End-User</th>
+                  <th class="text-center">Mode of Procurement</th>
+                  <th class="text-center">Pre-Procurement Conference</th>
+                  <th class="text-center">Ads/Post of IAEB</th>
+                  <th class="text-center">Pre-bid Conference</th>
+                  <th class="text-center">Opening of Bids</th>
+                  <th class="text-center">Bid Evaluation</th>
+                  <th class="text-center">Post Qual</th>
+                  <th class="text-center">Notice of Award</th>
+                  <th class="text-center">Contract Signing/P.O.</th>
+                  <th class="text-center">Notice to Proceed</th>
+                  <th class="text-center">Delivery/Completion</th>
+                  <th class="text-center">Post Qual</th>
+                  <th class="text-center">Source of Funds</th>
+                  <th class="text-center">ABC (Php)</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($projectTypes as $projectType): ?>
+                <?php foreach ($procacts as $procact): ?>
                   <tr>
-                    <td><?php echo $projectType['id'] ?></td>
-                    <td><?php echo $projectType['type'] ?></td>
-                    <td>
-                      <form action="<?php echo base_url('admin/setCurrentProjectTypeID') ?>" method="post">
-                        <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['id'] ?>"> 
-                          <i class="fa fa-edit"></i>
-                        </button>
-                      </form>
-                    </td>
+                    <td><?php echo $procact['project_title'] ?></td>
+                    <td></td>
+                    <td><?php echo $procact['mode'] ?></td>
+                    <td><?php echo $procact['pre_proc'] ?></td>
+                    <td><?php echo $procact['advertisement'] ?></td>
+                    <td><?php echo $procact['pre_bid'] ?></td>
+                    <td><?php echo $procact['openbid'] ?></td>
+                    <td><?php echo $procact['bidevaluation'] ?></td>
+                    <td><?php echo $procact['postqual'] ?></td>
+                    <td><?php echo $procact['awarddate'] ?></td>
+                    <td><?php echo $procact['contractsigning'] ?></td>
+                    <td><?php echo $procact['proceednotice'] ?></td>
+                    <td><?php echo $procact['completion'] ?></td>
+                    <td><?php echo $procact['postqual'] ?></td>
+                    <td><?php echo $procact['source'] ?></td>
+                    <td><?php echo $procact['ABC'] ?></td>
+                    
                   </tr>
                 <?php endforeach ?>
               </tbody>

@@ -1,7 +1,15 @@
 <?php 
   $username = $this->session->userdata('username');
+  $sideBarControl = $this->session->userdata('sideBarControl');
 ?>
-<body class="nav-md">
+<body 
+<?php if ($sideBarControl == 1): ?>
+    class="nav-md"
+<?php endif ?>
+<?php if ($sideBarControl == 0): ?>
+    class="nav-sm"
+<?php endif ?>
+>
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col" style="z-index:0;">
@@ -87,7 +95,7 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-folder-open"></i>Reports <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a>Reports</a>
+                    <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
                     </li>
                     <li><a>Reports</a>
                     </li>
@@ -104,7 +112,9 @@
         <div class="nav_menu">
           <nav class="" role="navigation">
             <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              <form id="sideBarControl" action="<?php echo base_url('admin/setNavControl') ?>" method="post">
+                <button class="btn" id="menu_toggle" type="submit" name="submit"><i class="fa fa-bars"></i></button>
+              </form>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
@@ -125,3 +135,21 @@
           </nav>
         </div>
       </div>
+
+
+      <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
+
+      <script>
+        $('#sideBarControl').submit(function(e){
+          e.preventDefault();
+
+          var details = $(this);
+          $.ajax({
+            type: 'POST',
+            url: details.attr('action'),
+            success: function(response){
+
+            }
+          });
+        })
+      </script>
