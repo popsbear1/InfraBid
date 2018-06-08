@@ -19,9 +19,19 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
-		$this->load->view('admin/home', $data);
+		$this->load->view('admin/home');
 		$this->load->view('admin/fragments/footer');
 
+	}
+
+	public function setNavControl(){
+		$sideBarControl = $this->session->userdata('sideBarControl');
+		if ($sideBarControl == 1) {
+			$this->session->set_userdata('sideBarControl', 0);
+		}else{
+			$this->session->set_userdata('sideBarControl', 1);
+		}
+		
 	}
 
 	public function planView(){
@@ -74,7 +84,7 @@ class Admin extends CI_Controller {
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($project_no);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/fragments/projectPlanNavigation');
 		$this->load->view('admin/editPlan', $data);
 		$this->load->view('admin/fragments/footer');	
 	}
@@ -421,6 +431,15 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/backres');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function procurementMonitoringReport(){
+		$data['procacts'] = $this->admin_model->getProcurementProjects();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/procurementMonitoringReport', $data);
 		$this->load->view('admin/fragments/footer');
 	}
 
