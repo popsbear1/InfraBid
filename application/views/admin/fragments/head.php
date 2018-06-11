@@ -30,11 +30,6 @@
         <link href="<?php echo base_url() ?>public/vendors/Select/css/select.dataTables.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>public/vendors/datatables-editor/css/editor.dataTables.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>public/vendors/nprogress/nprogress.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/SmartWizard-master/dist/css/smart_wizard.min.css">
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/SmartWizard-master/dist/css/smart_wizard_theme_circles.min.css">
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/SmartWizard-master/dist/css/smart_wizard_theme_arrows.min.css">
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/SmartWizard-master/dist/css/smart_wizard_theme_dots.min.css">
-        <!-- Custom Theme Style -->
         <link href="<?php echo base_url() ?>public/build/css/custom.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>public/build/css/print.css" rel="stylesheet" media="print">
     </head>

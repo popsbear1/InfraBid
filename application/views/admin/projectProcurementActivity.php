@@ -24,80 +24,131 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-       <form action="#" id="myForm" role="form" data-toggle="validator" method="post" accept-charset="utf-8">
-
-        <!-- SmartWizard html -->
-        <div id="smartwizard">
-          <ul>
-            <li><a href="#step-1">Step 1<br />Pre-proc</a></li>
-            <li><a href="#step-2">Step 2<br />Advert</a></li>
-            <li><a href="#step-3">Step 3<br />Pre-bid</a></li>
-            <li><a href="#step-4">Step 4<br />open</a></li>
-            <li><a href="#step-1">Step 5<br /></a></li>
-            <li><a href="#step-2">Step 6<br /></a></li>
-            <li><a href="#step-3">Step 7<br /></a></li>
-            <li><a href="#step-4">Step 8<br /></a></li>
-            <li><a href="#step-1">Step 9<br /></a></li>
-            <li><a href="#step-2">Step 10<br /></a></li>
-            <li><a href="#step-3">Step 11<br /></a></li>
-            <li><a href="#step-4">Step 12<br /></a></li>
-            <li><a href="#step-4">Step 13<br /></a></li>
+        <h2>Example: Vertical Style</h2>
+        <!-- Tabs -->
+        <div id="wizard_verticle" class="form_wizard wizard_verticle">
+          <ul class="list-unstyled wizard_steps">
+            <li>
+              <a href="#step-11">
+                <span class="step_no">1</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-22">
+                <span class="step_no">2</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-33">
+                <span class="step_no">3</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-44">
+                <span class="step_no">4</span>
+              </a>
+            </li>
           </ul>
 
-          <div>
-            <div id="step-1">
-              <h2>Your Email Address</h2>
-              <div id="form-step-0" role="form" data-toggle="validator">
-                <div class="form-group">
-                  <label for="email">Email address:</label>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Write your email address" required>
-                  <div class="help-block with-errors"></div>
+          <div id="step-11">
+            <h2 class="StepTitle">Step 1 Content</h2>
+            <form class="form-horizontal form-label-left">
+
+              <span class="section">Personal Info</span>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3" for="first-name">First Name <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6">
+                  <input type="text" id="first-name2" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3" for="last-name">Last Name <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6">
+                  <input type="text" id="last-name2" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="middle-name" class="control-label col-md-3 col-sm-3">Middle Name / Initial</label>
+                <div class="col-md-6 col-sm-6">
+                  <input id="middle-name2" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3">Gender</label>
+                <div class="col-md-6 col-sm-6">
+                  <div id="gender2" class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                      <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                    </label>
+                    <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                      <input type="radio" name="gender" value="female" checked=""> Female
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3">Date Of Birth <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6">
+                  <input id="birthday2" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                 </div>
               </div>
 
-            </div>
-            <div id="step-2">
-              <h2>Your Name</h2>
-              <div id="form-step-1" role="form" data-toggle="validator">
-                <div class="form-group">
-                  <label for="name">Name:</label>
-                  <input type="text" class="form-control" name="name" id="email" placeholder="Write your name" required>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-            </div>
-            <div id="step-3">
-              <h2>Your Address</h2>
-              <div id="form-step-2" role="form" data-toggle="validator">
-                <div class="form-group">
-                  <label for="address">Address</label>
-                  <textarea class="form-control" name="address" id="address" rows="3" placeholder="Write your address..." required></textarea>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-            </div>
-            <div id="step-4" class="">
-              <h2>Terms and Conditions</h2>
-              <p>
-                Terms and conditions: Keep your smile :)
-              </p>
-              <div id="form-step-3" role="form" data-toggle="validator">
-                <div class="form-group">
-                  <label for="terms">I agree with the T&C</label>
-                  <input type="checkbox" id="terms" data-error="Please accept the Terms and Conditions" required>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-
-
-            </div>
+            </form>
+          </div>
+          <div id="step-22">
+            <h2 class="StepTitle">Step 2 Content</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+          <div id="step-33">
+            <h2 class="StepTitle">Step 3 Content</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+          <div id="step-44">
+            <h2 class="StepTitle">Step 4 Content</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
           </div>
         </div>
-
-      </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </div>
 
@@ -113,86 +164,7 @@
 <script src="<?php echo base_url() ?>public/vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
 <script src="<?php echo base_url() ?>public/vendors/nprogress/nprogress.js"></script>
-<script src="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/SmartWizard-master/dist/js/jquery.smartWizard.min.js"></script>
 
-<script src="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/SmartWizard-master/dist/js/validator.js"></script>
-
+<script src="<?php echo base_url() ?>public/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 <!-- Custom Theme Scripts -->
 <script src="<?php echo base_url() ?>public/build/js/custom.min.js"></script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-
-            // Toolbar extra buttons
-            var btnFinish = $('<button></button>').text('Finish')
-            .addClass('btn btn-info')
-            .on('click', function(){
-              if( !$(this).hasClass('disabled')){
-                var elmForm = $("#myForm");
-                if(elmForm){
-                  elmForm.validator('validate');
-                  var elmErr = elmForm.find('.has-error');
-                  if(elmErr && elmErr.length > 0){
-                    alert('Oops we still have error in the form');
-                    return false;
-                  }else{
-                    alert('Great! we are ready to submit form');
-                    elmForm.submit();
-                    return false;
-                  }
-                }
-              }
-            });
-            var btnCancel = $('<button></button>').text('Cancel')
-            .addClass('btn btn-danger')
-            .on('click', function(){
-              $('#smartwizard').smartWizard("reset");
-              $('#myForm').find("input, textarea").val("");
-            });
-
-
-
-            // Smart Wizard
-            $('#smartwizard').smartWizard({
-              selected: 0,
-              theme: 'dots',
-              transitionEffect:'fade',
-              toolbarSettings: {toolbarPosition: 'bottom',
-              toolbarExtraButtons: [btnFinish, btnCancel]
-            },
-            anchorSettings: {
-                                markDoneStep: true, // add done css
-                                markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
-                                removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
-                                enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
-                              }
-                            });
-
-            $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-              var elmForm = $("#form-step-" + stepNumber);
-                // stepDirection === 'forward' :- this condition allows to do the form validation
-                // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
-                if(stepDirection === 'forward' && elmForm){
-                  elmForm.validator('validate');
-                  var elmErr = elmForm.children('.has-error');
-                  if(elmErr && elmErr.length > 0){
-                        // Form validation failed
-                        return false;
-                      }
-                    }
-                    return true;
-                  });
-
-            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
-                // Enable finish button only on last step
-                if(stepNumber == 3){
-                  $('.btn-finish').removeClass('disabled');
-                }else{
-                  $('.btn-finish').addClass('disabled');
-                }
-              });
-
-          });
-        </script>
-
-
