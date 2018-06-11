@@ -39,7 +39,7 @@
               <h3>Process</h3>
               <ul class="nav side-menu">
                 <li><a href="<?php echo base_url('admin/planView') ?>"><i class="fa fa-tasks"></i> Annual Procurement Plan </a></li>
-                <li><a><i class="fa fa-shopping-cart"></i> Procurement Activity <span class="fa fa-chevron-down"></span></a>
+                <!-- <li><a><i class="fa fa-shopping-cart"></i> Procurement Activity <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href='_addpreproc.php'>Pre-Procurement Conference</a>
                     </li>
@@ -71,7 +71,7 @@
                 </li>
                 <li>
                   <a href="#"><i class="fa fa-calendar"></i>Project Timeline</a>
-                </li>
+                </li> -->
                 <li>
                   <a href="<?php echo base_url('doctrack/docTrackView') ?>"><i class="fa fa-file"></i>Doc Track</a>
                 </li>

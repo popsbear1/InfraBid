@@ -79,65 +79,11 @@
                           <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                         </div>
-<!-- 
-                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="status" name ="status">
-                          <option value="">Status</option>
-                            <option value="Capital Outlay">On Going</option>
-                            <option value="MOOE">Failed</option>
-                          </select>
-                        </div>
-                      </div>
-
-                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Remarks<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" step="any"  id="remarks" value="" name="remarks"  required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                        </div> -->
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-                        <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-                        </div>
-                        <div class="modal-body">
-                          <table class='table table-striped table-bordered' style='font-size:13px;'>
-                          <thead>
-                            <tr >
-                              <th style='text-align: center'>Attributes</th>
-                              <th style='text-align: center'>Values</th>
-                            </tr> 
-                          </thead>
-                          <tbody>
-                                <tr><td>Project Title</td>
-                                    <td><span id="no"></span></td>
-                                </tr>
-                                <tr><td>Pre-Procurement Conference</td>
-                                    <td><span id="pre"></span></td>
-                                </tr>
-                          </tbody>
-                          </tfoot>
-                        </table>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="submit" name="submit" class="btn btn-primary">Confirm</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                         </div>
                       </div>
 

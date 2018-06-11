@@ -5,7 +5,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Edit Project<small></small></h2>
+            <h2>Manage Project Procurement Timeline<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -29,39 +29,6 @@
         </div>
       </div>
     </div>
-    <!-- modal for data confirmation -->
-    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-          </div>
-          <div class="modal-body">
-            <table class='table table-striped table-bordered' style='font-size:13px;'>
-              <thead>
-                <tr >
-                  <th style='text-align: center'>Attributes</th>
-                  <th style='text-align: center'>Values</th>
-                </tr> 
-              </thead>
-              <tbody>
-                <tr><td>Type of Project</td>
-                  <td><span id="username"></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" name="submit" form="editProjectForm" class="btn btn-primary">Confirm</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end of modal -->
   </div>
 </div>
 
