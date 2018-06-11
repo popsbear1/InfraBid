@@ -85,6 +85,7 @@ class Admin extends CI_Controller {
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($project_no);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/editPlan', $data);
 		$this->load->view('admin/fragments/footer');	
@@ -94,6 +95,7 @@ class Admin extends CI_Controller {
 		$pageName['pageName'] = "timeline";
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/projectProcurementTimeline');
 		$this->load->view('admin/fragments/footer');	
@@ -103,6 +105,7 @@ class Admin extends CI_Controller {
 		$pageName['pageName'] = "activity";
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/projectProcurementActivity');
 		$this->load->view('admin/fragments/footer');	

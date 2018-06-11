@@ -1,11 +1,5 @@
-  <div class="right_col" role="main">
-    <div class="">
-      <div class="row">
-        <div class="page-title">
-          <div class="title_left">
-          </div>
-        </div>
-      </div>
+
+      <div class="clearfix"></div>
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
           <nav class="navbar navbar-default" style="background: orange">
