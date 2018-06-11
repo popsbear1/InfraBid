@@ -29,7 +29,7 @@
         <link href="<?php echo base_url() ?>public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>public/vendors/Select/css/select.dataTables.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>public/vendors/datatables-editor/css/editor.dataTables.min.css" rel="stylesheet">
-
+        <link href="<?php echo base_url() ?>public/vendors/nprogress/nprogress.css" rel="stylesheet">
 
         <!-- Custom Theme Style -->
         <link href="<?php echo base_url() ?>public/build/css/custom.min.css" rel="stylesheet">

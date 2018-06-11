@@ -8,7 +8,7 @@
       </div>
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <nav class="navbar navbar-default">
+          <nav class="navbar navbar-default" style="background: orange">
             <div class="container-fluid">
               <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -24,9 +24,9 @@
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
               <ul class="nav navbar-nav navbar-centered collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <li><a href="">Edit Project Details</a></li>
-                <li><a href="">Project Timeline</a></li>
-                <li><a href="">Procurement Activity</a></li>
+                <li <?php if ($pageName == "edit") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/editPlanView') ?>">Edit Project Details</a></li>
+                <li <?php if ($pageName == "timeline") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/projectTimelineView') ?>">Project Timeline</a></li>
+                <li <?php if ($pageName == "activity") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/procurementActivityView') ?>">Procurement Activity</a></li>
               </ul>
             </div><!-- /.container-fluid -->
           </nav>

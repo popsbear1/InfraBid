@@ -76,6 +76,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function editPlanView(){
+		$pageName['pageName'] = "edit";
 		$project_no = $this->session->userdata('project_no');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
@@ -84,8 +85,26 @@ class Admin extends CI_Controller {
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($project_no);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/projectPlanNavigation');
+		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/editPlan', $data);
+		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function projectTimelineView(){
+		$pageName['pageName'] = "timeline";
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
+		$this->load->view('admin/projectProcurementTimeline');
+		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function procurementActivityView(){
+		$pageName['pageName'] = "activity";
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
+		$this->load->view('admin/projectProcurementActivity');
 		$this->load->view('admin/fragments/footer');	
 	}
 
