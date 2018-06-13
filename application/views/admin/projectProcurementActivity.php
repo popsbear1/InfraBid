@@ -51,7 +51,7 @@
                 <span class="step_no">3</span>
                 <span class="step_descr">
                   Step 3<br />
-                  <small>Step 3 description</small>
+                  <small></small>
                 </span>
               </a>
             </li>
