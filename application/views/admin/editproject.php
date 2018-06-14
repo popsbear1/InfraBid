@@ -46,8 +46,8 @@
 
               <div class="ln_solid"></div>
               <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                  <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
 
                 </div>
               </div>

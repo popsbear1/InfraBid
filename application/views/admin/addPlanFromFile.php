@@ -1,16 +1,10 @@
-<div class="row">
-  <div class="form-group no-print">
-    <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-10">
-      <a href="<?php echo base_url('admin/addUsersView') ?>" type="button" class="btn btn-primary">Add New User</a>
-    </div>
-  </div>
-</div>
-<br>
+
+<!-- page content -->
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Manage Users<small></small></h2>
+        <h2>Dropzone project file uploader</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -29,47 +23,20 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-
-        <table class='datatable-1 table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr>
-              <th style='text-align: center'>Username</th>
-              <th style='text-align: center'>Password</th>
-              <th style='text-align: center'>User Type</th>
-              <th style='text-align: center'>Edit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($users as $user): ?>
-              <tr>
-                <td><?php echo $user['username'] ?></td>
-                <td><?php echo $user['password'] ?></td>
-                <td><?php echo $user['user_type'] ?></td>
-                <td>
-                  <form method="post" action="<?php echo base_url('admin/setUsersID') ?>">
-                    <button name="userID" type="submit" value="<?php echo $user['id'] ?>" class = "btn btn-success">
-                      <i class = "fa fa-edit"></i>
-                    </button>
-                  </form>
-                </td>
-              </tr>
-            <?php endforeach ?>
-          </tbody>
-        </table>
+        <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
+        <form action="form_upload.html" class="dropzone"></form>
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
-
-  </form>
-</div>
+  </div>
 </div>
 </div>
 </div>
 
-
-<!-- /page content -->
-</div>
-</div>
-</div>
+<!-- jQuery -->
 <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="<?php echo base_url() ?>public/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -97,8 +64,3 @@
 <script src="<?php echo base_url() ?>public/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="<?php echo base_url() ?>public/vendors/pdfmake/build/vfs_fonts.js"></script>
 
-<script>
-  $(document).ready(function() {
-    $('.datatable-1').dataTable();
-  });
-</script>

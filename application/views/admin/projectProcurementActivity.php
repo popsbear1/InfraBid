@@ -25,7 +25,7 @@
       </div>
       <div class="x_content">
         <!-- Smart Wizard -->
-        <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p>
+        <p>Steps for Procurement Activity: <b>(ABC more than 5M )</b></p>
         <div id="wizard" class="form_wizard wizard_horizontal">
           <ul class="wizard_steps">
             <li>
@@ -33,7 +33,7 @@
                 <span class="step_no">1</span>
                 <span class="step_descr">
                   Step 1<br />
-                  <small>Pre-proc</small>
+                  <small>Pre-proc Conf</small>
                 </span>
               </a>
             </li>
@@ -42,7 +42,7 @@
                 <span class="step_no">2</span>
                 <span class="step_descr">
                   Step 2<br />
-                  <small>Advert</small>
+                  <small>Ads/Post of IAEB</small>
                 </span>
               </a>
             </li>
@@ -51,7 +51,7 @@
                 <span class="step_no">3</span>
                 <span class="step_descr">
                   Step 3<br />
-                  <small></small>
+                  <small>Pre-bid Conf</small>
                 </span>
               </a>
             </li>
@@ -60,7 +60,7 @@
                 <span class="step_no">4</span>
                 <span class="step_descr">
                   Step 4<br />
-                  <small>Step 4 description</small>
+                  <small>Eligibility Check</small>
                 </span>
               </a>
             </li>
@@ -68,8 +68,8 @@
               <a href="#step-5">
                 <span class="step_no">5</span>
                 <span class="step_descr">
-                  Step 1<br />
-                  <small>Step 1 description</small>
+                  Step 5<br />
+                  <small>Sub/Open of Bids</small>
                 </span>
               </a>
             </li>
@@ -77,8 +77,8 @@
               <a href="#step-6">
                 <span class="step_no">6</span>
                 <span class="step_descr">
-                  Step 2<br />
-                  <small>Step 2 description</small>
+                  Step 6<br />
+                  <small>Bid Evaluation</small>
                 </span>
               </a>
             </li>
@@ -86,8 +86,8 @@
               <a href="#step-7">
                 <span class="step_no">7</span>
                 <span class="step_descr">
-                  Step 3<br />
-                  <small>Step 3 description</small>
+                  Step 7<br />
+                  <small>Post Qual</small>
                 </span>
               </a>
             </li>
@@ -95,8 +95,8 @@
               <a href="#step-8">
                 <span class="step_no">8</span>
                 <span class="step_descr">
-                  Step 4<br />
-                  <small>Step 4 description</small>
+                  Step 8<br />
+                  <small>Notice of Award</small>
                 </span>
               </a>
             </li>
@@ -104,8 +104,8 @@
               <a href="#step-9">
                 <span class="step_no">9</span>
                 <span class="step_descr">
-                  Step 1<br />
-                  <small>Step 1 description</small>
+                  Step 9<br />
+                  <small>Contract Signing</small>
                 </span>
               </a>
             </li>
@@ -113,8 +113,8 @@
               <a href="#step-10">
                 <span class="step_no">10</span>
                 <span class="step_descr">
-                  Step 2<br />
-                  <small>Step 2 description</small>
+                  Step 10<br />
+                  <small>Notice to Proceed</small>
                 </span>
               </a>
             </li>
@@ -122,8 +122,8 @@
               <a href="#step-11">
                 <span class="step_no">11</span>
                 <span class="step_descr">
-                  Step 3<br />
-                  <small>Step 3 description</small>
+                  Step 11<br />
+                  <small>Delivery of Completion</small>
                 </span>
               </a>
             </li>
@@ -131,86 +131,377 @@
               <a href="#step-12">
                 <span class="step_no">12</span>
                 <span class="step_descr">
-                  Step 4<br />
-                  <small>Step 4 description</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-13">
-                <span class="step_no">13</span>
-                <span class="step_descr">
-                  Step 4<br />
-                  <small>Step 4 description</small>
+                  Step 12<br />
+                  <small>Acceptance/Turnover</small>
                 </span>
               </a>
             </li>
           </ul>
           <br>
+          <div class="ln_solid"></div>
           <div id="step-1">
-            <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pre-Procurement Conference<span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pre-Procurement Conference<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
                 </div>
-              </div>
 
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                  <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-                </div>
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
               </div>
-
-            </form>
+            </div>
           </div>
           <div id="step-2">
-            <h2 class="StepTitle">Step 2 Content</h2>
-            <p>
-              do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-          <div id="step-3">
-            <h2 class="StepTitle">Step 3 Content</h2>
-            <p>
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-          <div id="step-4">
-            <h2 class="StepTitle">Step 4 Content</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ads/Post of IAEB<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
           </div>
 
+          <div id="step-3">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pre-bid Conf<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-4">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Eligibility Check<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">re-bid/another SVP</button>
+              </div>
+            </div>
+          </div>
+          
+          <div id="step-5">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sub/Open of Bids<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-6">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bid Evaluation<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-7">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Post Qual<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-8">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Notice of Award<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-9">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Contract Signing<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-10">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Notice to Proceed<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-11">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Delivery/Completion<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-12">
+            <div class="well">
+              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" step="any"  id="project_title" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Acceptance/Turnover<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- End SmartWizard Content -->
       </div>

@@ -25,8 +25,7 @@
       </div>
       <div class="x_content">
         <div class="well">
-          <div class="well">
-            <div class="row">
+          <div class="row">
             <div class="form-horizontal col-lg-5">
               <div class="form-group">
                 <label class="control-label col-lg-5">Select date to begin with:</label>
@@ -42,6 +41,7 @@
               <button class="btn btn-default btn-block">Start Over</button>
             </div>
           </div>
+          <div class="ln_solid"></div>
           <div class="row">
             <table class="table table-bordered" style="background: white">
               <thead>
@@ -166,6 +166,11 @@
               </tbody>
             </table>
           </div>
+          <div class="ln_solid"></div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+            </div>
           </div>
         </div>
       </div>

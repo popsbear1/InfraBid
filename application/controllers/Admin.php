@@ -75,6 +75,14 @@ class Admin extends CI_Controller {
 		redirect('admin/addPlanView');
 	}
 
+	public function addPlanFromFileView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addPlanFromFile');
+		$this->load->view('admin/fragments/footer');
+	}
+
 	public function editPlanView(){
 		$pageName['pageName'] = "edit";
 		$project_no = $this->session->userdata('project_no');
@@ -456,6 +464,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	public function manageMunicipalitiesAndBarangays(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/municipalitiesAndBrangays');
+		$this->load->view('admin/fragments/footer');
+	}
+
 	public function procurementMonitoringReport(){
 		$data['procacts'] = $this->admin_model->getProcurementProjects();
 		$this->load->view('admin/fragments/head');
@@ -464,5 +480,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/procurementMonitoringReport', $data);
 		$this->load->view('admin/fragments/footer');
 	}
+
 
 }

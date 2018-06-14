@@ -1,11 +1,13 @@
 
         <!-- page content -->
-    <div class="form-group no-print">
-      <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-        <a href="<?php echo base_url('admin/addFundsView') ?>" type="button" class="btn btn-primary">Add New Fund</a>
+    <div class="row">
+      <div class="form-group no-print">
+        <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
+          <a href="<?php echo base_url('admin/addFundsView') ?>" type="button" class="btn btn-primary">Add New Fund</a>
+        </div>
       </div>
     </div>
-    <div class="clearfix"></div>
+    <br>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">

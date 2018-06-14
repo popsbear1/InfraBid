@@ -85,21 +85,16 @@
                 </li>
                 <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Manage Funds </a>
                 </li>
-                <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </span></a>
+                <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </a>
                 </li>
+                <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Manage Municipalities</a></li>
               </ul>
             </div>
 
             <div class="menu_section">
               <h3>Reports</h3>
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-folder-open"></i>Reports <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
-                    </li>
-                    <li><a>Reports</a>
-                    </li>
-                  </ul>
+                <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
                 </li>
               </ul>
             </div>
