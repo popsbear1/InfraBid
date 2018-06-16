@@ -60,12 +60,29 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td><b class="pull-right">Pre-bid Conference:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td>
+                    <div class="row">
+                      <b class="pull-right">Pre-bid Conference:</b>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="text-right"><i>Conduct?</i></p>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="yesPreBid" class="text-center">Yes</label>
+                        <input type="radio" name="pre-bid" id="yesPreBid" class="text-center">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="noPreBid" class="text-center">No</label>
+                        <input type="radio" name="pre-bid" id="noPreBid" class="text-center">
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="date" class="form-control" id="preBidStart"></td>
+                  <td><input type="date" class="form-control" id="preBidEnd"></td>
                   <td>
                     <div class="col-lg-6">
-                      <input type="number" class="form-control">
+                      <input type="number" class="form-control" id="preBidNumber">
                     </div>
                     <div class="col-lg-6">
                       <button class="btn btn-info btn-block">Update</button>
@@ -198,4 +215,16 @@
 <script src="<?php echo base_url() ?>public/vendors/nprogress/nprogress.js"></script>
 
 
+<script>
+  $('#noPreBid').click(function(event) {
+    $('#preBidStart').prop('disabled', true);
+    $('#preBidEnd').prop('disabled', true);
+    $('#preBidNumber').prop('disabled', true);
+  });
 
+  $('#yesPreBid').click(function(event) {
+    $('#preBidStart').prop('disabled', false);
+    $('#preBidEnd').prop('disabled', false);
+    $('#preBidNumber').prop('disabled', false);
+  });
+</script>
