@@ -110,12 +110,15 @@ class Admin extends CI_Controller {
 	}
 
 	public function procurementActivityView(){
+		$project_no = $this->session->userdata('project_no');
 		$pageName['pageName'] = "activity";
+		$data['project_title'] = $this->admin_model->getProjectTitle($project_no)->project_title;
+		$data['procActDate'] = $this->admin_model->getProcActivityDates($project_no);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
-		$this->load->view('admin/projectProcurementActivity');
+		$this->load->view('admin/projectProcurementActivity', $data);
 		$this->load->view('admin/fragments/footer');	
 	}
 

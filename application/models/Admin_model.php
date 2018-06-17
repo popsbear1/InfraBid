@@ -149,7 +149,25 @@
 			return $query->row_array();
 		}
 
+		public function getProcActivityDates($project_no){
+			$this->db->select('*');
+			$this->db->from('procact');
+			$this->db->where('project_no', $project_no);
 
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
+		public function getProjectTitle($project_no){
+			$this->db->select('project_title');
+			$this->db->from('plan');
+			$this->db->where('project_no', $project_no);
+
+			$query = $this->db->get();
+
+			return $query->row();
+		}
 
 	/**
 	* All functions bellow are used to insert data on Database.
