@@ -20,7 +20,7 @@
       $actdate = date_create($date);
       $formateddate = date_format($actdate, 'Y-m-d');
     }else{
-      $formateddate = '0000-00-00';
+      $formateddate = null;
     }
 
     return $formateddate;
@@ -209,10 +209,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ads/Post of IAEB<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Ads/Post of IAEB<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $advertisement ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="advertisement" value="<?php echo $advertisement ?>" name="advertisement"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -222,7 +222,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="advertisement">Submit</button>
               </div>
             </div>
           </div>
@@ -239,10 +239,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pre-bid Conf<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Pre-bid Conf<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $pre_bid ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="pre_bid" value="<?php echo $pre_bid ?>" name="pre_bid"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -252,7 +252,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="pre_bid">Submit</button>
               </div>
             </div>
           </div>
@@ -269,10 +269,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sub/Open of Bids<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub/Open of Bids<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $openbid ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="openbid" value="<?php echo $openbid ?>" name="openbid"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -282,7 +282,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="openbid">Submit</button> 
               </div>
             </div>
           </div>
@@ -299,7 +299,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Eligibility Check<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Eligibility Check<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="date" step="any"  id="pre_proc" value="" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
@@ -312,7 +312,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="eligi">Submit</button> 
               </div>
             </div>
             <div class="form-group">
@@ -334,20 +334,18 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bid Evaluation<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Bid Evaluation<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $bidevaluation ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="bidevaluation" value="<?php echo $bidevaluation ?>" name="bidevaluation"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
-                </div>
-
-                
+                </div>      
               </form>
             </div>
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="bidevaluation">Submit</button> 
               </div>
             </div>
           </div>
@@ -364,10 +362,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Post Qual<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Post Qual<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $postqual ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="postqual" value="<?php echo $postqual ?>" name="postqual"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -377,7 +375,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="postqual">Submit</button>
               </div>
             </div>
           </div>
@@ -394,10 +392,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Notice of Award<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Notice of Award<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $awarddate ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="awarddate" value="<?php echo $awarddate ?>" name="awarddate"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -407,7 +405,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="awarddate">Submit</button>
               </div>
             </div>
           </div>
@@ -424,10 +422,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Contract Signing<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Contract Signing<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $contractsigning ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="contractsigning" value="<?php echo $contractsigning ?>" name="contractsigning"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -437,7 +435,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="contractsigning">Submit</button>
               </div>
             </div>
           </div>
@@ -454,10 +452,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Notice to Proceed<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Notice to Proceed<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $proceednotice ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="proceednotice" value="<?php echo $proceednotice ?>" name="proceednotice"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -467,7 +465,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="proceednotice">Submit</button>
               </div>
             </div>
           </div>
@@ -484,10 +482,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Delivery/Completion<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery/Completion<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $completion ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="completion" value="<?php echo $completion ?>" name="completion"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -497,7 +495,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="completion">Submit</button>
               </div>
             </div>
           </div>
@@ -514,10 +512,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Acceptance/Turnover<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Acceptance/Turnover<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" step="any"  id="pre_proc" value="<?php echo $acceptance ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="date" step="any"  id="acceptance" value="<?php echo $acceptance ?>" name="acceptance"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -527,7 +525,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="acceptance">Submit</button>
               </div>
             </div>
           </div>
@@ -608,6 +606,20 @@
   var completion = '<?php echo $completion ?>';
   var acceptance = '<?php echo $acceptance ?>';
 
+  var planDates = {
+    pre_proc : '<?php echo $pre_proc ?>',
+    advertisement : '<?php echo $advertisement ?>',
+    pre_bid : '<?php echo $pre_bid ?>',
+    openbid : '<?php echo $openbid ?>',
+    bidevaluation : '<?php echo $bidevaluation ?>',
+    postqual : '<?php echo $postqual ?>',
+    awarddate : '<?php echo $awarddate ?>',
+    contractsigning : '<?php echo $contractsigning ?>',
+    proceednotice : '<?php echo $proceednotice ?>',
+    completion : '<?php echo $completion ?>',
+    acceptance : '<?php echo $acceptance ?>'
+  };
+
   $(document).ready(function(){
     var project_title = '<?php echo $project_title ?>';
     $('.project_title').val(project_title);
@@ -616,22 +628,29 @@
 
   $('.procactsubmitbutton').click(function(event){
     var activity = $(this).val();
+    inputElement = $('#' + activity);
+    inputValue = inputElement.val();
 
-    if (activity == "pre_proc") {
-      var new_pre_proc = $('#pre_proc').val();
-      if (new_pre_proc === pre_proc) {
-        showError(activity);
-      }else{
-        $('#myModal').modal('show');
-        $('#actName').text('Pre-Procurement Conference');
-        $('#actDateValue').text(new_pre_proc);
-      }
+    if (inputValue == null || inputValue == "") {
+      showError(activity, '<p class="text-danger text-center">The input filed should not be empty!!</p>');
+    }else if(inputValue == getValue(activity)){
+      showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
+    }else{
+      $('#myModal').modal('show');
+      $('#actName').text('Pre-Procurement Conference');
+      $('#actDateValue').text(inputValue);
     }
+
   });
 
-  function showError(inputId){
+  function showError(inputId, message){
     var element = $('#' + inputId);
-    element.closest('div.form-group').removeClass('has-error').addClass('has-error').remove('.text-danger').after('<p class="text-danger text-center">No changes were made to the value!!</p>');
+    element.closest('div.form-group').removeClass('has-error').addClass('has-error').find('.text-danger').remove();
+    element.after(message);
+  }
+
+  function getValue(activity){
+    return planDates[activity];
   }
 
 </script>
