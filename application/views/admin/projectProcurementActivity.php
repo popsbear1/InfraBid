@@ -54,6 +54,16 @@
       </div>
       <div class="x_content">
         <!-- Smart Wizard -->
+        <?php if (isset($_SESSION['success'])): ?>
+          <div class="alert alert-success">
+            <p class="text-center"><?php echo $_SESSION['success'] ?></p>
+          </div>
+        <?php endif ?>
+        <?php if (isset($_SESSION['error'])): ?>
+          <div class="alert alert-warning">
+            <p class="text-center"><?php echo $_SESSION['error'] ?></p>
+          </div>
+        <?php endif ?>
         <p>Steps for Procurement Activity: <b>(ABC more than 5M )</b></p>
         <div id="wizard" class="form_wizard wizard_horizontal">
           <ul class="wizard_steps">
@@ -170,8 +180,7 @@
           <div class="ln_solid"></div>
           <div id="step-1">
             <div class="well">
-              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
-
+              <form id="pre_proc_form" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editPreProcConf') ?>"> 
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -185,15 +194,13 @@
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="date" step="any"  id="pre_proc" value="<?php echo $pre_proc ?>" name="pre_proc"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
-                </div>
-
-                
+                </div>             
               </form>
             </div>
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="pre_proc">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="pre_proc,pre_proc_form">Submit</button>
               </div>
             </div>
           </div>
@@ -566,7 +573,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" name="submit" class="btn btn-primary">Confirm</button>
+          <button id="formSubmitBtn" type="submit" name="submit" class="btn btn-primary">Confirm</button>
         </div>
       </div>
     </div>
@@ -593,19 +600,6 @@
 
 <script>
 
-  var pre_proc = '<?php echo $pre_proc ?>';
-  var advertisement = '<?php echo $advertisement ?>';
-  var pre_bid = '<?php echo $pre_bid ?>';
-  //$ = ;;
-  var openbid = '<?php echo $openbid ?>';
-  var bidevaluation = '<?php echo $bidevaluation ?>';
-  var postqual = '<?php echo $postqual ?>';
-  var awarddate= '<?php echo $awarddate ?>';
-  var contractsigning = '<?php echo $contractsigning ?>';
-  var proceednotice = '<?php echo $proceednotice ?>';
-  var completion = '<?php echo $completion ?>';
-  var acceptance = '<?php echo $acceptance ?>';
-
   var planDates = {
     pre_proc : '<?php echo $pre_proc ?>',
     advertisement : '<?php echo $advertisement ?>',
@@ -627,7 +621,9 @@
   });
 
   $('.procactsubmitbutton').click(function(event){
-    var activity = $(this).val();
+    var activityArray = $(this).val().split(",");
+    var activity = activityArray[0];
+    var activityForm = activityArray[1];
     inputElement = $('#' + activity);
     inputValue = inputElement.val();
 
@@ -639,6 +635,7 @@
       $('#myModal').modal('show');
       $('#actName').text('Pre-Procurement Conference');
       $('#actDateValue').text(inputValue);
+      $('#formSubmitBtn').attr('form', activityForm);
     }
 
   });

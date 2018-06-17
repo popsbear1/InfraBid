@@ -259,7 +259,7 @@
 		}
 	}
 	/**
-	* All functions bellow are used to insert data on Database.
+	* All functions bellow are used to update data on Database.
 	**/
 		//Following are the functions used for updating plan details
 	public function updateProject_no($project_no, $currentProjNum){
@@ -423,6 +423,23 @@
 
 		$this->db->where('id', $userID);
 		$this->db->update('users', $data);
+	}
+
+	/**
+	* Update proc act dates
+	*/
+
+	public function updatePreProcConfDate($project_no, $date){
+		$data = array(
+			'pre_proc' => $date
+		);
+
+		$this->db->where('project_no', $project_no);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 ?>

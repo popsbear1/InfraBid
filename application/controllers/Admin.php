@@ -485,4 +485,23 @@ class Admin extends CI_Controller {
 	}
 
 
+	/**
+	*
+	* Bellow are the methods to update proc activity dates
+	*/
+
+	public function editPreProcConf(){
+		$project_no = $this->session->userdata('project_no');
+		$pre_proc = $this->input->post('pre_proc');
+
+		if ($this->admin_model->updatePreProcConfDate($project_no, $pre_proc)) {
+			$this->session->set_flashdata('success', "Pre-proc Conf successfully Updated!");
+		}else{
+			$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
+		}
+
+		redirect('admin/procurementActivityView');
+	}
+
+
 }
