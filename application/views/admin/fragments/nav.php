@@ -97,6 +97,10 @@
                 <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
                 </li>
               </ul>
+              <ul class="nav side-menu">
+                <li><a href="<?php echo base_url('admin/procurementTimelineReport') ?>"><i class="fa fa-list"></i>Procurement TimeLine Reports</a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

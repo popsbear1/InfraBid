@@ -30,12 +30,12 @@
               <div class="form-group">
                 <label class="control-label col-lg-5">Select date to begin with:</label>
                 <div class="col-lg-7">
-                  <input type="date" class="form-control">
+                  <input type="date" class="form-control" id="pre_proc_date" name="pre_proc_date">
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
-              <button class="btn btn-default btn-block">Compute/Reset to Earliest Possible Time</button>
+              <button id="timeLineComputeBtn" class="btn btn-default btn-block">Compute/Reset to Earliest Possible Time</button>
             </div>
             <div class="col-lg-3">
               <button class="btn btn-default btn-block">Start Over</button>
@@ -55,8 +55,8 @@
               <tbody>
                 <tr>
                   <td><b class="pull-right">Advertisement:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="advertisement_start" name="advertisement_start"></td>
+                  <td><input type="date" class="form-control" id="advertisement_end" name="advertisement_end"></td>
                   <td></td>
                 </tr>
                 <tr>
@@ -226,5 +226,21 @@
     $('#preBidStart').prop('disabled', false);
     $('#preBidEnd').prop('disabled', false);
     $('#preBidNumber').prop('disabled', false);
+  });
+
+  $('#timeLineComputeBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
+    var pre_proc_date = new Date(startDate);
+
+    if (startDate == null || startDate == "") {
+      alert("Select Start Date First!");
+    }else{
+      var advertisement_start = startDate;
+      $('#advertisement_start').val(advertisement_start);
+      var advertisement_end = new Date();
+      advertisement_end.setDate(pre_proc_date.getDate()+7);
+      advertisement_end.toISOString().substring(0, 10);
+      $('#advertisement_end').val(advertisement_end);
+    }
   });
 </script>

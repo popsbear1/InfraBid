@@ -206,8 +206,7 @@
           </div>
           <div id="step-2">
             <div class="well">
-              <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
-
+              <form id="advertisement_form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -221,15 +220,13 @@
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="date" step="any"  id="advertisement" value="<?php echo $advertisement ?>" name="advertisement"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
-                </div>
-
-                
+                </div>          
               </form>
             </div>
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="advertisement">Submit</button>
+                <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
               </div>
             </div>
           </div>
