@@ -15,7 +15,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$data['procacts'] = $this->admin_model->getProcurementProjects();
+		
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
@@ -224,7 +224,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function editContractorView(){
-		$currentContractorID = $this->session->userdata('contractorID');
+		$currentContractorID = $this->session->userdata('contractor_id');
 
 		$data['contractorDetails'] = $this->admin_model->getContractorDetails($currentContractorID);
 
@@ -236,15 +236,15 @@ class Admin extends CI_Controller {
 	}
 
 	public function setCurrentContractorID(){
-		$contractorID = $this->input->post('contractorID');
+		$contractorID = $this->input->post('contractor_id');
 
-		$this->session->set_userdata('contractorID', $contractorID);
+		$this->session->set_userdata('contractor_id', $contractorID);
 
 		redirect('admin/editContractorView');
 	}
 
 	public function editContractor(){
-		$currentContractorID = $this->session->userdata('contractorID');
+		$currentContractorID = $this->session->userdata('contractor_id');
 		if (!empty($_POST['businessname'])) {
 			$businessname = $this->input->post('businessname');
 			$this->admin_model->updateBusinessName($businessname, $currentContractorID);
@@ -299,8 +299,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function editFundsView(){
-		$fundID = $this->session->userdata('fundID');
-		$data['fundDetail'] = $this->admin_model->getFundsDetails($fundID);
+		$fund_id = $this->session->userdata('fund_id');
+		$data['fundDetail'] = $this->admin_model->getFundsDetails($fund_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
@@ -311,13 +311,13 @@ class Admin extends CI_Controller {
 	public function setCurrentFundID(){
 		$fundID = $this->input->post('source');
 
-		$this->session->set_userdata('fundID', $fundID);
+		$this->session->set_userdata('fund_id', $fundID);
 
 		redirect('admin/editFundsView');
 	}
 
 	public function editFunds(){
-		$fundID = $this->session->userdata('fundID');
+		$fundID = $this->session->userdata('fund_id');
 		if (!empty($_POST['source'])) {
 			$source = $this->input->post('source');
 			$this->admin_model->updateFundSource($source, $fundID);
@@ -338,15 +338,15 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function addProjectView(){
+	public function addProjectTypeView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
-		$this->load->view('admin/addproject');
+		$this->load->view('admin/addProjectType');
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function addProject(){
+	public function addProjectType(){
 		$type = $this->input->post('type');
 
 		if ($this->admin_model->insertNewProjectType($type)) {
@@ -355,12 +355,12 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'Error! Project Type Not Recorded.');
 		}
 
-		redirect('admin/addProjectView');
+		redirect('admin/addProjectTypeView');
 	}
 
 	public function editProjectTypeView(){
 		$projectID = $this->session->userdata('projectTypeID');
-		$data['projectTypeDetails'] = $this->admin_model->getProjectDetails($projectID);
+		$data['projectTypeDetails'] = $this->admin_model->getProjectTypeDetails($projectID);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
@@ -468,10 +468,84 @@ class Admin extends CI_Controller {
 	}
 
 	public function manageMunicipalitiesAndBarangays(){
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
-		$this->load->view('admin/municipalitiesAndBrangays');
+		$this->load->view('admin/municipalitiesAndBrangays', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addMunicipalityView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addMunicipality');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addNewMunicipality(){
+		$municipality_code = $this->input->post('municipality_code');
+		$municipality = $this->input->post('municipality');
+
+		if ($this->admin_model->insertMunicipality($municipality_code, $municipality)) {
+			$this->session->set_flashdata('success', 'New municipality added successfully.');
+		}else{
+			$this->session->set_flashdata('error', 'Erro adding municipality. Try again!');
+		}
+
+		redirect('admin/addMunicipalityView');
+	}
+
+	public function editMunicipalityView(){
+		$municipality_id = $this->session->userdata('municipality_id');
+		$data['municipalityDetails'] = $this->admin_model->getMunicipalityDetails($municipality_id);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/editMunicipality', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function editMunicipality(){
+
+		$municipality_id = $this->session->userdata('municipality_id');
+
+		if (!empty($_POST['municipality_code'])) {
+			$municipality_code = $this->input->post('municipality_code');
+			$this->admin_model->updateMunicipalityCode($municipality_id, $municipality_code);
+		}
+		if (!empty($_POST['municipality'])) {
+			$municipality = $this->input->post('municipality');
+			$this->admin_model->updateMunicipalityName($municipality_id, $municipality);
+		}
+
+		$this->session->set_flashdata('success', 'municipality details successfully updated.');
+
+		redirect('admin/editMunicipalityView');
+	}
+
+	public function setCurrentMunicipalityID(){
+		$municipality_id = $this->input->post('municipality_id');
+		
+		$this->session->set_userdata('municipality_id', $municipality_id);
+
+		redirect('admin/editMunicipalityView');
+	}
+
+	public function manageAccountClassifications(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/accountClassifications');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function manageProcurementMode(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/procurementMode');
 		$this->load->view('admin/fragments/footer');
 	}
 

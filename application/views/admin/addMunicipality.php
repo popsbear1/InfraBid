@@ -5,7 +5,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Edit Fund<small></small></h2>
+            <h2>Add Municipality and Barangay/s<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -34,18 +34,45 @@
                 <p><?php echo $_SESSION['error'] ?></p>
               </div>
             <?php endif ?>
-            <form id="editFundsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editFunds') ?>">
+            <form id="addMunicipalityForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addNewMunicipality') ?>">
+
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Source of Fund<span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="municipality_code">Municipality Code<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" step="any"  id="source" name="source" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $fundDetail['source'] ?>">
+                  <input type="text" step="any"  id="municipality_code" value="" name="municipality_code"  required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="municipality">Name of Municipality<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" step="any"  id="municipality" value="" name="municipality"  required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+              <div class="ln_solid"></div>
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <div class="row">
+                    <div class="col-lg-8 text-right">
+                      <div class="form-group">
+                        <label class="col-lg-6 control-label">Number Of Barangay/s</label>
+                        <div class="col-lg-6">
+                          <input type="number" min="0" class="form-control" id="barangayNumber">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 text-left">
+                      <button type="button" class="btn btn-primary" id="addBarangayButton">Add Barangay</button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="ln_solid"></div>
               <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                  <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>               
+                <div class="col-lg-12 text-center">
+                  <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
                 </div>
               </div>
             </form>
@@ -57,7 +84,6 @@
     <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
@@ -72,15 +98,18 @@
                 </tr> 
               </thead>
               <tbody>
-                <tr><td>Source of Fund</td>
-                  <td><span id="usernam"></span></td>
+                <tr><td>Municipality Code</td>
+                  <td><span id="code"></span></td>
+                </tr>
+                <tr><td>Municipality</td>
+                  <td><span id="name"></span></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" form="editFundsForm" name="submit" class="btn btn-primary">Confirm</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="addMunicipalityForm" name="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
@@ -105,8 +134,13 @@
 <script>
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-      $('#usernam').html($('#source').val());
+      $('#code').html($('#municipality_code').val());
+      $('#name').html($('#municipality').val());
     });
+  });
+
+  $('#addBarangayButton').click(function(e){
+    
   });
 </script>
 

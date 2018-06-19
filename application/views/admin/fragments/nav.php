@@ -87,7 +87,14 @@
                 </li>
                 <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </a>
                 </li>
-                <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Manage Municipalities</a></li>
+                <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Manage Municipalities</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i>Manage Account Classifications</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i>Manage Procurement Mode</a>
+                </li>
               </ul>
             </div>
 

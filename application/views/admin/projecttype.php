@@ -3,7 +3,7 @@
     <div class="row">
       <div class="form-group no-print">
         <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-          <a href="<?php echo base_url('admin/addProjectView') ?>" type="button" class="btn btn-primary">Add New Project Type</a>
+          <a href="<?php echo base_url('admin/addProjectTypeView') ?>" type="button" class="btn btn-primary">Add New Project Type</a>
         </div>
       </div>
     </div>
@@ -42,11 +42,11 @@
               <tbody>
                 <?php foreach ($projectTypes as $projectType): ?>
                   <tr>
-                    <td><?php echo $projectType['id'] ?></td>
+                    <td><?php echo $projectType['projtype_id'] ?></td>
                     <td><?php echo $projectType['type'] ?></td>
                     <td>
                       <form action="<?php echo base_url('admin/setCurrentProjectTypeID') ?>" method="post">
-                        <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['id'] ?>"> 
+                        <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['projtype_id'] ?>"> 
                           <i class="fa fa-edit"></i>
                         </button>
                       </form>

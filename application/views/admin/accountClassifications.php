@@ -2,8 +2,8 @@
         <!-- page content -->
     <div class="row">
       <div class="form-group no-print">
-        <div class="col-lg-12 text-right">
-          <a href="<?php echo base_url('admin/addMunicipalityView') ?>" type="button" class="btn btn-primary">Add New Municipality</a>
+        <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
+          <a href="<?php echo base_url('admin/addProjectView') ?>" type="button" class="btn btn-primary">Add New Account</a>
         </div>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Manage Municipalities and Barangays<small></small></h2>
+            <h2>Manage Account Classifications<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -34,26 +34,12 @@
             <table class="datatable-1 table table-striped table-bordered">
               <thead style='font-size:12px;'>
                 <tr>
-                  <th class="text-center">Code</th>
-                  <th class="text-center">Name</th>
-                  <th class="text-center">Edit</th>
+                  <th style='text-align: center'>ID</th>
+                  <th style='text-align: center'>Project Type</th>
+                  <th style='text-align: center'>Edit</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($municipalities as $municipality): ?>
-                  <tr>
-                    <td><?php echo $municipality['municipality_code'] ?></td>
-                    <td><?php echo $municipality['municipality'] ?></td>
-                    <td class="text-center">
-                      <form action="<?php echo base_url('admin/setCurrentMunicipalityID') ?>" method="POST">
-                        <input hidden type="text" name="municipality_id" value="<?php echo $municipality['municipality_id'] ?>">
-                        <button class="btn btn-success" type="submit">
-                          <i class="fa fa-edit"></i>
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-                <?php endforeach ?>
               </tbody>
             </table>
           </div>

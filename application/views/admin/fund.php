@@ -42,11 +42,11 @@
               <tbody>
                 <?php foreach ($funds as $fund): ?>
                   <tr>
-                    <td><?php echo $fund['id'] ?></td>
+                    <td><?php echo $fund['fund_id'] ?></td>
                     <td><?php echo $fund['source'] ?></td>
                     <td class="text-center">
                       <form method="POST" action="<?php echo base_url('admin/setCurrentFundID') ?>">
-                        <button class="btn btn-success" name="source" value="<?php echo $fund['id'] ?>" type="submit">
+                        <button class="btn btn-success" name="source" value="<?php echo $fund['fund_id'] ?>" type="submit">
                           <i class="fa fa-edit"></i>
                         </button>
                       </form>

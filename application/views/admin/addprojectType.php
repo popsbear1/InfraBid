@@ -34,7 +34,7 @@
                 <p><?php echo $_SESSION['error'] ?></p>
               </div>
             <?php endif ?>
-            <form id="addProjectForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addProject') ?>">
+            <form id="addProjectForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addProjectType') ?>">
 
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Type of Project<span class="required">*</span>
@@ -48,7 +48,6 @@
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                   <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-
                 </div>
               </div>
             </form>
@@ -76,7 +75,7 @@
               </thead>
               <tbody>
                 <tr><td>Type of Project</td>
-                  <td><span id="usernam"></span></td>
+                  <td><span id="typeName"></span></td>
                 </tr>
               </tbody>
             </table>
@@ -109,7 +108,7 @@
 <script>
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-     $('#username').html($('#type').val());
+     $('#typeName').html($('#type').val());
    });
     
   });

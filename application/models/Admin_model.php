@@ -18,8 +18,8 @@
 
 		public function getProjectPlan(){
 			$this->db->select('*');
-			$this->db->from('plan');
-			$this->db->order_by('project_no', 'DESC');
+			$this->db->from('project_plan');
+			$this->db->order_by('plan_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -75,7 +75,7 @@
 		public function getContractors(){
 			$this->db->select('*');
 			$this->db->from('contractors');
-			$this->db->order_by('id', 'DESC');
+			$this->db->order_by('contractor_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -85,7 +85,7 @@
 		public function getContractorDetails($currentContractorID){
 			$this->db->select('*');
 			$this->db->from('contractors');
-			$this->db->where('id', $currentContractorID);
+			$this->db->where('contractor_id', $currentContractorID);
 
 			$query = $this->db->get();
 
@@ -101,10 +101,10 @@
 			return $query->result_array();
 		}
 
-		public function getFundsDetails($fundID){
+		public function getFundsDetails($fund_id){
 			$this->db->select('*');
 			$this->db->from('funds');
-			$this->db->where('id', $fundID);
+			$this->db->where('fund_id', $fund_id);
 
 			$query = $this->db->get();
 
@@ -120,10 +120,10 @@
 			return $query->result_array();
 		}
 
-		public function getProjectDetails($projectID){
+		public function getProjectTypeDetails($projtype_id){
 			$this->db->select('*');
 			$this->db->from('projtype');
-			$this->db->where('id', $projectID);
+			$this->db->where('projtype_id', $projtype_id);
 
 			$query = $this->db->get();
 
@@ -163,6 +163,16 @@
 			$this->db->select('project_title');
 			$this->db->from('plan');
 			$this->db->where('project_no', $project_no);
+
+			$query = $this->db->get();
+
+			return $query->row();
+		}
+
+		public function getMunicipalityDetails($municipality_id){
+			$this->db->select('*');
+			$this->db->from('municipalities');
+			$this->db->where('municipality_id', $municipality_id);
 
 			$query = $this->db->get();
 
@@ -253,6 +263,19 @@
 
 
 		if ($this->db->insert('users', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function insertMunicipality($municipality_code, $municipality){
+		$data = array(
+			'municipality_code' => $municipality_code,
+			'municipality' => $municipality
+		);
+
+		if ($this->db->insert('municipalities', $data)) {
 			return true;
 		}else{
 			return false;
@@ -349,7 +372,7 @@
 			'businessname' => $businessname
 		);
 
-		$this->db->where('id', $currentContractorID);
+		$this->db->where('contractor_id', $currentContractorID);
 		$this->db->update('contractors', $data);
 	}
 
@@ -358,7 +381,7 @@
 			'owner' => $owner
 		);
 
-		$this->db->where('id', $currentContractorID);
+		$this->db->where('contractor_id', $currentContractorID);
 		$this->db->update('contractors', $data);
 	}
 
@@ -367,7 +390,7 @@
 			'address' => $address
 		);
 
-		$this->db->where('id', $currentContractorID);
+		$this->db->where('contractor_id', $currentContractorID);
 		$this->db->update('contractors', $data);
 	}
 
@@ -376,7 +399,7 @@
 			'contactnumber' => $contactnumber
 		);
 
-		$this->db->where('id', $currentContractorID);
+		$this->db->where('contractor_id', $currentContractorID);
 		$this->db->update('contractors', $data);
 	}
 
@@ -389,12 +412,12 @@
 		$this->db->update('funds', $data);
 	}
 
-	public function updateProjectType($type, $projectID){
+	public function updateProjectType($type, $projtype_id){
 		$data = array(
 			'type' => $type
 		);
 
-		$this->db->where('id', $projectID);
+		$this->db->where('projtype_id', $projtype_id);
 		$this->db->update('projtype', $data);
 	}
 
@@ -423,6 +446,25 @@
 
 		$this->db->where('id', $userID);
 		$this->db->update('users', $data);
+	}
+
+	public function updateMunicipalityCode($municipality_id, $municipality_code){
+		$data = array(
+			'municipality_code' => $municipality_code
+		);
+
+		$this->db->where('municipality_id', $municipality_id);
+		$this->db->update('municipalities', $data);
+
+	}
+
+	public function updateMunicipalityName($municipality_id, $municipality){
+		$data = array(
+			'municipality' => $municipality
+		);
+
+		$this->db->where('municipality_id', $municipality_id);
+		$this->db->update('municipalities', $data);
 	}
 
 	/**

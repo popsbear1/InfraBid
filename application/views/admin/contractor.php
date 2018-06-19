@@ -50,7 +50,7 @@
                     <td><?php echo $contructor['contactnumber'] ?></td>
                     <td>
                       <form method="POST" action="<?php echo base_url('admin/setCurrentContractorID') ?>">
-                        <button class="btn btn-success" name="contractorID" value="<?php echo $contructor['id'] ?>" type="submit">
+                        <button class="btn btn-success" name="contractor_id" value="<?php echo $contructor['contractor_id'] ?>" type="submit">
                           <i class="fa fa-edit"></i>
                         </button>
                       </form>

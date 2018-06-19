@@ -1,18 +1,11 @@
 
         <!-- page content -->
-    <div class="row">
-      <div class="form-group no-print">
-        <div class="col-lg-12 text-right">
-          <a href="<?php echo base_url('admin/addMunicipalityView') ?>" type="button" class="btn btn-primary">Add New Municipality</a>
-        </div>
-      </div>
-    </div>
-    <br>
+    <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Manage Municipalities and Barangays<small></small></h2>
+            <h2>Edit Municipality<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -31,37 +24,100 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <table class="datatable-1 table table-striped table-bordered">
-              <thead style='font-size:12px;'>
-                <tr>
-                  <th class="text-center">Code</th>
-                  <th class="text-center">Name</th>
-                  <th class="text-center">Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($municipalities as $municipality): ?>
+            <?php if (isset($_SESSION['success'])): ?>
+              <div class="alert alert-success">
+                <p><?php echo $_SESSION['success'] ?></p>
+              </div>
+            <?php endif ?>
+            <?php if (isset($_SESSION['error'])): ?>
+              <div class="alert alert-warning">
+                <p><?php echo $_SESSION['error'] ?></p>
+              </div>
+            <?php endif ?>
+            <form id="addMunicipalityForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editMunicipality') ?>">
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="municipality_code">Municipality Code<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" step="any"  id="municipality_code" placeholder="<?php echo $municipalityDetails->municipality_code ?>" name="municipality_code" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="municipality">Name of Municipality<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" step="any"  id="municipality" placeholder="<?php echo $municipalityDetails->municipality ?>" name="municipality" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                  <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <table class="datatable-1 table table-striped table-bordered">
+                <thead>
                   <tr>
-                    <td><?php echo $municipality['municipality_code'] ?></td>
-                    <td><?php echo $municipality['municipality'] ?></td>
-                    <td class="text-center">
-                      <form action="<?php echo base_url('admin/setCurrentMunicipalityID') ?>" method="POST">
-                        <input hidden type="text" name="municipality_id" value="<?php echo $municipality['municipality_id'] ?>">
-                        <button class="btn btn-success" type="submit">
-                          <i class="fa fa-edit"></i>
-                        </button>
-                      </form>
-                    </td>
+                    <th>Barangay ID</th>
+                    <td>Barangay Code</td>
+                    <td>Barangay Name</td>
                   </tr>
-                <?php endforeach ?>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>             
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- modal for data confirmation -->
+    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+          </div>
+          <div class="modal-body">
+            <table class='table table-striped table-bordered' style='font-size:13px;'>
+              <thead>
+                <tr >
+                  <th style='text-align: center'>Attributes</th>
+                  <th style='text-align: center'>Values</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr><td>Municipality Code</td>
+                  <td><span id="code"></span></td>
+                </tr>
+                <tr><td>Municipality</td>
+                  <td><span id="name"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="addMunicipalityForm" name="submit" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
   </div>
 </div>
+
 
 <!-- jQuery -->
 <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
@@ -90,6 +146,16 @@
 <script src="<?php echo base_url() ?>public/vendors/jszip/dist/jszip.min.js"></script>
 <script src="<?php echo base_url() ?>public/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="<?php echo base_url() ?>public/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#myModal').on('show.bs.modal' , function (e) {
+      $('#code').html($('#municipality_code').val());
+      $('#name').html($('#municipality').val());
+    });
+  });
+</script>
+
 
      <script>
         $(document).ready(function() {
@@ -147,3 +213,5 @@
         TableManageButtons.init();
       });
     </script>
+
+
