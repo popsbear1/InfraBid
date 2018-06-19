@@ -488,10 +488,17 @@ class Admin extends CI_Controller {
 		$municipality_code = $this->input->post('municipality_code');
 		$municipality = $this->input->post('municipality');
 
-		if ($this->admin_model->insertMunicipality($municipality_code, $municipality)) {
-			$this->session->set_flashdata('success', 'New municipality added successfully.');
-		}else{
+		$municipality_id = $this->admin_model->insertMunicipality($municipality_code, $municipality);
+
+		if (!$municipality_id) {
 			$this->session->set_flashdata('error', 'Erro adding municipality. Try again!');
+		}else{
+			if (isset($_POST['barangay_code']) && isset($_POST['barangay_name'])) {
+				for ($i=0; $i < count($_POST['barangay_code']); $i++) { 
+					$this->admin_model->insertBarangay($municipality_id, $_POST['barangay_code'][$i], $_POST['barangay_name'][$i]);
+				}
+			}
+			$this->session->set_flashdata('success', 'New municipality added successfully.');
 		}
 
 		redirect('admin/addMunicipalityView');
@@ -500,6 +507,7 @@ class Admin extends CI_Controller {
 	public function editMunicipalityView(){
 		$municipality_id = $this->session->userdata('municipality_id');
 		$data['municipalityDetails'] = $this->admin_model->getMunicipalityDetails($municipality_id);
+		$data['barangays'] = $this->admin_model->getMunicipalityBarangays($municipality_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
@@ -520,7 +528,29 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateMunicipalityName($municipality_id, $municipality);
 		}
 
+		if (isset($_POST['barangay_code']) && isset($_POST['barangay_name'])) {
+			for ($i=0; $i < count($_POST['barangay_code']); $i++) { 
+				$this->admin_model->insertBarangay($municipality_id, $_POST['barangay_code'][$i], $_POST['barangay_name'][$i]);
+			}
+		}
+
 		$this->session->set_flashdata('success', 'municipality details successfully updated.');
+
+		redirect('admin/editMunicipalityView');
+	}
+
+	public function editBarangay(){
+		$barangay_id = $this->input->post('current_barangay_id');
+		if (!empty($_POST['barangay_code'] || $_POST['barangay_code'] != null)) {
+			$barangay_code = $this->input->post('barangay_code');
+			$this->admin_model->updateBarangayCode($barangay_id, $barangay_code);
+				
+		}
+
+		if (!empty($_POST['barangay'])) {
+			$barangay = $this->input->post('barangay');
+			$this->admin_model->updateBarangayName($barangay_id, $barangay);
+		}
 
 		redirect('admin/editMunicipalityView');
 	}

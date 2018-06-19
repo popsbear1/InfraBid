@@ -51,13 +51,39 @@
                   <input type="text" step="any"  id="municipality" placeholder="<?php echo $municipalityDetails->municipality ?>" name="municipality" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
+              
+              <div class="ln_solid"></div>
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <div class="row">
+                    <div class="col-lg-8 text-right">
+                      <div class="form-group">
+                        <label class="col-lg-6 control-label">Number Of Barangay/s</label>
+                        <div class="col-lg-6">
+                          <input type="number" min="0" class="form-control" id="barangayNumber">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 text-left">
+                      <button type="button" class="btn btn-primary" id="addBarangayButton">Add Barangay</button>
+                      <button type="button" class="btn btn-warning" id="resetBarangayInputButton">Reset</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div id="barangayInputContainer">
+                      
+                    </div> 
+                  </div>
+                </div>
+              </div>
               <div class="ln_solid"></div>
               <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <div class="col-lg-12 text-center">
                   <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
                 </div>
               </div>
             </form>
+            <div class="ln_solid"></div>
             <div class="row">
               <table class="datatable-1 table table-striped table-bordered">
                 <thead>
@@ -65,14 +91,22 @@
                     <th>Barangay ID</th>
                     <td>Barangay Code</td>
                     <td>Barangay Name</td>
+                    <td>Edit</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                  <?php foreach ($barangays as $barangay): ?>
+                    <tr>
+                      <td><?php echo $barangay['barangay_id'] ?></td>
+                      <td><?php echo $barangay['barangay_code'] ?></td>
+                      <td><?php echo $barangay['barangay'] ?></td>
+                      <td>                      
+                        <button class="btn btn-success barangayEditButton" type="button" value="<?php echo $barangay['barangay_id'] . ',' . $barangay['barangay_code'] . ',' . $barangay['barangay'] ?>">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>             
             </div>
@@ -110,6 +144,46 @@
           <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" form="addMunicipalityForm" name="submit" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
+    <!-- modal for data confirmation -->
+    <div id="hisModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit Barnagay Details</h4>
+          </div>
+          <div class="modal-body">
+            <form action="<?php echo base_url('admin/editBarangay') ?>" method="POST" id ="editBarangayForm" class="form-horizontal">
+              <div class="form-group">
+                <label for="" class="control-label col-sm-4">Barangay ID</label>
+                <div class="col-sm-8">
+                  <input type="text" name="barangay_id" id="barangay_id" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label col-sm-4">Barangay Code</label>
+                <div class="col-sm-8">
+                  <input type="text" name="barangay_code" id="barangay_code" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label col-sm-4">Barangay Name</label>
+                <div class="col-sm-8">
+                  <input type="text" name="barangay" id="barangay"  class="form-control">
+                </div>
+              </div>
+              <input type="text" hidden name="current_barangay_id" id="current_barangay_id">
+            </form>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="editBarangayForm" name="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
@@ -154,7 +228,57 @@
       $('#name').html($('#municipality').val());
     });
   });
+
+  $('#addBarangayButton').click(function(e){
+    var barangayNumber = $('#barangayNumber').val();
+    if (barangayNumber == 0 || barangayNumber == null || barangayNumber == "") {
+      alert("input number of barangays to add");
+    }else{
+      for (var i = 1; i <= barangayNumber; i++) {
+        $('#barangayInputContainer').append(
+          '<div class="well">' +
+            '<div class="row">' +
+              '<div class="col-lg-3">' +
+                '<h1>' + i + '</h1>' +
+              '</div>' +
+              '<div class="col-lg-9">' +
+                '<div class="form-group">' +
+                  '<label class="control-label col-sm-3">Barangay Code</label>' +
+                  '<div class="col-sm-6">' +
+                    '<input type="text" class="form-control" name="barangay_code[]">' +
+                  '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                  '<label class="control-label col-sm-3">Barangay Name</label>' +
+                  '<div class="col-sm-6">' +
+                    '<input type="text" class="form-control" name="barangay_name[]">' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+    }
+  });
+
+  $(document).on('click', '#resetBarangayInputButton', function(e){
+    $('#barangayInputContainer').empty();
+  });
+
+  $('.barangayEditButton').click(function(e){
+    var barangayDetails = $(this).val().split(',');
+
+    $('#barangay_id').prop('value', barangayDetails[0]);
+    $('#current_barangay_id').prop('value', barangayDetails[0]);
+    $('#barangay_code').prop('placeholder', barangayDetails[1]);
+    $('#barangay').prop('placeholder', barangayDetails[2]);
+
+    $('#hisModal').modal('show');
+  });
+
 </script>
+
 
 
      <script>

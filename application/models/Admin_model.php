@@ -179,6 +179,16 @@
 			return $query->row();
 		}
 
+		public function getMunicipalityBarangays($municipality_id){
+			$this->db->select('*');
+			$this->db->from('barangays');
+			$this->db->where('municipality_id', $municipality_id);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 	/**
 	* All functions bellow are used to insert data on Database.
 	**/
@@ -276,10 +286,20 @@
 		);
 
 		if ($this->db->insert('municipalities', $data)) {
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}
+	}
+
+	public function insertBarangay($municipality_id, $barangay_code, $barangay){
+		$data = array(
+			'barangay_code' => $barangay_code,
+			'barangay' => $barangay,
+			'municipality_id' => $municipality_id
+		);
+
+		$this->db->insert('barangays', $data);
 	}
 	/**
 	* All functions bellow are used to update data on Database.
@@ -466,6 +486,28 @@
 		$this->db->where('municipality_id', $municipality_id);
 		$this->db->update('municipalities', $data);
 	}
+
+	public function updateBarangayCode($barangay_id, $barangay_code){
+		$data = array(
+			'barangay_code' => $barangay_code
+		);
+
+		$this->db->where('barangay_id', $barangay_id);
+		if($this->db->update('barangays', $data)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateBarangayName($barangay_id, $barangay){
+		$data = array(
+			'barangay' => $barangay
+		);
+
+		$this->db->where('barangay_id', $barangay_id);
+		$this->db->update('barangays', $data);
+	}	
 
 	/**
 	* Update proc act dates

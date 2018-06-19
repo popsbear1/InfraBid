@@ -65,7 +65,13 @@
                     </div>
                     <div class="col-lg-4 text-left">
                       <button type="button" class="btn btn-primary" id="addBarangayButton">Add Barangay</button>
+                      <button type="button" class="btn btn-warning" id="resetBarangayInputButton">Reset</button>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div id="barangayInputContainer">
+                      
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -140,8 +146,40 @@
   });
 
   $('#addBarangayButton').click(function(e){
-    
+    var barangayNumber = $('#barangayNumber').val();
+    if (barangayNumber == 0 || barangayNumber == null || barangayNumber == "") {
+      alert("input number of barangays to add");
+    }else{
+      for (var i = 1; i <= barangayNumber; i++) {
+        $('#barangayInputContainer').append(
+          '<div class="well">' +
+            '<div class="row">' +
+              '<div class="col-lg-3">' +
+                '<h1>' + i + '</h1>' +
+              '</div>' +
+              '<div class="col-lg-9">' +
+                '<div class="form-group">' +
+                  '<label class="control-label col-sm-3">Barangay Code</label>' +
+                  '<div class="col-sm-6">' +
+                    '<input type="text" class="form-control" name="barangay_code[]">' +
+                  '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                  '<label class="control-label col-sm-3">Barangay Name</label>' +
+                  '<div class="col-sm-6">' +
+                    '<input type="text" class="form-control" name="barangay_name[]">' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+    }
   });
-</script>
 
+  $(document).on('click', '#resetBarangayInputButton', function(e){
+    $('#barangayInputContainer').empty();
+  })
+</script>
 
