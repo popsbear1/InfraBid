@@ -239,8 +239,10 @@
       $('#advertisement_start').val(advertisement_start);
       var advertisement_end = new Date();
       advertisement_end.setDate(pre_proc_date.getDate()+7);
-      advertisement_end.toISOString().substring(0, 10);
-      $('#advertisement_end').val(advertisement_end);
+      var day = ("0" + advertisement_end.getDate()).slice(-2);
+      var month = ("0" + (advertisement_end.getMonth() + 1)).slice(-2);
+      var final = advertisement_end.getFullYear()+"-"+(month)+"-"+(day);
+      $('#advertisement_end').val(final);
     }
   });
 </script>

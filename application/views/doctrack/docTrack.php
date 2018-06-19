@@ -7,6 +7,31 @@
     </div>
     <div class="clearfix"></div>
     <div class="row">
+      <nav class="navbar navbar-default" style="background: orange">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a class="navbar-brand" href="#">Annual Procurement Plan </a>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <ul class="nav navbar-nav navbar-centered collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <li><a href="">Secretary</a></li>
+            <li ><a href="">BAC-INFRA</a></li>
+            <li ><a href="">PGO</a></li>
+            <li ><a href="">PEO</a></li>
+          </ul>
+        </div><!-- /.container-fluid -->
+      </nav>
+      
+    </div>
+    <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
