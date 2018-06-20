@@ -34,7 +34,9 @@
           <thead>
             <tr>
               <th style='text-align: center'>Username</th>
-              <th style='text-align: center'>Password</th>
+              <th style='text-align: center'>First Name</th>
+              <th style='text-align: center'>Middle Name</th>
+              <th style='text-align: center'>Last Name </th>
               <th style='text-align: center'>User Type</th>
               <th style='text-align: center'>Edit</th>
             </tr>
@@ -42,12 +44,15 @@
           <tbody>
             <?php foreach ($users as $user): ?>
               <tr>
-                <td><?php echo $user['username'] ?></td>
-                <td><?php echo $user['password'] ?></td>
+                <td><?php echo $user['username']  ?></td>
+                <td><?php echo $user['first_name'] ?></td>
+                <td><?php echo $user['middle_name'] ?> </td>
+                <td><?php echo $user['last_name'] ?></td>
                 <td><?php echo $user['user_type'] ?></td>
-                <td>
+
+                <td class="text-center">
                   <form method="post" action="<?php echo base_url('admin/setUsersID') ?>">
-                    <button name="userID" type="submit" value="<?php echo $user['id'] ?>" class = "btn btn-success">
+                    <button name="userID" type="submit" value="<?php echo $user['user_id'] ?>" class = "btn btn-success">
                       <i class = "fa fa-edit"></i>
                     </button>
                   </form>

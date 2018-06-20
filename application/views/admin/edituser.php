@@ -37,27 +37,39 @@
                     <form id="form" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" step="any"  id="username" placeholder="<?php echo $userDetails['username']; ?>" name="username" class="form-control col-md-7 col-xs-12">
+                          <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12">
                         </div>
-
                       </div>
+
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password  <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Middle Name
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" step="any"  id="password" placeholder="<?php echo $userDetails['password']; ?>" name="password" class="form-control col-md-7 col-xs-12">
+                          <input type="text" step="any"  id="middlename" placeholder="<?php echo $userDetails['middle_name']; ?>" name="middlename" class="form-control col-md-7 col-xs-12">
                         </div>
-
                       </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name  
+                          <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">User Type <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-9 col-xs-12">
                           <select class="select2_single form-control" step="any"  id="usertype" value="<?php echo $row['user_type']; ?>" name="usertype" tabindex="-1">
-                            <option></option>
-                            <option>admin</option>
+                            <option>Admin/Secretariat</option>
+                            <option>PGO</option>
+                            <option>PEO</option>
+                            <option>PWG</option>
                           </select>
                         </div>
                       </div>
@@ -84,14 +96,16 @@
                                       </tr> 
                                     </thead>
                                     <tbody>
-                                      <tr><td>Username</td>
-                                        <td><span id="usernam"></span></td>
+                                      <tr><td>First Name</td>
+                                        <td><span id="firstN"></span></td>
                                       </tr>
-                                      <tr><td>Password</td>
-                                        <td><span id="passwor"></span></td>
+                                      <tr><td>Middle Name</td>
+                                        <td><span id="middleN"></span></td>
                                       </tr>
+                                      <tr><td>Last Name </td>
+                                        <td><span id= "lastN"></span></td>
                                       <tr><td>User Type</td>
-                                        <td><span id="usertyp"></span></td>
+                                        <td><span id="userT"></span></td>
                                       </tr>
                                     </tbody>
                                   </tfoot>
@@ -134,9 +148,10 @@
     <script>
       $(document).ready(function() {
         $('#myModal').on('show.bs.modal' , function (e) {
-         $('#usernam').html($('#username').val());
-         $('#passwor').html($('#password').val());
-         $('#usertyp').html($('#usertype').val());
+         $('#firstN').html($('#firstname').val());
+         $('#middleN').html($('#middlename').val());
+         $('#lastN').html($('#lastname').val());
+         $('#userT').html($('#usertype').val());
        });
 
       });
