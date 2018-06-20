@@ -56,7 +56,7 @@
                   <select class="form-control" id="municipality" name ="municipality" onChange = "updateBarangay(this)">
                     <option selected hidden disabled>Choose Municipality</option>
                     <?php foreach ($municipalities as $municipality): ?>
-                      <option value="<?php echo $municipality['municipality'] . '-' . $municipality['municipalitycode'] ?>"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipalitycode'] ?></option>
+                      <option value="<?php echo $municipality['municipality_id'] ?>" class="municipality"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipality_code'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
@@ -65,11 +65,9 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Barangay <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select class="form-control" id="brgy" name ="barangay">
+                  <select class="form-control" id="barangaySelection" name ="barangay">
                     <option selected disabled hidden>Choose Barangay</option>
-                    <?php foreach ($barangays as $barangay): ?>
-                      <option value="<?php echo $barangay['barangaycode'] . '-' . $barangay['barangay'] ?>"><?php echo $barangay['barangaycode'] . ' - ' . $barangay['barangay'] ?></option>
-                    <?php endforeach ?>
+          
                   </select>
                 </div> 
               </div>
@@ -79,7 +77,7 @@
                   <select class="form-control" id="type" name ="type">
                     <option selected disabled hidden>Choose Type of Project</option>
                     <?php foreach ($projTypes as $projType): ?>
-                      <option value="<?php echo $projType['type'] ?>"><?php echo $projType['type'] ?></option>
+                      <option value="<?php echo $projType['projtype_id'] ?>"><?php echo $projType['type'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
@@ -89,9 +87,9 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="mode" name ="mode">
                     <option selected hidden disabled>Mode of Procurement</option>
-                    <option value="Bidding">Bidding</option>
-                    <option value="SVP">SVP</option>
-                    <option value="Negotiated">Negotiated</option>
+                    <?php foreach ($modes as $mode): ?>
+                      <option value="<?php echo $mode['mode_id'] ?>"><?php echo $mode['mode'] ?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
               </div>
@@ -107,7 +105,7 @@
                   <select class="form-control" id="source" name ="source">
                     <option selected hidden disabled>Choose Source of Fund</option>
                     <?php foreach ($sourceFunds as $sourceFund): ?>
-                      <option value="<?php echo $sourceFund['source'] ?>"><?php echo $sourceFund['source'] ?></option>
+                      <option value="<?php echo $sourceFund['fund_id'] ?>"><?php echo $sourceFund['source'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
@@ -117,8 +115,9 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" id="account" name ="account">
                     <option selected hidden disabled>Choose Account Classification</option>
-                    <option value="Capital Outlay">Capital Outlay</option>
-                    <option value="MOOE">MOOE</option>
+                    <?php foreach ($accounts as $account): ?>
+                      <option value="<?php echo $account['account_id'] ?>"><?php echo $account['classification'] ?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
               </div>
@@ -206,15 +205,35 @@
 
 <!-- Custom Theme Scripts -->
 <script src="<?php echo base_url() ?>public/build/js/custom.min.js"></script>
-<script src = "<?php echo base_url() ?>public/barangay.js"></script>
+<!-- <script src = "<?php echo base_url() ?>public/barangay.js"></script> -->
 
 <script>
+  var barangayData = '<?php echo json_encode($barangays) ?>';
+  var barangays = JSON.parse(barangayData);
+
+  console.log(barangays);
+
+  console.log(barangays[1]['municipality_id']);
+
+  $('.municipality').click(function(e){
+    $('#barangaySelection').empty();
+    var municipality_id = $(this).val();
+
+    for (var i = barangays.length - 1; i >= 0; i--) {
+      if (municipality_id == barangays[i]['municipality_id']) {
+        $('#barangaySelection').append(
+          '<option class="barangay" value="' + barangays[i]['barangay_id'] + '">' +  barangays[i]['barangay'] + ' - ' + barangays[i]['barangay_code'] + '</option>'
+        );
+      }
+    }
+  })
+
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
      $('#proj').html($('#project_no').val());
      $('#title').html($('#project_title').val());
      $('#mun').html($('#municipality').val());
-     $('#bar').html($('#brgy').val());
+     $('#bar').html($('#barangay').val());
      $('#typ').html($('#type').val());
      $('#mod').html($('#mode').val());
      $('#abc').html($('#ABC').val());

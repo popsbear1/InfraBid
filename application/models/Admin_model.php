@@ -19,6 +19,12 @@
 		public function getProjectPlan(){
 			$this->db->select('*');
 			$this->db->from('project_plan');
+			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('projtype', 'project_plan.projtype_id = projtype.projtype_id');
+			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
+			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->order_by('plan_id', 'DESC');
 
 			$query = $this->db->get();
@@ -62,12 +68,36 @@
 			return $query->result_array();
 		}
 
-		public function getPlanDetails($project_no){
-			// $this->db->select('*');
-			// $this->db->from('plan');
-			// $this->db->where('project_no', $project_no);
+		public function getAccountClassification(){
+			$this->db->select('*');
+			$this->db->from('account_classification');
 
-			$query = $this->db->query("SELECT * FROM `plan` WHERE project_no = '$project_no'");
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getProcurementMode(){
+			$this->db->select('*');
+			$this->db->from('procurement_mode');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getPlanDetails($plan_id){
+			$this->db->select('*');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('projtype', 'project_plan.projtype_id = projtype.projtype_id');
+			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
+			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
 
 			return $query->row_array();
 		}
@@ -190,15 +220,6 @@
 		}
 
 
-		public function getProcurementMode(){
-
-			$this->db->select('*');
-			$this->db->from('procurement_mode');
-
-			$query = $this->db->get();
-			return $query->result_array();
-		}
-
 		public function getProcurementModeDetails($procurementMode){
 			
 			$this->db->select('*');
@@ -237,29 +258,21 @@
 		$data = array(
 			'project_no' => $project_no,
 			'project_title' => $project_title,
-			'municipality' => $municipality,
-			'barangay' => $barangay,
-			'type' => $type,
-			'mode' => $mode,
-			'ABC' => $ABC,
-			'source' => $source,
-			'account' => $account
+			'municipality_id' => $municipality,
+			'barangay_id' => $barangay,
+			'projtype_id' => $type,
+			'mode_id' => $mode,
+			'fund_id' => $source,
+			'account_id' => $account,
+			'abc' => $ABC,
+			'status' => 'pending',
 		);
 
-		if ($this->db->insert('plan', $data)) {
-			$data2 = array(
-				'project_no' => $project_no
-			);
-
-			if ($this->db->insert('procact', $data2)) {
-				return true;
-			}else{
-				return false;
-			}
+		if ($this->db->insert('project_plan', $data)) {
+			return true;
 		}else{
 			return false;
-		}	
-
+		}		
 	}
 
 	public function insertNewContractor($businessname, $owner, $address, $contactnumber){
@@ -375,8 +388,8 @@
 			'project_no' => $project_no
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 
 	}
 
@@ -385,71 +398,71 @@
 			'project_title' => $project_title 
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateMunicipality($municipality, $currentProjNum){
 		$data = array(
-			'municipality' => $municipality 
+			'municipality_id' => $municipality 
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateBarangay($barangay, $currentProjNum){
 		$data = array(
-			'barangay' => $barangay
+			'barangay_id' => $barangay
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateType($type, $currentProjNum){
 		$data = array(
-			'type' => $type 
+			'projtype_id' => $type 
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateMode($mode, $currentProjNum){
 		$data = array(
-			'mode' => $mode 
+			'mode_id' => $mode 
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateABC($ABC, $currentProjNum){
 		$data = array(
-			'ABC' => $ABC 
+			'abc' => $ABC 
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateSource($source, $currentProjNum){
 		$data = array(
-			'source' => $source
+			'fund_id' => $source
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateAccount($account, $currentProjNum){
 		$data = array(
-			'account' => $account
+			'account_id' => $account
 		);
 
-		$this->db->where('project_no', $currentProjNum);
-		$this->db->update('plan', $data);
+		$this->db->where('plan_id', $currentProjNum);
+		$this->db->update('project_plan', $data);
 	}
 
 	public function updateBusinessName($businessname, $currentContractorID){

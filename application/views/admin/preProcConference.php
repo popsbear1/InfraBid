@@ -1,44 +1,9 @@
 
-        <!-- page content -->
-    <div class="well">
-      <div class="row">
-        <div class="form-group no-print">
-          <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-            <a href="<?php echo base_url('admin/addPlanView') ?>" type="button" class="btn btn-primary">Add New Project</a>
-            <a href="<?php echo base_url('admin/addPlanFromFileView') ?>" type="button" class="btn btn-primary">Add From File</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <nav class="navbar navbar-default" style="background: orange">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <a class="navbar-brand" href="#">Annual Procurement Plan </a>
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <ul class="nav navbar-nav navbar-centered collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <li><a href="">ABC 5M above</a></li>
-            <li ><a href="">ABC Between 1M & 5M</a></li>
-            <li ><a href="">ABC 1M below</a></li>
-          </ul>
-        </div><!-- /.container-fluid -->
-      </nav>
-      
-    </div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Procurement  Monitoring Report for Public Bidding and Negotiated<small></small></h2>
+            <h2>Pre-Procurement Conference<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -72,25 +37,15 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($plans as $plan): ?>
-                  <tr>
-                    <td><?php echo $plan['project_no'] ?></td>
-                    <td><?php echo $plan['project_title'] ?></td>
-                    <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
-                    <td><?php echo $plan['type'] ?></td>
-                    <td><?php echo $plan['mode'] ?></td>
-                    <td><?php echo $plan['abc'] ?></td>
-                    <td><?php echo $plan['source'] ?></td>
-                    <td><?php echo $plan['classification'] ?></td>
-                    <td>
-                      <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                        <button class="btn btn-success" type="submit" name="plan_id" value="<?php echo $plan['plan_id'] ?>">
-                          <i class="fa fa-edit"></i>
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-                <?php endforeach ?>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tbody>
             </table>
           </div>

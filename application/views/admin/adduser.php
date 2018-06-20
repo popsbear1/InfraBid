@@ -31,9 +31,7 @@
           <div class="alert alert-warning">
             <p><?php echo $_SESSION['error'] ?></p>
           </div>
-        <?php endif ?>
-
-        
+        <?php endif ?>   
         <form id="form" action="<?php echo base_url('admin/addUsers') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
 
           <div class="form-group">
