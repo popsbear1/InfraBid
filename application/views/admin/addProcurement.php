@@ -5,7 +5,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Add Contractor<small></small></h2>
+            <h2>Add Procurement Mode<small></small></h2>
             <ul class="nav navbar-right panel_toolbox noPrint">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -34,40 +34,17 @@
                 <p><?php echo $_SESSION['error'] ?></p>
               </div>
             <?php endif ?>
-            <form id="addContractorForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addNewContractor') ?>">
+            <form id="addProcurementForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addProcurement') ?>">
 
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Business Name<span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name of Procurement Mode<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" step="any"  id="businessname" value="" name="businessname"  required="required" class="form-control col-md-7 col-xs-12">
+                  <input type="text" step="any"  id="addProcurement" value="" name="mode"  required="required" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Owner/Manager  <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" step="any"  id="owner" value="" name="owner"  required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Address <span class="required">*</span></label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" step="any"  id="address" value="" name="address"  class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Number <span class="required">*</span></label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" step="any"  id="contactnumber" value="" name="contactnumber"  class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
-
-              <div class="ln_solid"></div>
+             <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                   <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
@@ -96,24 +73,15 @@
                 </tr> 
               </thead>
               <tbody>
-                <tr><td>Business Name</td>
-                  <td><span id="usernam"></span></td>
-                </tr>
-                <tr><td>Owner</td>
-                  <td><span id="passwor"></span></td>
-                </tr>
-                <tr><td>Address</td>
-                  <td><span id="usertyp"></span></td>
-                </tr>
-                <tr><td>Contact Number</td>
-                  <td><span id="contact"></span></td>
+                <tr><td>Procurement Mode</td>
+                  <td><span id="procurement"></span></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" form="addContractorForm" name="submit" class="btn btn-primary">Confirm</button>
+          <button type="submit" form="addProcurementForm" name="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
@@ -138,10 +106,7 @@
 <script>
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-      $('#usernam').html($('#businessname').val());
-      $('#passwor').html($('#owner').val());
-      $('#usertyp').html($('#address').val());
-      $('#contact').html($('#contactnumber').val());
+      $('#procurement').html($('#addProcurement').val());
     });
   });
 </script>

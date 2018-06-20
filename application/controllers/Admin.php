@@ -191,7 +191,7 @@ class Admin extends CI_Controller {
 	*Bellow are the functions for loading management of data...
 	**/
 
-	public function manageConstractorsView(){
+	public function manageContractorsView(){
 		$data['contructors'] = $this->admin_model->getContractors();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -564,19 +564,136 @@ class Admin extends CI_Controller {
 	}
 
 	public function manageAccountClassifications(){
+		$data['classifications'] = $this->admin_model->getClassification();
+
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
-		$this->load->view('admin/accountClassifications');
+		$this->load->view('admin/accountClassifications', $data);
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function manageProcurementMode(){
+	public function addClassificationView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
-		$this->load->view('admin/procurementMode');
+		$this->load->view('admin/addClassification');
+		$this->load->view('admin/fragments/footer');		
+	}
+
+	public function addClassification(){
+		$classification = $this->input->post('classification');
+
+		if ($this->admin_model->insertClassification($classification)) {
+			$this->session->set_flashdata('success', 'New Classification Mode Recorded.');
+		}else{
+			$this->session->set_flashdata('error', 'Error! Adding of Classification not Recorded.');
+		}
+
+		redirect('admin/addClassificationView');
+	}
+
+		public function editClassificationView(){
+		$classifications = $this->session->userdata('account_classification');
+
+		$data['classification'] = $this->admin_model->getClassificationDetails($classifications);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/editClassification', $data);
 		$this->load->view('admin/fragments/footer');
+	}
+
+		public function editClassification(){
+
+		$classification = $this->session->userdata('account_classification');
+		if (!empty($_POST['classification'])) {
+			$newClassification = $this->input->post('classification');
+			$this->admin_model->updateClassification($classification, $newClassification);
+		}
+
+		$this->session->set_flashdata('success', 'Classification Successfully Updated.');
+		redirect('admin/editClassificationView');
+
+	}
+
+		public function setClassification(){
+
+		$classifications = $this->input->post('classification');
+
+		$this->session->set_userdata('account_classification', $classifications);
+
+		redirect('admin/editClassificationView');
+
+	}
+
+
+
+	public function manageProcurementMode(){
+		$data['modes'] = $this->admin_model->getProcurementMode();
+
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/procurementMode', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addProcurementView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/addProcurement');
+		$this->load->view('admin/fragments/footer');
+	}
+
+
+
+	public function addProcurement(){
+		$mode = $this->input->post('mode');
+
+		if ($this->admin_model->insertProcurementMode($mode)) {
+			$this->session->set_flashdata('success', 'New Procurement Mode Recorded.');
+		}else{
+			$this->session->set_flashdata('error', 'Error! Procurement Mode not Recorded.');
+		}
+
+		redirect('admin/addProcurementView');
+
+	}
+
+	public function editProcurementView(){
+		$modes = $this->session->userdata('procurement_mode');
+
+		$data['mode'] = $this->admin_model->getProcurementModeDetails($modes);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/editProcurement', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function editProcurement(){
+
+		$mode = $this->session->userdata('procurement_mode');
+		if (!empty($_POST['mode'])) {
+			$newmode = $this->input->post('mode');
+			$this->admin_model->updateProcurementMode($mode, $newmode);
+		}
+
+		$this->session->set_flashdata('success', 'Procurement Mode Successfully Updated.');
+		redirect('admin/editProcurementView');
+
+	}
+
+	public function setProcurementMode(){
+
+		$modes = $this->input->post('mode');
+
+		$this->session->set_userdata('procurement_mode', $modes);
+
+		redirect('admin/editProcurementView');
+
 	}
 
 	public function procurementMonitoringReport(){
