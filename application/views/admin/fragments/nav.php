@@ -38,7 +38,7 @@
             <div class="menu_section">
               <h3>Process</h3>
               <ul class="nav side-menu">
-                <li><a href="<?php echo base_url('admin/planView') ?>"><i class="fa fa-tasks"></i> Annual Procurement Plan </a></li>
+                <li><a href="<?php echo base_url('admin/plan5MAboveABCView') ?>"><i class="fa fa-tasks"></i> Annual Procurement Plan </a></li>
                 <li><a><i class="fa fa-shopping-cart"></i> Procurement Activity <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href='<?php echo base_url('admin/preProcurementConferenceView') ?>'>Pre-Procurement Conference</a>

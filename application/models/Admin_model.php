@@ -189,10 +189,10 @@
 			return $query->row_array();
 		}
 
-		public function getProjectTitle($project_no){
+		public function getProjectTitle($plan_id){
 			$this->db->select('project_title');
-			$this->db->from('plan');
-			$this->db->where('project_no', $project_no);
+			$this->db->from('project_plan');
+			$this->db->where('plan_id', $plan_id);
 
 			$query = $this->db->get();
 
