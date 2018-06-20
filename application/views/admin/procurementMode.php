@@ -3,10 +3,11 @@
     <div class="row">
       <div class="form-group no-print">
         <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-          <a href="<?php echo base_url('admin/addProjectView') ?>" type="button" class="btn btn-primary">Add New Mode</a>
-        </div>
+          <a href="<?php echo base_url('admin/addProcurementView') ?>" type="button" class="btn btn-primary">Add Mode</a>
       </div>
     </div>
+  </div>
+
     <br>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -35,11 +36,25 @@
               <thead style='font-size:12px;'>
                 <tr>
                   <th style='text-align: center'>ID</th>
-                  <th style='text-align: center'>Project Type</th>
+                  <th style='text-align: center'>Project Type</tph>
                   <th style='text-align: center'>Edit</th>
                 </tr>
               </thead>
               <tbody>
+                <?php foreach ($modes as $mode): ?>
+                  <tr>
+                    <td><?php echo $mode['mode_id']?></td>
+                    <td><?php echo $mode['mode']?></td>
+                    <td>
+                      <form action="<?php echo base_url('admin/setProcurementMode') ?>" method="post">
+                        <input type="text" name="mode" value="<?php echo $mode['mode_id'] ?>" hidden>
+                        <button class="btn btn-success" type="submit">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                <?php endforeach ?>
               </tbody>
             </table>
           </div>

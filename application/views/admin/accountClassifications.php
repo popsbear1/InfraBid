@@ -1,52 +1,66 @@
 
-        <!-- page content -->
-    <div class="row">
-      <div class="form-group no-print">
-        <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-          <a href="<?php echo base_url('admin/addProjectView') ?>" type="button" class="btn btn-primary">Add New Account</a>
-        </div>
-      </div>
+<!-- page content -->
+<div class="row">
+  <div class="form-group no-print">
+    <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
+      <a href="<?php echo base_url('admin/addClassificationView') ?>" type="button" class="btn btn-primary">Add Classification</a>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Manage Account Classifications<small></small></h2>
-            <ul class="nav navbar-right panel_toolbox noPrint">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Manage Account Classifications<small></small></h2>
+        <ul class="nav navbar-right panel_toolbox noPrint">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
               </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
-                  </li>
-                  <li><a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              <li><a href="#">Settings 2</a>
               </li>
             </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <table class="datatable-1 table table-striped table-bordered">
-              <thead style='font-size:12px;'>
-                <tr>
-                  <th style='text-align: center'>ID</th>
-                  <th style='text-align: center'>Project Type</th>
-                  <th style='text-align: center'>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <table class="datatable-1 table table-striped table-bordered">
+          <thead style='font-size:12px;'>
+            <tr>
+              <th style='text-align: center'>ID</th>
+              <th style='text-align: center'>Project Type</th>
+              <th style='text-align: center'>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($classifications as $classification): ?>
+              <tr>
+                <td><?php echo $classification['account_id']?></td>
+                <td><?php echo $classification['classification']?></td>
+                <td>
+                  <form action="<?php echo base_url('admin/setClassification') ?>" method="post">
+                    <input type="text" name="classification" value="<?php echo $classification['account_id'] ?>" hidden>
+                    <button class="btn btn-success" type="submit">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <?php endforeach ?>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 
 <!-- jQuery -->
@@ -77,59 +91,59 @@
 <script src="<?php echo base_url() ?>public/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="<?php echo base_url() ?>public/vendors/pdfmake/build/vfs_fonts.js"></script>
 
-     <script>
-        $(document).ready(function() {
-        var handleDataTableButtons = function() {
-          if ($(".datatable-1").length) {
-            $(".datatable-1").DataTable({
-              dom: "Bfrtip",
-              lengthMenu: [
-            [ 10, 25, 50, -1 ],
-            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                         ],
+<script>
+  $(document).ready(function() {
+    var handleDataTableButtons = function() {
+      if ($(".datatable-1").length) {
+        $(".datatable-1").DataTable({
+          dom: "Bfrtip",
+          lengthMenu: [
+          [ 10, 25, 50, -1 ],
+          [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+          ],
 
-              buttons: [
+          buttons: [
 
-                'pageLength',
-            {
-                extend: 'copy',
-            },
+          'pageLength',
+          {
+            extend: 'copy',
+          },
 
-            {
-                extend: 'excelHtml5',
-                exportOptions: {
-                    columns: [ 0, 1]
-                }
-            },
-
-            {
-                extend: 'pdfHtml5',
-                exportOptions: {
-                    columns: [ 0, 1]
-                }
-            },
-
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: [ 0, 1]
-                }
+          {
+            extend: 'excelHtml5',
+            exportOptions: {
+              columns: [ 0, 1]
             }
-              ],
-              responsive: true
-            });
+          },
+
+          {
+            extend: 'pdfHtml5',
+            exportOptions: {
+              columns: [ 0, 1]
+            }
+          },
+
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [ 0, 1]
+            }
           }
-        };
+          ],
+          responsive: true
+        });
+      }
+    };
 
-        TableManageButtons = function() {
-          "use strict";
-          return {
-            init: function() {
-              handleDataTableButtons();
-            }
-          };
-        }();
+    TableManageButtons = function() {
+      "use strict";
+      return {
+        init: function() {
+          handleDataTableButtons();
+        }
+      };
+    }();
 
-        TableManageButtons.init();
-      });
-    </script>
+    TableManageButtons.init();
+  });
+</script>

@@ -179,6 +179,44 @@
 			return $query->row();
 		}
 
+		public function getProcurementMode(){
+
+			$this->db->select('*');
+			$this->db->from('procurement_mode');
+
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+
+		public function getProcurementModeDetails($procurementMode){
+			
+			$this->db->select('*');
+			$this->db->from('procurement_mode');
+			$this->db->where('mode_id', $procurementMode);
+
+			$query = $this->db->get();
+			return $query->row();
+		}
+
+		public function getClassification(){
+
+			$this->db->select('*');
+			$this->db->from('account_classification');
+
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+
+		public function getClassificationDetails($classificationDetails){
+
+			$this->db->select('*');
+			$this->db->from('account_classification');
+			$this->db->where('account_id', $classificationDetails);
+
+			$query = $this->db->get();
+			return $query->row();
+		}
+
 	/**
 	* All functions bellow are used to insert data on Database.
 	**/
@@ -281,6 +319,31 @@
 			return false;
 		}
 	}
+
+	public function insertProcurementMode($mode){
+		$data = array(
+			'mode' => $mode
+		);
+
+		if($this->db->insert('procurement_mode',$data)){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
+	public function insertClassification($classification){
+		$data = array(
+			'classification' => $classification
+		);
+
+		if($this->db->insert('account_classification', $data)){
+			return true;
+		}
+			return false;			
+	}
+
 	/**
 	* All functions bellow are used to update data on Database.
 	**/
@@ -465,6 +528,24 @@
 
 		$this->db->where('municipality_id', $municipality_id);
 		$this->db->update('municipalities', $data);
+	}
+
+	public function updateProcurementMode($mode_id, $mode){
+		$data = array(
+			'mode' => $mode
+		);
+
+		$this->db->where('mode_id', $mode_id);
+		$this->db->update('procurement_mode', $data);
+	}
+
+	public function updateClassification($account_id, $classification){
+		$data = array(
+			'classification' => $classification
+		);
+
+		$this->db->where('account_id', $account_id);
+		$this->db->update('account_classification', $data);
 	}
 
 	/**
