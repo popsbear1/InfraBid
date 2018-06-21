@@ -43,27 +43,27 @@
                   <ul class="nav child_menu">
                     <li><a href='<?php echo base_url('admin/preProcurementConferenceView') ?>'>Pre-Procurement Conference</a>
                     </li>
-                    <li><a href='_advertisement.php'>Advertisement</a>
+                    <li><a href='<?php echo base_url('admin/advertisementView') ?>'>Advertisement</a>
                     </li>
-                    <li><a href='_prebid.php'>Pre-bid Conference</a>
+                    <li><a href='<?php echo base_url('admin/preBidConferenceView') ?>'>Pre-bid Conference</a>
                     </li>
-                    <li><a href='#.php'>Eligibility Check</a>
+                    <li><a href='<?php echo base_url('admin/eligibilityCheckView') ?>'>Eligibility Check</a>
                     </li>
-                    <li><a href='_openbid.php'>Sub/Open of Bids</a>
+                    <li><a href='<?php echo base_url('admin/subOpenBidsView') ?>'>Sub/Open of Bids</a>
                     </li>
-                    <li><a href='_bideval.php'>Bid Evaluation</a>
+                    <li><a href='<?php echo base_url('admin/bidEvaluationView') ?>'>Bid Evaluation</a>
                     </li>
-                    <li><a href='_postqual.php'>Post Qualification</a>
+                    <li><a href='<?php echo base_url('admin/postQualificationView') ?>'>Post Qualification</a>
                     </li>
-                    <li><a href='_nofaward.php'>Notice of Award</a>
+                    <li><a href='<?php echo base_url('admin/noticeOfAwardView') ?>'>Notice of Award</a>
                     </li>
-                    <li><a href='_consign.php'>Contract Signing</a>
+                    <li><a href='<?php echo base_url('admin/contractSigningView') ?>'>Contract Signing</a>
                     </li>
-                    <li><a href='_ntoproceed.php'>Notice to Proceed</a>
+                    <li><a href='<?php echo base_url('admin/noticeToProceedView') ?>'>Notice to Proceed</a>
                     </li>
-                    <li><a href='_delivery.php'>Delivery/Completion</a>
+                    <li><a href='<?php echo base_url('admin/deliveryCompletionView') ?>'>Delivery/Completion</a>
                     </li>
-                    <li><a href='_acceptance.php'>Acceptance/Turnover</a>
+                    <li><a href='<?php echo base_url('admin/acceptanceTurnoverView') ?>'>Acceptance/Turnover</a>
                     </li>
                   </ul>
                 </li>

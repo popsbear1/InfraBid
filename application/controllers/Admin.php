@@ -735,6 +735,83 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/preProcConference');
 		$this->load->view('admin/fragments/footer');
 	}
+	public function advertisementView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/advertisement');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function preBidConferenceView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/preBidConference');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function eligibilityCheckView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/eligibilityCheck');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function subOpenBidsView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/subOpenBids');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function bidEvaluationView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/bidEvaluation');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function postQualificationView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/postQualification');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function noticeOfAwardView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/noticeOfAward');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function contractSigningView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/contractSigning');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function noticeToProceedView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/noticeToProceed');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function deliveryCompletionView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/deliveryCompletion');
+		$this->load->view('admin/fragments/footer');
+	}
+		public function acceptanceTurnoverView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/dashboard');
+		$this->load->view('admin/acceptanceTurnover');
+		$this->load->view('admin/fragments/footer');
+	}
 
 	/**
 	*
