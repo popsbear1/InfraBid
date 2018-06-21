@@ -410,13 +410,17 @@ class Admin extends CI_Controller {
 
 	public function editUsers(){
 		$userID = $this->session->userdata('userID');
-		if(!empty($_POST['username'])) {
-			$username = $this->input->post('username');
-			$this->admin_model->updateUsername($username, $userID);
+		if(!empty($_POST['firstname'])) {
+			$firstname = $this->input->post('firstname');
+			$this->admin_model->updateFirstName($firstname, $userID);
 		}
-		if(!empty($_POST['password'])) {
-			$password = $this->input->post('password');
-			$this->admin_model->updatePassword($password, $userID);
+		if(!empty($_POST['middlename'])) {
+			$middlename = $this->input->post('middlename');
+			$this->admin_model->updateMiddleName($middlename, $userID);
+		}
+		if(!empty($_POST['lastname'])) {
+			$lastname = $this->input->post('lastname');
+			$this->admin_model->updateLastName($lastname, $userID);
 		}
 		if(!empty($_POST['usertype'])) {
 			$usertype = $this->input->post('usertype');
@@ -446,11 +450,12 @@ class Admin extends CI_Controller {
 	}
 
 	public function addUsers(){
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$firstname = $this->input->post('firstname');
+		$middlename = $this->input->post('middlename');
+		$lastname = $this->input->post('lastname');
 		$usertype = $this->input->post('usertype');
 
-		if ($this->admin_model->insertUsers($username, $password, $usertype)) {
+		if ($this->admin_model->insertUsers($firstname, $middlename, $lastname, $usertype)) {
 			$this->session->set_flashdata('success', 'New User Added!');
 		}else{
 			$this->session->set_flashdata('error', 'ERROR!.');

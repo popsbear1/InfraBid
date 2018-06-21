@@ -37,28 +37,42 @@
         <form id="form" action="<?php echo base_url('admin/addUsers') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
 
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username <span class="required">*</span>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" step="any"  id="username" value="" name="username"  required="required" class="form-control col-md-7 col-xs-12">
-            </div>
-            
+              <input type="text" step="any"  id="firstname" value="" name="firstname"  required="required" class="form-control col-md-7 col-xs-12">
+            </div>  
           </div>
+
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password  <span class="required">*</span>
-            </label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Middle Name</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" step="any"  id="password" value="" name="password"  required="required" class="form-control col-md-7 col-xs-12">
+              <input type="text" step="any"  id="middlename" value="" name="middlename"  required="required" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">User Type <span class="required">*</span></label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name  
+              <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" step="any"  id="lastname" value="" name="lastname"  required="required" class="form-control col-md-7 col-xs-12">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">User Type 
+            <span class="required">*</span>
+            </label>
+            
+
             <div class="col-md-6 col-sm-9 col-xs-12">
               <select class="select2_single form-control" step="any"  id="usertype" value="" name="usertype" required="required" tabindex="-1">
-                <option></option>
-                <option>admin</option>
-                <option>encoder</option>
+                <option selected hidden disabled>Choose User Type</option>
+                <option>Admin/Secretariat</option>
+                <option>PGO</option>
+                <option>PEO</option>
+                <option>PWG</option>
               </select>
             </div>
           </div>
@@ -86,14 +100,17 @@
                           </tr> 
                         </thead>
                         <tbody>
-                          <tr><td>Username</td>
-                            <td><span id="usernam"></span></td>
+                          <tr><td>First Name</td>
+                            <td><span id="firstN"></span></td>
                           </tr>
-                          <tr><td>Password</td>
-                            <td><span id="passwor"></span></td>
+                          <tr><td>Middle Name</td>
+                            <td><span id="middleN"></span></td>
+                          </tr>
+                          <tr><td>Last Name</td>
+                            <td><span id="lastN"></span></td>
                           </tr>
                           <tr><td>User Type</td>
-                            <td><span id="usertyp"></span></td>
+                            <td><span id="userT"></span></td>
                           </tr>
                         </tbody>
                       </tfoot>
@@ -135,9 +152,10 @@
 <script>
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-     $('#usernam').html($('#username').val());
-     $('#passwor').html($('#password').val());
-     $('#usertyp').html($('#usertype').val());
+     $('#firstN').html($('#firstname').val());
+     $('#middleN').html($('#middlename').val());
+     $('#lastN').html($('#lastname').val());
+     $('#userT').html($('#usertype').val());
    });
     
   });

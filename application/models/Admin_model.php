@@ -142,7 +142,7 @@
 		public function getUserDetails($userID){
 			$this->db->select('*');
 			$this->db->from('users');
-			$this->db->where('id', $userID);
+			$this->db->where('user_id', $userID);
 
 			$query = $this->db->get();
 
@@ -302,16 +302,23 @@
 		}
 	}
 
-	public function insertUsers($username, $password, $usertype){
+	public function insertUsers($firstname, $middlename, $lastname, $usertype){
 		$data = array(
-			'username' => $username,
-			'password' => $password,
+			'first_name' => $firstname,
+			'middle_name' => $middlename,
+			'last_name' => $lastname,
 			'user_type' => $usertype
 		);
+		$this->db->insert('users', $data);
+		$user_id = $this->db->insert_id();
+		if (!empty($user_id) || $user_id == null) {
+			$userpass = array(
+				'username' => $user_id . $lastname,
+				'password' => "capitol"
+			);
 
-
-
-		if ($this->db->insert('users', $data)) {
+			$this->db->where('user_id', $user_id);
+			$this->db->update('users', $userpass);
 			return true;
 		}else{
 			return false;
@@ -506,21 +513,30 @@
 		$this->db->update('projtype', $data);
 	}
 
-	public function updateUsername($username, $userID){
+	public function updateFirstName($firstname, $userID){
 		$data = array(
-			'username' => $username
+			'first_name' => $firstname
 		);
 
-		$this->db->where('id', $userID);
+		$this->db->where('user_id', $userID);
 		$this->db->update('users', $data);
 	}
 
-	public function updatePassword($password, $userID){
+	public function updateMiddleName($middlename, $userID){
 		$data = array(
-			'password' => $password
+			'middle_name' => $middlename
 		);
 
-		$this->db->where('id', $userID);
+		$this->db->where('user_id', $userID);
+		$this->db->update('users', $data);
+	}
+
+	public function updateLastName($lastname, $userID){
+		$data = array(
+			'last_name' => $lastname
+		);
+
+		$this->db->where('user_id', $userID);
 		$this->db->update('users', $data);
 	}
 
@@ -529,7 +545,7 @@
 			'usertype' => $usertype
 		);
 
-		$this->db->where('id', $userID);
+		$this->db->where('user_id', $userID);
 		$this->db->update('users', $data);
 	}
 
