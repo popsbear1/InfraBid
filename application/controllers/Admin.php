@@ -36,7 +36,8 @@ class Admin extends CI_Controller {
 
 	public function plan5MAboveABCView(){
 		$pagename['pagename'] = "5mabove";
-		$data['plans'] = $this->admin_model->getProjectPlan();
+		$abc = "5mup";
+		$data['plans'] = $this->admin_model->getProjectPlan($abc);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
@@ -47,7 +48,8 @@ class Admin extends CI_Controller {
 
 	public function planABCBetween1Mn5mView(){
 		$pagename['pagename'] = "between1m&5m";
-		$data['plans'] = $this->admin_model->getProjectPlan();
+		$abc = "1m5m";
+		$data['plans'] = $this->admin_model->getProjectPlan($abc);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
@@ -58,7 +60,8 @@ class Admin extends CI_Controller {
 
 	public function plan1MBelowView(){
 		$pagename['pagename'] = "below1m";
-		$data['plans'] = $this->admin_model->getProjectPlan();
+		$abc = "1mbelow";
+		$data['plans'] = $this->admin_model->getProjectPlan($abc);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
