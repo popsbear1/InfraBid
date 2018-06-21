@@ -34,6 +34,7 @@
           <thead>
             <tr>
               <th style='text-align: center'>Username</th>
+              <th style='text-align: center'>User ID</th> 
               <th style='text-align: center'>First Name</th>
               <th style='text-align: center'>Middle Name</th>
               <th style='text-align: center'>Last Name </th>
@@ -45,6 +46,7 @@
             <?php foreach ($users as $user): ?>
               <tr>
                 <td><?php echo $user['username']  ?></td>
+                <td><?php echo $user['user_id'] ?></td>
                 <td><?php echo $user['first_name'] ?></td>
                 <td><?php echo $user['middle_name'] ?> </td>
                 <td><?php echo $user['last_name'] ?></td>
