@@ -65,120 +65,24 @@
           </div>
         <?php endif ?>
         <p>Steps for Procurement Activity: <b>(ABC more than 5M )</b></p>
-        <div id="wizard" class="form_wizard wizard_horizontal">
-          <ul class="wizard_steps">
-            <li>
-              <a href="#step-1">
-                <span class="step_no">1</span>
-                <span class="step_descr">
-                  Step 1<br />
-                  <small>Pre-proc Conf</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-2">
-                <span class="step_no">2</span>
-                <span class="step_descr">
-                  Step 2<br />
-                  <small>Ads/Post of IAEB</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-3">
-                <span class="step_no">3</span>
-                <span class="step_descr">
-                  Step 3<br />
-                  <small>Pre-bid Conf</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-4">
-                <span class="step_no">4</span>
-                <span class="step_descr">
-                  Step 4<br />
-                  <small>Sub/Open of Bids</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-5">
-                <span class="step_no">5</span>
-                <span class="step_descr">
-                  Step 5<br />
-                  <small>Eligibility Check</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-6">
-                <span class="step_no">6</span>
-                <span class="step_descr">
-                  Step 6<br />
-                  <small>Bid Evaluation</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-7">
-                <span class="step_no">7</span>
-                <span class="step_descr">
-                  Step 7<br />
-                  <small>Post Qual</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-8">
-                <span class="step_no">8</span>
-                <span class="step_descr">
-                  Step 8<br />
-                  <small>Notice of Award</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-9">
-                <span class="step_no">9</span>
-                <span class="step_descr">
-                  Step 9<br />
-                  <small>Contract Signing</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-10">
-                <span class="step_no">10</span>
-                <span class="step_descr">
-                  Step 10<br />
-                  <small>Notice to Proceed</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-11">
-                <span class="step_no">11</span>
-                <span class="step_descr">
-                  Step 11<br />
-                  <small>Delivery of Completion</small>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#step-12">
-                <span class="step_no">12</span>
-                <span class="step_descr">
-                  Step 12<br />
-                  <small>Acceptance or Turnover</small>
-                </span>
-              </a>
-            </li>
+        <div class="well text-center">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#step-1" data-toggle="tab">Step 1</a></li>
+            <li><a href="#step-2" data-toggle="tab">Step 2</a></li>
+            <li><a href="#step-3" data-toggle="tab">Step 3</a></li>
+            <li><a href="#step-4" data-toggle="tab">Step 4</a></li>
+            <li><a href="#step-5" data-toggle="tab">Step 5</a></li>
+            <li><a href="#step-6" data-toggle="tab">Step 6</a></li>
+            <li><a href="#step-7" data-toggle="tab">Step 7</a></li>
+            <li><a href="#step-8" data-toggle="tab">Step 8</a></li>
+            <li><a href="#step-9" data-toggle="tab">Step 9</a></li>
+            <li><a href="#step-10" data-toggle="tab">Step 10</a></li>
+            <li><a href="#step-11" data-toggle="tab">Step 11</a></li>
+            <li><a href="#step-12" data-toggle="tab">Step 12</a></li>
           </ul>
-          <br>
-          <div class="ln_solid"></div>
-          <div id="step-1">
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="step-1">
             <div class="well">
               <form id="pre_proc_form" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editPreProcConf') ?>"> 
                 <div class="form-group">
@@ -204,7 +108,8 @@
               </div>
             </div>
           </div>
-          <div id="step-2">
+          
+          <div class="tab-pane fade" id="step-2">
             <div class="well">
               <form id="advertisement_form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                 <div class="form-group">
@@ -231,7 +136,7 @@
             </div>
           </div>
 
-          <div id="step-3">
+          <div class="tab-pane fade" id="step-3">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -261,7 +166,7 @@
             </div>
           </div>
           
-          <div id="step-4">
+          <div class="tab-pane fade" id="step-4">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -291,7 +196,7 @@
             </div>
           </div>
 
-          <div id="step-5">
+          <div class="tab-pane fade" id="step-5">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -326,7 +231,7 @@
             </div>
           </div>
 
-          <div id="step-6">
+          <div class="tab-pane fade" id="step-6">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -354,7 +259,7 @@
             </div>
           </div>
 
-          <div id="step-7">
+          <div class="tab-pane fade" id="step-7">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -384,7 +289,7 @@
             </div>
           </div>
 
-          <div id="step-8">
+          <div class="tab-pane fade" id="step-8">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -414,7 +319,7 @@
             </div>
           </div>
 
-          <div id="step-9">
+          <div class="tab-pane fade" id="step-9">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -444,7 +349,7 @@
             </div>
           </div>
 
-          <div id="step-10">
+          <div class="tab-pane fade" id="step-10">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -474,7 +379,7 @@
             </div>
           </div>
 
-          <div id="step-11">
+          <div class="tab-pane fade" id="step-11">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -504,7 +409,7 @@
             </div>
           </div>
 
-          <div id="step-12">
+          <div class="tab-pane fade" id="step-12">
             <div class="well">
               <form id="form" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
