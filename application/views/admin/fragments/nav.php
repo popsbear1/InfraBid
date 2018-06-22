@@ -12,9 +12,9 @@
 >
   <div class="container body">
     <div class="main_container">
-      <div class="col-md-3 left_col" style="z-index:0;">
+      <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
-          <div class="navbar nav_title" style="border: 0;">
+          <div class="navbar nav_title">
             <a href="<?php echo base_url('admin') ?>" class="site_title"><i class="fa fa-road"></i> <span>InfraProj <?php echo date('Y');?></span></a>
           </div>
 

@@ -179,10 +179,10 @@
 			return $query->row_array();
 		}
 
-		public function getProcActivityDates($project_no){
+		public function getProcActivityDates($plan_id){
 			$this->db->select('*');
 			$this->db->from('procact');
-			$this->db->where('project_no', $project_no);
+			$this->db->where('plan_id', $plan_id);
 
 			$query = $this->db->get();
 
