@@ -91,8 +91,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Submission of bid:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="bidSubmissionStart"></td>
+                  <td><input type="date" class="form-control" id="bidSubmissionEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -104,8 +104,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Bid Evaluation:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="bidEvaluationStart"></td>
+                  <td><input type="date" class="form-control" id="bidEvaluationEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -117,8 +117,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Post Qualification:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="postQualificationStart"></td>
+                  <td><input type="date" class="form-control" id="postQualificationEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -130,8 +130,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="awardNoticeIssuanceStart"></td>
+                  <td><input type="date" class="form-control" id="awardNoticeIssuanceEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -143,8 +143,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="contractSigningStart"></td>
+                  <td><input type="date" class="form-control" id="contractSigningEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -156,8 +156,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Approval by Higher Authority:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="authorityApprovalStart"></td>
+                  <td><input type="date" class="form-control" id="authorityApprovalEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -169,8 +169,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Notice to Proceed:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="proceedNoticeStart"></td>
+                  <td><input type="date" class="form-control" id="proceedNoticeEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -238,19 +238,87 @@
     }else{
       var advertisement_start = startDate;
       $('#advertisement_start').val(advertisement_start);
-      var advertisement_end = new Date();
 
+      var advertisement_end = new Date();
       advertisement_end.setDate(pre_proc_date.getDate()+7);
+      console.log(advertisement_end);
       var day = ("0" + advertisement_end.getDate()).slice(-2);
       var month = ("0" + (advertisement_end.getMonth() + 1)).slice(-2);
       var final = advertisement_end.getFullYear()+"-"+(month)+"-"+(day);
       $('#advertisement_end').val(final);
       
-      var preBidStart = advertisement_end.getMonth();
+      var preBidStart = new Date();
+      preBidStart.setDate(advertisement_end.getDate()+1);
+      console.log(preBidStart);
+      var preBidDay = ("0" + preBidStart.getDate()).slice(-2);
+      var preBidMonth = ("0" + (preBidStart.getMonth() + 1)).slice(-2);
+      var preBidFinal = preBidStart.getFullYear()+"-"+(preBidMonth)+"-"+(preBidDay);
+      $('#preBidStart').val(preBidFinal);
+      $('#preBidEnd').val(preBidFinal);
 
+      var submissionOfBidStart = new Date();
+      submissionOfBidStart.setDate(pre_proc_date.getDate()+20);
+      console.log(submissionOfBidStart);
+      var bidSubmissionDay = ("0" + submissionOfBidStart.getDate()).slice(-2);
+      var bidSubmissionMonth = ("0" + (submissionOfBidStart.getMonth() + 1)).slice(-2);
+      var bidSubmissionFinal = submissionOfBidStart.getFullYear()+"-"+(bidSubmissionMonth)+"-"+(bidSubmissionDay);
+      $('#bidSubmissionStart').val(bidSubmissionFinal);
+      $('#bidSubmissionEnd').val(bidSubmissionFinal);
 
+      var bidEvaluationStart = new Date();
+      bidEvaluationStart.setDate(pre_proc_date.getDate()+21);
+      console.log(bidEvaluationStart);
+      var bidEvaluationDay = ("0" + bidEvaluationStart.getDate()).slice(-2);
+      var bidEvaluationMonth = ("0" + (bidEvaluationStart.getMonth() + 1)).slice(-2);
+      var bidEvaluationFinal = bidEvaluationStart.getFullYear()+"-"+(bidEvaluationMonth)+"-"+(bidEvaluationDay);
+      $('#bidEvaluationStart').val(bidEvaluationFinal);
+      $('#bidEvaluationEnd').val(bidEvaluationFinal);
 
-      
+      var postQualificationStart = new Date();
+      postQualificationStart.setDate(pre_proc_date.getDate()+22);
+      console.log(postQualificationStart);
+      var postQualificationDay = ("0" + postQualificationStart.getDate()).slice(-2);
+      var postQualificationMonth = ("0" + (postQualificationStart.getMonth() + 1)).slice(-2);
+      var postQualificationFinal = postQualificationStart.getFullYear()+"-"+(postQualificationMonth)+"-"+(postQualificationDay);
+      $('#postQualificationStart').val(postQualificationFinal);
+      $('#postQualificationEnd').val(postQualificationFinal); 
+
+      var awardNoticeIssuanceStart = new Date();
+      awardNoticeIssuanceStart.setDate(pre_proc_date.getDate()+24);
+      console.log(awardNoticeIssuanceStart);
+      var awardNoticeIssuanceDay = ("0" + awardNoticeIssuanceStart.getDate()).slice(-2);
+      var awardNoticeIssuanceMonth = ("0" + (awardNoticeIssuanceStart.getMonth() + 1)).slice(-2);
+      var awardNoticeIssuanceFinal = awardNoticeIssuanceStart.getFullYear()+"-"+(awardNoticeIssuanceMonth)+"-"+(awardNoticeIssuanceDay);
+      $('#awardNoticeIssuanceStart').val(awardNoticeIssuanceFinal);
+      $('#awardNoticeIssuanceEnd').val(awardNoticeIssuanceFinal);
+
+      var contractSigningStart = new Date();
+      contractSigningStart.setDate(pre_proc_date.getDate()+24);
+      console.log(contractSigningStart);
+      var contractSigningDay = ("0" + contractSigningStart.getDate()).slice(-2);
+      var contractSigningMonth = ("0" + (contractSigningStart.getMonth() + 1)).slice(-2);
+      var contractSigningFinal = contractSigningStart.getFullYear()+"-"+(contractSigningMonth)+"-"+(contractSigningDay);
+      $('#contractSigningStart').val(contractSigningFinal);
+      $('#contractSigningEnd').val(contractSigningFinal);       
+
+      var authorityApprovalStart = new Date();
+      authorityApprovalStart.setDate(pre_proc_date.getDate()+25);
+      console.log(authorityApprovalStart);
+      var authorityApprovalDay = ("0" + authorityApprovalStart.getDate()).slice(-2);
+      var authorityApprovalMonth = ("0" + (authorityApprovalStart.getMonth() + 1)).slice(-2);
+      var authorityApprovalFinal = authorityApprovalStart.getFullYear()+"-"+(authorityApprovalMonth)+"-"+(authorityApprovalDay);
+      $('#authorityApprovalStart').val(authorityApprovalFinal);
+      $('#authorityApprovalEnd').val(authorityApprovalFinal);
+
+      var proceedNoticeStart = new Date();
+      proceedNoticeStart.setDate(pre_proc_date.getDate()+26);
+      console.log(proceedNoticeStart);
+      var proceedNoticeDay = ("0" + proceedNoticeStart.getDate()).slice(-2);
+      var proceedNoticeMonth = ("0" + (proceedNoticeStart.getMonth() + 1)).slice(-2);
+      var proceedNoticeFinal = proceedNoticeStart.getFullYear()+"-"+(proceedNoticeMonth)+"-"+(proceedNoticeDay);
+      $('#proceedNoticeStart').val(proceedNoticeFinal);
+      $('#proceedNoticeEnd').val(proceedNoticeFinal);
+
 
     }
   });
