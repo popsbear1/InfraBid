@@ -143,7 +143,7 @@ class Admin extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id');
 		$pageName['pageName'] = "activity";
 		$data['project_title'] = $this->admin_model->getProjectTitle($plan_id)->project_title;
-		//$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
+		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/dashboard');
