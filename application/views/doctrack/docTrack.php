@@ -57,10 +57,12 @@
             <table class="datatable-1 table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th class="text-center">DEPT 1</th>
-                  <th class="text-center">DEPT 2</th>
-                  <th class="text-center">DEPT 3</th>
-                  <th class="text-center">DEPT 4</th>
+                  <th class="text-center">Document ID</th>
+                  <th class="text-center">Document Name</th>
+                  <th class="text-center">Document Details</th>
+                  <th class="text-center">Document Location</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Remarks</th>
                 </tr>
               </thead>
               <tbody>

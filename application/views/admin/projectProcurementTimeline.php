@@ -231,6 +231,7 @@
   $('#timeLineComputeBtn').click(function(event){
     var startDate = $('#pre_proc_date').val();
     var pre_proc_date = new Date(startDate);
+   
 
     if (startDate == null || startDate == "") {
       alert("Select Start Date First!");
@@ -238,11 +239,19 @@
       var advertisement_start = startDate;
       $('#advertisement_start').val(advertisement_start);
       var advertisement_end = new Date();
+
       advertisement_end.setDate(pre_proc_date.getDate()+7);
       var day = ("0" + advertisement_end.getDate()).slice(-2);
       var month = ("0" + (advertisement_end.getMonth() + 1)).slice(-2);
       var final = advertisement_end.getFullYear()+"-"+(month)+"-"+(day);
       $('#advertisement_end').val(final);
+      
+      var preBidStart = advertisement_end.getMonth();
+
+
+
+      
+
     }
   });
 </script>
