@@ -38,7 +38,7 @@
               <button id="timeLineComputeBtn" class="btn btn-default btn-block">Compute/Reset to Earliest Possible Time</button>
             </div>
             <div class="col-lg-3">
-              <button class="btn btn-default btn-block">Start Over</button>
+              <button class="btn btn-default btn-block" id="startOverBtn">Start Over</button>
             </div>
           </div>
           <div class="ln_solid"></div>
@@ -91,8 +91,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Submission of bid:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="bidSubmissionStart"></td>
+                  <td><input type="date" class="form-control" id="bidSubmissionEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -104,8 +104,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Bid Evaluation:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="bidEvaluationStart"></td>
+                  <td><input type="date" class="form-control" id="bidEvaluationEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -117,8 +117,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Post Qualification:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="postQualificationStart"></td>
+                  <td><input type="date" class="form-control" id="postQualificationEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -130,8 +130,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="awardNoticeIssuanceStart"></td>
+                  <td><input type="date" class="form-control" id="awardNoticeIssuanceEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -143,8 +143,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="contractSigningStart"></td>
+                  <td><input type="date" class="form-control" id="contractSigningEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -156,8 +156,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Approval by Higher Authority:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="authorityApprovalStart"></td>
+                  <td><input type="date" class="form-control" id="authorityApprovalEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -169,8 +169,8 @@
                 </tr>
                 <tr>
                   <td><b class="pull-right">Notice to Proceed:</b></td>
-                  <td><input type="date" class="form-control"></td>
-                  <td><input type="date" class="form-control"></td>
+                  <td><input type="date" class="form-control" id="proceedNoticeStart"></td>
+                  <td><input type="date" class="form-control" id="proceedNoticeEnd"></td>
                   <td>
                     <div class="col-lg-6">
                       <input type="number" class="form-control">
@@ -215,43 +215,4 @@
 <script src="<?php echo base_url() ?>public/vendors/nprogress/nprogress.js"></script>
 
 
-<script>
-  $('#noPreBid').click(function(event) {
-    $('#preBidStart').prop('disabled', true);
-    $('#preBidEnd').prop('disabled', true);
-    $('#preBidNumber').prop('disabled', true);
-  });
-
-  $('#yesPreBid').click(function(event) {
-    $('#preBidStart').prop('disabled', false);
-    $('#preBidEnd').prop('disabled', false);
-    $('#preBidNumber').prop('disabled', false);
-  });
-
-  $('#timeLineComputeBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
-    var pre_proc_date = new Date(startDate);
-   
-
-    if (startDate == null || startDate == "") {
-      alert("Select Start Date First!");
-    }else{
-      var advertisement_start = startDate;
-      $('#advertisement_start').val(advertisement_start);
-      var advertisement_end = new Date();
-
-      advertisement_end.setDate(pre_proc_date.getDate()+7);
-      var day = ("0" + advertisement_end.getDate()).slice(-2);
-      var month = ("0" + (advertisement_end.getMonth() + 1)).slice(-2);
-      var final = advertisement_end.getFullYear()+"-"+(month)+"-"+(day);
-      $('#advertisement_end').val(final);
-      
-      var preBidStart = advertisement_end.getMonth();
-
-
-
-      
-
-    }
-  });
-</script>
+<script src="<?php echo base_url() ?>public/build/js/timeLine.js"></script>
