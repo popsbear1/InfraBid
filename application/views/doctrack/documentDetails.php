@@ -25,61 +25,48 @@
           </ul>
         </div><!-- /.container-fluid -->
       </nav>
-      
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Document Tracking</h2>
-            <ul class="nav navbar-right panel_toolbox noPrint">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
-                  </li>
-                  <li><a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <table class="datatable-1 table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th class="text-center">Project ID</th>
-                  <th class="text-center">Document Type</th>
-                  <th class="text-center">Project Name</th>
-                  <th class="text-center">Status</th>
-                  <th class="text-center">Remarks</th>
-                  <th class="text-center">View and Edit Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>  
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td class="text-center">
-                    <form action=" <?php echo base_url("doctrack/documentDetailsView") ?>">
-                      <button class="btn btn-success" type=""
-                      submit"><i class="fa fa-edit"></i></button>
-                    </form>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h1>
+          </h1> 
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-4 text-center" style="background-color: white" >
+              <form>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+              </form>
+            </div>
+            <div class="col-lg-4 text-center" style="background-color: white" >
+              <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+                  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+            </div>
+            <div class="col-lg-4 text-center" style="background-color: white">
+              <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br><input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br><input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                  <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+            </div>
           </div>
         </div>
+        <div class="panel-footer"></div> 
+        
       </div>
+      
     </div>
   </div>
 </div>
