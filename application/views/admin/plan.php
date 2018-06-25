@@ -6,20 +6,22 @@
             <h2>Procurement  Monitoring Report for Public Bidding and Negotiated<small></small></h2>
           </div>
           <div class="row">
-            <p>filters:</p>
-            <input type="date" id="year">
-            <select name="" id="">
-              <option value="">1st Q</option>
-              <option value="">2nd Q</option>
-              <option value="">3rd Q</option>
-              <option value="">4th Q</option>
-            </select>
-            <select name="" id="">
-              <option value="">Pending</option>
-              <option value="">Processing</option>
-              <option value="">Implementation</option>
-              <option value="">Finished</option>
-            </select>
+            <div class="col-lg-12">
+              <p>filters:</p>
+              <input type="date" id="year">
+              <select name="" id="">
+                <option value="">1st Q</option>
+                <option value="">2nd Q</option>
+                <option value="">3rd Q</option>
+                <option value="">4th Q</option>
+              </select>
+              <select name="" id="">
+                <option value="">Pending</option>
+                <option value="">Processing</option>
+                <option value="">Implementation</option>
+                <option value="">Finished</option>
+              </select>
+            </div>
           </div>
           <div class="content">
             <table class="table table-striped table-bordered" id="plan_table">
