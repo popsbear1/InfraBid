@@ -635,17 +635,174 @@
 	* Update proc act dates
 	*/
 
-	public function updatePreProcConfDate($project_no, $date){
+	public function updatePreProcConfDate($plan_id, $date){
 		$data = array(
 			'pre_proc' => $date
 		);
 
-		$this->db->where('project_no', $project_no);
+		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
 			return true;
 		}else{
 			return false;
 		}
 	}
+
+	public function updateAdvertisementDate($plan_id, $date){
+		$data = array(
+			'advertisement' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updatePreBidDate($plan_id, $date){
+		$data = array(
+			'pre_bid' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateEligibilityCheckDate($plan_id, $date){
+		$data = array(
+			'eligibility_check' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateOpenBidDate($plan_id, $date){
+		$data = array(
+			'open_bid' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateBidEvaluationDate($plan_id, $date){
+		$data = array(
+			'bid_evaluation' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updatePostQualDate($plan_id, $date){
+		$data = array(
+			'post_qual' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateAwardNoticeDate($plan_id, $date){
+		$data = array(
+			'award_notice' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateContractSigningDate($plan_id, $date){
+		$data = array(
+			'contract_signing' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateProceedNoticeDate($plan_id, $date){
+		$data = array(
+			'proceed_notice' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateDeliveryCompletionDate($plan_id, $date){
+		$data = array(
+			'delivery_completion' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateAcceptanceTurnoverDate($plan_id, $date){
+		$data = array(
+			'acceptance_turnover' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateProcActFinalRemark($plan_id, $remark){
+		$data = array(
+			'remark' => $remark
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }
 ?>

@@ -847,14 +847,105 @@ class Admin extends CI_Controller {
 	* Bellow are the methods to update proc activity dates
 	*/
 
-	public function editPreProcConf(){
-		$project_no = $this->session->userdata('project_no');
-		$pre_proc = $this->input->post('pre_proc');
+	public function editProcActDate(){
+		$plan_id = $this->session->userdata('plan_id');
+		$date = $this->input->post('activity_date');
+		$activity_name = $this->input->post('activity_name');
 
-		if ($this->admin_model->updatePreProcConfDate($project_no, $pre_proc)) {
-			$this->session->set_flashdata('success', "Pre-proc Conf successfully Updated!");
-		}else{
-			$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
+		if ($activity_name === "pre_proc") {
+			if ($this->admin_model->updatePreProcConfDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Pre-Procuremwent Conference Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Pre-Procuremwent Conference Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "advertisement") {
+			if ($this->admin_model->updateAdvertisementDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Advertisement Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Advertisement Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "pre_bid") {
+			if ($this->admin_model->updatePreBidDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Pre-Bid Conference Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Pre-Bid Conference Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "open_bid") {
+			if ($this->admin_model->updateOpenBidDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Bid Oppening Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Bid Oppening Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "eligibility_check") {
+			if ($this->admin_model->updateEligibilityCheckDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "bid_evaluation") {
+			if ($this->admin_model->updateBidEvaluationDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Issuance Of Notice of Award Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Issuance Of Notice of Award Date Was not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "post_qual") {
+			if ($this->admin_model->updatePostQualDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Contract Preparation and Signing Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Contract Preparation and Signing Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "awar_notice") {
+			if ($this->admin_model->updateAwardNoticeDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Approval of Contract by Higher Authority Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Approval of Contract by Higher Authority Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "contract_signing") {
+			if ($this->admin_model->updateContractSigningDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Pre-proc Conf successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
+			}
+		}						
+
+		if ($activity_name === "proceed_notice") {
+			if ($this->admin_model->updateProceedNoticeDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Issuance of Notice to Procced Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Issuance of Notice to Procced Date Was Not Updated! Try again.");
+			}
+		}						
+
+		if ($activity_name === "completion") {
+			if ($this->admin_model->updateDeliveryCompletionDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Delivery/Completion Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Delivery/Completion Date Was Not Updated! Try again.");
+			}
+		}
+
+		if ($activity_name === "acceptance") {
+			if ($this->admin_model->updateAcceptanceTurnoverDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Acceptance/Turnover Date Successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Acceptance/Turnover Date Was Not Updated! Try again.");
+			}
 		}
 
 		redirect('admin/procurementActivityView');
