@@ -43,17 +43,22 @@
     if (startDate == null || startDate == "") {
       alert("Select Start Date First!");
     }else{
-      setAdvertisementDate(startDate, 0, 7);
-      setPreBidDate(startDate, 8, 8);
-      setBidSubmissionDate(startDate, 20, 20);
-      setBidEvaluationDate(startDate, 21, 21);
-      setPostQualificationDate(startDate, 22, 22);
-      setAwardNoticeIssuanceDate(startDate, 23, 23);
-      setContractSigningDate(startDate, 24, 24);
-      setAuthorityApprovalDate(startDate, 25, 25);
-      setProceedNoticeDate(startDate, 26, 26);
+      setDatesToEarliestPossibleTime(startDate);
     }
   });
+
+  function setDatesToEarliestPossibleTime(startDate){
+    setAdvertisementDate(startDate, 0, 7);
+    setPreBidDate(startDate, 8, 8);
+    setBidSubmissionDate(startDate, 20, 20);
+    setBidEvaluationDate(startDate, 21, 21);
+    setPostQualificationDate(startDate, 22, 22);
+    setAwardNoticeIssuanceDate(startDate, 23, 23);
+    setContractSigningDate(startDate, 24, 24);
+    setAuthorityApprovalDate(startDate, 25, 25);
+    setProceedNoticeDate(startDate, 26, 26);
+  }
+
 
   function setAdvertisementDate(startDate, min, max){
     $('#advertisement_start').val(setStartDate(startDate, min));
