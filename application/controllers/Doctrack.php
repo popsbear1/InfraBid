@@ -15,7 +15,6 @@ class Doctrack extends CI_Controller {
 	public function docTrackView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('doctrack/docTrack');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -23,7 +22,6 @@ class Doctrack extends CI_Controller {
 		public function documentDetailsView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('doctrack/documentDetails');
 		$this->load->view('admin/fragments/footer');
 	}

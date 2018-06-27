@@ -18,7 +18,6 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/home');
 		$this->load->view('admin/fragments/footer');
 
@@ -40,7 +39,6 @@ class Admin extends CI_Controller {
 		$data['plans'] = $this->admin_model->getProjectPlan($abc);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/planViewNavigation', $pagename);
 		$this->load->view('admin/plan', $data);
 		$this->load->view('admin/fragments/footer');
@@ -52,7 +50,6 @@ class Admin extends CI_Controller {
 		$data['plans'] = $this->admin_model->getProjectPlan($abc);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/planViewNavigation', $pagename);
 		$this->load->view('admin/plan', $data);
 		$this->load->view('admin/fragments/footer');
@@ -64,7 +61,6 @@ class Admin extends CI_Controller {
 		$data['plans'] = $this->admin_model->getProjectPlan($abc);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/planViewNavigation', $pagename);
 		$this->load->view('admin/plan', $data);
 		$this->load->view('admin/fragments/footer');		
@@ -80,7 +76,6 @@ class Admin extends CI_Controller {
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/planViewNavigation', $pagename);
 		$this->load->view('admin/addPlan', $data);
 		$this->load->view('admin/fragments/footer');	
@@ -109,7 +104,6 @@ class Admin extends CI_Controller {
 	public function addPlanFromFileView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addPlanFromFile');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -126,7 +120,6 @@ class Admin extends CI_Controller {
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/editPlan', $data);
 		$this->load->view('admin/fragments/footer');	
@@ -136,7 +129,6 @@ class Admin extends CI_Controller {
 		$pageName['pageName'] = "timeline";
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/projectProcurementTimeline');
 		$this->load->view('admin/fragments/footer');	
@@ -149,7 +141,6 @@ class Admin extends CI_Controller {
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
 		$this->load->view('admin/projectProcurementActivity', $data);
 		$this->load->view('admin/fragments/footer');	
@@ -228,7 +219,6 @@ class Admin extends CI_Controller {
 		$data['contructors'] = $this->admin_model->getContractors();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/contractor', $data);
 		$this->load->view('admin/fragments/footer');	
 	}
@@ -236,7 +226,6 @@ class Admin extends CI_Controller {
 	public function addNewContractorView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addcontractor');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -263,7 +252,6 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/editcontractor', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -307,7 +295,6 @@ class Admin extends CI_Controller {
 		$data['funds'] = $this->admin_model->getFunds();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/fund', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -315,7 +302,6 @@ class Admin extends CI_Controller {
 	public function addFundsView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addfund');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -336,7 +322,6 @@ class Admin extends CI_Controller {
 		$data['fundDetail'] = $this->admin_model->getFundsDetails($fund_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/editfund', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -366,7 +351,6 @@ class Admin extends CI_Controller {
 		$data['projectTypes'] = $this->admin_model->getProjectTypes();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/projecttype', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -374,7 +358,6 @@ class Admin extends CI_Controller {
 	public function addProjectTypeView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addProjectType');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -396,7 +379,6 @@ class Admin extends CI_Controller {
 		$data['projectTypeDetails'] = $this->admin_model->getProjectTypeDetails($projectID);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/editproject', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -426,7 +408,6 @@ class Admin extends CI_Controller {
 		$data['users'] = $this->admin_model->getUsers();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/user', $data);
 		$this->load->view('admin/fragments/footer');
 	}	
@@ -436,7 +417,6 @@ class Admin extends CI_Controller {
 		$data['userDetails'] = $this->admin_model->getUserDetails($userID);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/edituser', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -477,7 +457,6 @@ class Admin extends CI_Controller {
 	public function addUsersView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/adduser');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -500,7 +479,6 @@ class Admin extends CI_Controller {
 	public function manageDatabaseView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/backres');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -509,7 +487,6 @@ class Admin extends CI_Controller {
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/municipalitiesAndBrangays', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -517,7 +494,6 @@ class Admin extends CI_Controller {
 	public function addMunicipalityView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addMunicipality');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -548,7 +524,6 @@ class Admin extends CI_Controller {
 		$data['barangays'] = $this->admin_model->getMunicipalityBarangays($municipality_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/editMunicipality', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -606,7 +581,6 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/accountClassifications', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -614,7 +588,6 @@ class Admin extends CI_Controller {
 	public function addClassificationView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addClassification');
 		$this->load->view('admin/fragments/footer');		
 	}
@@ -637,7 +610,6 @@ class Admin extends CI_Controller {
 		$data['classification'] = $this->admin_model->getClassificationDetails($classifications);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/editClassification', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -672,7 +644,6 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/procurementMode', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -680,7 +651,6 @@ class Admin extends CI_Controller {
 	public function addProcurementView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/addProcurement');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -706,7 +676,6 @@ class Admin extends CI_Controller {
 		$data['mode'] = $this->admin_model->getProcurementModeDetails($modes);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/editProcurement', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -738,7 +707,6 @@ class Admin extends CI_Controller {
 		$data['procacts'] = $this->admin_model->getProcurementProjects();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/procurementMonitoringReport', $data);
 		$this->load->view('admin/fragments/footer');
 	}
@@ -746,7 +714,6 @@ class Admin extends CI_Controller {
 	public function procurementTimelineReport(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/projectProcurementTimelineReport');
 		$this->load->view('admin/fragments/footer');
 	}
@@ -760,84 +727,72 @@ class Admin extends CI_Controller {
 	public function preProcurementConferenceView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/preProcConference');
 		$this->load->view('admin/fragments/footer');
 	}
 	public function advertisementView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/advertisement');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function preBidConferenceView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/preBidConference');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function eligibilityCheckView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/eligibilityCheck');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function subOpenBidsView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/subOpenBids');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function bidEvaluationView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/bidEvaluation');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function postQualificationView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/postQualification');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function noticeOfAwardView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/noticeOfAward');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function contractSigningView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/contractSigning');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function noticeToProceedView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/noticeToProceed');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function deliveryCompletionView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/deliveryCompletion');
 		$this->load->view('admin/fragments/footer');
 	}
 		public function acceptanceTurnoverView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/dashboard');
 		$this->load->view('admin/acceptanceTurnover');
 		$this->load->view('admin/fragments/footer');
 	}

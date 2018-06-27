@@ -4,154 +4,403 @@
 ?>
 <body 
 <?php if ($sideBarControl == 1): ?>
-    class="nav-md"
+    class="hold-transition skin-blue sidebar-mini"
 <?php endif ?>
 <?php if ($sideBarControl == 0): ?>
-    class="nav-sm"
+    class="hold-transition skin-blue sidebar-mini sidebar-collapse"
 <?php endif ?>
 >
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col">
-        <div class="left_col scroll-view">
-          <div class="navbar nav_title">
-            <a href="<?php echo base_url('admin') ?>" class="site_title"><i class="fa fa-road"></i> <span>InfraProj <?php echo date('Y');?></span></a>
-          </div>
-
-          <div class="clearfix"></div>
-
-          <!-- menu profile quick info -->
-          <div class="profile">
-            <div class="profile_pic">
-              <img src="<?php echo base_url() ?>public/images/ph-ben.gif" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <h2>Benguet Provincial Government</h2>
-            </div>
-          </div>
-          <!-- /menu profile quick info -->
-
-          <br>
-
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <h3>Process</h3>
-              <ul class="nav side-menu">
-                <li><a href="<?php echo base_url('admin/plan5MAboveABCView') ?>"><i class="fa fa-tasks"></i> Annual Procurement Plan </a></li>
-                <li><a><i class="fa fa-shopping-cart"></i> Procurement Activity <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href='<?php echo base_url('admin/preProcurementConferenceView') ?>'>Pre-Procurement Conference</a>
+  <div class="wrapper">
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="<?php echo base_url('admin') ?>" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>I</b>PB</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Infra</b>PB</span>
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- <form id="sideBarControl" action="<?php echo base_url('admin/setNavControl') ?>" method="post">
+                <button class="btn" id="menu_toggle" type="submit" name="submit"><i class="fa fa-bars"></i></button>
+              </form> -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- Messages: style can be found in dropdown.less-->
+            <li class="dropdown messages-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-envelope-o"></i>
+                <span class="label label-success">4</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 4 messages</li>
+                <li>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu">
+                    <li><!-- start message -->
+                      <a href="#">
+                        <div class="pull-left">
+                          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                          Support Team
+                          <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                        </h4>
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
                     </li>
-                    <li><a href='<?php echo base_url('admin/advertisementView') ?>'>Advertisement</a>
+                    <!-- end message -->
+                    <li>
+                      <a href="#">
+                        <div class="pull-left">
+                          <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                          AdminLTE Design Team
+                          <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                        </h4>
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
                     </li>
-                    <li><a href='<?php echo base_url('admin/preBidConferenceView') ?>'>Pre-bid Conference</a>
+                    <li>
+                      <a href="#">
+                        <div class="pull-left">
+                          <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                          Developers
+                          <small><i class="fa fa-clock-o"></i> Today</small>
+                        </h4>
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
                     </li>
-                    <li><a href='<?php echo base_url('admin/eligibilityCheckView') ?>'>Eligibility Check</a>
+                    <li>
+                      <a href="#">
+                        <div class="pull-left">
+                          <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                          Sales Department
+                          <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                        </h4>
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
                     </li>
-                    <li><a href='<?php echo base_url('admin/subOpenBidsView') ?>'>Sub/Open of Bids</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/bidEvaluationView') ?>'>Bid Evaluation</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/postQualificationView') ?>'>Post Qualification</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/noticeOfAwardView') ?>'>Notice of Award</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/contractSigningView') ?>'>Contract Signing</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/noticeToProceedView') ?>'>Notice to Proceed</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/deliveryCompletionView') ?>'>Delivery/Completion</a>
-                    </li>
-                    <li><a href='<?php echo base_url('admin/acceptanceTurnoverView') ?>'>Acceptance/Turnover</a>
+                    <li>
+                      <a href="#">
+                        <div class="pull-left">
+                          <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                          Reviewers
+                          <small><i class="fa fa-clock-o"></i> 2 days</small>
+                        </h4>
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
                     </li>
                   </ul>
                 </li>
+                <li class="footer"><a href="#">See All Messages</a></li>
+              </ul>
+            </li>
+            <!-- Notifications: style can be found in dropdown.less -->
+            <li class="dropdown notifications-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <span class="label label-warning">10</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 10 notifications</li>
                 <li>
-                  <a href="<?php echo base_url('doctrack/docTrackView') ?>"><i class="fa fa-file"></i>Doc Track</a>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu">
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                        page and may cause design problems
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-users text-red"></i> 5 new members joined
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-user text-red"></i> You changed your username
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="footer"><a href="#">View all</a></li>
+              </ul>
+            </li>
+            <!-- Tasks: style can be found in dropdown.less -->
+            <li class="dropdown tasks-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-flag-o"></i>
+                <span class="label label-danger">9</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 9 tasks</li>
+                <li>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu">
+                    <li><!-- Task item -->
+                      <a href="#">
+                        <h3>
+                          Design some buttons
+                          <small class="pull-right">20%</small>
+                        </h3>
+                        <div class="progress xs">
+                          <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <!-- end task item -->
+                    <li><!-- Task item -->
+                      <a href="#">
+                        <h3>
+                          Create a nice theme
+                          <small class="pull-right">40%</small>
+                        </h3>
+                        <div class="progress xs">
+                          <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">40% Complete</span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <!-- end task item -->
+                    <li><!-- Task item -->
+                      <a href="#">
+                        <h3>
+                          Some task I need to do
+                          <small class="pull-right">60%</small>
+                        </h3>
+                        <div class="progress xs">
+                          <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">60% Complete</span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <!-- end task item -->
+                    <li><!-- Task item -->
+                      <a href="#">
+                        <h3>
+                          Make beautiful transitions
+                          <small class="pull-right">80%</small>
+                        </h3>
+                        <div class="progress xs">
+                          <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">80% Complete</span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <!-- end task item -->
+                  </ul>
+                </li>
+                <li class="footer">
+                  <a href="#">View all tasks</a>
                 </li>
               </ul>
-            </div>
+            </li>
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="<?php echo base_url() ?>public2/images/user.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"><?php echo $username ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="<?php echo base_url() ?>public2/images/user.png" class="img-circle" alt="User Image">
 
-            <div class="menu_section">
-              <h3>Others</h3>
-              <ul class="nav side-menu">
-                <li><a href="<?php echo base_url('admin/manageContractorsView') ?>"><i class="fa fa-users"></i> Manage Contractor</a>
+                  <p>
+                    <?php echo $username ?>
+                  </p>
                 </li>
-                <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Manage Funds </a>
-                </li>
-                <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </a>
-                </li>
-                <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Manage Municipalities</a>
-                </li>
-                <li>
-                  <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i>Manage Account Classifications</a>
-                </li>
-                <li>
-                  <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i>Manage Procurement Mode</a>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="<?php echo base_url('user/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
                 </li>
               </ul>
-            </div>
-
-            <div class="menu_section">
-              <h3>Reports</h3>
-              <ul class="nav side-menu">
-                <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
-                </li>
-              </ul>
-              <ul class="nav side-menu">
-                <li><a href="<?php echo base_url('admin/procurementTimelineReport') ?>"><i class="fa fa-list"></i>Procurement TimeLine Reports</a>
-                </li>
-              </ul>
-            </div>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+            <li>
+              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="<?php echo base_url() ?>public2/images/ph-ben.gif" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p>Benguet Provincial Government</p>
           </div>
         </div>
-      </div>
-
-      <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav class="" role="navigation">
-            <div class="nav toggle">
-              <form id="sideBarControl" action="<?php echo base_url('admin/setNavControl') ?>" method="post">
-                <button class="btn" id="menu_toggle" type="submit" name="submit"><i class="fa fa-bars"></i></button>
-              </form>
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php echo base_url() ?>public/images/user.png" alt=""><?php echo $username ?>
-                </a>
-                <ul role="menu" class="dropdown-menu">
-                  <li><a href="<?php echo base_url('admin/manageDatabaseView')?>">Manage Database</a>
-                  </li>
-                  <li><a href="<?php echo base_url('admin/manageUsers') ?>">Manage Users</a>
-                  </li>
-                  <li><a href="<?php echo base_url('user/logout') ?>">Log out</a>
-                  </li>
-                </ul>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                  </button>
+                </span>
+          </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+          <li class="header">MAIN NAVIGATION</li>
+          <li class="header">Process</li>
+          <li>
+            <a href="<?php echo base_url('admin/plan5MAboveABCView') ?>">
+              <i class="fa fa-tasks"></i> <span>Annual Procurement Plan</span>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-shopping-cart"></i>
+              <span>Procurement Activity</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class=treeview-menu>
+              <li><a href='<?php echo base_url('admin/preProcurementConferenceView') ?>'>Pre-Procurement Conference</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/advertisementView') ?>'>Advertisement</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/preBidConferenceView') ?>'>Pre-bid Conference</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/eligibilityCheckView') ?>'>Eligibility Check</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/subOpenBidsView') ?>'>Sub/Open of Bids</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/bidEvaluationView') ?>'>Bid Evaluation</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/postQualificationView') ?>'>Post Qualification</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/noticeOfAwardView') ?>'>Notice of Award</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/contractSigningView') ?>'>Contract Signing</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/noticeToProceedView') ?>'>Notice to Proceed</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/deliveryCompletionView') ?>'>Delivery/Completion</a>
+              </li>
+              <li><a href='<?php echo base_url('admin/acceptanceTurnoverView') ?>'>Acceptance/Turnover</a>
               </li>
             </ul>
-          </nav>
-        </div>
-      </div>
+          </li>
+          <li>
+            <a href="<?php echo base_url('doctrack/docTrackView') ?>">
+              <i class="fa fa-file"></i> <span>Doc Track</span>
+            </a>
+          </li>
+          <li class="header">Others</li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Manage</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?php echo base_url('admin/manageContractorsView') ?>"><i class="fa fa-users"></i> Manage Contractor</a>
+              </li>
+              <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Manage Funds </a>
+              </li>
+              <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </a>
+              </li>
+              <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Manage Municipalities</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i>Manage Account Classifications</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i>Manage Procurement Mode</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('admin/manageDatabaseView')?>">Manage Database</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('admin/manageUsers') ?>">Manage Users</a>
+              </li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-laptop"></i>
+              <span>Reports</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
+              </li>
+              <li><a href="<?php echo base_url('admin/procurementTimelineReport') ?>"><i class="fa fa-list"></i>Procurement TimeLine Reports</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper">
+
       
+    <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
 
+    <script>
+      $('#sideBarControl').submit(function(e){
+        e.preventDefault();
 
-      <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
+        var details = $(this);
+        $.ajax({
+          type: 'POST',
+          url: details.attr('action'),
+          success: function(response){
 
-      <script>
-        $('#sideBarControl').submit(function(e){
-          e.preventDefault();
-
-          var details = $(this);
-          $.ajax({
-            type: 'POST',
-            url: details.attr('action'),
-            success: function(response){
-
-            }
-          });
-        })
-      </script>
+          }
+        });
+      })
+    </script>

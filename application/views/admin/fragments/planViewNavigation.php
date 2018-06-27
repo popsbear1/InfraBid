@@ -1,7 +1,7 @@
-<div class="clearfix"></div>
+
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12">
-    <nav class="navbar navbar-default" style="background: orange">
+    <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <a class="navbar-brand" href="#">Annual Procurement Plan </a>
