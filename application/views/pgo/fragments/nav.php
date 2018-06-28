@@ -136,14 +136,6 @@
           </nav>
         </div>
       </div>
-      <div class="">
-        <div class="row">
-          <div class="page-title">
-            <div class="title_left">
-              <h4>Infrastructure Projects Procurement Monitoring and Information System <?php echo date('Y');?></h4>
-            </div>
-          </div>
-        </div>
 
 
       <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
