@@ -3,62 +3,64 @@
 </section>
 <section class="content">
   <div class="row">
-    <div class="box">
-      <div class="box-header">
-        <h2 class="box-title">
-          Document Forwarding
-        </h2> 
-      </div>
-      <div class="box-body">
-        <table class="table table-striped table-bordered" id="projectDocumenTable">
-          <thead>
-            <tr>
-              <th class="text-center">Existing Documents</th>
-              <th class="text-center">Add Documents</th>
-              <th class="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">
-                    Document 1
-                <br>Document 2
-                <br>Document 3
-                <br>Document 4
-                <br>Document 5
-                <br>Document 6
-                <br>Document 7
-                <br>Document 8
-              </td>  
-              <td class="text-center">
-                <input type="checkbox" name="myTextEditBox" value="checked"/> Document 1
-                <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 2
-                <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 3
-                <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 4
-                <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 5
-                <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 6
-                <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 7
-              </td>
-              <td>
-                <div class="form-group">
-                  <label>Department:</label>
-                  <select class="form-control">
-                    <option>BAC-Infra Secretariat</option>
-                    <option>PWG</option>
-                    <option>PGO</option>
-                    <option>PEO</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Remarks:</label>
-                  <textarea class="form-control"></textarea>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="row text-right">
-          <button class="btn btn-primary">Send</button>
+    <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
+      <div class="box">
+        <div class="box-header">
+          <h2 class="box-title">
+            Document Forwarding
+          </h2> 
+        </div>
+        <div class="box-body">
+          <table class="table table-striped table-bordered" id="projectDocumenTable">
+            <thead>
+              <tr>
+                <th class="text-center">Existing Documents</th>
+                <th class="text-center">Add Documents</th>
+                <th class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">
+                      Document 1
+                  <br>Document 2
+                  <br>Document 3
+                  <br>Document 4
+                  <br>Document 5
+                  <br>Document 6
+                  <br>Document 7
+                  <br>Document 8
+                </td>  
+                <td class="text-center">
+                  <input type="checkbox" name="myTextEditBox" value="checked"/> Document 1
+                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 2
+                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 3
+                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 4
+                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 5
+                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 6
+                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 7
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label>Department:</label>
+                    <select class="form-control">
+                      <option>BAC-Infra Secretariat</option>
+                      <option>PWG</option>
+                      <option>PGO</option>
+                      <option>PEO</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Remarks:</label>
+                    <textarea class="form-control"></textarea>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row text-right">
+            <button class="btn btn-primary">Send</button>
+          </div>
         </div>
       </div>
     </div>
@@ -97,10 +99,7 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
+
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

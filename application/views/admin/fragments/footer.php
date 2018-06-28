@@ -1,6 +1,6 @@
 
-</div>
-<!-- /.content-wrapper -->
+  </div>
+  <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right">
       <b>Version</b> 1.0

@@ -344,25 +344,25 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url('admin/manageContractorsView') ?>"><i class="fa fa-users"></i> Manage Contractor</a>
+              <li><a href="<?php echo base_url('admin/manageContractorsView') ?>"><i class="fa fa-users"></i> Contractor</a>
               </li>
-              <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Manage Funds </a>
+              <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Funds </a>
               </li>
-              <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Manage Project Types </a>
+              <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i> Project Types </a>
               </li>
-              <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Manage Municipalities</a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i>Manage Account Classifications</a>
+              <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i> Municipalities</a>
               </li>
               <li>
-                <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i>Manage Procurement Mode</a>
+                <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i> Account Classifications</a>
               </li>
               <li>
-                <a href="<?php echo base_url('admin/manageDatabaseView')?>">Manage Database</a>
+                <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i> Procurement Mode</a>
               </li>
               <li>
-                <a href="<?php echo base_url('admin/manageUsers') ?>">Manage Users</a>
+                <a href="<?php echo base_url('admin/manageDatabaseView')?>"><i class="fa fa-list"></i> Database</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('admin/manageUsers') ?>"><i class="fa fa-users"></i> Users</a>
               </li>
             </ul>
           </li>
