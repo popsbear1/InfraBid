@@ -404,6 +404,18 @@
 			return false;			
 	}
 
+		public function insertDocument($docname){
+		$data = array(
+			'document_name' => $docname
+		);
+
+		if ($this->db->insert('document_type', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 
 	/**
 	* All functions bellow are used to update data on Database.
@@ -812,6 +824,16 @@
 			return false;
 		}
 	}
+
+	public function updateDocumentDetails($document_name, $doc_type_id){
+		$data = array(
+			'document_name' => $document_name
+		);
+
+		$this->db->where('doc_type_id', $doc_type_id);
+		$this->db->update('document_type', $data);
+	}
+
 
 }
 ?>
