@@ -16,7 +16,7 @@
 			return $query->result_array();
 		}
 
-		public function getProjectPlan($abc){
+		public function getProjectPlan($year){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -25,16 +25,6 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
-			
-			if ($abc == "5mup") {
-				$this->db->where('abc >=', 5000000);
-			}elseif ($abc == "1m5m") {
-				$this->db->where('abc <', 5000000);
-				$this->db->where('abc >=', 1000000);
-			}elseif ($abc == "1mbelow") {
-				$this->db->where('abc <', 1000000);
-			}
-
 			$this->db->order_by('plan_id', 'DESC');
 
 			$query = $this->db->get();

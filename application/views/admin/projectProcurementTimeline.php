@@ -1,6 +1,6 @@
 
 <section class="content-header">
-  
+  <h2>Manage Procurement Timeline</h2>
 </section>
 <section class="content">
   <div class="row">
@@ -201,4 +201,4 @@
 <script src="<?php echo base_url() ?>public/vendors/nprogress/nprogress.js"></script>
 
 
-<script src="<?php echo base_url() ?>public/build/js/timeLine.js"></script>
+<script src="<?php echo base_url() ?>public/timeLine.js"></script>

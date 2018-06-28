@@ -22,12 +22,9 @@
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a id="sideBarControl" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
-        <!-- <form id="sideBarControl" action="<?php echo base_url('admin/setNavControl') ?>" method="post">
-                <button class="btn" id="menu_toggle" type="submit" name="submit"><i class="fa fa-bars"></i></button>
-              </form> -->
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
@@ -271,7 +268,8 @@
             <img src="<?php echo base_url() ?>public2/images/ph-ben.gif" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
-            <p>Benguet Provincial Government</p>
+            <p>Benguet Provincial</p>
+            <p>Government</p>
           </div>
         </div>
         <!-- search form -->
@@ -287,10 +285,14 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-          <li class="header">MAIN NAVIGATION</li>
-          <li class="header">Process</li>
+          <li class="header">PROCESS</li>
           <li>
-            <a href="<?php echo base_url('admin/plan5MAboveABCView') ?>">
+            <a href="<?php echo base_url('admin/addPlanView') ?>">
+              <i class="fa fa-plus"></i> <span>Add Plan</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo base_url('admin/annualPlanView') ?>">
               <i class="fa fa-tasks"></i> <span>Annual Procurement Plan</span>
             </a>
           </li>
@@ -388,16 +390,16 @@
     <div class="content-wrapper">
 
       
-    <script src="<?php echo base_url() ?>public/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 
     <script>
-      $('#sideBarControl').submit(function(e){
+      $('#sideBarControl').click(function(e){
         e.preventDefault();
 
         var details = $(this);
         $.ajax({
           type: 'POST',
-          url: details.attr('action'),
+          url: '<?php echo base_url('admin/setNavControl') ?>',
           success: function(response){
 
           }
