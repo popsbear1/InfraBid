@@ -1,62 +1,51 @@
-<section class="content-header">
-  
-</section>
-<section class="content">
 
-  <!-- page content -->
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="box">
-          <div class="box-header">
-            <h2 class="box-title">Procurement Timeline Report<small></small></h2>
-          </div>
-
-        <div class="box-body">
-          <div class="row">
-            <div class="col-lg-12">
-            <table class="table table-striped table-bordered" id="proc_time_report">
-              <thead style='font-size:12px;'>
-                <tr>
-                  <th class="text-center">Procurement Program/Project</th>
-                  <th class="text-center">Pre-proc Conf Start-End Date</th>
-                  <th class="text-center">Ads/Post of IAEB Start-End Date</th>
-                  <th class="text-center">Pre-bid Conf Start-End Date</th>
-                  <th class="text-center">Eligibility Check Start-End Date</th>
-                  <th class="text-center">Sub/Open of Bids Start-End Date</th>
-                  <th class="text-center">Bid Evaluation Start-End Date</th>
-                  <th class="text-center">Post Qual Start-End Date</th>
-                  <th class="text-center">Notice of Award Start-End Date</th>
-                  <th class="text-center">Contract Signing Start-End Date</th>
-                  <th class="text-center">Notice to Proceed Start-End Date</th>
-                  <th class="text-center">Delivery/Completion Start-End Date</th>
-                  <th class="text-center">Acceptance/Turnover Start-End Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+    <section class="content-header">
+      <h2>Manage Documents</h2>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
+            <a href="<?php echo base_url('admin/addDocumentsView') ?>" type="button" class="btn btn-primary">Add New Document</a>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-</section>        
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h2 class="box-title">Manage Document<small></small></h2>
+            </div>
+            <div class="box-body">
+              <table class="table table-bordered table-striped" id="documentsTable">
+                <thead>
+                  <tr>
+                    <th class="text-center">Document ID</th>
+                    <th class="text-center">Document Type</th>
+                    <th class="text-center">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($document_type as $document): ?>
+                    <tr>
+                      <td><?php echo $document['doc_type_id'] ?></td>
+                      <td><?php echo $document['document_name'] ?></td>
+                      <td class="text-center">
+                        <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
+                          <button class="btn btn-success" name="document_name" value="<?php echo $document['doc_type_id'] ?>" type="submit">
+                            <i class="fa fa-edit"></i>
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
@@ -91,17 +80,19 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+
 <script>
   $(document).ready( 
     function () {
-      $('#proc_time_report').DataTable();
-      $('#year').datepicker({
-        dateFormat: 'yy'
-      });
+      $('#documentsTable').DataTable();
     } 
   );
 </script>

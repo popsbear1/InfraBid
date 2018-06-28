@@ -366,6 +366,9 @@
               <li>
                 <a href="<?php echo base_url('admin/manageUsers') ?>"><i class="fa fa-users"></i> Users</a>
               </li>
+              <li>
+                <a href="<?php echo base_url('admin/manageDocumentsView') ?>"><i class="fa fa-file"></i> Documents </a>;
+              </li>
             </ul>
           </li>
           <li class="treeview">
@@ -377,9 +380,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Procurement Monitoring Reports</a>
+              <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Monitoring Reports</a>
               </li>
-              <li><a href="<?php echo base_url('admin/procurementTimelineReport') ?>"><i class="fa fa-list"></i>Procurement TimeLine Reports</a>
+              <li><a href="<?php echo base_url('admin/procurementTimelineReport') ?>"><i class="fa fa-list"></i>Timeline Reports</a>
               </li>
             </ul>
           </li>

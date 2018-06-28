@@ -249,6 +249,25 @@
 			return $query->row();
 		}
 
+		public function getDocument(){
+			$this->db->select('*');
+			$this->db->from('document_type');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getDocumentDetails($doc_type_id){
+			$this->db->select('*');
+			$this->db->from('document_type');
+			$this->db->where('doc_type_id', $doc_type_id);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
 	/**
 	* All functions bellow are used to insert data on Database.
 	**/
