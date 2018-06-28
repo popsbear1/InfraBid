@@ -1,12 +1,12 @@
 <section class="content-header">
-  
+  <h2>Add Municipality and Barangay</h2>
 </section>
 <section class="content">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h2 class="box-title">Add Municipality and Barangay/s<small></small></h2>
+          <a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>" class="btn btn-primary" type="button">Back</a>
         </div>
         <div class="box-body">
           <?php if (isset($_SESSION['success'])): ?>
@@ -140,10 +140,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

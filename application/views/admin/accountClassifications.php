@@ -3,17 +3,11 @@
 </section>
 <section class="content">
   <div class="row">
-    <div class="form-group">
-      <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-        <a href="<?php echo base_url('admin/addClassificationView') ?>" type="button" class="btn btn-primary">Add Classification</a>
-      </div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
           <h2 class="box-title">Manage Account Classifications<small></small></h2>
+          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addAccountClassificationModal">Add Account Classification</button>
         </div>
         <div class="box-body">
           <table class="table table-striped table-bordered" id="accountClassificationTable">
@@ -78,10 +72,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -94,3 +84,74 @@
     } 
   );
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('#myModal').on('show.bs.modal' , function (e) {
+      $('#accounts').html($('#addClassification').val());
+    });
+  });
+</script>
+
+<div class="modal fade" id="addAccountClassificationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Default Modal</h4>
+      </div>
+      <div class="modal-body">
+        <form id="addClassificationForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addClassification') ?>">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Classification<span class="required">*</span>
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" id="addClassification" name="classification" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- modal for data confirmation -->
+    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+          </div>
+          <div class="modal-body">
+            <table class='table table-striped table-bordered' style='font-size:13px;'>
+              <thead>
+                <tr >
+                  <th style='text-align: center'>Attributes</th>
+                  <th style='text-align: center'>Values</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr><td>Classification</td>
+                  <td><span id="accounts"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="addClassificationForm" name="submit" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->

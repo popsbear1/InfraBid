@@ -1,22 +1,15 @@
 <section class="content-header">
-  
+  <h2>Manage Users</h2>
 </section>
 <section class="content">
-  <div class="row">
-    <div class="form-group no-print">
-      <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-10">
-        <a href="<?php echo base_url('admin/addUsersView') ?>" type="button" class="btn btn-primary">Add New User</a>
-      </div>
-    </div>
-  </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h2 class="box-title">Manage Users<small></small></h2>
+          <h2 class="box-title">User Record<small></small></h2>
+          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addNewUserModal">Add New User</button>
         </div>
         <div class="box-body">
-
           <table class='table table-striped table-bordered' style='font-size:13px;' id="userTable">
             <thead>
               <tr>
@@ -87,10 +80,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -102,3 +91,110 @@
     } 
   );
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('#myModal').on('show.bs.modal' , function (e) {
+     $('#firstN').html($('#firstname').val());
+     $('#middleN').html($('#middlename').val());
+     $('#lastN').html($('#lastname').val());
+     $('#userT').html($('#usertype').val());
+   });
+    
+  });
+</script>
+
+<div class="modal fade" id="addNewUserModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add New User</h4>
+      </div>
+      <div class="modal-body">
+        <form id="addNewUserForm" action="<?php echo base_url('admin/addUsers') ?>" method="POST" class="form-horizontal form-label-left">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name*</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" id="firstname" name="firstname"  class="form-control">
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" id="middlename" name="middlename"  class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Last Name*</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" id="lastname" name="lastname"  class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">User Type*</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <select class="select2_single form-control" id="usertype" name="usertype" tabindex="-1">
+                <option selected hidden disabled>Choose User Type</option>
+                <option value="BAC_SEC">Bac SEC</option>
+                <option value="BAC_TWG">Bac TWG</option>
+                <option value="PEO">PEO</option>
+                <option value="PGO">PGO</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- confirm input modal -->
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+      </div>
+      <div class="modal-body">
+        <table class='table table-striped table-bordered' style='font-size:13px;'>
+          <thead>
+            <tr >
+              <th style='text-align: center'>Attributes</th>
+              <th style='text-align: center'>Values</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <tr><td>First Name</td>
+              <td><span id="firstN"></span></td>
+            </tr>
+            <tr><td>Middle Name</td>
+              <td><span id="middleN"></span></td>
+            </tr>
+            <tr><td>Last Name</td>
+              <td><span id="lastN"></span></td>
+            </tr>
+            <tr><td>User Type</td>
+              <td><span id="userT"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button form="addNewUserForm" type="submit" name="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end confirm modal -->

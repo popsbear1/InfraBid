@@ -3,17 +3,11 @@
 </section>
 <section class="content">
   <div class="row">
-    <div class="form-group">
-      <div class="col-lg-12 text-right">
-        <a href="<?php echo base_url('admin/addMunicipalityView') ?>" type="button" class="btn btn-primary">Add New Municipality</a>
-      </div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
           <h2 class="box-title">Manage Municipalities and Barangays<small></small></h2>
+          <a href="<?php echo base_url('admin/addMunicipalityView') ?>" type="button" class="btn btn-primary pull-right">Add New Municipality</a>
         </div>
         <div class="box-body">
           <table class="table table-striped table-bordered" id="municipalityTable">
@@ -78,10 +72,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
