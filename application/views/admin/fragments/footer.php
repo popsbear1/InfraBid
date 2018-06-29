@@ -1,3 +1,4 @@
+  </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right">
@@ -8,7 +9,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  <aside class="control-sidebar control-sidebar-light">
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a class="text-center">Manage</a></li>
     </ul>
@@ -63,28 +64,71 @@
             </div>         
           </div>
         </a>
-      </li>            
-<!-- 
-      <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i>Funds</a>
       </li>
-      <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i>Project Types</a>
-      </li>
-      <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i>Municipalities</a>
-      </li> -->
+
       <li>
-        <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i>Account Classifications</a>
+        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageAccountClassifications') ?>">
+          <div class="row">
+            <div class="col-lg-3">
+              <i class="fa fa-file"></i>
+            </div>
+            <div class="col-lg-9 text-left">
+              Account Classifications
+            </div>         
+          </div>
+        </a>
       </li>
+
       <li>
-        <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i> Procurement Mode</a>
+        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageProcurementMode') ?>">
+          <div class="row">
+            <div class="col-lg-3">
+              <i class="fa fa-list"></i>
+            </div>
+            <div class="col-lg-9 text-left">
+              Procurement Mode
+            </div>         
+          </div>
+        </a>
       </li>
+
       <li>
-        <a href="<?php echo base_url('admin/manageDatabaseView')?>"><i class="fa fa-list"></i> Database</a>
+        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDatabaseView') ?>">
+          <div class="row">
+            <div class="col-lg-3">
+              <i class="fa fa-list"></i>
+            </div>
+            <div class="col-lg-9 text-left">
+              Database
+            </div>         
+          </div>
+        </a>
       </li>
+
       <li>
-        <a href="<?php echo base_url('admin/manageUsers') ?>"><i class="fa fa-users"></i> Users</a>
+        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageUsers') ?>">
+          <div class="row">
+            <div class="col-lg-3">
+              <i class="fa fa-users"></i>
+            </div>
+            <div class="col-lg-9 text-left">
+              Users
+            </div>         
+          </div>
+        </a>
       </li>
+
       <li>
-        <a href="<?php echo base_url('admin/manageDocumentsView') ?>"><i class="fa fa-file"></i> Documents </a>;
+        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDocumentsView') ?>">
+          <div class="row">
+            <div class="col-lg-3">
+              <i class="fa fa-list"></i>
+            </div>
+            <div class="col-lg-9 text-left">
+              Documents
+            </div>         
+          </div>
+        </a>
       </li>
     </ul>
 
