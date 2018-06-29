@@ -797,9 +797,66 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	/** Start of Manage Documents */
+
+		public function manageDocumentsView(){
+		$data['document_type'] = $this->admin_model->getDocument();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/manageDocuments', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addDocumentsView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/addDocuments');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addDocument(){
+		$document_name = $this->input->post('document_name');
+
+		if ($this->admin_model->insertDocument($document_name)) {
+			$this->session->set_flashdata('success', 'Document Successfully Added.');
+		}else{
+			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
+		}
+		redirect('admin/addDocumentsView');
+	}
+
+	public function editDocumentView(){
+		$doc_type_id = $this->session->userdata('doc_type_id');
+		$data['documentDetail'] = $this->admin_model->getDocumentDetails($doc_type_id);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/editDocument', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function setCurrentDocumentID(){
+		$documentID = $this->input->post('document_name');
+
+		$this->session->set_userdata('doc_type_id', $documentID);
+
+		redirect('admin/editDocumentsView');
+	}
+
+	public function editDocument(){
+		$documentID = $this->session->userdata('doc_type_id');
+		if (!empty($_POST['document_name'])) {
+			$document_name = $this->input->post('document_name');
+			$this->admin_model->updateDocumentNAme($document_name, $documentID);
+	}
+
+}
+
+	/** End of Manage Document */
+
+
 	/**
 	*
-	* Bellow are the methods to update proc activity dates
+	* Below are the methods to update proc activity dates
 	*/
 
 	public function editProcActDate(){
