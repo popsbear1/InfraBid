@@ -340,40 +340,6 @@
           <li class="treeview">
             <a href="#">
               <i class="fa fa-laptop"></i>
-              <span>Manage</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="<?php echo base_url('admin/manageContractorsView') ?>"><i class="fa fa-users"></i> Contractor</a>
-              </li>
-              <li><a href="<?php echo base_url('admin/manageFundsView') ?>"><i class="fa fa-money"></i> Funds </a>
-              </li>
-              <li><a href="<?php echo base_url('admin/manageProjectTypeView') ?>"><i class="fa fa-list"></i> Project Types </a>
-              </li>
-              <li><a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>"><i class="fa fa-list"></i> Municipalities</a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('admin/manageAccountClassifications') ?>"><i class="fa fa-file"></i> Account Classifications</a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('admin/manageProcurementMode') ?>"><i class="fa fa-list"></i> Procurement Mode</a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('admin/manageDatabaseView')?>"><i class="fa fa-list"></i> Database</a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('admin/manageUsers') ?>"><i class="fa fa-users"></i> Users</a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('admin/manageDocumentsView') ?>"><i class="fa fa-file"></i> Documents </a>;
-              </li>
-            </ul>
-          </li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-laptop"></i>
               <span>Reports</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
