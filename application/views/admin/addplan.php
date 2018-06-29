@@ -1,11 +1,13 @@
 
-    <section class="content-header"></section>
+    <section class="content-header">
+      <h2>Add New Project Plan</h2>
+    </section>
     <section class="content">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h2 class="box-title">Add Project<small></small></h2>
+              <h2 class="box-title">Input Project Plan Details</h2>
             </div>
             <div class="box-body">
               <?php if (isset($_SESSION['success'])): ?>
@@ -19,25 +21,33 @@
                 </div>
               <?php endif ?>
               <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addPlan') ?>">
+                <!-- Date -->
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Project No.<span class="required">*</span>
+                  <label  class="control-label col-md-3 col-sm-3 col-xs-12">Year *</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control pull-right" id="year" name="year" value="<?php echo $currentYear ?>">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Number *</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" step="any"  id="project_no" value="" name="project_no"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="project_no" value="" name="project_no" class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Project Title <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title *</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" step="any"  id="project_title" value="" name="project_title"  required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="project_title" value="" name="project_title"  required="required" class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Municipality<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipality *</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control" id="municipality" name ="municipality" onChange = "updateBarangay(this)">
+                    <select class="form-control" id="municipality" name ="municipality">
                       <option selected hidden disabled>Choose Municipality</option>
                       <?php foreach ($municipalities as $municipality): ?>
                         <option value="<?php echo $municipality['municipality_id'] ?>" class="municipality"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipality_code'] ?></option>
@@ -46,7 +56,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Barangay <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Barangay *</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="barangaySelection" name ="barangay">
@@ -56,7 +66,7 @@
                   </div> 
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project *</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="type" name ="type">
                       <option selected disabled hidden>Choose Type of Project</option>
@@ -67,7 +77,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement *</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="mode" name ="mode">
                       <option selected hidden disabled>Mode of Procurement</option>
@@ -78,13 +88,13 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) *</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" step="any"  id="ABC" value="" name="ABC"  class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="ABC" value="" name="ABC"  class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund *</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="source" name ="source">
                       <option selected hidden disabled>Choose Source of Fund</option>
@@ -95,7 +105,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification *</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="account" name ="account">
                       <option selected hidden disabled>Choose Account Classification</option>
@@ -105,13 +115,10 @@
                     </select>
                   </div>
                 </div>
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-                  </div>
-                </div>
               </form>
+            </div>
+            <div class="box-footer text-center">
+              <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
             </div>
           </div>
         </div>
@@ -136,7 +143,10 @@
                 </tr> 
               </thead>
               <tbody>
-                <tr><td>Project No.</td>
+                <tr><td>Year</td>
+                  <td><span id="y"></span></td>
+                </tr>
+                <tr><td>Project Number</td>
                   <td><span id="proj"></span></td>
                 </tr>
                 <tr><td>Project Title</td>
@@ -163,7 +173,6 @@
                 <tr><td>Account Classification</td>
                   <td><span id="accoun"></span></td>
                 </tr>
-
               </tbody>
             </tfoot>
           </table>
@@ -210,14 +219,18 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<script>
+  //Date picker
+  $('#year').datepicker({
+    autoclose: true,
+    minViewMode: 2,
+    format: 'yyyy'
+  })
+</script>
 <script>
   var barangayData = '<?php echo json_encode($barangays) ?>';
   var barangays = JSON.parse(barangayData);
@@ -241,17 +254,18 @@
 
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-     $('#proj').html($('#project_no').val());
-     $('#title').html($('#project_title').val());
-     $('#mun').html($('#municipality').val());
-     $('#bar').html($('#barangay').val());
-     $('#typ').html($('#type').val());
-     $('#mod').html($('#mode').val());
-     $('#abc').html($('#ABC').val());
-     $('#fun').html($('#source').val());
-     $('#accoun').html($('#account').val());
-     $('#statu').html($('#status').val());
-     $('#remar').html($('#remarks').val());
+      $('#y').html($('#year').val());
+      $('#proj').html($('#project_no').val());
+      $('#title').html($('#project_title').val());
+      $('#mun').html($('#municipality').val());
+      $('#bar').html($('#barangay').val());
+      $('#typ').html($('#type').val());
+      $('#mod').html($('#mode').val());
+      $('#abc').html($('#ABC').val());
+      $('#fun').html($('#source').val());
+      $('#accoun').html($('#account').val());
+      $('#statu').html($('#status').val());
+      $('#remar').html($('#remarks').val());
    });
     
   });
