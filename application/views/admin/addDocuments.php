@@ -19,9 +19,9 @@
                 <p><?php echo $_SESSION['error'] ?></p>
               </div>
             <?php endif ?>
-            <form id="addDocumentsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
+            <form id="addDocumentsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/manageDocuments') ?>">
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Source of Documents<span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Name<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input type="text" step="any"  id="documents" name="documents"  required="required" class="form-control col-md-7 col-xs-12">
@@ -59,15 +59,15 @@
                 </tr> 
               </thead>
               <tbody>
-                <tr><td>Source of Documents</td>
-                  <td><span id="docs"></span></td>
+                <tr><td>New Document</td>
+                  <td><span id="newdocuments"></span></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" form="addDocumetsForm" name="submit" class="btn btn-primary">Confirm</button>
+            <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@
 <script>
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-      $('#docs').html($('#documents').val());
+      $('#newdocuments').html($('#documents').val());
     });
   });
 </script>
