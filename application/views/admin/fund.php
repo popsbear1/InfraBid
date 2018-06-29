@@ -1,51 +1,45 @@
 
-    <section class="content-header">
-      <h2>Manage Funds</h2>
-    </section>
-    <section class="content">
-      <div class="row">
-        <div class="form-group">
-          <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-9">
-            <a href="<?php echo base_url('admin/addFundsView') ?>" type="button" class="btn btn-primary">Add New Fund</a>
-          </div>
+<section class="content-header">
+  <h2>Manage Funds</h2>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h2 class="box-title">Funds Records<small></small></h2>
+          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addFundModal">Add New Fund</button>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-striped" id="fundTable">
+            <thead>
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Source of Fund</th>
+                <th class="text-center">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($funds as $fund): ?>
+                <tr>
+                  <td><?php echo $fund['fund_id'] ?></td>
+                  <td><?php echo $fund['source'] ?></td>
+                  <td class="text-center">
+                    <form method="POST" action="<?php echo base_url('admin/setCurrentFundID') ?>">
+                      <button class="btn btn-success" name="source" value="<?php echo $fund['fund_id'] ?>" type="submit">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <?php endforeach ?>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h2 class="box-title">Manage Funds<small></small></h2>
-            </div>
-            <div class="box-body">
-              <table class="table table-bordered table-striped" id="fundTable">
-                <thead>
-                  <tr>
-                    <th class="text-center">ID</th>
-                    <th class="text-center">Source of Fund</th>
-                    <th class="text-center">Edit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($funds as $fund): ?>
-                    <tr>
-                      <td><?php echo $fund['fund_id'] ?></td>
-                      <td><?php echo $fund['source'] ?></td>
-                      <td class="text-center">
-                        <form method="POST" action="<?php echo base_url('admin/setCurrentFundID') ?>">
-                          <button class="btn btn-success" name="source" value="<?php echo $fund['fund_id'] ?>" type="submit">
-                            <i class="fa fa-edit"></i>
-                          </button>
-                        </form>
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
 
 
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
@@ -96,3 +90,76 @@
     } 
   );
 </script>
+<script>
+  $(document).ready(function() {
+    $('#myModal').on('show.bs.modal' , function (e) {
+      $('#usernam').html($('#source').val());
+    });
+  });
+</script>
+
+<div class="modal fade" id="addFundModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add New Fund</h4>
+      </div>
+      <div class="modal-body">
+        <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund*
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" id="source" name="source" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- modal for data confirmation -->
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+      </div>
+      <div class="modal-body">
+        <table class='table table-striped table-bordered' style='font-size:13px;'>
+          <thead>
+            <tr >
+              <th style='text-align: center'>Attributes</th>
+              <th style='text-align: center'>Values</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <tr><td>Source of Fund</td>
+              <td><span id="usernam"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" form="addFundsForm" name="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
+
+

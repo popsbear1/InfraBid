@@ -223,13 +223,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');	
 	}
 
-	public function addNewContractorView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addcontractor');
-		$this->load->view('admin/fragments/footer');
-	}
-
 	public function addNewContractor(){
 		$businessname = $this->input->post('businessname');
 		$owner = $this->input->post('owner');
@@ -242,7 +235,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'There was an error. The new contructor is not added to the database.');
 		}
 
-		redirect('admin/addNewContractorView');
+		redirect('admin/manageContractorsView');
 	}
 
 	public function editContractorView(){
@@ -299,13 +292,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function addFundsView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addfund');
-		$this->load->view('admin/fragments/footer');
-	}
-
 	public function addFunds(){
 		$source = $this->input->post('source');
 
@@ -314,7 +300,7 @@ class Admin extends CI_Controller {
 		}else{
 			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
 		}
-		redirect('admin/addFundsView');
+		redirect('admin/manageFundsView');
 	}
 
 	public function editFundsView(){
@@ -355,13 +341,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function addProjectTypeView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addProjectType');
-		$this->load->view('admin/fragments/footer');
-	}
-
 	public function addProjectType(){
 		$type = $this->input->post('type');
 
@@ -371,7 +350,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'Error! Project Type Not Recorded.');
 		}
 
-		redirect('admin/addProjectTypeView');
+		redirect('admin/manageProjectTypeView');
 	}
 
 	public function editProjectTypeView(){
@@ -453,14 +432,6 @@ class Admin extends CI_Controller {
 		redirect('admin/editUsersView');
 	}
 
-
-	public function addUsersView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/adduser');
-		$this->load->view('admin/fragments/footer');
-	}
-
 	public function addUsers(){
 		$firstname = $this->input->post('firstname');
 		$middlename = $this->input->post('middlename');
@@ -473,7 +444,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'ERROR!.');
 		}
 
-		redirect('admin/addUsersView');
+		redirect('admin/manageUsers');
 	}
 
 	public function manageDatabaseView(){
@@ -512,10 +483,10 @@ class Admin extends CI_Controller {
 					$this->admin_model->insertBarangay($municipality_id, $_POST['barangay_code'][$i], $_POST['barangay_name'][$i]);
 				}
 			}
-			$this->session->set_flashdata('success', 'New municipality added successfully.');
+			$this->session->set_userdata('municipality_id', $municipality_id);
 		}
 
-		redirect('admin/addMunicipalityView');
+		redirect('admin/editMunicipalityView');
 	}
 
 	public function editMunicipalityView(){
@@ -585,13 +556,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function addClassificationView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addClassification');
-		$this->load->view('admin/fragments/footer');		
-	}
-
 	public function addClassification(){
 		$classification = $this->input->post('classification');
 
@@ -601,7 +565,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'Error! Adding of Classification not Recorded.');
 		}
 
-		redirect('admin/addClassificationView');
+		redirect('admin/manageAccountClassifications');
 	}
 
 		public function editClassificationView(){
@@ -637,8 +601,6 @@ class Admin extends CI_Controller {
 
 	}
 
-
-
 	public function manageProcurementMode(){
 		$data['modes'] = $this->admin_model->getProcurementMode();
 
@@ -647,15 +609,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/procurementMode', $data);
 		$this->load->view('admin/fragments/footer');
 	}
-
-	public function addProcurementView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addProcurement');
-		$this->load->view('admin/fragments/footer');
-	}
-
-
 
 	public function addProcurement(){
 		$mode = $this->input->post('mode');
@@ -666,7 +619,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'Error! Procurement Mode not Recorded.');
 		}
 
-		redirect('admin/addProcurementView');
+		redirect('admin/manageProcurementMode');
 
 	}
 
