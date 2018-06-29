@@ -272,9 +272,10 @@
 	* All functions bellow are used to insert data on Database.
 	**/
 		//Function for inserting new project.
-	public function insertNewProject($project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+	public function insertNewProject($date_added, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
 
 		$data = array(
+			'date_added' => $date_added,
 			'project_no' => $project_no,
 			'project_title' => $project_title,
 			'municipality_id' => $municipality,
@@ -288,6 +289,12 @@
 		);
 
 		if ($this->db->insert('project_plan', $data)) {
+			$new_plan_id = $this->db->insert_id();
+			$plan_id = array(
+				'plan_id' => $new_plan_id
+			);
+
+			$this->db->insert('procact', $plan_id);
 			return true;
 		}else{
 			return false;

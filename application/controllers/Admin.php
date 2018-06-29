@@ -78,7 +78,7 @@ class Admin extends CI_Controller {
 
 
 	public function addPlanView(){
-		$data['currentYear'] = date('Y');
+		$data['currentYear'] = date('Y-m-d');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
@@ -92,6 +92,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function addPlan(){
+		$date_added = htmlspecialchars($this->input->post('date_added'));
 		$project_no = htmlspecialchars($this->input->post('project_no'));
 		$project_title = htmlspecialchars($this->input->post('project_title'));
 		$municipality=htmlspecialchars($this->input->post('municipality'));
@@ -102,7 +103,7 @@ class Admin extends CI_Controller {
 		$source=htmlspecialchars($this->input->post('source'));
 		$account=htmlspecialchars($this->input->post('account'));
 
-		if ($this->admin_model->insertNewProject($project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
+		if ($this->admin_model->insertNewProject($date_added, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
 			$this->session->set_flashdata('success', 'The new project has been added to the database.');
 		}else{
 			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');

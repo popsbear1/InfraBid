@@ -22,21 +22,28 @@
               <?php endif ?>
               <form id="editPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editPlan') ?>" autocomplete="off">
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Project No.<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" step="any"  id="project_no" value="" name="project_no" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $projectDetails['project_no'] ?>">
+                    <input type="text" class="form-control" placeholder="<?php echo $projectDetails['date_added'] ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Project Title <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Number *
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" step="any"  id="project_title" value="" name="project_title" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $projectDetails['project_title'] ?>">
+                    <input type="text" id="project_no" name="project_no" class="form-control" placeholder="<?php echo $projectDetails['project_no'] ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Municipality<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title *
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="project_title" name="project_title" class="form-control" placeholder="<?php echo $projectDetails['project_title'] ?>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipality *
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="municipality" name ="municipality">
@@ -48,7 +55,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Barangay <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Barangay *
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="barangaySelection" name ="barangay">
@@ -57,7 +64,7 @@
                   </div> 
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="type" name ="type">
                       <option selected disabled hidden><?php echo $projectDetails['type'] ?></option>
@@ -68,7 +75,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="mode" name ="mode">
                       <option selected hidden disabled><?php echo $projectDetails['mode'] ?></option>
@@ -79,13 +86,13 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" step="any"  id="ABC" value="" name="ABC"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $projectDetails['abc'] ?>">
+                    <input type="text" id="ABC" name="ABC"  class="form-control" placeholder="<?php echo $projectDetails['abc'] ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="source" name ="source">
                       <option selected hidden disabled><?php echo $projectDetails['source'] ?></option>
@@ -96,7 +103,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" id="account" name ="account">
                       <option selected hidden disabled><?php echo $projectDetails['classification'] ?></option>
@@ -121,7 +128,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×
               </button>
               <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
             </div>
@@ -135,31 +142,31 @@
                 </thead>
                 <tbody>
                   <tr><td>Project No.</td>
-                    <td><span id="proj"></span></td>
+                    <td><span id="proj"></td>
                   </tr>
                   <tr><td>Project Title</td>
-                    <td><span id="title"></span></td>
+                    <td><span id="title"></td>
                   </tr>
                   <tr><td>Municipality</td>
-                    <td><span id="mun"></span></td>
+                    <td><span id="mun"></td>
                   </tr>
                   <tr><td>Barangay</td>
-                    <td><span id="bar"></span></td>
+                    <td><span id="bar"></td>
                   </tr>
                   <tr><td>Type of Project</td>
-                    <td><span id="typ"></span></td>
+                    <td><span id="typ"></td>
                   </tr>
                   <tr><td>Mode of Procurement</td>
-                    <td><span id="mod"></span></td>
+                    <td><span id="mod"></td>
                   </tr>
                   <tr><td>Approved Budget Cost(ABC)</td>
-                    <td><span id="abc"></span></td>
+                    <td><span id="abc"></td>
                   </tr>
                   <tr><td>Source of Fund</td>
-                    <td><span id="fun"></span></td>
+                    <td><span id="fun"></td>
                   </tr>
                   <tr><td>Account Classification</td>
-                    <td><span id="accoun"></span></td>
+                    <td><span id="accoun"></td>
                   </tr>
 
                 </tbody>

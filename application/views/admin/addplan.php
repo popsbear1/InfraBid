@@ -23,9 +23,9 @@
               <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addPlan') ?>">
                 <!-- Date -->
                 <div class="form-group">
-                  <label  class="control-label col-md-3 col-sm-3 col-xs-12">Year *</label>
+                  <label  class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control pull-right" id="year" name="year" value="<?php echo $currentYear ?>">
+                    <input type="date" class="form-control pull-right" id="date_added" name="date_added" value="<?php echo $currentYear ?>">
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -254,7 +254,7 @@
 
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-      $('#y').html($('#year').val());
+      $('#y').html($('#date_added').val());
       $('#proj').html($('#project_no').val());
       $('#title').html($('#project_title').val());
       $('#mun').html($('#municipality').val());
