@@ -1,112 +1,64 @@
-<!-- <?php
-  session_start();
-  if (isset($_SESSION['user'])) {
-    $user = $_SESSION['user'];
-    include 'databaseconnect.php';
-        $que = mysql_query("SELECT * from users where username = '$user'") or die(mysql_error());
-        $sql = mysql_fetch_array($que);
-          $usertype = $sql['user_type'];
-
-            if ($usertype == 'encoder') {
-              header("location:Encoder/home.php");
-            }if ($usertype == 'admin') {
-              header("location:Admin/home.php");
-            }
-    
-  }else{
-
-
-?> -->
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>InfraProj | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/dist/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/plugins/iCheck/square/blue.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <p>Benguet Provincial Capitol</p>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
 
-    <title>Infrastructure Project Bidding 2017! | </title>
-
-    <!-- Bootstrap -->
-    <link href="public/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="public/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="public/build/css/custom.min.css" rel="stylesheet"> 
-  </head>
-
-  <body class="login">
-    <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-<!--       <?php
-        include 'databaseconnect.php';
-
-        if(isset($_POST["submit"])){
-              $user=mysql_real_escape_string($_POST['username']);
-              $pas=mysql_real_escape_string($_POST['password']);
-              $pass = sha1($pas);
-
-              $query=mysql_query("SELECT * FROM users WHERE username='$user'");
-              $numrows=mysql_num_rows($query);
-              if($numrows!=0)
-                {
-
-              while($row=mysql_fetch_array($query))
-                  {
-                  $dbusername=$row['username'];
-                  $dbpassword=$row['password'];
-                  $dbtype=$row['user_type'];
-                          
-                  // if ($pass == $dbpassword ) {
-                        $_SESSION['user']=$user;  
-                          if ($dbtype == 'encoder') {
-                              header("Location: Encoder/home.php");
-                          }
-                          if ($dbtype == 'admin') {
-                              header("Location: Admin/home.php");
-                          }
-                  // }else{
-                  //   echo "<div class='alert alert-danger'>Incorrect Password</div>";
-              //}
-            }
-            }else{
-              echo "<div class='alert alert-danger'>Username doesn't exist!</div>";
-          }
-        }
-      }
-
-      ?> -->
-
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <form role="form" method="POST" action="<?php echo base_url('user/login') ?>">
-              <h1>Login Form</h1>
-              <div>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input type="password" class="form-control" name="password" placeholder="Password" required="" />
-              </div>
-              <div>
-                <button class="btn btn-default submit" type="submit" name="submit">Log in</button>
-
-                <div class="clearfix"></div>
-                <br /> 
-
-                <div>
-                  <h1><i class="fa fa-road"></i> InfraProj 2017!</h1>
-                  <p>©2017 PGO-IT. Infrastructure Project Bidding 2017</p>
-                </div>
-
-              </div>
-            </form>
-          </section>
+    <form role="form" method="POST" action="<?php echo base_url('user/login') ?>">
+      <div class="form-group has-feedback">
+        <input type="text" id="usename" name="username" class="form-control" placeholder="username">
+        <span class="fa fa-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+        <span class="fa fa-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
       </div>
+    </form>
+    <br>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <a href="#">I forgot my password</a><br>
+      </div>
     </div>
-  </body>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url() ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="<?php echo base_url() ?>public/plugins/iCheck/icheck.min.js"></script>
+</body>
 </html>
+
