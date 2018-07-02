@@ -1,14 +1,16 @@
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					<a>Infrastructure Projects Procurement Monitoring and Information System <?php echo date('Y');?> - PGO-IT</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
-
-		</div>
-	</div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+      </div>
+      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+      reserved.
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
 
 </body>
 </html>

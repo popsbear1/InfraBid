@@ -31,7 +31,15 @@ class User extends CI_Controller {
 			$this->session->set_userdata('username', $userData['username']);
 			$this->session->set_userdata('user_type', $userData['user_type']);
 
-			redirect('admin');
+			if ($userData['user_type'] === 'BAC_SEC') {
+				redirect('admin');
+			}elseif ($userData['user_type'] === 'PEO') {
+				redirect('peo');
+			}elseif ($userData['user_type'] === 'PGO') {
+				redirect('pgo');
+			}elseif ($userData['user_type'] === 'BAC_TWG') {
+				redirect('bac_twg');
+			}
 		}else{
 			redirect('user');
 		}
