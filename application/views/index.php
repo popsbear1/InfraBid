@@ -26,7 +26,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form role="form" method="POST" action="<?php echo base_url('user/login') ?>">
+    <form role="form" method="POST" action="<?php echo base_url('user/login') ?>" autocomplete="off">
       <div class="form-group has-feedback">
         <input type="text" id="usename" name="username" class="form-control" placeholder="username">
         <span class="fa fa-user form-control-feedback"></span>

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url() ?>public/timeLine.css">
+<!-- <link rel="stylesheet" href="<?php echo base_url() ?>public/timeLine.css"> -->
 <section class="content-header">
   <h2>Manage Procurement Timeline</h2>
 </section>
@@ -30,7 +30,7 @@
             <div class="ln_solid"></div>
             <div class="row">
               <div id="timeLineTableContainer">
-                <table style="background: white" id="timeLineTable">
+                <table id="timeLineTable" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th>Procurement Stage</th>
@@ -41,13 +41,13 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><b class="pull-right">Advertisement:</b></td>
-                      <td><input type="date" class="form-control" id="advertisement_start" name="advertisement_start"></td>
-                      <td><input type="date" class="form-control" id="advertisement_end" name="advertisement_end"></td>
-                      <td></td>
+                      <td class="left-col"><b class="pull-right">Advertisement:</b></td>
+                      <td class="center"><input type="date" class="form-control" id="advertisement_start" name="advertisement_start"></td>
+                      <td class="center"><input type="date" class="form-control" id="advertisement_end" name="advertisement_end"></td>
+                      <td class="reight-col"></td>
                     </tr>
                     <tr>
-                      <td>
+                      <td class="left-col">
                         <div class="row">
                           <b class="pull-right">Pre-bid Conference:</b>
                         </div>
@@ -65,9 +65,9 @@
                           </div>
                         </div>
                       </td>
-                      <td><input type="date" class="form-control" id="preBidStart"></td>
-                      <td><input type="date" class="form-control" id="preBidEnd"></td>
-                      <td>
+                      <td class="center"><input type="date" class="form-control" id="preBidStart"></td>
+                      <td class="center"><input type="date" class="form-control" id="preBidEnd"></td>
+                      <td class="reight-col">
                         <div class="col-lg-6">
                           <input type="number" class="form-control" id="preBidNumber">
                         </div>
