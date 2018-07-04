@@ -860,7 +860,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateDocumentDetails($document_name, $documentID);
 	}
 	redirect('admin/manageDocumentsView');
-}
+	}
 
 	/** End of Manage Document */
 

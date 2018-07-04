@@ -7,7 +7,7 @@
       <div class="box">
         <div class="box-header">
           <h2 class="box-title">
-            Document Forwarding
+            Document Records
           </h2> 
         </div>
         <div class="box-body">
