@@ -226,7 +226,7 @@
 
   console.log(barangays[1]['municipality_id']);
 
-  $('.municipality').click(function(e){
+  $('#municipality').change(function(e){
     $('#barangaySelection').empty();
     var municipality_id = $(this).val();
 

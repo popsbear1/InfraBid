@@ -239,7 +239,7 @@
 
   console.log(barangays[1]['municipality_id']);
 
-  $('.municipality').click(function(e){
+  $('#municipality').change(function(e){
     $('#barangaySelection').empty();
     var municipality_id = $(this).val();
 
@@ -251,6 +251,8 @@
       }
     }
   })
+
+
 
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
