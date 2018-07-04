@@ -6,201 +6,240 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Manage Project Procurement Timeline<small></small></h2>
-        </div>
         <div class="box-body">
-          <form action="<?php echo base_url('admin/addProcTimeline') ?>" method="POST" id="addProcTimelineForm">
-            <div class="well">
-              <div class="row">
-                <div class="form-horizontal col-lg-5">
-                  <div class="form-group">
-                    <label class="control-label col-lg-5">Select date to begin with:</label>
-                    <div class="col-lg-7">
-                      <input type="date" class="form-control" id="pre_proc_date" name="pre_proc_date">
+          <div class="col-lg-3">
+            <h3>Project Details</h3>
+            <div class="form-group">
+              <label for="">Project Number:</label>
+              <p class="form-control"><?php echo $projectDetails['project_no'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Project Title:</label>
+              <p class="form-control"><?php echo $projectDetails['project_title'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Municipality:</label>
+              <p class="form-control"><?php echo $projectDetails['municipality'] . ' - ' . $projectDetails['municipality_code'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Barangay:</label>
+              <p class="form-control"><?php echo $projectDetails['barangay_code'] . ' - ' . $projectDetails['barangay'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Project Type:</label>
+              <p class="form-control"><?php echo $projectDetails['type'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Procurement Mode:</label>
+              <p class="form-control"><?php echo $projectDetails['mode'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">ABC:</label>
+              <p class="form-control"><?php echo $projectDetails['abc'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Source of Fund:</label>
+              <p class="form-control"><?php echo $projectDetails['source'] ?></p>
+            </div>
+            <div class="form-group">
+              <label for="">Account Classification:</label>
+              <p class="form-control"><?php echo $projectDetails['classification'] ?></p>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <h3>Project Timeline</h3>
+            <form action="<?php echo base_url('admin/updateProcurementTimeline') ?>" method="POST" id="updateProcurementTimelineForm">
+              <div class="well">
+                <div class="row">
+                  <div class="form-horizontal col-lg-5">
+                    <div class="form-group">
+                      <label class="control-label col-lg-7">Select date to begin with:</label>
+                      <div class="col-lg-5">
+                        <input type="date" class="form-control" id="pre_proc_date" name="pre_proc_date">
+                      </div>
                     </div>
                   </div>
+                  <div class="col-lg-4">
+                    <button id="timeLineComputeBtn" type="button" class="btn btn-default btn-block">Compute/Reset to Earliest Possible Time</button>
+                  </div>
+                  <div class="col-lg-3">
+                    <button class="btn btn-default btn-block" type="button" id="startOverBtn">Start Over</button>
+                  </div>
                 </div>
-                <div class="col-lg-4">
-                  <button id="timeLineComputeBtn" type="button" class="btn btn-default btn-block">Compute/Reset to Earliest Possible Time</button>
+                <div class="ln_solid"></div>
+                <div class="row">
+                  <div id="timeLineTableContainer">
+                    <table id="timeLineTable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Procurement Stage</th>
+                          <th class="text-center">Start Date</th>
+                          <th class="text-center">End Date</th>
+                          <th class="text-center">Add Days</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="left-col"><b class="pull-right">Advertisement:</b></td>
+                          <td class="center"><input type="date" class="form-control" id="advertisement_start" name="advertisement_start"></td>
+                          <td class="center"><input type="date" class="form-control" id="advertisement_end" name="advertisement_end"></td>
+                          <td class="reight-col"></td>
+                        </tr>
+                        <tr>
+                          <td class="left-col">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <b class="pull-right">Pre-bid Conference:</b>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <p class="text-right"><i>Conduct?</i></p>
+                              </div>
+                              <div class="col-md-3">
+                                <label for="yesPreBid" class="text-center">Yes</label>
+                                <input type="radio" name="pre-bid" id="yesPreBid" class="text-center">
+                              </div>
+                              <div class="col-md-3">
+                                <label for="noPreBid" class="text-center">No</label>
+                                <input type="radio" name="pre-bid" id="noPreBid" class="text-center">
+                              </div>
+                            </div>
+                          </td>
+                          <td class="center"><input type="date" class="form-control" id="preBidStart" name="preBidStart"></td>
+                          <td class="center"><input type="date" class="form-control" id="preBidEnd" name="preBidEnd"></td>
+                          <td class="reight-col">
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control" id="preBidNumber">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block" id="preBidUpdateBtn">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><b class="pull-right">Submission of bid:</b></td>
+                          <td><input type="date" class="form-control" id="bidSubmissionStart" name="bidSubmissionStart"></td>
+                          <td><input type="date" class="form-control" id="bidSubmissionEnd" name="bidSubmissionEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><b class="pull-right">Bid Evaluation:</b></td>
+                          <td><input type="date" class="form-control" id="bidEvaluationStart" name="bidEvaluationStart"></td>
+                          <td><input type="date" class="form-control" id="bidEvaluationEnd" name="bidEvaluationEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><b class="pull-right">Post Qualification:</b></td>
+                          <td><input type="date" class="form-control" id="postQualificationStart" name="postQualificationStart"></td>
+                          <td><input type="date" class="form-control" id="postQualificationEnd" name="postQualificationEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
+                          <td><input type="date" class="form-control" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart"></td>
+                          <td><input type="date" class="form-control" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><b class="pull-right">Contract Preparation and Signing:</b></td>
+                          <td><input type="date" class="form-control" id="contractSigningStart" name="contractSigningStart"></td>
+                          <td><input type="date" class="form-control" id="contractSigningEnd" name="contractSigningEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <b class="pull-right">Approval by Higher Authority:</b>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <p class="text-right"><i>Necessary?</i></p>
+                              </div>
+                              <div class="col-md-3">
+                                <label for="yesPreBid" class="text-center">Yes</label>
+                                <input type="radio" name="pre-bid" id="yesApproval" class="text-center">
+                              </div>
+                              <div class="col-md-3">
+                                <label for="noPreBid" class="text-center">No</label>
+                                <input type="radio" name="pre-bid" id="noApproval" class="text-center">
+                              </div>
+                            </div>
+                          </td>
+                          <td><input type="date" class="form-control" id="authorityApprovalStart" name="authorityApprovalStart"></td>
+                          <td><input type="date" class="form-control" id="authorityApprovalEnd" name="authorityApprovalEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control" id="authorityApprovalNumber">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><b class="pull-right">Notice to Proceed:</b></td>
+                          <td><input type="date" class="form-control" id="proceedNoticeStart" name="proceedNoticeStart"></td>
+                          <td><input type="date" class="form-control" id="proceedNoticeEnd" name="proceedNoticeEnd"></td>
+                          <td>
+                            <div class="col-lg-6">
+                              <input type="number" class="form-control">
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn btn-info btn-block">Update</button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="col-lg-3">
-                  <button class="btn btn-default btn-block" type="button" id="startOverBtn">Start Over</button>
+                <div class="ln_solid"></div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#timelineModal" id="timelineModalConfirmBtn">Submit</button>
+                  </div>
                 </div>
               </div>
-              <div class="ln_solid"></div>
-              <div class="row">
-                <div id="timeLineTableContainer">
-                  <table id="timeLineTable" class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Procurement Stage</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Add Days</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="left-col"><b class="pull-right">Advertisement:</b></td>
-                        <td class="center"><input type="date" class="form-control" id="advertisement_start" name="advertisement_start"></td>
-                        <td class="center"><input type="date" class="form-control" id="advertisement_end" name="advertisement_end"></td>
-                        <td class="reight-col"></td>
-                      </tr>
-                      <tr>
-                        <td class="left-col">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <b class="pull-right">Pre-bid Conference:</b>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <p class="text-right"><i>Conduct?</i></p>
-                            </div>
-                            <div class="col-md-3">
-                              <label for="yesPreBid" class="text-center">Yes</label>
-                              <input type="radio" name="pre-bid" id="yesPreBid" class="text-center">
-                            </div>
-                            <div class="col-md-3">
-                              <label for="noPreBid" class="text-center">No</label>
-                              <input type="radio" name="pre-bid" id="noPreBid" class="text-center">
-                            </div>
-                          </div>
-                        </td>
-                        <td class="center"><input type="date" class="form-control" id="preBidStart"></td>
-                        <td class="center"><input type="date" class="form-control" id="preBidEnd"></td>
-                        <td class="reight-col">
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control" id="preBidNumber">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block" id="preBidUpdateBtn">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b class="pull-right">Submission of bid:</b></td>
-                        <td><input type="date" class="form-control" id="bidSubmissionStart"></td>
-                        <td><input type="date" class="form-control" id="bidSubmissionEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b class="pull-right">Bid Evaluation:</b></td>
-                        <td><input type="date" class="form-control" id="bidEvaluationStart"></td>
-                        <td><input type="date" class="form-control" id="bidEvaluationEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b class="pull-right">Post Qualification:</b></td>
-                        <td><input type="date" class="form-control" id="postQualificationStart"></td>
-                        <td><input type="date" class="form-control" id="postQualificationEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                        <td><input type="date" class="form-control" id="awardNoticeIssuanceStart"></td>
-                        <td><input type="date" class="form-control" id="awardNoticeIssuanceEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                        <td><input type="date" class="form-control" id="contractSigningStart"></td>
-                        <td><input type="date" class="form-control" id="contractSigningEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <b class="pull-right">Approval by Higher Authority:</b>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <p class="text-right"><i>Necessary?</i></p>
-                            </div>
-                            <div class="col-md-3">
-                              <label for="yesPreBid" class="text-center">Yes</label>
-                              <input type="radio" name="pre-bid" id="yesApproval" class="text-center">
-                            </div>
-                            <div class="col-md-3">
-                              <label for="noPreBid" class="text-center">No</label>
-                              <input type="radio" name="pre-bid" id="noApproval" class="text-center">
-                            </div>
-                          </div>
-                        </td>
-                        <td><input type="date" class="form-control" id="authorityApprovalStart"></td>
-                        <td><input type="date" class="form-control" id="authorityApprovalEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control" id="authorityApprovalNumber">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b class="pull-right">Notice to Proceed:</b></td>
-                        <td><input type="date" class="form-control" id="proceedNoticeStart"></td>
-                        <td><input type="date" class="form-control" id="proceedNoticeEnd"></td>
-                        <td>
-                          <div class="col-lg-6">
-                            <input type="number" class="form-control">
-                          </div>
-                          <div class="col-lg-6">
-                            <button class="btn btn-info btn-block">Update</button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="ln_solid"></div>
-              <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#timelineModal" id="timelineModalConfirmBtn">Submit</button>
-                </div>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -248,6 +287,7 @@
 
 <script>
   $('#timelineModalConfirmBtn').click(function(e){
+    $('#preproc').html($('#pre_proc_date').val());
     $('#addStart').html($('#advertisement_start').val());
     $('#addEnd').html($('#advertisement_end').val());
     $('#pbcStart').html($('#preBidStart').val());
@@ -266,7 +306,27 @@
     $('#ahaEnd').html($('#authorityApprovalEnd').val());
     $('#ntpStart').html($('#proceedNoticeStart').val());
     $('#ntpEnd').html($('#proceedNoticeEnd').val());
-    
+  });
+  $(document).ready(function(e){
+    $('#pre_proc_date').val("<?php echo $timeLine['pre_proc_date'] ?>");
+    $('#advertisement_start').val("<?php echo $timeLine['advertisement_start'] ?>");
+    $('#advertisement_end').val("<?php echo $timeLine['advertisement_end'] ?>");
+    $('#preBidStart').val("<?php echo $timeLine['pre_bid_start'] ?>");
+    $('#preBidEnd').val("<?php echo $timeLine['pre_bid_end'] ?>");
+    $('#bidSubmissionStart').val("<?php echo $timeLine['bid_submission_start'] ?>");
+    $('#bidSubmissionEnd').val("<?php echo $timeLine['bid_submission_end'] ?>");
+    $('#bidEvaluationStart').val("<?php echo $timeLine['bid_evaluation_start'] ?>");
+    $('#bidEvaluationEnd').val("<?php echo $timeLine['bid_evaluation_end'] ?>");
+    $('#postQualificationStart').val("<?php echo $timeLine['post_qualification_start'] ?>");
+    $('#postQualificationEnd').val("<?php echo $timeLine['post_qualification_end'] ?>");
+    $('#awardNoticeIssuanceStart').val("<?php echo $timeLine['award_notice_start'] ?>");
+    $('#awardNoticeIssuanceEnd').val("<?php echo $timeLine['award_notice_end'] ?>");
+    $('#contractSigningStart').val("<?php echo $timeLine['contract_signing_start'] ?>");
+    $('#contractSigningEnd').val("<?php echo $timeLine['contract_signing_end'] ?>");
+    $('#authorityApprovalStart').val("<?php echo $timeLine['authority_approval_start'] ?>");
+    $('#authorityApprovalEnd').val("<?php echo $timeLine['authority_approval_end'] ?>");
+    $('#proceedNoticeStart').val("<?php echo $timeLine['proceed_notice_start'] ?>");
+    $('#proceedNoticeEnd').val("<?php echo $timeLine['proceed_notice_end'] ?>");
   });
 </script>
 
@@ -281,8 +341,14 @@
           </div>
           <div class="modal-body">
             <table class='table table-striped table-bordered' style='font-size:13px;'>
+              <tbody>
+                <td>Pre-proc Conference</td>
+                <td id="preproc"></td>
+              </tbody>
+            </table>
+            <table class='table table-striped table-bordered' style='font-size:13px;'>
               <thead>
-                <tr >
+                <tr>
                   <th class="text-center">Activity</th>
                   <th class="text-center">Start Date</th>
                   <th class="text-center">End Date</th>
@@ -339,7 +405,7 @@
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" form="addProcTimelineForm" name="submit" class="btn btn-primary">Confirm</button>
+          <button type="submit" form="updateProcurementTimelineForm" name="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>

@@ -138,11 +138,44 @@ class Admin extends CI_Controller {
 
 	public function projectTimelineView(){
 		$pageName['pageName'] = "timeline";
+		$plan_id = $this->session->userdata('plan_id');
+		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
+		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
-		$this->load->view('admin/projectProcurementTimeline');
+		$this->load->view('admin/projectProcurementTimeline', $data);
 		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function updateProcurementTimeline(){
+		$plan_id = $this->session->userdata('plan_id');
+		$pre_proc_date = $this->input->post('pre_proc_date');
+		$advertisement_start = $this->input->post('advertisement_start');
+		$advertisement_end = $this->input->post('advertisement_end');
+		$pre_bid_start = $this->input->post('preBidStart');
+		$pre_bid_end = $this->input->post('preBidEnd');
+		$bid_submission_start = $this->input->post('bidSubmissionStart');
+		$bid_submission_end = $this->input->post('bidSubmissionEnd');
+		$bid_evaluation_start = $this->input->post('bidEvaluationStart');
+		$bid_evaluation_end = $this->input->post('bidEvaluationEnd');
+		$post_qualification_start = $this->input->post('postQualificationStart');
+		$post_qualification_end = $this->input->post('postQualificationEnd');
+		$award_notice_start = $this->input->post('awardNoticeIssuanceStart');
+		$award_notice_end = $this->input->post('awardNoticeIssuanceEnd');
+		$contract_signing_start = $this->input->post('contractSigningStart');
+		$contract_signing_end = $this->input->post('contractSigningEnd');
+		$authority_approval_start = $this->input->post('authorityApprovalStart');
+		$authority_approval_end = $this->input->post('authorityApprovalEnd');
+		$proceed_notice_start = $this->input->post('proceedNoticeStart');
+		$proceed_notice_end = $this->input->post('proceedNoticeEnd');
+
+		$this->admin_model->updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
+
+		$this->admin_model->updatePreProcConfDate($plan_id, $pre_proc_date);
+
+		redirect('admin/projectTimelineView');
+		 
 	}
 
 	public function procurementActivityView(){

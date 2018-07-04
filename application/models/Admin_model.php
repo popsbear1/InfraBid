@@ -102,6 +102,16 @@
 			return $query->row_array();
 		}
 
+		public function getProjectTimeline($plan_id){
+			$this->db->select('*');
+			$this->db->from('project_timeline');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
 		public function getContractors(){
 			$this->db->select('*');
 			$this->db->from('contractors');
@@ -295,6 +305,7 @@
 			);
 
 			$this->db->insert('procact', $plan_id);
+			$this->db->insert('project_timeline', $plan_id);
 			return true;
 		}else{
 			return false;
@@ -839,6 +850,33 @@
 
 		$this->db->where('doc_type_id', $doc_type_id);
 		$this->db->update('document_type', $data);
+	}
+
+	public function updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
+		$data = array(
+			'pre_proc_date' => $pre_proc_date,
+			'advertisement_start' => $advertisement_start,
+			'advertisement_end' => $advertisement_end,
+			'pre_bid_start' => $pre_bid_start,
+			'pre_bid_end' => $pre_bid_end,
+			'bid_submission_start' => $bid_submission_start,
+			'bid_submission_end' => $bid_submission_end,
+			'bid_evaluation_start' => $bid_evaluation_start,
+			'bid_evaluation_end' => $bid_evaluation_end,
+			'post_qualification_start' => $post_qualification_start,
+			'post_qualification_end' => $post_qualification_end,
+			'award_notice_start' => $award_notice_start,
+			'award_notice_end' => $award_notice_end,
+			'contract_signing_start' => $contract_signing_start,
+			'contract_signing_end' => $contract_signing_end,
+			'authority_approval_start' => $authority_approval_start,
+			'authority_approval_end' => $authority_approval_end,
+			'proceed_notice_start' => $proceed_notice_start,
+			'proceed_notice_end' => $proceed_notice_end
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_timeline', $data);
 	}
 
 
