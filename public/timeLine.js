@@ -3,12 +3,28 @@
     $('#preBidStart').prop('disabled', true);
     $('#preBidEnd').prop('disabled', true);
     $('#preBidNumber').prop('disabled', true);
+    $('#preBidUpdateBtn').prop('disabled', true);
   });
 
   $('#yesPreBid').click(function(event) {
     $('#preBidStart').prop('disabled', false);
     $('#preBidEnd').prop('disabled', false);
     $('#preBidNumber').prop('disabled', false);
+    $('#preBidUpdateBtn').prop('disabled', false);
+  });
+
+  $('#noApproval').click(function(event) {
+    $('#authorityApprovalStart').prop('disabled', true);
+    $('#authorityApprovalEnd').prop('disabled', true);
+    $('#authorityApprovalNumber').prop('disabled', true);
+    $('#authorityApprovalUpdateBtn').prop('disabled', true);
+  });
+
+  $('#yesApproval').click(function(event) {
+    $('#authorityApprovalStart').prop('disabled', false);
+    $('#authorityApprovalEnd').prop('disabled', false);
+    $('#authorityApprovalNumber').prop('disabled', false);
+    $('#authorityApprovalUpdateBtn').prop('disabled', false);
   });
 
   $('#startOverBtn').click(function(event){
