@@ -1,0 +1,155 @@
+
+
+	.ui-button {
+		border: 1px solid gray;
+		background-color: lightgray;
+		border-radius: 4px;
+		box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px gray, 1px 2px 1px gray;
+		-o-box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px gray, 1px 2px 1px gray;
+		-webkit-box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px gray, 1px 2px 1px gray;
+		-moz-box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px gray, 1px 2px 1px gray;
+		color: white;
+		text-shadow: 2px 2px 2px black;
+		padding: 5px 30px;
+	}
+
+	.ui-button:hover {
+		border: 1px solid blue;
+		background-color: blue;
+		border-radius: 4px;
+		box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue, 1px 2px 1px skyblue;
+		-o-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue, 1px 2px 1px skyblue;
+		-webkit-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue, 1px 2px 1px skyblue;
+		-moz-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue, 1px 2px 1px skyblue;
+		color: white;
+		text-shadow: 5px 5px 5px black;
+	}
+
+
+	.ui-buttonnew {
+		border:1px solid #999;
+		background-color:#D2D2FF;
+		border-radius: 4px;
+		color: black;
+		font-size:14px;
+		padding: 0px;
+	}
+
+	.ui-buttonnew:hover {
+		border: darkblue;
+		background-color: blue;
+		border-radius:4px;
+		-webkit-border-radius:4px;
+		box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue;
+		-o-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue;
+		-webkit-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue;
+		-moz-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px darkblue;
+		color: white;
+
+	}
+
+	.ui-buttonnew:hover:visited {
+		border: yellow;
+		background-color: blue;
+		border-radius:4px;
+		box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px yellow;
+		-o-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px yellow;
+		-webkit-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px yellow;
+		-moz-box-shadow: inset 1px 6px 12px lightblue, inset -1px -10px 5px yellow;
+		color: white;
+		text-shadow: 5px 5px 5px black;
+
+	}
+
+
+
+	.ttable {
+		
+		border-radius: 10px 10px 0px 0px;
+		margin-left:20px;
+	}
+
+	.ttable1 {
+		border-radius: 0px 0px 10px 10px;
+		margin-left:20px;
+	}
+
+	.ttable1 a {
+		text-decoration:none;
+
+		
+	}
+
+	.ttable1 a:hover {
+		color:red;
+		cursor:pointer;
+		text-decoration:underline;
+		
+	}
+
+	.maintable {
+		border:solid 1px;
+		border-color: #CCC;
+		margin-left:20px;
+	}
+
+	.txtfield{
+		border: 1px solid lightgray;
+		background-color: white;
+		border-radius: 4px;
+		box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px darkwhite, 1px 2px 1px black;
+		-o-box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px darkwhite, 1px 2px 1px black;
+		-webkit-box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px darkwhite, 1px 2px 1px black;
+		-moz-box-shadow: inset 1px 6px 12px lightgray, inset -1px -10px 5px darkwhite, 1px 2px 1px black;
+		color: black;
+
+		padding: 5px 30px;
+	}
+
+	.tooltip {
+		border-bottom: 1px dotted #000000; color: #000000; outline: none;
+		cursor: help; text-decoration: none;
+		position: relative;
+	}
+	.tooltip span {
+		margin-left: -999em;
+		position: absolute;
+	}
+	.tooltip:hover span {
+		border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+		font-family: Calibri, Tahoma, Geneva, sans-serif;
+		position: absolute; left: 1em; top: 2em; z-index: 99;
+		margin-left: 0; width: 250px;
+	}
+	.tooltip:hover img {
+		border: 0; margin: -10px 0 0 -55px;
+		float: left; position: absolute;
+	}
+	.tooltip:hover em {
+		font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
+		display: block; padding: 0.2em 0 0.6em 0;
+	}
+
+	.ufont {
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:13px;
+		color:black;
+
+	}
+
+	.txtlink {
+		color:#FFF;
+	}
+	.txtlink a {
+		color:#FFF;
+		font-weight:bold;
+		text-decoration:none;
+		
+	}
+	.txtlink a:hover {
+		color:#FFF;
+		text-shadow:2px 2px 2px yellow;	
+		text-decoration:underline;
+		
+	}
