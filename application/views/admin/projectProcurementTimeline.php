@@ -98,7 +98,7 @@
                               </div>
                               <div class="col-md-3">
                                 <label for="yesPreBid" class="text-center">Yes</label>
-                                <input type="radio" name="pre-bid" id="yesPreBid" class="text-center">
+                                <input type="radio" name="pre-bid" id="yesPreBid" class="text-center" checked="checked">
                               </div>
                               <div class="col-md-3">
                                 <label for="noPreBid" class="text-center">No</label>
@@ -195,11 +195,11 @@
                               </div>
                               <div class="col-md-3">
                                 <label for="yesPreBid" class="text-center">Yes</label>
-                                <input type="radio" name="pre-bid" id="yesApproval" class="text-center">
+                                <input type="radio" name="approval" id="yesApproval" class="text-center" checked="checked">
                               </div>
                               <div class="col-md-3">
                                 <label for="noPreBid" class="text-center">No</label>
-                                <input type="radio" name="pre-bid" id="noApproval" class="text-center">
+                                <input type="radio" name="approval" id="noApproval" class="text-center">
                               </div>
                             </div>
                           </td>
