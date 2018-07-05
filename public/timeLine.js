@@ -55,6 +55,61 @@
     }
   });
 
+
+  $('#preBidUpdateBtn').click(function(event){
+    var daysToAdd = $('#preBidNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
+  $('#bidSubmissionUpdateBtn').click(function(event){
+    var daysToAdd = $('#bidSubmissionNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
+  $('#bidEvaluationUpdateBtn').click(function(event){
+    var daysToAdd = $('#bidEvaluationNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
+  $('#postQualificationUpdateBtn').click(function(event){
+    var daysToAdd = $('#postQualificationNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
+  $('#awardNoticeIssuanceUpdateBtn').click(function(event){
+    var daysToAdd = $('#awardNoticeIssuanceNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
+  $('#contractSigningUpdateBtn').click(function(event){
+    var daysToAdd = $('#contractSigningNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
   $('#authorityApprovalUpdateBtn').click(function(event){
     var daysToAdd = $('#authorityApprovalNumber').val();
     if (daysToAdd) {
@@ -63,6 +118,16 @@
       alert("place an input adi sika met");
     }
   });
+
+  $('#proceedNoticeUpdateBtn').click(function(event){
+    var daysToAdd = $('#proceedNoticeNumber').val();
+    if (daysToAdd) {
+
+    }else{
+      alert("place an input adi sika met");
+    }
+  });
+
 
   $('#startOverBtn').click(function(event){
     $(':input').val('');

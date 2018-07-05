@@ -113,7 +113,7 @@
                               <input type="number" class="form-control" id="preBidNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block" id="preBidUpdateBtn">Update</button>
+                              <button class="btn btn-info btn-block" id="preBidUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -123,10 +123,10 @@
                           <td><input type="date" class="form-control" id="bidSubmissionEnd" name="bidSubmissionEnd"></td>
                           <td>
                             <div class="col-lg-6">
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" id="bidSubmissionNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block">Update</button>
+                              <button class="btn btn-info btn-block" id="bidSubmissionUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -136,10 +136,10 @@
                           <td><input type="date" class="form-control" id="bidEvaluationEnd" name="bidEvaluationEnd"></td>
                           <td>
                             <div class="col-lg-6">
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" id="bidEvaluationNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block">Update</button>
+                              <button class="btn btn-info btn-block" id="bidEvaluationUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -149,10 +149,10 @@
                           <td><input type="date" class="form-control" id="postQualificationEnd" name="postQualificationEnd"></td>
                           <td>
                             <div class="col-lg-6">
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" id="postQualificationNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block">Update</button>
+                              <button class="btn btn-info btn-block" id="postQualificationUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -162,10 +162,10 @@
                           <td><input type="date" class="form-control" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd"></td>
                           <td>
                             <div class="col-lg-6">
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" id="awardNoticeIssuanceNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block">Update</button>
+                              <button class="btn btn-info btn-block" id="awardNoticeIssuanceUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -175,10 +175,10 @@
                           <td><input type="date" class="form-control" id="contractSigningEnd" name="contractSigningEnd"></td>
                           <td>
                             <div class="col-lg-6">
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" id="contractSigningNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block">Update</button>
+                              <button class="btn btn-info btn-block" id="contractSigningUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -210,7 +210,7 @@
                               <input type="number" class="form-control" id="authorityApprovalNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn">Update</button>
+                              <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
@@ -220,10 +220,10 @@
                           <td><input type="date" class="form-control" id="proceedNoticeEnd" name="proceedNoticeEnd"></td>
                           <td>
                             <div class="col-lg-6">
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" id="proceedNoticeNumber">
                             </div>
                             <div class="col-lg-6">
-                              <button class="btn btn-info btn-block">Update</button>
+                              <button class="btn btn-info btn-block" id="proceedNoticeUpdateBtn" type="button">Update</button>
                             </div>
                           </td>
                         </tr>
