@@ -860,8 +860,9 @@ class Admin extends CI_Controller {
 
 	public function addDocuments(){
 		$document_name = $this->input->post('newdocuments');
+		$document_numbers = $this->input->post('document_numbers');
 
-		if ($this->admin_model->insertDocument($document_name)) {
+		if ($this->admin_model->insertDocument($document_name, $document_numbers)) {
 			$this->session->set_flashdata('success', 'Document Successfully Added.');
 		}else{
 			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
@@ -891,6 +892,8 @@ class Admin extends CI_Controller {
 		if (!empty($_POST['document_name'])) {
 			$document_name = $this->input->post('document_name');
 			$this->admin_model->updateDocumentDetails($document_name, $documentID);
+			$document_number = $this->input->post('doc_no');
+			$this->admin_model->updateDocumentNumber($document_number, $documentID);
 	}
 	redirect('admin/manageDocumentsView');
 	}

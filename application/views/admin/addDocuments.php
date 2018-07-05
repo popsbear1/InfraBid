@@ -20,6 +20,15 @@
               </div>
             <?php endif ?>
             <form id="addDocumentsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/manageDocuments') ?>">
+
+              <div class="form-group">   
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Number<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" step="any"  id="document_numbers" name="document_numbers"  required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Name<span class="required">*</span>
                 </label>
@@ -27,6 +36,7 @@
                   <input type="text" step="any"  id="documents" name="documents"  required="required" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
+
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -59,8 +69,13 @@
                 </tr> 
               </thead>
               <tbody>
-                <tr><td>New Document</td>
+                <tr>
+                  <td>New Document</td>
                   <td><span id="newdocuments"></span></td>
+                </tr>
+                <tr>
+                  <td>Document Number</td>
+                  <td><span id="newdocumentnumbers"></span></td>
                 </tr>
               </tbody>
             </table>
@@ -92,6 +107,7 @@
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
       $('#newdocuments').html($('#documents').val());
+      $('#newdocumentnumbers').html($('#document_numbers'));
     });
   });
 </script>
