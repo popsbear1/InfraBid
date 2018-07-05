@@ -14,47 +14,10 @@
           <table class="table table-striped table-bordered" id="projectDocumenTable">
             <thead>
               <tr>
-                <th class="text-center">Existing Documents</th>
-                <th class="text-center">Add Documents</th>
-                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="text-center">
-                      Document 1
-                  <br>Document 2
-                  <br>Document 3
-                  <br>Document 4
-                  <br>Document 5
-                  <br>Document 6
-                  <br>Document 7
-                  <br>Document 8
-                </td>  
-                <td class="text-center">
-                  <input type="checkbox" name="myTextEditBox" value="checked"/> Document 1
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 2
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 3
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 4
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 5
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 6
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 7
-                </td>
-                <td>
-                  <div class="form-group">
-                    <label>Department:</label>
-                    <select class="form-control">
-                      <option>BAC-Infra Secretariat</option>
-                      <option>PWG</option>
-                      <option>PGO</option>
-                      <option>PEO</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>Remarks:</label>
-                    <textarea class="form-control"></textarea>
-                  </div>
-                </td>
               </tr>
             </tbody>
           </table>

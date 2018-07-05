@@ -29,4 +29,14 @@ class Doctrack extends CI_Controller {
 		$this->load->view('doctrack/documentDetails');
 		$this->load->view('admin/fragments/footer');
 	}
-}
+
+		public function historyView(){
+			$data['logs'] = $this->doctrack_model->getHistory();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('doctrack/fragments/docTrackNavigation');
+			$this->load->view('doctrack/historyView', $data);
+			$this->load->view('admin/fragments/footer');
+		}
+
+	}
