@@ -21,12 +21,19 @@
           <?php endif ?>
           <form id="editDocumentsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editDocument') ?>">
             <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Number<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" step="any"  id="doc_no" name="doc_no" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $documentDetail['doc_no'] ?>">
+              </div>
+            </div>
+            <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Name<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" step="any"  id="document_name" name="document_name" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $documentDetail['document_name'] ?>">
               </div>
-            </div>
+            </div> 
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -90,36 +97,37 @@
 </script>
 
 
-    <!-- modal for data confirmation -->
-    <div id="editDocumentsModal" class="modal fade" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<!-- modal for data confirmation -->
+<div id="editDocumentsModal" class="modal fade" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-          </div>
-          <div class="modal-body">
-            <table class='table table-striped table-bordered' style='font-size:13px;'>
-              <thead>
-                <tr >
-                  <th style='text-align: center'>Attributes</th>
-                  <th style='text-align: center'>Values</th>
-                </tr> 
-              </thead>
-              <tbody>
-                <tr><td>Document Name</td>
-                  <td><span id="usernam"></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" form="editDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
-          </div>
-        </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+      </div>
+      <div class="modal-body">
+        <table class='table table-striped table-bordered' style='font-size:13px;'>
+          <thead>
+            <tr >
+              <th style='text-align: center'>Attributes</th>
+              <th style='text-align: center'>Values</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <tr>
+              <td>Document Name</td>
+              <td><span id="usernam"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" form="editDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
       </div>
     </div>
+  </div>
+</div>
     <!-- end of modal -->

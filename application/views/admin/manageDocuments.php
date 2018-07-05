@@ -14,7 +14,7 @@
           <table class="table table-bordered table-striped" id="documentsTable">
             <thead>
               <tr>
-                <th class="text-center">Document Type ID</th>
+                <th class="text-center">Document Number</th>
                 <th class="text-center">Document Name</th>
                 <th class="text-center">Edit</th>
               </tr>
@@ -22,8 +22,8 @@
             <tbody>
               <?php foreach ($document_type as $document): ?>
                 <tr>
-                  <td><?php echo $document['doc_type_id'] ?></td>
-                  <td><?php echo $document['document_name'] ?></td>
+                  <td class="text-center"><?php echo $document['doc_no'] ?></td>
+                  <td class="text-center"><?php echo $document['document_name'] ?></td>
                   <td class="text-center">
                     <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
                       <button class="btn btn-success" id="documentID" name="documentID" value="<?php echo $document['doc_type_id'] ?>" type="submit">
@@ -74,10 +74,7 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
+
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -94,6 +91,7 @@
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
       $('#manageDocu').html($('#documents').val());
+      $('#manageNo').html($('#document_numbers').val());
     });
   });
 </script>
@@ -108,15 +106,28 @@
       </div>
       <div class="modal-body">
         <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
+
           <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Number*
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input type="text" id="document_numbers" name="document_numbers" class="form-control">
+            </div>
+          </div>
+
+            <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Name*
             </label>
             <div class="col-md-9 col-sm-9 col-xs-12">
               <input type="text" id="newdocuments" name="newdocuments" class="form-control">
             </div>
           </div>
+
+
+          </div>
         </form>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
@@ -147,12 +158,16 @@
             </tr> 
           </thead>
           <tbody>
+            <tr><td class="text-center">Document Number</td>
+              <td><span id="manageNo"></span></td>
+            </tr>
             <tr><td class="text-center">Document Name</td>
               <td><span id="manageDocu"></span></td>
             </tr>
           </tbody>
         </table>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>

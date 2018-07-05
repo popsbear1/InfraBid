@@ -422,9 +422,10 @@
 			return false;			
 	}
 
-		public function insertDocument($docname){
+		public function insertDocument($docname, $document_numbers){
 		$data = array(
-			'document_name' => $docname
+			'document_name' => $docname,
+			'doc_no' => $document_numbers
 		);
 
 		if ($this->db->insert('document_type', $data)) {
@@ -846,6 +847,15 @@
 	public function updateDocumentDetails($document_name, $doc_type_id){
 		$data = array(
 			'document_name' => $document_name
+		);
+
+		$this->db->where('doc_type_id', $doc_type_id);
+		$this->db->update('document_type', $data);
+	}
+
+	public function updateDocumentNumber($document_number, $doc_type_id){
+		$data = array(
+			'doc_no' => $document_number
 		);
 
 		$this->db->where('doc_type_id', $doc_type_id);
