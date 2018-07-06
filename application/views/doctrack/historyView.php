@@ -20,7 +20,7 @@
                 <th class="text-center">Forwarded Date</th>
                 <th class="text-center">Date Received</th>
                 <th class="text-center">Name of Receiver</th>
-                <th class="text-center">Remarks</th>
+                <th class="text-center">Remarks and Documents</th>
               </tr>
             </thead>
             <tbody>
@@ -108,6 +108,18 @@
           <thead>
             <tr >
               <th style='text-align: center'>Remarks</th>
+            </tr> 
+          </thead>
+        </table>
+          <p class="text-center" id="remark"></p>
+      </div>
+
+      <div class="modal-body">
+        <table class='table table-striped table-bordered' style='font-size:13px;'>
+          <thead>
+            <tr>
+              <th style="text-align: center">Name</th>
+              <th style="text-align: center">Location</th>
             </tr> 
           </thead>
         </table>
