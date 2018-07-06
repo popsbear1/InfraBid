@@ -85,96 +85,93 @@
     function () {
       $('#documentsTable').DataTable();
     } 
-  );
-</script>
-<script>
-  $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
-      $('#manageDocu').html($('#documents').val());
-      $('#manageNo').html($('#document_numbers').val());
+    );
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#myModal').on('show.bs.modal' , function (e) {
+        $('#manageDocu').html($('#documents').val());
+        $('#manageNo').html($('#document_numbers').val());
+      });
     });
-  });
-</script>
+  </script>
 
-<div class="modal fade" id="addDocumentsModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <div class="modal fade" id="addDocumentsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Add New Document</h4>
-      </div>
-      <div class="modal-body">
-        <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
-
-          <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Number*
-            </label>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-              <input type="text" id="document_numbers" name="document_numbers" class="form-control">
-            </div>
-          </div>
+          <h4 class="modal-title">Add New Document</h4>
+        </div>
+        <div class="modal-body">
+          <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
 
             <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Name*
-            </label>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-              <input type="text" id="newdocuments" name="newdocuments" class="form-control">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Number*
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" id="document_numbers" name="document_numbers" class="form-control">
+              </div>
             </div>
-          </div>
 
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Name*
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" id="newdocuments" name="newdocuments" class="form-control">
+              </div>
+            </div>
 
-          </div>
-        </form>
+          </form>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
+        </div>
       </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
+  <!-- modal for data confirmation -->
+  <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+        </div>
+        <div class="modal-body">
+          <table class='table table-striped table-bordered' style='font-size:13px;'>
+            <thead>
+              <tr >
+                <th style='text-align: center'>Attributes</th>
+                <th style='text-align: center'>Values</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr><td class="text-center">Document Number</td>
+                <td><span id="manageNo"></span></td>
+              </tr>
+              <tr><td class="text-center">Document Name</td>
+                <td><span id="manageDocu"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
+        </div>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- modal for data confirmation -->
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td class="text-center">Document Number</td>
-              <td><span id="manageNo"></span></td>
-            </tr>
-            <tr><td class="text-center">Document Name</td>
-              <td><span id="manageDocu"></span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of modal -->
+  <!-- end of modal -->
 
 
