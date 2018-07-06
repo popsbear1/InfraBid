@@ -25,6 +25,7 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->where('YEAR(date_added)', $year);
 			$this->db->order_by('plan_id', 'DESC');
 
 			$query = $this->db->get();

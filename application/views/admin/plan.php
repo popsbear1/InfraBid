@@ -12,19 +12,22 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <p>filters:</p>
-                    <input type="date" id="year">
-                    <select name="" id="">
-                      <option value="">1st Q</option>
-                      <option value="">2nd Q</option>
-                      <option value="">3rd Q</option>
-                      <option value="">4th Q</option>
-                    </select>
-                    <select name="" id="">
-                      <option value="">Pending</option>
-                      <option value="">Processing</option>
-                      <option value="">Implementation</option>
-                      <option value="">Finished</option>
-                    </select>
+                    <form action="">
+                      <input type="text" id="year">
+                      <select name="" id="">
+                        <option value="">1st Q</option>
+                        <option value="">2nd Q</option>
+                        <option value="">3rd Q</option>
+                        <option value="">4th Q</option>
+                      </select>
+                      <select name="" id="">
+                        <option value="">Pending</option>
+                        <option value="">Processing</option>
+                        <option value="">Implementation</option>
+                        <option value="">Finished</option>
+                      </select>
+                      <button>GO</button>
+                    </form>
                   </div>
                 </div>
                 <table class="table table-bordered table-striped" id="plan_table">
@@ -114,8 +117,14 @@
     function () {
       $('#plan_table').DataTable();
       $('#year').datepicker({
-        dateFormat: 'yy'
+        autoclose: true,
+        format: 'yyyy',
+        startView: 'years',
+        minViewMode: 'years',
+        orientation: 'bottom auto'
       });
+
+      $('#year').attr('placeholder', 'yyyy');
     } 
   );
 </script>
