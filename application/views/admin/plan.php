@@ -11,22 +11,53 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col-lg-12">
-                    <p>filters:</p>
-                    <form action="">
-                      <input type="text" id="year">
-                      <select name="" id="">
-                        <option value="">1st Q</option>
-                        <option value="">2nd Q</option>
-                        <option value="">3rd Q</option>
-                        <option value="">4th Q</option>
-                      </select>
-                      <select name="" id="">
-                        <option value="">Pending</option>
-                        <option value="">Processing</option>
-                        <option value="">Implementation</option>
-                        <option value="">Finished</option>
-                      </select>
-                      <button>GO</button>
+                    
+                    <form action="<?php echo base_url('admin/annualPlanView') ?>" method="POST">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <button class="btn btn-primary" data-toggle="collapse" data-target="#filters" type="button">Filters</button>
+                          <div class="collapse" id="filters">
+                            <div class="form-group col-lg-3">
+                              <label for="year">Year: </label>
+                              <input type="text" id="year" class="form-control">  
+                            </div>
+                            <div class="form-group col-lg-3">
+                              <label for="quarter">Quarter: </label>
+                              <select name="quarter" id="quarter" class="form-control">
+                                <option hidden disabled selected>Choose Quarter</option>
+                                <option value="1stQ">1st Q</option>
+                                <option value="2ndQ">2nd Q</option>
+                                <option value="3rdQ">3rd Q</option>
+                                <option value="4thQ">4th Q</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-lg-3">
+                              <label for="status">Status: </label>
+                              <select name="status" id="status" class="form-control">
+                                <option hidden disabled selected>Choose Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="implementation">Implementation</option>
+                                <option value="finished">Finished</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-lg-3">
+                              <label for="mode">Mode: </label>
+                              <select name="mode" id="mode" class="form-control">
+                                <option hidden disabled selected>Choose Mode</option>
+                                <?php foreach ($modes as $mode): ?>
+                                  <option value="<?php echo $mode['mode_id'] ?>"><?php echo $mode['mode'] ?></option>
+                                <?php endforeach ?>
+                              </select>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-12 text-center">
+                                <button class="btn btn-primary" type="submit">GO</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </form>
                   </div>
                 </div>

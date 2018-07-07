@@ -33,43 +33,28 @@ class Admin extends CI_Controller {
 		
 	}
 
-	// public function plan5MAboveABCView(){
-	// 	$pagename['pagename'] = "5mabove";
-	// 	$abc = "5mup";
-	// 	$data['plans'] = $this->admin_model->getProjectPlan($abc);
-	// 	$this->load->view('admin/fragments/head');
-	// 	$this->load->view('admin/fragments/nav');
-	// 	$this->load->view('admin/fragments/planViewNavigation', $pagename);
-	// 	$this->load->view('admin/plan', $data);
-	// 	$this->load->view('admin/fragments/footer');
-	// }
-
-	// public function planABCBetween1Mn5mView(){
-	// 	$pagename['pagename'] = "between1m&5m";
-	// 	$abc = "1m5m";
-	// 	$data['plans'] = $this->admin_model->getProjectPlan($abc);
-	// 	$this->load->view('admin/fragments/head');
-	// 	$this->load->view('admin/fragments/nav');
-	// 	$this->load->view('admin/fragments/planViewNavigation', $pagename);
-	// 	$this->load->view('admin/plan', $data);
-	// 	$this->load->view('admin/fragments/footer');
-	// }
-
-	// public function plan1MBelowView(){
-	// 	$pagename['pagename'] = "below1m";
-	// 	$abc = "1mbelow";
-	// 	$data['plans'] = $this->admin_model->getProjectPlan($abc);
-	// 	$this->load->view('admin/fragments/head');
-	// 	$this->load->view('admin/fragments/nav');
-	// 	$this->load->view('admin/fragments/planViewNavigation', $pagename);
-	// 	$this->load->view('admin/plan', $data);
-	// 	$this->load->view('admin/fragments/footer');		
-	// }
-
-
 	public function annualPlanView(){
-		$currentYear = date('Y');
-		$data['plans'] = $this->admin_model->getProjectPlan($currentYear);
+		$year = null;
+		$quarter = null;
+		$status = null;
+		$mode = null;
+		if (isset($_POST['year']) && !empty($_POST['year'])) {
+			$year = $_POST['year'];
+		}else{
+			$year = date('Y');
+		}
+		if (isset($_POST['quarter'])) {
+			$quarter = $_POST['quarter'];
+		}
+		if (isset($_POST['status'])) {
+			$status = $_POST['status'];
+		}
+		if (isset($_POST['mode'])) {
+			$mode = $_POST['mode'];
+		}
+		
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/plan', $data);

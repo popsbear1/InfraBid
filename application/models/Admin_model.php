@@ -16,7 +16,7 @@
 			return $query->result_array();
 		}
 
-		public function getProjectPlan($year){
+		public function getProjectPlan($year, $quarter, $status, $mode){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -26,7 +26,34 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('YEAR(date_added)', $year);
+			if ($quarter != null) {
+				if ($quarter == '1stQ') {
+					$this->db->where('MONTH(date_added)', '01');
+					$this->db->or_where('MONTH(date_added)', '02');
+					$this->db->or_where('MONTH(date_added)', '03');
+				}elseif ($quarter == '2ndQ') {
+					$this->db->where('MONTH(date_added)', '04');
+					$this->db->or_where('MONTH(date_added)', '05');
+					$this->db->or_where('MONTH(date_added)', '06');
+				}elseif ($quarter == '3rdQ') {
+					$this->db->where('MONTH(date_added)', '07');
+					$this->db->or_where('MONTH(date_added)', '08');
+					$this->db->or_where('MONTH(date_added)', '09');
+				}elseif ($quarter == '4thQ') {
+					$this->db->where('MONTH(date_added)', '10');
+					$this->db->or_where('MONTH(date_added)', '11');
+					$this->db->or_where('MONTH(date_added)', '12');
+				}
+			}
+
+			if ($status != null) {
+				$this->db->where('status', $status);
+			}
 			$this->db->order_by('plan_id', 'DESC');
+
+			if ($mode  != null) {
+				$this->db->where('project_plan.mode_id', $mode);
+			}
 
 			$query = $this->db->get();
 
