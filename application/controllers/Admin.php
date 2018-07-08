@@ -38,6 +38,8 @@ class Admin extends CI_Controller {
 		$quarter = null;
 		$status = null;
 		$mode = null;
+		$municipality = null;
+
 		if (isset($_POST['year']) && !empty($_POST['year'])) {
 			$year = $_POST['year'];
 		}else{
@@ -52,9 +54,13 @@ class Admin extends CI_Controller {
 		if (isset($_POST['mode'])) {
 			$mode = $_POST['mode'];
 		}
-		
+		if (isset($_POST['municipality'])) {
+			$mode = $_POST['municipality'];
+		}
+
 		$data['modes'] = $this->admin_model->getProcurementMode();
-		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode);
+		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/plan', $data);

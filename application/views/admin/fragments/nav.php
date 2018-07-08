@@ -336,6 +336,12 @@
               <i class="fa fa-file"></i> <span>Doc Track</span>
             </a>
           </li>
+          <li class="header">Document</li>
+          <li>
+            <a href="<?php echo base_url('doctrack/documentTrackHomeView') ?>">
+              <i class="fa fa-file"></i> <span>Document Track</span>
+            </a>
+          </li>
           <li class="header">Others</li>
           <li class="treeview">
             <a href="#">

@@ -30,13 +30,50 @@ class Doctrack extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-		public function historyView(){
-			$data['logs'] = $this->doctrack_model->getHistory();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('doctrack/fragments/docTrackNavigation');
-			$this->load->view('doctrack/historyView', $data);
-			$this->load->view('admin/fragments/footer');
-		}
-
+	public function historyView(){
+		$data['logs'] = $this->doctrack_model->getHistory();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/fragments/docTrackNavigation');
+		$this->load->view('doctrack/historyView', $data);
+		$this->load->view('admin/fragments/footer');
 	}
+
+	public function documentTrackHomeView(){
+		$pageName['pageName'] = "home";
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/fragments/documentTrackNavigation', $pageName);
+		$this->load->view('doctrack/documentTrackHome');
+		$this->load->view('admin/fragments/footer');
+	}
+
+
+	public function documentsOnHandView(){
+		$pageName['pageName'] = "onHand";
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/fragments/documentTrackNavigation', $pageName);
+		$this->load->view('doctrack/projectList');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function incomingDocumentsView(){
+		$pageName['pageName'] = "incoming";
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/fragments/documentTrackNavigation', $pageName);
+		$this->load->view('doctrack/projectList');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function onRouteDocumentsView(){
+		$pageName['pageName'] = "onRoute";
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/fragments/documentTrackNavigation', $pageName);
+		$this->load->view('doctrack/projectList');
+		$this->load->view('admin/fragments/footer');
+	}
+
+}
