@@ -14,7 +14,7 @@ class Doctrack extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 	public function docTrackView(){
-		$data['plans'] = $this->admin_model->getProjectPlan(1212);
+		$data['plans'] = $this->admin_model->getProjectPlan(null,null,null,null,null);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/docTrack', $data);
@@ -23,10 +23,11 @@ class Doctrack extends CI_Controller {
 
 		public function documentDetailsView(){
 		$pageName['pageName'] = "edit";
+		$data['document_types'] = $this->doctrack_model->getDocumentTypes();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/fragments/docTrackNavigation', $pageName);
-		$this->load->view('doctrack/documentDetails');
+		$this->load->view('doctrack/documentDetails', $data);
 		$this->load->view('admin/fragments/footer');
 	}
 
@@ -40,11 +41,38 @@ class Doctrack extends CI_Controller {
 	}
 
 	public function documentTrackHomeView(){
+				$year = null;
+		$quarter = null;
+		$status = null;
+		$mode = null;
+		$municipality = null;
+
+		if (isset($_POST['year']) && !empty($_POST['year'])) {
+			$year = $_POST['year'];
+		}else{
+			$year = date('Y');
+		}
+		if (isset($_POST['quarter'])) {
+			$quarter = $_POST['quarter'];
+		}
+		if (isset($_POST['status'])) {
+			$status = $_POST['status'];
+		}
+		if (isset($_POST['mode'])) {
+			$mode = $_POST['mode'];
+		}
+		if (isset($_POST['municipality'])) {
+			$municipality = $_POST['municipality'];
+		}
+
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$pageName['pageName'] = "home";
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/fragments/documentTrackNavigation', $pageName);
-		$this->load->view('doctrack/documentTrackHome');
+		$this->load->view('doctrack/documentTrackHome', $data);
 		$this->load->view('admin/fragments/footer');
 	}
 

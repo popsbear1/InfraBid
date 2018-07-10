@@ -21,14 +21,14 @@
                 <th class="text-center">Approved Budget Cost</th>
                 <th class="text-center">Source of Fund</th>
                 <th class="text-center">Account Classification</th>
-                <th class="text-center">Edit</th>
+                <th class="text-center">Action</th>
               </tr>
 
             </thead>
             <tbody>
               <?php foreach ($plans as $plan): ?>
                 <tr class="text-center">
-                 <td><?php echo $plan['project_no'] ?></td>
+                <!-- <td><?php echo $plan['project_no'] ?></td>
                  <td><?php echo $plan['project_title'] ?></td>
                  <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
                  <td><?php echo $plan['type'] ?></td>
@@ -36,11 +36,18 @@
                  <td><?php echo $plan['abc'] ?></td>
                  <td><?php echo $plan['source'] ?></td>
                  <td><?php echo $plan['classification'] ?></td>
-
+ -->
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
                  <td class="text-center">
                   <form action=" <?php echo base_url("doctrack/documentDetailsView") ?>">
-                    <button class="btn btn-success" type=""
-                    submit"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-success" type="submit"><i class="fa fa-edit">Edit</i></button>
                   </form>
                 </td>
               </tr>

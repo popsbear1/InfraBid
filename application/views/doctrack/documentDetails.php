@@ -31,14 +31,13 @@
                   <br>Document 7
                   <br>Document 8
                 </td>  
-                <td class="text-center">
-                  <input type="checkbox" name="myTextEditBox" value="checked"/> Document 1
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 2
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 3
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 4
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 5
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 6
-                  <br><input type="checkbox" name="myTextEditBox" value="checked"/> Document 7
+                <td class="text-left">
+                  <?php foreach ($document_types as $type): ?>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" name="document_type" value="<?php echo $type['doc_type_id'] ?>">
+                      <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                    </div>
+                  <?php endforeach ?>
                 </td>
                 <td>
                   <div class="form-group">

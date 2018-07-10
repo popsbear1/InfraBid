@@ -20,7 +20,7 @@
                   <a href="<?php echo base_url('doctrack/documentsOnHandView') ?>">Documents On Hand</a>
                 </li>
                 <li <?php if($pageName == "incoming"){ echo "class='active'"; } ?>>
-                  <a href="<?php echo base_url('doctrack/incomingDocumentsView') ?>">Incomming Documents</a>
+                  <a href="<?php echo base_url('doctrack/incomingDocumentsView') ?>">Incoming Documents</a>
                 </li>
                 <li <?php if($pageName == "onRoute"){ echo "class='active'"; } ?>>
                   <a href="<?php echo base_url('doctrack/onRouteDocumentsView') ?>">Documents On Route</a>

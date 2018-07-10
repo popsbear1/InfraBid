@@ -7,21 +7,18 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h2 class="box-title">Document Tracking</h2>
+          <h2 class="box-title">Documents</h2>
         </div>
         <div class="box-body">
           <table class="table table-striped table-bordered" id="documentTable">
             <thead style='font-size:12px;'>
               <tr>
-                <th class="text-center">Project No.</th>
-                <th class="text-center">Project Title</th>
-                <th class="text-center">Location</th>
-                <th class="text-center">Type of Project</th>
-                <th class="text-center">Mode of Procurement</th>
-                <th class="text-center">Approved Budget Cost</th>
-                <th class="text-center">Source of Fund</th>
-                <th class="text-center">Account Classification</th>
-                <th class="text-center">Edit</th>
+                <th class="text-center">Project Number</th>
+                <th class="text-center">Project Name</th>
+                <th class="text-center">Document Name</th>
+                <th class="text-center">Receiver</th>
+                <th class="text-center">Date Received</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -31,13 +28,10 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
+                <td class="text-center">
                   <form action="">
                     <button class="btn btn-success">
-                      <i class="fa fa-view"></i>
+                      <i class="fa fa-edit">Edit</i>
                     </button>
                   </form>
                 </td>
