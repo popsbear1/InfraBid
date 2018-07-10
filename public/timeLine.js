@@ -1,4 +1,23 @@
 
+  var advertisementMinBase = 0;
+  var advertisementMaxBase = 7;
+  var prebidMinBase = 8;
+  var prebidMaxBase = 8;
+  var bidSubmissionMinBase = 20;
+  var bidSubmissionMaxBase = 20;
+  var bidEvaluationMinBase = 21;
+  var bidEvaluationMaxBase = 21;
+  var postQualificationMinBase = 22;
+  var postQualificationMaxBase = 22;
+  var awardNoticeIssuanceMinBase = 23;
+  var awardNoticeIssuanceMaxBase = 23;
+  var contractSigningMinBase = 24;
+  var contractSigningMaxBase = 24;
+  var authorityApprovalMinBase = 25;
+  var authorityApprovalMaxBase = 25;
+  var proceedNoticeMinBase = 26;
+  var proceedNoticeMaxBase = 26;
+
   $('#noPreBid').click(function(event) {
     $('#preBidStart').prop('value', '');
     $('#preBidEnd').prop('value', '');
@@ -57,72 +76,144 @@
 
 
   $('#preBidUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#preBidNumber').val();
+    prebidMaxBase = prebidMinBase + (parseFloat(daysToAdd)-1);
+    bidSubmissionMinBase = prebidMaxBase + 12;
+    bidSubmissionMaxBase = prebidMaxBase + 12;
+    bidEvaluationMinBase = bidSubmissionMaxBase + 1;
+    bidEvaluationMaxBase = bidSubmissionMaxBase + 1;
+    postQualificationMinBase = bidSubmissionMaxBase + 1;
+    postQualificationMaxBase = bidSubmissionMaxBase + 1;
+    awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
+    awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
+    contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
+    contractSigningMaxBase = awardNoticeIssuanceMaxBase + 1;
+    authorityApprovalMinBase = contractSigningMaxBase + 1;
+    authorityApprovalMaxBase = contractSigningMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
-    }else{
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+    }else{  
       alert("place an input adi sika met");
     }
   });
 
   $('#bidSubmissionUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#bidSubmissionNumber').val();
+    bidSubmissionMaxBase = bidSubmissionMinBase + (parseFloat(daysToAdd)-1);
+    bidEvaluationMinBase = bidSubmissionMaxBase + 1;
+    bidEvaluationMaxBase = bidSubmissionMaxBase + 1;
+    postQualificationMinBase = bidSubmissionMaxBase + 1;
+    postQualificationMaxBase = bidSubmissionMaxBase + 1;
+    awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
+    awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
+    contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
+    contractSigningMaxBase = awardNoticeIssuanceMaxBase + 1;
+    authorityApprovalMinBase = contractSigningMaxBase + 1;
+    authorityApprovalMaxBase = contractSigningMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
   });
 
   $('#bidEvaluationUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#bidEvaluationNumber').val();
+    bidEvaluationMaxBase = bidEvaluationMinBase + (parseFloat(daysToAdd)-1);
+    postQualificationMinBase = bidSubmissionMaxBase + 1;
+    postQualificationMaxBase = bidSubmissionMaxBase + 1;
+    awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
+    awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
+    contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
+    contractSigningMaxBase = awardNoticeIssuanceMaxBase + 1;
+    authorityApprovalMinBase = contractSigningMaxBase + 1;
+    authorityApprovalMaxBase = contractSigningMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
   });
 
   $('#postQualificationUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#postQualificationNumber').val();
+    postQualificationMaxBase = postQualificationMinBase + (parseFloat(daysToAdd)-1);
+    awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
+    awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
+    contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
+    contractSigningMaxBase = awardNoticeIssuanceMaxBase + 1;
+    authorityApprovalMinBase = contractSigningMaxBase + 1;
+    authorityApprovalMaxBase = contractSigningMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
   });
 
   $('#awardNoticeIssuanceUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#awardNoticeIssuanceNumber').val();
+    awardNoticeIssuanceMaxBase = awardNoticeIssuanceMinBase + (parseFloat(daysToAdd)-1);
+    contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
+    contractSigningMaxBase = awardNoticeIssuanceMaxBase + 1;
+    authorityApprovalMinBase = contractSigningMaxBase + 1;
+    authorityApprovalMaxBase = contractSigningMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
   });
 
   $('#contractSigningUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#contractSigningNumber').val();
+    contractSigningMaxBase = contractSigningMinBase + (parseFloat(daysToAdd)-1);
+    authorityApprovalMinBase = contractSigningMaxBase + 1;
+    authorityApprovalMaxBase = contractSigningMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
   });
 
   $('#authorityApprovalUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#authorityApprovalNumber').val();
+    authorityApprovalMaxBase = authorityApprovalMinBase + (parseFloat(daysToAdd)-1);
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
   });
 
   $('#proceedNoticeUpdateBtn').click(function(event){
+    var startDate = $('#pre_proc_date').val();
     var daysToAdd = $('#proceedNoticeNumber').val();
+    proceedNoticeMaxBase = proceedNoticeMinBase + (parseFloat(daysToAdd)-1);
     if (daysToAdd) {
-
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       alert("place an input adi sika met");
     }
@@ -134,8 +225,7 @@
   });
 
   function setStartDate(date, interval){
-    var date = new Date(this.date);
-    var startDate = new Date();
+    var startDate = new Date(date);
     startDate.setDate(startDate.getDate()+interval);
     console.log(startDate);
     var startDateDay = ("0" + startDate.getDate()).slice(-2);
@@ -145,8 +235,7 @@
   }
 
   function setEndDate(date, interval){
-    var date = new Date(this.date);
-    var endDate = new Date();
+    var endDate = new Date(date);
     endDate.setDate(endDate.getDate()+interval);
     console.log(endDate);
     var endDateDay = ("0" + endDate.getDate()).slice(-2);
@@ -175,6 +264,18 @@
     setContractSigningDate(startDate, 24, 24);
     setAuthorityApprovalDate(startDate, 25, 25);
     setProceedNoticeDate(startDate, 26, 26);
+  }
+
+  function setDates(startDate, advertisementMin, advertisementMax, prebidMin, prebidMax, bidSubmissionMin, bidSubmissionMax, bidEvaluationMin, bidEvaluationMax, postQualificationMin, postQualificationMax, awardNoticeIssuanceMin, awardNoticeIssuanceMax, contractSigningMin, contractSigningMax, authorityApprovalMin, authorityApprovalMax, proceedNoticeMin, proceedNoticeMax){
+    setAdvertisementDate(startDate, advertisementMin, advertisementMax);
+    setPreBidDate(startDate, prebidMin, prebidMax);
+    setBidSubmissionDate(startDate, bidSubmissionMin, bidSubmissionMax);
+    setBidEvaluationDate(startDate, bidEvaluationMin, bidEvaluationMax);
+    setPostQualificationDate(startDate, postQualificationMin, postQualificationMax);
+    setAwardNoticeIssuanceDate(startDate, awardNoticeIssuanceMin, awardNoticeIssuanceMax);
+    setContractSigningDate(startDate, contractSigningMin, contractSigningMax);
+    setAuthorityApprovalDate(startDate, authorityApprovalMin, authorityApprovalMax);
+    setProceedNoticeDate(startDate, proceedNoticeMin, proceedNoticeMax);
   }
 
   function setDatesToEarliestPossibleTimeWithoutPBC(startDate){

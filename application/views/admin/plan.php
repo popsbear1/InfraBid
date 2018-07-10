@@ -14,6 +14,7 @@
                     <form action="<?php echo base_url('admin/annualPlanView') ?>" method="POST">
                       <div class="row">
                         <div class="col-lg-12">
+                          <p>Filters: </p>
                           <div class="form-group col-lg-2">
                             <label for="year">Year: </label>
                             <input type="text" id="year" class="form-control">  
@@ -84,6 +85,7 @@
                       <th class="text-center">Approved Budget Cost</th>
                       <th class="text-center">Source of Fund</th>
                       <th class="text-center">Account Classification</th>
+                      <th class="text-center">Date Added</th>
                       <th class="text-center">Edit</th>
                     </tr>
                   </thead>
@@ -98,6 +100,7 @@
                         <td><?php echo $plan['abc'] ?></td>
                         <td><?php echo $plan['source'] ?></td>
                         <td><?php echo $plan['classification'] ?></td>
+                        <td><?php echo $plan['date_added'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
                             <button class="btn btn-success" type="submit" name="plan_id" value="<?php echo $plan['plan_id'] ?>">

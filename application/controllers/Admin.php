@@ -55,7 +55,7 @@ class Admin extends CI_Controller {
 			$mode = $_POST['mode'];
 		}
 		if (isset($_POST['municipality'])) {
-			$mode = $_POST['municipality'];
+			$municipality = $_POST['municipality'];
 		}
 
 		$data['modes'] = $this->admin_model->getProcurementMode();
