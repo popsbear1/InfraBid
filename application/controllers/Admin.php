@@ -172,7 +172,7 @@ class Admin extends CI_Controller {
 	public function procurementActivityView(){
 		$plan_id = $this->session->userdata('plan_id');
 		$pageName['pageName'] = "activity";
-		$data['project_title'] = $this->admin_model->getProjectTitle($plan_id)->project_title;
+		$data['project_details'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
 		$data['contractors'] = $this->admin_model->getContractors();
 		$this->load->view('admin/fragments/head');

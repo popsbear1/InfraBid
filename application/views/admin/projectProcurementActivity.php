@@ -36,7 +36,7 @@ function convertDate($date){
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h2 class="box-title">Manage Project Procurement Activity<small></small></h2>
+          <h2 class="box-title">Manage Project Procurement Activity</h2>
         </div>
         <div class="box-body">
           <?php if (isset($_SESSION['success'])): ?>
@@ -49,364 +49,343 @@ function convertDate($date){
               <p class="text-center"><?php echo $_SESSION['error'] ?></p>
             </div>
           <?php endif ?>
-          <p>Steps for Procurement Activity: <b>(ABC more than 5M )</b></p>
-          <div class="well text-center">
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-1" aria-expanded="false">Step 1</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-2" aria-expanded="false">Step 2</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-3" aria-expanded="false">Step 3</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-4" aria-expanded="false">Step 4</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-5" aria-expanded="false">Step 5</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-6" aria-expanded="false">Step 6</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-7" aria-expanded="false">Step 7</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-8" aria-expanded="false">Step 8</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-9" aria-expanded="false">Step 9</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-10" aria-expanded="false">Step 10</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-11" aria-expanded="false">Step 11</button>
-            <button class="btn btn-default activityBtn" type="button" data-toggle="collapse" data-target="#step-12" aria-expanded="false">Step 12</button>
+          
+          
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Project Plan Details</h3>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-horizontal">
+                  <div class="form-group">
+                    <label for="pageNumber" class="col-lg-4 control-label">Project Number</label>
+                    <div class="col-lg-8">
+                      <p class="form-control"><?php echo $project_details['project_no'] ?></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-horizontal">
+                  <div class="form-group">
+                    <label for="pageTitle" class="col-lg-4 control-label">Project Title</label>
+                    <div class="col-lg-8">
+                      <p class="form-control"><?php echo $project_details['project_title'] ?></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-horizontal">
+                  <div class="form-group">
+                    <label for="abc" class="col-lg-4 control-label">Project ABC</label>
+                    <div class="col-lg-8">
+                      <p class="form-control" id="abc"><?php echo $project_details['abc'] ?></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="well text-center">
-            <div class="collapse" id="step-1">
-              <div class="well">
-                <form id="pre_proc_form" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editProcActDate') ?>"> 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="pre_proc" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Pre-Procurement Conference<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <p class="form-control col-md-7 col-xs-12"><?php echo $pre_proc ?></p>
-                    </div>
-                  </div>             
-                </form>
-              </div>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Steps for Procurement Activity: <b>(ABC more than 5M )</b></h3>
             </div>
-            <div class="collapse" id="step-2">
-              <div class="well">
-                <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="advertisement" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ads/Post of IAEB<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="advertisement" value="<?php echo $advertisement ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>          
-                </form>
-              </div>
+            <div class="box-body">
               <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
+                <div class="col-lg-3">
+                  <ul>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#pre-proc" aria-expanded="false">Pre-Proc Conference</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#ads-post" aria-expanded="false">Ads/Post of IAEB</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#pre-bid" aria-expanded="false">Pre-bid Conf</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#bid-open" aria-expanded="false">Sub/Open of Bids</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#eligibility" aria-expanded="false">Eligibility Check</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#bid-eval" aria-expanded="false">Bid Evaluation</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#post-qual" aria-expanded="false">Post Qual</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#notice-award" aria-expanded="false">Notice of Award</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#sign-contract" aria-expanded="false">Contract Signing</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#proceed-notice" aria-expanded="false">Notice to Proceed</button>
+
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#completion-delivery" aria-expanded="false">Delivery/Completion</button>
+                  
+                    <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#turnover-acceptance" aria-expanded="false">Acceptance/Turnover</button>
+
+                  </ul>
                 </div>
-              </div>
-            </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                  <div class=text-center">
+                    <div class="collapse" id="pre-proc">
+                      <div class="well">
+                        <form id="pre_proc_form" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editProcActDate') ?>"> 
+                          <input type="text" name="activity_name" value="pre_proc" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Pre-Procurement Conference<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <p class="form-control col-md-7 col-xs-12"><?php echo $pre_proc ?></p>
+                            </div>
+                          </div>             
+                        </form>
+                      </div>
+                    </div>
+                    <div class="collapse" id="ads-post">
+                      <div class="well">
+                        <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+                          <input type="text" name="activity_name" value="advertisement" hidden>
+                        
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Ads/Post of IAEB<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="advertisement" value="<?php echo $advertisement ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>          
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
 
-            <div class="collapse" id="step-3">
-              <div class="well">
-                <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+                    <div class="collapse" id="pre-bid">
+                      <div class="well">
+                        <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+                          <input type="text" name="activity_name" value="pre_bid" hidden>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="pre_bid" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Pre-bid Conf<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="pre_bid,pre_bid_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="bid-open">
+                      <div class="well">
+                        <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="open_bid" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub/Open of Bids<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="openbid" value="<?php echo $openbid ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="openbid,open_bid_form">Submit</button> 
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="eligibility">
+                      <div class="well">
+                        <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="eligibility_check" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Eligibility Check *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="eligibility" value="<?php echo $eligibility ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Contractor *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select name="contactor" id="contractor" class="form-control">
+                                <option hidden selected disabled>Choose Contractor</option>
+                                <?php foreach ($contractors as $contractor): ?>
+                                  <option value="<?php echo $contactor['contractor_id'] ?>"><?php echo $contactor['businessname'] ?></option>
+                                <?php endforeach ?>
+                              </select>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary procactsubmitbutton" value="eligibility,eligibility_check_form">Submit</button> 
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rebid_svp_model">re-bid/another SVP</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="bid-eval">
+                      <div class="well">
+                        <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="bid_evaluation" hidden>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Bid Evaluation<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="bidevaluation" value="<?php echo $bidevaluation ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>      
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button> 
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="post-qual">
+                      <div class="well">
+                        <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="post_qual" hidden>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Post Qual<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="postqual" value="<?php echo $postqual ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="postqual,post_qual_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="notice-award">
+                      <div class="well">
+                        <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+                          <input type="text" name="activity_name" value="awar_notice" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Notice of Award<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="awarddate" value="<?php echo $awarddate ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="awarddate,award_notice_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="sign-contract">
+                      <div class="well">
+                        <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="contract_signing" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Contract Signing<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="contractsigning" value="<?php echo $contractsigning ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="contractsigning,contract_signing_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="proceed-notice">
+                      <div class="well">
+                        <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+                          <input type="text" name="activity_name" value="proceed_notice" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Notice to Proceed<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="proceednotice" value="<?php echo $proceednotice ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="proceednotice,proceed_notice_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="completion-delivery">
+                      <div class="well">
+                        <form id="competion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="completion" hidden>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery/Completion<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="completion" value="<?php echo $completion ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="completion,competion_form">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="collapse" id="turnover-acceptance">
+                      <div class="well">
+                        <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                          <input type="text" name="activity_name" value="acceptance" hidden>
+                        
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Acceptance/Turnover<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="date" step="any"  id="acceptance" value="<?php echo $acceptance ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+
+                        </form>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                          <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="acceptance,acceptance_form">Finish</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Pre-bid Conf<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="pre_bid,pre_bid_form">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-4">
-              <div class="well">
-                <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="open_bid" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub/Open of Bids<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="openbid" value="<?php echo $openbid ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="openbid,open_bid_form">Submit</button> 
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-5">
-              <div class="well">
-                <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="eligibility_check" hidden>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Eligibility Check *
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="eligibility" value="<?php echo $eligibility ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Contractor *
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="contactor" id="contractor" class="form-control">
-                        <option hidden selected disabled>Choose Contractor</option>
-                        <?php foreach ($contractors as $contractor): ?>
-                          <option value="<?php echo $contactor['contractor_id'] ?>"><?php echo $contactor['businessname'] ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary procactsubmitbutton" value="eligibility,eligibility_check_form">Submit</button> 
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rebid_svp_model">re-bid/another SVP</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-6">
-              <div class="well">
-                <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="bid_evaluation" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Bid Evaluation<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="bidevaluation" value="<?php echo $bidevaluation ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>      
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button> 
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-7">
-              <div class="well">
-                <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="post_qual" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Post Qual<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="postqual" value="<?php echo $postqual ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="postqual,post_qual_form">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-8">
-              <div class="well">
-                <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="awar_notice" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Notice of Award<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="awarddate" value="<?php echo $awarddate ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-
-
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="awarddate,award_notice_form">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-9">
-              <div class="well">
-                <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="contract_signing" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Contract Signing<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="contractsigning" value="<?php echo $contractsigning ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="contractsigning,contract_signing_form">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-10">
-              <div class="well">
-                <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="proceed_notice" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Notice to Proceed<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="proceednotice" value="<?php echo $proceednotice ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="proceednotice,proceed_notice_form">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-11">
-              <div class="well">
-                <form id="competion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="completion" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery/Completion<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="completion" value="<?php echo $completion ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-
-
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="completion,competion_form">Submit</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="collapse" id="step-12">
-              <div class="well">
-                <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title & ABC <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" step="any" value="" name="project_title" disabled class="form-control col-md-7 col-xs-12 project_title">
-                      <input type="text" name="activity_name" value="acceptance" hidden>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Acceptance/Turnover<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="date" step="any"  id="acceptance" value="<?php echo $acceptance ?>" name="activity_date"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-
-
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                  <button type="button" class="btn btn-primary pull-right procactsubmitbutton" value="acceptance,acceptance_form">Finish</button>
                 </div>
               </div>
             </div>
@@ -437,8 +416,11 @@ function convertDate($date){
 <script>
 
   $('.activityBtn').click(function(e){
+    $('.activityBtn').removeClass('active');
+    $(this).addClass('active');
     $('.collapse.in').collapse('hide', function(){
-      $(this).collapse('show');
+      $(e).collapse('show');
+
     });
 
   })
@@ -458,8 +440,7 @@ function convertDate($date){
   };
 
   $(document).ready(function(){
-  var project_title = '<?php echo $project_title ?>';
-  $('.project_title').val(project_title);
+  var project_title = '<?php echo $project_details['project_title'] ?>';
   $('#project_title_modal').text(project_title);
   });
 
@@ -533,20 +514,21 @@ function convertDate($date){
 
       <!--Modal for confirmation -->
 
-<div id="rebid_svp_model" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div id="rebid_svp_model" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Schedule for re-bid/another SVP</h4>
       </div>
       <div class="modal-body">
-        
+        <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="formSubmitBtn" type="submit" name="submit" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
