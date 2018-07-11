@@ -15,20 +15,69 @@
               <tr>
                 <th style='text-align: center'>ID</th>
                 <th style='text-align: center'>Project Type</th>
-                <th style='text-align: center'>Edit</th>
+                <th style='text-align: center'>Status</th>
+                <th style='text-align: center'>Actions</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($projectTypes as $projectType): ?>
                 <tr>
-                  <td><?php echo $projectType['projtype_id'] ?></td>
-                  <td><?php echo $projectType['type'] ?></td>
-                  <td>
+                  <td class="text-center"><?php echo $projectType['projtype_id'] ?></td>
+                  <td class="text-center"><?php echo $projectType['type'] ?></td>
+                  <td class="text-center"><?php echo $projectType['status'] ?></td>
+                  <td class="text-center row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                     <form action="<?php echo base_url('admin/setCurrentProjectTypeID') ?>" method="post">
                       <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['projtype_id'] ?>"> 
                         <i class="fa fa-edit"></i>
                       </button>
                     </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown tasks-menu">
+                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
+                              <i class="fa fa-eye"></i> Status
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- Task item -->
+                                    <form action="<?php echo base_url('admin/deleteProjectType') ?>" method="POST">
+                                      <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id']?>" hidden>
+                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
+                                    </form>
+                                  </li>
+
+                                  <?php if ($projectType['status']=='active'): ?>
+                                    <li><!-- Task item -->
+                                      <form action="<?php echo base_url('admin/deactivateProjectType') ?>" method="POST">
+                                        <input type="text" name="projtype_id" value="
+                                        <?php echo $projectType['projtype_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      </form>
+                                    </li>                                  
+                                  <?php endif ?>
+
+                                  <?php if ($projectType['projtype_id']=='inactive'): ?>
+                                    <li>
+                                      <form action="<?php echo base_url('admin/activateProjectType') ?>" method="POST">
+                                        <input type="text" name="projtype_id" value="
+                                        <?php echo $projectType['projtype_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      </form>
+                                    </li>
+
+                                  <?php endif ?>                               
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div> 
                   </td>
                 </tr>
               <?php endforeach ?>

@@ -15,7 +15,8 @@
               <tr>
                 <th style='text-align: center'>ID</th>
                 <th style='text-align: center'>Project Type</th>
-                <th style='text-align: center'>Edit</th>
+                <th style='text-align: center'>Status</th>
+                <th style='text-align: center'>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -23,13 +24,62 @@
                 <tr>
                   <td><?php echo $classification['account_id']?></td>
                   <td><?php echo $classification['classification']?></td>
-                  <td>
+                  <td><?php echo $classification['status'] ?></td>
+                  <td class="text-center row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                     <form action="<?php echo base_url('admin/setClassification') ?>" method="post">
                       <input type="text" name="classification" value="<?php echo $classification['account_id'] ?>" hidden>
                       <button class="btn btn-success" type="submit">
                         <i class="fa fa-edit"></i>
                       </button>
                     </form>
+                  </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown tasks-menu">
+                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
+                              <i class="fa fa-eye"></i> Status
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- Task item -->
+                                    <form action="<?php echo base_url('admin/deleteClassification') ?>" method="POST">
+                                      <input type="text" name="classification" value="<?php echo $classification['account_id']?>" hidden>
+                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
+                                    </form>
+                                  </li>
+
+                                  <?php if ($classification['status']=='active'): ?>
+                                    <li><!-- Task item -->
+                                      <form action="<?php echo base_url('admin/deactivateClassification') ?>" method="POST">
+                                        <input type="text" name="classification" value="
+                                        <?php echo $classification['account_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      </form>
+                                    </li>                                  
+                                  <?php endif ?>
+
+                                  <?php if ($classifications['status']=='inactive'): ?>
+                                    <li>
+                                      <form action="<?php echo base_url('admin/activateClassifications') ?>" method="POST">
+                                        <input type="text" name="account_id" value="
+                                        <?php echo $classifications['account_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      </form>
+                                    </li>
+
+                                  <?php endif ?>                               
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div> 
                   </td>
                 </tr>
               <?php endforeach ?>

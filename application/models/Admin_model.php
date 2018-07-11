@@ -958,7 +958,156 @@
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
+/* update for delete/activate**/
+	
+	public function deleteDocumentType($doc_type_id){
+
+		$this->db->where('doc_type_id', $doc_type_id);
+		$this->db->delete('document_type');
+	}
+
+	public function updateDocumentTypeStatus($doc_type_id, $action){
+
+		
+			if ($action=='deactivate') { 
+				 $data = array(
+				'status' => 'inactive'
+				);
+			}
+			else{
+				$data = array(
+				'status' => 'active'
+				);
+			}
+		
+
+		$this->db->where('doc_type_id', $doc_type_id);
+		$this->db->update('document_type', $data);
+	}
+
+		public function deleteContractor($contractor_id){
+
+		$this->db->where('contractor_id', $contractor_id);
+		$this->db->delete('contractors');
+	}
+
+	public function updateContractor($contractor_id, $action){
+
+		
+			if ($action=='deactivate') { 
+				 $data = array(
+				'status' => 'inactive'
+				);
+			}
+			else{
+				$data = array(
+				'status' => 'active'
+				);
+			}
+		
+
+		$this->db->where('contractor_id', $contractor_id);
+		$this->db->update('contractors', $data);
+	}
+
+		public function updateFund($fund_id, $action){
+
+		
+			if ($action=='deactivate') { 
+				 $data = array(
+				'status' => 'inactive'
+				);
+			}
+			else{
+				$data = array(
+				'status' => 'active'
+				);
+			}
+		
+
+		$this->db->where('fund_id', $fund_id);
+		$this->db->update('funds', $data);
+	}
+
+		public function deleteFund($fund_id){
+
+		$this->db->where('fund_id', $fund_id);
+		$this->db->delete('funds');
+	}
+		public function updateProjectTypes($projtype_id, $action){
+
+		
+			if ($action=='deactivate') { 
+				 $data = array(
+				'status' => 'inactive'
+				);
+			}
+			else{
+				$data = array(
+				'status' => 'active'
+				);
+			}
+		
+
+		$this->db->where('projtype_id', $projtype_id);
+		$this->db->update('projtype', $data);
+	}
+
+		public function deleteProjectType($projtype_id){
+
+		$this->db->where('projtype_id', $projtype_id);
+		$this->db->delete('projtype');
+	}
 
 
+		public function updateClassifications($account_id, $action){
+
+		
+			if ($action=='deactivate') { 
+				 $data = array(
+				'status' => 'inactive'
+				);
+			}
+			else{
+				$data = array(
+				'status' => 'active'
+				);
+			}
+		
+
+		$this->db->where('account_id', $account_id);
+		$this->db->update('account_classification', $data);
+	}
+
+		public function deleteClassification($account_id){
+
+		$this->db->where('account_id', $account_id);
+		$this->db->delete('account_classification');
+	}
+
+		public function updateModes($mode_id, $action){
+
+		
+			if ($action=='deactivate') { 
+				 $data = array(
+				'status' => 'inactive'
+				);
+			}
+			else{
+				$data = array(
+				'status' => 'active'
+				);
+			}
+		
+
+		$this->db->where('mode_id', $mode_id);
+		$this->db->update('procurement_mode', $data);
+	}
+
+		public function deleteMode($mode_id){
+
+		$this->db->where('mode_id', $mode_id);
+		$this->db->delete('procurement_mode');
+	}
 }
 ?>

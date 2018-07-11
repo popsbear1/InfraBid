@@ -14,26 +14,76 @@
           <table class="table table-striped table-bordered" id="contructorTable">
             <thead style='font-size:12px;'>
               <tr>
-                <th style='text-align: center'>Business Name</th>
-                <th style='text-align: center'>Owner/Manager</th>
-                <th style='text-align: center'>Address</th>
-                <th style='text-align: center'>Contact Number</th>
-                <th style='text-align: center'>Edit</th>
+                <th class="text-center">Business Name</th>
+                <th class="text-center">Owner/Manager</th>
+                <th class="text-center">Address</th>
+                <th class="text-center">Contact Number</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($contructors as $contructor): ?>
+              <?php foreach ($contractors as $contractor): ?>
                 <tr>
-                  <td><?php echo $contructor['businessname'] ?></td>
-                  <td><?php echo $contructor['owner'] ?></td>
-                  <td><?php echo $contructor['address'] ?></td>
-                  <td><?php echo $contructor['contactnumber'] ?></td>
-                  <td>
+                  <td class="text-center" ><?php echo $contractor['businessname'] ?></td>
+                  <td class="text-center"><?php echo $contractor['owner'] ?></td>
+                  <td class="text-center"><?php echo $contractor['address'] ?></td>
+                  <td class="text-center"><?php echo $contractor['contactnumber'] ?></td>
+                  <td class="text-center"><?php echo $contractor['status'] ?></td>
+                  <td class="text-center row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                     <form method="POST" action="<?php echo base_url('admin/setCurrentContractorID') ?>">
-                      <button class="btn btn-success" name="contractor_id" value="<?php echo $contructor['contractor_id'] ?>" type="submit">
-                        <i class="fa fa-edit"></i>
+                      <button class="btn btn-success" name="contractor_id" value="<?php echo $contractor['contractor_id'] ?>" type="submit">
+                        <i class="fa fa-edit">Edit</i>
                       </button>
                     </form>
+                    </div>
+
+                     <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown tasks-menu">
+                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
+                              <i class="fa fa-eye"></i> Status
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- Task item -->
+                                    <form action="<?php echo base_url('admin/deleteContractor') ?>" method="POST">
+                                      <input type="text" name="contractor_id" value="<?php echo $contractor['contractor_id']?>" hidden>
+                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
+                                    </form>
+                                  </li>
+
+                                  <?php if ($contractor['status']=='active'): ?>
+                                    <li><!-- Task item -->
+                                      <form action="<?php echo base_url('admin/deactivateContractor') ?>" method="POST">
+                                        <input type="text" name="contractor_id" value="
+                                        <?php echo $contractor['contractor_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      </form>
+                                    </li>                                  
+                                  <?php endif ?>
+
+                                  <?php if ($contractor['status']=='inactive'): ?>
+                                    <li>
+                                      <form action="<?php echo base_url('admin/activateContractor') ?>" method="POST">
+                                        <input type="text" name="contractor_id" value="
+                                        <?php echo $contractor['contractor_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      </form>
+                                    </li>
+
+                                  <?php endif ?>                               
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>                   
                   </td>
                 </tr>
               <?php endforeach ?>
