@@ -16,8 +16,8 @@
               <tr>
                 <th class="text-center">Document Number</th>
                 <th class="text-center">Document Name</th>
-                <th class="text-center">Edit</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -25,93 +25,60 @@
                 <tr>
                   <td class="text-center"><?php echo $document['doc_no'] ?></td>
                   <td class="text-center"><?php echo $document['document_name'] ?></td>
-                  <td class="text-center">
-                    <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
-                      <button class="btn btn-success" id="documentID" name="documentID" value="<?php echo $document['doc_type_id'] ?>" type="submit">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                    </form>
-                  </td>
-                  <td>
-                    <div class="navbar-custom-menu">
-                      <ul class="nav navbar-nav">
-                        <li class="dropdown tasks-menu">
-                          <button class="dropdown-toggle btn btn-warning" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                              <!-- inner menu: contains the actual data -->
-                              <ul class="menu">
-                                <li><!-- Task item -->
-                                  <a href="#">
-                                    <h3>
-                                      Design some buttons
-                                      <small class="pull-right">20%</small>
-                                    </h3>
-                                    <div class="progress xs">
-                                      <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                                           aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">20% Complete</span>
-                                      </div>
-                                    </div>
-                                  </a>
-                                </li>
-                                <!-- end task item -->
-                                <li><!-- Task item -->
-                                  <a href="#">
-                                    <h3>
-                                      Create a nice theme
-                                      <small class="pull-right">40%</small>
-                                    </h3>
-                                    <div class="progress xs">
-                                      <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                                           aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">40% Complete</span>
-                                      </div>
-                                    </div>
-                                  </a>
-                                </li>
-                                <!-- end task item -->
-                                <li><!-- Task item -->
-                                  <a href="#">
-                                    <h3>
-                                      Some task I need to do
-                                      <small class="pull-right">60%</small>
-                                    </h3>
-                                    <div class="progress xs">
-                                      <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                                           aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">60% Complete</span>
-                                      </div>
-                                    </div>
-                                  </a>
-                                </li>
-                                <!-- end task item -->
-                                <li><!-- Task item -->
-                                  <a href="#">
-                                    <h3>
-                                      Make beautiful transitions
-                                      <small class="pull-right">80%</small>
-                                    </h3>
-                                    <div class="progress xs">
-                                      <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                                           aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">80% Complete</span>
-                                      </div>
-                                    </div>
-                                  </a>
-                                </li>
-                                <!-- end task item -->
-                              </ul>
-                            </li>
-                            <li class="footer">
-                              <a href="#">View all tasks</a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+                  <td class="text-center"><?php echo $document['status'] ?></td>
+                  <td class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
+                        <button class="btn btn-success pull-right" id="documentID" name="documentID" value="<?php echo $document['doc_type_id'] ?>" type="submit">
+                          <i class="fa fa-edit"> Edit</i>
+                        </button>
+                      </form>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown tasks-menu">
+                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
+                              <i class="fa fa-eye"></i> Status
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- Task item -->
+                                    <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST">
+                                      <input type="text" name="document_id" value="<?php echo $document['doc_type_id']?>" hidden>
+                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
+                                    </form>
+                                  </li>
+
+                                  <?php if ($document['status']=='active'): ?>
+                                    <li><!-- Task item -->
+                                      <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
+                                        <input type="text" name="document_id" value="
+                                        <?php echo $document['doc_type_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      </form>
+                                    </li>                                  
+                                  <?php endif ?>
+
+                                  <?php if ($document['status']=='inactive'): ?>
+                                    <li>
+                                      <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
+                                        <input type="text" name="document_id" value="
+                                        <?php echo $document['doc_type_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      </form>
+                                    </li>
+
+                                  <?php endif ?>                               
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -184,77 +151,77 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add New Document</h4>
-        </div>
-        <div class="modal-body">
-          <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add New Document</h4>
+          </div>
+          <div class="modal-body">
+            <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
 
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Number*
-              </label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <input type="text" id="document_numbers" name="document_numbers" class="form-control">
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Number*
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" id="document_numbers" name="document_numbers" class="form-control">
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Name*
-              </label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <input type="text" id="newdocuments" name="newdocuments" class="form-control">
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Document Name*
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" id="newdocuments" name="newdocuments" class="form-control">
+                </div>
               </div>
-            </div>
 
-          </form>  
+            </form>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- modal for data confirmation -->
+    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+          </div>
+          <div class="modal-body">
+            <table class='table table-striped table-bordered' style='font-size:13px;'>
+              <thead>
+                <tr >
+                  <th style='text-align: center'>Attributes</th>
+                  <th style='text-align: center'>Values</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr><td class="text-center">Document Number</td>
+                  <td><span id="manageNo"></span></td>
+                </tr>
+                <tr><td class="text-center">Document Name</td>
+                  <td><span id="manageDocu"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
+          </div>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
-
-  <!-- modal for data confirmation -->
-  <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-        </div>
-        <div class="modal-body">
-          <table class='table table-striped table-bordered' style='font-size:13px;'>
-            <thead>
-              <tr >
-                <th style='text-align: center'>Attributes</th>
-                <th style='text-align: center'>Values</th>
-              </tr> 
-            </thead>
-            <tbody>
-              <tr><td class="text-center">Document Number</td>
-                <td><span id="manageNo"></span></td>
-              </tr>
-              <tr><td class="text-center">Document Name</td>
-                <td><span id="manageDocu"></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end of modal -->
+    <!-- end of modal -->
 
 

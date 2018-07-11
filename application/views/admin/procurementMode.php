@@ -15,21 +15,71 @@
               <tr>
                 <th style='text-align: center'>ID</th>
                 <th style='text-align: center'>Project Type</tph>
-                <th style='text-align: center'>Edit</th>
+                <th style='text-align: center;'>Status</th>
+                <th style='text-align: center'>Actions</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($modes as $mode): ?>
                 <tr>
-                  <td><?php echo $mode['mode_id']?></td>
-                  <td><?php echo $mode['mode']?></td>
-                  <td class="text-center">
+                  <td class="text-center"><?php echo $mode['mode_id']?></td>
+                  <td class="text-center"><?php echo $mode['mode']?></td>
+                  <td class="text-center"><?php echo $mode['status']?></td>
+                    <td class="text-center row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                     <form action="<?php echo base_url('admin/setProcurementMode') ?>" method="post">
                       <input type="text" name="mode" value="<?php echo $mode['mode_id'] ?>" hidden>
                       <button class="btn btn-success" type="submit">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit"></i>Edit
                       </button>
                     </form>
+                  </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown tasks-menu">
+                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
+                              <i class="fa fa-eye"></i> Status
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- Task item -->
+                                    <form action="<?php echo base_url('admin/deleteMode') ?>" method="POST">
+                                      <input type="text" name="mode_id" value="<?php echo $mode['mode_id']?>" hidden>
+                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
+                                    </form>
+                                  </li>
+
+                                  <?php if ($mode['status']=='active'): ?>
+                                    <li><!-- Task item -->
+                                      <form action="<?php echo base_url('admin/deactivateMode') ?>" method="POST">
+                                        <input type="text" name="mode_id" value="
+                                        <?php echo $mode['mode_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      </form>
+                                    </li>                                  
+                                  <?php endif ?>
+
+                                  <?php if ($mode['status']=='inactive'): ?>
+                                    <li>
+                                      <form action="<?php echo base_url('admin/activateMode') ?>" method="POST">
+                                        <input type="text" name="mode_id" value="
+                                        <?php echo $mode['mode_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      </form>
+                                    </li>
+
+                                  <?php endif ?>                               
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               <?php endforeach ?>

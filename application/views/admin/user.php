@@ -19,7 +19,8 @@
                 <th style='text-align: center'>Middle Name</th>
                 <th style='text-align: center'>Last Name </th>
                 <th style='text-align: center'>User Type</th>
-                <th style='text-align: center'>Edit</th>
+                <th style='text-align: center'>Status</th>
+                <th style='text-align: center'>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -31,12 +32,60 @@
                   <td><?php echo $user['middle_name'] ?> </td>
                   <td><?php echo $user['last_name'] ?></td>
                   <td><?php echo $user['user_type'] ?></td>
-
+                  <td><?php echo $user['status'] ?></td>
                   <td class="text-center">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                     <form method="post" action="<?php echo base_url('admin/setUsersID') ?>">
                       <button name="userID" type="submit" value="<?php echo $user['user_id'] ?>" class = "btn btn-success">
                         <i class = "fa fa-edit"></i>
                       </button>
+                    </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown tasks-menu">
+                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
+                              <i class="fa fa-eye"></i> Status
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- Task item -->
+                                    <form action="<?php echo base_url('admin/deleteMode') ?>" method="POST">
+                                      <input type="text" name="mode_id" value="<?php echo $mode['mode_id']?>" hidden>
+                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
+                                    </form>
+                                  </li>
+
+                                  <?php if ($mode['status']=='active'): ?>
+                                    <li><!-- Task item -->
+                                      <form action="<?php echo base_url('admin/deactivateMode') ?>" method="POST">
+                                        <input type="text" name="mode_id" value="
+                                        <?php echo $mode['mode_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      </form>
+                                    </li>                                  
+                                  <?php endif ?>
+
+                                  <?php if ($mode['status']=='inactive'): ?>
+                                    <li>
+                                      <form action="<?php echo base_url('admin/activateMode') ?>" method="POST">
+                                        <input type="text" name="mode_id" value="
+                                        <?php echo $mode['mode_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      </form>
+                                    </li>
+
+                                  <?php endif ?>                               
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                     </form>
                   </td>
                 </tr>

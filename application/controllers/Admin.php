@@ -256,7 +256,7 @@ class Admin extends CI_Controller {
 	**/
 
 	public function manageContractorsView(){
-		$data['contructors'] = $this->admin_model->getContractors();
+		$data['contractors'] = $this->admin_model->getContractors();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/contractor', $data);
@@ -270,9 +270,9 @@ class Admin extends CI_Controller {
 		$contactnumber = $this->input->post('contactnumber');
 
 		if ($this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber)) {
-			$this->session->set_flashdata('success', 'The new contructor has been added to the database.');
+			$this->session->set_flashdata('success', 'The new contractor has been added to the database.');
 		}else{
-			$this->session->set_flashdata('error', 'There was an error. The new contructor is not added to the database.');
+			$this->session->set_flashdata('error', 'There was an error. The new contractor is not added to the database.');
 		}
 
 		redirect('admin/manageContractorsView');
@@ -1000,6 +1000,7 @@ class Admin extends CI_Controller {
 		redirect('admin/procurementActivityView');
 	}
 
+<<<<<<< HEAD
 	/*
 	* Rebid a project
 	* 1. Get current re_bid_count then increment.
@@ -1048,5 +1049,140 @@ class Admin extends CI_Controller {
 		redirect('admin/editPlanView');
 	}
 
+=======
+/* Delete or Activate shit**/
+
+	public function deleteDocumentType(){
+		$doc_type_id=$this->input->post('document_id');
+		$this->admin_model->deleteDocumentType($doc_type_id);
+
+		redirect('admin/manageDocumentsView');
+	}
+
+	public function deactivateDocumentType(){
+		$doc_type_id=$this->input->post('document_id');
+		$this->admin_model->updateDocumentTypeStatus($doc_type_id, 'deactivate');
+
+		redirect('admin/manageDocumentsView');		
+
+	}
+
+	public function activateDocumentType(){
+		$doc_type_id=$this->input->post('document_id');
+		$this->admin_model->updateDocumentTypeStatus($doc_type_id, 'activate');
+
+		redirect('admin/manageDocumentsView');	
+	}
+
+		public function deleteContractor(){
+		$contractor_id=$this->input->post('contractor_id');
+		$this->admin_model->deleteContractor($contractor_id);
+
+		redirect('admin/manageContractorsView');
+	}
+
+	public function deactivateContractor(){
+		$contractor_id=$this->input->post('contractor_id');
+		$this->admin_model->updateContractor($contractor_id, 'deactivate');
+
+		redirect('admin/manageContractorsView');		
+
+	}
+
+	public function activateContractor(){
+		$contractor_id=$this->input->post('contractor_id');
+		$this->admin_model->updateContractor($contractor_id, 'activate');
+
+		redirect('admin/manageContractorsView');	
+	}
+
+	public function deleteFund(){
+		$fund_id=$this->input->post('fund_id');
+		$this->admin_model->deleteFund($fund_id);
+
+		redirect('admin/manageFundsView');
+	}
+
+	public function deactivateFund(){
+		$fund_id=$this->input->post('fund_id');
+		$this->admin_model->updateFund($fund_id, 'deactivate');
+
+		redirect('admin/manageFundsView');		
+
+	}
+
+	public function activateFund(){
+		$fund_id=$this->input->post('fund_id');
+		$this->admin_model->updateFund($fund_id, 'activate');
+
+		redirect('admin/manageFundsView');	
+	}
+
+		public function deleteProjectType(){
+		$projtype_id=$this->input->post('projtype_id');
+		$this->admin_model->deleteProjectType($projtype_id);
+
+		redirect('admin/manageProjectTypeView');
+	}
+
+	public function deactivateProjectType(){
+		$projtype_id=$this->input->post('projtype_id');
+		$this->admin_model->updateProjectTypes($projtype_id, 'deactivate');
+
+		redirect('admin/manageProjectTypeView');		
+
+	}
+
+	public function activateProjectType(){
+		$projtype_id=$this->input->post('projtype_id');
+		$this->admin_model->updateProjectTypes($projtype_id, 'activate');
+
+		redirect('admin/manageProjectTypeView');	
+	}
+
+		public function deleteClassification(){
+		$account_id=$this->input->post('account_id');
+		$this->admin_model->deleteClassification($account_id);
+
+		redirect('admin/manageAccountClassifications');
+	}
+
+	public function deactivateClassification(){
+		$account_id=$this->input->post('account_id');
+		$this->admin_model->updateClassifications($account_id, 'deactivate');
+
+		redirect('admin/manageAccountClassifications');		
+
+	}
+
+	public function activateClassification(){
+		$account_id=$this->input->post('account_id');
+		$this->admin_model->updateClassifications($account_id, 'activate');
+
+		redirect('admin/manageAccountClassifications');	
+	}
+
+	public function deleteMode(){
+		$mode_id=$this->input->post('mode_id');
+		$this->admin_model->deleteMode($mode_id);
+
+		redirect('admin/manageProcurementMode');
+	}
+
+	public function deactivateMode(){
+		$mode_id=$this->input->post('mode_id');
+		$this->admin_model->updateModes($mode_id, 'deactivate');
+
+		redirect('admin/manageProcurementMode');		
+
+	}
+
+	public function activateMode(){
+		$mode_id=$this->input->post('mode_id');
+		$this->admin_model->updateModes($mode_id, 'activate');
+
+		redirect('admin/manageProcurementMode');	
+	}
+>>>>>>> 72e73e0d06e990c72fdcc4fd650256a3b2f1c39b
 
 }
