@@ -135,7 +135,8 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
-		$this->load->view('admin/projectProcurementTimeline', $data);
+		$this->load->view('admin/fragments/projectPlanDetails', $data);
+		$this->load->view('admin/projectProcurementTimeline');
 		$this->load->view('admin/fragments/footer');	
 	}
 
@@ -172,14 +173,16 @@ class Admin extends CI_Controller {
 	public function procurementActivityView(){
 		$plan_id = $this->session->userdata('plan_id');
 		$pageName['pageName'] = "activity";
-		$data['project_details'] = $this->admin_model->getPlanDetails($plan_id);
+		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
+		
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
-		$this->load->view('admin/projectProcurementActivity', $data);
+		$this->load->view('admin/fragments/projectPlanDetails', $data);
+		$this->load->view('admin/projectProcurementActivity');
 		$this->load->view('admin/fragments/footer');	
 	}
 
@@ -995,6 +998,54 @@ class Admin extends CI_Controller {
 		}
 
 		redirect('admin/procurementActivityView');
+	}
+
+	/*
+	* Rebid a project
+	* 1. Get current re_bid_count then increment.
+	* 2. Change project status to pending.
+	* 3. Empty project timeline (revert all dates to null).
+	* 4. Empty project procurement activity dates (revert all dates to null).
+	*/
+
+	public function rebidProjectPlan(){
+		$plan_id = $this->input->post('plan_id');
+
+		// Update the project rebid count
+
+		$this->admin_model->updateProjectRebidCount($plan_id);
+
+		// Chnage project status to pending
+
+		$this->admin_model->updateProjectStatus($plan_id, 're_bid');
+
+		// Empty project timeline (revert all dates to null)
+
+		$this->admin_model->resetProjectTimeline($plan_id);
+
+		// Empty project procurement activity (revert all dates to null)
+
+		$this->admin_model->resetProjectProcurementActivity($plan_id);
+
+		redirect('admin/editPlanView');
+
+	}
+
+	/*
+	* Project re-review
+	* 1. Update project plan status to canceled
+	* 2. Set remark
+	*/
+	public function recommendProjectPlanForReview(){
+
+		$plan_id = $this->input->post('plan_id');
+		$remark = $this->input->post('re_review_remark');
+
+		$this->admin_model->updateProcActFinalRemark($plan_id, $remark);
+
+		$this->admin_model->updateProjectStatus($plan_id, 're_review');
+
+		redirect('admin/editPlanView');
 	}
 
 

@@ -882,6 +882,7 @@
 		}
 	}
 
+
 	public function updateDocumentDetails($document_name, $doc_type_id){
 		$data = array(
 			'document_name' => $document_name
@@ -926,14 +927,26 @@
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_timeline', $data);
 
-		$this->admin_model->updateProjectStatus($plan_id);
+		$this->admin_model->updateProjectStatus($plan_id, 'setTimeline');
 		$this->admin_model->updateProjectRebidCount($plan_id);
 	}
 
-	public function updateProjectStatus($plan_id){
-		$data = array(
-			'status' => 'processing' 
-		);
+	public function updateProjectStatus($plan_id, $action){
+		if ($action == 'setTimeline') {
+			$data = array(
+				'status' => 'processing' 
+			);
+		}
+		if ($action == 're_bid') {
+			$data = array(
+				'status' => 'pending'
+			);
+		}
+		if ($action == 're_review') {
+			$data = array(
+				'status' => 'canceled'
+			);
+		}
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
@@ -957,6 +970,58 @@
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
+	}
+
+	public function resetProjectTimeline($plan_id){
+
+		$data = array(
+			'pre_proc_date' => null,
+			'advertisement_start' => null,
+			'advertisement_end' => null,
+			'pre_bid_start' => null,
+			'pre_bid_end' => null,
+			'bid_submission_start' => null,
+			'bid_submission_end' => null,
+			'bid_evaluation_start' => null,
+			'bid_evaluation_end' => null,
+			'post_qualification_start' => null,
+			'post_qualification_end' => null,
+			'award_notice_start' => null,
+			'award_notice_end' => null,
+			'contract_signing_start' => null,
+			'contract_signing_end' => null,
+			'authority_approval_start' => null,
+			'authority_approval_end' => null,
+			'proceed_notice_start' => null,
+			'proceed_notice_end' => null
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_timeline', $data);
+
+	}
+
+	public function resetProjectProcurementActivity($plan_id){
+
+		$data = array(
+			'pre_proc' => null,
+			'advertisement' => null,
+			'pre_bid' => null,
+			'eligibility_check' => null,
+			'open_bid' => null,
+			'bid_evaluation' => null,
+			'post_qual' => null,
+			'award_notice' => null,
+			'contract_signing' => null,
+			'proceed_notice' => null,
+			'delivery_completion' => null,
+			'acceptance_turnover' => null,
+			'remark' => null
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('procact', $data);
+
 	}
 
 

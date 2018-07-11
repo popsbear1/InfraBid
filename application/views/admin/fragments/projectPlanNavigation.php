@@ -17,9 +17,12 @@
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
               <ul class="nav navbar-nav navbar-centered collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <li <?php if ($pageName == "edit") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/editPlanView') ?>">Edit Project Details</a></li>
                 <li <?php if ($pageName == "timeline") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/projectTimelineView') ?>">Project Timeline</a></li>
                 <li <?php if ($pageName == "activity") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/procurementActivityView') ?>">Procurement Activity</a></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li <?php if ($pageName == "edit") { echo 'class="active"';} ?>><a href="<?php echo base_url('admin/editPlanView') ?>">Edit Project Details</a></li>
               </ul>
             </div><!-- /.container-fluid -->
           </nav>

@@ -37,6 +37,7 @@
                               <option value="processing">Processing</option>
                               <option value="implementation">Implementation</option>
                               <option value="finished">Finished</option>
+                              <option value="Canceled">Canceled</option>
                             </select>
                           </div>
                           <div class="form-group col-lg-2">
