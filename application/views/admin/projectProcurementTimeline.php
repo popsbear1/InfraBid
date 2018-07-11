@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
               <label for="">Municipality:</label>
-              <p class="form-control"><?php echo $projectDetails['municipality'] . ' - ' . $projectDetails['municipality_code'] ?></p>
+              <p class="form-control"><?php echo $projectDetails['municipality_code'] . ' - ' . $projectDetails['municipality'] ?></p>
             </div>
             <div class="form-group">
               <label for="">Barangay:</label>
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
               <label for="">ABC:</label>
-              <p class="form-control"><?php echo $projectDetails['abc'] ?></p>
+              <p class="form-control"><?php echo number_format($projectDetails['abc'], 2) ?></p>
             </div>
             <div class="form-group">
               <label for="">Source of Fund:</label>

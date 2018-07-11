@@ -175,6 +175,7 @@ class Admin extends CI_Controller {
 		$data['project_details'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
 		$data['contractors'] = $this->admin_model->getContractors();
+		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
@@ -259,13 +260,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');	
 	}
 
-	public function addNewContractorView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addcontractor');
-		$this->load->view('admin/fragments/footer');
-	}
-
 	public function addNewContractor(){
 		$businessname = $this->input->post('businessname');
 		$owner = $this->input->post('owner');
@@ -278,7 +272,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'There was an error. The new contructor is not added to the database.');
 		}
 
-		redirect('admin/addNewContractorView');
+		redirect('admin/manageContractorsView');
 	}
 
 	public function editContractorView(){
@@ -895,7 +889,7 @@ class Admin extends CI_Controller {
 
 	/**
 	*
-	* Below are the methods to update proc activity dates
+	* Below are the function to update proc activity dates
 	*/
 
 	public function editProcActDate(){
@@ -936,7 +930,8 @@ class Admin extends CI_Controller {
 		}
 
 		if ($activity_name === "eligibility_check") {
-			if ($this->admin_model->updateEligibilityCheckDate($plan_id, $date)) {
+			$contractor_id = $this->input->post('contractor');
+			if ($this->admin_model->updateEligibilityCheckDate($plan_id, $date, $contractor_id)) {
 				$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");

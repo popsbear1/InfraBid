@@ -134,6 +134,7 @@
 			return $query->row_array();
 		}
 
+
 		public function getProjectTimeline($plan_id){
 			$this->db->select('*');
 			$this->db->from('project_timeline');
@@ -147,7 +148,6 @@
 		public function getContractors(){
 			$this->db->select('*');
 			$this->db->from('contractors');
-			$this->db->order_by('contractor_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -746,13 +746,19 @@
 		}
 	}
 
-	public function updateEligibilityCheckDate($plan_id, $date){
+	public function updateEligibilityCheckDate($plan_id, $date, $contractor_id){
 		$data = array(
 			'eligibility_check' => $date
 		);
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$dataTwo = array(
+				'contractor_id' => $contractor_id
+			);
+
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_plan', $dataTwo);
 			return true;
 		}else{
 			return false;
@@ -919,6 +925,38 @@
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_timeline', $data);
+
+		$this->admin_model->updateProjectStatus($plan_id);
+		$this->admin_model->updateProjectRebidCount($plan_id);
+	}
+
+	public function updateProjectStatus($plan_id){
+		$data = array(
+			'status' => 'processing' 
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateProjectRebidCount($plan_id){
+
+		$this->db->select('re_bid_count');
+		$this->db->from('project_plan');
+		$this->db->where('plan_id', $plan_id);
+
+		$query = $this->db->get();
+
+		$bidcount = $query->row()->re_bid_count;
+
+		$newRebidCount = $bidcount + 1;
+
+		$data = array(
+			're_bid_count' => $newRebidCount
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
 	}
 
 
