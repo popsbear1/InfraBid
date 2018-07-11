@@ -999,8 +999,6 @@ class Admin extends CI_Controller {
 
 		redirect('admin/procurementActivityView');
 	}
-
-<<<<<<< HEAD
 	/*
 	* Rebid a project
 	* 1. Get current re_bid_count then increment.
@@ -1049,7 +1047,6 @@ class Admin extends CI_Controller {
 		redirect('admin/editPlanView');
 	}
 
-=======
 /* Delete or Activate shit**/
 
 	public function deleteDocumentType(){
@@ -1183,6 +1180,5 @@ class Admin extends CI_Controller {
 
 		redirect('admin/manageProcurementMode');	
 	}
->>>>>>> 72e73e0d06e990c72fdcc4fd650256a3b2f1c39b
 
 }
