@@ -104,8 +104,8 @@
                         <td><?php echo $plan['date_added'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                            <button class="btn btn-success" type="submit" name="plan_id" value="<?php echo $plan['plan_id'] ?>">
-                              <i class="fa fa-edit"></i>
+                            <button class="btn btn-info" type="submit" name="plan_id" value="<?php echo $plan['plan_id'] ?>">
+                              <i class="fa fa-eye"></i>
                             </button>
                           </form>
                         </td>

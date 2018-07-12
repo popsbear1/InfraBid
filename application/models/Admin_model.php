@@ -310,6 +310,16 @@
 			return $query->row_array();
 		}
 
+		public function getProjectPlanStatus($plan_id){
+			$this->db->select('status');
+			$this->db->from('project_plan');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->row();
+		}
+
 	/**
 	* All functions bellow are used to insert data on Database.
 	**/
@@ -1077,7 +1087,7 @@
 
 	public function updateFund($fund_id, $action){
 
-		
+
 		if ($action=='deactivate') { 
 			$data = array(
 				'status' => 'inactive'
@@ -1101,7 +1111,7 @@
 	}
 	public function updateProjectTypes($projtype_id, $action){
 
-		
+
 		if ($action=='deactivate') { 
 			$data = array(
 				'status' => 'inactive'

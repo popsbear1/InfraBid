@@ -293,7 +293,7 @@
           </li>
           <li>
             <a href="<?php echo base_url('admin/annualPlanView') ?>">
-              <i class="fa fa-tasks"></i> <span>Annual Procurement Plan</span>
+              <i class="fa fa-tasks"></i> <span>Project Plan</span>
             </a>
           </li>
           <li class="treeview">

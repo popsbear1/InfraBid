@@ -67,6 +67,18 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	public function projectDetailsView(){
+		$projectNavControl['pageName'] = "details";
+		$plan_id = $this->session->userdata('plan_id');	
+		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
+		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
+		$this->load->view('admin/projectPlanDetailsPage', $data);
+		$this->load->view('admin/fragments/footer');	
+	}
+
 
 	public function addPlanView(){
 		$data['currentYear'] = date('Y-m-d');
@@ -103,16 +115,11 @@ class Admin extends CI_Controller {
 		redirect('admin/addPlanView');
 	}
 
-	public function addPlanFromFileView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addPlanFromFile');
-		$this->load->view('admin/fragments/footer');
-	}
 
 	public function editPlanView(){
-		$pageName['pageName'] = "edit";
-		$plan_id = $this->session->userdata('plan_id');
+		$projectNavControl['pageName'] = "edit";
+		$plan_id = $this->session->userdata('plan_id');	
+		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
@@ -122,19 +129,20 @@ class Admin extends CI_Controller {
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
+		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
 		$this->load->view('admin/editPlan', $data);
 		$this->load->view('admin/fragments/footer');	
 	}
 
 	public function projectTimelineView(){
-		$pageName['pageName'] = "timeline";
+		$projectNavControl['pageName'] = "timeline";
 		$plan_id = $this->session->userdata('plan_id');
+		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
+		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
 		$this->load->view('admin/fragments/projectPlanDetails', $data);
 		$this->load->view('admin/projectProcurementTimeline');
 		$this->load->view('admin/fragments/footer');	
@@ -172,15 +180,21 @@ class Admin extends CI_Controller {
 
 	public function procurementActivityView(){
 		$plan_id = $this->session->userdata('plan_id');
-		$pageName['pageName'] = "activity";
+		$projectNavControl['pageName'] = "activity";
+		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
+
+		$data['arrayCount'] = count($data['procActDate']);
+		// for ($i=0; $i < $data['procActDate'].; $i++) { 
+		// 	# code...
+		// }
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		
-		$this->load->view('admin/fragments/projectPlanNavigation', $pageName);
+		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
 		$this->load->view('admin/fragments/projectPlanDetails', $data);
 		$this->load->view('admin/projectProcurementActivity');
 		$this->load->view('admin/fragments/footer');	
@@ -191,7 +205,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('plan_id', $plan_id);
 
-		redirect('admin/editPlanView');
+		redirect('admin/projectDetailsView');
 	}
 
 	public function editPlan(){

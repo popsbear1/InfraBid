@@ -58,8 +58,9 @@ function convertDate($date){
 }
 
 ?>
+
       <div class="col-lg-9 col-md-9 col-sm-9">
-        <h3>Procurement Activity</h3>
+        <h3>Project Timeline</h3>
         <?php if (isset($_SESSION['success'])): ?>
           <div class="alert alert-success">
             <p class="text-center"><?php echo $_SESSION['success'] ?></p>
@@ -70,6 +71,8 @@ function convertDate($date){
             <p class="text-center"><?php echo $_SESSION['error'] ?></p>
           </div>
         <?php endif ?>
+        
+
         <div class="well">
           <div class="row">
             <div class="col-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -460,7 +463,6 @@ function convertDate($date){
       </div>
     </div>
   </div>
-</div>
 </section>
   
 
