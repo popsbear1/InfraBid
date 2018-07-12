@@ -14,10 +14,9 @@ class Doctrack extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 	public function docTrackView(){
-		$data['plans'] = $this->admin_model->getProjectPlan(null,null,null,null,null);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('doctrack/docTrack', $data);
+		$this->load->view('doctrack/docTrack');
 		$this->load->view('admin/fragments/footer');
 	}
 

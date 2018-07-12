@@ -119,7 +119,7 @@
 		}
 
 		public function getPlanDetails($plan_id){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as plan_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -1182,6 +1182,31 @@
 
 		$this->db->where('mode_id', $mode_id);
 		$this->db->delete('procurement_mode');
+	}
+
+	public function updateUsers($user_id, $action){
+
+		
+		if ($action=='deactivate') { 
+			$data = array(
+				'status' => 'inactive'
+			);
+		}
+		else{
+			$data = array(
+				'status' => 'active'
+			);
+		}
+		
+
+		$this->db->where('user_id', $user_id);
+		$this->db->update('users', $data);
+	}
+
+	public function deleteUsers($user_id){
+
+		$this->db->where('user_id', $user_id);
+		$this->db->delete('users');
 	}
 }
 ?>

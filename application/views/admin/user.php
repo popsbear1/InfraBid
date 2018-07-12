@@ -37,11 +37,11 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                     <form method="post" action="<?php echo base_url('admin/setUsersID') ?>">
                       <button name="userID" type="submit" value="<?php echo $user['user_id'] ?>" class = "btn btn-success">
-                        <i class = "fa fa-edit"></i>
+                        <i class = "fa fa-edit"></i>Edit
                       </button>
                     </div>
 
-                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                           <li class="dropdown tasks-menu">
@@ -53,28 +53,28 @@
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                   <li><!-- Task item -->
-                                    <form action="<?php echo base_url('admin/deleteMode') ?>" method="POST">
-                                      <input type="text" name="mode_id" value="<?php echo $mode['mode_id']?>" hidden>
+                                    <form action="<?php echo base_url('admin/deleteUsers') ?>" method="POST">
+                                      <input type="text" name="user_id" value="<?php echo $user['user_id']?>" hidden>
                                       <button class="btn btn-default btn-block" type="submit">Delete</button>
                                     </form>
                                   </li>
 
-                                  <?php if ($mode['status']=='active'): ?>
+                                  <?php if ($user['status']=='active'): ?>
                                     <li><!-- Task item -->
-                                      <form action="<?php echo base_url('admin/deactivateMode') ?>" method="POST">
-                                        <input type="text" name="mode_id" value="
-                                        <?php echo $mode['mode_id'] ?>" hidden>
-                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                                      <form action="<?php echo base_url('admin/deactivateUsers') ?>" method="POST">
+                                        <input type="text" name="user_id" value="
+                                        <?php echo $user['user_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete" type="submit">Deactivate</button>
                                       </form>
                                     </li>                                  
                                   <?php endif ?>
 
-                                  <?php if ($mode['status']=='inactive'): ?>
+                                  <?php if ($user['status']=='inactive'): ?>
                                     <li>
-                                      <form action="<?php echo base_url('admin/activateMode') ?>" method="POST">
-                                        <input type="text" name="mode_id" value="
-                                        <?php echo $mode['mode_id'] ?>" hidden>
-                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                                      <form action="<?php echo base_url('admin/activateUsers') ?>" method="POST">
+                                        <input type="text" name="user_id" value="
+                                        <?php echo $user['user_id'] ?>" hidden>
+                                        <button class="btn btn-default btn-block" name="delete" id="delete" type="submit">Activate</button>
                                       </form>
                                     </li>
 

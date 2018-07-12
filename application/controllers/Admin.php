@@ -72,6 +72,7 @@ class Admin extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id');	
 		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
+		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -186,14 +187,10 @@ class Admin extends CI_Controller {
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
 
 		$data['arrayCount'] = count($data['procActDate']);
-		// for ($i=0; $i < $data['procActDate'].; $i++) { 
-		// 	# code...
-		// }
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
 		$this->load->view('admin/fragments/projectPlanDetails', $data);
 		$this->load->view('admin/projectProcurementActivity');
@@ -1195,4 +1192,25 @@ class Admin extends CI_Controller {
 		redirect('admin/manageProcurementMode');	
 	}
 
+	public function deleteUsers(){
+		$user_id=$this->input->post('user_id');
+		$this->admin_model->deleteUsers($user_id);
+
+		redirect('admin/manageUsers');
+	}
+
+	public function deactivateUsers(){
+		$user_id=$this->input->post('user_id');
+		$this->admin_model->updateUsers($user_id, 'deactivate');
+
+		redirect('admin/manageUsers');		
+
+	}
+
+	public function activateUsers(){
+		$user_id=$this->input->post('user_id');
+		$this->admin_model->updateUsers($user_id, 'activate');
+
+		redirect('admin/manageUsers');	
+	}
 }

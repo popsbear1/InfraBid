@@ -78,7 +78,7 @@ function convertDate($date){
             <div class="col-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
               <ul>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#pre-proc" aria-expanded="false">Pre-Proc Conference</button>
+                <button class="list-group-item list-group-item-action activityBtn" id="pre_proc_button" type="button" data-toggle="collapse" data-target="#pre-proc" aria-expanded="false">Pre-Proc Conference</button>
 
                 <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#ads-post" aria-expanded="false">Ads/Post of IAEB</button>
 
@@ -487,10 +487,7 @@ function convertDate($date){
   $('.activityBtn').click(function(e){
     $('.activityBtn').removeClass('active');
     $(this).addClass('active');
-    $('.collapse.in').collapse('hide', function(){
-      $(e).collapse('show');
-
-    });
+    $('.collapse.in').collapse('hide');
 
   })
 
@@ -507,6 +504,12 @@ function convertDate($date){
     completion : '<?php echo $completion ?>',
     acceptance : '<?php echo $acceptance ?>'
   };
+
+  $(document).ready(function(){
+      if (planDates['pre_proc'] != null) {
+        $('#pre_proc_button').prop('style', 'background: lightgreen');
+      }
+  });
 
   $(document).ready(function(){
   var project_title = '<?php echo $projectDetails['project_title'] ?>';

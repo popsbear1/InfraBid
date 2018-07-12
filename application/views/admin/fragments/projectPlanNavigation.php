@@ -41,7 +41,7 @@
                 </li>
                 <li
                   <?php 
-                    if ($projectStatus == "pending" || $projectStatus == "processing" || $projectStatus == "implementation") {
+                    if ($projectStatus == "processing" || $projectStatus == "implementation") {
                       if ($pageName == "activity") {
                         echo 'class="active"';
                       }  
