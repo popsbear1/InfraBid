@@ -20,7 +20,7 @@
         </div>
         <div class="box-body">
           <div id="documentTableContainer">
-            <div id="tableContainer">
+            <div class="tableContainer" id="for_receiving_document_table">
               <table class="table table-bordered table-striped documentsTable">
                 <thead>
                   <tr>
@@ -37,7 +37,7 @@
                     <td>multiple</td>
                     <td>July 02, 2018</td>
                     <td>Ni Enginier</td>
-                    <td>
+                    <td class="text-center">
                       <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
                         <i class="fa fa-get-pocket"></i> Receive
                       </button>
@@ -46,6 +46,64 @@
                       </button>
                     </td>
                   </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tableContainer" id="onhand_documents_table" hidden="hidden"> 
+              <table class="table table-bordered documentsTable"> 
+                <thead> 
+                  <tr> 
+                    <th>Project Title</th> 
+                    <th>Document Name</th> 
+                    <th>Project Name</th> 
+                    <th>Sender</th> 
+                    <th>Action</th> 
+                  </tr> 
+                </thead> 
+                <tbody> 
+                  <tr> 
+                    <td>01</td> 
+                    <td>POW</td> 
+                    <td>Balay ni tatang</td> 
+                    <td>Ni Enginier</td> 
+                    <td class="text-center"> 
+                      <a class="btn btn-success" href="<?php echo base_url('docTrack/documentDetailsView') ?>"> 
+                        <i class="fa fa-plus"></i> Update 
+                      </a> 
+                      <button class="btn btn-info viewDataBtn"> 
+                        <i class="fa fa-eye"></i> View Data 
+                      </button> 
+                    </td> 
+                  </tr>  
+                </tbody> 
+              </table> 
+            </div>
+            <div class="tableContainer" id="forwarded_documents_table" hidden="hidden">
+              <table class="table table-bordered documentsTable">
+                <thead>
+                  <tr>
+                    <th>Project Title</th>
+                    <th>Document Name</th>
+                    <th>Project Name</th>
+                    <th>Sender</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>01</td>
+                    <td>POW</td>
+                    <td>Balay ni tatang</td>
+                    <td>Ni Enginier</td>
+                    <td class="text-center">
+                      <button class="btn btn-success">
+                        <i class="fa fa-plus"></i> Update
+                      </button>
+                      <button class="btn btn-info viewDataBtn">
+                        <i class="fa fa-eye"></i> View Data
+                      </button>
+                    </td>
+                  </tr> 
                 </tbody>
               </table>
             </div>
@@ -98,127 +156,42 @@
       $('.documentsTable').DataTable();
     } 
   );
-</script>
 
-<script>
+  function setViewHidden(){
+    $('.tableContainer').attr('hidden', false).prop('hidden', 'hidden');
+  }
+
+  function setButtonStyle(elementID){
+    $('.documentViewBtn').removeAttr('style');
+    $(elementID).css({'background':'#555555', 'color' : '#ffffff'});
+  }
+
   $('#pendingDocumentsBtn').click(function(){
     $('#page_tittle').html('Pending Documents (For Receiving)');
-    $('#tableContainer').remove();
-    $('#documentTableContainer').append(
-      '<div id="tableContainer">' +
-        '<table class="table table-bordered documentsTable">' +
-          '<thead>' +
-            '<tr>' +
-              '<th>Project Title</th>' +
-              '<th>Document Name</th>' +
-              '<th>Date Sent</th>' +
-              '<th>Sender</th>' +
-              '<th>Action</th>' +
-            '</tr>' +
-          '</thead>' +
-          '<tbody>' +
-            '<tr>' +
-              '<td>Balay ni tatang</td>' +
-              '<td>multiple</td>' +
-              '<td>July 8, 2018</td>' +
-              '<td>Ni Enginier</td>' +
-              '<td>' +
-                '<button class="btn btn-warning">' +
-                  '<i class="fa fa-get-pocket"></i> Receive' +
-                '</button>' +
-                '<button class="btn btn-info viewDataBtn">' +
-                  '<i class="fa fa-eye"></i> View Data' +
-                '</button>' +
-              '</td>' +
-            '</tr>' + 
-          '</tbody>' +
-        '</table>' +
-      '</div>' 
-    );
-    $('.documentsTable').DataTable();
+    setViewHidden();
+    setButtonStyle('#pendingDocumentsBtn');
+    $('#for_receiving_document_table').removeAttr('hidden');
+    
   });
 
   $('#onhandDocumentsBtn').click(function(){
     $('#page_tittle').html('Onhand Documents (For Forwarding)');
-    $('#tableContainer').remove();
-    $('#documentTableContainer').append(
-      '<div id="tableContainer">' +
-        '<table class="table table-bordered documentsTable">' +
-          '<thead>' +
-            '<tr>' +
-              '<th>Project Title</th>' +
-              '<th>Document Name</th>' +
-              '<th>Project Name</th>' +
-              '<th>Sender</th>' +
-              '<th>Action</th>' +
-            '</tr>' +
-          '</thead>' +
-          '<tbody>' +
-            '<tr>' +
-              '<td>01</td>' +
-              '<td>POW</td>' +
-              '<td>Balay ni tatang</td>' +
-              '<td>Ni Enginier</td>' +
-              '<td>' +
-                '<button class="btn btn-success">' +
-                  '<i class="fa fa-plus"></i> Update' +
-                '</button>' +
-                '<button class="btn btn-info viewDataBtn">' +
-                  '<i class="fa fa-eye"></i> View Data' +
-                '</button>' +
-              '</td>' +
-            '</tr>' + 
-          '</tbody>' +
-        '</table>' +
-      '</div>' 
-    );
-    $('.documentsTable').DataTable();
+    setViewHidden();
+    setButtonStyle('#onhandDocumentsBtn');
+    $('#onhand_documents_table').removeAttr('hidden');
+    
   });
 
   $('#forwardedDocumentsBtn').click(function(){
     $('#page_tittle').html('Forwarded Documents (Waiting to be Received)');
-    $('#tableContainer').remove();
-    $('#documentTableContainer').append(
-      '<div id="tableContainer">' +
-        '<table class="table table-bordered documentsTable">' +
-          '<thead>' +
-            '<tr>' +
-              '<th>Project Title</th>' +
-              '<th>Document Name</th>' +
-              '<th>Project Name</th>' +
-              '<th>Sender</th>' +
-              '<th>Action</th>' +
-            '</tr>' +
-          '</thead>' +
-          '<tbody>' +
-            '<tr>' +
-              '<td>01</td>' +
-              '<td>POW</td>' +
-              '<td>Balay ni tatang</td>' +
-              '<td>Ni Enginier</td>' +
-              '<td>' +
-                '<button class="btn btn-success">' +
-                  '<i class="fa fa-plus"></i> Update' +
-                '</button>' +
-                '<button class="btn btn-info viewDataBtn">' +
-                  '<i class="fa fa-eye"></i> View Data' +
-                '</button>' +
-              '</td>' +
-            '</tr>' + 
-          '</tbody>' +
-        '</table>' +
-      '</div>' 
-    );
-    $('.documentsTable').DataTable();
+    setViewHidden();
+    setButtonStyle('#forwardedDocumentsBtn');
+    $('#forwarded_documents_table').removeAttr('hidden');
+    
   });
 
   $(document).on('click', '.viewDataBtn', function(){
     $('#documentDetailsViewModal').modal('show');
-  });
-
-  $('.documentViewBtn').click(function(){
-    $('.documentViewBtn').removeAttr('style');
-    $(this).css('background-color','#555555');
   });
 
 

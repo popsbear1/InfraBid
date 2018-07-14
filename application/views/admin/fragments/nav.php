@@ -331,10 +331,27 @@
               </li>
             </ul>
           </li>
-          <li>
-            <a href="<?php echo base_url('doctrack/docTrackView') ?>">
-              <i class="fa fa-file"></i> <span>Document Track</span>
+          <li class="header">Document Management</li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-file"></i>
+              <span>Document Tracking</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
             </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="<?php echo base_url('doctrack/projectListView') ?>">
+                  <i class="fa fa-file"></i> <span>Add Document</span>
+                </a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('doctrack/docTrackView') ?>">
+                  <i class="fa fa-file"></i> <span>Doc Track</span>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="header">Others</li>
           <li class="treeview">

@@ -20,7 +20,14 @@ class Doctrack extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-		public function documentDetailsView(){
+	public function projectListView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/projectList');
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function documentDetailsView(){
 		$pageName['pageName'] = "edit";
 		$data['document_types'] = $this->doctrack_model->getDocumentTypes();
 		$this->load->view('admin/fragments/head');
