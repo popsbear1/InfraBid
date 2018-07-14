@@ -2,13 +2,18 @@
 <section class="content">
   <div class="row">
 	  <div class="col-lg-12 col-md-12">
-	  	<h3>Project Document Tracking</h3>
+    	<div class="row">
+        <div class="col-md-12">
+          <h3 class="pull-left">Project Document Tracking</h3>
+          <button class="btn btn-primary btn-lg pull-right">Add Project Document</button>
+        </div>
+      </div>
 	  	<div class="box box-info">
 	  		<div class="row">
           <div class="col-lg-12 col-md-12" >
-            <button class="btn btn-primary btn-lg" id="pendingDocumentsBtn"><small>Pending (For Receiving)</small></button>
-            <button class="btn btn-success btn-lg" id="onhandDocumentsBtn"><small>Onhand (For Forwarding)</small></button>
-            <button class="btn btn-warning btn-lg" id="forwardedDocumentsBtn"><small>Forwarded Documents</small></button>
+            <button class="btn btn-info btn-lg documentViewBtn" id="pendingDocumentsBtn"><small>Pending (For Receiving)</small></button>
+            <button class="btn btn-success btn-lg documentViewBtn" id="onhandDocumentsBtn"><small>Onhand (For Forwarding)</small></button>
+            <button class="btn btn-warning btn-lg documentViewBtn" id="forwardedDocumentsBtn"><small>Forwarded Documents</small></button>
           </div>
         </div>
         <div class="box-header">
@@ -20,7 +25,7 @@
               <table class="table table-bordered documentsTable">
                 <thead>
                   <tr>
-                    <th>Document Number</th>
+                    <th>Project Title</th>
                     <th>Document Name</th>
                     <th>Project Name</th>
                     <th>Sender</th>
@@ -105,7 +110,7 @@
         '<table class="table table-bordered documentsTable">' +
           '<thead>' +
             '<tr>' +
-              '<th>Document Number</th>' +
+              '<th>Project Title</th>' +
               '<th>Document Name</th>' +
               '<th>Project Name</th>' +
               '<th>Sender</th>' +
@@ -142,7 +147,7 @@
         '<table class="table table-bordered documentsTable">' +
           '<thead>' +
             '<tr>' +
-              '<th>Document Number</th>' +
+              '<th>Project Title</th>' +
               '<th>Document Name</th>' +
               '<th>Project Name</th>' +
               '<th>Sender</th>' +
@@ -182,7 +187,7 @@
         '<table class="table table-bordered documentsTable">' +
           '<thead>' +
             '<tr>' +
-              '<th>Document Number</th>' +
+              '<th>Project Title</th>' +
               '<th>Document Name</th>' +
               '<th>Project Name</th>' +
               '<th>Sender</th>' +
@@ -210,11 +215,15 @@
     );
     $('.documentsTable').DataTable();
   });
-</script>
-<script>
+
   $(document).on('click', '.viewDataBtn', function(){
     $('#documentDetailsViewModal').modal('show');
-  })
+  });
+
+  $('.documentViewBtn').click(function(){
+    $('.documentViewBtn').removeAttr('style');
+    $(this).css('background-color','#555555');
+  });
 </script>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="documentDetailsViewModal">
@@ -245,3 +254,4 @@
     </div>
   </div>
 </div>
+
