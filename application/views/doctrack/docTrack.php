@@ -5,10 +5,9 @@
     	<div class="row">
         <div class="col-md-12">
           <h3 class="pull-left">Project Document Tracking</h3>
-          <button class="btn btn-primary btn-lg pull-right">Add Project Document</button>
         </div>
       </div>
-	  	<div class="box box-info">
+	  	<div class="box box">
 	  		<div class="row">
           <div class="col-lg-12 col-md-12" >
             <button class="btn btn-info btn-lg documentViewBtn" id="pendingDocumentsBtn"><small>Pending (For Receiving)</small></button>
@@ -22,24 +21,24 @@
         <div class="box-body">
           <div id="documentTableContainer">
             <div id="tableContainer">
-              <table class="table table-bordered documentsTable">
+              <table class="table table-bordered table-striped documentsTable">
                 <thead>
                   <tr>
                     <th>Project Title</th>
                     <th>Document Name</th>
-                    <th>Project Name</th>
+                    <th>Date Sent</th>
                     <th>Sender</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>01</td>
-                    <td>POW</td>
                     <td>Balay ni tatang</td>
+                    <td>multiple</td>
+                    <td>July 02, 2018</td>
                     <td>Ni Enginier</td>
                     <td>
-                      <button class="btn btn-warning">
+                      <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
                         <i class="fa fa-get-pocket"></i> Receive
                       </button>
                       <button class="btn btn-info viewDataBtn">
@@ -112,16 +111,16 @@
             '<tr>' +
               '<th>Project Title</th>' +
               '<th>Document Name</th>' +
-              '<th>Project Name</th>' +
+              '<th>Date Sent</th>' +
               '<th>Sender</th>' +
               '<th>Action</th>' +
             '</tr>' +
           '</thead>' +
           '<tbody>' +
             '<tr>' +
-              '<td>01</td>' +
-              '<td>POW</td>' +
               '<td>Balay ni tatang</td>' +
+              '<td>multiple</td>' +
+              '<td>July 8, 2018</td>' +
               '<td>Ni Enginier</td>' +
               '<td>' +
                 '<button class="btn btn-warning">' +
@@ -161,9 +160,6 @@
               '<td>Balay ni tatang</td>' +
               '<td>Ni Enginier</td>' +
               '<td>' +
-                '<button class="btn btn-warning">' +
-                  '<i class="fa fa-mail-forward"></i> Forward' +
-                '</button>' +
                 '<button class="btn btn-success">' +
                   '<i class="fa fa-plus"></i> Update' +
                 '</button>' +
@@ -201,8 +197,8 @@
               '<td>Balay ni tatang</td>' +
               '<td>Ni Enginier</td>' +
               '<td>' +
-                '<button class="btn btn-warning">' +
-                  '<i class="fa fa-get-pocket"></i> Receive' +
+                '<button class="btn btn-success">' +
+                  '<i class="fa fa-plus"></i> Update' +
                 '</button>' +
                 '<button class="btn btn-info viewDataBtn">' +
                   '<i class="fa fa-eye"></i> View Data' +
@@ -224,6 +220,8 @@
     $('.documentViewBtn').removeAttr('style');
     $(this).css('background-color','#555555');
   });
+
+
 </script>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="documentDetailsViewModal">
@@ -255,3 +253,42 @@
   </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDocumentReceivalModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Confirm Document Receival</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDocumentForwardModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Confirm Document Receival</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>

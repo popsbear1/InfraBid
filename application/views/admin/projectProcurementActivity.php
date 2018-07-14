@@ -58,10 +58,7 @@ function convertDate($date){
 }
 
 ?>
-
-      <div class="col-lg-9 col-md-9 col-sm-9">
-        <h3>Project Timeline</h3>
-        <?php if (isset($_SESSION['success'])): ?>
+<?php if (isset($_SESSION['success'])): ?>
           <div class="alert alert-success">
             <p class="text-center"><?php echo $_SESSION['success'] ?></p>
           </div>
@@ -71,42 +68,41 @@ function convertDate($date){
             <p class="text-center"><?php echo $_SESSION['error'] ?></p>
           </div>
         <?php endif ?>
-        
 
-        <div class="well">
+      <div class="col-lg-9 col-md-9 col-sm-9">
+        <h3>Project Timeline</h3>
+        <div class="">
           <div class="row">
-            <div class="col-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-              <ul>
+            <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12">
 
-                <button class="list-group-item list-group-item-action activityBtn" id="pre_proc_button" type="button" data-toggle="collapse" data-target="#pre-proc" aria-expanded="false">Pre-Proc Conference</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#ads-post" aria-expanded="false">Ads/Post of IAEB</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#pre-bid" aria-expanded="false">Pre-bid Conf</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="pre_bid_btn">Pre-bid Conf</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#bid-open" aria-expanded="false">Sub/Open of Bids</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="open_bid_btn">Sub/Open of Bids</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#eligi_check" aria-expanded="false">Eligibility Check</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="eligibility_btn">Eligibility Check</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#bid-eval" aria-expanded="false">Bid Evaluation</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="bid_eval_btn">Bid Evaluation</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#post-qual" aria-expanded="false">Post Qual</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="post_qual_btn">Post Qual</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#notice-award" aria-expanded="false">Notice of Award</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="award_notice_btn">Notice of Award</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#sign-contract" aria-expanded="false">Contract Signing</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="contract_signing_btn">Contract Signing</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#proceed-notice" aria-expanded="false">Notice to Proceed</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="proceed_notice_btn">Notice to Proceed</button>
 
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#completion-delivery" aria-expanded="false">Delivery/Completion</button>
-              
-                <button class="list-group-item list-group-item-action activityBtn" type="button" data-toggle="collapse" data-target="#turnover-acceptance" aria-expanded="false">Acceptance/Turnover</button>
+              <button class="activityBtn btn btn-default btn-block" type="button" id="delivery_completion_btn">Delivery/Completion</button>
+            
+              <button class="activityBtn btn btn-default btn-block" type="button" id="acceptance_turnover_btn">Acceptance/Turnover</button>
 
-              </ul>
             </div>
-            <div class="col-9 col-lg-9 col-md-9 col-sm-9 col-xs-9">
+            <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12">
               <div class=text-center">
-                <div class="collapse" id="pre-proc">
+                <div id="pre_proc_view" class="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="pre_proc_form" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editProcActDate') ?>"> 
                       <input type="text" name="activity_name" value="pre_proc" hidden>
@@ -120,7 +116,7 @@ function convertDate($date){
                     </form>
                   </div>
                 </div>
-                <div class="collapse" id="ads-post">
+                <div id="ads_post_view" class="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
                       <input type="text" name="activity_name" value="advertisement" hidden>
@@ -151,7 +147,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="pre-bid">
+                <div id="pre_bid_view" class ="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
                       <input type="text" name="activity_name" value="pre_bid" hidden>
@@ -182,7 +178,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="bid-open">
+                <div id="bid_open_view" class="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
@@ -214,7 +210,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="eligi_check">
+                <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
@@ -243,6 +239,12 @@ function convertDate($date){
                           </select>
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Proposed Bid *: </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="bid_proposal" name="bid_proposal" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
                     </form>
                   </div>
                   <div class="row">
@@ -254,7 +256,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="bid-eval">
+                <div id="bid_evaluation_view" class="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
@@ -286,7 +288,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="post-qual">
+                <div id="post_qual_view" class ="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
@@ -319,7 +321,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="notice-award">
+                <div id="notice_award_view" class="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
                       <input type="text" name="activity_name" value="awar_notice" hidden>
@@ -351,7 +353,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="sign-contract">
+                <div id="sign_contract_view" class ="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
@@ -383,7 +385,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="proceed-notice">
+                <div id="proceed_notice_view" class="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
                       <input type="text" name="activity_name" value="proceed_notice" hidden>
@@ -414,7 +416,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="completion-delivery">
+                <div id="completion_delivery_view" class ="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="competion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
@@ -437,7 +439,7 @@ function convertDate($date){
                   </div>
                 </div>
 
-                <div class="collapse" id="turnover-acceptance">
+                <div id="turnover_acceptance_view" class ="activity_view" hidden="hidden">
                   <div class="well">
                     <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
                       <input type="text" name="activity_name" value="acceptance" hidden>
@@ -483,13 +485,6 @@ function convertDate($date){
 <!-- page script -->
 
 <script>
-
-  $('.activityBtn').click(function(e){
-    $('.activityBtn').removeClass('active');
-    $(this).addClass('active');
-    $('.collapse.in').collapse('hide');
-
-  })
 
   var planDates = {
     pre_proc : '<?php echo $pre_proc ?>',
@@ -677,3 +672,88 @@ function convertDate($date){
     </div>
   </div>
 </div>
+
+<script>
+  function setViewHidden(){
+    $('.activity_view').attr('hidden', false).prop('hidden', 'hidden');
+  }
+
+  function setButtonStyle(elementID){
+    $('.activityBtn').removeAttr('style');
+    $(elementID).css({'background':'#555555', 'color' : '#ffffff'});
+  }
+
+  $('#pre_proc_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#pre_proc_btn');
+    $('#pre_proc_view').removeAttr('hidden');
+  });
+
+  $('#advertisement_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#advertisement_btn');
+    $('#ads_post_view').removeAttr('hidden');
+  });
+
+  $('#pre_bid_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#pre_bid_btn');
+    $('#pre_bid_view').removeAttr('hidden');
+  });
+
+  $('#open_bid_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#open_bid_btn');
+    $('#bid_open_view').removeAttr('hidden');
+  });
+
+  $('#eligibility_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#eligibility_btn');
+    $('#eligibility_check_view').removeAttr('hidden');
+  });
+
+  $('#bid_eval_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#bid_eval_btn');
+    $('#bid_evaluation_view').removeAttr('hidden');
+  });
+
+  $('#post_qual_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#post_qual_btn');
+    $('#post_qual_view').removeAttr('hidden');
+  });
+
+  $('#award_notice_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#award_notice_btn');
+    $('#notice_award_view').removeAttr('hidden');
+  });
+
+  $('#contract_signing_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#contract_signing_btn');
+    $('#sign_contract_view').removeAttr('hidden');
+  });
+
+  $('#proceed_notice_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#proceed_notice_btn');
+    $('#proceed_notice_view').removeAttr('hidden');
+  });
+
+  $('#delivery_completion_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#delivery_completion_btn');
+    $('#completion_delivery_view').removeAttr('hidden');
+  });
+
+  $('#acceptance_turnover_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#acceptance_turnover_btn');
+    $('#turnover_acceptance_view').removeAttr('hidden');
+  });
+
+
+</script>
