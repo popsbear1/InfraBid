@@ -769,76 +769,401 @@ class Admin extends CI_Controller {
 
 
 	public function preProcurementConferenceView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/preProcConference');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/preProcConference', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 	public function advertisementView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/advertisement');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/advertisement', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function preBidConferenceView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/preBidConference');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/preBidConference', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function eligibilityCheckView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/eligibilityCheck');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/eligibilityCheck', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function subOpenBidsView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/subOpenBids');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/subOpenBids', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function bidEvaluationView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/bidEvaluation');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/bidEvaluation', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function postQualificationView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/postQualification');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/postQualification', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function noticeOfAwardView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/noticeOfAward');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/noticeOfAward', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function contractSigningView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/contractSigning');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/contractSigning', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function noticeToProceedView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/noticeToProceed');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/noticeToProceed', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 		public function deliveryCompletionView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/deliveryCompletion');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/deliveryCompletion', $data);
+			$this->load->view('admin/fragments/footer');
 	}
+
 		public function acceptanceTurnoverView(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/acceptanceTurnover');
-		$this->load->view('admin/fragments/footer');
+			$year = null;
+			$quarter = null;
+			$status = null;
+			$mode = null;
+			$municipality = null;
+
+			if (isset($_POST['year']) && !empty($_POST['year'])) {
+				$year = $_POST['year'];
+			}else{
+				$year = date('Y');
+			}
+			if (isset($_POST['quarter'])) {
+				$quarter = $_POST['quarter'];
+			}
+			if (isset($_POST['status'])) {
+				$status = $_POST['status'];
+			}
+			if (isset($_POST['mode'])) {
+				$mode = $_POST['mode'];
+			}
+			if (isset($_POST['municipality'])) {
+				$municipality = $_POST['municipality'];
+			}
+
+			$data['modes'] = $this->admin_model->getProcurementMode();
+			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+			$data['municipalities'] = $this->admin_model->getMunicipalities();
+			$this->load->view('admin/fragments/head');
+			$this->load->view('admin/fragments/nav');
+			$this->load->view('admin/acceptanceTurnover', $data);
+			$this->load->view('admin/fragments/footer');
 	}
 
 	/** Start of Manage Documents */
