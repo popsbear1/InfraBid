@@ -95,9 +95,11 @@
                   <div class="box-body">
                     <table class="table table-striped table-bordered">
                       <thead>
-                        <th class="text-center">Activity</th>
-                        <th class="text-center">Start Date</th>
-                        <th class="text-center">End Date</th>
+                        <tr>
+                          <th class="text-center">Activity</th>
+                          <th class="text-center">Start Date</th>
+                          <th class="text-center">End Date</th>
+                        </tr> 
                       </thead>
                       <tbody>
                         <tr>
