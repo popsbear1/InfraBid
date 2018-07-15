@@ -47,5 +47,13 @@
 
 			return $query->result_array();
 		}
+
+		/**
+		* Update Documents
+		*/
+
+		public function addProjectDocument($plan_id, $doc_type_id){
+			
+		}
 	}
 ?>
