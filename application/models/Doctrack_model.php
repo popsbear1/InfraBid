@@ -52,8 +52,16 @@
 		* Update Documents
 		*/
 
-		public function addProjectDocument($plan_id, $doc_type_id){
-			
+		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $department){
+			$data = array(
+				'plan_id' => $plan_id,
+				'doc_type_id' => $doc_type_id,
+				'user_added_document' => $user_id,
+				'doc_loc' => $department,
+				'status' => 'sent'
+			);
+
+			$this->db->insert('project_document', $data);
 		}
 	}
 ?>
