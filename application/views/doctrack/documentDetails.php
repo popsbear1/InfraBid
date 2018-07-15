@@ -1,5 +1,5 @@
 <section class="content-header">
-  
+
 </section>
 <section class="content">
   <div class="row">
@@ -13,49 +13,35 @@
         <div class="box-body">
           <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3">
-              
+              <thead>
+                <tr>
+                  <th class="text-center">Existing Documents</th>
+                  <th class="text-center">Add Documents</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead> 
             </div>
+
             <div class="col-lg-3 col-md-3 col-sm-3">
-              
+              <?php foreach ($document_types as $type): ?>
+                
+                <div class="row">
+                  <div class="form-check">
+                          <input type="checkbox" class="form-check-input" name="document_type" value="<?php echo $type['doc_type_id'] ?>">
+                          <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                      </div>
+                  </div>
+              <?php endforeach ?>          
             </div>
+
             <div class="col-lg-6 col-md-6 col-sm-6">
-              
-            </div>
-          </div>
-          <table class="table table-striped table-bordered" id="projectDocumenTable">
-            <thead>
-              <tr>
-                <th class="text-center">Existing Documents</th>
-                <th class="text-center">Add Documents</th>
-                <th class="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center">
-                      Document 1
-                  <br>Document 2
-                  <br>Document 3
-                  <br>Document 4
-                  <br>Document 5
-                  <br>Document 6
-                  <br>Document 7
-                  <br>Document 8
-                </td>  
-                <td class="text-left">
-                  <?php foreach ($document_types as $type): ?>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" name="document_type" value="<?php echo $type['doc_type_id'] ?>">
-                      <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
-                    </div>
-                  <?php endforeach ?>
-                </td>
+              <tbody>
                 <td>
                   <div class="form-group">
                     <label>Department:</label>
                     <select class="form-control">
                       <option>BAC-Infra Secretariat</option>
-                      <option>PWG</option>
+                      <option>TWG</option>
                       <option>PGO</option>
                       <option>PEO</option>
                     </select>
@@ -65,18 +51,19 @@
                     <textarea class="form-control"></textarea>
                   </div>
                 </td>
-              </tr>
             </tbody>
-          </table>
-          <div class="row text-right">
-            <button class="btn btn-primary">Send</button>
+            <div class="row text-right">
+              <button class="btn btn-primary">Send</button>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
-  
+
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-ui/jquery-ui.min.js"></script>
@@ -119,5 +106,5 @@
     function () {
       $('#projectDocumenTable').DataTable();
     } 
-  );
-</script>
+    );
+  </script>
