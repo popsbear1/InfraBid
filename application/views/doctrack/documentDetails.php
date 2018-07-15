@@ -11,52 +11,57 @@
           </h2> 
         </div>
         <div class="box-body">
-          <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3">
-              <thead>
-                <tr>
-                  <th class="text-center">Existing Documents</th>
-                  <th class="text-center">Add Documents</th>
-                  <th class="text-center">Actions</th>
-                </tr>
-              </thead> 
-            </div>
-
-            <div class="col-lg-3 col-md-3 col-sm-3">
-              <?php foreach ($document_types as $type): ?>
-                
-                <div class="row">
-                  <div class="form-check">
-                          <input type="checkbox" class="form-check-input" name="document_type" value="<?php echo $type['doc_type_id'] ?>">
-                          <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+          <form action="<?php echo base_url('doctrack/manageProjectDocuments') ?>" id="sendProjectDocuments" method="POST">
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div>
+                  <?php foreach ($project_documents as $document): ?>
+                    <div class="row">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
+                        <label class="form-check-label"><?php $document['document_name'] ?></label>
                       </div>
-                  </div>
-              <?php endforeach ?>          
+                    </div>
+                  <?php endforeach ?>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <?php foreach ($document_types as $type): ?>
+                  
+                  <div class="row">
+                    <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
+                            <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                        </div>
+                    </div>
+                <?php endforeach ?>          
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <tbody>
+                  <td>
+                    <div class="form-group">
+                      <label>Department:</label>
+                      <select class="form-control" name="department">
+                        <option hidden disabled selected>Choose Receiver</option>
+                        <option value="BAC_SEC">BAC-SEC</option>
+                        <option value="BAC_TWG">BAC-TWG</option>
+                        <option value="PGO">PGO</option>
+                        <option value="PEO">PEO</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Remarks:</label>
+                      <textarea class="form-control" name="forward_remark"></textarea>
+                    </div>
+                  </td>
+              </tbody>
             </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <tbody>
-                <td>
-                  <div class="form-group">
-                    <label>Department:</label>
-                    <select class="form-control">
-                      <option>BAC-Infra Secretariat</option>
-                      <option>TWG</option>
-                      <option>PGO</option>
-                      <option>PEO</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>Remarks:</label>
-                    <textarea class="form-control"></textarea>
-                  </div>
-                </td>
-            </tbody>
-            <div class="row text-right">
-              <button class="btn btn-primary">Send</button>
-            </div>
-
-          </div>
+          </form>
+        </div>
+        <div class="box-footer text-center">
+          <button class="btn btn-primary" form="sendProjectDocuments" type="submit">
+            Submit
+          </button>
         </div>
       </div>
     </div>
