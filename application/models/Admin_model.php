@@ -324,10 +324,11 @@
 	* All functions bellow are used to insert data on Database.
 	**/
 		//Function for inserting new project.
-	public function insertNewProject($date_added, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+	public function insertNewProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
 
 		$data = array(
 			'date_added' => $date_added,
+			'project_year' => $project_year,
 			'project_no' => $project_no,
 			'project_title' => $project_title,
 			'municipality_id' => $municipality,
@@ -482,85 +483,104 @@
 	* All functions bellow are used to update data on Database.
 	**/
 		//Following are the functions used for updating plan details
-	public function updateProject_no($project_no, $currentProjNum){
+
+	public function updateDate_added($date_added, $currentPlanID){
+		$data = array(
+			'date_added' => $date_added
+		);
+
+		$this->db->where('plan_id', $currentPlanID);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateProject_year($year, $currentPlanID){
+		$data = array(
+			'year' => $year
+		);
+
+		$this->db->where('plan_id', $currentPlanID);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateProject_no($project_no, $currentPlanID){
 		$data = array(
 			'project_no' => $project_no
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 
 	}
 
-	public function updateProject_title($project_title, $currentProjNum){
+	public function updateProject_title($project_title, $currentPlanID){
 		$data = array(
 			'project_title' => $project_title 
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateMunicipality($municipality, $currentProjNum){
+	public function updateMunicipality($municipality, $currentPlanID){
 		$data = array(
 			'municipality_id' => $municipality 
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateBarangay($barangay, $currentProjNum){
+	public function updateBarangay($barangay, $currentPlanID){
 		$data = array(
 			'barangay_id' => $barangay
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateType($type, $currentProjNum){
+	public function updateType($type, $currentPlanID){
 		$data = array(
 			'projtype_id' => $type 
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateMode($mode, $currentProjNum){
+	public function updateMode($mode, $currentPlanID){
 		$data = array(
 			'mode_id' => $mode 
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateABC($ABC, $currentProjNum){
+	public function updateABC($ABC, $currentPlanID){
 		$data = array(
 			'abc' => $ABC 
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateSource($source, $currentProjNum){
+	public function updateSource($source, $currentPlanID){
 		$data = array(
 			'fund_id' => $source
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateAccount($account, $currentProjNum){
+	public function updateAccount($account, $currentPlanID){
 		$data = array(
 			'account_id' => $account
 		);
 
-		$this->db->where('plan_id', $currentProjNum);
+		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 

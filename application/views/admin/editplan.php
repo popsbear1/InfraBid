@@ -25,7 +25,14 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" placeholder="<?php echo $projectDetails['date_added'] ?>">
+                    <input type="text" class="form-control" id="date_added" name="date_added" placeholder="<?php echo $projectDetails['date_added'] ?>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control" id="year" name="year" placeholder="<?php echo $projectDetails['project_year'] ?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -141,6 +148,12 @@
                   </tr> 
                 </thead>
                 <tbody>
+                  <tr><td>Date Added</td>
+                    <td><span id="dAdd"></td>
+                  </tr>
+                  <tr><td>Project Year</td>
+                    <td><span id="y"></td>
+                  </tr>
                   <tr><td>Project No.</td>
                     <td><span id="proj"></td>
                   </tr>
@@ -240,6 +253,8 @@
   })
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
+      $('#dAdd').html($('#date_added').val());
+      $('#y').html($('#year').val());
      $('#proj').html($('#project_no').val());
      $('#title').html($('#project_title').val());
      $('#mun').html($('#municipality').val());

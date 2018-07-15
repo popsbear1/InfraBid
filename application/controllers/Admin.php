@@ -82,7 +82,8 @@ class Admin extends CI_Controller {
 
 
 	public function addPlanView(){
-		$data['currentYear'] = date('Y-m-d');
+		$data['currentDate'] = date('Y-m-d');
+		$data['currentYear'] = date('Y');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
@@ -97,6 +98,7 @@ class Admin extends CI_Controller {
 
 	public function addPlan(){
 		$date_added = htmlspecialchars($this->input->post('date_added'));
+		$project_year = htmlspecialchars($this->input->post('year'));
 		$project_no = htmlspecialchars($this->input->post('project_no'));
 		$project_title = htmlspecialchars($this->input->post('project_title'));
 		$municipality=htmlspecialchars($this->input->post('municipality'));
@@ -107,7 +109,7 @@ class Admin extends CI_Controller {
 		$source=htmlspecialchars($this->input->post('source'));
 		$account=htmlspecialchars($this->input->post('account'));
 
-		if ($this->admin_model->insertNewProject($date_added, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
+		if ($this->admin_model->insertNewProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
 			$this->session->set_flashdata('success', 'The new project has been added to the database.');
 		}else{
 			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
@@ -207,13 +209,22 @@ class Admin extends CI_Controller {
 
 	public function editPlan(){
 		$currentPlanID = $this->session->userdata('plan_id');
+		if (!empty($_POST['date_added']) && $_POST['date_added'] != null) {
+			$date_added = $this->input->post('date_added');
+			$this->admin_model->updateDate_added($$date_added, $currentPlanID);
+		}
 
-		if (!empty($_POST['project_no']) && $_POST != null) {
+		if (!empty($_POST['year']) && $_POST['year'] != null) {
+			$year = $this->input->post('year');
+			$this->admin_model->updateProject_year($year, $currentPlanID);
+		}
+
+		if (!empty($_POST['project_no']) && $_POST['project_no'] != null) {
 			$project_no = $this->input->post('project_no');
 			$this->admin_model->updateProject_no($project_no, $currentPlanID);
 		}
 
-		if (!empty($_POST['project_title']) && $_POST != null) {
+		if (!empty($_POST['project_title']) && $_POST['project_title'] != null) {
 			$project_title = $this->input->post('project_title');
 			$this->admin_model->updateProject_title($project_title, $currentPlanID);
 		}
@@ -238,7 +249,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateMode($mode, $currentPlanID);
 		}
 
-		if (!empty($_POST['ABC'])) {
+		if (!empty($_POST['ABC']) && $_POST['ABC'] != null) {
 			$ABC = $this->input->post('ABC');
 			$this->admin_model->updateABC($ABC, $currentPlanID);
 		}

@@ -13,12 +13,12 @@
           <table class="table table-striped table-bordered" id="documentTable">
             <thead style='font-size:12px;'>
               <tr>
-                <th class="text-center">Project Number</th>
-                <th class="text-center">Project Name</th>
-                <th class="text-center">Document Name</th>
-                <th class="text-center">Receiver</th>
-                <th class="text-center">Date Received</th>
-                <th class="text-center">Actions</th>
+                <th class="text-center">Project title</th>
+                <th class="text-center">Location</th>
+                <th class="text-center">ABC</th>
+                <th class="text-center">Contractor</th>
+                <th class="text-center">Source of Fund</th>
+                <th class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -31,7 +31,7 @@
                 <td class="text-center">
                   <form action="">
                     <button class="btn btn-success">
-                      <i class="fa fa-edit">Edit</i>
+                      <i class="fa fa-edit">Add Document</i>
                     </button>
                   </form>
                 </td>

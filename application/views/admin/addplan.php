@@ -25,7 +25,14 @@
                 <div class="form-group">
                   <label  class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="date" class="form-control pull-right" id="date_added" name="date_added" value="<?php echo $currentYear ?>">
+                    <input type="text" class="form-control pull-right" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <label  class="control-label col-md-3 col-sm-3 col-xs-12">Project Year *</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control pull-right" id="year" name="year" value="<?php echo $currentYear ?>">
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -143,7 +150,10 @@
                 </tr> 
               </thead>
               <tbody>
-                <tr><td>Year</td>
+                <tr><td>Date Added</td>
+                  <td><span id="dAdd"></span></td>
+                </tr>
+                <tr><td>Project Tear</td>
                   <td><span id="y"></span></td>
                 </tr>
                 <tr><td>Project Number</td>
@@ -252,11 +262,10 @@
     }
   })
 
-
-
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
-      $('#y').html($('#date_added').val());
+      $('#dAdd').html($('#date_added').val());
+      $('#y').html($('#year').val());
       $('#proj').html($('#project_no').val());
       $('#title').html($('#project_title').val());
       $('#mun').html($('#municipality option:selected').html());
@@ -271,6 +280,21 @@
    });
     
   });
+</script>
+<script>
+  $(document).ready( 
+    function () {
+      $('#project_year').datepicker({
+        autoclose: true,
+        format: 'yyyy',
+        startView: 'years',
+        minViewMode: 'years',
+        orientation: 'bottom auto'
+      });
+
+      $('#date_added').datepicker();
+    } 
+  );
 </script>
 
 
