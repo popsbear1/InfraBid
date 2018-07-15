@@ -14,31 +14,32 @@
           <form action="<?php echo base_url('doctrack/manageProjectDocuments') ?>" id="sendProjectDocuments" method="POST">
             <div class="row">
               <div class="col-lg-3 col-md-3 col-sm-3">
-                <div>
-                  <?php foreach ($project_documents as $document): ?>
-                    <div class="row">
+                <?php foreach ($project_documents as $document): ?>
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
-                        <label class="form-check-label"><?php $document['document_name'] ?></label>
+                        <label class="form-check-label"><?php echo $document['document_name'] ?></label>
                       </div>
                     </div>
-                  <?php endforeach ?>
-                </div>
+                  </div>
+                <?php endforeach ?>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3">
-                <?php foreach ($document_types as $type): ?>
-                  
+                <?php foreach ($document_types as $type): ?> 
                   <div class="row">
-                    <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
-                            <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
-                        </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
+                        <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                      </div>
                     </div>
+                  </div>
                 <?php endforeach ?>          
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <tbody>
-                  <td>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group">
                       <label>Department:</label>
                       <select class="form-control" name="department">
@@ -53,8 +54,9 @@
                       <label>Remarks:</label>
                       <textarea class="form-control" name="forward_remark"></textarea>
                     </div>
-                  </td>
-              </tbody>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
         </div>

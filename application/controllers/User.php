@@ -27,7 +27,7 @@ class User extends CI_Controller {
 
 		if ($userData) {
 
-			$this->session->set_userdata('id', $userData['id']);
+			$this->session->set_userdata('user_id', $userData['user_id']);
 			$this->session->set_userdata('username', $userData['username']);
 			$this->session->set_userdata('user_type', $userData['user_type']);
 
