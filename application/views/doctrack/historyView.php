@@ -1,50 +1,60 @@
-<section class="content-header">
-
-</section>
-<section class="content">
-  <div class="row">
-    <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">
-            History
-          </h2>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <h4>FORWARDING</h4>
         </div>
-        <div class="box-body">
-          <table class="table table-striped table-bordered" id="projectDocumenTable">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <h4>RECEIVING</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th class="text-center">Log ID</th>
-                <th class="text-center">Forwarded by</th>
-                <th class="text-center">Forwarded to</th>
-                <th class="text-center">Forwarded Date</th>
-                <th class="text-center">Date Received</th>
-                <th class="text-center">Name of Receiver</th>
-                <th class="text-center">Remarks and Documents</th>
+                <th class="text-center">Department</th>
+                <th class="text-center">Date/Time Received</th>
+                <th class="text-center">Received By</th>
+                <th class="text-center">Remarks</th>
+                <th class="text-center">Status</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($logs as $log):?>
-                <tr>
-                  <td class="text-center"><?php echo $log['log_id']?></td>
-                  <td class="text-center"><?php echo $log['forwarded_by']?></td>
-                  <td class="text-center"><?php echo $log['forwarded_to']?></td>
-                  <td class="text-center"><?php echo $log['forward_date']?></td>
-                  <td class="text-center"><?php echo $log['received_date']?></td>
-                  <td class="text-center"><?php echo $log['receiver']?></td>
-                  <td class="text-center">
-                  <button class="btn btn-sucess logRemark" name="logID" type="submit" value="<?php echo $log['remark']?>"> 
-                      <i class="fa fa-eye">View</i>
-                    </td>
-                  </tr>
-                <?php endforeach?>
-              </tbody>
-            </table>
-          </div>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="text-center">Department</th>
+                <th class="text-center">Forwarded By</th>
+                <th class="text-center">Forwarded To</th>
+                <th class="text-center">Forward (Remarks)</th>  
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-  </section>
+  </div>     
+  </div>
   
   <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->

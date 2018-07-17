@@ -201,55 +201,69 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <section class="content">
-          <div class="row">
-            <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-              <div class="box text-center">
-                <div class="box-header">
-                  <h2 class="box-title">
-                    HISTORY TRACKS
-                  </h2>
-                </div>
-              <div class="box-body">
-              <table class="table table-striped table-bordered" id="projectDocumenTable">
-                <thead>
-                  <div class="row">
-                    <tr>
-                      <th class="text-center">RECEIVING</th>
+        <div class="box text-center">
+          <div class="box-header">
+            <h2 class="box-title">
+              HISTORY TRACKS
+            </h2>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4>FORWARDING</h4>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4>RECEIVING</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <table class="table table-bordered table-striped">
+                  <thead>
                     <tr>
                       <th class="text-center">Department</th>
                       <th class="text-center">Date/Time Received</th>
                       <th class="text-center">Received By</th>
                       <th class="text-center">Remarks</th>
                       <th class="text-center">Status</th>
-                      <th class="text-center">Date/Time Received</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Department</th>
                       <th class="text-center">Forwarded By</th>
                       <th class="text-center">Forwarded To</th>
-                      <th class="text-center">Forward (Remarks)</th>
+                      <th class="text-center">Forward (Remarks)</th>  
                     </tr>
-                  </div>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>                         
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        </div>     
       </div>
-    </section>      
-  </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

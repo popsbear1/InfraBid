@@ -6,9 +6,16 @@
     <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
       <div class="box">
         <div class="box-header">
-          <h2 class="box-title">
-            Document Records
-          </h2> 
+                <h2 class="box-title">
+                  Document Records
+                </h2>
+          <div class="row">
+            <div class="col-lg-12 text-right">
+                <button class="btn btn-primary" form="sendProjectDocuments" type="submit">
+                Upload Document Photo
+                </button>
+            </div>
+          </div>
         </div>
         <div class="box-body">
           <form action="<?php echo base_url('doctrack/manageProjectDocuments') ?>" id="sendProjectDocuments" method="POST">
