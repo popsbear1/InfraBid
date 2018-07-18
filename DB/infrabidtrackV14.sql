@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
+<<<<<<< HEAD
 -- Generation Time: Jul 18, 2018 at 02:59 AM
+=======
+-- Generation Time: Jul 17, 2018 at 06:01 AM
+>>>>>>> e10f158fc43ef5672eed3fe4e73c0902d508e95c
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -455,7 +459,10 @@ CREATE TABLE IF NOT EXISTS `project_document` (
   `added_by` int(11) NOT NULL,
   `previous_doc_loc` varchar(255) DEFAULT NULL,
   `current_doc_loc` varchar(255) DEFAULT NULL,
+<<<<<<< HEAD
   `receiver` varchar(255) DEFAULT NULL,
+=======
+>>>>>>> e10f158fc43ef5672eed3fe4e73c0902d508e95c
   `status` enum('sent','received') DEFAULT NULL,
   `img_url` varchar(255) NOT NULL,
   PRIMARY KEY (`project_document_id`),
@@ -466,6 +473,7 @@ CREATE TABLE IF NOT EXISTS `project_document` (
 -- Dumping data for table `project_document`
 --
 
+<<<<<<< HEAD
 INSERT INTO `project_document` (`project_document_id`, `plan_id`, `doc_type_id`, `added_by`, `previous_doc_loc`, `current_doc_loc`, `receiver`, `status`, `img_url`) VALUES
 (1, 8, 2, 1, '', 'BAC_SEC', NULL, 'sent', ''),
 (2, 8, 3, 1, '', 'BAC_SEC', NULL, 'sent', ''),
@@ -474,6 +482,16 @@ INSERT INTO `project_document` (`project_document_id`, `plan_id`, `doc_type_id`,
 (5, 8, 6, 1, '', 'BAC_SEC', NULL, 'sent', ''),
 (6, 8, 7, 1, '', 'BAC_SEC', NULL, 'sent', ''),
 (7, 8, 8, 1, '', 'BAC_SEC', NULL, 'sent', '');
+=======
+INSERT INTO `project_document` (`project_document_id`, `plan_id`, `doc_type_id`, `added_by`, `previous_doc_loc`, `current_doc_loc`, `status`, `img_url`) VALUES
+(1, 8, 2, 1, '', 'BAC_SEC', 'sent', ''),
+(2, 8, 3, 1, '', 'BAC_SEC', 'sent', ''),
+(3, 8, 4, 1, '', 'BAC_SEC', 'sent', ''),
+(4, 8, 5, 1, '', 'BAC_SEC', 'sent', ''),
+(5, 8, 6, 1, '', 'BAC_SEC', 'sent', ''),
+(6, 8, 7, 1, '', 'BAC_SEC', 'sent', ''),
+(7, 8, 8, 1, '', 'BAC_SEC', 'sent', '');
+>>>>>>> e10f158fc43ef5672eed3fe4e73c0902d508e95c
 
 -- --------------------------------------------------------
 

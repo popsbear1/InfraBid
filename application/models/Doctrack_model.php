@@ -41,7 +41,7 @@
 			$this->db->from('project_document');
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
-			$this->db->where('doc_loc', $user_type);
+			$this->db->where('current_doc_loc', $user_type);
 
 			$query = $this->db->get();
 
@@ -57,7 +57,7 @@
 				'plan_id' => $plan_id,
 				'doc_type_id' => $doc_type_id,
 				'user_added_document' => $user_id,
-				'doc_loc' => $department,
+				'current_doc_loc' => $department,
 				'status' => 'sent'
 			);
 

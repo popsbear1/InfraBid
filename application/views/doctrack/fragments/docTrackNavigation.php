@@ -17,7 +17,7 @@
               <!-- Collect the nav links, forms, and other content for toggling -->
               <ul class="nav navbar-nav navbar-centered collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <li><a href="<?php echo base_url('doctrack/historyView') ?>">History</a></li>
-                <li><a href="<?php echo base_url('doctrack/documentsDetailsView') ?>">Managing Documents</a></li>
+                <li><a href="<?php echo base_url('doctrack/docTrackView') ?>">Managing Documents</a></li>
               </ul>
             </div><!-- /.container-fluid -->
           </nav>
