@@ -63,6 +63,11 @@ class Doctrack extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_id = $this->session->userdata('user_id');
 		$department = $this->session->userdata('user_type');
+		if (!empty($this->input->post('project_document[]'))) {
+			foreach (!empty($this->input->post('project_document[]') as $document) {
+				$this->doctrack_model->forwardDocument($plan_id, $doc_type_id, );
+			}
+		}
 		if (!empty($this->input->post('document_type[]'))) {
 			foreach ($this->input->post('document_type[]') as $doc_type_id) {
 				$this->doctrack_model->addProjectDocument($plan_id, $doc_type_id, $user_id, $department);
