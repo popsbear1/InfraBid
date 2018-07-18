@@ -126,7 +126,6 @@
 
 			$this->db->insert('project_document', $data);
 			
-			return $this->db->insert_id();
 		}
 
 		public function insertNewLog($remark, $log_type, $user_id){
