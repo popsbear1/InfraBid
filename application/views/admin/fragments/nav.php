@@ -1,5 +1,4 @@
 <?php 
-  $username = $this->session->userdata('username');
   $sideBarControl = $this->session->userdata('sideBarControl');
 ?>
 <body 
@@ -228,7 +227,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?php echo base_url() ?>uploads/default" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?php echo $username ?></span>
+                <span class="hidden-xs"><?php echo $this->session->userdata('first_name') . " " . $this->session->userdata('last_name') ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -236,7 +235,7 @@
                   <img src="<?php echo base_url() ?>uploads/default" class="img-circle" alt="User Image">
 
                   <p>
-                    <?php echo $username ?>
+                    <?php echo $this->session->userdata('first_name') . " " . $this->session->userdata('last_name') . " - " . $this->session->userdata('user_type') ?>
                   </p>
                 </li>
                 <!-- Menu Footer-->

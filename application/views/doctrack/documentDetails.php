@@ -1,71 +1,79 @@
-<section class="content-header">
-
-</section>
+<style>
+  div #project_documents_container{
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;  
+  }
+</style>
 <section class="content">
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
       <div class="box">
         <div class="box-header">
-                <h2 class="box-title">
-                  Document Records
-                </h2>
-          <div class="row">
-            <div class="col-lg-12 text-right">
-                <button class="btn btn-primary" form="sendProjectDocuments" type="submit">
-                Upload Document Photo
-                </button>
-            </div>
-          </div>
+          <h3 class="box-title">Project Document Records</h3>
         </div>
         <div class="box-body">
-          <form action="<?php echo base_url('doctrack/manageProjectDocuments') ?>" id="sendProjectDocuments" method="POST">
+          <div id="project_documents_container">
             <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <?php foreach ($project_documents as $document): ?>
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
-                        <label class="form-check-label"><?php echo $document['document_name'] ?></label>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                
+              </div>
+            </div>
+            <form action="<?php echo base_url('doctrack/manageProjectDocuments') ?>" id="sendProjectDocuments" method="POST">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                  <?php foreach ($project_documents as $document): ?>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
+                          <label class="form-check-label"><?php echo $document['document_name'] ?></label>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                <?php endforeach ?>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <?php foreach ($document_types as $type): ?> 
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
-                        <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                  <?php endforeach ?>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                  <?php foreach ($document_types as $type): ?> 
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
+                          <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                <?php endforeach ?>          
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="form-group">
-                      <label>Department:</label>
-                      <select class="form-control" name="department">
-                        <option hidden disabled selected>Choose Receiver</option>
-                        <option value="BAC_SEC">BAC-SEC</option>
-                        <option value="BAC_TWG">BAC-TWG</option>
-                        <option value="PGO">PGO</option>
-                        <option value="PEO">PEO</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>Remarks:</label>
-                      <textarea class="form-control" name="forward_remark"></textarea>
+                  <?php endforeach ?>          
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <label>Department:</label>
+                        <select class="form-control" name="department">
+                          <option hidden disabled selected>Choose Receiver</option>
+                          <option value="BAC_SEC">BAC-SEC</option>
+                          <option value="BAC_TWG">BAC-TWG</option>
+                          <option value="PGO">PGO</option>
+                          <option value="PEO">PEO</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Remarks:</label>
+                        <textarea class="form-control" name="forward_remark"></textarea>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
         <div class="box-footer text-center">
           <button class="btn btn-primary" form="sendProjectDocuments" type="submit">

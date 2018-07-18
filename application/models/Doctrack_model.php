@@ -21,7 +21,9 @@
 
 			$this->db->select('*');
 			$this->db->from('document_type');
-			$this->db->where_not_in('doc_type_id', $data);
+			if (!empty($data)) {
+				$this->db->where_not_in('doc_type_id', $data);
+			}
 
 			$query = $this->db->get();
 

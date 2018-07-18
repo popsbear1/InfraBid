@@ -1,7 +1,4 @@
-<?php if ($this->session->userdata('user_type') != 'BAC_SEC'): ?>
-  <div class="content-wrapper">
-    <div class="container">
-<?php endif ?>
+
 <section class="content">
   <div class="row">
 	  <div class="col-lg-12 col-md-12">
@@ -137,9 +134,6 @@
 	  </div>
   </div>
 </section>
-<?php if ($this->session->userdata('user_type') != 'BAC_SEC'): ?>
-  </div>
-<?php endif ?>
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-ui/jquery-ui.min.js"></script>

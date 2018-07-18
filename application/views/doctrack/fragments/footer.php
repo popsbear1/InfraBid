@@ -1,3 +1,4 @@
+  </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="container">

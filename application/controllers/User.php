@@ -28,7 +28,9 @@ class User extends CI_Controller {
 		if ($userData) {
 
 			$this->session->set_userdata('user_id', $userData['user_id']);
-			$this->session->set_userdata('username', $userData['username']);
+			$this->session->set_userdata('first_name', $userData['first_name']);
+			$this->session->set_userdata('middle_name', $userData['middle_name']);
+			$this->session->set_userdata('last_name', $userData['last_name']);
 			$this->session->set_userdata('user_type', $userData['user_type']);
 
 			if ($userData['user_type'] === 'BAC_SEC') {

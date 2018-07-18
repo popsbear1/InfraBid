@@ -1,11 +1,21 @@
-<body class="hold-transition skin-blue layout-top-nav">
+<?php 
+  $user_type = $this->session->userdata('user_type');
+  $color = "";
+  if ($user_type == 'PEO') {
+    $color = 'skin-yellow-light';
+  }elseif ($user_type == 'PEO') {
+    $color = 'skin-red-light';
+  }elseif ($user_type == 'BAC_TWG') {
+    $color = 'skin-green-light';
+  }
+?>
+<body class="hold-transition <?php echo $color ?> layout-top-nav">
 <div class="wrapper">
-
   <header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="<?php echo base_url('peo') ?>" class="navbar-brand"><b>Document </b>TRACKING</a>
+          <a href="<?php echo base_url('peo') ?>" class="navbar-brand"><b>Capitol </b><?php echo $user_type ?></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -14,14 +24,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">         
-            <li><a href="<?php echo base_url('peo/projectListView') ?>">Add Document</a></li>
+            <li ><a href="<?php echo base_url('peo/projectListView') ?>">Add Document</a></li>
             <li><a href="<?php echo base_url('peo/docTrackView') ?>">Doc Track</a></li>
           </ul>
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
-            </div>
-          </form>
         </div>
         <!-- /.navbar-collapse -->
         <!-- Navbar Right Menu -->
@@ -127,34 +132,18 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <img src="<?php echo base_url() ?>uploads/default" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">Alexander Pierce</span>
+                <span class="hidden-xs"><?php echo $this->session->userdata('first_name') . " " . $this->session->userdata('last_name') ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                  <img src="<?php echo base_url() ?>uploads/default" class="img-circle" alt="User Image">
 
                   <p>
-                    Alexander Pierce - Web Developer
-                    <small>Member since Nov. 2012</small>
+                    <?php echo $this->session->userdata('first_name') . " " . $this->session->userdata('last_name') . " - " . $this->session->userdata('user_type') ?>
                   </p>
-                </li>
-                <!-- Menu Body -->
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!-- /.row -->
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -174,3 +163,5 @@
       <!-- /.container-fluid -->
     </nav>
   </header>
+  <div class="content-wrapper">
+    <div class="container">
