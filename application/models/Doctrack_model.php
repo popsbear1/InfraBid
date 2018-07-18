@@ -73,6 +73,7 @@
 			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('receiver', $user_type);
+			$this->db->group_by('project_plan.plan_id');
 
 			$query = $this->db->get();
 
@@ -85,6 +86,7 @@
 			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('current_doc_loc', $user_type);
+			$this->db->group_by('project_plan.plan_id');
 
 			$query = $this->db->get();
 
@@ -97,6 +99,7 @@
 			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
 			$this->db->where('project_document.status', 'received');
 			$this->db->where('current_doc_loc', $user_type);
+			$this->db->group_by('project_plan.plan_id');
 
 			$query = $this->db->get();
 

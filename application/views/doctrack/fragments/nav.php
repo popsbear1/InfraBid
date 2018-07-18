@@ -15,7 +15,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="<?php echo base_url('peo') ?>" class="navbar-brand"><b>Capitol </b><?php echo $user_type ?></a>
+          <a href="<?php echo base_url('capitol') ?>" class="navbar-brand"><b>Capitol </b><?php echo $user_type ?></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -24,8 +24,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">         
-            <li ><a href="<?php echo base_url('peo/projectListView') ?>">Add Document</a></li>
-            <li><a href="<?php echo base_url('peo/docTrackView') ?>">Doc Track</a></li>
+            <li ><a href="<?php echo base_url('capitol/projectListView') ?>">Add Document</a></li>
+            <li><a href="<?php echo base_url('capitol/docTrackView') ?>">Doc Track</a></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
