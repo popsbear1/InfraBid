@@ -43,12 +43,15 @@
                       <td><?php echo $pending_document['project_title'] ?></td>
                       <td><?php echo $pending_document['current_doc_loc'] ?></td>
                       <td class="text-center">
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
-                          <i class="fa fa-get-pocket"></i> Receive
-                        </button>
-                        <button class="btn btn-info viewDataBtn">
+                        <form action="<?php echo base_url('doctrack/receiveDocument') ?>" method="POST" id="receiveDocumentForm">
+                          <input type="text" name="sender" value="<?php $pending_document['current_doc_loc'] ?>" hidden>
+                          <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
+                            <i class="fa fa-get-pocket"></i> Receive
+                          </button>
+                          <button class="btn btn-info viewDataBtn" type="button">
                           <i class="fa fa-eye"></i> View Data
                         </button>
+                        </form>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -306,8 +309,8 @@
         <p>Confirm Document Receival</p>
       </div>
       <div class="modal-footer">
+        <button type="submit" form="receiveDocumentForm" class="btn btn-primary">Confirm</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
       </div>
     </div>
   </div>
