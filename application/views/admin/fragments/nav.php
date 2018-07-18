@@ -295,6 +295,11 @@
               <i class="fa fa-tasks"></i> <span>Project Plan</span>
             </a>
           </li>
+          <li>
+            <a href="<?php echo base_url('admin/supplementalPlanView') ?>"><i class="fa fa-tasks">
+              </i> <span>Supplemental Plan</span>
+            </a>
+          </li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-shopping-cart"></i>
