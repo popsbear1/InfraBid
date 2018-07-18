@@ -148,5 +148,14 @@
 
 			$this->db->insert('document_logs', $data);
 		}
+
+		public function forwardDocument($project_document_id, $receiver){
+			$data = array(
+				'receiver' => $receiver,
+				'status' => 'sent'
+			);
+
+			$this->db->update('project_document', $data);
+		}
 	}
 ?>

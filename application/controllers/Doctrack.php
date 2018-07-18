@@ -61,10 +61,10 @@ class Doctrack extends CI_Controller {
 		$receiver = $this->input->post('department');
 		$remark = $this->input->post('forward_remark');
 
-		if (!empty($this->input->post('project_document[]'))) {
-			foreach (!empty($this->input->post('project_document[]')) as $document) {
+		if ($this->input->post('project_document[]') !== null) {
+			foreach ($this->input->post('project_document[]') as $document) {
 				$this->doctrack_model->forwardDocument($document, $receiver);
-				$existing_doc_forward_log_id = $this->db->insertNewLog($remark, 'send', $user_id);
+				$existing_doc_forward_log_id = $this->doctrack_model->insertNewLog($remark, 'send', $user_id);
 
 				$this->doctrack_model->insertNewDocumentLogRelation($existing_doc_forward_log_id, $document);
 			}

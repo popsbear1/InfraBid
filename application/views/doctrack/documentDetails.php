@@ -74,7 +74,7 @@
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-check">
-                              <input type="checkbox" class="form-check-input" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
+                              <input type="checkbox" class="form-check-input documentTypeCheckbox" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
                               <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
                             </div>
                           </div>
@@ -86,7 +86,7 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 15px">
-                  <button class="btn btn-secondary" type="button">Reset</button>
+                  <button class="btn btn-secondary" type="button" id="documentTypeReset">Reset</button>
                   <button class="btn btn-primary pull-right" type="submit" form="addNewProjectDocumentForm">
                     Add Documents  
                   </button>                    
@@ -101,7 +101,6 @@
       </div>
     </div>
   </div>
-</div>
 </section>
 
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
@@ -147,6 +146,10 @@
       $('.existingDocuments').prop('checked', true);
     } 
   );
+
+  $('#documentTypeReset').click(function(){
+    $('.documentTypeCheckbox').prop('checked', false);
+  });
 </script>
 
 
