@@ -33,12 +33,8 @@ class User extends CI_Controller {
 
 			if ($userData['user_type'] === 'BAC_SEC') {
 				redirect('admin');
-			}elseif ($userData['user_type'] === 'PEO') {
-				redirect('peo');
-			}elseif ($userData['user_type'] === 'PGO') {
-				redirect('pgo');
-			}elseif ($userData['user_type'] === 'BAC_TWG') {
-				redirect('bac_twg');
+			}else{
+				redirect('Capitol');
 			}
 		}else{
 			redirect('user');

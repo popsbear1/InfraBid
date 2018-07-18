@@ -1,4 +1,7 @@
-
+<?php if ($this->session->userdata('user_type') != 'BAC_SEC'): ?>
+  <div class="content-wrapper">
+    <div class="container">
+<?php endif ?>
 <section class="content">
   <div class="row">
 	  <div class="col-lg-12 col-md-12">
@@ -25,56 +28,71 @@
                 <thead>
                   <tr>
                     <th>Project Title</th>
-                    <th>Document Name</th>
-                    <th>Date Sent</th>
+                    <th>Location</th>
+                    <th>ABC</th>
+                    <th>Contractor</th>
+                    <th>Source of Fund</th>
                     <th>Sender</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Balay ni tatang</td>
-                    <td>multiple</td>
-                    <td>July 02, 2018</td>
-                    <td>Ni Enginier</td>
-                    <td class="text-center">
-                      <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
-                        <i class="fa fa-get-pocket"></i> Receive
-                      </button>
-                      <button class="btn btn-info viewDataBtn">
-                        <i class="fa fa-eye"></i> View Data
-                      </button>
-                    </td>
-                  </tr>
+                  <?php foreach ($pending_documents as $pending_document): ?>
+                    <tr>
+                      <td><?php echo $pending_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['current_doc_loc'] ?></td>
+                      <td class="text-center">
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
+                          <i class="fa fa-get-pocket"></i> Receive
+                        </button>
+                        <button class="btn btn-info viewDataBtn">
+                          <i class="fa fa-eye"></i> View Data
+                        </button>
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>
             <div class="tableContainer" id="onhand_documents_table" hidden="hidden"> 
               <table class="table table-bordered documentsTable"> 
-                <thead> 
-                  <tr> 
-                    <th>Project Title</th> 
-                    <th>Document Name</th> 
-                    <th>Project Name</th> 
-                    <th>Sender</th> 
-                    <th>Action</th> 
-                  </tr> 
+                <thead>
+                  <tr>
+                    <th>Project Title</th>
+                    <th>Location</th>
+                    <th>ABC</th>
+                    <th>Contractor</th>
+                    <th>Source of Fund</th>
+                    <th>Sender</th>
+                    <th>Action</th>
+                  </tr>
                 </thead> 
-                <tbody> 
-                  <tr> 
-                    <td>01</td> 
-                    <td>POW</td> 
-                    <td>Balay ni tatang</td> 
-                    <td>Ni Enginier</td> 
-                    <td class="text-center"> 
-                      <a class="btn btn-success" href="<?php echo base_url('docTrack/documentDetailsView') ?>"> 
-                        <i class="fa fa-plus"></i> Update 
-                      </a> 
-                      <button class="btn btn-info viewDataBtn"> 
-                        <i class="fa fa-eye"></i> View Data 
-                      </button> 
-                    </td> 
-                  </tr>  
+                <tbody>
+                  <?php foreach ($onhand_documents as $onhand_document): ?>
+                     <tr>
+                       <td><?php echo $onhand_document['project_title'] ?></td>
+                       <td><?php echo $onhand_document['project_title'] ?></td>
+                       <td><?php echo $onhand_document['project_title'] ?></td>
+                       <td><?php echo $onhand_document['project_title'] ?></td>
+                       <td><?php echo $onhand_document['project_title'] ?></td>
+                       <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
+                       <td class="text-center"> 
+                        <form action="<?php echo base_url('doctrack/setCurrentPlanID') ?>">
+                          <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
+                          <button class="btn btn-success" type="submit"> 
+                            <i class="fa fa-plus"></i> Update 
+                          </button>
+                        </form> 
+                        <button class="btn btn-info viewDataBtn"> 
+                          <i class="fa fa-eye"></i> View Data 
+                        </button> 
+                      </td>
+                     </tr>
+                   <?php endforeach ?>  
                 </tbody> 
               </table> 
             </div>
@@ -83,27 +101,33 @@
                 <thead>
                   <tr>
                     <th>Project Title</th>
-                    <th>Document Name</th>
-                    <th>Project Name</th>
-                    <th>Sender</th>
+                    <th>Location</th>
+                    <th>ABC</th>
+                    <th>Contractor</th>
+                    <th>Source of Fund</th>
+                    <th>Destination</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>01</td>
-                    <td>POW</td>
-                    <td>Balay ni tatang</td>
-                    <td>Ni Enginier</td>
-                    <td class="text-center">
-                      <button class="btn btn-success">
-                        <i class="fa fa-plus"></i> Update
-                      </button>
-                      <button class="btn btn-info viewDataBtn">
-                        <i class="fa fa-eye"></i> View Data
-                      </button>
-                    </td>
-                  </tr> 
+                  <?php foreach ($forwarded_documents as $forwarded_document): ?>
+                    <tr>
+                      <td><?php echo $forwarded_document['project_title'] ?></td>
+                      <td><?php echo $forwarded_document['project_title'] ?></td>
+                      <td><?php echo $forwarded_document['project_title'] ?></td>
+                      <td><?php echo $forwarded_document['project_title'] ?></td>
+                      <td><?php echo $forwarded_document['project_title'] ?></td>
+                      <td><?php echo $forwarded_document['receiver'] ?></td>
+                      <td class="text-center">
+                        <button class="btn btn-success">
+                          <i class="fa fa-plus"></i> Update
+                        </button>
+                        <button class="btn btn-info viewDataBtn">
+                          <i class="fa fa-eye"></i> View Data
+                        </button>
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>
@@ -113,6 +137,9 @@
 	  </div>
   </div>
 </section>
+<?php if ($this->session->userdata('user_type') != 'BAC_SEC'): ?>
+  </div>
+<?php endif ?>
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-ui/jquery-ui.min.js"></script>
@@ -154,6 +181,7 @@
   $(document).ready( 
     function () {
       $('.documentsTable').DataTable();
+      setButtonStyle('#pendingDocumentsBtn');
     } 
   );
 

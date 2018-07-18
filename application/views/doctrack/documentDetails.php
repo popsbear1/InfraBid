@@ -25,7 +25,7 @@
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
+                        <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
                         <label class="form-check-label"><?php echo $document['document_name'] ?></label>
                       </div>
                     </div>
@@ -118,7 +118,7 @@
 <script>
   $(document).ready( 
     function () {
-      $('#projectDocumenTable').DataTable();
+      $('.existingDocuments').prop('checked', true);
     } 
-    );
-  </script>
+  );
+</script>

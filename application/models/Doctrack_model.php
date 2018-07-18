@@ -11,13 +11,30 @@
 			return $query->result_array();
 		}
 
-		public function getDocumentTypes(){
+		public function getDocumentTypes($plan_id){
+
+			$existingDocuments = $this->getExistingDocumentTypes($plan_id);
+			$data = array();
+			foreach ($existingDocuments as $document) {
+				array_push($data, $document['doc_type_id']);
+			}
+
 			$this->db->select('*');
 			$this->db->from('document_type');
+			$this->db->where_not_in('doc_type_id', $data);
 
 			$query = $this->db->get();
 
 			return $query->result_array();
+		}
+
+		public function getExistingDocumentTypes($plan_id){
+			$this->db->select('doc_type_id');
+			$this->db->from('project_document');
+			$this->db->where('plan_id', $plan_id);
+
+			$existingDocumentsQuery = $this->db->get();
+			return $existingDocumentsQuery->result_array();
 		}
 
 		public function getProjectPlans($year){
@@ -48,20 +65,87 @@
 			return $query->result_array();
 		}
 
+		public function getPendingDocuments($user_type){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->where('project_document.status', 'sent');
+			$this->db->where('receiver', $user_type);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getForwardedDocuments($user_type){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->where('project_document.status', 'sent');
+			$this->db->where('current_doc_loc', $user_type);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getOnHandDocuments($user_type){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->where('project_document.status', 'received');
+			$this->db->where('current_doc_loc', $user_type);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		/**
 		* Update Documents
 		*/
 
-		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $department){
+		/**
+		* 1. Insert new Document to the database
+		* 2. Insert new Log to the database
+		* 3. Get insert id of new document and new log
+		* 4. Insert new document log
+		*/
+
+		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $receiver, $department){
 			$data = array(
 				'plan_id' => $plan_id,
 				'doc_type_id' => $doc_type_id,
-				'user_added_document' => $user_id,
+				'added_by' => $user_id,
 				'current_doc_loc' => $department,
+				'receiver' => $receiver,
 				'status' => 'sent'
 			);
 
 			$this->db->insert('project_document', $data);
+			
+			return $this->db->insert_id();
+		}
+
+		public function insertNewLog($remark, $log_type, $user_id){
+			$data = array(
+				'remark' => $remark,
+				'log_type' => $log_type,
+				'user_id' => $user_id,
+			);
+
+			$this->db->insert('logs', $data);
+
+			return $this->db->insert_id();
+		}
+
+		public function insertNewDocumentLogRelation($log_id, $project_document_id){
+			$data = array(
+				'log_id' => $log_id,
+				'project_document_id' => $project_document_id
+			);
+
+			$this->db->insert('document_logs', $data);
 		}
 	}
 ?>
