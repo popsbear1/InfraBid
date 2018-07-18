@@ -67,6 +67,40 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	public function supplementalPlanView(){
+		$year = null;
+		$quarter = null;
+		$status = null;
+		$mode = null;
+		$municipality = null;
+
+		if (isset($_POST['year']) && !empty($_POST['year'])) {
+			$year = $_POST['year'];
+		}else{
+			$year = date('Y');
+		}
+		if (isset($_POST['quarter'])) {
+			$quarter = $_POST['quarter'];
+		}
+		if (isset($_POST['status'])) {
+			$status = $_POST['status'];
+		}
+		if (isset($_POST['mode'])) {
+			$mode = $_POST['mode'];
+		}
+		if (isset($_POST['municipality'])) {
+			$municipality = $_POST['municipality'];
+		}
+
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/supplementalPlan', $data);
+		$this->load->view('admin/fragments/footer');		
+	}
+
 	public function projectDetailsView(){
 		$projectNavControl['pageName'] = "details";
 		$plan_id = $this->session->userdata('plan_id');	
