@@ -26,60 +26,37 @@
                   <td class="text-center"><?php echo $document['doc_no'] ?></td>
                   <td class="text-center"><?php echo $document['document_name'] ?></td>
                   <td class="text-center"><?php echo $document['status'] ?></td>
-                  <td class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                  <td class="text-center">
+                    <div class="btn-group">
                       <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
                         <button class="btn btn-success pull-right" id="documentID" name="documentID" value="<?php echo $document['doc_type_id'] ?>" type="submit">
-                          <i class="fa fa-edit"> Edit</i>
+                          <i class="fa fa-edit">Edit</i>
                         </button>
                       </form>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="navbar-custom-menu">
-                        <ul class="nav navbar-nav">
-                          <li class="dropdown tasks-menu">
-                            <button class="dropdown-toggle btn btn-danger" data-toggle="dropdown">
-                              <i class="fa fa-eye"></i> Status
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                  <li><!-- Task item -->
-                                    <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST">
-                                      <input type="text" name="document_id" value="<?php echo $document['doc_type_id']?>" hidden>
-                                      <button class="btn btn-default btn-block" type="submit">Delete</button>
-                                    </form>
-                                  </li>
-
-                                  <?php if ($document['status']=='active'): ?>
-                                    <li><!-- Task item -->
-                                      <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
-                                        <input type="text" name="document_id" value="
-                                        <?php echo $document['doc_type_id'] ?>" hidden>
-                                        <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
-                                      </form>
-                                    </li>                                  
-                                  <?php endif ?>
-
-                                  <?php if ($document['status']=='inactive'): ?>
-                                    <li>
-                                      <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
-                                        <input type="text" name="document_id" value="
-                                        <?php echo $document['doc_type_id'] ?>" hidden>
-                                        <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
-                                      </form>
-                                    </li>
-
-                                  <?php endif ?>                               
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
+                    <div class="btn-group">
+                      <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST">
+                        <input type="text" name="document_id" value="<?php echo $document['doc_type_id']?>" hidden>
+                          <button class="btn btn-danger" type="submit">Delete</button>                       
+                      </form>
                     </div>
+
+                    <div class="btn-group">
+                      <?php if ($document['status']=='active'): ?>
+                          <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
+                            <input type="text" name="document_id" value="<?php echo $document['doc_type_id'] ?>" hidden>
+                          <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                        </form>                          
+                      <?php endif ?>
+
+                      <?php if ($document['status']=='inactive'): ?>
+                          <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
+                            <input type="text" name="document_id" value="<?php echo $document['doc_type_id'] ?>" hidden>
+                          <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                        </form>                          
+                      <?php endif ?>
+                    </div> 
                   </td>
                 </tr>
               <?php endforeach ?>
