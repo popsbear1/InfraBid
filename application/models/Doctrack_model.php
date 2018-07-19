@@ -129,14 +129,13 @@
 		* 4. Insert new document log
 		*/
 
-		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $receiver, $department){
+		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $department){
 			$data = array(
 				'plan_id' => $plan_id,
 				'doc_type_id' => $doc_type_id,
 				'added_by' => $user_id,
 				'current_doc_loc' => $department,
-				'receiver' => $receiver,
-				'status' => 'sent'
+				'status' => 'received'
 			);
 
 			$this->db->insert('project_document', $data);
