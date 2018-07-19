@@ -8,6 +8,13 @@
     margin: 0 5px 0 5px;
     background: #D4BBBB;
   }
+
+  .document_add{
+    padding: 7px 10px; 
+    margin: 0 5px 0 5px;
+    background: #ffcccc;
+    text-align: right;
+  }
 </style>
 <section class="content-header">
   <div class="row">
@@ -28,75 +35,43 @@
       <div class="box">
         <div class="box-header">
           <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6 text-center">
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
               <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
-                <h4 class="box-title">Project Documents</h4>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-6 text-center">
-              <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
-                <h4 class="box-title">Project Documents Types</h4>
+                <h4>Existing Project Documents</h4>
               </div>
             </div>
           </div>
         </div>
         <div class="box-body">      
           <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-12 col-md-12 col-lg-12">
               <div class="document_container">
                 <form action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
                   <?php foreach ($project_documents as $document): ?>
-                    <div class="row">
-                      <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
-                          <label class="form-check-label"><?php echo $document['document_name'] ?></label>
-                        </div>
-                      </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
+                      <label class="form-check-label"><?php echo $document['document_name'] ?></label>
                     </div>
                   <?php endforeach ?>
                 </form>
               </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 15px">
-                  <button class="btn btn-primary pull-right" type="button" data-toggle="modal" data-target="#sendDocumentsModal">
-                    Send
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <div class="document_container">
-                <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <form  action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/addNewProjectDocument'); }else{ echo base_url('capitol/addNewProjectDocument'); } ?>" method="POST" id="addNewProjectDocumentForm">
-                      <?php foreach ($document_types as $type): ?> 
-                        <div class="row">
-                          <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input documentTypeCheckbox" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
-                              <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
-                            </div>
-                          </div>
-                        </div>
-                      <?php endforeach ?>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 15px">
-                  <button class="btn btn-secondary" type="button" id="documentTypeReset">Reset</button>
-                  <button class="btn btn-primary pull-right" type="submit" form="addNewProjectDocumentForm">
-                    Add Documents  
-                  </button>                    
-                </div>
-              </div>          
+              <div class="document_add">
+                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
+                  <i class="fa fa-plus"></i>
+                  Add Item
+                </button>
+              </div> 
             </div>
           </div>
         </div>
-        <div class="box-footer text-center">
-          
+        <div class="box-footer">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+              <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#sendDocumentsModal">
+                Send
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -193,20 +168,26 @@
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="projectDocumentHistoryModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header" style="padding-top: 0">
+      <div class="modal-header" style="padding: 0 0 0 0;">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#D76969; text-align: center; padding: 7px 10px;">
-            <h3>Project Document Tracking History</h3>
+          <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+            <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">
+              <h4 class="box-title">Project Documents Types</h4>
+            </div>
           </div>
         </div>
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-            <h4>FORWARDING</h4>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="text-center">  
+              <h4>FORWARDING</h4>
+            </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6  text-center">
-            <h4>RECEIVING</h4>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="text-center">  
+              <h4>RECEIVING</h4>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -254,6 +235,45 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="addProjectDocumentModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-top: 0">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#D76969; text-align: center; padding: 7px 10px;">
+            <h3>Project Document Types</h3>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="document_container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <form  action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/addNewProjectDocument'); }else{ echo base_url('capitol/addNewProjectDocument'); } ?>" method="POST" id="addNewProjectDocumentForm">
+                <?php foreach ($document_types as $type): ?> 
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input documentTypeCheckbox" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
+                    <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
+                  </div>
+                <?php endforeach ?>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="document_add">
+          <button class="btn btn-secondary pull-left" type="button" id="documentTypeReset">Reset</button>
+          <button class="btn btn-primary" type="submit" form="addNewProjectDocumentForm">
+            Add Documents  
+          </button>                    
         </div>
       </div>
       <div class="modal-footer">
