@@ -45,6 +45,8 @@ class Capitol extends CI_Controller {
 		$user_type = $this->session->userdata('user_type');
 		$data['document_types'] = $this->doctrack_model->getDocumentTypes($plan_id);
 		$data['project_documents'] = $this->doctrack_model->getProjectDocuments($plan_id, $user_type);
+		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
+		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav');
 		$this->load->view('doctrack/documentDetails', $data);
@@ -101,7 +103,7 @@ class Capitol extends CI_Controller {
 
 		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
 		$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
-		
+
 		foreach ($receive_id as $id) {
 			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
 			$this->doctrack_model->updateDocumentDetails($id['project_document_id'], $plan_id, $department, $sender);

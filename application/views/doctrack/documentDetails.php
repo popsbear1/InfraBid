@@ -193,15 +193,19 @@
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="projectDocumentHistoryModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Project Document History</h5>
+      <div class="modal-header" style="padding-top: 0">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#D76969; text-align: center; padding: 7px 10px;">
+            <h3>Project Document Tracking History</h3>
+          </div>
+        </div>
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 text-center">
             <h4>FORWARDING</h4>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-6 col-md-6 col-sm-6  text-center">
             <h4>RECEIVING</h4>
           </div>
         </div>
@@ -211,21 +215,20 @@
               <thead>
                 <tr>
                   <th class="text-center">Department</th>
-                  <th class="text-center">Date/Time Received</th>
-                  <th class="text-center">Received By</th>
+                  <th class="text-center">Forwarded By</th>
+                  <th class="text-center">Date/Time Forwarded</th>
                   <th class="text-center">Remarks</th>
-                  <th class="text-center">Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                <?php foreach ($forwarding_logs as $flogs): ?>
+                  <tr>
+                    <td><?php echo $flogs['user_type'] ?></td>
+                    <td><?php echo $flogs['user_name'] ?></td>
+                    <td><?php echo $flogs['log_date'] ?></td>
+                    <td><?php echo $flogs['remark'] ?></td>
+                  </tr>
+                <?php endforeach ?>
               </tbody>
             </table>
           </div>
@@ -234,18 +237,20 @@
               <thead>
                 <tr>
                   <th class="text-center">Department</th>
-                  <th class="text-center">Forwarded By</th>
-                  <th class="text-center">Forwarded To</th>
-                  <th class="text-center">Forward (Remarks)</th>  
+                  <th class="text-center">Received By</th>
+                  <th class="text-center">Date/Time Received</th>
+                  <th class="text-center">Remarks</th>   
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                <?php foreach ($receiving_logs as $rlogs): ?>
+                  <tr>
+                    <td><?php echo $rlogs['user_type'] ?></td>
+                    <td><?php echo $rlogs['user_name'] ?></td>
+                    <td><?php echo $rlogs['log_date'] ?></td>
+                    <td><?php echo $rlogs['remark'] ?></td>
+                  </tr>
+                <?php endforeach ?>
               </tbody>
             </table>
           </div>
