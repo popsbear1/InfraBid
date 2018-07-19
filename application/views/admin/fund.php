@@ -15,6 +15,7 @@
             <thead>
               <tr>
                 <th class="text-center">ID</th>
+                <th class="text-center">Type of Fund</th>
                 <th class="text-center">Source of Fund</th>
                 <th class="text-center">Status</th>
                 <th class="text-center">Actions</th>
@@ -24,6 +25,7 @@
               <?php foreach ($funds as $fund): ?>
                 <tr>
                   <td class="text-center"><?php echo $fund['fund_id'] ?></td>
+                  <td class="text-center"><?php echo $fund['fund_type'] ?></td>
                   <td class="text-center"><?php echo $fund['source'] ?></td>
                   <td class="text-center"><?php echo $fund['status'] ?></td>
                   <td class="text-center row">
