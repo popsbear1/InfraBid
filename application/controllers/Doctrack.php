@@ -87,16 +87,17 @@ class Doctrack extends CI_Controller {
 	}
 
 	public function receiveDocument(){
-		$plan_id = $this->session->userdata('plan_id_doctrack');
+		
 		$user_id = $this->session->userdata('user_id');
 		$department = $this->session->userdata('user_type');
+		$plan_id = $this->input->post('plan_id');
 		$sender = $this->input->post('sender');
 
 		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
 		$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
 		foreach ($receive_id as $id) {
 			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
-			$this->doctrack_model->updateDocumentDetails($id, $plan_id, $department, $sender);
+			$this->doctrack_model->updateDocumentDetails($id['project_document_id'], $plan_id, $department, $sender);
 		}
 		
 		redirect('doctrack/docTrackView');

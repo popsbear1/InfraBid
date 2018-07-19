@@ -224,6 +224,7 @@
 			$this->db->where('project_document_id', $project_document_id);
 			$this->db->where('plan_id', $plan_id);
 			$this->db->where('receiver', $department);
+			$this->db->where('current_doc_loc', $sender);
 			$this->db->where('status', 'sent');
 			$this->db->update('project_document', $data);
 		}

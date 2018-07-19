@@ -3,7 +3,7 @@
   $color = "";
   if ($user_type == 'PEO') {
     $color = 'skin-yellow-light';
-  }elseif ($user_type == 'PEO') {
+  }elseif ($user_type == 'PGO') {
     $color = 'skin-red-light';
   }elseif ($user_type == 'BAC_TWG') {
     $color = 'skin-green-light';

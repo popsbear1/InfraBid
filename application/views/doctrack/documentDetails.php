@@ -44,7 +44,7 @@
           <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6">
               <div class="document_container">
-                <form action="<?php echo base_url('doctrack/sendProjectDocuments') ?>" id="sendProjectDocumentsForm" method="POST">  
+                <form action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
                   <?php foreach ($project_documents as $document): ?>
                     <div class="row">
                       <div class="col-lg-12 col-md-12 col-sm-12">
@@ -69,7 +69,7 @@
               <div class="document_container">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
-                    <form action="<?php echo base_url('doctrack/addNewProjectDocument') ?>" method="POST" id="addNewProjectDocumentForm">
+                    <form  action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/addNewProjectDocument'); }else{ echo base_url('capitol/addNewProjectDocument'); } ?>" method="POST" id="addNewProjectDocumentForm">
                       <?php foreach ($document_types as $type): ?> 
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12">

@@ -120,9 +120,6 @@
                       <td><?php echo $forwarded_document['project_title'] ?></td>
                       <td><?php echo $forwarded_document['receiver'] ?></td>
                       <td class="text-center">
-                        <button class="btn btn-success">
-                          <i class="fa fa-plus"></i> Update
-                        </button>
                         <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] ?>">
                           <i class="fa fa-eye"></i> View Data
                         </button>
