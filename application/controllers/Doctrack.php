@@ -95,11 +95,21 @@ class Doctrack extends CI_Controller {
 		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
 		$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
 		foreach ($receive_id as $id) {
-			
 			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
 			$this->doctrack_model->updateDocumentDetails($id, $plan_id, $department, $sender);
 		}
 		
 		redirect('doctrack/docTrackView');
+	}
+
+	public function getProjectDocumentHistory(){
+		$plan_id = $this->input->post('plan_id');
+		$sender = $this->input->post('sender');
+		$receiver = $this->input->post('receiver');
+
+		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
+		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
+
+		echo json_encode($data);
 	}
 }

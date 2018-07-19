@@ -49,9 +49,9 @@
                           <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
                             <i class="fa fa-get-pocket"></i> Receive
                           </button>
-                          <button class="btn btn-info viewDataBtn" type="button">
-                          <i class="fa fa-eye"></i> View Data
-                        </button>
+                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] ?>">
+                            <i class="fa fa-eye"></i> View Data
+                          </button> 
                         </form>
                       </td>
                     </tr>
@@ -87,8 +87,8 @@
                           <button class="btn btn-success" type="submit"> 
                             <i class="fa fa-plus"></i> Update 
                           </button>
-                          <button class="btn btn-info viewDataBtn" type="button"> 
-                            <i class="fa fa-eye"></i> View Data 
+                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] ?>">
+                            <i class="fa fa-eye"></i> View Data
                           </button> 
                         </form> 
                       </td>
@@ -123,7 +123,7 @@
                         <button class="btn btn-success">
                           <i class="fa fa-plus"></i> Update
                         </button>
-                        <button class="btn btn-info viewDataBtn">
+                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] ?>">
                           <i class="fa fa-eye"></i> View Data
                         </button>
                       </td>
@@ -216,8 +216,59 @@
     
   });
 
-  $(document).on('click', '.viewDataBtn', function(){
+  $(document).on('click', '.viewPendingDocumentDataBtn', function(){
     $('#documentDetailsViewModal').modal('show');
+  });
+
+  $(document).on('click', '.viewDocumentDataBtn', function(){
+    $('#documentDetailsViewModal').modal('show');
+
+    $('#forwardingLogTable').DataTable().destroy();
+    $('#receivingLogTable').DataTable().destroy();
+
+    var forwarded_document_details = $(this).val();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
+      data: { plan_id: forwarded_document_details},
+      dataType: 'json',
+      success: function(response){
+
+        $('#forwardingLogTable').DataTable( {
+            data: response.forwarding_logs,
+            columns: [
+                { data: 'user_type' },
+                { data: 'user_name' },
+                { data: 'log_date' },
+                { data: 'remark' }
+            ],
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : false,
+            'autoWidth'   : false
+        } );
+
+        $('#receivingLogTable').DataTable( {
+            data: response.receiving_logs,
+            columns: [
+                { data: 'user_type' },
+                { data: 'user_name' },
+                { data: 'log_date' },
+                { data: 'remark' }
+            ],
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : false,
+            'autoWidth'   : false
+        } );
+      }
+    });
+
   });
 
 
@@ -227,69 +278,67 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="box text-center">
-          <div class="box-header">
-            <h2 class="box-title">
-              HISTORY TRACKS
-            </h2>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div>
+              <h2 style="background-color:#D76969; text-align: center; padding: 7px 10px;">
+                HISTORY TRACKS
+              </h2>
+            </div>
           </div>
-          <div class="box-body">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
-                  <h4>FORWARDING</h4>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
-                  <h4>RECEIVING</h4>
-                </div>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
+              <h4>FORWARDING</h4>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th class="text-center">Department</th>
-                      <th class="text-center">Date/Time Received</th>
-                      <th class="text-center">Received By</th>
-                      <th class="text-center">Remarks</th>
-                      <th class="text-center">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th class="text-center">Department</th>
-                      <th class="text-center">Forwarded By</th>
-                      <th class="text-center">Forwarded To</th>
-                      <th class="text-center">Forward (Remarks)</th>  
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
+              <h4>RECEIVING</h4>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <table class="table table-bordered table-striped" id="forwardingLogTable">
+              <thead>
+                <tr>
+                  <th class="text-center">Department</th>
+                  <th class="text-center">Forwarded By</th>
+                  <th class="text-center">Date/Time Forwarded</th>
+                  <th class="text-center">Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <table class="table table-bordered table-striped" id="receivingLogTable">
+              <thead>
+                <tr>
+                  <th class="text-center">Department</th>
+                  <th class="text-center">Received By</th>
+                  <th class="text-center">Date/Time Received</th>
+                  <th class="text-center">Remarks</th>  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>     
       </div>

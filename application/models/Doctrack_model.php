@@ -118,6 +118,36 @@
 			return $query->result_array();
 		}
 
+		public function getProjectDocumentHistoryForwarding($plan_id){
+			$this->db->select('*, concat(users.first_name, " ", users.middle_name, " ", users.last_name) as user_name');
+			$this->db->from('logs');
+			$this->db->join('users', 'logs.user_id = users.user_id');
+			$this->db->join('document_logs', 'logs.log_id = document_logs.log_id');
+			$this->db->join('project_document', 'document_logs.project_document_id = project_document.project_document_id');
+			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->where('logs.log_type', 'send');
+			$this->db->group_by('logs.log_id');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getProjectDocumentHistoryReceiving($plan_id){
+			$this->db->select('*, concat(users.first_name, " ", users.middle_name, " ", users.last_name) as user_name');
+			$this->db->from('logs');
+			$this->db->join('users', 'logs.user_id = users.user_id');
+			$this->db->join('document_logs', 'logs.log_id = document_logs.log_id');
+			$this->db->join('project_document', 'document_logs.project_document_id = project_document.project_document_id');
+			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->where('logs.log_type', 'receive');
+			$this->db->group_by('logs.log_id');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		/**
 		* Update Documents
 		*/
