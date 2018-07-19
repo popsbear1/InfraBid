@@ -61,10 +61,12 @@ class Doctrack extends CI_Controller {
 		$receiver = $this->input->post('department');
 		$remark = $this->input->post('forward_remark');
 
+		$existing_doc_forward_log_id = $this->doctrack_model->insertNewLog($remark, 'send', $user_id);
+
 		if ($this->input->post('project_document[]') !== null) {
 			foreach ($this->input->post('project_document[]') as $document) {
 				$this->doctrack_model->forwardDocument($document, $receiver);
-				$existing_doc_forward_log_id = $this->doctrack_model->insertNewLog($remark, 'send', $user_id);
+				
 
 				$this->doctrack_model->insertNewDocumentLogRelation($existing_doc_forward_log_id, $document);
 			}
@@ -78,7 +80,7 @@ class Doctrack extends CI_Controller {
 		$department = $this->session->userdata('user_type');
 		if (!empty($this->input->post('document_type[]'))) {
 			foreach ($this->input->post('document_type[]') as $doc_type_id) {
-				$this->doctrack_model->addProjectDocument($plan_id, $doc_type_id, $user_id, $receiver, $department);
+				$this->doctrack_model->addProjectDocument($plan_id, $doc_type_id, $user_id, $department);
 			}
 		}
 		redirect('docTrack/documentDetailsView');
@@ -91,8 +93,9 @@ class Doctrack extends CI_Controller {
 		$sender = $this->input->post('sender');
 
 		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
+		$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
 		foreach ($receive_id as $id) {
-			$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
+			
 			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
 			$this->doctrack_model->updateDocumentDetails($id, $plan_id, $department, $sender);
 		}
