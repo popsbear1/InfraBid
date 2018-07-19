@@ -403,7 +403,7 @@ class Admin extends CI_Controller {
 		}else{
 			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
 		}
-		redirect('admin/addFundsView');
+		redirect('admin/manageFundsView');
 	}
 
 	public function editFundsView(){
@@ -584,7 +584,7 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/addMunicipality');
-		$this->load->view('admin/fragments/footer');
+		$this->	load->view('admin/fragments/footer');
 	}
 
 	public function addNewMunicipality(){
@@ -1582,5 +1582,26 @@ class Admin extends CI_Controller {
 		$this->admin_model->updateUsers($user_id, 'activate');
 
 		redirect('admin/manageUsers');	
+	}
+	public function deleteMunicipalitiesAndBarangays(){
+		$municipality_id=$this->input->post('municipality_id');
+		$this->admin_model->deleteMunicipalitiesAndBarangays($municipality_id);
+
+		redirect('admin/manageMunicipalitiesAndBarangays');
+	}
+
+	public function deactivateMunicipalitiesAndBarangays(){
+		$municipality_id=$this->input->post('municipality_id');
+		$this->admin_model->updateMunicipalitiesAndBarangays($municipality_id, 'deactivate');
+
+		redirect('admin/manageMunicipalitiesAndBarangays');		
+
+	}
+
+	public function activateMunicipalitiesAndBarangays(){
+		$municipality_id=$this->input->post('municipality_id');
+		$this->admin_model->updateMunicipalitiesAndBarangays($municipality_id, 'activate');
+
+		redirect('admin/manageMunicipalitiesAndBarangays');	
 	}
 }
