@@ -19,29 +19,19 @@
                 <p><?php echo $_SESSION['error'] ?></p>
               </div>
             <?php endif ?>
-            d
+            
             <form id="addFundsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>">
+              
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Source of Fund<span class="required">*</span>
                 </label>
-
-                    <div class="modal-body">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="form-group">
-              <label>Department:</label>
-              <select class="form-control" name="department" form="sendProjectDocumentsForm">
-                <option hidden disabled selected>Choose Receiver</option>
-                <option value="BAC_SEC">BAC-SEC</option>
-                <option value="BAC_TWG">BAC-TWG</option>
-                <option value="PGO">PGO</option>
-                <option value="PEO">PEO</option>
-              </select>
-            </div>
-
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input type="text" step="any"  id="source" name="source"  required="required" class="form-control col-md-7 col-xs-12">
                 </div>
+              </div>
+
+              <div class="form-group">
+                
               </div>
 
               <div class="ln_solid"></div>

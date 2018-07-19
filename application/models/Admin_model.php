@@ -1228,5 +1228,29 @@
 		$this->db->where('user_id', $user_id);
 		$this->db->delete('users');
 	}
+
+	public function updateMunicipalitiesAndBarangays($municipality_id, $action){
+
+		if ($action=='deactivate') {
+			$data = array(
+				'status' => 'inactive'
+			);
+		} 
+		else{
+			$data = array(
+				'status' => 'active'
+			);
+		}
+
+		$this->db->where('municipality_id', $municipality_ids);
+		$this->db->update('municipalities', $data);
+
+	}
+
+	public function deleteMunicipalitiesAndBarangays($municipality_id){
+
+		$this->db->where('municipality_id', $municipality_id);
+		$this->db->delete('municipalities');
+	}
 }
 ?>
