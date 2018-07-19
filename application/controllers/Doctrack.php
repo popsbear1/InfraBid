@@ -90,10 +90,13 @@ class Doctrack extends CI_Controller {
 		$department = $this->session->userdata('user_type');
 		$sender = $this->input->post('sender');
 
-		$this->doctrack_model->updateDocumentDetails($plan_id, $department, $sender);
-
-		// $this->doctrack_model->insertNewLog();
-
+		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
+		foreach ($receive_id as $id) {
+			$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
+			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
+			$this->doctrack_model->updateDocumentDetails($id, $plan_id, $department, $sender);
+		}
+		
 		redirect('doctrack/docTrackView');
 	}
 }

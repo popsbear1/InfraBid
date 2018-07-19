@@ -43,9 +43,10 @@
                       <td><?php echo $pending_document['project_title'] ?></td>
                       <td><?php echo $pending_document['current_doc_loc'] ?></td>
                       <td class="text-center">
-                        <form action="<?php echo base_url('doctrack/receiveDocument') ?>" method="POST" id="receiveDocumentForm">
-                          <input type="text" name="sender" value="<?php $pending_document['current_doc_loc'] ?>" hidden>
-                          <button class="btn btn-warning" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
+                        <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/receiveDocument');}else{ echo base_url('capitol/receiveDocument'); } ?>" method="POST" id="receiveDocumentForm">
+                          <input type="text" name="plan_id" value="<?php echo $pending_document['plan_id'] ?>" hidden>
+                          <input type="text" name="sender" value="<?php echo $pending_document['current_doc_loc'] ?>" hidden>
+                          <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
                             <i class="fa fa-get-pocket"></i> Receive
                           </button>
                           <button class="btn btn-info viewDataBtn" type="button">
@@ -81,15 +82,15 @@
                        <td><?php echo $onhand_document['project_title'] ?></td>
                        <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
                        <td class="text-center"> 
-                        <form action="<?php echo base_url('doctrack/setCurrentPlanID') ?>">
+                        <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
                           <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
                           <button class="btn btn-success" type="submit"> 
                             <i class="fa fa-plus"></i> Update 
                           </button>
+                          <button class="btn btn-info viewDataBtn" type="button"> 
+                            <i class="fa fa-eye"></i> View Data 
+                          </button> 
                         </form> 
-                        <button class="btn btn-info viewDataBtn"> 
-                          <i class="fa fa-eye"></i> View Data 
-                        </button> 
                       </td>
                      </tr>
                    <?php endforeach ?>  
@@ -235,10 +236,14 @@
           <div class="box-body">
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <h4>FORWARDING</h4>
+                <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
+                  <h4>FORWARDING</h4>
+                </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <h4>RECEIVING</h4>
+                <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
+                  <h4>RECEIVING</h4>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -255,7 +260,6 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>

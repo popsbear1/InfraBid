@@ -106,6 +106,18 @@
 			return $query->result_array();
 		}
 
+		public function getReceivedDocumentID($plan_id, $department, $sender){
+			$this->db->select('project_document_id');
+			$this->db->from('project_document');
+			$this->db->where('plan_id', $plan_id);
+			$this->db->where('receiver', $department);
+			$this->db->where('current_doc_loc', $sender);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		/**
 		* Update Documents
 		*/
@@ -143,9 +155,16 @@
 			return $this->db->insert_id();
 		}
 
-		// public function insertNewLogReceive(){
+		public function insertNewReceivedLog($user_id){
+			$data = array(
+				'log_type' => 'receive',
+				'user_id' => $user_id,
+			);
 
-		// }
+			$this->db->insert('logs', $data);
+
+			return $this->db->insert_id();
+		}		
 
 		public function insertNewDocumentLogRelation($log_id, $project_document_id){
 			$data = array(
@@ -165,7 +184,7 @@
 			$this->db->update('project_document', $data);
 		}
 
-		public function updateDocumentDetails($plan_id, $department, $sender){
+		public function updateDocumentDetails($project_document_id, $plan_id, $department, $sender){
 			$data = array(
 				'previous_doc_loc' => $sender,
 				'current_doc_loc' => $department,
@@ -173,7 +192,8 @@
 				'status' => 'received'
 			);
 
-			$this->db->where('$plan_id', $plan_id);
+			$this->db->where('project_document_id', $project_document_id);
+			$this->db->where('plan_id', $plan_id);
 			$this->db->where('receiver', $department);
 			$this->db->where('status', 'sent');
 			$this->db->update('project_document', $data);
