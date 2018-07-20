@@ -22,10 +22,19 @@ class Capitol extends CI_Controller {
 
 	public function projectListView(){
 		$year = date('Y');
-		$data['plans'] = $this->doctrack_model->getProjectPlans($year);
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW($year);
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav');
 		$this->load->view('doctrack/projectList', $data);
+		$this->load->view('doctrack/fragments/footer');
+	}
+
+	public function projectListViewForPOW(){
+		$year = date('Y');
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithoutPOW($year);
+		$this->load->view('doctrack/fragments/head');
+		$this->load->view('doctrack/fragments/nav');
+		$this->load->view('doctrack/projectListForPOW', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}
 

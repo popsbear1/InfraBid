@@ -72,8 +72,8 @@
                   <?php foreach ($onhand_documents as $onhand_document): ?>
                      <tr>
                        <td><?php echo $onhand_document['project_title'] ?></td>
-                       <td><?php echo $onhand_document['municipality'] . ', ' . $onhand_document['barangay'] ?></td>
-                       <td><?php echo number_format($onhand_document['abc'], 2) ?></td>
+                       <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                       <td><?php echo number_format($pending_document['abc'], 2) ?></td>
                        <td><?php echo $onhand_document['businessname'] ?></td>
                        <td><?php echo $onhand_document['source'] ?></td>
                        <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
@@ -110,8 +110,8 @@
                   <?php foreach ($forwarded_documents as $forwarded_document): ?>
                     <tr>
                       <td><?php echo $forwarded_document['project_title'] ?></td>
-                      <td><?php echo $forwarded_document['municipality'] . ', ' . $forwarded_document['barangay'] ?></td>
-                      <td><?php echo number_format($forwarded_document['abc'], 2) ?></td>
+                      <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                      <td><?php echo number_format($pending_document['abc'], 2) ?></td>
                       <td><?php echo $forwarded_document['businessname'] ?></td>
                       <td><?php echo $forwarded_document['source'] ?></td>
                       <td><?php echo $forwarded_document['receiver'] ?></td>
