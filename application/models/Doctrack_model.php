@@ -89,12 +89,24 @@
 			return $query->result_array();
 		}
 
-		public function getProjectDocuments($plan_id, $user_type){
+		public function getProjectDocumentsOnhand($plan_id, $user_type){
 			$this->db->select('*');
 			$this->db->from('project_document');
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('current_doc_loc', $user_type);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getProjectDocuments($plan_id, $user_type){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->not_like('current_doc_loc', $user_type);
 
 			$query = $this->db->get();
 

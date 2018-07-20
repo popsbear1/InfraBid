@@ -46,7 +46,8 @@ class Doctrack extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');
 		$data['document_types'] = $this->doctrack_model->getDocumentTypes($plan_id);
-		$data['project_documents'] = $this->doctrack_model->getProjectDocuments($plan_id, $user_type);
+		$data['onhand_project_documents'] = $this->doctrack_model->getProjectDocumentsOnhand($plan_id, $user_type);
+		$data['other_project_documents'] = $this->doctrack_model->getProjectDocuments($plan_id, $user_type);
 		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
 		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
 		$this->load->view('admin/fragments/head');

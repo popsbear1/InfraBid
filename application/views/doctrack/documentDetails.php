@@ -7,24 +7,24 @@
     padding: 7px 10px; 
     margin: 0 5px 0 5px;
     background: #D4BBBB;
+    border: black;
   }
 
   .document_add{
     padding: 7px 10px; 
     margin: 0 5px 0 5px;
-    background: #ffcccc;
     text-align: right;
   }
 </style>
 <section class="content-header">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6 col-sm-6">
       <a href="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/docTrackView'); }else{ echo base_url('capitol/docTrackView'); } ?>" type="button" class="btn btn-warning btn-lg" >
         <i class="fa fa-arrow-left"></i>
         Back
       </a>
     </div>
-    <div class="col-lg-6 text-right">
+    <div class="col-lg-6 col-md-6 col-sm-6 text-right">
       <button class="btn btn-lg btn-info" data-target="#projectDocumentHistoryModal" data-toggle="modal" >
         History
         <i class="fa fa-list"></i>    
@@ -48,15 +48,35 @@
         <div class="box-body">      
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-              <div class="document_container">
-                <form action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
-                  <?php foreach ($project_documents as $document): ?>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $document['project_document_id'] ?>">
-                      <label class="form-check-label"><?php echo $document['document_name'] ?></label>
-                    </div>
-                  <?php endforeach ?>
-                </form>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
+                    <h5>Onhand Documents</h5>
+                  </div>
+                  <div class="document_container">
+                    <form action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
+                      <?php foreach ($onhand_project_documents as $onhand_document): ?>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $onhand_document['project_document_id'] ?>">
+                          <label class="form-check-label"><?php echo $onhand_document['document_name'] ?></label>
+                        </div>
+                      <?php endforeach ?>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
+                    <h5>Documents on other Departments</h5>
+                  </div>
+                  <div class="document_container"> 
+                    <?php foreach ($other_project_documents as $other_document): ?>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $other_document['project_document_id'] ?>">
+                        <label class="form-check-label"><?php echo $other_document['document_name'] ?></label>
+                      </div>
+                    <?php endforeach ?>
+                  </div>
+                </div>
               </div>
               <div class="document_add">
                 <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
