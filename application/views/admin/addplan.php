@@ -1,6 +1,6 @@
 
     <section class="content-header">
-      <h2>Add New Project Plan</h2>
+      <h3>ADD NEW PROJECT PLAN (REGULAR)</h3>
     </section>
     <section class="content">
       <div class="row">

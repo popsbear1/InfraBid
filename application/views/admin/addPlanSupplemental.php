@@ -1,13 +1,13 @@
 
     <section class="content-header">
-      <h2>Add New Project Plan</h2>
+      <h3>ADD NEW PROJECT PLAN (SUPPLEMENTAL)</h3>
     </section>
     <section class="content">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h2 class="box-title"><medium>(SUPPLEMENTAL)</medium>  Input Project Plan Details</h2>
+              <h2 class="box-title">Input Project Plan Details</h2>
             </div>
             <div class="box-body">
               <?php if (isset($_SESSION['success'])): ?>
