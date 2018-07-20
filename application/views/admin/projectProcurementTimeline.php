@@ -61,7 +61,7 @@
                       </td>
                       <td class="center"><input type="date" class="form-control" id="preBidStart" name="preBidStart"></td>
                       <td class="center"><input type="date" class="form-control" id="preBidEnd" name="preBidEnd"></td>
-                      <td class="reight-col">
+                      <td class="row-col">
                         <div class="col-lg-6">
                           <input type="number" class="form-control" id="preBidNumber" min="0">
                         </div>
@@ -75,7 +75,7 @@
                       <td><input type="date" class="form-control" id="bidSubmissionStart" name="bidSubmissionStart"></td>
                       <td><input type="date" class="form-control" id="bidSubmissionEnd" name="bidSubmissionEnd"></td>
                       <td>
-                        <div class="col-lg-6">
+                        <div class="conflictl-lg-6">
                           <input type="number" class="form-control" id="bidSubmissionNumber" min="0">
                         </div>
                         <div class="col-lg-6">
