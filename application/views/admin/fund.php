@@ -123,6 +123,7 @@
   $(document).ready(function() {
     $('#myModal').on('show.bs.modal' , function (e) {
       $('#usernam').html($('#source').val());
+      $('#wewetype').html($('#fundtype').val());
     });
   });
 </script>
@@ -138,25 +139,21 @@
       <div class="modal-body">
         <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>">
 
-          <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:
-            </label>
+      <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
               <input type="text" id="source" name="source" class="form-control">
             </div>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Fund:</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select class="form-control" id="fundtype" name="fundtype">
+                    <option hidden disabled selected>Select Type</option>
+                    <option value="regular">Regular</option>
+                    <option value="supplemental">Supplemental</option>
+                  </select>
+            </div>
           </div>
-        </form>
-
-          <div class="form-group">
-            <label>Type of Fund:</label>
-              <select class="form-control" name="department" form="sendProjectDocumentsForm">
-                <option hidden disabled selected>Select Type</option>
-                <option value="regular">Regular</option>
-                <option value="supplemental">Supplemental</option>
-              </select>
-          </div>
-          
-      </div>
+      </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
@@ -189,6 +186,10 @@
           <tbody>
             <tr><td>Source of Fund</td>
               <td><span id="usernam"></span></td>
+            </tr>
+            <tr>
+              <td>Type of Fund</td>
+              <td><span id="wewetype"></span></td>
             </tr>
           </tbody>
         </table>

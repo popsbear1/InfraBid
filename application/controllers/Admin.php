@@ -397,8 +397,9 @@ class Admin extends CI_Controller {
 
 	public function addFunds(){
 		$source = $this->input->post('source');
+		$fund_type = $this->input->post('fund_type');
 
-		if ($this->admin_model->insertNewFunds($source)) {
+		if ($this->admin_model->insertNewFunds($source,$fund_type)) {
 			$this->session->set_flashdata('success', 'New Funds Successfully Added.');
 		}else{
 			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
