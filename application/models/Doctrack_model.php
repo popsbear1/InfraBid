@@ -193,7 +193,7 @@
 		public function getProjectDocumentHistoryForwarding($plan_id){
 			$this->db->select('*, concat(users.first_name, " ", users.middle_name, " ", users.last_name) as user_name');
 			$this->db->from('logs');
-			$this->db->join('users', 'logs.user_id = users.user_id');
+			$this->db->join('users', 'logs.sender = users.user_id');
 			$this->db->join('document_logs', 'logs.log_id = document_logs.log_id');
 			$this->db->join('project_document', 'document_logs.project_document_id = project_document.project_document_id');
 			$this->db->where('project_document.plan_id', $plan_id);
@@ -208,7 +208,7 @@
 		public function getProjectDocumentHistoryReceiving($plan_id){
 			$this->db->select('*, concat(users.first_name, " ", users.middle_name, " ", users.last_name) as user_name');
 			$this->db->from('logs');
-			$this->db->join('users', 'logs.user_id = users.user_id');
+			$this->db->join('users', 'logs.receiver = users.user_id');
 			$this->db->join('document_logs', 'logs.log_id = document_logs.log_id');
 			$this->db->join('project_document', 'document_logs.project_document_id = project_document.project_document_id');
 			$this->db->where('project_document.plan_id', $plan_id);
@@ -248,7 +248,7 @@
 			$data = array(
 				'remark' => $remark,
 				'log_type' => $log_type,
-				'user_id' => $user_id,
+				'sender' => $user_id,
 			);
 
 			$this->db->insert('logs', $data);
@@ -259,7 +259,7 @@
 		public function insertNewReceivedLog($user_id){
 			$data = array(
 				'log_type' => 'receive',
-				'user_id' => $user_id,
+				'receiver' => $user_id,
 			);
 
 			$this->db->insert('logs', $data);
