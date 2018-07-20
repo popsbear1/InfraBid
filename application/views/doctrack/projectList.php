@@ -1,4 +1,3 @@
-
 <section class="content-header">
 
 </section>
@@ -87,5 +86,56 @@
     function () {
       $('#documentTable').DataTable();
     } 
-    );
+  );
+
+  $(document).ready(function(){
+    $('#documentDetailsViewModal').modal('show');
+
+    $('#forwardingLogTable').DataTable().destroy();
+    $('#receivingLogTable').DataTable().destroy();
+
+    var forwarded_document_details = $(this).val();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
+      data: { plan_id: forwarded_document_details},
+      dataType: 'json',
+      success: function(response){
+
+        $('#forwardingLogTable').DataTable( {
+            data: response.forwarding_logs,
+            columns: [
+                { data: 'user_type' },
+                { data: 'user_name' },
+                { data: 'log_date' },
+                { data: 'remark' }
+            ],
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : false,
+            'autoWidth'   : false
+        } );
+
+        $('#receivingLogTable').DataTable( {
+            data: response.receiving_logs,
+            columns: [
+                { data: 'user_type' },
+                { data: 'user_name' },
+                { data: 'log_date' },
+                { data: 'remark' }
+            ],
+            'paging'      : false,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : false,
+            'autoWidth'   : false
+        } );
+      }
+    });
+
+  });
   </script>

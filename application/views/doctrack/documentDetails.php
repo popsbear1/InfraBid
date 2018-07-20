@@ -261,7 +261,7 @@
         <div class="document_container">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-              <form  action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/addNewProjectDocument'); }else{ echo base_url('capitol/addNewProjectDocument'); } ?>" method="POST" id="addNewProjectDocumentForm">
+              <form  action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/addNewProjectDocument'); }else{ echo base_url('capitol/addNewProjectDocument'); } ?>" method="POST" id="addNewProjectDocumentForm">
                 <?php foreach ($document_types as $type): ?> 
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input documentTypeCheckbox" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">

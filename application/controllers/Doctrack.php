@@ -26,10 +26,19 @@ class Doctrack extends CI_Controller {
 
 	public function projectListView(){
 		$year = date('Y');
-		$data['plans'] = $this->doctrack_model->getProjectPlans($year);
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW($year);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/projectList', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function projectListViewForPOW(){
+		$year = date('Y');
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithoutPOW($year);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/projectListForPOW', $data);
 		$this->load->view('admin/fragments/footer');
 	}
 
@@ -44,6 +53,14 @@ class Doctrack extends CI_Controller {
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/documentDetails', $data);
 		$this->load->view('admin/fragments/footer');
+	}
+
+	public function getProjectPlanDetails(){
+		$plan_id = $this->input->post('plan_id');
+
+		$data['plan_details'] = $this->doctrack_model->getProjectPlanDetails($plan_id);
+
+		echo json_encode($data);
 	}
 
 

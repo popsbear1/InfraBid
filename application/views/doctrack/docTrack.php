@@ -43,16 +43,12 @@
                       <td><?php echo $pending_document['source'] ?></td>
                       <td><?php echo $pending_document['current_doc_loc'] ?></td>
                       <td class="text-center">
-                        <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/receiveDocument');}else{ echo base_url('capitol/receiveDocument'); } ?>" method="POST" id="receiveDocumentForm">
-                          <input type="text" name="plan_id" value="<?php echo $pending_document['plan_id'] ?>" hidden>
-                          <input type="text" name="sender" value="<?php echo $pending_document['current_doc_loc'] ?>" hidden>
-                          <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#confirmDocumentReceivalModal">
-                            <i class="fa fa-get-pocket"></i> Receive
-                          </button>
-                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] ?>">
-                            <i class="fa fa-eye"></i>
-                          </button> 
-                        </form>
+                        <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
+                          <i class="fa fa-get-pocket"></i> Receive
+                        </button>
+                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] ?>">
+                          <i class="fa fa-eye"></i>
+                        </button>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -217,6 +213,15 @@
     $('#documentDetailsViewModal').modal('show');
   });
 
+  $(document).on('click', '.receiveProjectDocumentBtn', function(){
+    var project_document_details = $(this).val().split(',');
+
+    $('#plan_id').val(project_document_details[0]);
+    $('#sender').val(project_document_details[1]);
+
+    $('#confirmDocumentReceivalModal').modal('show');    
+  });
+
   $(document).on('click', '.viewDocumentDataBtn', function(){
     $('#documentDetailsViewModal').modal('show');
 
@@ -357,6 +362,10 @@
       </div>
       <div class="modal-body">
         <p>Confirm Document Receival</p>
+        <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/receiveDocument');}else{ echo base_url('capitol/receiveDocument'); } ?>" method="POST" id="receiveDocumentForm">
+          <input type="text" name="plan_id" id="plan_id" hidden>
+          <input type="text" name="sender" id="sender" hidden>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="submit" form="receiveDocumentForm" class="btn btn-primary">Confirm</button>
