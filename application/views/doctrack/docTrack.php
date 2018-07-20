@@ -43,12 +43,16 @@
                       <td><?php echo $pending_document['source'] ?></td>
                       <td><?php echo $pending_document['current_doc_loc'] ?></td>
                       <td class="text-center">
-                        <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
-                          <i class="fa fa-get-pocket"></i> Receive
-                        </button>
-                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] . ',' . $pending_document['receiver'] . ',' . 'pending' ?>">
-                          <i class="fa fa-eye"></i>
-                        </button>
+                        <div class="btn-group">
+                          <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
+                            <i class="fa fa-get-pocket"></i> Receive
+                          </button>
+                        </div>
+                        <div class="btn-group">
+                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] . ',' . $pending_document['receiver'] . ',' . 'pending' ?>">
+                            <i class="fa fa-eye">View</i>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -77,15 +81,20 @@
                        <td><?php echo $onhand_document['businessname'] ?></td>
                        <td><?php echo $onhand_document['source'] ?></td>
                        <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
-                       <td class="text-center"> 
-                        <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
-                          <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
-                          <button class="btn btn-success" type="submit"> 
-                            <i class="fa fa-plus"></i> Update 
-                          </button>
-                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
-                            <i class="fa fa-eye"></i>
-                          </button> 
+                      <td class="text-center">
+                         <div class="btn-group"> 
+                            <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
+                                <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
+                              <button class="btn btn-success" type="submit"> 
+                                <i class="fa fa-plus"></i> Update </button>
+                          </div>
+                          <div class="btn-group">
+                            <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
+                              <i class="fa fa-eye">View</i></button>
+                          </div>
+                          <div class="btn-group">
+                            <button><i>Cancel</i></button>
+                          </div> 
                         </form> 
                       </td>
                      </tr>
