@@ -292,19 +292,19 @@
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               <ul class=treeview-menu>
-                <li><a href="<?php echo base_url('admin/addPlanView') ?>">Regular</a></li>
-                <li><a href="<?php echo base_url('admin/addPlanViewSupplemental') ?>">Supplemental</a></li>
+                <li><a href="<?php echo base_url('admin/addRegularPlanView') ?>">Regular Plan</a></li>
+                <li><a href="<?php echo base_url('admin/addSupplementalPlanView') ?>">Supplemental Plan</a></li>
               </ul>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url('admin/annualPlanView') ?>">
-              <i class="fa fa-tasks"></i> <span>Project Plan</span>
+            <a href="<?php echo base_url('admin/regularPlanView') ?>">
+              <i class="fa fa-tasks"></i> <span>Regular Records</span>
             </a>
           </li>
           <li>
             <a href="<?php echo base_url('admin/supplementalPlanView') ?>"><i class="fa fa-tasks">
-              </i> <span>Supplemental Plan</span>
+              </i> <span>Supplemental Records</span>
             </a>
           </li>
           <li class="treeview">

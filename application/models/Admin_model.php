@@ -324,7 +324,7 @@
 	* All functions bellow are used to insert data on Database.
 	**/
 		//Function for inserting new project.
-	public function insertNewProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+	public function insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
 
 		$data = array(
 			'date_added' => $date_added,
@@ -354,6 +354,38 @@
 			return false;
 		}		
 	}
+
+		public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+
+		$data = array(
+			'date_added' => $date_added,
+			'project_year' => $project_year,
+			'project_no' => $project_no,
+			'project_title' => $project_title,
+			'municipality_id' => $municipality,
+			'barangay_id' => $barangay,
+			'projtype_id' => $type,
+			'mode_id' => $mode,
+			'fund_id' => $source,
+			'account_id' => $account,
+			'abc' => $ABC,
+			'status' => 'pending',
+		);
+
+		if ($this->db->insert('project_plan', $data)) {
+			$new_plan_id = $this->db->insert_id();
+			$plan_id = array(
+				'plan_id' => $new_plan_id
+			);
+
+			$this->db->insert('procact', $plan_id);
+			$this->db->insert('project_timeline', $plan_id);
+			return true;
+		}else{
+			return false;
+		}		
+	}
+
 
 	public function insertNewContractor($businessname, $owner, $address, $contactnumber){
 		$data = array(

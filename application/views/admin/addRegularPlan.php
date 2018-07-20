@@ -20,7 +20,7 @@
                   <p><?php echo $_SESSION['error'] ?></p>
                 </div>
               <?php endif ?>
-              <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addPlan') ?>">
+              <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addRegularPlan') ?>">
                 <!-- Date -->
                 <div class="form-group">
                   <label  class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *</label>

@@ -33,7 +33,7 @@ class Admin extends CI_Controller {
 		
 	}
 
-	public function annualPlanView(){
+	public function regularPlanView(){
 		$year = null;
 		$quarter = null;
 		$status = null;
@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/plan', $data);
+		$this->load->view('admin/regularPlan', $data);
 		$this->load->view('admin/fragments/footer');
 	}
 
@@ -115,7 +115,7 @@ class Admin extends CI_Controller {
 	}
 
 
-	public function addPlanView(){
+	public function addRegularPlanView(){
 		$data['currentDate'] = date('Y-m-d');
 		$data['currentYear'] = date('Y');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
@@ -126,11 +126,11 @@ class Admin extends CI_Controller {
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addPlan', $data);
+		$this->load->view('admin/addRegularPlan', $data);
 		$this->load->view('admin/fragments/footer');	
 	}
 
-	public function addPlanViewSupplemental(){
+	public function addSupplementalPlanView(){
 		$data['currentDate'] = date('Y-m-d');
 		$data['currentYear'] = date('Y');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
@@ -141,12 +141,12 @@ class Admin extends CI_Controller {
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/addPlanSupplemental', $data);
+		$this->load->view('admin/addSupplementalPlan', $data);
 		$this->load->view('admin/fragments/footer');
 
 	}
 
-	public function addPlan(){
+	public function addRegularPlan(){
 		$date_added = htmlspecialchars($this->input->post('date_added'));
 		$project_year = htmlspecialchars($this->input->post('year'));
 		$project_no = htmlspecialchars($this->input->post('project_no'));
@@ -159,13 +159,35 @@ class Admin extends CI_Controller {
 		$source=htmlspecialchars($this->input->post('source'));
 		$account=htmlspecialchars($this->input->post('account'));
 
-		if ($this->admin_model->insertNewProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
+		if ($this->admin_model->insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
 			$this->session->set_flashdata('success', 'The new project has been added to the database.');
 		}else{
 			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
 		}
 
-		redirect('admin/addPlanView');
+		redirect('admin/regularPlanView');
+	}
+
+		public function addSupplementalPlan(){
+		$date_added = htmlspecialchars($this->input->post('date_added'));
+		$project_year = htmlspecialchars($this->input->post('year'));
+		$project_no = htmlspecialchars($this->input->post('project_no'));
+		$project_title = htmlspecialchars($this->input->post('project_title'));
+		$municipality=htmlspecialchars($this->input->post('municipality'));
+		$barangay=htmlspecialchars($this->input->post('barangay'));
+		$type=htmlspecialchars($this->input->post('type'));
+		$mode=htmlspecialchars($this->input->post('mode'));
+		$ABC=htmlspecialchars($this->input->post('ABC'));
+		$source=htmlspecialchars($this->input->post('source'));
+		$account=htmlspecialchars($this->input->post('account'));
+
+		if ($this->admin_model->insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
+			$this->session->set_flashdata('success', 'The new project has been added to the database.');
+		}else{
+			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
+		}
+
+		redirect('admin/SupplementalPlanView');
 	}
 
 

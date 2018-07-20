@@ -20,42 +20,44 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($classifications as $classification): ?>
-                <tr>
-                  <td><?php echo $classification['account_id']?></td>
-                  <td><?php echo $classification['classification']?></td>
-                  <td><?php echo $classification['status'] ?></td>
-                  <td class="text-center row">
-                  <div class="btn-group">
-                    <form action="<?php echo base_url('admin/setClassification') ?>" method="post">
-                      <input type="text" name="classification" value="<?php echo $classification['account_id'] ?>" hidden>
-                        <button class="btn btn-success" type="submit">
-                          <i class="fa fa-edit">Edit</i>
-                        </button>
-                    </form>
-                  </div>
-
+                <?php foreach ($classifications as $classification): ?>
+                  <tr>
+                    <td class="text-center"><?php echo $classification['account_id']?></td>
+                    <td class="text-center"><?php echo $classification['classification']?></td>
+                    <td class="text-center"><?php echo $classification['status'] ?></td>
+                    <td class="text-center row">
                     <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteClassification') ?>" method="POST">
-                      <input type="text" name="classification" value="<?php echo $classification['account_id']?>" hidden>
-                          <button class="btn btn-danger" type="submit">Delete</button>                       
+                      <form action="<?php echo base_url('admin/setClassification') ?>" method="post">
+                        <input type="text" name="classification" value="<?php echo $classification['account_id'] ?>" hidden>
+                          <button class="btn btn-success" type="submit">
+                            <i class="fa fa-edit">Edit</i>
+                          </button>
                       </form>
                     </div>
 
-                    <div class="btn-group">
-                      <?php if ($classification['status']=='active'): ?>
-                          <form action="<?php echo base_url('admin/deactivateClassification') ?>" method="POST">
-                            <input type="text" name="classification" value="<?php echo $classification['account_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
-                        </form>                          
-                      <?php endif ?>
+                      <div class="btn-group">
+                        <form action="<?php echo base_url('admin/deleteClassification') ?>" method="POST">
+                        <input type="text" name="classification" value="<?php echo $classification['account_id']?>" hidden>
+                            <button class="btn btn-danger" type="submit">Delete</button>                       
+                        </form>
+                      </div>
 
-                      <?php if ($classification['status']=='active'): ?>
-                        <form action="<?php echo base_url('admin/activateClassifications') ?>" method="POST">
-                            <input type="text" name="account_id" value="<?php echo $classifications['account_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
-                        </form>                          
-                      <?php endif ?>
+                        <div class="btn-group">
+                          <?php if ($classification['status']=='active'): ?>
+                            <form action="<?php echo base_url('admin/deactivateClassification') ?>" method="POST">
+                              <input type="text" name="account_id" value="<?php echo $classification['account_id'] ?>" hidden>
+                              <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                            </form>                          
+                          <?php endif ?>
+
+                          <?php if ($classification['status']=='inactive'): ?>
+                            <form action="<?php echo base_url('admin/activateClassification') ?>" method="POST">
+                              <input type="text" name="account_id" value="<?php echo $classification['account_id'] ?>" hidden>
+                              <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                            </form>                          
+                          <?php endif ?>
+                        </div>
+                      </div>  
                     </div> 
                   </td>
                 </tr>
