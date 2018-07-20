@@ -54,7 +54,7 @@
                     <h5>Onhand Documents</h5>
                   </div>
                   <div class="document_container">
-                    <form action="<?php if ($this->session->userdata('user_type' == 'BAC_SEC')){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
+                    <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
                       <?php foreach ($onhand_project_documents as $onhand_document): ?>
                         <div class="form-check">
                           <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $onhand_document['project_document_id'] ?>">

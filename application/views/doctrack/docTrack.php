@@ -46,7 +46,7 @@
                         <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
                           <i class="fa fa-get-pocket"></i> Receive
                         </button>
-                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] ?>">
+                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] . ',' . $pending_document['receiver'] . ',' . 'pending' ?>">
                           <i class="fa fa-eye"></i>
                         </button>
                       </td>
@@ -83,7 +83,7 @@
                           <button class="btn btn-success" type="submit"> 
                             <i class="fa fa-plus"></i> Update 
                           </button>
-                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] ?>">
+                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
                             <i class="fa fa-eye"></i>
                           </button> 
                         </form> 
@@ -116,7 +116,7 @@
                       <td><?php echo $forwarded_document['source'] ?></td>
                       <td><?php echo $forwarded_document['receiver'] ?></td>
                       <td class="text-center">
-                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] ?>">
+                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] . ',' . 'forwarded' ?>">
                           <i class="fa fa-eye"></i>
                         </button>
                       </td>
@@ -223,19 +223,49 @@
   });
 
   $(document).on('click', '.viewDocumentDataBtn', function(){
-    $('#documentDetailsViewModal').modal('show');
+    
 
     $('#forwardingLogTable').DataTable().destroy();
     $('#receivingLogTable').DataTable().destroy();
+    $('#documentTableModal').DataTable().destroy();
 
-    var forwarded_document_details = $(this).val();
+    var forwarded_document_details = $(this).val().split(',');
+
+    if (forwarded_document_details[3] == 'pending') {
+      $('#documentHeader').html('Incomming Documents List');
+    }
+
+    if (forwarded_document_details[3] == 'onhand') {
+      $('#documentHeader').html('Onhand Documents List');
+    }
+
+    if (forwarded_document_details[3] == 'forwarded') {
+      $('#documentHeader').html('Forwarded Documents List');  
+    }
 
     $.ajax({
       type: 'POST',
       url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
-      data: { plan_id: forwarded_document_details},
+      data: { plan_id: forwarded_document_details[0], current_doc_loc: forwarded_document_details[1], receiver: forwarded_document_details[2], type: forwarded_document_details[3]},
       dataType: 'json',
       success: function(response){
+
+        $('#documentTableModal').DataTable({
+          data: response.documents,
+          columns: [
+              { data: 'doc_no' },
+              { data: 'document_name' },
+              { data: 'previous_doc_loc' },
+              { data: 'current_doc_loc' },
+              { data: 'receiver' }
+          ],
+          'paging'      : false,
+          'lengthChange': false,
+          'searching'   : false,
+          'ordering'    : true,
+          'info'        : false,
+          'autoWidth'   : false
+        });
 
         $('#forwardingLogTable').DataTable( {
             data: response.forwarding_logs,
@@ -271,6 +301,8 @@
       }
     });
 
+    $('#documentDetailsViewModal').modal('show');
+
   });
 
 
@@ -282,11 +314,40 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
-            <div>
+              <h2 style="background-color:#D76969; text-align: center; padding: 7px 10px;" id="documentHeader">
+                Documents
+              </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <table class="table table-bordered table-striped" id="documentTableModal">
+              <thead>
+                <tr>
+                  <th>Doc No.</th>
+                  <th>Doc Name</th>
+                  <th>Previous Holder</th>
+                  <th>Current Holder</th>
+                  <th>Receiver</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
               <h2 style="background-color:#D76969; text-align: center; padding: 7px 10px;">
                 HISTORY TRACKS
               </h2>
-            </div>
           </div>
         </div>
         <div class="row">
