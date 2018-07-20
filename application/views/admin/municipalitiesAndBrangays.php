@@ -22,9 +22,9 @@
             <tbody>
               <?php foreach ($municipalities as $municipality): ?>
                 <tr>
-                  <td><?php echo $municipality['municipality_code'] ?></td>
-                  <td><?php echo $municipality['municipality'] ?></td>
-                  <td><?php echo $municipality['status'] ?></td>
+                  <td class="text-center"><?php echo $municipality['municipality_code'] ?></td>
+                  <td class="text-center"><?php echo $municipality['municipality'] ?></td>
+                  <td class="text-center"><?php echo $municipality['status'] ?></td>
                   <td class="text-center">
                       <div class="btn-group">
                       <form action="<?php echo base_url('admin/setCurrentMunicipalityID') ?>" method="POST">

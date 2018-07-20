@@ -130,6 +130,22 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');	
 	}
 
+	public function addPlanViewSupplemental(){
+		$data['currentDate'] = date('Y-m-d');
+		$data['currentYear'] = date('Y');
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['barangays'] = $this->admin_model->getBarangays();
+		$data['projTypes'] = $this->admin_model->getProjectType();
+		$data['sourceFunds'] = $this->admin_model->getSourceofFunds();
+		$data['accounts'] = $this->admin_model->getAccountClassification();
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/addPlanSupplemental', $data);
+		$this->load->view('admin/fragments/footer');
+
+	}
+
 	public function addPlan(){
 		$date_added = htmlspecialchars($this->input->post('date_added'));
 		$project_year = htmlspecialchars($this->input->post('year'));
@@ -397,8 +413,9 @@ class Admin extends CI_Controller {
 
 	public function addFunds(){
 		$source = $this->input->post('source');
+		$fund_type = $this->input->post('fund_type');
 
-		if ($this->admin_model->insertNewFunds($source)) {
+		if ($this->admin_model->insertNewFunds($source,$fund_type)) {
 			$this->session->set_flashdata('success', 'New Funds Successfully Added.');
 		}else{
 			$this->session->set_flashdata('error', 'Error! Fund Not Added.');

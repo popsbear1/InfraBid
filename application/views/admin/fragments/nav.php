@@ -285,9 +285,16 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">PROCESS</li>
-          <li>
-            <a href="<?php echo base_url('admin/addPlanView') ?>">
-              <i class="fa fa-plus"></i> <span>Add Plan</span>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-plus"></i><span>ADD PLAN</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              <ul class=treeview-menu>
+                <li><a href="<?php echo base_url('admin/addPlanView') ?>">Regular</a></li>
+                <li><a href="<?php echo base_url('admin/addPlanViewSupplemental') ?>">Supplemental</a></li>
+              </ul>
             </a>
           </li>
           <li>

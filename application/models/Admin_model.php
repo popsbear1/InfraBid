@@ -371,9 +371,10 @@
 
 	}
 
-	public function insertNewFunds($source){
+	public function insertNewFunds($source, $fund_type){
 		$data = array(
-			'source' => $source
+			'source' => $source,
+			'fund_type' => $fund_type
 		);
 
 		if ($this->db->insert('funds', $data)) {
