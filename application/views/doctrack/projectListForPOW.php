@@ -164,7 +164,10 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary pull-left" data-dismiss="modal" >Cancel</button>
-        <button class="btn btn-primary">Confirm</button>
+        <form action="<?php echo base_url('doctrack/updatePOWAvailability') ?>" method="POST" >
+          <input type="text" name="plan_id" id="plan_id" hidden>
+          <button class="btn btn-primary" type="submit">Confirm</button>  
+        </form>
       </div>
     </div>
   </div>
@@ -178,9 +181,10 @@
   );
 
   $('.addProjectPOWBtn').click(function(){
-    $('#addPOWConfirmationModal').modal('show');
 
     var plan_id = $(this).val();
+
+    $('#plan_id').val(plan_id);
 
     $.ajax({
       type: 'POST',
@@ -201,6 +205,8 @@
         $('#project_type').html(response.plan_details['project_type']);
       }
     });
+
+    $('#addPOWConfirmationModal').modal('show');
   })
 
   // $(document).ready(function(){

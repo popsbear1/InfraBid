@@ -132,4 +132,12 @@ class Doctrack extends CI_Controller {
 
 		echo json_encode($data);
 	}
+
+	public function updatePOWAvailability(){
+		$plan_id = $this->input->post('plan_id');
+
+		$this->doctrack_model->updatePOWAvailabilitye($plan_id);
+
+		redirect('doctrack/projectListViewForPOW');
+	}
 }
