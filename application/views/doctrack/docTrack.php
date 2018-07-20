@@ -20,8 +20,8 @@
         </div>
         <div class="box-body">
           <div id="documentTableContainer">
-            <div class="tableContainer" id="for_receiving_document_table">
-              <table class="table table-bordered table-striped documentsTable">
+            <div class="tableContainer  table-responsive no-pading" id="for_receiving_document_table">
+              <table class="table table-bordered table-striped table-hover documentsTable">
                 <thead>
                   <tr>
                     <th>Project Title</th>
@@ -37,10 +37,10 @@
                   <?php foreach ($pending_documents as $pending_document): ?>
                     <tr>
                       <td><?php echo $pending_document['project_title'] ?></td>
-                      <td><?php echo $pending_document['project_title'] ?></td>
-                      <td><?php echo $pending_document['project_title'] ?></td>
-                      <td><?php echo $pending_document['project_title'] ?></td>
-                      <td><?php echo $pending_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                      <td><?php echo number_format($pending_document['abc'], 2) ?></td>
+                      <td><?php echo $pending_document['businessname'] ?></td>
+                      <td><?php echo $pending_document['source'] ?></td>
                       <td><?php echo $pending_document['current_doc_loc'] ?></td>
                       <td class="text-center">
                         <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/receiveDocument');}else{ echo base_url('capitol/receiveDocument'); } ?>" method="POST" id="receiveDocumentForm">
@@ -50,7 +50,7 @@
                             <i class="fa fa-get-pocket"></i> Receive
                           </button>
                           <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] ?>">
-                            <i class="fa fa-eye"></i> View Data
+                            <i class="fa fa-eye"></i>
                           </button> 
                         </form>
                       </td>
@@ -59,8 +59,8 @@
                 </tbody>
               </table>
             </div>
-            <div class="tableContainer" id="onhand_documents_table" hidden="hidden"> 
-              <table class="table table-bordered documentsTable"> 
+            <div class="tableContainer table-responsive no-pading" id="onhand_documents_table" hidden="hidden"> 
+              <table class="table table-bordered table-striped table-hover documentsTable"> 
                 <thead>
                   <tr>
                     <th>Project Title</th>
@@ -76,10 +76,10 @@
                   <?php foreach ($onhand_documents as $onhand_document): ?>
                      <tr>
                        <td><?php echo $onhand_document['project_title'] ?></td>
-                       <td><?php echo $onhand_document['project_title'] ?></td>
-                       <td><?php echo $onhand_document['project_title'] ?></td>
-                       <td><?php echo $onhand_document['project_title'] ?></td>
-                       <td><?php echo $onhand_document['project_title'] ?></td>
+                       <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                       <td><?php echo number_format($pending_document['abc'], 2) ?></td>
+                       <td><?php echo $onhand_document['businessname'] ?></td>
+                       <td><?php echo $onhand_document['source'] ?></td>
                        <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
                        <td class="text-center"> 
                         <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
@@ -88,7 +88,7 @@
                             <i class="fa fa-plus"></i> Update 
                           </button>
                           <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] ?>">
-                            <i class="fa fa-eye"></i> View Data
+                            <i class="fa fa-eye"></i>
                           </button> 
                         </form> 
                       </td>
@@ -97,8 +97,8 @@
                 </tbody> 
               </table> 
             </div>
-            <div class="tableContainer" id="forwarded_documents_table" hidden="hidden">
-              <table class="table table-bordered documentsTable">
+            <div class="tableContainer  table-responsive no-pading" id="forwarded_documents_table" hidden="hidden">
+              <table class="table table-bordered table-striped table-hover documentsTable">
                 <thead>
                   <tr>
                     <th>Project Title</th>
@@ -114,14 +114,14 @@
                   <?php foreach ($forwarded_documents as $forwarded_document): ?>
                     <tr>
                       <td><?php echo $forwarded_document['project_title'] ?></td>
-                      <td><?php echo $forwarded_document['project_title'] ?></td>
-                      <td><?php echo $forwarded_document['project_title'] ?></td>
-                      <td><?php echo $forwarded_document['project_title'] ?></td>
-                      <td><?php echo $forwarded_document['project_title'] ?></td>
+                      <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                      <td><?php echo number_format($pending_document['abc'], 2) ?></td>
+                      <td><?php echo $forwarded_document['businessname'] ?></td>
+                      <td><?php echo $forwarded_document['source'] ?></td>
                       <td><?php echo $forwarded_document['receiver'] ?></td>
                       <td class="text-center">
                         <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] ?>">
-                          <i class="fa fa-eye"></i> View Data
+                          <i class="fa fa-eye"></i>
                         </button>
                       </td>
                     </tr>
@@ -286,12 +286,12 @@
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6">
-            <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
+            <div class="text-center">  
               <h4>FORWARDING</h4>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6">
-            <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">  
+            <div class="text-center">  
               <h4>RECEIVING</h4>
             </div>
           </div>
@@ -361,26 +361,6 @@
       <div class="modal-footer">
         <button type="submit" form="receiveDocumentForm" class="btn btn-primary">Confirm</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDocumentForwardModal">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Confirm Document Receival</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
       </div>
     </div>
   </div>

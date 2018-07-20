@@ -74,7 +74,7 @@ class Capitol extends CI_Controller {
 
 		if ($this->input->post('project_document[]') !== null) {
 			foreach ($this->input->post('project_document[]') as $document) {
-				$this->doctrack_model->forwardDocument($document, $receiver);
+				$this->doctrack_model->forwardDocument($document, $plan_id, $department, $receiver);
 				
 
 				$this->doctrack_model->insertNewDocumentLogRelation($existing_doc_forward_log_id, $document);

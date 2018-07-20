@@ -28,7 +28,7 @@
                   <td><?php echo $plan['abc'] ?></td>
                   <td><?php echo $plan['source'] ?></td>
                   <td class="text-center">
-                    <form action="<?php echo base_url('doctrack/setCurrentPlanID') ?>" method="POST">
+                    <form action="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/setCurrentPlanID'); }else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
                       <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
                       <button class="btn btn-success" type="submit">
                         <i class="fa fa-edit">Add Document</i>

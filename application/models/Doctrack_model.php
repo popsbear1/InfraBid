@@ -69,10 +69,14 @@
 
 		public function getPendingDocuments($user_type){
 			$this->db->select('*');
-			$this->db->from('project_document');
-			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities','project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays','project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('contractors','project_plan.contractor_id = contractors.contractor_id', 'Left');
+			$this->db->join('project_document', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
-			$this->db->where('receiver', $user_type);
+			$this->db->where('project_document.receiver', $user_type);
 			$this->db->group_by('project_plan.plan_id');
 
 			$query = $this->db->get();
@@ -82,8 +86,12 @@
 
 		public function getForwardedDocuments($user_type){
 			$this->db->select('*');
-			$this->db->from('project_document');
-			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities','project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays','project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('contractors','project_plan.contractor_id = contractors.contractor_id', 'Left');
+			$this->db->join('project_document', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('current_doc_loc', $user_type);
 			$this->db->group_by('project_plan.plan_id');
@@ -95,8 +103,12 @@
 
 		public function getOnHandDocuments($user_type){
 			$this->db->select('*');
-			$this->db->from('project_document');
-			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities','project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays','project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('contractors','project_plan.contractor_id = contractors.contractor_id', 'Left');
+			$this->db->join('project_document', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'received');
 			$this->db->where('current_doc_loc', $user_type);
 			$this->db->group_by('project_plan.plan_id');
@@ -204,12 +216,15 @@
 			$this->db->insert('document_logs', $data);
 		}
 
-		public function forwardDocument($project_document_id, $receiver){
+		public function forwardDocument($project_document_id, $plan_id, $department, $receiver){
 			$data = array(
 				'receiver' => $receiver,
 				'status' => 'sent'
 			);
 
+			$this->db->where('project_document_id', $project_document_id);
+			$this->db->where('current_doc_loc', $department);
+			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_document', $data);
 		}
 

@@ -19,7 +19,10 @@
 <section class="content-header">
   <div class="row">
     <div class="col-lg-6">
-      <h2>Project Document</h2>
+      <a href="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/docTrackView'); }else{ echo base_url('capitol/docTrackView'); } ?>" type="button" class="btn btn-warning btn-lg" >
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </a>
     </div>
     <div class="col-lg-6 text-right">
       <button class="btn btn-lg btn-info" data-target="#projectDocumentHistoryModal" data-toggle="modal" >
