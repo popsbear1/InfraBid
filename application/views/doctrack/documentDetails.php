@@ -167,10 +167,18 @@
               <label>Department:</label>
               <select class="form-control" name="department" form="sendProjectDocumentsForm">
                 <option hidden disabled selected>Choose Receiver</option>
-                <option value="BAC_SEC">BAC-SEC</option>
-                <option value="BAC_TWG">BAC-TWG</option>
-                <option value="PGO">PGO</option>
-                <option value="PEO">PEO</option>
+                  <?php if ($this->session->userdata('user_type') != 'BAC_SEC'): ?>
+                    <option value="BAC_SEC">BAC-SEC</option>
+                  <?php endif ?>
+                  <?php if ($this->session->userdata('user_type') != 'BAC_TWG'): ?>
+                    <option value="BAC_TWG">BAC-TWG</option>
+                  <?php endif ?>
+                  <?php if ($this->session->userdata('user_type') != 'PGO'): ?>
+                    <option value="PGO">PGO</option>
+                  <?php endif ?>
+                  <?php if ($this->session->userdata('user_type') != 'PEO'): ?>
+                    <option value="PEO">PEO</option>
+                  <?php endif ?>
               </select>
             </div>
             <div class="form-group">

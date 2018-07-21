@@ -66,6 +66,7 @@ class Capitol extends CI_Controller {
 	}
 
 	public function documentDetailsView(){
+		$page['page'] = '';
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');
 		$data['document_types'] = $this->doctrack_model->getDocumentTypes($plan_id);
@@ -74,7 +75,7 @@ class Capitol extends CI_Controller {
 		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
 		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
 		$this->load->view('doctrack/fragments/head');
-		$this->load->view('doctrack/fragments/nav');
+		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/documentDetails', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}
