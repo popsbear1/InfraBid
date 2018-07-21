@@ -90,7 +90,7 @@ class Capitol extends CI_Controller {
 				$this->doctrack_model->insertNewDocumentLogRelation($existing_doc_forward_log_id, $document);
 			}
 		}
-		redirect('capitol/documentDetailsView');
+		redirect('capitol/docTrackView');
 	}
 
 	public function addNewProjectDocument(){
@@ -112,14 +112,22 @@ class Capitol extends CI_Controller {
 		$sender = $this->input->post('sender');
 
 		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
-		$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
 
-		foreach ($receive_id as $id) {
-			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
-			$this->doctrack_model->updateDocumentDetails($id['project_document_id'], $plan_id, $department, $sender);
+		if (count($receive_id) < 1) {
+			$data['success'] = false;
+		}else{
+			$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
+
+			foreach ($receive_id as $id) {
+				$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
+				$this->doctrack_model->updateDocumentDetails($id['project_document_id'], $plan_id, $department, $sender);
+			}
+
+			$data['success'] = true;
 		}
+			
 		
-		redirect('capitol/docTrackView');
+		echo json_encode($data);
 	}
 
 	public function cancelDocumentForward(){

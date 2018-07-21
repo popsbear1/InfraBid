@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                   <?php foreach ($pending_documents as $pending_document): ?>
-                    <tr>
+                    <tr id="<?php echo 'receive' . $pending_document['plan_id'] ?>">
                       <td><?php echo $pending_document['project_title'] ?></td>
                       <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
                       <td><?php echo number_format($pending_document['abc'], 2) ?></td>
@@ -221,24 +221,6 @@
   $(document).on('click', '.viewPendingDocumentDataBtn', function(){
     $('#documentDetailsViewModal').modal('show');
   });
-
-  $(document).on('click', '.receiveProjectDocumentBtn', function(){
-    var project_document_details = $(this).val().split(',');
-
-    $('#plan_id').val(project_document_details[0]);
-    $('#sender').val(project_document_details[1]);
-
-    $('#confirmDocumentReceivalModal').modal('show');    
-  });
-
-  $(document).on('click', '.cancelDocumentForwardBtn', function(){
-    $('#confirmDocumentForwardCancelModal').modal('show');
-    var forwarded_document_details = $(this).val().split(',');
-
-    $('#forwarded_plan_id').val(forwarded_document_details[0]);
-    $('#forwarded_current_doc_loc').val(forwarded_document_details[1]);
-    $('#forwarded_receiver').val(forwarded_document_details[2]);
-  })
 
   $(document).on('click', '.viewDocumentDataBtn', function(){
     
@@ -440,10 +422,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Confirm Document Receival</p>
+        <p class="text-center">Confirm Document Receival</p>
+        <div class="alert alert-success" hidden="hidden" id="receiveDocumentSuccessAlert">
+          <h4><i class="icon fa fa-check"></i> Alert!</h4>
+          <p>Receive Document Success!</p>
+        </div>
+        <div class="alert alert-warning" hidden="hidden" id="receiveDocumentFailedAlert">
+          <h4><i class="icon fa fa-check"></i> Alert!</h4>
+          <p>Document Receival Failed!</p>
+          <p>Document Forwarding Cancelled!</p>
+        </div>
         <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/receiveDocument');}else{ echo base_url('capitol/receiveDocument'); } ?>" method="POST" id="receiveDocumentForm">
-          <input type="text" name="plan_id" id="plan_id" hidden>
-          <input type="text" name="sender" id="sender" hidden>
+          <input type="text" name="plan_id" id="receive_plan_id" hidden>
+          <input type="text" name="sender" id="receive_sender" hidden>
         </form>
       </div>
       <div class="modal-footer">
@@ -453,6 +444,41 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  $(document).on('click', '.receiveProjectDocumentBtn', function(){
+    var project_document_details = $(this).val().split(',');
+
+    $('#receive_plan_id').val(project_document_details[0]);
+    $('#receive_sender').val(project_document_details[1]);
+
+    $('#confirmDocumentReceivalModal').modal('show');    
+  });
+
+  $('#receiveDocumentForm').submit(function(e){
+    e.preventDefault();
+    $('#receiveDocumentSuccessAlert').prop('hidden', 'hidden');
+    $('#receiveDocumentFailedAlert').prop('hidden', 'hidden');
+    var plan_id = $('#receive_plan_id').val();
+    var row_name = '#receive' + plan_id;
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: $('#receiveDocumentForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $(row_name).remove();
+          $('#receiveDocumentSuccessAlert').prop('hidden', false);
+        }else{
+          $(row_name).remove();
+          $('#receiveDocumentFailedAlert').prop('hidden', false);
+        }
+      }
+    });
+  })
+</script>
 
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDocumentForwardCancelModal">
@@ -490,6 +516,15 @@
 </div>
 
 <script>
+  $(document).on('click', '.cancelDocumentForwardBtn', function(){
+    $('#confirmDocumentForwardCancelModal').modal('show');
+    var forwarded_document_details = $(this).val().split(',');
+
+    $('#forwarded_plan_id').val(forwarded_document_details[0]);
+    $('#forwarded_current_doc_loc').val(forwarded_document_details[1]);
+    $('#forwarded_receiver').val(forwarded_document_details[2]);
+  })
+
   $('#cancelDocumentForwardForm').submit(function(e){
     e.preventDefault();
     $('#cancelForwardSuccessAlert').prop('hidden', 'hidden');

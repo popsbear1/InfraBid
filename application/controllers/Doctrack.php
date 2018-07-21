@@ -91,7 +91,7 @@ class Doctrack extends CI_Controller {
 				$this->doctrack_model->insertNewDocumentLogRelation($existing_doc_forward_log_id, $document);
 			}
 		}
-		redirect('docTrack/documentDetailsView');
+		redirect('docTrack/docTrackView');
 	}
 
 	public function addNewProjectDocument(){
