@@ -33,15 +33,6 @@ class Doctrack extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function projectListViewForPOW(){
-		$year = date('Y');
-		$data['plans'] = $this->doctrack_model->getProjectPlansWithoutPOW($year);
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('doctrack/projectListForPOW', $data);
-		$this->load->view('admin/fragments/footer');
-	}
-
 	public function documentDetailsView(){
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');
@@ -139,14 +130,6 @@ class Doctrack extends CI_Controller {
 		$data['documents'] = $this->doctrack_model->getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver);
 
 		echo json_encode($data);
-	}
-
-	public function updatePOWAvailability(){
-		$plan_id = $this->input->post('plan_id');
-
-		$this->doctrack_model->updatePOWAvailabilitye($plan_id);
-
-		redirect('doctrack/projectListViewForPOW');
 	}
 
 	public function cancelDocumentForward(){

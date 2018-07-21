@@ -23,9 +23,31 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-          <ul class="nav navbar-nav">         
-            <li ><a href="<?php echo base_url('capitol/projectListView') ?>">Add Document</a></li>
-            <li><a href="<?php echo base_url('capitol/docTrackView') ?>">Doc Track</a></li>
+          <ul class="nav navbar-nav">
+            <li 
+            <?php if ($page == 'POW'): ?>
+              class="active"
+            <?php endif ?>
+            >
+              <a href="<?php echo base_url('capitol/projectListViewForPOW') ?>">Add POW
+              </a>
+            </li>        
+            <li
+            <?php if ($page == 'list'): ?>
+              class="active"
+            <?php endif ?>
+            >
+              <a href="<?php echo base_url('capitol/projectListView') ?>">Add Document
+              </a>
+            </li>
+            <li
+            <?php if ($page == 'doctrack'): ?>
+              class="active"
+            <?php endif ?>
+            >
+              <a href="<?php echo base_url('capitol/docTrackView') ?>">Doc Track
+              </a>
+            </li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->

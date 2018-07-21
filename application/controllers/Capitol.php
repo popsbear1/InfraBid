@@ -22,29 +22,45 @@ class Capitol extends CI_Controller {
 
 	public function projectListView(){
 		$year = date('Y');
+		$page['page'] = 'list'; 
 		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW($year);
 		$this->load->view('doctrack/fragments/head');
-		$this->load->view('doctrack/fragments/nav');
+		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/projectList', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}
 
+
 	public function projectListViewForPOW(){
 		$year = date('Y');
+		$page['page'] = 'POW';
 		$data['plans'] = $this->doctrack_model->getProjectPlansWithoutPOW($year);
 		$this->load->view('doctrack/fragments/head');
-		$this->load->view('doctrack/fragments/nav');
+		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/projectListForPOW', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}
 
+	public function updatePOWAvailability(){
+		$plan_id = $this->input->post('plan_id');
+
+		if ($this->doctrack_model->updatePOWAvailabilitye($plan_id)) {
+			$data['success'] = true;
+		}else{
+			$data['success'] = false;
+		}
+
+		echo json_encode($data);
+	}
+
 	public function docTrackView(){
+		$page['page'] = 'doctrack';
 		$user_type = $this->session->userdata('user_type');
 		$data['pending_documents'] = $this->doctrack_model->getPendingDocuments($user_type);
 		$data['forwarded_documents'] = $this->doctrack_model->getForwardedDocuments($user_type);
 		$data['onhand_documents'] = $this->doctrack_model->getOnHandDocuments($user_type); 
 		$this->load->view('doctrack/fragments/head');
-		$this->load->view('doctrack/fragments/nav');
+		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/docTrack', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}

@@ -22,7 +22,7 @@
             </thead>
             <tbody>
               <?php foreach ($plans as $plan): ?>
-                <tr>
+                <tr id="<?php echo 'projectPOW' . $plan['plan_id'] ?>">
                   <td><?php echo $plan['project_title'] ?></td>
                   <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
                   <td><?php echo $plan['abc'] ?></td>
@@ -162,16 +162,62 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary pull-left" data-dismiss="modal" >Cancel</button>
-        <form action="<?php echo base_url('doctrack/updatePOWAvailability') ?>" method="POST" >
+      <div class="modal-footer">      
+        <form action="<?php echo base_url('capitol/updatePOWAvailability') ?>" method="POST" id="addPOWForm" >
           <input type="text" name="plan_id" id="plan_id" hidden>
-          <button class="btn btn-primary" type="submit">Confirm</button>  
+          <button class="btn btn-primary" type="submit">Confirm</button>
+          <button class="btn btn-default" data-dismiss="modal" type="button" >Cancel</button>  
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal modal-success fade" id="pow_adding_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Success Modal</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added project POW!</p>
+        <p>Proceed to adding documents!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal modal-warning fade" id="pow_adding_warning">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Warning Modal</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error updating POW availability!</p>
+        <p>Try again later!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <script>
   $(document).ready( 
@@ -207,6 +253,29 @@
     });
 
     $('#addPOWConfirmationModal').modal('show');
+  })
+
+  $('#addPOWForm').submit(function(e){
+    e.preventDefault();
+    var plan_id = $('#plan_id').val();
+    var row_name = '#projectPOW' + plan_id;
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: $('#addPOWForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+
+        $('#addPOWConfirmationModal').modal('hide');
+
+        if (response.success == true) {
+          $('#pow_adding_success').modal('show');
+          $(row_name).remove();
+        }else{
+          $('#pow_adding_warning').modal('show');
+        }
+      }
+    });
   })
 
   // $(document).ready(function(){

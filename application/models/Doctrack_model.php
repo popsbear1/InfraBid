@@ -310,7 +310,11 @@
 			);
 
 			$this->db->where('plan_id', $plan_id);
-			$this->db->update('project_plan', $data);
+			if ($this->db->update('project_plan', $data)) {
+				return true;
+			}else{
+				return false;
+			}
 		}
 
 		public function cancelDocumentForward($plan_id, $current_doc_loc, $receiver){
