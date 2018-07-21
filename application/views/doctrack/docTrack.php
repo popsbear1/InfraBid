@@ -47,10 +47,8 @@
                           <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
                             <i class="fa fa-get-pocket"></i> Receive
                           </button>
-                        </div>
-                        <div class="btn-group">
                           <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] . ',' . $pending_document['receiver'] . ',' . 'pending' ?>">
-                            <i class="fa fa-eye">View</i>
+                            <i class="fa fa-eye"></i> View
                           </button>
                         </div>
                       </td>
@@ -75,28 +73,25 @@
                 <tbody>
                   <?php foreach ($onhand_documents as $onhand_document): ?>
                      <tr>
-                       <td><?php echo $onhand_document['project_title'] ?></td>
-                       <td><?php echo $onhand_document['municipality'] . ', ' . $onhand_document['barangay'] ?></td>
-                       <td><?php echo number_format($onhand_document['abc'], 2) ?></td>
-                       <td><?php echo $onhand_document['businessname'] ?></td>
-                       <td><?php echo $onhand_document['source'] ?></td>
-                       <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
-                      <td class="text-center">
-                         <div class="btn-group"> 
-                            <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
-                                <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
+                        <td><?php echo $onhand_document['project_title'] ?></td>
+                        <td><?php echo $onhand_document['municipality'] . ', ' . $onhand_document['barangay'] ?></td>
+                        <td><?php echo number_format($onhand_document['abc'], 2) ?></td>
+                        <td><?php echo $onhand_document['businessname'] ?></td>
+                        <td><?php echo $onhand_document['source'] ?></td>
+                        <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
+                        <td class="text-center">
+                          <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
+                            <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
+                            <div class="btn-group">
                               <button class="btn btn-success" type="submit"> 
-                                <i class="fa fa-plus"></i> Update </button>
-                          </div>
-                          <div class="btn-group">
-                            <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
-                              <i class="fa fa-eye">View</i></button>
-                          </div>
-                          <div class="btn-group">
-                            <button><i>Cancel</i></button>
-                          </div> 
-                        </form> 
-                      </td>
+                                <i class="fa fa-plus"></i> Update 
+                              </button>
+                              <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
+                                <i class="fa fa-eye"></i> View
+                              </button>
+                            </div> 
+                          </form> 
+                        </td>
                      </tr>
                    <?php endforeach ?>  
                 </tbody> 
@@ -117,7 +112,7 @@
                 </thead>
                 <tbody>
                   <?php foreach ($forwarded_documents as $forwarded_document): ?>
-                    <tr>
+                    <tr id="<?php echo 'forwarded' . $forwarded_document['plan_id'] ?>">
                       <td><?php echo $forwarded_document['project_title'] ?></td>
                       <td><?php echo $forwarded_document['municipality'] . ', ' . $forwarded_document['barangay'] ?></td>
                       <td><?php echo number_format($forwarded_document['abc'], 2) ?></td>
@@ -125,9 +120,14 @@
                       <td><?php echo $forwarded_document['source'] ?></td>
                       <td><?php echo $forwarded_document['receiver'] ?></td>
                       <td class="text-center">
-                        <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] . ',' . 'forwarded' ?>">
-                          <i class="fa fa-eye"></i>
-                        </button>
+                        <div class="btn-group">
+                          <button class="btn btn-default cancelDocumentForwardBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] ?>">
+                            <i class="fa fa-close"></i> Cancel
+                          </button>
+                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] . ',' . 'forwarded' ?>">
+                            <i class="fa fa-eye"></i> View
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -231,6 +231,15 @@
     $('#confirmDocumentReceivalModal').modal('show');    
   });
 
+  $(document).on('click', '.cancelDocumentForwardBtn', function(){
+    $('#confirmDocumentForwardCancelModal').modal('show');
+    var forwarded_document_details = $(this).val().split(',');
+
+    $('#forwarded_plan_id').val(forwarded_document_details[0]);
+    $('#forwarded_current_doc_loc').val(forwarded_document_details[1]);
+    $('#forwarded_receiver').val(forwarded_document_details[2]);
+  })
+
   $(document).on('click', '.viewDocumentDataBtn', function(){
     
 
@@ -238,24 +247,24 @@
     $('#receivingLogTable').DataTable().destroy();
     $('#documentTableModal').DataTable().destroy();
 
-    var forwarded_document_details = $(this).val().split(',');
+    var document_details = $(this).val().split(',');
 
-    if (forwarded_document_details[3] == 'pending') {
+    if (document_details[3] == 'pending') {
       $('#documentHeader').html('Incomming Documents List');
     }
 
-    if (forwarded_document_details[3] == 'onhand') {
+    if (document_details[3] == 'onhand') {
       $('#documentHeader').html('Onhand Documents List');
     }
 
-    if (forwarded_document_details[3] == 'forwarded') {
+    if (document_details[3] == 'forwarded') {
       $('#documentHeader').html('Forwarded Documents List');  
     }
 
     $.ajax({
       type: 'POST',
       url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
-      data: { plan_id: forwarded_document_details[0], current_doc_loc: forwarded_document_details[1], receiver: forwarded_document_details[2], type: forwarded_document_details[3]},
+      data: { plan_id: document_details[0], current_doc_loc: document_details[1], receiver: document_details[2], type: document_details[3]},
       dataType: 'json',
       success: function(response){
 
@@ -444,3 +453,63 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDocumentForwardCancelModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Cancellation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Confirm Forwarding Cancellation</p>
+        <div class="alert alert-success" hidden="hidden" id="cancelForwardSuccessAlert">
+          <h4><i class="icon fa fa-check"></i> Alert!</h4>
+          <p>Cancell Forward Success!</p>
+        </div>
+        <div class="alert alert-warning" hidden="hidden" id="cancelForwardFailedAlert">
+          <h4><i class="icon fa fa-check"></i> Alert!</h4>
+          <p>Cancell Forward Failed!</p>
+          <p>Documents Allready Received!</p>
+        </div>
+        <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/cancelDocumentForward');}else{ echo base_url('capitol/cancelDocumentForward'); } ?>" method="POST" id="cancelDocumentForwardForm">
+          <input type="text" name="plan_id" id="forwarded_plan_id" hidden>
+          <input type="text" name="current_doc_loc" id="forwarded_current_doc_loc" hidden>
+          <input type="text" name="receiver" id="forwarded_receiver" hidden>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="cancelDocumentForwardForm" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#cancelDocumentForwardForm').submit(function(e){
+    e.preventDefault();
+    $('#cancelForwardSuccessAlert').prop('hidden', 'hidden');
+    $('#cancelForwardFailedAlert').prop('hidden', 'hidden');
+    var plan_id = $('#forwarded_plan_id').val();
+    var row_name = '#forwarded' + plan_id;
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: $('#cancelDocumentForwardForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $(row_name).remove();
+          $('#cancelForwardSuccessAlert').prop('hidden', false);
+        }else{
+          $(row_name).remove();
+          $('#cancelForwardFailedAlert').prop('hidden', false);
+        }
+      }
+    });
+  })
+</script>

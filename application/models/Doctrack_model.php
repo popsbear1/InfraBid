@@ -312,5 +312,23 @@
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_plan', $data);
 		}
+
+		public function cancelDocumentForward($plan_id, $current_doc_loc, $receiver){
+			$data = array(
+				'receiver' => null,
+				'status' => 'received'
+			);
+
+			$this->db->where('plan_id', $plan_id);
+			$this->db->where('current_doc_loc', $current_doc_loc);
+			$this->db->where('receiver', $receiver);
+			$this->db->where('status', 'sent');
+			$this->db->update('project_document', $data);
+			if ($this->db->affected_rows()) {
+				return true;
+			}else{
+				return false;
+			}
+		}
 	}
 ?>

@@ -148,4 +148,18 @@ class Doctrack extends CI_Controller {
 
 		redirect('doctrack/projectListViewForPOW');
 	}
+
+	public function cancelDocumentForward(){
+		$plan_id = $this->input->post('plan_id');
+		$current_doc_loc = $this->input->post('current_doc_loc');
+		$receiver = $this->input->post('receiver');
+
+		if ($this->doctrack_model->cancelDocumentForward($plan_id, $current_doc_loc, $receiver)) {
+			$data['success'] = true;
+		}else{
+			$data['success'] = false;
+		}
+		
+		echo json_encode($data);
+	}
 }
