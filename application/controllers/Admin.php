@@ -59,7 +59,7 @@ class Admin extends CI_Controller {
 		}
 
 		$data['modes'] = $this->admin_model->getProcurementMode();
-		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $mode, $municipality);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -93,7 +93,7 @@ class Admin extends CI_Controller {
 		}
 
 		$data['modes'] = $this->admin_model->getProcurementMode();
-		$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
+		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $mode, $municipality);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');

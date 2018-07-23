@@ -162,7 +162,14 @@
 <script>
   $(document).ready( 
     function () {
-      $('#plan_table').DataTable();
+      $('#plan_table').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : true,
+        'ordering'    : false,
+        'info'        : true,
+        'autoWidth'   : true
+      });
       $('#year').datepicker({
         autoclose: true,
         format: 'yyyy',

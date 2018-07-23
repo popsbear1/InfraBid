@@ -16,7 +16,7 @@
 			return $query->result_array();
 		}
 
-		public function getProjectPlan($year, $quarter, $status, $mode, $municipality){
+		public function getRegularProjectPlan($year, $quarter, $status, $mode, $municipality){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -25,6 +25,7 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->where('project_type', 'regular');
 			$this->db->where('YEAR(date_added)', $year);
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
@@ -49,7 +50,6 @@
 			if ($status != null) {
 				$this->db->where('status', $status);
 			}
-			$this->db->order_by('plan_id', 'DESC');
 
 			if ($mode  != null) {
 				$this->db->where('project_plan.mode_id', $mode);
@@ -58,6 +58,58 @@
 			if ($municipality != null) {
 				$this->db->where('project_plan.municipality_id', $municipality);
 			}
+
+			$this->db->order_by('municipality ASC', 'barangay ASC');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getSupplementaryProjectPlan($year, $quarter, $status, $mode, $municipality){
+			$this->db->select('*');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('projtype', 'project_plan.projtype_id = projtype.projtype_id');
+			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
+			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->where('project_type', 'supplementary');
+			$this->db->where('YEAR(date_added)', $year);
+			if ($quarter != null) {
+				if ($quarter == '1stQ') {
+					$this->db->where('MONTH(date_added)', '01');
+					$this->db->or_where('MONTH(date_added)', '02');
+					$this->db->or_where('MONTH(date_added)', '03');
+				}elseif ($quarter == '2ndQ') {
+					$this->db->where('MONTH(date_added)', '04');
+					$this->db->or_where('MONTH(date_added)', '05');
+					$this->db->or_where('MONTH(date_added)', '06');
+				}elseif ($quarter == '3rdQ') {
+					$this->db->where('MONTH(date_added)', '07');
+					$this->db->or_where('MONTH(date_added)', '08');
+					$this->db->or_where('MONTH(date_added)', '09');
+				}elseif ($quarter == '4thQ') {
+					$this->db->where('MONTH(date_added)', '10');
+					$this->db->or_where('MONTH(date_added)', '11');
+					$this->db->or_where('MONTH(date_added)', '12');
+				}
+			}
+
+			if ($status != null) {
+				$this->db->where('status', $status);
+			}
+
+			if ($mode  != null) {
+				$this->db->where('project_plan.mode_id', $mode);
+			}
+
+			if ($municipality != null) {
+				$this->db->where('project_plan.municipality_id', $municipality);
+			}
+
+			$this->db->order_by('municipality ASC', 'barangay ASC');
 
 			$query = $this->db->get();
 
@@ -339,6 +391,8 @@
 			'account_id' => $account,
 			'abc' => $ABC,
 			'status' => 'pending',
+			'project_type' => 'regular',
+			'pow_ready' => 'false'
 		);
 
 		if ($this->db->insert('project_plan', $data)) {
@@ -370,6 +424,8 @@
 			'account_id' => $account,
 			'abc' => $ABC,
 			'status' => 'pending',
+			'project_type' => 'supplementary',
+			'pow_ready' => 'false'
 		);
 
 		if ($this->db->insert('project_plan', $data)) {
