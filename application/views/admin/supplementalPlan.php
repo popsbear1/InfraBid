@@ -35,10 +35,11 @@
                             <select name="status" id="status" class="form-control">
                               <option hidden disabled selected>Choose Status</option>
                               <option value="pending">Pending</option>
-                              <option value="processing">Processing</option>
-                              <option value="implementation">Implementation</option>
-                              <option value="finished">Finished</option>
-                              <option value="Canceled">Canceled</option>
+                              <option value="onprocess">On process</option>
+                              <option value="for_implementation">For Implementation</option>
+                              <option value="for_rebid">For Rebid</option>
+                              <option value="for_review">For Review</option>
+                              <option value="completed">Completed</option>
                             </select>
                           </div>
                           <div class="form-group col-lg-2">
@@ -69,7 +70,7 @@
                             </select>
                           </div>
                           <div class="col-lg-12 text-center">
-                            <button class="btn btn-primary" type="submit">GO</button>
+                            <button class="btn btn-primary" id="filterBtn" type="submit">GO</button>
                           </div>
                         </div>
                       </div>
@@ -81,13 +82,13 @@
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
+                      <th class="text-center">Project Year</th>
                       <th class="text-center">Location</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Mode of Procurement</th>
                       <th class="text-center">Approved Budget Cost</th>
                       <th class="text-center">Source of Fund</th>
                       <th class="text-center">Account Classification</th>
-                      <th class="text-center">Date Added</th>
                       <th class="text-center">Edit</th>
                     </tr>
                   </thead>
@@ -96,13 +97,13 @@
                       <tr>
                         <td><?php echo $plan['project_no'] ?></td>
                         <td><?php echo $plan['project_title'] ?></td>
+                        <td><?php echo $plan['project_year'] ?></td>
                         <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
                         <td><?php echo $plan['type'] ?></td>
                         <td><?php echo $plan['mode'] ?></td>
                         <td><?php echo $plan['abc'] ?></td>
                         <td><?php echo $plan['source'] ?></td>
                         <td><?php echo $plan['classification'] ?></td>
-                        <td><?php echo $plan['date_added'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
                             <button class="btn btn-info" type="submit" name="plan_id" value="<?php echo $plan['plan_id'] ?>">
@@ -182,4 +183,61 @@
       $('#year').attr('placeholder', 'yyyy');
     } 
   );
+
+  $('#filterBtn').click(function(e){
+    e.preventDefault();
+    var year = $('#year').val();
+    var quarter = $('#quarter').val();
+    var status = $('#status').val();
+    var municipality = $('#municipality').val();
+
+    $('#plan_table').DataTable().destroy();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url("admin/getFilteredSupplementaryPlanData") ?>',
+      data: { year: year, quarter: quarter, status: status, municipality: municipality},
+      dataType: 'json',
+      success: function(response){
+
+        $('#plan_table').DataTable({
+          data: response.plans,
+          columns: [
+              { data: 'project_no' },
+              { data: 'project_title' },
+              { data: 'project_year' },
+              { 
+                data: null,
+                render: function(data, type, row){
+                  return data.barangay + ', ' + data.municipality;
+                },
+                editField: ['barangay', 'municipality']
+              },
+              { data: 'type' },
+              { data: 'mode' },
+              { data: 'abc' },
+              { data: 'source' },
+              { data: 'classification' },
+              { 
+                data: null,
+                render: function ( data, type, row ) {
+                  return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                            '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                              '<i class="fa fa-eye"></i>' +
+                            '</button>' +
+                          '</form>';
+                }
+              }
+          ],
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : true
+        });
+
+      }
+    });
+  });
 </script>
