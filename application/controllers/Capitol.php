@@ -14,8 +14,9 @@ class Capitol extends CI_Controller {
 	}
 
 	public function index(){
+		$page['page'] = ''; 
 		$this->load->view('doctrack/fragments/head');
-		$this->load->view('doctrack/fragments/nav');
+		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/home');
 		$this->load->view('doctrack/fragments/footer');
 	}

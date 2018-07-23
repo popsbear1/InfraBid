@@ -34,13 +34,26 @@ class Admin extends CI_Controller {
 	}
 
 	public function regularPlanView(){
-		$year = null;
+		$year = date('Y');
 		$quarter = null;
 		$status = null;
-		$mode = null;
 		$municipality = null;
 
-		if (isset($_POST['year']) && !empty($_POST['year'])) {
+		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality);
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/regularPlan', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function getFilteredPlanData(){
+		$year = $this->input->post('year');
+		$quarter = $this->input->post('quarter');
+		$status = $this->input->post('status');
+		$municipality = $this->input->post('municipality');
+
+		if (empty($)) {
 			$year = $_POST['year'];
 		}else{
 			$year = date('Y');
@@ -51,20 +64,13 @@ class Admin extends CI_Controller {
 		if (isset($_POST['status'])) {
 			$status = $_POST['status'];
 		}
-		if (isset($_POST['mode'])) {
-			$mode = $_POST['mode'];
-		}
 		if (isset($_POST['municipality'])) {
 			$municipality = $_POST['municipality'];
 		}
 
-		$data['modes'] = $this->admin_model->getProcurementMode();
-		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $mode, $municipality);
-		$data['municipalities'] = $this->admin_model->getMunicipalities();
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/regularPlan', $data);
-		$this->load->view('admin/fragments/footer');
+		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality);
+
+		echo json_encode($data);
 	}
 
 	public function supplementalPlanView(){
