@@ -6,7 +6,7 @@
           <div class="col-xs-12">
             <div class="box">
               <div class="box-header">
-                <h2 class="box-title">Procurement  Monitoring Report for Public Bidding and Negotiated<small></small></h2>
+                <h2 class="box-title">Project Procurement Plan Records<small></small></h2>
               </div>
               <div class="box-body">
                 <div class="row">
@@ -41,24 +41,6 @@
                             </select>
                           </div>
                           <div class="form-group col-lg-2">
-                            <label for="mode">Mode: </label>
-                            <select name="mode" id="mode" class="form-control">
-                              <option hidden disabled selected>Choose Mode</option>
-                              <?php foreach ($modes as $mode): ?>
-                                <option value="<?php echo $mode['mode_id'] ?>"><?php echo $mode['mode'] ?></option>
-                              <?php endforeach ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-2">
-                            <label for="abc">ABC: </label>
-                            <select name="abc" id="abc" class="form-control">
-                              <option hidden disabled selected>Choose ABC</option>
-                              <option value="bellowOneMil">Bellow One Mil</option>
-                              <option value="betweenOneAndFiveMil">Between One and Five Mil</option>
-                              <option value="aboveFiveMil">Above Five Million</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-2">
                             <label for="municipality">Municipality: </label>
                             <select name="municipality" id="municipality" class="form-control">
                               <option hidden disabled selected>Choose Municipality</option>
@@ -68,7 +50,7 @@
                             </select>
                           </div>
                           <div class="col-lg-12 text-center">
-                            <button class="btn btn-primary" type="submit">GO</button>
+                            <button class="btn btn-primary" id="filterBtn" type="submit">GO</button>
                           </div>
                         </div>
                       </div>
@@ -181,4 +163,21 @@
       $('#year').attr('placeholder', 'yyyy');
     } 
   );
+
+  $('#filterBtn').click(function(){
+    var year = $('#year').val();
+    var quarter = $('#quarter').val();
+    var status = $('#status').val();
+    var municipality = $('#municipality').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url("admin/getFilteredPlanData") ?>',
+      data: { year: year, quarter: quarter, status: status, municipality: municipality},
+      dataType: 'json',
+      success: function(response){
+
+      }
+    });
+  });
 </script>

@@ -16,7 +16,7 @@
 			return $query->result_array();
 		}
 
-		public function getRegularProjectPlan($year, $quarter, $status, $mode, $municipality){
+		public function getRegularProjectPlan($year, $quarter, $status, $municipality){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -49,10 +49,6 @@
 
 			if ($status != null) {
 				$this->db->where('status', $status);
-			}
-
-			if ($mode  != null) {
-				$this->db->where('project_plan.mode_id', $mode);
 			}
 
 			if ($municipality != null) {
