@@ -366,18 +366,35 @@ class Admin extends CI_Controller {
 	}
 
 	public function addNewContractor(){
-		$businessname = $this->input->post('businessname');
-		$owner = $this->input->post('owner');
-		$address = $this->input->post('address');
-		$contactnumber = $this->input->post('contactnumber');
 
-		if ($this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber)) {
-			$this->session->set_flashdata('success', 'The new contractor has been added to the database.');
+		$data = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules('businessname', 'Business Name', 'trim|required');
+		$this->form_validation->set_rules('owner', 'Owner Name', 'trim|required');
+		$this->form_validation->set_rules('address', 'Bussiness Address', 'trim|required');
+		$this->form_validation->set_rules('contactnumber', 'Business Contact Number', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$businessname = $this->input->post('businessname');
+			$owner = $this->input->post('owner');
+			$address = $this->input->post('address');
+			$contactnumber = $this->input->post('contactnumber');
+
+			if ($this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'There was an error. The new contractor is not added to the database.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			}
 		}
-
-		redirect('admin/manageContractorsView');
+		
+		echo json_encode($data);
 	}
 
 	public function editContractorView(){

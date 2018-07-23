@@ -28,25 +28,17 @@
                 </li>
                 <li 
                 <?php 
-                  if ($projectStatus == "pending" || $projectStatus == "processing" || $projectStatus == "implementation") {
-                    if ($pageName == "timeline") {
-                      echo 'class="active"';
-                    }  
-                  }else{
-                    echo 'class="disabled"';
-                  }
+                  if ($pageName == "timeline") {
+                    echo 'class="active"';
+                  }  
                 ?>
                 >
                   <a href="<?php echo base_url('admin/projectTimelineView') ?>">Project Timeline</a>
                 </li>
                 <li
-                  <?php 
-                    if ($projectStatus == "processing" || $projectStatus == "implementation") {
-                      if ($pageName == "activity") {
-                        echo 'class="active"';
-                      }  
-                    }else{
-                      echo 'class="disabled"';
+                  <?php
+                    if ($pageName == "activity") {
+                      echo 'class="active"';
                     }
                   ?>
                 >
@@ -57,9 +49,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li 
                   <?php 
-                    if ($projectStatus  ==  "canceled") {
-                      echo 'class="disabled"';
-                    }elseif($pageName == "edit") { 
+                    if($pageName == "edit") { 
                       echo 'class="active"';
                     } 
                   ?>
