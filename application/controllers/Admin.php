@@ -47,25 +47,23 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-	public function getFilteredPlanData(){
+	public function getFilteredRegularPlanData(){
 		$year = $this->input->post('year');
 		$quarter = $this->input->post('quarter');
 		$status = $this->input->post('status');
 		$municipality = $this->input->post('municipality');
 
-		if (empty($)) {
-			$year = $_POST['year'];
-		}else{
+		if (empty($year)) {
 			$year = date('Y');
 		}
-		if (isset($_POST['quarter'])) {
-			$quarter = $_POST['quarter'];
+		if (empty($quarter)) {
+			$quarter = null;
 		}
-		if (isset($_POST['status'])) {
-			$status = $_POST['status'];
+		if (empty($status)) {
+			$status = null;
 		}
-		if (isset($_POST['municipality'])) {
-			$municipality = $_POST['municipality'];
+		if (empty($municipality)) {
+			$municipality = null;
 		}
 
 		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality);
@@ -73,33 +71,37 @@ class Admin extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function supplementalPlanView(){
-		$year = null;
-		$quarter = null;
-		$status = null;
-		$mode = null;
-		$municipality = null;
+	public function getFilteredSupplementaryPlanData(){
+		$year = $this->input->post('year');
+		$quarter = $this->input->post('quarter');
+		$status = $this->input->post('status');
+		$municipality = $this->input->post('municipality');
 
-		if (isset($_POST['year']) && !empty($_POST['year'])) {
-			$year = $_POST['year'];
-		}else{
+		if (empty($year)) {
 			$year = date('Y');
 		}
-		if (isset($_POST['quarter'])) {
-			$quarter = $_POST['quarter'];
+		if (empty($quarter)) {
+			$quarter = null;
 		}
-		if (isset($_POST['status'])) {
-			$status = $_POST['status'];
+		if (empty($status)) {
+			$status = null;
 		}
-		if (isset($_POST['mode'])) {
-			$mode = $_POST['mode'];
-		}
-		if (isset($_POST['municipality'])) {
-			$municipality = $_POST['municipality'];
+		if (empty($municipality)) {
+			$municipality = null;
 		}
 
-		$data['modes'] = $this->admin_model->getProcurementMode();
-		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $mode, $municipality);
+		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality);
+
+		echo json_encode($data);
+	}
+
+	public function supplementalPlanView(){
+		$year = date('Y');
+		$quarter = null;
+		$status = null;
+		$municipality = null;
+
+		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
