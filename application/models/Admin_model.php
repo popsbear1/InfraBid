@@ -26,7 +26,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_type', 'regular');
-			$this->db->where('YEAR(date_added)', $year);
+			$this->db->where('YEAR(project_year)', $year);
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
 					$this->db->where('MONTH(date_added)', '01');
@@ -72,7 +72,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_type', 'supplementary');
-			$this->db->where('YEAR(date_added)', $year);
+			$this->db->where('YEAR(project_year)', $year);
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
 					$this->db->where('MONTH(date_added)', '01');
@@ -164,7 +164,7 @@
 		}
 
 		public function getPlanDetails($plan_id){
-			$this->db->select('*, project_plan.status as plan_status');
+			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
