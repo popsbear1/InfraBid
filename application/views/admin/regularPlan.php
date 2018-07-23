@@ -19,7 +19,7 @@
                             <label for="year">Year: </label>
                             <input type="text" id="year" class="form-control">  
                           </div>
-                          <div class="form-group col-lg-2">
+                          <div class="btn-group">
                             <label for="quarter">Quarter: </label>
                             <select name="quarter" id="quarter" class="form-control">
                               <option hidden disabled selected>Choose Quarter</option>
@@ -29,7 +29,7 @@
                               <option value="4thQ">4th Q</option>
                             </select>
                           </div>
-                          <div class="form-group col-lg-2">
+                          <div class="btn-group">
                             <label for="status">Status: </label>
                             <select name="status" id="status" class="form-control">
                               <option hidden disabled selected>Choose Status</option>
@@ -41,7 +41,7 @@
                               <option value="completed">Completed</option>
                             </select>
                           </div>
-                          <div class="form-group col-lg-2">
+                          <div class="btn-group">
                             <label for="municipality">Municipality: </label>
                             <select name="municipality" id="municipality" class="form-control">
                               <option hidden disabled selected>Choose Municipality</option>
@@ -50,7 +50,7 @@
                               <?php endforeach ?>
                             </select>
                           </div>
-                          <div class="col-lg-12 text-center">
+                          <div class="btn-group">
                             <button class="btn btn-primary" id="filterBtn" type="submit">GO</button>
                           </div>
                         </div>
