@@ -118,16 +118,6 @@
     } 
   );
 </script>
-<script>
-  $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
-      $('#usernam').html($('#businessname').val());
-      $('#passwor').html($('#owner').val());
-      $('#usertyp').html($('#address').val());
-      $('#contact').html($('#contactnumber').val());
-    });
-  });
-</script>
 
 <div class="modal fade" id="addContractorModal">
   <div class="modal-dialog">
@@ -138,7 +128,15 @@
         <h4 class="modal-title">Add New Contractor</h4>
       </div>
       <div class="modal-body">
-        <form id="addContractorForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addNewContractor') ?>">
+        <div class="alert alert-success text-center" id="adding_success" hidden>
+          <p class="text-left"><b>SUCCESS!</b></p>
+          <p>The new contractor was successfuly added and recorded!</p>
+        </div>
+        <div class="alert alert-warning text-center" id="adding_failed" hidden>
+          <p class="text-left"><b>FAILED!</b></p>
+          <p>An error was encountered. The new contractor was not recorded!</p>
+        </div>
+        <form id="addContractorForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addNewContractor') ?>" autocomplete="off">
 
           <div class="form-group">
             <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12">Business Name*
@@ -173,7 +171,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+        <button type="submit" class="btn btn-primary" form="addContractorForm">Submit</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -182,44 +180,38 @@
 </div>
 <!-- /.modal -->
 
-<!-- modal for data confirmation -->
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td>Business Name</td>
-              <td><span id="usernam"></span></td>
-            </tr>
-            <tr><td>Owner</td>
-              <td><span id="passwor"></span></td>
-            </tr>
-            <tr><td>Address</td>
-              <td><span id="usertyp"></span></td>
-            </tr>
-            <tr><td>Contact Number</td>
-              <td><span id="contact"></span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" form="addContractorForm" name="submit" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of modal -->
+
+<script>
+  $('#addContractorForm').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addContractorForm').attr('action'),
+      data: $('#addContractorForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#alert-success').prop('hidden', false);
+          $('.alert-success').delay(500).show(10, function() {
+          $(this).delay(3000).hide(10, function() {
+            $(this).remove();
+          });
+          })
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  })
+</script>
