@@ -10,54 +10,64 @@
               </div>
               <div class="box-body">
                 <div class="row">
-                  <div class="col-lg-12">                    
-                    <form action="<?php echo base_url('admin/annualPlanView') ?>" method="POST">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <p>Filters: </p>
-                          <div class="form-group col-lg-2">
-                            <label for="year">Year: </label>
-                            <input type="text" id="year" class="form-control">  
-                          </div>
-                          <div class="btn-group">
-                            <label for="quarter">Quarter: </label>
-                            <select name="quarter" id="quarter" class="form-control">
-                              <option hidden disabled selected>Choose Quarter</option>
-                              <option value="1stQ">1st Q</option>
-                              <option value="2ndQ">2nd Q</option>
-                              <option value="3rdQ">3rd Q</option>
-                              <option value="4thQ">4th Q</option>
-                            </select>
-                          </div>
-                          <div class="btn-group">
-                            <label for="status">Status: </label>
-                            <select name="status" id="status" class="form-control">
-                              <option hidden disabled selected>Choose Status</option>
-                              <option value="pending">Pending</option>
-                              <option value="onprocess">On process</option>
-                              <option value="for_implementation">For Implementation</option>
-                              <option value="for_rebid">For Rebid</option>
-                              <option value="for_review">For Review</option>
-                              <option value="completed">Completed</option>
-                            </select>
-                          </div>
-                          <div class="btn-group">
-                            <label for="municipality">Municipality: </label>
-                            <select name="municipality" id="municipality" class="form-control">
-                              <option hidden disabled selected>Choose Municipality</option>
-                              <?php foreach ($municipalities as $municipality): ?>
-                                <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
-                              <?php endforeach ?>
-                            </select>
-                          </div>
-                          <div class="btn-group">
-                            <button class="btn btn-primary" id="filterBtn" type="submit">GO</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
+              <div class="box-body">
+                <div class="row">                   
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <p>Filters: </p>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label for="year">Year: </label>
+                      <input type="text" id="year" class="form-control">  
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label for="quarter">Quarter: </label>
+                      <select name="quarter" id="quarter" class="form-control">
+                        <option hidden disabled selected>Choose Quarter</option>
+                        <option value="1stQ">1st Q</option>
+                        <option value="2ndQ">2nd Q</option>
+                        <option value="3rdQ">3rd Q</option>
+                        <option value="4thQ">4th Q</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label for="status">Status: </label>
+                      <select name="status" id="status" class="form-control">
+                        <option hidden disabled selected>Choose Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="onprocess">On process</option>
+                        <option value="for_implementation">For Implementation</option>
+                        <option value="for_rebid">For Rebid</option>
+                        <option value="for_review">For Review</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label for="municipality">Municipality: </label>
+                      <select name="municipality" id="municipality" class="form-control">
+                        <option hidden disabled selected>Choose Municipality</option>
+                        <?php foreach ($municipalities as $municipality): ?>
+                          <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                        <?php endforeach ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                    <div class="form-group">
+                      <label>Action:</label>
+                      <button class="btn btn-primary form-control" id="filterBtn" type="button">Find</button>
+                    </div>
                   </div>
                 </div>
+              </div>
                 <table class="table table-bordered table-striped" id="plan_table">
                   <thead style='font-size:12px;'>
                     <tr>
