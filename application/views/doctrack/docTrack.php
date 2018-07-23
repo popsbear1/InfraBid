@@ -36,12 +36,12 @@
                 <tbody>
                   <?php foreach ($pending_documents as $pending_document): ?>
                     <tr id="<?php echo 'receive' . $pending_document['plan_id'] ?>">
-                      <td><?php echo $pending_document['project_title'] ?></td>
-                      <td><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
-                      <td><?php echo number_format($pending_document['abc'], 2) ?></td>
-                      <td><?php echo $pending_document['businessname'] ?></td>
-                      <td><?php echo $pending_document['source'] ?></td>
-                      <td><?php echo $pending_document['current_doc_loc'] ?></td>
+                      <td class="text-center"><?php echo $pending_document['project_title'] ?></td>
+                      <td class="text-center"><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                      <td class="text-center"><?php echo number_format($pending_document['abc'], 2) ?></td>
+                      <td class="text-center"><?php echo $pending_document['businessname'] ?></td>
+                      <td class="text-center"><?php echo $pending_document['source'] ?></td>
+                      <td class="text-center"><?php echo $pending_document['current_doc_loc'] ?></td>
                       <td class="text-center">
                         <div class="btn-group">
                           <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
@@ -73,24 +73,25 @@
                 <tbody>
                   <?php foreach ($onhand_documents as $onhand_document): ?>
                      <tr>
-                        <td><?php echo $onhand_document['project_title'] ?></td>
-                        <td><?php echo $onhand_document['municipality'] . ', ' . $onhand_document['barangay'] ?></td>
-                        <td><?php echo number_format($onhand_document['abc'], 2) ?></td>
-                        <td><?php echo $onhand_document['businessname'] ?></td>
-                        <td><?php echo $onhand_document['source'] ?></td>
-                        <td><?php echo $onhand_document['previous_doc_loc'] ?></td>
+                        <td class="text-center"><?php echo $onhand_document['project_title'] ?></td>
+                        <td class="text-center"><?php echo $onhand_document['municipality'] . ', ' . $onhand_document['barangay'] ?></td>
+                        <td class="text-center"><?php echo number_format($onhand_document['abc'], 2) ?></td>
+                        <td class="text-center"><?php echo $onhand_document['businessname'] ?></td>
+                        <td class="text-center"><?php echo $onhand_document['source'] ?></td>
+                        <td class="text-center"><?php echo $onhand_document['previous_doc_loc'] ?></td>
                         <td class="text-center">
-                          <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
-                            <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
-                            <div class="btn-group">
-                              <button class="btn btn-success" type="submit"> 
-                                <i class="fa fa-plus"></i> Update 
-                              </button>
-                              <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
-                                <i class="fa fa-eye"></i> View
-                              </button>
-                            </div> 
-                          </form> 
+                          <div class="btn-group">
+                            <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>"   method="POST">
+                              <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
+                              
+                                <button class="btn btn-success" type="submit"> 
+                                  <i class="fa fa-plus"></i>Update
+                                </button>
+                                <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
+                                  <i class="fa fa-eye"></i>View
+                                </button>     
+                            </form>
+                          </div> 
                         </td>
                      </tr>
                    <?php endforeach ?>  
@@ -113,19 +114,19 @@
                 <tbody>
                   <?php foreach ($forwarded_documents as $forwarded_document): ?>
                     <tr id="<?php echo 'forwarded' . $forwarded_document['plan_id'] ?>">
-                      <td><?php echo $forwarded_document['project_title'] ?></td>
-                      <td><?php echo $forwarded_document['municipality'] . ', ' . $forwarded_document['barangay'] ?></td>
-                      <td><?php echo number_format($forwarded_document['abc'], 2) ?></td>
-                      <td><?php echo $forwarded_document['businessname'] ?></td>
-                      <td><?php echo $forwarded_document['source'] ?></td>
-                      <td><?php echo $forwarded_document['receiver'] ?></td>
+                      <td class="text-center"><?php echo $forwarded_document['project_title'] ?></td>
+                      <td class="text-center"><?php echo $forwarded_document['municipality'] . ', ' . $forwarded_document['barangay'] ?></td>
+                      <td class="text-center"><?php echo number_format($forwarded_document['abc'], 2) ?></td>
+                      <td class="text-center"><?php echo $forwarded_document['businessname'] ?></td>
+                      <td class="text-center"><?php echo $forwarded_document['source'] ?></td>
+                      <td class="text-center"><?php echo $forwarded_document['receiver'] ?></td>
                       <td class="text-center">
                         <div class="btn-group">
                           <button class="btn btn-default cancelDocumentForwardBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] ?>">
-                            <i class="fa fa-close"></i> Cancel
+                            <i class="fa fa-close"></i>Cancel
                           </button>
                           <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] . ',' . 'forwarded' ?>">
-                            <i class="fa fa-eye"></i> View
+                            <i class="fa fa-eye"></i>View
                           </button>
                         </div>
                       </td>
@@ -314,7 +315,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
-              <h2 style="background-color:#D76969; text-align: center; padding: 7px 10px;" id="documentHeader">
+              <h2 style="background-color:#C0C0C0; text-align: center; padding: 7px 10px;" id="documentHeader">
                 Documents
               </h2>
           </div>
@@ -345,7 +346,7 @@
         </div>
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
-              <h2 style="background-color:#D76969; text-align: center; padding: 7px 10px;">
+              <h2 style="background-color:#C0C0C0; text-align: center; padding: 7px 10px;">
                 HISTORY TRACKS
               </h2>
           </div>
@@ -494,12 +495,12 @@
         <p class="text-center">Confirm Forwarding Cancellation</p>
         <div class="alert alert-success" hidden="hidden" id="cancelForwardSuccessAlert">
           <h4><i class="icon fa fa-check"></i> Alert!</h4>
-          <p>Cancell Forward Success!</p>
+          <p>Cancel Forward Success!</p>
         </div>
         <div class="alert alert-warning" hidden="hidden" id="cancelForwardFailedAlert">
           <h4><i class="icon fa fa-check"></i> Alert!</h4>
-          <p>Cancell Forward Failed!</p>
-          <p>Documents Allready Received!</p>
+          <p>Cancel Forward Failed!</p>
+          <p>Documents Already Received!</p>
         </div>
         <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/cancelDocumentForward');}else{ echo base_url('capitol/cancelDocumentForward'); } ?>" method="POST" id="cancelDocumentForwardForm">
           <input type="text" name="plan_id" id="forwarded_plan_id" hidden>
