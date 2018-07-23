@@ -4,6 +4,7 @@
 		<div class="box-body">
 			<div class="row">	
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<h3>Project Details:</h3>
 					<div class="form-group">
 						<label for="">Project Number:</label>
 						<p class="form-control"><?php echo $projectDetails['project_no'] ?></p>

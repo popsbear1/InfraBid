@@ -250,8 +250,17 @@
     if (startDate == null || startDate == "") {
       alert("Select Start Date First!");
     }else{
-      setDatesToEarliestPossibleTime(startDate);
+      if ($('#noPreBid').is(":checked") && $('#noApproval').is(":checked")) {
+        setDatesToEarliestPossibleTimeWithoutPBCandAHA(startDate);
+      }else if($('#noApproval').is(":checked")){
+        setDatesToEarliestPossibleTimeWithoutAHA(startDate);
+      }else if($('#noPreBid').is(":checked")){
+        setDatesToEarliestPossibleTimeWithoutPBC(startDate);
+      }else{
+        setDatesToEarliestPossibleTime(startDate);  
+      }
     }
+      
   });
 
   function setDatesToEarliestPossibleTime(startDate){

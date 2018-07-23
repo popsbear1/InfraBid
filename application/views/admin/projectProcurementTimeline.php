@@ -1,6 +1,6 @@
   <!-- <link rel="stylesheet" href="<?php echo base_url() ?>public/timeLine.css"> -->
       <div class="col-lg-9 col-md-9 col-sm-9">
-        <h3>Project Timeline</h3>
+        <h3>Project Timeline:</h3>
         <form action="<?php echo base_url('admin/updateProcurementTimeline') ?>" method="POST" id="updateProcurementTimelineForm">
           <div class="well">
             <div class="row">
