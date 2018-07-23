@@ -1,13 +1,14 @@
 <style>
   .document_container{
-    max-height: 500px;
-    min-height: 500px;
+    max-height: 600px;
+    min-height: 600px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 7px 10px; 
     margin: 0 5px 0 5px;
-    background: #D4BBBB;
-    border: black;
+    background: #FFFFFF;
+    border-style: groove;
+    border-width: 1px;
   }
 
   .document_add{
@@ -15,7 +16,7 @@
     margin: 0 5px 0 5px;
     text-align: right;
   }
-</style>
+</style>  
 <section class="content-header">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -39,7 +40,7 @@
         <div class="box-header">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-              <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
+              <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px; border-width: 1px; border-style: groove;">
                 <h4>Existing Project Documents</h4>
               </div>
             </div>
@@ -50,7 +51,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
+                  <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px; border-width: 1px; border-style: groove;">
                     <h5>Onhand Documents</h5>
                   </div>
                   <div class="document_container">
@@ -65,7 +66,7 @@
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px;">
+                  <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px; border-width: 1px; border-style: groove;">
                     <h5>Documents on other Departments</h5>
                   </div>
                   <div class="document_container"> 
@@ -202,7 +203,7 @@
       <div class="modal-header" style="padding: 0 0 0 0;">
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-            <div style="background-color:#D76969; font-size: 25px; text-align: center; padding: 7px 10px;">
+            <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; border-style: groove;">
               <h4 class="box-title">Project Documents Types</h4>
             </div>
           </div>
@@ -280,7 +281,7 @@
     <div class="modal-content">
       <div class="modal-header" style="padding-top: 0">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#D76969; text-align: center; padding: 7px 10px;">
+          <div class="col-lg-12 col-md-12 col-sm-12" style="background-color:#C0C0C0; text-align: center; padding: 7px 10px; border-width: 1px;">
             <h3>Project Document Types</h3>
           </div>
         </div>
