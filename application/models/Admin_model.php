@@ -172,11 +172,23 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
 			$this->db->where('plan_id', $plan_id);
 
 			$query = $this->db->get();
 
 			return $query->row_array();
+		}
+
+		public function getProjectLogs($plan_id){
+			$this->db->select('*, concat(first_name, " ", middle_name, " ", last_name) as username');
+			$this->db->from('project_logs');
+			$this->db->join('users', 'project_logs.user_id = users.user_id');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
 		}
 
 

@@ -595,6 +595,10 @@ function convertDate($date){
           <label>Current Re-bid Count: </label>
           <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
         </div>
+        <div class="form-group">
+          <label>Remark: </label>
+          <textarea name="" id="" cols="30" rows="10" class="form-control" style="resize: none;"></textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <form action="<?php echo base_url('admin/rebidProjectPlan') ?>" method="POST">

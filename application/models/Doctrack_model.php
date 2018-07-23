@@ -20,6 +20,7 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
 			$this->db->where('plan_id', $plan_id);
 
 			$query = $this->db->get();

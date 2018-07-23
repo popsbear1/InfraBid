@@ -114,7 +114,9 @@ class Admin extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id');	
 		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
+		$data['logs'] = $this->admin_model->getProjectLogs($plan_id);
 		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
+		$data['actdates'] = $this->admin_model->getProcActivityDates($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);

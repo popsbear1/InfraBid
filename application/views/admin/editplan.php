@@ -29,7 +29,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Year *
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" class="form-control" id="year" name="year" placeholder="<?php echo $projectDetails['project_year'] ?>">
