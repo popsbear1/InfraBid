@@ -26,7 +26,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_type', 'regular');
-			$this->db->where('YEAR(project_year)', $year);
+			$this->db->where('project_year', $year);
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
 					$this->db->where('MONTH(date_added)', '01');
@@ -72,7 +72,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_type', 'supplementary');
-			$this->db->where('YEAR(project_year)', $year);
+			$this->db->where('project_year', $year);
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
 					$this->db->where('MONTH(date_added)', '01');
