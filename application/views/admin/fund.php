@@ -137,26 +137,40 @@
         <h4 class="modal-title">Add New Fund</h4>
       </div>
       <div class="modal-body">
-        <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>">
 
-      <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:</label>
+        <div class="alert alert-sucess text-center" id="adding_success" hidden>
+          <p class="text-left"><b>SUCCESS!</b></p>
+          <p>Type of Fund has been Sucessfully Added!</p>
+        </div>
+
+        <div class="alert alert-warning text-center" id="
+        adding_failed" hidden><p class="text-left"><b>FAILED!</b></p><p>An error was encountered. The Type of Fund was not Recorded!</p> 
+        </div>
+
+        <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
               <input type="text" id="source" name="source" class="form-control">
             </div>
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Fund:</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <select class="form-control" id="fundtype" name="fundtype">
-                    <option hidden disabled selected>Select Type</option>
-                    <option value="regular">Regular</option>
-                    <option value="supplemental">Supplemental</option>
-                  </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Fund:</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <select class="form-control" id="fund_type" name="fund_type">
+                <option hidden disabled selected>Select Type</option>
+                <option value="regular">Regular</option>
+                <option value="supplemental">Supplemental</option>
+              </select>
             </div>
           </div>
-      </form>
+        </form>
+      </div>
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button> 
+        <button type="submit" class="btn btn-primary" form="addFundsForm">Submit</button> 
       </div>
     </div>
     <!-- /.modal-content -->
@@ -203,4 +217,38 @@
 </div>
 <!-- end of modal -->
 
+<script>
+  $('#addFundsForm').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addFundsForm').attr('action'),
+      data: $('#addFundsForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#alert-success').prop('hidden', false);
+          $('.alert-success').delay(500).show(10, function() {
+          $(this).delay(3000).hide(10, function() {
+            $(this).remove();
+          });
+          })
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  })
+</script>
 

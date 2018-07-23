@@ -138,6 +138,17 @@
         <h4 class="modal-title">Add New User</h4>
       </div>
       <div class="modal-body">
+
+        <div class="alert alert-sucess text-center" id="adding_success" hidden>
+          <p class="text-left"><b>SUCESS!</b></p>
+          <p>User has been Added Sucessfully!</p>
+        </div>
+
+        <div class="alert alert-warning text-center" id="adding_failed" hidden>
+          <p class="text-left"><b>FAILED!</b></p>
+          <p>An error was encountered.User has not been added!</p>
+        </div>
+
         <form id="addNewUserForm" action="<?php echo base_url('admin/addUsers') ?>" method="POST" class="form-horizontal form-label-left">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name*</label>
@@ -173,7 +184,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+        <button type="submit" class="btn btn-primary" form="addNewUserForm">Submit</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -223,3 +234,37 @@
 </div>
 
 <!-- end confirm modal -->
+<script>
+  $('#addNewUserForm').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addNewUserForm').attr('action'),
+      data: $('#addNewUserForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#alert-success').prop('hidden', false);
+          $('.alert-success').delay(500).show(10, function() {
+          $(this).delay(3000).hide(10, function() {
+            $(this).remove();
+          });
+          })
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  })
+</script>

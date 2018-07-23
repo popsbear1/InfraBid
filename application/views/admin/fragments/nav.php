@@ -307,41 +307,6 @@
               </i> <span>Supplemental Records</span>
             </a>
           </li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-shopping-cart"></i>
-              <span>Procurement Activity</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class=treeview-menu>
-              <li><a href='<?php echo base_url('admin/preProcurementConferenceView') ?>'>Pre-Procurement Conference</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/advertisementView') ?>'>Advertisement</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/preBidConferenceView') ?>'>Pre-bid Conference</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/eligibilityCheckView') ?>'>Eligibility Check</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/subOpenBidsView') ?>'>Sub/Open of Bids</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/bidEvaluationView') ?>'>Bid Evaluation</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/postQualificationView') ?>'>Post Qualification</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/noticeOfAwardView') ?>'>Notice of Award</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/contractSigningView') ?>'>Contract Signing</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/noticeToProceedView') ?>'>Notice to Proceed</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/deliveryCompletionView') ?>'>Delivery/Completion</a>
-              </li>
-              <li><a href='<?php echo base_url('admin/acceptanceTurnoverView') ?>'>Acceptance/Turnover</a>
-              </li>
-            </ul>
-          </li>
           <li class="header">Document Management</li>
           <li class="treeview">
             <a href="#">
