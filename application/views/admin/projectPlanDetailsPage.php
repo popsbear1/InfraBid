@@ -21,7 +21,7 @@
                         <div class="col-lg-12 col-md-12 well text-center">
                           <div class="form-group">
                             <label for="eventStatus">Current Project Status:</label>
-                            <h3 id="eventStatus"><?php echo $projectDetails['plan_status'] ?></h3>
+                            <h3 id="eventStatus"><?php echo $projectDetails['status'] ?></h3>
                           </div>
                         </div>
                       </div>
