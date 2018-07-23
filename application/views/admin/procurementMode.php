@@ -128,18 +128,28 @@
         <h4 class="modal-title">Default Modal</h4>
       </div>
       <div class="modal-body">
+
+        <div class="alert alert-sucess text-center" id="adding_success" hidden><p class="text-left"><b>SUCCESS!</b></p><p>Procurement Mode has been sucessfully added!</p>
+        </div>
+
+        <div class="alert alert-warning text-center" id="adding_failed" hidden><p class="text-left"><b>FAILED!</b></p><p>An error was encountered. The Operation has been failed!</p>
+          
+        </div>
+
+
         <form id="addProcurementForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addProcurement') ?>">
           <div class="form-group">
             <label class="control-label col-md-5 col-sm-5 col-xs-12">Name of Procurement Mode*</label>
             <div class="col-md-7 col-sm-7 col-xs-12">
-              <input type="text" id="addProcurement" name="mode" class="form-control col-md-7 col-xs-12">
+              <input type="text" id="mode" name="mode" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
         </form>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+        <button type="submit" class="btn btn-primary" form="addProcurementForm">Submit</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -180,3 +190,37 @@
   </div>
 </div>
 <!-- end of modal -->
+<script>
+  $('#addProcurementForm').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addProcurementForm').attr('action'),
+      data: $('#addProcurementForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#alert-success').prop('hidden', false);
+          $('#alert-success').delay(500).show(10, function() {
+          $(this).delay(3000).hide(10, function() {
+            $(this).remove();
+          });
+          })
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  })
+</script>

@@ -378,10 +378,10 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
-			$businessname = $this->input->post('businessname');
-			$owner = $this->input->post('owner');
-			$address = $this->input->post('address');
-			$contactnumber = $this->input->post('contactnumber');
+			$businessname = htmlspecialchars($this->input->post('businessname'));
+			$owner = htmlspecialchars($this->input->post('owner'));
+			$address = htmlspecialchars($this->input->post('address'));
+			$contactnumber = htmlspecialchars($this->input->post('contactnumber'));
 
 			if ($this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber)) {
 				$data['success'] = true;
@@ -461,15 +461,31 @@ class Admin extends CI_Controller {
 	}
 
 	public function addFunds(){
-		$source = $this->input->post('source');
-		$fund_type = $this->input->post('fund_type');
 
-		if ($this->admin_model->insertNewFunds($source,$fund_type)) {
-			$this->session->set_flashdata('success', 'New Funds Successfully Added.');
+		$data = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
+		$this->form_validation->set_rules('fund_type', 'Type of Fund', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$source = htmlspecialchars($this->input->post('source'));
+			$fund_type = htmlspecialchars($this->input->post('fund_type'));
+
+			if ($this->admin_model->insertNewFunds($source, $fund_type)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['fund_type'])) {
+				$data['messages']['fund_type'] = '<p class="text-danger">The Role field is required!</p>';
+			}
 		}
-		redirect('admin/manageFundsView');
+		
+		echo json_encode($data);
 	}
 
 	public function editFundsView(){
@@ -518,15 +534,28 @@ class Admin extends CI_Controller {
 	}
 
 	public function addProjectType(){
-		$type = $this->input->post('type');
+		$data = array('success' => false, 'messages' => array());
 
-		if ($this->admin_model->insertNewProjectType($type)) {
-			$this->session->set_flashdata('success', 'New Project Type Recorded.');
+		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$type = htmlspecialchars($this->input->post('type'));
+
+			if ($this->admin_model->insertNewProjectType($type)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'Error! Project Type Not Recorded.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			}
 		}
-
-		redirect('admin/addProjectTypeView');
+		
+		echo json_encode($data);
 	}
 
 	public function editProjectTypeView(){
@@ -617,18 +646,34 @@ class Admin extends CI_Controller {
 	}
 
 	public function addUsers(){
-		$firstname = $this->input->post('firstname');
-		$middlename = $this->input->post('middlename');
-		$lastname = $this->input->post('lastname');
-		$usertype = $this->input->post('usertype');
+		$data = array('success' => false, 'messages' => array());
 
-		if ($this->admin_model->insertUsers($firstname, $middlename, $lastname, $usertype)) {
-			$this->session->set_flashdata('success', 'New User Added!');
+		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
+		$this->form_validation->set_rules('middlename', 'Middle Name', 'trim|required');
+		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+		$this->form_validation->set_rules('usertype', 'User Type', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$firstname = htmlspecialchars($this->input->post('firstname'));
+			$middlename = htmlspecialchars($this->input->post('middlename'));
+			$lastname = htmlspecialchars($this->input->post('lastname'));
+			$usertype = htmlspecialchars($this->input->post('usertype'));
+
+			if ($this->admin_model->insertUsers($firstname, $middlename, $lastname, $usertype)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'ERROR!.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['usertype'])) {
+				$data['messages']['usertype'] = '<p class="text-danger">The User Type field is required!</p>';
+			}
 		}
-
-		redirect('admin/addUsersView');
+		
+		echo json_encode($data);
 	}
 
 	public function manageDatabaseView(){
@@ -813,16 +858,28 @@ class Admin extends CI_Controller {
 
 
 	public function addProcurement(){
-		$mode = $this->input->post('mode');
+		$data = array('success' => false, 'messages' => array());
 
-		if ($this->admin_model->insertProcurementMode($mode)) {
-			$this->session->set_flashdata('success', 'New Procurement Mode Recorded.');
+		$this->form_validation->set_rules('mode', 'Procurement Mode', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$mode = htmlspecialchars($this->input->post('mode'));
+
+			if ($this->admin_model->insertProcurementMode($mode)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'Error! Procurement Mode not Recorded.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			}
 		}
-
-		redirect('admin/addProcurementView');
-
+		
+		echo json_encode($data);
 	}
 
 	public function editProcurementView(){
@@ -872,411 +929,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/projectProcurementTimelineReport');
 		$this->load->view('admin/fragments/footer');
 	}
-
-	/**
-	*
-	*Procurement Activity
-	*/
-
-
-	public function preProcurementConferenceView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/preProcConference', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-	public function advertisementView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/advertisement', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function preBidConferenceView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/preBidConference', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function eligibilityCheckView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/eligibilityCheck', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function subOpenBidsView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/subOpenBids', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function bidEvaluationView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/bidEvaluation', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function postQualificationView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/postQualification', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function noticeOfAwardView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/noticeOfAward', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function contractSigningView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/contractSigning', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function noticeToProceedView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/noticeToProceed', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-		public function deliveryCompletionView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/deliveryCompletion', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-
-		public function acceptanceTurnoverView(){
-			$year = null;
-			$quarter = null;
-			$status = null;
-			$mode = null;
-			$municipality = null;
-
-			if (isset($_POST['year']) && !empty($_POST['year'])) {
-				$year = $_POST['year'];
-			}else{
-				$year = date('Y');
-			}
-			if (isset($_POST['quarter'])) {
-				$quarter = $_POST['quarter'];
-			}
-			if (isset($_POST['status'])) {
-				$status = $_POST['status'];
-			}
-			if (isset($_POST['mode'])) {
-				$mode = $_POST['mode'];
-			}
-			if (isset($_POST['municipality'])) {
-				$municipality = $_POST['municipality'];
-			}
-
-			$data['modes'] = $this->admin_model->getProcurementMode();
-			$data['plans'] = $this->admin_model->getProjectPlan($year, $quarter, $status, $mode, $municipality);
-			$data['municipalities'] = $this->admin_model->getMunicipalities();
-			$this->load->view('admin/fragments/head');
-			$this->load->view('admin/fragments/nav');
-			$this->load->view('admin/acceptanceTurnover', $data);
-			$this->load->view('admin/fragments/footer');
-	}
-
 	/** Start of Manage Documents */
 
 		public function manageDocumentsView(){
@@ -1295,15 +947,30 @@ class Admin extends CI_Controller {
 	}
 
 	public function addDocuments(){
-		$document_name = $this->input->post('newdocuments');
-		$document_numbers = $this->input->post('document_numbers');
+		$data = array('success' => false, 'messages' => array());
 
-		if ($this->admin_model->insertDocument($document_name, $document_numbers)) {
-			$this->session->set_flashdata('success', 'Document Successfully Added.');
+		$this->form_validation->set_rules('document_numbers', 'Document Number', 'trim|required');
+		$this->form_validation->set_rules('newdocuments', 'Document Number', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$document_numbers = htmlspecialchars($this->input->post('document_numbers'));
+			$fund_type = htmlspecialchars($this->input->post('newdocuments'));
+
+			if ($this->admin_model->insertNewFunds($source, $fund_type)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'Error! Fund Not Added.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['fund_type'])) {
+				$data['messages']['fund_type'] = '<p class="text-danger">The Role field is required!</p>';
+			}
 		}
-		redirect('admin/manageDocumentsView');
+		
+		echo json_encode($data);
 	}
 
 	public function editDocumentsView(){
