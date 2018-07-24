@@ -128,22 +128,22 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Default Modal</h4>
+        <h4 class="modal-title">Manage Classifications</h4>
       </div>
       <div class="modal-body">
         <form id="addClassificationForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addClassification') ?>">
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Classification<span class="required">*</span>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" >Classification<span class="required">*</span>
             </label>
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <input type="text" id="addClassification" name="classification" class="form-control">
+              <input type="text" id="classification" name="classification" class="form-control">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+        <button type="button" class="btn btn-primary" form="addClassificationForm">Submit</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -151,36 +151,38 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<!-- end of modal -->
+<script>
+  $('#addClassificationForm').submit(function(e){
+    e.preventDefault();
 
-<!-- modal for data confirmation -->
-    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-          </div>
-          <div class="modal-body">
-            <table class='table table-striped table-bordered' style='font-size:13px;'>
-              <thead>
-                <tr >
-                  <th style='text-align: center'>Attributes</th>
-                  <th style='text-align: center'>Values</th>
-                </tr> 
-              </thead>
-              <tbody>
-                <tr><td>Classification</td>
-                  <td><span id="accounts"></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" form="addClassificationForm" name="submit" class="btn btn-primary">Confirm</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end of modal -->
+    $.ajax({
+      type: 'POST',
+      url: $('#addClassificationForm').attr('action'),
+      data: $('#addClassificationForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#alert-success').prop('hidden', false);
+          $('.alert-success').delay(500).show(10, function() {
+          $(this).delay(3000).hide(10, function() {
+            $(this).remove();
+          });
+          })
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  })
+</script>
