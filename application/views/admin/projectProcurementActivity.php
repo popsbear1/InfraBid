@@ -1,3 +1,4 @@
+
 <?php 
 
 $pre_proc = convertDate($procActDate['pre_proc']);
@@ -60,9 +61,12 @@ function convertDate($date){
 ?>
 
 <div class="col-lg-9 col-md-9 col-sm-9">
-  <h3>Project Timeline</h3>
-  <div class="">
-    <div class="row">
+  <h3>Procurement Activity</h3>
+  <div class="row">
+    <div class="box-header">
+      <h3 class="box-title">Activity View</h3>
+    </div>
+    <div class="box-body">
       <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12">
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
@@ -88,20 +92,17 @@ function convertDate($date){
         <button class="activityBtn btn btn-default btn-block" type="button" id="delivery_completion_btn">Delivery/Completion</button>
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="acceptance_turnover_btn">Acceptance/Turnover</button>
-
       </div>
       <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12">
         <div class=text-center">
           <div id="pre_proc_view" class="activity_view" hidden="hidden">
-            <div class="well">
-              <input type="text" name="activity_name" value="pre_proc" hidden>
+              <input type="text" name="activity_name" hidden>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
                   <p class="form-control"><?php echo $pre_proc_start ?></p>
                 </div>
               </div> 
-            </div>
           </div>
           <div id="ads_post_view" class="activity_view" hidden="hidden">
             <div class="well">
@@ -126,11 +127,6 @@ function convertDate($date){
                   </div>
                 </div>          
               </form>
-            </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
-              </div>
             </div>
           </div>
 
@@ -157,11 +153,6 @@ function convertDate($date){
                   </div>
                 </div>
               </form>
-            </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="pre_bid,pre_bid_form">Submit</button>
-              </div>
             </div>
           </div>
 
@@ -190,11 +181,6 @@ function convertDate($date){
                 </div>
               </form>
             </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="openbid,open_bid_form">Submit</button> 
-              </div>
-            </div>
           </div>
 
           <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
@@ -220,11 +206,11 @@ function convertDate($date){
                     <select name="contractor" id="contractor" class="form-control">
                       <option hidden selected disabled>
                         <?php
-                          if ($projectDetails['contractor_id'] == null) {
-                            echo 'Choose Contractor';
-                          }else{
-                            echo $projectDetails['businessname'];
-                          }  
+                        if ($projectDetails['contractor_id'] == null) {
+                          echo 'Choose Contractor';
+                        }else{
+                          echo $projectDetails['businessname'];
+                        }  
                         ?>
                       </option>
                       <?php foreach ($contractors as $contractor): ?>
@@ -240,13 +226,6 @@ function convertDate($date){
                   </div>
                 </div>
               </form>
-            </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="eligibility,eligibility_check_form">Submit</button> 
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model">Schedule for re-bid/another SVP</button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode">Recommend Project for Review</button>
-              </div>
             </div>
           </div>
 
@@ -275,11 +254,6 @@ function convertDate($date){
                 </div>      
               </form>
             </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button> 
-              </div>
-            </div>
           </div>
 
           <div id="post_qual_view" class ="activity_view" hidden="hidden">
@@ -307,12 +281,6 @@ function convertDate($date){
                 </div>
               </form>
             </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="postqual,post_qual_form">Submit</button>
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal" >Bid Disqualifide</button>
-              </div>
-            </div>
           </div>
 
           <div id="notice_award_view" class="activity_view" hidden="hidden">
@@ -338,12 +306,6 @@ function convertDate($date){
                   </div>
                 </div>
               </form>
-            </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="awarddate,award_notice_form">Submit</button>
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal">Prepare Sanction Letter</button>
-              </div>
             </div>
           </div>
 
@@ -372,11 +334,6 @@ function convertDate($date){
                 </div>
               </form>
             </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="contractsigning,contract_signing_form">Submit</button>
-              </div>
-            </div>
           </div>
 
           <div id="proceed_notice_view" class="activity_view" hidden="hidden">
@@ -403,11 +360,6 @@ function convertDate($date){
                 </div>
               </form>
             </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="proceednotice,proceed_notice_form">Submit</button>
-              </div>
-            </div>
           </div>
 
           <div id="completion_delivery_view" class ="activity_view" hidden="hidden">
@@ -425,11 +377,6 @@ function convertDate($date){
 
 
               </form>
-            </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="completion,competion_form">Submit</button>
-              </div>
             </div>
           </div>
 
@@ -453,12 +400,78 @@ function convertDate($date){
                 </div>
               </form>
             </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-primary procactsubmitbutton" value="acceptance,acceptance_form">Finish</button>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <div class="row procactsubmitcontainer" id="advertisement_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="pre_bid_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="pre_bid,pre_bid_form">Submit</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="open_bid_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="openbid,open_bid_form">Submit</button> 
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer"  id="eligibility_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="eligibility,eligibility_check_form">Submit</button> 
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model">Schedule for re-bid/another SVP</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode">Recommend Project for Review</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="bid_eval_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button> 
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer"  id="post_qual_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="postqual,post_qual_form">Submit</button>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal" >Bid Disqualifide</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="award_notice_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="awarddate,award_notice_form">Submit</button>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal">Prepare Sanction Letter</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="contract_signing_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="contractsigning,contract_signing_form">Submit</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="proceed_notice_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="proceednotice,proceed_notice_form">Submit</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="completion_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="completion,competion_form">Submit</button>
+        </div>
+      </div>
+
+      <div class="row procactsubmitcontainer" id="acceptance_submit_btn" hidden="hidden">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+          <button type="button" class="btn btn-primary procactsubmitbutton" value="acceptance,acceptance_form">Finish</button>
         </div>
       </div>
     </div>
@@ -467,24 +480,6 @@ function convertDate($date){
 </div>
 </div>
 </section>
-
-
-<!-- jQuery 3 -->
-<script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url() ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url() ?>public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-
-<!-- page script -->
-
 
 <!--Modal for confirmation -->
 
@@ -531,28 +526,28 @@ function convertDate($date){
             <h5 class="modal-title">Schedule for re-bid/another SVP</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;
-              </button>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Current Re-bid Count: </label>
+              <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
             </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Current Re-bid Count: </label>
-                <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
-              </div>
-              <div class="form-group">
-                <label>Remark* : </label>
-                <textarea name="re_bid_remark" id="re_bid_remark" cols="30" rows="10" class="form-control" style="resize: none;" form="rebidProjectForm" ></textarea>
-              </div>
+            <div class="form-group">
+              <label>Remark* : </label>
+              <textarea name="re_bid_remark" id="re_bid_remark" cols="30" rows="10" class="form-control" style="resize: none;" form="rebidProjectForm" ></textarea>
             </div>
-            <div class="modal-footer">
-              <form action="<?php echo base_url('admin/rebidProjectPlan') ?>" method="POST" id="rebidProjectForm">
-                <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
-                <button type="submit" class="btn btn-primary">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </form>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <form action="<?php echo base_url('admin/rebidProjectPlan') ?>" method="POST" id="rebidProjectForm">
+              <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
+              <button type="submit" class="btn btn-primary">Confirm</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
           </div>
         </div>
       </div>
+    </div>
 
       <div id="recommendForReviewMode" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -636,6 +631,22 @@ function convertDate($date){
               </div>
             </div>
 
+
+            <!-- jQuery 3 -->
+            <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap 3.3.7 -->
+            <script src="<?php echo base_url() ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- DataTables -->
+            <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="<?php echo base_url() ?>public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
+
+            <!-- page script -->
 <script>
 
   var planDates = {
@@ -652,16 +663,26 @@ function convertDate($date){
     acceptance : '<?php echo $acceptance ?>'
   };
 
-  $(document).ready(function(){
-    if (planDates['pre_proc'] != null) {
-      $('#pre_proc_button').prop('style', 'background: lightgreen');
-    }
-  });
 
-  $(document).ready(function(){
-    var project_title = '<?php echo $projectDetails['project_title'] ?>';
-    $('#project_title_modal').text(project_title);
-  });
+  var pre_proc_date = '<?php echo $timeline['pre_proc_date'] ?>';
+  var $advertisement_start = '<?php echo $timeline['advertisement_start'] ?>';
+  var advertisement_end = '<?php echo $timeline['advertisement_end'] ?>';
+  var pre_bid_start = '<?php echo $timeline['pre_bid_start'] ?>';
+  var pre_bid_end = '<?php echo $timeline['pre_bid_end'] ?>';
+  var bid_submission_start = '<?php echo $timeline['bid_submission_start'] ?>';
+  var bid_submission_end = '<?php echo $timeline['bid_submission_end'] ?>';
+  var bid_evaluation_start = '<?php echo $timeline['bid_evaluation_start'] ?>';
+  var bid_evaluation_end = '<?php echo $timeline['bid_evaluation_end'] ?>';
+  var post_qualification_start = '<?php echo $timeline['post_qualification_start'] ?>';
+  var post_qualification_end = '<?php echo $timeline['post_qualification_end'] ?>';
+  var award_notice_start = '<?php echo $timeline['award_notice_start'] ?>';
+  var award_notice_end = '<?php echo $timeline['award_notice_end'] ?>';
+  var contract_signing_start = '<?php echo $timeline['contract_signing_start'] ?>';
+  var contract_signing_end = '<?php echo $timeline['contract_signing_end'] ?>';
+  var authority_approval_start = '<?php echo $timeline['authority_approval_start'] ?>';
+  var authority_approval_end = '<?php echo $timeline['authority_approval_end'] ?>';
+  var proceed_notice_start = '<?php echo $timeline['proceed_notice_start'] ?>';
+  var proceed_notice_end = '<?php echo $timeline['proceed_notice_end'] ?>'; 
 
   $('.procactsubmitbutton').click(function(event){
     var activityArray = $(this).val().split(",");
@@ -696,117 +717,118 @@ function convertDate($date){
 
 /*
   ajax for re-bid
-*/
-$('#rebidProjectForm').submit(function(e){
-  e.preventDefault();
+  */
+  $('#rebidProjectForm').submit(function(e){
+    e.preventDefault();
 
-  $.ajax({
-    type: 'POST',
-    url: $('#rebidProjectForm').attr('action'),
-    data: $('#rebidProjectForm').serialize(),
-    dataType: 'json',
-    success: function(response){
-      if (response.success == true) {
-        window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
-      }else{
-        $.each(response.messages, function(key, value) {
-          var element = $('#' + key);
-          
-          element.closest('div.form-group')
-          .removeClass('has-error')
-          .addClass(value.length > 0 ? 'has-error' : 'has-success')
-          .find('.text-danger')
-          .remove();
-          
-          element.after(value);
-        });
+    $.ajax({
+      type: 'POST',
+      url: $('#rebidProjectForm').attr('action'),
+      data: $('#rebidProjectForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+
+            element.after(value);
+          });
+        }
       }
-    }
+    });
   });
-});
 
 /*
   ajax for review
-**/
+  **/
   
-$('#recommendForReviewForm').submit(function(e){
-  e.preventDefault();
+  $('#recommendForReviewForm').submit(function(e){
+    e.preventDefault();
 
-  $.ajax({
-    type: 'POST',
-    url: $('#recommendForReviewForm').attr('action'),
-    data: $('#recommendForReviewForm').serialize(),
-    dataType: 'json',
-    success: function(response){
-      if (response.success == true) {
-        window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
-      }else{
-        $.each(response.messages, function(key, value) {
-          var element = $('#' + key);
-          
-          element.closest('div.form-group')
-          .removeClass('has-error')
-          .addClass(value.length > 0 ? 'has-error' : 'has-success')
-          .find('.text-danger')
-          .remove();
-          
-          element.after(value);
-        });
+    $.ajax({
+      type: 'POST',
+      url: $('#recommendForReviewForm').attr('action'),
+      data: $('#recommendForReviewForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+
+            element.after(value);
+          });
+        }
       }
-    }
+    });
   });
-});
 
 /**
   js and ajax for bidder disqualification
-*/
+  */
 
-$('.dis_qual_btn').click(function(){
-  var action = $(this).val();
-  var remark = $('.bidder_saction_disqualification_remark').val();
-  if (remark.trim() == "") {
-    var message = '<p class="text-danger">Remark field must not be empty!</p>';
-    $(".bidder_saction_disqualification_remark").closest('div.form-group').removeClass('has-error').addClass('has-error').find('.text-danger').remove();
-    $(".bidder_saction_disqualification_remark").after(message);
-  }else{
-    if (action == 'rebid') {
-      $('#actionName').html('Re-bid / another SVP');
-      $('#disqualificationSanction_action').val('re_bid');
-      
-    }
-    if (action == 'rereview') {
-      $('#actionName').html('Project Review');
-      $('#disqualificationSanction_action').val('re_review');
-      
-    }
+  $('.dis_qual_btn').click(function(){
+    var action = $(this).val();
+    var remark = $('.bidder_saction_disqualification_remark').val();
+    if (remark.trim() == "") {
+      var message = '<p class="text-danger">Remark field must not be empty!</p>';
+      $(".bidder_saction_disqualification_remark").closest('div.form-group').removeClass('has-error').addClass('has-error').find('.text-danger').remove();
+      $(".bidder_saction_disqualification_remark").after(message);
+    }else{
+      if (action == 'rebid') {
+        $('#actionName').html('Re-bid / another SVP');
+        $('#disqualificationSanction_action').val('re_bid');
 
-    $('#disqualifiactionSanctionConfirmationModal').modal('show');
-  }
-    
-});
-
-$('#projectBidderDisqualificationAndSanctionForm').submit(function(e){
-  e.preventDefault();
-  $.ajax({
-    type: 'POST',
-    url: $('#projectBidderDisqualificationAndSanctionForm').attr('action'),
-    data: $('#projectBidderDisqualificationAndSanctionForm').serialize(),
-    dataType: 'json',
-    success: function(response){
-      if (response.success == true) {
-        window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
       }
+      if (action == 'rereview') {
+        $('#actionName').html('Project Review');
+        $('#disqualificationSanction_action').val('re_review');
+
+      }
+
+      $('#disqualifiactionSanctionConfirmationModal').modal('show');
     }
+    
   });
-});
+
+  $('#projectBidderDisqualificationAndSanctionForm').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: $('#projectBidderDisqualificationAndSanctionForm').attr('action'),
+      data: $('#projectBidderDisqualificationAndSanctionForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
+        }
+      }
+    });
+  });
 
 
 /**
 
   act view controls
-**/
+  **/
 
   function setViewHidden(){
+    $('.procactsubmitcontainer').attr('hidden', false).prop('hidden', 'hidden');
     $('.activity_view').attr('hidden', false).prop('hidden', 'hidden');
   }
 
@@ -823,68 +845,79 @@ $('#projectBidderDisqualificationAndSanctionForm').submit(function(e){
 
   $('#advertisement_btn').click(function(){
     setViewHidden();
-    setButtonStyle('#advertisement_btn');
+    setButtonStyle('#advertisement_btn');    
     $('#ads_post_view').removeAttr('hidden');
+    $('#advertisement_submit_btn').attr('hidden', false);
   });
 
   $('#pre_bid_btn').click(function(){
     setViewHidden();
     setButtonStyle('#pre_bid_btn');
     $('#pre_bid_view').removeAttr('hidden');
+    $('#pre_bid_submit_btn').attr('hidden', false);
   });
 
   $('#open_bid_btn').click(function(){
     setViewHidden();
     setButtonStyle('#open_bid_btn');
     $('#bid_open_view').removeAttr('hidden');
+    $('#open_bid_submit_btn').attr('hidden', false);
   });
 
   $('#eligibility_btn').click(function(){
     setViewHidden();
     setButtonStyle('#eligibility_btn');
     $('#eligibility_check_view').removeAttr('hidden');
+    $('#eligibility_submit_btn').attr('hidden', false);
   });
 
   $('#bid_eval_btn').click(function(){
     setViewHidden();
     setButtonStyle('#bid_eval_btn');
     $('#bid_evaluation_view').removeAttr('hidden');
+    $('#bid_eval_submit_btn').attr('hidden', false);
   });
 
   $('#post_qual_btn').click(function(){
     setViewHidden();
     setButtonStyle('#post_qual_btn');
     $('#post_qual_view').removeAttr('hidden');
+    $('#post_qual_submit_btn').attr('hidden', false);
   });
 
   $('#award_notice_btn').click(function(){
     setViewHidden();
     setButtonStyle('#award_notice_btn');
     $('#notice_award_view').removeAttr('hidden');
+    $('#award_notice_submit_btn').attr('hidden', false);
   });
 
   $('#contract_signing_btn').click(function(){
     setViewHidden();
     setButtonStyle('#contract_signing_btn');
     $('#sign_contract_view').removeAttr('hidden');
+    $('#contract_signing_submit_btn').attr('hidden', false);
   });
 
   $('#proceed_notice_btn').click(function(){
     setViewHidden();
     setButtonStyle('#proceed_notice_btn');
     $('#proceed_notice_view').removeAttr('hidden');
+    $('#proceed_notice_submit_btn').attr('hidden', false);
   });
 
   $('#delivery_completion_btn').click(function(){
     setViewHidden();
     setButtonStyle('#delivery_completion_btn');
     $('#completion_delivery_view').removeAttr('hidden');
+    $('#completion_submit_btn').attr('hidden', false);
   });
 
   $('#acceptance_turnover_btn').click(function(){
     setViewHidden();
     setButtonStyle('#acceptance_turnover_btn');
     $('#turnover_acceptance_view').removeAttr('hidden');
+    $('#acceptance_submit_btn').attr('hidden', false);
   });
 
 
