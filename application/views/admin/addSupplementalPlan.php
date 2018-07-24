@@ -20,7 +20,16 @@
                   <p><?php echo $_SESSION['error'] ?></p>
                 </div>
               <?php endif ?>
-              <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addSupplementalPlan') ?>">
+
+            <div class="alert alert-success text-center" id="adding_success" hidden>
+              <p class="text-left"><b>SUCCESS!</b></p>
+              <p>The data has been entered successfully!</p>
+            </div>
+            <div class="alert alert-warning text-center" id="adding_failed" hidden>
+              <p class="text-left"><b>FAILED!</b></p>
+              <p>A problem has been encountered! Please try again!</p>
+            </div>
+              <form id="addSupplementalPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addSupplementalPlan') ?>">
                 <!-- Date -->
                 <div class="form-group">
                   <label  class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *</label>
@@ -125,77 +134,12 @@
               </form>
             </div>
             <div class="box-footer text-center">
-              <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+              <button type="submit" class="btn btn-primary" form="addSupplementalPlanForm">Submit</button>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- modal for data confirmation -->
-    <div id="myModal" class="modal fade bs-example-modal-lg" role="dialog" >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-          </div>
-          <div class="modal-body">
-            <table class='table table-striped table-bordered' style='font-size:13px;'>
-              <thead>
-                <tr >
-                  <th style='text-align: center'>Attributes</th>
-                  <th style='text-align: center'>Values</th>
-                </tr> 
-              </thead>
-              <tbody>
-                <tr><td>Date Added</td>
-                  <td><span id="dAdd"></span></td>
-                </tr>
-                <tr><td>Project Tear</td>
-                  <td><span id="y"></span></td>
-                </tr>
-                <tr><td>Project Number</td>
-                  <td><span id="proj"></span></td>
-                </tr>
-                <tr><td>Project Title</td>
-                  <td><span id="title"></span></td>
-                </tr>
-                <tr><td>Municipality</td>
-                  <td><span id="mun"></span></td>
-                </tr>
-                <tr><td>Barangay</td>
-                  <td><span id="bar"></span></td>
-                </tr>
-                <tr><td>Type of Project</td>
-                  <td><span id="typ"></span></td>
-                </tr>
-                <tr><td>Mode of Procurement</td>
-                  <td><span id="mod"></span></td>
-                </tr>
-                <tr><td>Approved Budget Cost(ABC)</td>
-                  <td><span id="abc"></span></td>
-                </tr>
-                <tr><td>Source of Fund</td>
-                  <td><span id="fun"></span></td>
-                </tr>
-                <tr><td>Account Classification</td>
-                  <td><span id="accoun"></span></td>
-                </tr>
-              </tbody>
-            </tfoot>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" name="submit" form="addPlanForm"class="btn btn-primary">Confirm</button>
-        </div>
-      </div>
-    </div>
-    <!-- end of modal -->
-  </div>
-
 
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -262,24 +206,24 @@
     }
   })
 
-  $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
-      $('#dAdd').html($('#date_added').val());
-      $('#y').html($('#year').val());
-      $('#proj').html($('#project_no').val());
-      $('#title').html($('#project_title').val());
-      $('#mun').html($('#municipality option:selected').html());
-      $('#bar').html($('#barangaySelection option:selected').html());
-      $('#typ').html($('#type option:selected').html());
-      $('#mod').html($('#mode option:selected').html());
-      $('#abc').html($('#ABC').val());
-      $('#fun').html($('#source option:selected').html());
-      $('#accoun').html($('#account option:selected').html());
-      $('#statu').html($('#status').val());
-      $('#remar').html($('#remarks').val());
-   });
+  // $(document).ready(function() {
+  //   $('#myModal').on('show.bs.modal' , function (e) {
+  //     $('#dAdd').html($('#date_added').val());
+  //     $('#y').html($('#year').val());
+  //     $('#proj').html($('#project_no').val());
+  //     $('#title').html($('#project_title').val());
+  //     $('#mun').html($('#municipality option:selected').html());
+  //     $('#bar').html($('#barangaySelection option:selected').html());
+  //     $('#typ').html($('#type option:selected').html());
+  //     $('#mod').html($('#mode option:selected').html());
+  //     $('#abc').html($('#ABC').val());
+  //     $('#fun').html($('#source option:selected').html());
+  //     $('#accoun').html($('#account option:selected').html());
+  //     $('#statu').html($('#status').val());
+  //     $('#remar').html($('#remarks').val());
+  //  });
     
-  });
+  // });
 </script>
 <script>
   $(document).ready( 
@@ -297,4 +241,40 @@
   );
 </script>
 
+<script>
+  $('#addSupplementalPlanForm').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addSupplementalPlanForm').attr('action'),
+      data: $('#addSupplementalPlanForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('.has-error').remove();
+          $('.has-success').remove();
+          $('#alert-success').prop('hidden', false);
+          $('.alert-success').delay(500).show(10, function() {
+          $(this).delay(3000).hide(10, function() {
+            $(this).remove();
+          });
+          })
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  })
+</script>
 

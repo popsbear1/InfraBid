@@ -1320,7 +1320,11 @@
 	public function deleteMode($mode_id){
 
 		$this->db->where('mode_id', $mode_id);
-		$this->db->delete('procurement_mode');
+		if($this->db->delete('procurement_mode')){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function updateUsers($user_id, $action){

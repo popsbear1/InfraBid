@@ -161,7 +161,7 @@ class Admin extends CI_Controller {
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required');
-		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|integer|is_natural');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
@@ -217,27 +217,65 @@ class Admin extends CI_Controller {
 	}
 
 		public function addSupplementalPlan(){
-		$date_added = htmlspecialchars($this->input->post('date_added'));
-		$project_year = htmlspecialchars($this->input->post('year'));
-		$project_no = htmlspecialchars($this->input->post('project_no'));
-		$project_title = htmlspecialchars($this->input->post('project_title'));
-		$municipality=htmlspecialchars($this->input->post('municipality'));
-		$barangay=htmlspecialchars($this->input->post('barangay'));
-		$type=htmlspecialchars($this->input->post('type'));
-		$mode=htmlspecialchars($this->input->post('mode'));
-		$ABC=htmlspecialchars($this->input->post('ABC'));
-		$source=htmlspecialchars($this->input->post('source'));
-		$account=htmlspecialchars($this->input->post('account'));
 
-		if ($this->admin_model->insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
-			$this->session->set_flashdata('success', 'The new project has been added to the database.');
+		$data = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
+		$this->form_validation->set_rules('year', 'Project year', 'trim|required');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|integer|is_natural');
+		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
+		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
+		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
+		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
+		$this->form_validation->set_rules('mode', 'Mode of Procurement', 'trim|required');
+		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required');
+		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
+		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$date_added = htmlspecialchars($this->input->post('date_added'));
+			$year = htmlspecialchars($this->input->post('year'));
+			$project_no = htmlspecialchars($this->input->post('project_no'));
+			$project_title = htmlspecialchars($this->input->post('project_title'));
+			$municipality = htmlspecialchars($this->input->post('municipality'));
+			$barangay = htmlspecialchars($this->input->post('barangay'));
+			$type = htmlspecialchars($this->input->post('type'));
+			$mode = htmlspecialchars($this->input->post('mode'));
+			$ABC = htmlspecialchars($this->input->post('ABC'));
+			$source = htmlspecialchars($this->input->post('source'));
+			$account = htmlspecialchars($this->input->post('account'));
+
+			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['municipality'])) {
+				$data['messages']['municipality'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['barangay'])) {
+				$data['messages']['barangay'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['type'])) {
+				$data['messages']['type'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['mode'])) {
+				$data['messages']['mode'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['source'])) {
+				$data['messages']['source'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['account'])) {
+				$data['messages']['account'] = '<p class="text-danger">This field is required!</p>';
+			}
 		}
-
-		redirect('admin/SupplementalPlanView');
+		
+		echo json_encode($data);
 	}
-
 
 	public function editPlanView(){
 		$projectNavControl['pageName'] = "edit";
@@ -1002,7 +1040,7 @@ class Admin extends CI_Controller {
 	public function addDocuments(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('document_numbers', 'Document Number', 'trim|required');
+		$this->form_validation->set_rules('document_numbers', 'Document Number', 'trim|required|is_natural');
 		$this->form_validation->set_rules('newdocuments', 'Document Name', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
@@ -1432,9 +1470,16 @@ class Admin extends CI_Controller {
 
 	public function deleteMode(){
 		$mode_id=$this->input->post('mode_id');
-		$this->admin_model->deleteMode($mode_id);
 
-		redirect('admin/manageProcurementMode');
+		if($this->admin_model->deleteMode($mode_id)){
+
+			$this->session->set_flashdata('success', 'Successfully deleted mode!');
+
+		}else{
+
+			$this->session->set_flashdata('failed', "Mode cannot be deleted. Error Occured!");
+		}	
+			redirect('admin/manageProcurementMode');
 	}
 
 	public function deactivateMode(){

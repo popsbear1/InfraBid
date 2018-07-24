@@ -25,11 +25,11 @@
 
               <div class="alert alert-success text-center" id="adding_success" hidden>
                 <p class="text-left"><b>SUCCESS!</b></p>
-                <p>The new contractor was successfuly added and recorded!</p>
+                <p>The data has been entered successfully!</p>
               </div>
               <div class="alert alert-warning text-center" id="adding_failed" hidden>
                 <p class="text-left"><b>FAILED!</b></p>
-                <p>An error was encountered. The new contractor was not recorded!</p>
+                <p>A problem has been encountered! Please try again!</p>
               </div>
 
               <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addRegularPlan') ?>">
@@ -255,6 +255,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
+          $('.has-error').remove();
+          $('.has-success').remove();
           $('#alert-success').prop('hidden', false);
           $('.alert-success').delay(500).show(10, function() {
           $(this).delay(3000).hide(10, function() {

@@ -10,6 +10,7 @@
           <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addProcurementModeModal">Add Procurement Mode</button>
         </div>
         <div class="box-body">
+          
           <table class="table table-striped table-bordered" id="modeTable">
             <thead style='font-size:12px;'>
               <tr>
@@ -170,6 +171,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
+          $('.has-error').remove();
+          $('.has-success').remove();
           $('#alert-success').prop('hidden', false);
           $('.alert-success').delay(500).show(10, function() {
           $(this).delay(3000).hide(10, function() {
