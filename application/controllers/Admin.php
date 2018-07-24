@@ -1010,6 +1010,7 @@ class Admin extends CI_Controller {
 	*/
 
 	public function editProcActDate(){
+		$user_id = $this->session->userdata('user_id');
 		$plan_id = $this->session->userdata('plan_id');
 		$date = $this->input->post('activity_date');
 		$activity_name = $this->input->post('activity_name');
@@ -1048,7 +1049,8 @@ class Admin extends CI_Controller {
 
 		if ($activity_name === "eligibility_check") {
 			$contractor_id = $this->input->post('contractor');
-			if ($this->admin_model->updateEligibilityCheckDate($plan_id, $date, $contractor_id)) {
+			$bid_proposal = $this->input->post('bid_proposal');
+			if ($this->admin_model->updateEligibilityCheckDate($plan_id, $date, $contractor_id, $bid_proposal)) {
 				$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
@@ -1104,7 +1106,13 @@ class Admin extends CI_Controller {
 		}
 
 		if ($activity_name === "acceptance") {
+			$final_remark = $this->input->post('final_remark');
 			if ($this->admin_model->updateAcceptanceTurnoverDate($plan_id, $date)) {
+
+				$this->admin_model->updateProjectStatus($plan_id, 'finish');
+
+				$this->admin_model->recordProjectLog($plan_id, $user_id, $final_remark);
+
 				$this->session->set_flashdata('success', "Acceptance/Turnover Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Acceptance/Turnover Date Was Not Updated! Try again.");
@@ -1119,46 +1127,142 @@ class Admin extends CI_Controller {
 	* 2. Change project status to pending.
 	* 3. Empty project timeline (revert all dates to null).
 	* 4. Empty project procurement activity dates (revert all dates to null).
+	* 5. Record log
 	*/
 
 	public function rebidProjectPlan(){
+
+		$data = array('success' => false, 'messages' => array());
+
 		$plan_id = $this->input->post('plan_id');
+		$user_id = $this->session->userdata('user_id');
 
-		// Update the project rebid count
+		$this->form_validation->set_rules('re_bid_remark', 'Remark', 'trim|required');
 
-		$this->admin_model->updateProjectRebidCount($plan_id);
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-		// Chnage project status to pending
+		if ($this->form_validation->run()) {
 
-		$this->admin_model->updateProjectStatus($plan_id, 're_bid');
+			$remark = htmlspecialchars($this->input->post('re_bid_remark'));
 
-		// Empty project timeline (revert all dates to null)
+			// Update the project rebid count
 
-		$this->admin_model->resetProjectTimeline($plan_id);
+			$this->admin_model->updateProjectRebidCount($plan_id);
 
-		// Empty project procurement activity (revert all dates to null)
+			// Chnage project status to pending
 
-		$this->admin_model->resetProjectProcurementActivity($plan_id);
+			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
+			// Remove current bidder
 
-		redirect('admin/editPlanView');
+			$this->admin_model->updateProjectContractor($plan_id);
+
+			// Empty project timeline (revert all dates to null)
+
+			$this->admin_model->resetProjectTimeline($plan_id);
+
+			// Empty project procurement activity (revert all dates to null)
+
+			$this->admin_model->resetProjectProcurementActivity($plan_id);
+
+			// Record Log
+
+			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
+
+			$data['success'] = true;
+		}else{
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+		}
+
+		echo json_encode($data);
 
 	}
 
 	/*
 	* Project re-review
-	* 1. Update project plan status to canceled
-	* 2. Set remark
+	* 1. Update project plan status
+	* 2. Set remark / record log
 	*/
 	public function recommendProjectPlanForReview(){
 
+		$data = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules('re_review_remark', 'Remark', 'trim|required');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$user_id = $this->session->userdata('user_id');
+			$plan_id = $this->input->post('plan_id');
+			$remark = $this->input->post('re_review_remark');
+
+			$this->admin_model->updateProjectStatus($plan_id, 're_review');
+
+			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
+			$data['success'] = true;
+		}else{
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+		}
+
+		echo json_encode($data);
+	}
+
+	/**
+	* Bidder disqualification 
+	* review or re-bid
+	***/
+
+	public function projectBidderDisqualificationAndSunction(){
+		$data = array('success' => false);
+		
+		$user_id = $this->session->userdata('user_id');
 		$plan_id = $this->input->post('plan_id');
-		$remark = $this->input->post('re_review_remark');
+		$remark = $this->input->post('bidder_saction_disqualification_remark');
+		$action = $this->input->post('action');
 
-		$this->admin_model->updateProcActFinalRemark($plan_id, $remark);
+		if ($action == 're_bid') {
 
-		$this->admin_model->updateProjectStatus($plan_id, 're_review');
+			// Update the project rebid count
 
-		redirect('admin/editPlanView');
+			$this->admin_model->updateProjectRebidCount($plan_id);
+
+			// Chnage project status to pending
+
+			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
+
+			// Remove current bidder
+
+			$this->admin_model->updateProjectContractor($plan_id);
+
+			// Empty project timeline (revert all dates to null)
+
+			$this->admin_model->resetProjectTimeline($plan_id);
+
+			// Empty project procurement activity (revert all dates to null)
+
+			$this->admin_model->resetProjectProcurementActivity($plan_id);
+
+			// Record Log
+
+			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
+
+			$data['success'] = true;
+		}
+
+		if ($action == 're_review') {
+
+			$this->admin_model->updateProjectStatus($plan_id, 're_review');
+
+			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
+
+			$data['success'] = true;
+		}
+
+		echo json_encode($data);
+
 	}
 
 /* Delete or Activate shit**/

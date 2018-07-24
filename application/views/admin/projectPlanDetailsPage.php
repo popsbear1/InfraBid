@@ -12,7 +12,7 @@
                   <h3>Project Details</h3>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <h3 class="pull-right"><?php echo $projectDetails['status'] ?></h3>
+                  <h3 class="pull-right"><?php echo $projectDetails['project_status'] ?></h3>
                 </div>
               </div>
             </div>
