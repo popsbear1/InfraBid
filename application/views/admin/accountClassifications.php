@@ -131,16 +131,28 @@
         <h4 class="modal-title">Manage Classifications</h4>
       </div>
       <div class="modal-body">
+        <div class="alert alert-success text-center" id="adding_success" hidden>
+          <p class="text-left"><b>SUCESS!</b></p><p>
+            Account Classification has been sucessfully added!
+          </p>
+        </div>
+        <div class="alert alert-warning text-center" id="adding_failed" hidden>
+          <p class="text-left"><b>FAILED!</b></p><p>
+            An error was encountered. The Classification was not recorded!</p>
+        </div>
+
         <form id="addClassificationForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addClassification') ?>">
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" >Classification<span class="required">*</span>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" >Classification<span>*</span>
             </label>
+            
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <input type="text" id="classification" name="classification" class="form-control">
+              <input type="text" id="acc_classification" name="acc_classification" class="form-control">
             </div>
           </div>
         </form>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" form="addClassificationForm">Submit</button>

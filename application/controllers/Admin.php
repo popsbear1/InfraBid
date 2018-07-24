@@ -157,25 +157,63 @@ class Admin extends CI_Controller {
 	}
 
 	public function addRegularPlan(){
-		$date_added = htmlspecialchars($this->input->post('date_added'));
-		$project_year = htmlspecialchars($this->input->post('year'));
-		$project_no = htmlspecialchars($this->input->post('project_no'));
-		$project_title = htmlspecialchars($this->input->post('project_title'));
-		$municipality=htmlspecialchars($this->input->post('municipality'));
-		$barangay=htmlspecialchars($this->input->post('barangay'));
-		$type=htmlspecialchars($this->input->post('type'));
-		$mode=htmlspecialchars($this->input->post('mode'));
-		$ABC=htmlspecialchars($this->input->post('ABC'));
-		$source=htmlspecialchars($this->input->post('source'));
-		$account=htmlspecialchars($this->input->post('account'));
+		$data = array('success' => false, 'messages' => array());
 
-		if ($this->admin_model->insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account)) {
-			$this->session->set_flashdata('success', 'The new project has been added to the database.');
+		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
+		$this->form_validation->set_rules('year', 'Project year', 'trim|required');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
+		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
+		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
+		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
+		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
+		$this->form_validation->set_rules('mode', 'Mode of Procurement', 'trim|required');
+		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required');
+		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
+		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$date_added = htmlspecialchars($this->input->post('date_added'));
+			$year = htmlspecialchars($this->input->post('year'));
+			$project_no = htmlspecialchars($this->input->post('project_no'));
+			$project_title = htmlspecialchars($this->input->post('project_title'));
+			$municipality = htmlspecialchars($this->input->post('municipality'));
+			$barangay = htmlspecialchars($this->input->post('barangay'));
+			$type = htmlspecialchars($this->input->post('type'));
+			$mode = htmlspecialchars($this->input->post('mode'));
+			$ABC = htmlspecialchars($this->input->post('ABC'));
+			$source = htmlspecialchars($this->input->post('source'));
+			$account = htmlspecialchars($this->input->post('account'));
+
+			if ($this->admin_model->insertNewRegularProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'There seems to be a problem. The new project was not successfully added to the database.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['municipality'])) {
+				$data['messages']['municipality'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['barangay'])) {
+				$data['messages']['barangay'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['type'])) {
+				$data['messages']['type'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['mode'])) {
+				$data['messages']['mode'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['source'])) {
+				$data['messages']['source'] = '<p class="text-danger">This field is required!</p>';
+			}
+			if (!isset($_POST['account'])) {
+				$data['messages']['account'] = '<p class="text-danger">This field is required!</p>';
+			}
 		}
-
-		redirect('admin/regularPlanView');
+		
+		echo json_encode($data);
 	}
 
 		public function addSupplementalPlan(){
@@ -481,8 +519,8 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['role'])) {
-				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			if (!isset($_POST['fund_type'])) {
+				$data['messages']['fund_type'] = '<p class="text-danger">This field is required!</p>';
 			}
 		}
 		
@@ -647,12 +685,12 @@ class Admin extends CI_Controller {
 	}
 
 	public function addUsers(){
-		$data = array('success' => false, 'messages' => array());
+			$data = array('success' => false, 'messages' => array());
 
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('middlename', 'Middle Name', 'trim|required');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
-		$this->form_validation->set_rules('usertype', 'User Type', 'trim|required');
+		$this->form_validation->set_rules('usertype', 'User Type', 'required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
@@ -661,7 +699,7 @@ class Admin extends CI_Controller {
 			$lastname = htmlspecialchars($this->input->post('lastname'));
 			$usertype = htmlspecialchars($this->input->post('usertype'));
 
-			if ($this->admin_model->insertUsers($firstname, $middlename, $lastname, $usertype)) {
+			if ($this->admin_model->insertNewContractor($firstname, $middlename, $lastname, $usertype)) {
 				$data['success'] = true;
 			}
 
@@ -670,13 +708,13 @@ class Admin extends CI_Controller {
 				$data['messages'][$key] = form_error($key);
 			}
 			if (!isset($_POST['usertype'])) {
-				$data['messages']['usertype'] = '<p class="text-danger">The User Type field is required!</p>';
+				$data['messages']['usertype'] = '<p class="text-danger">This field is required!</p>';
 			}
 		}
 		
 		echo json_encode($data);
 	}
-
+		
 	public function manageDatabaseView(){
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -796,13 +834,13 @@ class Admin extends CI_Controller {
 	public function addClassification(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('classification', 'Classification', 'trim|required');
+		$this->form_validation->set_rules('acc_classification', 'Account Classification', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
-			$classification = htmlspecialchars($this->input->post('classification'));
+			$acc_classification = htmlspecialchars($this->input->post('acc_classification'));
 
-			if ($this->admin_model->insertClassification($classification)) {
+			if ($this->admin_model->insertClassification($acc_classification)) {
 				$data['success'] = true;
 			}
 
@@ -965,14 +1003,14 @@ class Admin extends CI_Controller {
 		$data = array('success' => false, 'messages' => array());
 
 		$this->form_validation->set_rules('document_numbers', 'Document Number', 'trim|required');
-		$this->form_validation->set_rules('newdocuments', 'Document Number', 'trim|required');
+		$this->form_validation->set_rules('newdocuments', 'Document Name', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
 			$document_numbers = htmlspecialchars($this->input->post('document_numbers'));
-			$fund_type = htmlspecialchars($this->input->post('newdocuments'));
+			$newdocuments = htmlspecialchars($this->input->post('newdocuments'));
 
-			if ($this->admin_model->insertNewFunds($source, $fund_type)) {
+			if ($this->admin_model->insertDocument($document_numbers, $newdocuments)) {
 				$data['success'] = true;
 			}
 

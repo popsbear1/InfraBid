@@ -138,18 +138,15 @@
         <h4 class="modal-title">Add New User</h4>
       </div>
       <div class="modal-body">
-
-        <div class="alert alert-sucess text-center" id="adding_success" hidden>
+        <div class="alert alert-success text-center" id="adding_success" hidden>
           <p class="text-left"><b>SUCESS!</b></p>
           <p>User has been Added Sucessfully!</p>
         </div>
-
         <div class="alert alert-warning text-center" id="adding_failed" hidden>
           <p class="text-left"><b>FAILED!</b></p>
           <p>An error was encountered.User has not been added!</p>
         </div>
-
-        <form id="addNewUserForm" action="<?php echo base_url('admin/addUsers') ?>" method="POST" class="form-horizontal form-label-left">
+        <form id="addNewUserForm" action="<?php echo base_url('admin/addUsers') ?>" method="POST" class="form-horizontal form-label-left" autocomplete="off">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name*</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -192,47 +189,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<!-- confirm input modal -->
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td>First Name</td>
-              <td><span id="firstN"></span></td>
-            </tr>
-            <tr><td>Middle Name</td>
-              <td><span id="middleN"></span></td>
-            </tr>
-            <tr><td>Last Name</td>
-              <td><span id="lastN"></span></td>
-            </tr>
-            <tr><td>User Type</td>
-              <td><span id="userT"></span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button form="addNewUserForm" type="submit" name="submit" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- end confirm modal -->
 <script>
   $('#addNewUserForm').submit(function(e){

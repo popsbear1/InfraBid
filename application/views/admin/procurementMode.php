@@ -171,7 +171,7 @@
       success: function(response){
         if (response.success == true) {
           $('#alert-success').prop('hidden', false);
-          $('#alert-success').delay(500).show(10, function() {
+          $('.alert-success').delay(500).show(10, function() {
           $(this).delay(3000).hide(10, function() {
             $(this).remove();
           });

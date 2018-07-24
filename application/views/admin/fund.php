@@ -137,18 +137,14 @@
         <h4 class="modal-title">Add New Fund</h4>
       </div>
       <div class="modal-body">
-
-        <div class="alert alert-sucess text-center" id="adding_success" hidden>
+        <div class="alert alert-success text-center" id="adding_success" hidden>
           <p class="text-left"><b>SUCCESS!</b></p>
           <p>Type of Fund has been Sucessfully Added!</p>
         </div>
-
         <div class="alert alert-warning text-center" id="
         adding_failed" hidden><p class="text-left"><b>FAILED!</b></p><p>An error was encountered. The Type of Fund was not Recorded!</p> 
         </div>
-
         <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>" autocomplete="off">
-
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -176,8 +172,6 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-<!-- end of modal -->
 
 <script>
   $('#addFundsForm').submit(function(e){

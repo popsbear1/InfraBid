@@ -133,7 +133,7 @@
           </div>
           <div class="modal-body">
 
-            <div class="alert alert-sucess text-centert" id="adding_sucess" hidden=""> <p class="text-left"><b>SUCESS!</b></p>
+            <div class="alert alert-success text-centert" id="adding_sucess" hidden=""> <p class="text-left"><b>SUCESS!</b></p>
               <p>Document has been addded Sucessfully!</p></div>
 
             <div class="alert alert-warning text-center" id="adding_failed" hidden><p class="text-left"><b>FAILED</b></p><p>An error was encountered. The document was not recorded!</p></div>
@@ -171,44 +171,7 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
-    <!-- modal for data confirmation -->
-    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-          </div>
-          <div class="modal-body">
-            <table class='table table-striped table-bordered' style='font-size:13px;'>
-              <thead>
-                <tr >
-                  <th style='text-align: center'>Attributes</th>
-                  <th style='text-align: center'>Values</th>
-                </tr> 
-              </thead>
-              <tbody>
-                <tr><td class="text-center">Document Number</td>
-                  <td><span id="manageNo"></span></td>
-                </tr>
-                <tr><td class="text-center">Document Name</td>
-                  <td><span id="manageDocu"></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" form="addDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end of modal -->
+<!-- end of modal -->
 
 <script>
   $('#addDocumentsForm').submit(function(e){
