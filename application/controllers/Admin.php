@@ -465,14 +465,15 @@ class Admin extends CI_Controller {
 		$data = array('success' => false, 'messages' => array());
 
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
-		$this->form_validation->set_rules('fund_type', 'Type of Fund', 'trim|required');
+		$this->form_validation->set_rules('fund_type','Type of Fund', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
 			$source = htmlspecialchars($this->input->post('source'));
 			$fund_type = htmlspecialchars($this->input->post('fund_type'));
 
-			if ($this->admin_model->insertNewFunds($source, $fund_type)) {
+			if ($this->admin_model->insertNewFunds($source,$fund_type)) {
+
 				$data['success'] = true;
 			}
 
@@ -480,8 +481,8 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['fund_type'])) {
-				$data['messages']['fund_type'] = '<p class="text-danger">The Role field is required!</p>';
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
 			}
 		}
 		
@@ -793,15 +794,28 @@ class Admin extends CI_Controller {
 	}
 
 	public function addClassification(){
-		$classification = $this->input->post('classification');
+		$data = array('success' => false, 'messages' => array());
 
-		if ($this->admin_model->insertClassification($classification)) {
-			$this->session->set_flashdata('success', 'New Classification Mode Recorded.');
+		$this->form_validation->set_rules('classification', 'Classification', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$classification = htmlspecialchars($this->input->post('classification'));
+
+			if ($this->admin_model->insertClassification($classification)) {
+				$data['success'] = true;
+			}
+
 		}else{
-			$this->session->set_flashdata('error', 'Error! Adding of Classification not Recorded.');
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			}
 		}
-
-		redirect('admin/addClassificationView');
+		
+		echo json_encode($data);
 	}
 
 		public function editClassificationView(){
@@ -860,7 +874,8 @@ class Admin extends CI_Controller {
 	public function addProcurement(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('mode', 'Procurement Mode', 'trim|required');
+		$this->form_validation->set_rules('mode', 'Procurement Mode', 'trim|required|alpha');
+
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {

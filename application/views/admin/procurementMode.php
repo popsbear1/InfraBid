@@ -49,7 +49,7 @@
                           <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
                         </form>                          
                       <?php endif ?>
-
+                      
                       <?php if ($mode['status']=='inactive'): ?>
                           <form action="<?php echo base_url('admin/activateMode') ?>" method="POST">
                             <input type="text" name="mode_id" value="<?php echo $mode['mode_id'] ?>" hidden>
@@ -125,15 +125,16 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Default Modal</h4>
+        <h4 class="modal-title">Manage Procurement Mode</h4>
       </div>
       <div class="modal-body">
-
-        <div class="alert alert-sucess text-center" id="adding_success" hidden><p class="text-left"><b>SUCCESS!</b></p><p>Procurement Mode has been sucessfully added!</p>
+        <div class="alert alert-success text-center" id="adding_success" hidden>
+          <p class="text-left"><b>SUCCESS!</b></p>
+          <p>The Procurement has been added!</p>
         </div>
-
-        <div class="alert alert-warning text-center" id="adding_failed" hidden><p class="text-left"><b>FAILED!</b></p><p>An error was encountered. The Operation has been failed!</p>
-          
+        <div class="alert alert-warning text-center" id="adding_failed" hidden>
+          <p class="text-left"><b>FAILED!</b></p>
+          <p>An error was encountered. The Operation has been failed!</p>  
         </div>
 
 
@@ -157,38 +158,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<!-- modal for data confirmation -->
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td>Procurement Mode</td>
-              <td><span id="procurement"></span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" form="addProcurementForm" name="submit" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- end of modal -->
 <script>
   $('#addProcurementForm').submit(function(e){

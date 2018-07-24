@@ -164,40 +164,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<!-- modal for data confirmation -->
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td>Type of Project</td>
-              <td><span id="typeName"></span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" name="submit" form="addProjectForm" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of modal -->
 <script>
   $('#addProjectForm').submit(function(e){
     e.preventDefault();

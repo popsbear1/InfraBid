@@ -147,7 +147,8 @@
         adding_failed" hidden><p class="text-left"><b>FAILED!</b></p><p>An error was encountered. The Type of Fund was not Recorded!</p> 
         </div>
 
-        <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>">
+        <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>" autocomplete="off">
+
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -166,8 +167,6 @@
           </div>
         </form>
       </div>
-
-
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" form="addFundsForm">Submit</button> 
@@ -178,43 +177,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<!-- modal for data confirmation -->
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-      </div>
-      <div class="modal-body">
-        <table class='table table-striped table-bordered' style='font-size:13px;'>
-          <thead>
-            <tr >
-              <th style='text-align: center'>Attributes</th>
-              <th style='text-align: center'>Values</th>
-            </tr> 
-          </thead>
-          <tbody>
-            <tr><td>Source of Fund</td>
-              <td><span id="usernam"></span></td>
-            </tr>
-            <tr>
-              <td>Type of Fund</td>
-              <td><span id="wewetype"></span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" form="addFundsForm" name="submit" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- end of modal -->
 
 <script>
