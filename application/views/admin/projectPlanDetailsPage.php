@@ -7,18 +7,15 @@
         <div class="col-lg-7 col-md-7">
           <div class="box box-info">
             <div class="box-header">
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <h3>Project Details</h3>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <h3 class="pull-right"><?php echo $projectDetails['project_status'] ?></h3>
-                </div>
-              </div>
+              <h3>Project Details</h3>
             </div>
             <div class="box-body">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
+                  <div class="form-group">
+                    <label for="">Project Status:</label>
+                    <p class="form-control"><?php echo $projectDetails['project_status'] ?></p>  
+                  </div>
                   <div class="form-group">
                     <label for="">Date Added:</label>
                     <p class="form-control"><?php echo $projectDetails['date_added'] ?></p>  
@@ -68,6 +65,10 @@
                   <div class="form-group">
                     <label for="">Contractor:</label>
                     <p class="form-control"><?php echo $projectDetails['businessname'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Proposed Date:</label>
+                    <p class="form-control"><?php echo $projectDetails['proposed_bid'] ?></p>  
                   </div>
                 </div>
               </div>
