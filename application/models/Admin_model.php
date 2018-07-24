@@ -164,7 +164,7 @@
 		}
 
 		public function getPlanDetails($plan_id){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -870,7 +870,7 @@
 		}
 	}
 
-	public function updateEligibilityCheckDate($plan_id, $date, $contractor_id){
+	public function updateEligibilityCheckDate($plan_id, $date, $contractor_id, $proposed_bid){
 		$data = array(
 			'eligibility_check' => $date
 		);
@@ -878,7 +878,8 @@
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
 			$dataTwo = array(
-				'contractor_id' => $contractor_id
+				'contractor_id' => $contractor_id,
+				'proposed_bid' => $proposed_bid
 			);
 
 			$this->db->where('plan_id', $plan_id);
@@ -982,7 +983,7 @@
 
 	public function updateAcceptanceTurnoverDate($plan_id, $date){
 		$data = array(
-			'acceptance_turnover' => $date
+			'acceptance_turnover' => $date,
 		);
 
 		$this->db->where('plan_id', $plan_id);
@@ -1058,17 +1059,23 @@
 	public function updateProjectStatus($plan_id, $action){
 		if ($action == 'setTimeline') {
 			$data = array(
-				'status' => 'processing' 
+				'status' => 'onprocess' 
 			);
 		}
 		if ($action == 're_bid') {
 			$data = array(
-				'status' => 'pending'
+				'status' => 'for_rebid'
 			);
 		}
 		if ($action == 're_review') {
 			$data = array(
-				'status' => 'canceled'
+				'status' => 'for_review'
+			);
+		}
+
+		if ($action == 'finish') {
+			$data = array(
+				'status' => 'completed'
 			);
 		}
 
@@ -1090,6 +1097,15 @@
 
 		$data = array(
 			're_bid_count' => $newRebidCount
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateProjectContractor($plan_id){
+		$data = array(
+			'contractor_id' => null
 		);
 
 		$this->db->where('plan_id', $plan_id);
@@ -1146,8 +1162,7 @@
 			'contract_signing' => null,
 			'proceed_notice' => null,
 			'delivery_completion' => null,
-			'acceptance_turnover' => null,
-			'remark' => null
+			'acceptance_turnover' => null
 		);
 
 		$this->db->where('plan_id', $plan_id);
@@ -1172,6 +1187,16 @@
 
 		$this->db->where('doc_type_id', $doc_type_id);
 		$this->db->update('document_type', $data);
+	}
+
+	public function recordProjectLog($plan_id, $user_id, $remark){
+		$data = array(
+			'plan_id' => $plan_id,
+			'user_id' => $user_id,
+			'remark' => $remark
+		);
+
+		$this->db->insert('project_logs', $data);
 	}
 
 	public function deleteContractor($contractor_id){
