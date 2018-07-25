@@ -56,7 +56,7 @@
 			return $existingDocumentsQuery->result_array();
 		}
 
-		public function getProjectPlansWithPOW($year){
+		public function getProjectPlansWithPOW(){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -65,7 +65,6 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
-			$this->db->where('YEAR(date_added)', $year);
 			$this->db->where('pow_ready', 'true');
 
 			$query = $this->db->get();
@@ -73,7 +72,7 @@
 			return $query->result_array();
 		}
 
-		public function getProjectPlansWithoutPOW($year){
+		public function getProjectPlansWithoutPOW(){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -82,7 +81,6 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
-			$this->db->where('YEAR(date_added)', $year);
 			$this->db->where('pow_ready', 'false');
 
 			$query = $this->db->get();
@@ -307,10 +305,13 @@
 
 		public function updatePOWAvailabilitye($plan_id){
 			$data = array(
-				'pow_ready' => 'true'
+				'pow_ready' => 'true',
+				'status' => 'onprocess'
 			);
 
 			$this->db->where('plan_id', $plan_id);
+			$this->db->where('status', 'pending');
+			$this->db->where('pow_ready', 'false');
 			if ($this->db->update('project_plan', $data)) {
 				return true;
 			}else{

@@ -96,7 +96,9 @@
                         <td><?php echo $plan['classification'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                            <button class="btn btn-info" type="submit" name="plan_id" value="<?php echo $plan['plan_id'] ?>">
+                            <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
+                            <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
+                            <button class="btn btn-info" type="submit">
                               <i class="fa fa-eye"></i>
                             </button>
                           </form>
