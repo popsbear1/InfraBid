@@ -359,8 +359,13 @@ class Admin extends CI_Controller {
 
 	public function setCurrentPlanID(){
 		$plan_id = $this->input->post('plan_id');
+		$project_status = $this->input->post('project_status');
+
+		$timeLine_status = $this->admin_model->getProjectTimelineStatus($plan_id);
 
 		$this->session->set_userdata('plan_id', $plan_id);
+		$this->session->set_userdata('project_status', $project_status);
+		$this->session->set_userdata('timeLine_status', $timeLine_status['timeLine_status']);
 
 		redirect('admin/projectDetailsView');
 	}
@@ -1372,6 +1377,8 @@ class Admin extends CI_Controller {
 
 			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
 
+			$this->session->set_userdata('project_status', 'for_rebid');
+
 			$data['success'] = true;
 		}
 
@@ -1380,6 +1387,8 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateProjectStatus($plan_id, 're_review');
 
 			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
+
+			$this->session->set_userdata('project_status', 'for_review');
 
 			$data['success'] = true;
 		}

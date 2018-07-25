@@ -17,7 +17,7 @@
 		}
 
 		public function getRegularProjectPlan($year, $quarter, $status, $municipality){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -63,7 +63,7 @@
 		}
 
 		public function getSupplementaryProjectPlan($year, $quarter, $status, $municipality){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -194,6 +194,16 @@
 
 		public function getProjectTimeline($plan_id){
 			$this->db->select('*');
+			$this->db->from('project_timeline');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
+		public function getProjectTimelineStatus($plan_id){
+			$this->db->select('timeLine_status');
 			$this->db->from('project_timeline');
 			$this->db->where('plan_id', $plan_id);
 
@@ -408,13 +418,16 @@
 
 			$this->db->insert('procact', $plan_id);
 			$this->db->insert('project_timeline', $plan_id);
+
+			$this->updateTimelineProjectStatus($ABC, $new_plan_id);
 			return true;
 		}else{
 			return false;
 		}		
 	}
 
-		public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+	
+	public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
 
 		$data = array(
 			'date_added' => $date_added,
@@ -658,6 +671,7 @@
 
 		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
+		$this->updateTimelineProjectStatus($ABC, $currentPlanID);
 	}
 
 	public function updateSource($source, $currentPlanID){
@@ -1029,6 +1043,7 @@
 	public function updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
 		$data = array(
 			'pre_proc_date' => $pre_proc_date,
+			'timeLine_status' => 'set',
 			'advertisement_start' => $advertisement_start,
 			'advertisement_end' => $advertisement_end,
 			'pre_bid_start' => $pre_bid_start,
@@ -1051,17 +1066,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_timeline', $data);
-
-		$this->admin_model->updateProjectStatus($plan_id, 'setTimeline');
-		$this->admin_model->updateProjectRebidCount($plan_id);
+		$this->session->set_userdata('timeLine_status', 'set');
 	}
 
 	public function updateProjectStatus($plan_id, $action){
-		if ($action == 'setTimeline') {
-			$data = array(
-				'status' => 'onprocess' 
-			);
-		}
+
 		if ($action == 're_bid') {
 			$data = array(
 				'status' => 'for_rebid'
@@ -1111,6 +1120,60 @@
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
+
+	public function updateTimelineProjectStatus($ABC, $plan_id){
+		if ($ABC >= 5000000) {
+			$timeLine_status_data = array(
+				'plan_id' => $plan_id,
+				'pre_proc' => 'pending',
+				'advertisement' => 'pending',
+				'pre_bid' => 'pending',
+				'eligibility_check' => 'pending',
+				'open_bid' => 'pending',
+				'bid_evaluation' => 'pending',
+				'post_qual' => 'pending',
+				'award_notice' => 'pending',
+				'contract_signing' => 'pending',
+				'proceed_notice' => 'pending',
+				'delivery_completion' => 'pending',
+				'acceptance_turnover' => 'pending'
+			);
+		}elseif ($ABC < 5000000 && $ABC > 1000000) {
+			$timeLine_status_data = array(
+				'plan_id' => $plan_id,
+				'pre_proc' => 'not_needed',
+				'advertisement' => 'not_needed',
+				'pre_bid' => 'pending',
+				'eligibility_check' => 'pending',
+				'open_bid' => 'pending',
+				'bid_evaluation' => 'pending',
+				'post_qual' => 'pending',
+				'award_notice' => 'pending',
+				'contract_signing' => 'pending',
+				'proceed_notice' => 'pending',
+				'delivery_completion' => 'pending',
+				'acceptance_turnover' => 'pending'
+			);
+		}elseif ($ABC < 1000000) {
+			$timeLine_status_data = array(
+				'plan_id' => $plan_id,
+				'pre_proc' => 'not_needed',
+				'advertisement' => 'not_needed',
+				'pre_bid' => 'not_needed',
+				'eligibility_check' => 'pending',
+				'open_bid' => 'pending',
+				'bid_evaluation' => 'pending',
+				'post_qual' => 'pending',
+				'award_notice' => 'pending',
+				'contract_signing' => 'pending',
+				'proceed_notice' => 'pending',
+				'delivery_completion' => 'pending',
+				'acceptance_turnover' => 'pending'
+			);
+		}
+		$this->db->insert('project_activity_status', $timeLine_status_data);
+	}
+
 	/* update for delete/activate**/
 	
 	public function deleteDocumentType($doc_type_id){
@@ -1126,6 +1189,7 @@
 	public function resetProjectTimeline($plan_id){
 
 		$data = array(
+			'timeLine_status' => 'pending',
 			'pre_proc_date' => null,
 			'advertisement_start' => null,
 			'advertisement_end' => null,
@@ -1149,6 +1213,7 @@
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_timeline', $data);
+		$this->session->set_userdata('timeLine_status', 'pending');
 
 	}
 
