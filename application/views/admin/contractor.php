@@ -236,7 +236,10 @@
             '<p>Refresh To do More</p>'
           ]).draw().node();
 
-          $(rowNode).css('text-align', 'center');
+          $(rowNode).css({
+            'text-align': 'center',
+            'background-color': '#c1f0c1'
+          });
 
           $('#addContractorForm input').val('');
         }else if(response.success == 'failed'){
