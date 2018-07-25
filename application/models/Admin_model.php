@@ -205,7 +205,6 @@
 		public function getContractors(){
 			$this->db->select('*');
 			$this->db->from('contractors');
-			$this->db->order_by('contractor_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -472,7 +471,7 @@
 		);
 
 		if ($this->db->insert('funds', $data)) {
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}
@@ -484,7 +483,7 @@
 		);
 
 		if ($this->db->insert('projtype', $data)) {
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}
@@ -555,7 +554,7 @@
 		);
 
 		if($this->db->insert('account_classification', $data)){
-			return true;
+			return $this->db->insert_id();
 		}
 		return false;			
 	}
@@ -1117,7 +1116,11 @@
 	public function deleteDocumentType($doc_type_id){
 
 		$this->db->where('doc_type_id', $doc_type_id);
-		$this->db->delete('document_type');
+		if($this->db->delete('document_type')){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function resetProjectTimeline($plan_id){
@@ -1203,7 +1206,7 @@
 	public function deleteContractor($contractor_id){
 
 		$this->db->where('contractor_id', $contractor_id);
-		if ($this->db->delete('contractors')) {
+		if($this->db->delete('contractors')){
 			return true;
 		}else{
 			return false;
@@ -1251,7 +1254,12 @@
 	public function deleteFund($fund_id){
 
 		$this->db->where('fund_id', $fund_id);
-		$this->db->delete('funds');
+		if($this->db->delete('funds')){
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 	public function updateProjectTypes($projtype_id, $action){
 
@@ -1274,7 +1282,11 @@
 	public function deleteProjectType($projtype_id){
 
 		$this->db->where('projtype_id', $projtype_id);
-		$this->db->delete('projtype');
+		if($this->db->delete('projtype')){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 
@@ -1300,7 +1312,11 @@
 	public function deleteClassification($account_id){
 
 		$this->db->where('account_id', $account_id);
-		$this->db->delete('account_classification');
+		if($this->db->delete('account_classification')){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function updateModes($mode_id, $action){
@@ -1354,7 +1370,11 @@
 	public function deleteUsers($user_id){
 
 		$this->db->where('user_id', $user_id);
-		$this->db->delete('users');
+		if($this->db->delete('users')){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function updateMunicipalitiesAndBarangays($municipality_id, $action){
@@ -1378,7 +1398,11 @@
 	public function deleteMunicipalitiesAndBarangays($municipality_id){
 
 		$this->db->where('municipality_id', $municipality_id);
-		$this->db->delete('municipalities');
+		if($this->db->delete('municipalities')){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 ?>

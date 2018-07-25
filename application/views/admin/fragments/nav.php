@@ -286,7 +286,7 @@
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">PROCESS</li>
           <li class="treeview">
-            <a href="#">
+            <a>
               <i class="fa fa-plus"></i><span>ADD PLAN</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>

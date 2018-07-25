@@ -21,7 +21,7 @@
             </thead>
             <tbody>
               <?php foreach ($projectTypes as $projectType): ?>
-                <tr>
+                <tr id="<?php echo 'projectType' . $projectType['projtype_id'] ?>">
                   <td class="text-center"><?php echo $projectType['projtype_id'] ?></td>
                   <td class="text-center"><?php echo $projectType['type'] ?></td>
                   <td class="text-center"><?php echo $projectType['status'] ?></td>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteProjectType') ?>" method="POST">
+                      <form action="<?php echo base_url('admin/deleteProjectType') ?>" method="POST" id="delete_project_form">
                         <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id']?>" hidden>
                           <button class="btn btn-danger" type="submit">Delete</button>                       
                       </form>
@@ -107,22 +107,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
-<script>
-  $(document).ready( 
-    function () {
-      $('#projectTypeTable').DataTable();
-    } 
-  );
-</script>
-<script>
-  $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
-     $('#typeName').html($('#type').val());
-   });
-    
-  });
-</script>
-
 <div class="modal fade" id="addProjectTypeModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -161,8 +145,45 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">The Data has been Removed Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_failed">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Failed!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Error Occured!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  $('#addProjectForm').submit(function(e){
+
+  var table = $('#projectTypeTable').DataTable({
+  });
+
+  $(document).on('submit', '#addProjectForm', function(e){
     e.preventDefault();
 
     $.ajax({
@@ -172,14 +193,38 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
+          $('#alert-success').attr('hidden', false);
           $('.has-error').remove();
           $('.has-success').remove();
-          $('#alert-success').prop('hidden', false);
           $('.alert-success').delay(500).show(10, function() {
-          $(this).delay(3000).hide(10, function() {
-            $(this).remove();
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
           });
-          })
+
+          var rowNode = table.row.add([
+            response.project['projtype_id'],
+            response.project['type'],
+            response.project['status'],
+            '<p>Refresh To do More</p>'
+          ]).draw().node();
+
+          $(rowNode).css({
+            'text-align': 'center',
+            'background-color': '#c1f0c1'
+          });
+
+          $('#addProjectForm input').val('');
+        }else if(response.success == 'failed'){
+          $('#alert-failed').attr('hidden', false);
+          $('.has-error').remove();
+          $('.has-success').remove();
+          $('.alert-failed').delay(500).show(10, function() {
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
+          });
+          $('#addProjectForm input').val('');
         }else{
           $.each(response.messages, function(key, value) {
             var element = $('#' + key);
@@ -195,5 +240,30 @@
         }
       }
     });
-  })
+  });
+
+  $(document).on('submit', '#delete_project_form', function(e){
+    e.preventDefault();
+
+    var form_name = $(this).attr('id');
+    console.log(form_name);
+    var projtype_id =  $(this).find("input[name='projtype_id']").val();
+    console.log(projtype_id);
+    var row_id = 'project' + projtype_id;
+
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#' + row_id).remove();
+          $('#action_success').modal('show');
+        }else{
+          $('#action_failed').modal('show');
+        }
+      }
+    });
+  });
 </script>

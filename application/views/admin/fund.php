@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               <?php foreach ($funds as $fund): ?>
-                <tr>
+                <tr id="<?php echo 'fund' . $fund['fund_id'] ?>">
                   <td class="text-center"><?php echo $fund['fund_id'] ?></td>
                   <td class="text-center"><?php echo $fund['fund_type'] ?></td>
                   <td class="text-center"><?php echo $fund['source'] ?></td>
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteFund') ?>" method="POST">
+                      <form action="<?php echo base_url('admin/deleteFund') ?>" method="POST" id ="delete_fund_form">
                         <input type="text" name="fund_id" value="<?php echo $fund['fund_id']?>" hidden>
                           <button class="btn btn-danger" type="submit">Delete</button>                       
                       </form>
@@ -69,8 +69,6 @@
     </div>
   </div>
 </section>
-
-
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-ui/jquery-ui.min.js"></script>
@@ -103,30 +101,9 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
-
-<script>
-  $(document).ready( 
-    function () {
-      $('#fundTable').DataTable();
-    } 
-  );
-</script>
-<script>
-  $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
-      $('#usernam').html($('#source').val());
-      $('#wewetype').html($('#fundtype').val());
-    });
-  });
-</script>
 
 <div class="modal fade" id="addFundModal">
   <div class="modal-dialog">
@@ -173,8 +150,45 @@
   <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">The Data has been Removed Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_failed">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Failed!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Error Occured!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
-  $('#addFundsForm').submit(function(e){
+
+  var table = $('#fundTable').DataTable({
+  });
+
+  $(document).on('submit', '#addFundsForm', function(e){
     e.preventDefault();
 
     $.ajax({
@@ -184,14 +198,39 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
+          $('#alert-success').attr('hidden', false);
           $('.has-error').remove();
           $('.has-success').remove();
-          $('#alert-success').prop('hidden', false);
           $('.alert-success').delay(500).show(10, function() {
-          $(this).delay(3000).hide(10, function() {
-            $(this).remove();
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
           });
-          })
+
+          var rowNode = table.row.add([
+            response.fund['fund_id'],
+            response.fund['fund_type'],
+            response.fund['source'],
+            response.fund['status'],
+            '<p>Refresh To do More</p>'
+          ]).draw().node();
+
+          $(rowNode).css({
+            'text-align': 'center',
+            'background-color': '#c1f0c1'
+          });
+
+          $('#addFundsForm input').val('');
+        }else if(response.success == 'failed'){
+          $('#alert-failed').attr('hidden', false);
+          $('.has-error').remove();
+          $('.has-success').remove();
+          $('.alert-failed').delay(500).show(10, function() {
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
+          });
+          $('#addFundsForm input').val('');
         }else{
           $.each(response.messages, function(key, value) {
             var element = $('#' + key);
@@ -207,6 +246,31 @@
         }
       }
     });
-  })
+  });
+
+  $(document).on('submit', '#delete_fund_form', function(e){
+    e.preventDefault();
+
+    var form_name = $(this).attr('id');
+    console.log(form_name);
+    var fund_id =  $(this).find("input[name='fund_id']").val();
+    console.log(fund_id);
+    var row_id = 'fund' + fund_id;
+
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#' + row_id).remove();
+          $('#action_success').modal('show');
+        }else{
+          $('#action_failed').modal('show');
+        }
+      }
+    });
+  });
 </script>
 

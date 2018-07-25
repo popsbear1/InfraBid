@@ -546,15 +546,21 @@ class Admin extends CI_Controller {
 		$data = array('success' => false, 'messages' => array());
 
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
-		$this->form_validation->set_rules('fund_type','Type of Fund', 'trim|required');
+		$this->form_validation->set_rules('fund_type', 'Type of Fund', 'trim|required');
+
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
 			$source = htmlspecialchars($this->input->post('source'));
 			$fund_type = htmlspecialchars($this->input->post('fund_type'));
 
-			if ($this->admin_model->insertNewFunds($source,$fund_type)) {
 
+			$return_value = $this->admin_model->insertNewFunds($source, $fund_type);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['fund'] = $this->admin_model->getFundsDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -618,13 +624,19 @@ class Admin extends CI_Controller {
 	public function addProjectType(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
+		$this->form_validation->set_rules('type', 'Type of Project', 'trim|required');
+
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
 			$type = htmlspecialchars($this->input->post('type'));
 
-			if ($this->admin_model->insertNewProjectType($type)) {
+			$return_value = $this->admin_model->insertNewProjectType($type);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['project'] = $this->admin_model->getProjectTypeDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -632,8 +644,8 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['role'])) {
-				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			if (!isset($_POST['fund_type'])) {
+				$data['messages']['fund_type'] = '<p class="text-danger">This field is required!</p>';
 			}
 		}
 		
@@ -886,13 +898,19 @@ class Admin extends CI_Controller {
 	public function addClassification(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('acc_classification', 'Account Classification', 'trim|required');
+		$this->form_validation->set_rules('classification', 'Classification', 'trim|required');
+
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
-			$acc_classification = htmlspecialchars($this->input->post('acc_classification'));
+			$classification = htmlspecialchars($this->input->post('classification'));
 
-			if ($this->admin_model->insertClassification($acc_classification)) {
+			$return_value = $this->admin_model->insertClassification($classification);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['classifications'] = $this->admin_model->getClassificationDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -900,8 +918,8 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['role'])) {
-				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			if (!isset($_POST['fund_type'])) {
+				$data['messages']['fund_type'] = '<p class="text-danger">This field is required!</p>';
 			}
 		}
 		
@@ -1373,10 +1391,13 @@ class Admin extends CI_Controller {
 /* Delete or Activate shit**/
 
 	public function deleteDocumentType(){
-		$doc_type_id=$this->input->post('document_id');
-		$this->admin_model->deleteDocumentType($doc_type_id);
+		$data['success'] = false;
+		$doc_type_id=$this->input->post('doc_type_id');
+		if ($this->admin_model->deleteFund($doc_type_id)) {
+			$data['success'] = true;
+		}
 
-		redirect('admin/manageDocumentsView');
+		echo json_encode($data);
 	}
 
 	public function deactivateDocumentType(){
@@ -1420,10 +1441,13 @@ class Admin extends CI_Controller {
 	}
 
 	public function deleteFund(){
+		$data['success'] = false;
 		$fund_id=$this->input->post('fund_id');
-		$this->admin_model->deleteFund($fund_id);
+		if ($this->admin_model->deleteFund($fund_id)) {
+			$data['success'] = true;
+		}
 
-		redirect('admin/manageFundsView');
+		echo json_encode($data);
 	}
 
 	public function deactivateFund(){
@@ -1442,13 +1466,16 @@ class Admin extends CI_Controller {
 	}
 
 		public function deleteProjectType(){
+		$data['success'] = false;
 		$projtype_id=$this->input->post('projtype_id');
-		$this->admin_model->deleteProjectType($projtype_id);
-
-		redirect('admin/manageProjectTypeView');
+		if ($this->admin_model->deleteProjectType($projtype_id)) {
+			$data['success'] = true;
+		}
+			echo json_encode($data);
 	}
 
-	public function deactivateProjectType(){
+
+     	public function deactivateProjectType(){
 		$projtype_id=$this->input->post('projtype_id');
 		$this->admin_model->updateProjectTypes($projtype_id, 'deactivate');
 
@@ -1464,10 +1491,13 @@ class Admin extends CI_Controller {
 	}
 
 		public function deleteClassification(){
+		$data['success'] = false;
 		$account_id=$this->input->post('account_id');
-		$this->admin_model->deleteClassification($account_id);
+		if ($this->admin_model->deleteFund($account_id)) {
+			$data['success'] = true;
+		}
 
-		redirect('admin/manageAccountClassifications');
+		echo json_encode($data);
 	}
 
 	public function deactivateClassification(){
@@ -1486,17 +1516,13 @@ class Admin extends CI_Controller {
 	}
 
 	public function deleteMode(){
+		$data['success'] = false;
 		$mode_id=$this->input->post('mode_id');
+		if ($this->admin_model->deleteFund($mode_id)) {
+			$data['success'] = true;
+		}
 
-		if($this->admin_model->deleteMode($mode_id)){
-
-			$this->session->set_flashdata('success', 'Successfully deleted mode!');
-
-		}else{
-
-			$this->session->set_flashdata('failed', "Mode cannot be deleted. Error Occured!");
-		}	
-			redirect('admin/manageProcurementMode');
+		echo json_encode($data);
 	}
 
 	public function deactivateMode(){
@@ -1536,10 +1562,13 @@ class Admin extends CI_Controller {
 		redirect('admin/manageUsers');	
 	}
 	public function deleteMunicipalitiesAndBarangays(){
+		$data['success'] = false;
 		$municipality_id=$this->input->post('municipality_id');
-		$this->admin_model->deleteMunicipalitiesAndBarangays($municipality_id);
+		if ($this->admin_model->deleteFund($municipality_id)) {
+			$data['success'] = true;
+		}
 
-		redirect('admin/manageMunicipalitiesAndBarangays');
+		echo json_encode($data);
 	}
 
 	public function deactivateMunicipalitiesAndBarangays(){

@@ -11,7 +11,7 @@
           <button class="btn btn-primary pull-right" type="button" data-target="#addContractorModal" data-toggle="modal">Add New Contractor</button>
         </div>
         <div class="box-body">
-          <table class="table table-striped table-bordered" id="contructorTable">
+          <table class="table table-striped table-bordered" id="contractorTable">
             <thead style='font-size:12px;'>
               <tr>
                 <th class="text-center">Business Name</th>
@@ -174,10 +174,10 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h4>Success!!</h4>
+        <h4 class="text-center">Success!</h4>
       </div>
       <div class="modal-body">
-        <p>Action Success</p>
+        <p class="text-center">The Data has been Removed Successfully!</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" data-dismiss="modal">Close</button>
@@ -190,10 +190,10 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h4>Failed!!</h4>
+        <h4 class="text-center">Failed!</h4>
       </div>
       <div class="modal-body">
-        <p>Action  Failed</p>
+        <p class="text-center">Error Occured!</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" data-dismiss="modal">Close</button>
@@ -205,7 +205,7 @@
 
 <script>
 
-  var table = $('#contructorTable').DataTable({
+  var table = $('#contractorTable').DataTable({
   });
 
   $(document).on('submit', '#addContractorForm', function(e){
