@@ -28,7 +28,7 @@
                 </li>
                 <li 
                 <?php 
-                  if ($this->session->userdata('project_status') == 'pending') {
+                  if ($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid') {
                     echo 'class="disabled"';   
                   }else{
                     if ($pageName == "timeline") {
@@ -37,11 +37,11 @@
                   } 
                 ?>
                 >
-                  <a href="<?php if($this->session->userdata('project_status') == 'pending'){ echo '#'; }else{ echo base_url('admin/projectTimelineView'); }  ?>">Project Timeline</a>
+                  <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid'){ echo '#'; }else{ echo base_url('admin/projectTimelineView'); }  ?>">Project Timeline</a>
                 </li>
                 <li
                 <?php 
-                  if ($this->session->userdata('project_status') == 'pending') {
+                  if ($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid' || $this->session->userdata('timeLine_status') == 'pending') {
                     echo 'class="disabled"';   
                   }else{
                     if ($pageName == "activity") {
@@ -50,7 +50,7 @@
                   } 
                 ?>
                 >
-                  <a href="<?php if($this->session->userdata('project_status') == 'pending'){ echo '#'; }else{ echo base_url('admin/procurementActivityView'); } ?>">Procurement Activity</a>
+                  <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('timeLine_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid'){ echo '#'; }else{ echo base_url('admin/procurementActivityView'); } ?>">Procurement Activity</a>
                 </li>
               </ul>
 
