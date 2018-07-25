@@ -783,23 +783,32 @@ class Admin extends CI_Controller {
 	}
 
 	public function addNewMunicipality(){
-		$municipality_code = $this->input->post('municipality_code');
-		$municipality = $this->input->post('municipality');
+		$data = array('success' => false, 'messages' => array());
 
-		$municipality_id = $this->admin_model->insertMunicipality($municipality_code, $municipality);
+		$this->form_validation->set_rules('municipality_code', 'Municipality Code', 'trim|required|is_natural');
+		$this->form_validation->set_rules('municipality', 'Municipality Name', 'trim|required');
+		$this->form_validation->set_rules('barangayNumber', 'Municipality Number', 'trim|required|is_natural');				
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-		if (!$municipality_id) {
-			$this->session->set_flashdata('error', 'Erro adding municipality. Try again!');
-		}else{
-			if (isset($_POST['barangay_code']) && isset($_POST['barangay_name'])) {
-				for ($i=0; $i < count($_POST['barangay_code']); $i++) { 
-					$this->admin_model->insertBarangay($municipality_id, $_POST['barangay_code'][$i], $_POST['barangay_name'][$i]);
-				}
+		if ($this->form_validation->run()) {
+			$municipality_code = htmlspecialchars($this->input->post('municipality_code'));
+			$municipality = htmlspecialchars($this->input->post('municipality'));
+			$barangayNumber = htmlspecialchars($this->input->post('barangayNumber'));
+
+			if ($this->admin_model->insertMunicipality($municipality_code,$municipality,$barangayNumber)) {
+				$data['success'] = true;
 			}
-			$this->session->set_flashdata('success', 'New municipality added successfully.');
-		}
 
-		redirect('admin/addMunicipalityView');
+		}else{
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			}
+		}
+		
+		echo json_encode($data);
 	}
 
 	public function editMunicipalityView(){
