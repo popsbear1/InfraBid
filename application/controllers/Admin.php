@@ -459,7 +459,12 @@ class Admin extends CI_Controller {
 			$address = htmlspecialchars($this->input->post('address'));
 			$contactnumber = htmlspecialchars($this->input->post('contactnumber'));
 
-			if ($this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber)) {
+			$return_value = $this->admin_model->insertNewContractor($businessname, $owner, $address, $contactnumber);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['contractor'] = $this->admin_model->getContractorDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -1380,11 +1385,14 @@ class Admin extends CI_Controller {
 		redirect('admin/manageDocumentsView');	
 	}
 
-		public function deleteContractor(){
+	public function deleteContractor(){
+		$data['success'] = false;
 		$contractor_id=$this->input->post('contractor_id');
-		$this->admin_model->deleteContractor($contractor_id);
+		if ($this->admin_model->deleteContractor($contractor_id)) {
+			$data['success'] = true;
+		}
 
-		redirect('admin/manageContractorsView');
+		echo json_encode($data);
 	}
 
 	public function deactivateContractor(){

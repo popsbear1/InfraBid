@@ -205,6 +205,7 @@
 		public function getContractors(){
 			$this->db->select('*');
 			$this->db->from('contractors');
+			$this->db->order_by('contractor_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -457,7 +458,7 @@
 		);
 
 		if ($this->db->insert('contractors', $data)) {
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}
@@ -1202,7 +1203,11 @@
 	public function deleteContractor($contractor_id){
 
 		$this->db->where('contractor_id', $contractor_id);
-		$this->db->delete('contractors');
+		if ($this->db->delete('contractors')) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function updateContractor($contractor_id, $action){
