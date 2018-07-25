@@ -17,7 +17,7 @@
 		}
 
 		public function getRegularProjectPlan($year, $quarter, $status, $municipality){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -63,7 +63,7 @@
 		}
 
 		public function getSupplementaryProjectPlan($year, $quarter, $status, $municipality){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -1058,11 +1058,7 @@
 	}
 
 	public function updateProjectStatus($plan_id, $action){
-		if ($action == 'setTimeline') {
-			$data = array(
-				'status' => 'onprocess' 
-			);
-		}
+
 		if ($action == 're_bid') {
 			$data = array(
 				'status' => 'for_rebid'

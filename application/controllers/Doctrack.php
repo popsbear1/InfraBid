@@ -25,8 +25,7 @@ class Doctrack extends CI_Controller {
 	}
 
 	public function projectListView(){
-		$year = date('Y');
-		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW($year);
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/projectList', $data);

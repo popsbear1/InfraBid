@@ -22,9 +22,8 @@ class Capitol extends CI_Controller {
 	}
 
 	public function projectListView(){
-		$year = date('Y');
 		$page['page'] = 'list'; 
-		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW($year);
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW();
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/projectList', $data);
@@ -33,9 +32,8 @@ class Capitol extends CI_Controller {
 
 
 	public function projectListViewForPOW(){
-		$year = date('Y');
 		$page['page'] = 'POW';
-		$data['plans'] = $this->doctrack_model->getProjectPlansWithoutPOW($year);
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithoutPOW();
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/projectListForPOW', $data);

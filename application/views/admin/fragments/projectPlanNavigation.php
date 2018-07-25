@@ -28,21 +28,29 @@
                 </li>
                 <li 
                 <?php 
-                  if ($pageName == "timeline") {
-                    echo 'class="active"';
-                  }  
+                  if ($this->session->userdata('project_status') == 'pending') {
+                    echo 'class="disabled"';   
+                  }else{
+                    if ($pageName == "timeline") {
+                      echo 'class="active"';
+                    } 
+                  } 
                 ?>
                 >
-                  <a href="<?php echo base_url('admin/projectTimelineView') ?>">Project Timeline</a>
+                  <a href="<?php if($this->session->userdata('project_status') == 'pending'){ echo '#'; }else{ echo base_url('admin/projectTimelineView'); }  ?>">Project Timeline</a>
                 </li>
                 <li
-                  <?php
+                <?php 
+                  if ($this->session->userdata('project_status') == 'pending') {
+                    echo 'class="disabled"';   
+                  }else{
                     if ($pageName == "activity") {
                       echo 'class="active"';
                     }
-                  ?>
+                  } 
+                ?>
                 >
-                  <a href="<?php echo base_url('admin/procurementActivityView') ?>">Procurement Activity</a>
+                  <a href="<?php if($this->session->userdata('project_status') == 'pending'){ echo '#'; }else{ echo base_url('admin/procurementActivityView'); } ?>">Procurement Activity</a>
                 </li>
               </ul>
 

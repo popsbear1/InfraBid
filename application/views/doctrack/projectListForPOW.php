@@ -1,4 +1,25 @@
+<style>
+  
 
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+</style>
 <section class="content-header">
 
 </section>
@@ -173,8 +194,8 @@
   </div>
 </div>
 
-<div class="modal modal-success fade" id="pow_adding_success">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade" id="pow_adding_success">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -186,8 +207,7 @@
         <p>Proceed to adding documents!</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -196,28 +216,47 @@
 </div>
 <!-- /.modal -->
 
-<div class="modal modal-warning fade" id="pow_adding_warning">
-  <div class="modal-dialog modal-sm">
+<!-- Modal -->
+<div class="modal fade" id="pow_adding_success" tabindex="-1" role="dialog" aria-labelledby="pow_adding_success" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Warning Modal</h4>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added project POW!</p>
+        <p>Proceed to adding documents!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="pow_adding_warning" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body text-center">
         <p>Error updating POW availability!</p>
         <p>Try again later!</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline">Save changes</button>
+        <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
 <script>
   $(document).ready( 
@@ -278,56 +317,6 @@
     });
   })
 
-  // $(document).ready(function(){
-  //   $('#documentDetailsViewModal').modal('show');
-
-  //   $('#forwardingLogTable').DataTable().destroy();
-  //   $('#receivingLogTable').DataTable().destroy();
-
-  //   var forwarded_document_details = $(this).val();
-
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
-  //     data: { plan_id: forwarded_document_details},
-  //     dataType: 'json',
-  //     success: function(response){
-
-  //       $('#forwardingLogTable').DataTable( {
-  //           data: response.forwarding_logs,
-  //           columns: [
-  //               { data: 'user_type' },
-  //               { data: 'user_name' },
-  //               { data: 'log_date' },
-  //               { data: 'remark' }
-  //           ],
-  //           'paging'      : false,
-  //           'lengthChange': false,
-  //           'searching'   : false,
-  //           'ordering'    : true,
-  //           'info'        : false,
-  //           'autoWidth'   : false
-  //       } );
-
-  //       $('#receivingLogTable').DataTable( {
-  //           data: response.receiving_logs,
-  //           columns: [
-  //               { data: 'user_type' },
-  //               { data: 'user_name' },
-  //               { data: 'log_date' },
-  //               { data: 'remark' }
-  //           ],
-  //           'paging'      : false,
-  //           'lengthChange': false,
-  //           'searching'   : false,
-  //           'ordering'    : true,
-  //           'info'        : false,
-  //           'autoWidth'   : false
-  //       } );
-  //     }
-  //   });
-
-  // });
   </script>
 
 

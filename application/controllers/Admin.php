@@ -359,8 +359,10 @@ class Admin extends CI_Controller {
 
 	public function setCurrentPlanID(){
 		$plan_id = $this->input->post('plan_id');
+		$project_status = $this->input->post('project_status');
 
 		$this->session->set_userdata('plan_id', $plan_id);
+		$this->session->set_userdata('project_status', $project_status);
 
 		redirect('admin/projectDetailsView');
 	}
