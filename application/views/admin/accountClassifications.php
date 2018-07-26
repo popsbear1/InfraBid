@@ -14,14 +14,14 @@
             <thead style='font-size:12px;'>
               <tr>
                 <th style='text-align: center'>ID</th>
-                <th style='text-align: center'>Project Type</th>
+                <th style='text-align: center'>Classification</th>
                 <th style='text-align: center'>Status</th>
                 <th style='text-align: center'>Actions</th>
               </tr>
             </thead>
             <tbody>
                 <?php foreach ($classifications as $classification): ?>
-                  <tr>
+                  <tr id="<?php echo 'classication' . $classification['account_id'] ?>">
                     <td class="text-center"><?php echo $classification['account_id']?></td>
                     <td class="text-center"><?php echo $classification['classification']?></td>
                     <td class="text-center"><?php echo $classification['status'] ?></td>
@@ -145,8 +145,40 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-<!-- end of modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">The Data has been Removed Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_failed">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Failed!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Error Occured!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
 
   var table = $('#accountClassificationTable').DataTable({
@@ -172,9 +204,9 @@
           });
 
           var rowNode = table.row.add([
-            response.classifications['account_id'],
-            response.classifications['classification'],,
-            response.classifications['status'],
+            response.mode['account_id'],
+            response.mode['mode'],
+            response.mode['status'],
             '<p>Refresh To do More</p>'
           ]).draw().node();
 
@@ -211,14 +243,14 @@
     });
   });
 
-  $(document).on('submit', '#delete_classification_form', function(e){
+  $(document).on('submit', '#delete_mode_form', function(e){
     e.preventDefault();
 
     var form_name = $(this).attr('id');
     console.log(form_name);
-    var account_id =  $(this).find("input[name='account_id']").val();
-    console.log(account_id);
-    var row_id = 'classifications' + account_id;
+    var mode_id =  $(this).find("input[name='mode_id']").val();
+    console.log(mode_id);
+    var row_id = 'mode' + mode_id;
 
     $.ajax({
       type: 'POST',

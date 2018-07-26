@@ -641,7 +641,7 @@ class Admin extends CI_Controller {
 			if (!$return_value) {
 				$data['success'] = 'failed';
 			}else{
-				$data['project'] = $this->admin_model->getProjectTypeDetails($return_value);
+				$data['projectType'] = $this->admin_model->getProjectTypeDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -745,21 +745,28 @@ class Admin extends CI_Controller {
 	}
 
 	public function addUsers(){
-			$data = array('success' => false, 'messages' => array());
+		
+		$data = array('success' => false, 'messages' => array());
+
 
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('middlename', 'Middle Name', 'trim|required');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
-		$this->form_validation->set_rules('usertype', 'User Type', 'required');
+		$this->form_validation->set_rules('usertype', 'User Type', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
+
 			$firstname = htmlspecialchars($this->input->post('firstname'));
 			$middlename = htmlspecialchars($this->input->post('middlename'));
 			$lastname = htmlspecialchars($this->input->post('lastname'));
 			$usertype = htmlspecialchars($this->input->post('usertype'));
-
-			if ($this->admin_model->insertNewContractor($firstname, $middlename, $lastname, $usertype)) {
+			$return_value = $this->admin_model->insertUsers($firstname, $middlename, $lastname,$usertype);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['user'] = $this->admin_model->getUserDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -767,13 +774,14 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['usertype'])) {
-				$data['messages']['usertype'] = '<p class="text-danger">This field is required!</p>';
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
 			}
 		}
 		
 		echo json_encode($data);
 	}
+
 		
 	public function manageDatabaseView(){
 		$this->load->view('admin/fragments/head');
@@ -987,14 +995,19 @@ class Admin extends CI_Controller {
 	public function addProcurement(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('mode', 'Procurement Mode', 'trim|required|alpha');
+		$this->form_validation->set_rules('mode', 'Type of Procurement Mode', 'trim|required|alpha');
 
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
 			$mode = htmlspecialchars($this->input->post('mode'));
 
-			if ($this->admin_model->insertProcurementMode($mode)) {
+			$return_value = $this->admin_model->insertProcurementMode($mode);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['mode'] = $this->admin_model->getProcurementModeDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -1002,8 +1015,8 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['role'])) {
-				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
+			if (!isset($_POST['fund_type'])) {
+				$data['messages']['fund_type'] = '<p class="text-danger">This field is required!</p>';
 			}
 		}
 		
@@ -1084,8 +1097,12 @@ class Admin extends CI_Controller {
 		if ($this->form_validation->run()) {
 			$document_numbers = htmlspecialchars($this->input->post('document_numbers'));
 			$newdocuments = htmlspecialchars($this->input->post('newdocuments'));
-
-			if ($this->admin_model->insertDocument($document_numbers, $newdocuments)) {
+			$return_value = $this->admin_model->insertDocument($document_numbers,$newdocuments);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['document'] = $this->admin_model->getDocumentDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -1093,13 +1110,14 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['fund_type'])) {
-				$data['messages']['fund_type'] = '<p class="text-danger">The Role field is required!</p>';
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
 			}
 		}
-		
+	
 		echo json_encode($data);
 	}
+
 
 	public function editDocumentsView(){
 		$doc_type_id = $this->session->userdata('doc_type_id');
@@ -1401,8 +1419,8 @@ class Admin extends CI_Controller {
 
 	public function deleteDocumentType(){
 		$data['success'] = false;
-		$doc_type_id=$this->input->post('doc_type_id');
-		if ($this->admin_model->deleteFund($doc_type_id)) {
+		$doc_type_id=$this->input->post('document_id');
+		if ($this->admin_model->deleteDocumentType($doc_type_id)) {
 			$data['success'] = true;
 		}
 
@@ -1480,7 +1498,8 @@ class Admin extends CI_Controller {
 		if ($this->admin_model->deleteProjectType($projtype_id)) {
 			$data['success'] = true;
 		}
-			echo json_encode($data);
+
+		echo json_encode($data);
 	}
 
 
@@ -1527,7 +1546,7 @@ class Admin extends CI_Controller {
 	public function deleteMode(){
 		$data['success'] = false;
 		$mode_id=$this->input->post('mode_id');
-		if ($this->admin_model->deleteFund($mode_id)) {
+		if ($this->admin_model->deleteMode($mode_id)) {
 			$data['success'] = true;
 		}
 
@@ -1550,10 +1569,13 @@ class Admin extends CI_Controller {
 	}
 
 	public function deleteUsers(){
+		$data['success'] = false;
 		$user_id=$this->input->post('user_id');
-		$this->admin_model->deleteUsers($user_id);
+		if ($this->admin_model->deleteUsers($user_id)) {
+			$data['success'] = true;
+		}
 
-		redirect('admin/manageUsers');
+		echo json_encode($data);
 	}
 
 	public function deactivateUsers(){

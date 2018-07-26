@@ -279,6 +279,14 @@
 		}
 
 		public function getUserDetails($userID){
+		// 	$this->db->select('*');
+		// 	$this->db->from('users');
+		// 	$this->db->where('user_id', $userID);
+
+		// 	$query = $this->db->get();
+
+		// 	return $query->row_array();
+		// }
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('user_id', $userID);
@@ -287,7 +295,6 @@
 
 			return $query->row_array();
 		}
-
 		public function getProcActivityDates($plan_id){
 			$this->db->select('*');
 			$this->db->from('procact');
@@ -572,17 +579,18 @@
 		return false;			
 	}
 
-	public function insertDocument($docname, $document_numbers){
+	public function insertDocument($doc_no, $document_name){
 		$data = array(
-			'document_name' => $docname,
-			'doc_no' => $document_numbers
+			'doc_no' => $doc_no,
+			'document_name' => $document_name
 		);
 
 		if ($this->db->insert('document_type', $data)) {
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}
+
 	}
 
 

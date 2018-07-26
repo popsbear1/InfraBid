@@ -99,10 +99,7 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
+
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -162,6 +159,22 @@
   </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">The Data has been Removed Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_failed">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -177,6 +190,7 @@
     </div>
   </div>
 </div>
+
 
 <script>
 
@@ -203,9 +217,9 @@
           });
 
           var rowNode = table.row.add([
-            response.project['projtype_id'],
-            response.project['type'],
-            response.project['status'],
+            response.projectType['projtype_id'],
+            response.projectType['type'],
+            response.projectType['status'],
             '<p>Refresh To do More</p>'
           ]).draw().node();
 
@@ -249,7 +263,7 @@
     console.log(form_name);
     var projtype_id =  $(this).find("input[name='projtype_id']").val();
     console.log(projtype_id);
-    var row_id = 'project' + projtype_id;
+    var row_id = 'projectType' + projtype_id;
 
     $.ajax({
       type: 'POST',
