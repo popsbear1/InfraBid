@@ -298,7 +298,8 @@ class Admin extends CI_Controller {
 	public function projectTimelineView(){
 		$projectNavControl['pageName'] = "timeline";
 		$plan_id = $this->session->userdata('plan_id');
-		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
+		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;	
+		$data['actStatus'] = $this->admin_model->getProjectActivityStatus($plan_id);
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
 		$this->load->view('admin/fragments/head');
@@ -333,7 +334,11 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		$this->admin_model->updatePreProcConfDate($plan_id, $pre_proc_date);
+		$abc = $this->admin_model->getABC('$plan_id');
+
+		//if ($abc) {
+			$this->admin_model->updatePreProcConfDate($plan_id, $pre_proc_date);
+		//}
 
 		redirect('admin/projectTimelineView');
 		 
@@ -344,8 +349,8 @@ class Admin extends CI_Controller {
 		$projectNavControl['pageName'] = "activity";
 		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
+		$data['actStatus'] = $this->admin_model->getProjectActivityStatus($plan_id);
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
-
 		$data['arrayCount'] = count($data['procActDate']);
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
@@ -1310,6 +1315,12 @@ class Admin extends CI_Controller {
 
 			$this->admin_model->resetProjectProcurementActivity($plan_id);
 
+			// Reset project activity status
+
+			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
+
+			$this->admin_model->resetTimelineProjectStatus($abc, $plan_id);
+
 			// Record Log
 
 			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
@@ -1390,6 +1401,12 @@ class Admin extends CI_Controller {
 			// Empty project procurement activity (revert all dates to null)
 
 			$this->admin_model->resetProjectProcurementActivity($plan_id);
+
+			// Reset project activity status
+
+			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
+
+			$this->admin_model->resetTimelineProjectStatus($abc, $plan_id);
 
 			// Record Log
 

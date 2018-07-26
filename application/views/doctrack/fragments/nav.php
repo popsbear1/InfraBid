@@ -24,14 +24,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li 
-            <?php if ($page == 'POW'): ?>
-              class="active"
-            <?php endif ?>
-            >
-              <a href="<?php echo base_url('capitol/projectListViewForPOW') ?>">Add POW
-              </a>
-            </li>        
+            <?php if ($this->session->userdata('user_type') == 'PEO'): ?>
+              <li 
+              <?php if ($page == 'POW'): ?>
+                class="active"
+              <?php endif ?>
+              >
+                <a href="<?php echo base_url('capitol/projectListViewForPOW') ?>">Add POW
+                </a>
+              </li>          
+            <?php endif ?>       
             <li
             <?php if ($page == 'list'): ?>
               class="active"

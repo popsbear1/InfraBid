@@ -394,6 +394,42 @@
 			return $query->row();
 		}
 
+		public function getABC($plan_id){
+			$this->db->select('abc');
+			$this->db->from('project_plan');
+			$this->db->where('abc >=', 5000000);
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+			if (sizeof($query->row()) > 0) {
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+
+		public function getCurrentABC($plan_id){
+			$this->db->select('abc');
+			$this->db->from('project_plan');
+			$this->db->where('abc >=', 5000000);
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+			return $query->row();
+			
+		}
+
+		public function getProjectActivityStatus($plan_id){
+			$this->db->select('*');
+			$this->db->from('project_activity_status');
+			$this->db->where('plan_id', $plan_id);
+
+			$query =$this->db->get();
+
+			return $query->row_array();
+		}
+
 	/**
 	* All functions bellow are used to insert data on Database.
 	**/
@@ -860,6 +896,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'pre_proc' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -873,6 +914,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'advertisement' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -886,6 +932,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'pre_bid' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -906,6 +957,11 @@
 
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_plan', $dataTwo);
+			$status = array(
+				'eligibility_check' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -919,6 +975,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'open_bid' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -932,6 +993,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'bid_evaluation' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -945,6 +1011,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'post_qual' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -958,6 +1029,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'award_notice' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -971,6 +1047,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'contract_signing' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -984,6 +1065,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'proceed_notice' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -997,6 +1083,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'delivery_completion' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -1010,6 +1101,11 @@
 
 		$this->db->where('plan_id', $plan_id);
 		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'acceptance_turnover' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
 			return true;
 		}else{
 			return false;
@@ -1180,6 +1276,57 @@
 			);
 		}
 		$this->db->insert('project_activity_status', $timeLine_status_data);
+	}
+
+		public function resetTimelineProjectStatus($ABC, $plan_id){
+		if ($ABC >= 5000000) {
+			$timeLine_status_data = array(
+				'pre_proc' => 'pending',
+				'advertisement' => 'pending',
+				'pre_bid' => 'pending',
+				'eligibility_check' => 'pending',
+				'open_bid' => 'pending',
+				'bid_evaluation' => 'pending',
+				'post_qual' => 'pending',
+				'award_notice' => 'pending',
+				'contract_signing' => 'pending',
+				'proceed_notice' => 'pending',
+				'delivery_completion' => 'pending',
+				'acceptance_turnover' => 'pending'
+			);
+		}elseif ($ABC < 5000000 && $ABC > 1000000) {
+			$timeLine_status_data = array(
+				'pre_proc' => 'not_needed',
+				'advertisement' => 'not_needed',
+				'pre_bid' => 'pending',
+				'eligibility_check' => 'pending',
+				'open_bid' => 'pending',
+				'bid_evaluation' => 'pending',
+				'post_qual' => 'pending',
+				'award_notice' => 'pending',
+				'contract_signing' => 'pending',
+				'proceed_notice' => 'pending',
+				'delivery_completion' => 'pending',
+				'acceptance_turnover' => 'pending'
+			);
+		}elseif ($ABC < 1000000) {
+			$timeLine_status_data = array(
+				'pre_proc' => 'not_needed',
+				'advertisement' => 'not_needed',
+				'pre_bid' => 'not_needed',
+				'eligibility_check' => 'pending',
+				'open_bid' => 'pending',
+				'bid_evaluation' => 'pending',
+				'post_qual' => 'pending',
+				'award_notice' => 'pending',
+				'contract_signing' => 'pending',
+				'proceed_notice' => 'pending',
+				'delivery_completion' => 'pending',
+				'acceptance_turnover' => 'pending'
+			);
+		}
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_activity_status', $timeLine_status_data);
 	}
 
 	/* update for delete/activate**/

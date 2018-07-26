@@ -136,7 +136,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('project_document.receiver', $user_type);
-			$this->db->group_by('project_plan.plan_id');
+			$this->db->group_by('project_document.current_doc_loc');
 
 			$query = $this->db->get();
 

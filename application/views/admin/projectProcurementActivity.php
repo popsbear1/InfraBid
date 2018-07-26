@@ -69,11 +69,17 @@ function convertDate($date){
     <div class="panel-body" style="height: 550px">
       <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12" style="height: 100%">
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
+        <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
+        <?php endif ?>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
+        <?php if ($actStatus['advertisement'] != 'not_needed'): ?>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
+        <?php endif ?>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="pre_bid_btn">Pre-bid Conf</button>
+        <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="pre_bid_btn">Pre-bid Conf</button>
+        <?php endif ?>
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="open_bid_btn">Sub/Open of Bids</button>
 
@@ -94,64 +100,71 @@ function convertDate($date){
         <button class="activityBtn btn btn-default btn-block" type="button" id="acceptance_turnover_btn">Acceptance/Turnover</button>
       </div>
       <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 100%">
-        <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
-          <div class="form-group">
-            <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
-            <div class="col-lg-7 col-md-7 col-sm-7">
-              <p class="form-control"><?php echo $pre_proc_start ?></p>
-            </div>
-          </div> 
-        </div>
-        <div id="ads_post_view" class="activity_view" hidden="hidden">
-          <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-            <input type="text" name="activity_name" value="advertisement" hidden>
+        <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
+          <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
             <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $advertisement_start ?></p>
+                <p class="form-control"><?php echo $pre_proc_start ?></p>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Add/Post of IAEB:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $advertisement_end ?></p>
+            </div> 
+          </div>
+        <?php endif ?>
+        
+        <?php if ($actStatus['advertisement'] != 'not_needed'): ?>
+          <div id="ads_post_view" class="activity_view" hidden="hidden">
+            <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <input type="text" name="activity_name" value="advertisement" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $advertisement_start ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Add/Post of IAEB:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $advertisement_end ?></p>
+                </div>
               </div>
-            </div>          
-          </form>
-        </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="date" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control">
+                </div>
+              </div>          
+            </form>
+          </div>
+        <?php endif ?>
 
-        <div id="pre_bid_view" class ="activity_view" hidden="hidden">
-          <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-            <input type="text" name="activity_name" value="pre_bid" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Pre-bid Conf:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $pre_bid_start ?></p>
+        <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
+          <div id="pre_bid_view" class ="activity_view" hidden="hidden">
+            <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <input type="text" name="activity_name" value="pre_bid" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Pre-bid Conf:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $pre_bid_start ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Pre-bid Conf:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $pre_bid_end ?></p>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Pre-bid Conf:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $pre_bid_end ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date" class="form-control">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="date" id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date" class="form-control">
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        <?php endif ?>
 
         <div id="bid_open_view" class="activity_view" hidden="hidden">
-          <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+          <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/updateOpenBidDate') ?>" class="form-horizontal form-label-left">
 
             <input type="text" name="activity_name" value="open_bid" hidden>
             <div class="form-group">
@@ -383,6 +396,13 @@ function convertDate($date){
           <p class="text-right">Actions:</p>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9">
+
+          <div class="row procactsubmitcontainer" id="pre_proc_submit_btn" hidden="hidden">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
+            </div>
+          </div>
+
           <div class="row procactsubmitcontainer" id="advertisement_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
               <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
@@ -648,9 +668,7 @@ function convertDate($date){
 
   var pre_proc_date = '<?php echo $timeline['pre_proc_date'] ?>';
   var advertisement_start = '<?php echo $timeline['advertisement_start'] ?>';
-  console.log(advertisement_start);
   var advertisement_end = '<?php echo $timeline['advertisement_end'] ?>';
-  console.log(advertisement_end);
   var pre_bid_start = '<?php echo $timeline['pre_bid_start'] ?>';
   var pre_bid_end = '<?php echo $timeline['pre_bid_end'] ?>';
   var bid_submission_start = '<?php echo $timeline['bid_submission_start'] ?>';
@@ -667,6 +685,140 @@ function convertDate($date){
   var authority_approval_end = '<?php echo $timeline['authority_approval_end'] ?>';
   var proceed_notice_start = '<?php echo $timeline['proceed_notice_start'] ?>';
   var proceed_notice_end = '<?php echo $timeline['proceed_notice_end'] ?>'; 
+
+  var activity_status = [
+    {
+      actname : 'pre_proc_status', 
+      status : '<?php echo $actStatus['pre_proc'] ?>'
+    },
+    {
+      actname : 'advertisement_status', 
+      status : '<?php echo $actStatus['advertisement'] ?>'
+    },
+    {
+      actname : 'pre_bid_status', 
+      status : '<?php echo $actStatus['pre_bid'] ?>'
+    },  
+    {
+      actname : 'open_bid_status', 
+      status : '<?php echo $actStatus['open_bid'] ?>'
+    },
+    {
+      actname : 'eligibility_check_status', 
+      status : '<?php echo $actStatus['eligibility_check'] ?>'
+    },
+    {
+      actname : 'bid_evaluation_status', 
+      status : '<?php echo $actStatus['bid_evaluation'] ?>'
+    },
+    {
+      actname : 'post_qual_status', 
+      status : '<?php echo $actStatus['post_qual'] ?>'
+    },
+    {
+      actname : 'award_notice_status', 
+      status : '<?php echo $actStatus['award_notice'] ?>'
+    },
+    {
+      actname : 'contract_signing_status', 
+      status : '<?php echo $actStatus['contract_signing'] ?>'
+    },
+    {
+      actname : 'proceed_notice_status', 
+      status : '<?php echo $actStatus['proceed_notice'] ?>'
+    },
+    {
+      actname : 'delivery_completion_status', 
+      status : '<?php echo $actStatus['delivery_completion'] ?>'
+    },
+    {
+      actname : 'acceptance_turnover_status', 
+      status : '<?php echo $actStatus['acceptance_turnover'] ?>'
+    }
+  ];
+
+  $(document).ready(function(){
+    for (var i = 0; i < activity_status.length; i++) {
+
+      if (activity_status[i].status == 'pending') {
+        var index = i + 1;
+        for (var j = index; j < activity_status.length; j++) {
+          activity_status[j].status = 'comming';
+        }
+      }
+      //console.log(activity_status[i].actname);
+      
+    }
+
+    for (var i = 0; i < activity_status.length; i++) {
+      console.log(activity_status[i].actname + ' ' + activity_status[i].status);
+    }
+
+    for (var i = 0; i < activity_status.length; i++) {
+      if (activity_status[i].actname == 'pre_proc_status') {
+        setActivityView(activity_status[i].status, '#pre_proc_btn', '#pre_proc_view', '#pre_proc_submit_btn');
+        
+      }
+
+      if (activity_status[i].actname == 'advertisement_status') {
+        setActivityView(activity_status[i].status, '#advertisement_btn', '#ads_post_view', '#advertisement_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'pre_bid_status') {
+        setActivityView(activity_status[i].status, '#pre_bid_btn', '#pre_bid_view', '#pre_bid_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'open_bid_status') {
+        setActivityView(activity_status[i].status, '#open_bid_btn', '#bid_open_view', '#open_bid_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'eligibility_check_status') {
+        setActivityView(activity_status[i].status, '#eligibility_btn', '#eligibility_check_view', '#eligibility_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'bid_evaluation_status') {
+        setActivityView(activity_status[i].status, '#bid_eval_btn', '#bid_evaluation_view', '#bid_eval_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'post_qual_status') {
+        setActivityView(activity_status[i].status, '#post_qual_btn', '#post_qual_view', '#post_qual_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'award_notice_status') {
+        setActivityView(activity_status[i].status, '#award_notice_btn', '#notice_award_view', '#award_notice_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'contract_signing_status') {
+        setActivityView(activity_status[i].status, '#contract_signing_btn', '#sign_contract_view', '#contract_signing_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'proceed_notice_status') {
+        setActivityView(activity_status[i].status, '#proceed_notice_btn', '#proceed_notice_view', '#proceed_notice_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'delivery_completion_status') {
+        setActivityView(activity_status[i].status, '#delivery_completion_btn', '#completion_delivery_view', '#completion_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'acceptance_turnover_status') {
+        setActivityView(activity_status[i].status, '#acceptance_turnover_btn', '#turnover_acceptance_view', '#acceptance_submit_btn');
+      }
+    }
+  })
+
+  function setActivityView(status, btnID, viewID, submitID){
+    if (status == 'finished') {
+      $(btnID).addClass('btn-success');
+    }else if(status == 'pending'){
+      setButtonStyle(btnID);
+      $(viewID).removeAttr('hidden');
+      $(submitID).removeAttr('hidden');
+    }else if(status == 'comming'){
+      $(btnID).prop('disabled', 'disabled');
+    }
+  }
+
+        
 
   $('.procactsubmitbutton').click(function(event){
     var activityArray = $(this).val().split(",");
@@ -695,7 +847,7 @@ function convertDate($date){
         }
       }
       if (activity == 'openbid') {
-        if (compareDates(inputValue, pre_bid_start, pre_bid_end)) {
+        if (compareDates(inputValue, bid_submission_start, bid_submission_end)) {
           proceedSubmit('Pre-bid Date', inputValue, activityForm)
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
