@@ -136,9 +136,11 @@
 			return $query->result_array();
 		}
 
-		public function getSourceofFunds(){
+		public function getSourceofFunds($fund_type,$status){
 			$this->db->select('*');
 			$this->db->from('funds');
+			$this->db->where('fund_type',$fund_type);
+			$this->db->where('status',$status);
 
 			$query = $this->db->get();
 
