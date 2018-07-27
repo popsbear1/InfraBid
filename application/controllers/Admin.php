@@ -131,7 +131,7 @@ class Admin extends CI_Controller {
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSourceofFunds();
+		$data['sourceFunds'] = $this->admin_model->getSourceofFunds('regular','active');
 		$data['accounts'] = $this->admin_model->getAccountClassification();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$this->load->view('admin/fragments/head');
@@ -916,19 +916,19 @@ class Admin extends CI_Controller {
 	public function addClassification(){
 		$data = array('success' => false, 'messages' => array());
 
-		$this->form_validation->set_rules('classification', 'Classification', 'trim|required');
+		$this->form_validation->set_rules('acc_classification', 'Classification', 'trim|required');
 
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
-			$classification = htmlspecialchars($this->input->post('classification'));
+			$acc_classification = htmlspecialchars($this->input->post('acc_classification'));
 
-			$return_value = $this->admin_model->insertClassification($classification);
+			$return_value = $this->admin_model->insertClassification($acc_classification);
 			
 			if (!$return_value) {
 				$data['success'] = 'failed';
 			}else{
-				$data['classifications'] = $this->admin_model->getClassificationDetails($return_value);
+				$data['classification'] = $this->admin_model->getClassificationDetails($return_value);
 				$data['success'] = true;
 			}
 
@@ -936,13 +936,14 @@ class Admin extends CI_Controller {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
 			}
-			if (!isset($_POST['fund_type'])) {
-				$data['messages']['fund_type'] = '<p class="text-danger">This field is required!</p>';
+			if (!isset($_POST['role'])) {
+				$data['messages']['role'] = '<p class="text-danger">The Role field is required!</p>';
 			}
 		}
 		
 		echo json_encode($data);
 	}
+
 
 		public function editClassificationView(){
 		$classifications = $this->session->userdata('account_classification');
@@ -1444,6 +1445,7 @@ class Admin extends CI_Controller {
 		echo json_encode($data);
 	}
 
+
 	public function deactivateDocumentType(){
 		$doc_type_id=$this->input->post('document_id');
 		$this->admin_model->updateDocumentTypeStatus($doc_type_id, 'deactivate');
@@ -1538,7 +1540,7 @@ class Admin extends CI_Controller {
 		public function deleteClassification(){
 		$data['success'] = false;
 		$account_id=$this->input->post('account_id');
-		if ($this->admin_model->deleteFund($account_id)) {
+		if ($this->admin_model->deleteClassification($account_id)) {
 			$data['success'] = true;
 		}
 

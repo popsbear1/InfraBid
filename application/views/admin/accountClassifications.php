@@ -204,9 +204,9 @@
           });
 
           var rowNode = table.row.add([
-            response.mode['account_id'],
-            response.mode['mode'],
-            response.mode['status'],
+            response.classification['account_id'],
+            response.classification['classification'],
+            response.classification['status'],
             '<p>Refresh To do More</p>'
           ]).draw().node();
 
@@ -243,14 +243,14 @@
     });
   });
 
-  $(document).on('submit', '#delete_mode_form', function(e){
+  $(document).on('submit', '#delete_classification_form', function(e){
     e.preventDefault();
 
     var form_name = $(this).attr('id');
     console.log(form_name);
-    var mode_id =  $(this).find("input[name='mode_id']").val();
-    console.log(mode_id);
-    var row_id = 'mode' + mode_id;
+    var account_id =  $(this).find("input[name='account_id']").val();
+    console.log(account_id);
+    var row_id = 'classification' + account_id;
 
     $.ajax({
       type: 'POST',
