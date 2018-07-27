@@ -146,7 +146,7 @@ class Admin extends CI_Controller {
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSourceofFunds();
+		$data['sourceFunds'] = $this->admin_model->getSourceofFunds('fund_type','status');
 		$data['accounts'] = $this->admin_model->getAccountClassification();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$this->load->view('admin/fragments/head');
