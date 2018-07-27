@@ -21,7 +21,7 @@
         <div class="box-body">
           <div id="documentTableContainer">
             <div class="tableContainer  table-responsive no-pading" id="for_receiving_document_table">
-              <table class="table table-bordered table-striped table-hover documentsTable">
+              <table class="table table-bordered table-striped table-hover documentsTable" id="pendingTable">
                 <thead>
                   <tr>
                     <th>Project Title</th>
@@ -58,7 +58,7 @@
               </table>
             </div>
             <div class="tableContainer table-responsive no-pading" id="onhand_documents_table" hidden="hidden"> 
-              <table class="table table-bordered table-striped table-hover documentsTable"> 
+              <table class="table table-bordered table-striped table-hover documentsTable" id="onhandTable"> 
                 <thead>
                   <tr>
                     <th>Project Title</th>
@@ -99,7 +99,7 @@
               </table> 
             </div>
             <div class="tableContainer  table-responsive no-pading" id="forwarded_documents_table" hidden="hidden">
-              <table class="table table-bordered table-striped table-hover documentsTable">
+              <table class="table table-bordered table-striped table-hover documentsTable" id="forwardedTable">
                 <thead>
                   <tr>
                     <th>Project Title</th>
@@ -306,6 +306,168 @@
 
   });
 
+  $(document).on('click', '#pendingDocumentsBtn', function(e){
+    e.preventDefault();
+    getPendingDocuments();
+  });
+
+  function getPendingDocuments(){
+
+    $('#pendingTable').DataTable().destroy();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url('doctrack/getPendingDocuments') ?>',
+      dataType: 'json',
+      success: function(response){
+        $('#pendingTable').DataTable({
+          data: response.plans,
+          columns: [
+            { data: 'project_title' },
+            { 
+              data: null,
+              render: function(data, type, row){
+                return data.barangay + ', ' + data.municipality;
+              },
+              editField: ['barangay', 'municipality']
+            },
+            { data: 'abc' },
+            { data: 'businessname' },
+            { data: 'source' },
+            { data: 'current_doc_loc' },
+            {
+              data: null,
+              render: function (data, type, row) {
+                return '<div class="btn-group">' +
+                          '<button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="' + data.plan_id + ',' + data.current_doc_loc + '" >' +
+                            '<i class="fa fa-get-pocket"></i> Receive' +
+                          '</button>' +
+                          '<button class="btn btn-info viewDocumentDataBtn" type="button" value="' + data.plan_id + ',' + data.current_doc_loc + ',' + data.receiver + ',' + 'pending' + '">' +
+                            '<i class="fa fa-eye"></i> View' +
+                          '</button>' +
+                        '</div>';
+              }
+            }
+          ],
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : true
+        });
+      }
+    });
+  }
+
+  $(document).on('click', '#onhandDocumentsBtn', function(e){
+    e.preventDefault();
+    getOnhandDocuments();
+  });
+
+  function getOnhandDocuments(){
+
+    $('#onhandTable').DataTable().destroy();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url('doctrack/getOnhandDocuments') ?>',
+      dataType: 'json',
+      success: function(response){
+        $('#onhandTable').DataTable({
+          data: response.plans,
+          columns: [
+            { data: 'project_title' },
+            { 
+              data: null,
+              render: function(data, type, row){
+                return data.barangay + ', ' + data.municipality;
+              },
+              editField: ['barangay', 'municipality']
+            },
+            { data: 'abc' },
+            { data: 'businessname' },
+            { data: 'source' },
+            { data: 'previous_doc_loc' },
+            {
+              data: null,
+              render: function (data, type, row) {
+                return '<form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>"   method="POST">' +
+                        '<input type="text" name="plan_id" value="' + data.plan_id + '" hidden>' +
+                        '<button class="btn btn-success" type="submit">' + 
+                          '<i class="fa fa-plus"></i>Update' +
+                        '</button>' +
+                        '<button class="btn btn-info viewDocumentDataBtn" type="button" value="' + data.plan_id + ',' + data.current_doc_loc + ',' + data.receiver + ',' + 'onhand' + '">' +
+                          '<i class="fa fa-eye"></i>View' +
+                        '</button>' +     
+                      '</form>';
+              }
+            }
+          ],
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : true
+        });
+      }
+    });    
+  }
+
+  $(document).on('click', '#forwardedDocumentsBtn', function(e){
+    e.preventDefault();
+    getForwardedDocuments();
+  });
+
+  function getForwardedDocuments(){
+
+
+    $('#forwardedTable').DataTable().destroy();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url('doctrack/getForwardedDocuments') ?>',
+      dataType: 'json',
+      success: function(response){
+        $('#forwardedTable').DataTable({
+          data: response.plans,
+          columns: [
+            { data: 'project_title' },
+            { 
+              data: null,
+              render: function(data, type, row){
+                return data.barangay + ', ' + data.municipality;
+              },
+              editField: ['barangay', 'municipality']
+            },
+            { data: 'abc' },
+            { data: 'businessname' },
+            { data: 'source' },
+            { data: 'current_doc_loc' },
+            {
+              data: null,
+              render: function (data, type, row) {
+                return '<button class="btn btn-default cancelDocumentForwardBtn" type="button" value="' + data.plan_id + ','+ data.current_doc_loc + ','+ data.receiver + '">' +
+                          '<i class="fa fa-close"></i>Cancel' +
+                        '</button>' +
+                        '<button class="btn btn-info viewDocumentDataBtn" type="button" value="' + data.plan_id + ',' + data.current_doc_loc + ',' + data.receiver + ',' + 'forwarded' + '">' +
+                          '<i class="fa fa-eye"></i>View' +
+                        '</button>';
+              }
+            }
+          ],
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : true,
+          'autoWidth'   : true
+        });
+      }
+    });
+  }
+
 
 </script>
 
@@ -321,7 +483,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-12 col-md-12 col-sm-12" style="height: 400px; overflow: scroll; overflow-x: auto;">
             <table class="table table-bordered table-striped" id="documentTableModal">
               <thead>
                 <tr>
@@ -363,7 +525,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="height: 400px; overflow: scroll; overflow-x: auto;">
           <div class="col-lg-6 col-md-6 col-sm-6">
             <table class="table table-bordered table-striped" id="forwardingLogTable">
               <thead>
@@ -470,10 +632,9 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $(row_name).remove();
+          getPendingDocuments('e');
           $('#receiveDocumentSuccessAlert').prop('hidden', false);
         }else{
-          $(row_name).remove();
           $('#receiveDocumentFailedAlert').prop('hidden', false);
         }
       }
@@ -539,10 +700,9 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $(row_name).remove();
+          getForwardedDocuments('e');
           $('#cancelForwardSuccessAlert').prop('hidden', false);
         }else{
-          $(row_name).remove();
           $('#cancelForwardFailedAlert').prop('hidden', false);
         }
       }

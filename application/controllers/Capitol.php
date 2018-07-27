@@ -14,11 +14,7 @@ class Capitol extends CI_Controller {
 	}
 
 	public function index(){
-		$page['page'] = ''; 
-		$this->load->view('doctrack/fragments/head');
-		$this->load->view('doctrack/fragments/nav', $page);
-		$this->load->view('doctrack/home');
-		$this->load->view('doctrack/fragments/footer');
+		redirect('capitol/docTrackView');
 	}
 
 	public function projectListView(){
@@ -27,6 +23,15 @@ class Capitol extends CI_Controller {
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/projectList', $data);
+		$this->load->view('doctrack/fragments/footer');
+	}
+
+	public function ongoingDocumentTrackingView(){
+		$page['page'] = 'ongoing'; 
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW();
+		$this->load->view('doctrack/fragments/head');
+		$this->load->view('doctrack/fragments/nav', $page);
+		$this->load->view('doctrack/ongoingTracking', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}
 
