@@ -233,7 +233,7 @@
     var document_details = $(this).val().split(',');
 
     if (document_details[3] == 'pending') {
-      $('#documentHeader').html('Incomming Documents List');
+      $('#documentHeader').html('Incoming Documents List');
     }
 
     if (document_details[3] == 'onhand') {
@@ -261,8 +261,8 @@
               { data: 'receiver' }
           ],
           'paging'      : false,
-          'lengthChange': false,
-          'searching'   : false,
+          'lengthChange': true,
+          'searching'   : true,
           'ordering'    : true,
           'info'        : false,
           'autoWidth'   : false
@@ -277,7 +277,7 @@
                 { data: 'remark' }
             ],
             'paging'      : false,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
             'ordering'    : true,
             'info'        : false,
@@ -293,7 +293,7 @@
                 { data: 'remark' }
             ],
             'paging'      : false,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
             'ordering'    : true,
             'info'        : false,

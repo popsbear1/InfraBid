@@ -146,14 +146,11 @@ class Doctrack extends CI_Controller {
 		$receiver = $this->input->post('receiver');
 		$type = $this->input->post('type');
 
-		if (empty($receiver)) {
-			$receiver = null;
-		}
 
 		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
 		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
 
-		$data['documents'] = $this->doctrack_model->getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver);
+		$data['documents'] = $this->doctrack_model->getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver, $type);
 
 		echo json_encode($data);
 	}
