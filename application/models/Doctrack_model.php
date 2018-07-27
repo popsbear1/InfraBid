@@ -100,14 +100,16 @@
 			return $query->result_array();
 		}
 
-		public function getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver){
+		public function getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver, $type){
 			$this->db->select('*');
 			$this->db->from('project_document');
 			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('current_doc_loc', $current_doc_loc);
-			$this->db->where('receiver', $receiver);
+			if ($type != 'onhand') {
+				$this->db->where('receiver', $receiver);
+			}
 
 			$query = $this->db->get();
 
