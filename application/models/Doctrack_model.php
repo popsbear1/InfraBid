@@ -94,13 +94,15 @@
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('current_doc_loc', $user_type);
+			$this->db->where('receiver', null);
+			$this->db->where('project_document.status', 'received');
 
 			$query = $this->db->get();
 
 			return $query->result_array();
 		}
 
-		public function getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver, $type){
+		public function getProjectDocumentsToDisplay($plan_id, $current_doc_loc, $receiver, $type){
 			$this->db->select('*');
 			$this->db->from('project_document');
 			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
@@ -116,12 +118,25 @@
 			return $query->result_array();
 		}
 
+		public function getAllProjectDocuments($plan_id){
+			$this->db->select('*, concat(first_name, " ", middle_name, " ", last_name) as username');
+			$this->db->from('project_document');
+			$this->db->join('project_plan', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->join('users', 'project_document.added_by = users.user_id');
+			$this->db->where('project_document.plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function getProjectDocuments($plan_id, $user_type){
 			$this->db->select('*');
 			$this->db->from('project_document');
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
-			$this->db->not_like('current_doc_loc', $user_type);
+			$this->db->where('project_document.status', 'sent');
 
 			$query = $this->db->get();
 
@@ -155,7 +170,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('current_doc_loc', $user_type);
-			$this->db->group_by('project_document.current_doc_loc');
+			$this->db->group_by('project_document.receiver');
 
 			$query = $this->db->get();
 
@@ -172,7 +187,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'received');
 			$this->db->where('current_doc_loc', $user_type);
-			$this->db->group_by('project_document.previous_doc_loc');
+			$this->db->group_by('project_plan.plan_id');
 
 			$query = $this->db->get();
 
@@ -200,6 +215,7 @@
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('logs.log_type', 'send');
 			$this->db->group_by('logs.log_id');
+			$this->db->order_by('logs.log_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -215,6 +231,7 @@
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('logs.log_type', 'receive');
 			$this->db->group_by('logs.log_id');
+			$this->db->order_by('logs.log_id', 'DESC');
 
 			$query = $this->db->get();
 
@@ -308,7 +325,8 @@
 		public function updatePOWAvailabilitye($plan_id){
 			$data = array(
 				'pow_ready' => 'true',
-				'status' => 'onprocess'
+				'status' => 'onprocess',
+				'date_pow_added' => date('Y-m-d H:i:s')
 			);
 
 			$this->db->where('plan_id', $plan_id);
