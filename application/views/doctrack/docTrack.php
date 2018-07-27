@@ -25,6 +25,7 @@
                 <thead>
                   <tr>
                     <th>Project Title</th>
+                    <th>Date Plan Added</th>
                     <th>Location</th>
                     <th>ABC</th>
                     <th>Contractor</th>
@@ -37,6 +38,7 @@
                   <?php foreach ($pending_documents as $pending_document): ?>
                     <tr id="<?php echo 'receive' . $pending_document['plan_id'] ?>">
                       <td class="text-center"><?php echo $pending_document['project_title'] ?></td>
+                      <td class="text-center"><?php echo $pending_document['date_pow_added'] ?></td>
                       <td class="text-center"><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
                       <td class="text-center"><?php echo number_format($pending_document['abc'], 2) ?></td>
                       <td class="text-center"><?php echo $pending_document['businessname'] ?></td>
@@ -62,6 +64,7 @@
                 <thead>
                   <tr>
                     <th>Project Title</th>
+                    <th>Date Plan Added</th>
                     <th>Location</th>
                     <th>ABC</th>
                     <th>Contractor</th>
@@ -71,31 +74,17 @@
                   </tr>
                 </thead> 
                 <tbody>
-                  <?php foreach ($onhand_documents as $onhand_document): ?>
-                     <tr>
-                        <td class="text-center"><?php echo $onhand_document['project_title'] ?></td>
-                        <td class="text-center"><?php echo $onhand_document['municipality'] . ', ' . $onhand_document['barangay'] ?></td>
-                        <td class="text-center"><?php echo number_format($onhand_document['abc'], 2) ?></td>
-                        <td class="text-center"><?php echo $onhand_document['businessname'] ?></td>
-                        <td class="text-center"><?php echo $onhand_document['source'] ?></td>
-                        <td class="text-center"><?php echo $onhand_document['previous_doc_loc'] ?></td>
-                        <td class="text-center">
-                          <div class="btn-group">
-                            <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/setCurrentPlanID');}else{ echo base_url('capitol/setCurrentPlanID'); } ?>"   method="POST">
-                              <input type="text" name="plan_id" value="<?php echo $onhand_document['plan_id'] ?>" hidden>
-                              
-                                <button class="btn btn-success" type="submit"> 
-                                  <i class="fa fa-plus"></i>Update
-                                </button>
-                                <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $onhand_document['plan_id'] . ',' . $onhand_document['current_doc_loc'] . ',' . $onhand_document['receiver'] . ',' . 'onhand' ?>">
-                                  <i class="fa fa-eye"></i>View
-                                </button>     
-                            </form>
-                          </div> 
-                        </td>
-                     </tr>
-                   <?php endforeach ?>  
-                </tbody> 
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
               </table> 
             </div>
             <div class="tableContainer  table-responsive no-pading" id="forwarded_documents_table" hidden="hidden">
@@ -103,6 +92,7 @@
                 <thead>
                   <tr>
                     <th>Project Title</th>
+                    <th>Date Plan Added</th>
                     <th>Location</th>
                     <th>ABC</th>
                     <th>Contractor</th>
@@ -112,26 +102,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($forwarded_documents as $forwarded_document): ?>
-                    <tr id="<?php echo 'forwarded' . $forwarded_document['plan_id'] ?>">
-                      <td class="text-center"><?php echo $forwarded_document['project_title'] ?></td>
-                      <td class="text-center"><?php echo $forwarded_document['municipality'] . ', ' . $forwarded_document['barangay'] ?></td>
-                      <td class="text-center"><?php echo number_format($forwarded_document['abc'], 2) ?></td>
-                      <td class="text-center"><?php echo $forwarded_document['businessname'] ?></td>
-                      <td class="text-center"><?php echo $forwarded_document['source'] ?></td>
-                      <td class="text-center"><?php echo $forwarded_document['receiver'] ?></td>
-                      <td class="text-center">
-                        <div class="btn-group">
-                          <button class="btn btn-default cancelDocumentForwardBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] ?>">
-                            <i class="fa fa-close"></i>Cancel
-                          </button>
-                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $forwarded_document['plan_id'] . ',' . $forwarded_document['current_doc_loc'] . ',' . $forwarded_document['receiver'] . ',' . 'forwarded' ?>">
-                            <i class="fa fa-eye"></i>View
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -279,7 +259,7 @@
             'paging'      : false,
             'lengthChange': true,
             'searching'   : false,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : false,
             'autoWidth'   : false
         } );
@@ -289,13 +269,12 @@
             columns: [
                 { data: 'user_type' },
                 { data: 'user_name' },
-                { data: 'log_date' },
-                { data: 'remark' }
+                { data: 'log_date' }
             ],
             'paging'      : false,
             'lengthChange': true,
             'searching'   : false,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : false,
             'autoWidth'   : false
         } );
@@ -324,6 +303,7 @@
           data: response.plans,
           columns: [
             { data: 'project_title' },
+            { data: 'date_pow_added' },
             { 
               data: null,
               render: function(data, type, row){
@@ -378,6 +358,7 @@
           data: response.plans,
           columns: [
             { data: 'project_title' },
+            { data: 'date_pow_added' },
             { 
               data: null,
               render: function(data, type, row){
@@ -434,6 +415,7 @@
           data: response.plans,
           columns: [
             { data: 'project_title' },
+            { data: 'date_pow_added' },
             { 
               data: null,
               render: function(data, type, row){
@@ -472,7 +454,7 @@
 </script>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="documentDetailsViewModal">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg" role="document" style="width: 1100px">
     <div class="modal-content">
       <div class="modal-body">
         <div class="row">
@@ -514,19 +496,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-7 col-md-7 col-sm-7">
             <div class="text-center">  
               <h4>FORWARDING</h4>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-5 col-md-5 col-sm-5">
             <div class="text-center">  
               <h4>RECEIVING</h4>
             </div>
           </div>
         </div>
-        <div class="row" style="height: 400px; overflow: scroll; overflow-x: auto;">
-          <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="row">
+          <div class="col-lg-7 col-md-7 col-sm-7" style="height: 400px; overflow: scroll; overflow-x: auto;">
             <table class="table table-bordered table-striped" id="forwardingLogTable">
               <thead>
                 <tr>
@@ -546,19 +528,17 @@
               </tbody>
             </table>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 400px; overflow: scroll; overflow-x: auto;">
             <table class="table table-bordered table-striped" id="receivingLogTable">
               <thead>
                 <tr>
                   <th class="text-center">Department</th>
                   <th class="text-center">Received By</th>
                   <th class="text-center">Date/Time Received</th>
-                  <th class="text-center">Remarks</th>  
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -569,7 +549,7 @@
         </div>     
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -602,7 +582,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" form="receiveDocumentForm" class="btn btn-primary">Confirm</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -671,7 +651,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" form="cancelDocumentForwardForm" class="btn btn-primary">Confirm</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

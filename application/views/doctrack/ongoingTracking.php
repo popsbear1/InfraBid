@@ -16,6 +16,7 @@
                 <th class="text-center">Location</th>
                 <th class="text-center">ABC</th>
                 <th class="text-center">Source of Fund</th>
+                <th class="text-center">Date POW Added</th>
                 <th class="text-center">Action</th>
               </tr>
             </thead>
@@ -26,13 +27,11 @@
                   <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
                   <td><?php echo $plan['abc'] ?></td>
                   <td><?php echo $plan['source'] ?></td>
+                  <td><?php echo $plan['date_pow_added'] ?></td>
                   <td class="text-center">
-                    <form action="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/setCurrentPlanID'); }else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
-                      <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
-                      <button class="btn btn-success" type="submit">
-                        <i class="fa fa-edit">Add Document</i>
-                      </button>
-                    </form>
+                    <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $plan['plan_id']?>">
+                      <i class="fa fa-eye"></i> History
+                    </button>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -87,21 +86,38 @@
       $('#documentTable').DataTable();
     } 
   );
-
-  $(document).ready(function(){
-    $('#documentDetailsViewModal').modal('show');
+  $(document).on('click', '.viewDocumentDataBtn', function(){
+    
 
     $('#forwardingLogTable').DataTable().destroy();
     $('#receivingLogTable').DataTable().destroy();
+    $('#documentTableModal').DataTable().destroy();
 
-    var forwarded_document_details = $(this).val();
+    var document_details = $(this).val();
 
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
-      data: { plan_id: forwarded_document_details},
+      url: '<?php echo base_url("doctrack/getFullProjectDocumentHistory") ?>',
+      data: { plan_id: document_details },
       dataType: 'json',
       success: function(response){
+
+        $('#documentTableModal').DataTable({
+          data: response.documents,
+          columns: [
+              { data: 'doc_no' },
+              { data: 'document_name' },
+              { data: 'previous_doc_loc' },
+              { data: 'current_doc_loc' },
+              { data: 'username' }
+          ],
+          'paging'      : false,
+          'lengthChange': true,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : false,
+          'autoWidth'   : false
+        });
 
         $('#forwardingLogTable').DataTable( {
             data: response.forwarding_logs,
@@ -112,9 +128,9 @@
                 { data: 'remark' }
             ],
             'paging'      : false,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : false,
             'autoWidth'   : false
         } );
@@ -124,18 +140,121 @@
             columns: [
                 { data: 'user_type' },
                 { data: 'user_name' },
-                { data: 'log_date' },
-                { data: 'remark' }
+                { data: 'log_date' }
             ],
             'paging'      : false,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : false,
             'autoWidth'   : false
         } );
       }
     });
 
+    $('#documentDetailsViewModal').modal('show');
+
   });
   </script>
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="documentDetailsViewModal">
+  <div class="modal-dialog modal-lg" role="document" style="width: 1100px">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+              <h2 style="background-color:#C0C0C0; text-align: center; padding: 7px 10px;" id="documentHeader">
+                Documents
+              </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12" style="height: 400px; overflow: scroll; overflow-x: auto;">
+            <table class="table table-bordered table-striped" id="documentTableModal">
+              <thead>
+                <tr>
+                  <th>Doc No.</th>
+                  <th>Doc Name</th>
+                  <th>Previous Holder</th>
+                  <th>Current Holder</th>
+                  <th>Added By</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+              <h2 style="background-color:#C0C0C0; text-align: center; padding: 7px 10px;">
+                HISTORY TRACKS
+              </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-7 col-md-7 col-sm-7">
+            <div class="text-center">  
+              <h4>FORWARDING</h4>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5">
+            <div class="text-center">  
+              <h4>RECEIVING</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-7 col-md-7 col-sm-7" style="height: 400px; overflow: scroll; overflow-x: auto;">
+            <table class="table table-bordered table-striped" id="forwardingLogTable">
+              <thead>
+                <tr>
+                  <th class="text-center">Department</th>
+                  <th class="text-center">Forwarded By</th>
+                  <th class="text-center">Date/Time Forwarded</th>
+                  <th class="text-center">Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 400px; overflow: scroll; overflow-x: auto;">
+            <table class="table table-bordered table-striped" id="receivingLogTable">
+              <thead>
+                <tr>
+                  <th class="text-center">Department</th>
+                  <th class="text-center">Received By</th>
+                  <th class="text-center">Date/Time Received</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

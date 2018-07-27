@@ -49,19 +49,29 @@
         <div class="box-body">      
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="document_add">
+                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
+                  <i class="fa fa-plus"></i>
+                  Add Item
+                </button>
+              </div> 
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                   <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px; border-width: 1px; border-style: groove;">
                     <h5>Onhand Documents</h5>
                   </div>
                   <div class="document_container">
-                    <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">  
+                    <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/sendProjectDocuments'); }else{ echo base_url('capitol/sendProjectDocuments'); } ?>" id="sendProjectDocumentsForm" method="POST">
+                      <ul class="list-group">  
                       <?php foreach ($onhand_project_documents as $onhand_document): ?>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $onhand_document['project_document_id'] ?>">
-                          <label class="form-check-label"><?php echo $onhand_document['document_name'] ?></label>
-                        </div>
+                        <li class="list-group-item">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $onhand_document['project_document_id'] ?>">
+                            <label class="form-check-label"><?php echo $onhand_document['document_name'] ?></label>
+                          </div>
+                        </li>
                       <?php endforeach ?>
+                      </ul>
                     </form>
                   </div>
                 </div>
@@ -69,22 +79,20 @@
                   <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px; border-width: 1px; border-style: groove;">
                     <h5>Documents on other Departments</h5>
                   </div>
-                  <div class="document_container"> 
-                    <?php foreach ($other_project_documents as $other_document): ?>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input existingDocuments" name="project_document[]" value="<?php echo $other_document['project_document_id'] ?>">
-                        <label class="form-check-label"><?php echo $other_document['document_name'] ?></label>
-                      </div>
-                    <?php endforeach ?>
+                  <div class="document_container">
+                    <ul class="list-group"> 
+                      <?php foreach ($other_project_documents as $other_document): ?>
+                        <li class="list-group-item">
+                          <ul class="list-inline">
+                            <li><?php echo $other_document['document_name'] ?></li>
+                            <li class="pull-right"><?php echo $other_document['current_doc_loc'] ?></li>
+                          </ul>
+                        </li>
+                      <?php endforeach ?>
+                    </ul>
                   </div>
                 </div>
               </div>
-              <div class="document_add">
-                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
-                  <i class="fa fa-plus"></i>
-                  Add Item
-                </button>
-              </div> 
             </div>
           </div>
         </div>
@@ -166,7 +174,7 @@
           <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="form-group">
               <label>Department:</label>
-              <select class="form-control" name="department" form="sendProjectDocumentsForm">
+              <select class="form-control" name="department" form="sendProjectDocumentsForm" required>
                 <option hidden disabled selected>Choose Receiver</option>
                   <?php if ($this->session->userdata('user_type') != 'BAC_SEC'): ?>
                     <option value="BAC_SEC">BAC-SEC</option>
@@ -184,7 +192,7 @@
             </div>
             <div class="form-group">
               <label>Remarks:</label>
-              <textarea class="form-control" name="forward_remark" form="sendProjectDocumentsForm"></textarea>
+              <textarea class="form-control" name="forward_remark" form="sendProjectDocumentsForm" cols="30" rows="10" style="resize: none" ></textarea>
             </div>
           </div>
         </div>
@@ -198,7 +206,7 @@
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="projectDocumentHistoryModal">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg" style="width: 80%">
     <div class="modal-content">
       <div class="modal-header" style="padding: 0 0 0 0;">
         <div class="row">
@@ -211,19 +219,19 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-7 col-md-7 col-sm-7">
             <div class="text-center">  
               <h4>FORWARDING</h4>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-5 col-md-5 col-sm-5">
             <div class="text-center">  
               <h4>RECEIVING</h4>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="col-lg-7 col-md-7 col-sm-7"  style="height: 500px; overflow: scroll;">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -245,14 +253,18 @@
               </tbody>
             </table>
           </div>
+<<<<<<< HEAD
           <div class="col-lg-6 col-md-6 col-sm-6">
             <table class="table table-bordered table-striped" style="overflow-x:auto; ">
+=======
+          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 500px; overflow: scroll;">
+            <table class="table table-bordered table-striped">
+>>>>>>> 17258c3f2acccfde4d4687167c29f4326b588c6d
               <thead>
                 <tr>
                   <th class="text-center">Department</th>
                   <th class="text-center">Received By</th>
-                  <th class="text-center">Date/Time Received</th>
-                  <th class="text-center">Remarks</th>   
+                  <th class="text-center">Date/Time Received</th>  
                 </tr>
               </thead>
               <tbody>
@@ -261,7 +273,6 @@
                     <td><?php echo $rlogs['user_type'] ?></td>
                     <td><?php echo $rlogs['user_name'] ?></td>
                     <td><?php echo $rlogs['log_date'] ?></td>
-                    <td><?php echo $rlogs['remark'] ?></td>
                   </tr>
                 <?php endforeach ?>
               </tbody>
@@ -291,26 +302,32 @@
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
               <form  action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/addNewProjectDocument'); }else{ echo base_url('capitol/addNewProjectDocument'); } ?>" method="POST" id="addNewProjectDocumentForm">
+                <ul class="list-group">
                 <?php foreach ($document_types as $type): ?> 
-                  <div class="form-check">
+                  <div class="list-group-item">
                     <input type="checkbox" class="form-check-input documentTypeCheckbox" name="document_type[]" value="<?php echo $type['doc_type_id'] ?>">
                     <label class="form-check-label"><?php echo $type['doc_no'] . " - " . $type['document_name'] ?></label>
                   </div>
                 <?php endforeach ?>
+                </ul>
               </form>
             </div>
           </div>
         </div>
         <div class="document_add">
-          <button class="btn btn-secondary pull-left" type="button" id="documentTypeReset">Reset</button>
+          <button class="btn btn-default pull-left" type="button" id="documentTypeReset">Reset</button>
           <button class="btn btn-primary" type="submit" form="addNewProjectDocumentForm">
             Add Documents  
           </button>                    
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  
+</script>

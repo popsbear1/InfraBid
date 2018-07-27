@@ -16,6 +16,7 @@
                 <th class="text-center">Location</th>
                 <th class="text-center">ABC</th>
                 <th class="text-center">Source of Fund</th>
+                <th class="text-center">Date POW Added</th>
                 <th class="text-center">Action</th>
               </tr>
             </thead>
@@ -26,6 +27,7 @@
                   <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
                   <td><?php echo $plan['abc'] ?></td>
                   <td><?php echo $plan['source'] ?></td>
+                  <td><?php echo $plan['date_pow_added'] ?></td>
                   <td class="text-center">
                     <form action="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/setCurrentPlanID'); }else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
                       <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>

@@ -150,7 +150,18 @@ class Doctrack extends CI_Controller {
 		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
 		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
 
-		$data['documents'] = $this->doctrack_model->getProjectDocumentsToReceive($plan_id, $current_doc_loc, $receiver, $type);
+		$data['documents'] = $this->doctrack_model->getProjectDocumentsToDisplay($plan_id, $current_doc_loc, $receiver, $type);
+
+		echo json_encode($data);
+	}
+
+	public function getFullProjectDocumentHistory(){
+		$plan_id = $this->input->post('plan_id');
+
+		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
+		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);
+
+		$data['documents'] = $this->doctrack_model->getAllProjectDocuments($plan_id);
 
 		echo json_encode($data);
 	}
