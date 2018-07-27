@@ -24,6 +24,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
+            <li
+            <?php if ($page == 'doctrack'): ?>
+              class="active"
+            <?php endif ?>
+            >
+              <a href="<?php echo base_url('capitol/docTrackView') ?>">Doc Track
+              </a>
+            </li>
             <?php if ($this->session->userdata('user_type') == 'PEO'): ?>
               <li 
               <?php if ($page == 'POW'): ?>
@@ -43,11 +51,11 @@
               </a>
             </li>
             <li
-            <?php if ($page == 'doctrack'): ?>
+            <?php if ($page == 'ongoing'): ?>
               class="active"
             <?php endif ?>
             >
-              <a href="<?php echo base_url('capitol/docTrackView') ?>">Doc Track
+              <a href="<?php echo base_url('capitol/ongoingDocumentTrackingView') ?>">Ongoing
               </a>
             </li>
           </ul>

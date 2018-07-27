@@ -32,6 +32,15 @@ class Doctrack extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	public function ongoingDocumentTrackingView(){
+		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/ongoingTracking', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+
 	public function documentDetailsView(){
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');
@@ -51,6 +60,24 @@ class Doctrack extends CI_Controller {
 
 		$data['plan_details'] = $this->doctrack_model->getProjectPlanDetails($plan_id);
 
+		echo json_encode($data);
+	}
+
+	public function getPendingDocuments(){
+		$user_type = $this->session->userdata('user_type');
+		$data['plans'] = $this->doctrack_model->getPendingDocuments($user_type);
+		echo json_encode($data);
+	}
+
+	public function getOnhandDocuments(){
+		$user_type = $this->session->userdata('user_type');
+		$data['plans'] = $this->doctrack_model->getOnHandDocuments($user_type);
+		echo json_encode($data);
+	}
+
+	public function getForwardedDocuments(){
+		$user_type = $this->session->userdata('user_type');
+		$data['plans'] = $this->doctrack_model->getForwardedDocuments($user_type);
 		echo json_encode($data);
 	}
 

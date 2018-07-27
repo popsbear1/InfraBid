@@ -318,13 +318,18 @@
             </a>
             <ul class="treeview-menu">
               <li>
+                <a href="<?php echo base_url('doctrack/docTrackView') ?>">
+                  <i class="fa fa-file"></i> <span>Doc Track</span>
+                </a>
+              </li>
+              <li>
                 <a href="<?php echo base_url('doctrack/projectListView') ?>">
                   <i class="fa fa-file"></i> <span>Add Document</span>
                 </a>
               </li>
               <li>
-                <a href="<?php echo base_url('doctrack/docTrackView') ?>">
-                  <i class="fa fa-file"></i> <span>Doc Track</span>
+                <a href="<?php echo base_url('doctrack/ongoingDocumentTrackingView') ?>">
+                  <i class="fa fa-file"></i> <span>Ongoing</span>
                 </a>
               </li>
             </ul>
