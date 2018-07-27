@@ -83,7 +83,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
+    $('#editFundModal').on('show.bs.modal' , function (e) {
       $('#usernam').html($('#source').val());
     });
   });

@@ -246,7 +246,7 @@
             </table>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="overflow-x:auto; ">
               <thead>
                 <tr>
                   <th class="text-center">Department</th>

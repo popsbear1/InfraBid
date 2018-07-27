@@ -1,5 +1,5 @@
 <section class="content-header">
-  <h2>Edit Contructor Details</h2>
+  <h2>Edit Contractor Details</h2>
 </section>
 <section class="content">
   <div class="row">
@@ -25,7 +25,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Business Name<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="businessname" value="" name="businessname" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['businessname'] ?>">
+                <input type="text" step="any"  id="businessname" value="" name="businessname" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['businessname'] ?>" required>
               </div>
             </div>
 
@@ -33,21 +33,21 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Owner/Manager  <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="owner" value="" name="owner" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['owner'] ?>">
+                <input type="text" step="any"  id="owner" value="" name="owner" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['owner'] ?>" required>
               </div>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Address <span class="required">*</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="address" value="" name="address"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['address'] ?>">
+                <input type="text" step="any"  id="address" value="" name="address"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['address'] ?>" required>
               </div>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Number <span class="required">*</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="contactnumber" value="" name="contactnumber"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['contactnumber'] ?>">
+                <input type="text" step="any"  id="contactnumber" value="" name="contactnumber"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['contactnumber'] ?>" required>
               </div>
             </div>
 

@@ -779,7 +779,7 @@
 			'source' => $source
 		);
 
-		$this->db->where('id', $fundID);
+		$this->db->where('fund_id', $fundID);
 		$this->db->update('funds', $data);
 	}
 

@@ -30,7 +30,7 @@
             </div>
           <?php endif ?>
 
-          <form id="form" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
+          <form id="editUsersForm" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
@@ -164,7 +164,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" name="submit" class="btn btn-primary">Confirm</button>
+            <button type="submit" name="submit" class="btn btn-primary" id="editUsersForm">Confirm</button>
           </div>
         </div>
       </div>

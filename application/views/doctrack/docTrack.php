@@ -444,7 +444,7 @@
             { data: 'abc' },
             { data: 'businessname' },
             { data: 'source' },
-            { data: 'current_doc_loc' },
+            { data: 'receiver' },
             {
               data: null,
               render: function (data, type, row) {

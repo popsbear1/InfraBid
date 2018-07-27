@@ -531,7 +531,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateContactnumber($contactnumber, $currentContractorID);
 		}
 
-		$this->session->set_flashdata('success', 'Constructor Details Successfully Updated.');
+		$this->session->set_flashdata('success', 'Contractor Details Successfully Updated.');
 		redirect('admin/editContractorView');
 
 	}
