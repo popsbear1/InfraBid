@@ -8,6 +8,11 @@
         <div class="box-header">
           <h2 class="box-title">Edit Project Details<small></small></h2>
         </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <a href="<?php echo base_url('admin/manageProjectTypeView') ?>" class="btn btn-primary">Back</a>
+            </div>
+          </div>        
         <div class="box-body">
           <?php if (isset($_SESSION['success'])): ?>
             <div class="alert alert-success">
@@ -24,7 +29,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Type of Project<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="source" name="source" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $fundDetail['source'] ?>">
+                <input type="text" step="any"  id="editproject" name="editproject" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $projectTypeDetails['type'] ?>" required>
               </div>
             </div>
             <div class="ln_solid"></div>
@@ -84,7 +89,7 @@
 <script>
   $(document).ready(function() {
     $('#editProjectModal').on('show.bs.modal' , function (e) {
-      $('#usernam').html($('#source').val());
+      $('#usernam').html($('#editproject').val());
     });
   });
 </script>

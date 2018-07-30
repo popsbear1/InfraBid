@@ -1149,9 +1149,11 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateDocumentDetails($document_name, $documentID);
 			$document_number = $this->input->post('doc_no');
 			$this->admin_model->updateDocumentNumber($document_number, $documentID);
+		}
+	redirect('admin/editDocumentsView');
 	}
-	redirect('admin/manageDocumentsView');
-	}
+
+	
 
 	/** End of Manage Document */
 
