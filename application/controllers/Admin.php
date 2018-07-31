@@ -128,12 +128,12 @@ class Admin extends CI_Controller {
 	public function addRegularPlanView(){
 		$data['currentDate'] = date('Y-m-d');
 		$data['currentYear'] = date('Y');
-		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['municipalities'] = $this->admin_model->getActiveMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
-		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSourceofFunds('regular','active');
-		$data['accounts'] = $this->admin_model->getAccountClassification();
-		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['projTypes'] = $this->admin_model->getActiveProjectType();
+		$data['sourceFunds'] = $this->admin_model->getActiveSourceofFunds('regular');
+		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
+		$data['modes'] = $this->admin_model->getActiveProcurementMode();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/addRegularPlan', $data);
@@ -143,12 +143,12 @@ class Admin extends CI_Controller {
 	public function addSupplementalPlanView(){
 		$data['currentDate'] = date('Y-m-d');
 		$data['currentYear'] = date('Y');
-		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['municipalities'] = $this->admin_model->getActiveMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
-		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSourceofFunds('fund_type','status');
-		$data['accounts'] = $this->admin_model->getAccountClassification();
-		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['projTypes'] = $this->admin_model->getActiveProjectType();
+		$data['sourceFunds'] = $this->admin_model->getActiveSourceofFunds('supplemental');
+		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
+		$data['modes'] = $this->admin_model->getActiveProcurementMode();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/addSupplementalPlan', $data);

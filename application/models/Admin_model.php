@@ -118,6 +118,16 @@
 			return $query->result_array();
 		}
 
+		public function getActiveMunicipalities(){
+			$this->db->select('*');
+			$this->db->from('municipalities');
+			$this->db->where('status', 'active');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function getBarangays(){
 			$this->db->select('*');
 			$this->db->from('barangays');
@@ -136,29 +146,51 @@
 			return $query->result_array();
 		}
 
-		public function getSourceofFunds($fund_type,$status){
+		public function getActiveProjectType(){
+			$this->db->select('*');
+			$this->db->from('projtype');
+			$this->db->where('status', 'active');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getSourceofFunds(){
 			$this->db->select('*');
 			$this->db->from('funds');
-			$this->db->where('fund_type',$fund_type);
-			$this->db->where('status',$status);
+			$this->db->where('fund_type', $fund_type);
 
 			$query = $this->db->get();
 
 			return $query->result_array();
 		}
 
-		public function getAccountClassification(){
+		public function getActiveSourceofFunds($fund_type){
+			$this->db->select('*');
+			$this->db->from('funds');
+			$this->db->where('fund_type', $fund_type);
+			$this->db->where('status', 'active');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getActiveAccountClassification(){
 			$this->db->select('*');
 			$this->db->from('account_classification');
+			$this->db->where('status', 'active');
 
 			$query = $this->db->get();
 
 			return $query->result_array();
 		}
 
-		public function getProcurementMode(){
+		public function getActiveProcurementMode(){
 			$this->db->select('*');
 			$this->db->from('procurement_mode');
+			$this->db->where('status', 'active');
 
 			$query = $this->db->get();
 
