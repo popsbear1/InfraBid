@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <?php foreach ($classifications as $classification): ?>
-                  <tr id="<?php echo 'classication' . $classification['account_id'] ?>">
+                  <tr id="<?php echo 'classification' . $classification['account_id'] ?>">
                     <td class="text-center"><?php echo $classification['account_id']?></td>
                     <td class="text-center"><?php echo $classification['classification']?></td>
                     <td class="text-center"><?php echo $classification['status'] ?></td>

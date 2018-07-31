@@ -30,14 +30,14 @@
             </div>
           <?php endif ?>
 
-          <form id="editUsersForm" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left"onkeypress="return event.keyCode != 13;">
+          <form id="editUsersForm" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left">
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12">
+                <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12" required>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12">
+                <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12" required>
               </div>
             </div>
 
@@ -133,7 +133,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+            <h4 class="modal-title" id="myModal">Confirm Input Values</h4>
           </div>
           <div class="modal-body">
             <table class='table table-striped table-bordered' style='font-size:13px;'>
@@ -164,7 +164,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" name="submit" class="btn btn-primary" id="editUsersForm">Confirm</button>
+            <button type="submit" form="editUsersForm" name="submit" class="btn btn-primary" id="editUsersForm">Confirm</button>
           </div>
         </div>
       </div>

@@ -8,6 +8,11 @@
         <div class="box-header">
           <h2 class="box-title">Edit Municipality<small></small></h2>
         </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <a href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>" class="btn btn-primary">Back</a>
+            </div>
+          </div>
         <div class="box-body">
           <?php if (isset($_SESSION['success'])): ?>
             <div class="alert alert-success">
