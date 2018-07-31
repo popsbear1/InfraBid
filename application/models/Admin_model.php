@@ -16,7 +16,7 @@
 			return $query->result_array();
 		}
 
-		public function getRegularProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype){
+		public function getRegularProjectPlan($year, $quarter, $status, $municipality, $source, $type){
 			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -56,11 +56,11 @@
 			}
 
 			if ($source !=null) {
-				$this->db->where('funds.source',$source);
+				$this->db->where('project_plan.fund_id',$source);
 			}
 
-			if ($projecttype !=null){
-				$this->db->where('projtype.type',$projecttype);
+			if ($type !=null){
+				$this->db->where('project_plan.projtype_id',$projecttype);
 			}
 
 			$this->db->order_by('municipality ASC', 'barangay ASC');
@@ -167,7 +167,6 @@
 		public function getSourceofFunds(){
 			$this->db->select('*');
 			$this->db->from('funds');
-			$this->db->where('fund_type', $fund_type);
 
 			$query = $this->db->get();
 
