@@ -49,6 +49,30 @@
                       </select>
                     </div>
                   </div>
+<!--                   <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label for="projecttype">Project Type:</label>
+                      <select name="projecttype" id="projecttype" class="form-control">
+                        <option hidden disabled selected>Choose Project Type</option>
+                        <?php foreach ($projecttypes as $projecttype): ?>
+                          <option value="<?php echo $projecttype['projtype_id'] ?>"><?php echo $projecttype['type'] ?></option>
+                      </select>
+                        <?php endforeach ?>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label for="source">Source of Fund:</label>
+                      <select name="source" id="source" class="form_control">
+                        <option hidden disabled selected>Choose Source of Fund</option>
+                        <?php foreach ($sources as $source): ?>
+                          <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?></option>
+                      </select>
+                        <?php endforeach ?>
+                    </div>
+                  </div>                 -->
+
+                  
                   <div class="col-lg-2 col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="municipality">Municipality: </label>

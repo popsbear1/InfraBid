@@ -16,7 +16,7 @@
 			return $query->result_array();
 		}
 
-		public function getRegularProjectPlan($year, $quarter, $status, $municipality){
+		public function getRegularProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype){
 			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -53,6 +53,14 @@
 
 			if ($municipality != null) {
 				$this->db->where('project_plan.municipality_id', $municipality);
+			}
+
+			if ($source !=null) {
+				$this->db->where('funds.source',$source);
+			}
+
+			if ($projecttype !=null){
+				$this->db->where('projtype.type',$projecttype);
 			}
 
 			$this->db->order_by('municipality ASC', 'barangay ASC');
@@ -1058,7 +1066,7 @@
 		}else{
 			return false;
 		}
-	}
+	} 
 
 	public function updateProceedNoticeDate($plan_id, $date){
 		$data = array(
@@ -1612,7 +1620,7 @@
 			);
 		}
 
-		$this->db->where('municipality_id', $municipality_ids);
+		$this->db->where('municipality_id', $municipality_id);
 		$this->db->update('municipalities', $data);
 
 	}

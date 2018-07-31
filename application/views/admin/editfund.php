@@ -10,7 +10,7 @@
         </div>
           <div class="row">
             <div class="col-lg-12">
-              <a href="<?php echo base_url('admin/editFundsView') ?>" class="btn btn-primary">Back</a>
+              <a href="<?php echo base_url('admin/manageFundsView') ?>" class="btn btn-primary">Back</a>
             </div>
           </div>
         <div class="box-body">
