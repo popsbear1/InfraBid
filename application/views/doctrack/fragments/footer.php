@@ -1,7 +1,11 @@
 
 <script type="text/javascript">
+  var alertCount = 0;
   $(document).ready(function(){
     getAlertCount();
+    if (alertCount > 0) {
+      playAlert()
+    }
     setInterval(getAlertCount, 180000);
   });
 
@@ -12,8 +16,16 @@
     }).done(function(response){
 
       $("#alertCount").html(response.alertCount);
-      $('#alertHeader').html(response.alertCount + ' project documents to receive')
+      $('#alertHeader').html(response.alertCount + ' project documents to receive');
+      if (response.alertCount > 0 && response.alertCount > alertCount) {
+        alertCount = response.alertCount;
+        playAlert();
+      }
     })
+  }
+
+  function playAlert(){
+    document.getElementById('alertSound').play();
   }
 
   $('#alertBtn').click(function(){

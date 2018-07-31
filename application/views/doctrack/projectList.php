@@ -1,47 +1,47 @@
-<section class="content-header">
 
-</section>
 <section class="content">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Documents</h2>
-        </div>
-        <div class="box-body">
-          <table class="table table-striped table-bordered" id="documentTable">
-            <thead style='font-size:12px;'>
-              <tr>
-                <th class="text-center">Project title</th>
-                <th class="text-center">Location</th>
-                <th class="text-center">ABC</th>
-                <th class="text-center">Source of Fund</th>
-                <th class="text-center">Date POW Added</th>
-                <th class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($plans as $plan): ?>
-                <tr>
-                  <td><?php echo $plan['project_title'] ?></td>
-                  <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
-                  <td><?php echo $plan['abc'] ?></td>
-                  <td><?php echo $plan['source'] ?></td>
-                  <td><?php echo $plan['date_pow_added'] ?></td>
-                  <td class="text-center">
-                    <form action="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/setCurrentPlanID'); }else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
-                      <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
-                      <button class="btn btn-success" type="submit">
-                        <i class="fa fa-edit">Add Document</i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="col-md-12">
+      <h3 class="pull-left">Project Document Adding Page</h3>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title"><i class="fa fa-list"></i> Project Plan Records</h2>
+      <small>(Listed Here are Those Projects which POW and can is currently being processed.)</small>
+    </div>
+    <div class="box-body">
+      <table class="table table-striped table-bordered" id="documentTable">
+        <thead style='font-size:12px;'>
+          <tr>
+            <th class="text-center">Project title</th>
+            <th class="text-center">Location</th>
+            <th class="text-center">ABC</th>
+            <th class="text-center">Source of Fund</th>
+            <th class="text-center">Date POW Added</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($plans as $plan): ?>
+            <tr>
+              <td><?php echo $plan['project_title'] ?></td>
+              <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
+              <td><?php echo $plan['abc'] ?></td>
+              <td><?php echo $plan['source'] ?></td>
+              <td><?php echo $plan['date_pow_added'] ?></td>
+              <td class="text-center">
+                <form action="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/setCurrentPlanID'); }else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
+                  <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
+                  <button class="btn btn-success" type="submit">
+                    <i class="fa fa-edit">Add Document</i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

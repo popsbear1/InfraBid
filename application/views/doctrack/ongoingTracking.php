@@ -1,44 +1,44 @@
-<section class="content-header">
 
-</section>
 <section class="content">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Documents</h2>
-        </div>
-        <div class="box-body">
-          <table class="table table-striped table-bordered" id="documentTable">
-            <thead style='font-size:12px;'>
-              <tr>
-                <th class="text-center">Project title</th>
-                <th class="text-center">Location</th>
-                <th class="text-center">ABC</th>
-                <th class="text-center">Source of Fund</th>
-                <th class="text-center">Date POW Added</th>
-                <th class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($plans as $plan): ?>
-                <tr>
-                  <td><?php echo $plan['project_title'] ?></td>
-                  <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
-                  <td><?php echo $plan['abc'] ?></td>
-                  <td><?php echo $plan['source'] ?></td>
-                  <td><?php echo $plan['date_pow_added'] ?></td>
-                  <td class="text-center">
-                    <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $plan['plan_id']?>">
-                      <i class="fa fa-eye"></i> History
-                    </button>
-                  </td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="col-md-12">
+      <h3 class="pull-left">Ongoing Document Tracking Monitoring Page</h3>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title"><i class="fa fa-list"></i> Project Plan Records</h2>
+      <small>(Listed Here are Those Projects which are currently being processed.)</small>
+    </div>
+    <div class="box-body">
+      <table class="table table-striped table-bordered" id="documentTable">
+        <thead style='font-size:12px;'>
+          <tr>
+            <th class="text-center">Project title</th>
+            <th class="text-center">Location</th>
+            <th class="text-center">ABC</th>
+            <th class="text-center">Source of Fund</th>
+            <th class="text-center">Date POW Added</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($plans as $plan): ?>
+            <tr>
+              <td><?php echo $plan['project_title'] ?></td>
+              <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
+              <td><?php echo $plan['abc'] ?></td>
+              <td><?php echo $plan['source'] ?></td>
+              <td><?php echo $plan['date_pow_added'] ?></td>
+              <td class="text-center">
+                <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $plan['plan_id']?>">
+                  <i class="fa fa-eye"></i> History
+                </button>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -96,7 +96,7 @@
     var document_details = $(this).val();
 
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: '<?php echo base_url("doctrack/getFullProjectDocumentHistory") ?>',
       data: { plan_id: document_details },
       dataType: 'json',

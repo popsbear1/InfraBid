@@ -64,6 +64,7 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
+            <audio src="<?php echo base_url('public/sound/alert.mp3')?>" id="alertSound"></audio>
             <!-- Messages: style can be found in dropdown.less-->
             <li class="dropdown notifications-menu">
               <!-- Menu toggle button -->

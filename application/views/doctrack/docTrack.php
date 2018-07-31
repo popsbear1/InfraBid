@@ -1,125 +1,121 @@
 
 <section class="content">
-  <div class="row">
-	  <div class="col-lg-12 col-md-12">
-    	<div class="row">
-        <div class="col-md-12">
-          <h3 class="pull-left">Project Document Tracking</h3>
+	<div class="row">
+    <div class="col-md-12">
+      <h3 class="pull-left">Project Document Tracking</h3>
+    </div>
+  </div>
+	<div class="box">
+		<div class="row">
+      <div class="col-lg-12 col-md-12" >
+        <button class="btn btn-info btn-lg documentViewBtn" id="pendingDocumentsBtn"><small>Pending (For Receiving)</small></button>
+        <button class="btn btn-success btn-lg documentViewBtn" id="onhandDocumentsBtn"><small>Onhand (For Forwarding)</small></button>
+        <button class="btn btn-warning btn-lg documentViewBtn" id="forwardedDocumentsBtn"><small>Forwarded Documents</small></button>
+      </div>
+    </div>
+    <div class="box-header">
+      <h4 class="box-title" id="page_tittle">Pending Documents (For Receiving)</h4>
+    </div>
+    <div class="box-body">
+      <div id="documentTableContainer">
+        <div class="tableContainer  table-responsive no-pading" id="for_receiving_document_table">
+          <table class="table table-bordered table-striped table-hover documentsTable" id="pendingTable">
+            <thead>
+              <tr>
+                <th>Project Title</th>
+                <th>Date Plan Added</th>
+                <th>Location</th>
+                <th>ABC</th>
+                <th>Contractor</th>
+                <th>Source of Fund</th>
+                <th>Sender</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($pending_documents as $pending_document): ?>
+                <tr id="<?php echo 'receive' . $pending_document['plan_id'] ?>">
+                  <td class="text-center"><?php echo $pending_document['project_title'] ?></td>
+                  <td class="text-center"><?php echo $pending_document['date_pow_added'] ?></td>
+                  <td class="text-center"><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
+                  <td class="text-center"><?php echo number_format($pending_document['abc'], 2) ?></td>
+                  <td class="text-center"><?php echo $pending_document['businessname'] ?></td>
+                  <td class="text-center"><?php echo $pending_document['source'] ?></td>
+                  <td class="text-center"><?php echo $pending_document['current_doc_loc'] ?></td>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
+                        <i class="fa fa-get-pocket"></i> Receive
+                      </button>
+                      <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] . ',' . $pending_document['receiver'] . ',' . 'pending' ?>">
+                        <i class="fa fa-eye"></i> View
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tableContainer table-responsive no-pading" id="onhand_documents_table" hidden="hidden"> 
+          <table class="table table-bordered table-striped table-hover documentsTable" id="onhandTable"> 
+            <thead>
+              <tr>
+                <th>Project Title</th>
+                <th>Date Plan Added</th>
+                <th>Location</th>
+                <th>ABC</th>
+                <th>Contractor</th>
+                <th>Source of Fund</th>
+                <th>Sender</th>
+                <th>Action</th>
+              </tr>
+            </thead> 
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table> 
+        </div>
+        <div class="tableContainer  table-responsive no-pading" id="forwarded_documents_table" hidden="hidden">
+          <table class="table table-bordered table-striped table-hover documentsTable" id="forwardedTable">
+            <thead>
+              <tr>
+                <th>Project Title</th>
+                <th>Date Plan Added</th>
+                <th>Location</th>
+                <th>ABC</th>
+                <th>Contractor</th>
+                <th>Source of Fund</th>
+                <th>Destination</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-	  	<div class="box box">
-	  		<div class="row">
-          <div class="col-lg-12 col-md-12" >
-            <button class="btn btn-info btn-lg documentViewBtn" id="pendingDocumentsBtn"><small>Pending (For Receiving)</small></button>
-            <button class="btn btn-success btn-lg documentViewBtn" id="onhandDocumentsBtn"><small>Onhand (For Forwarding)</small></button>
-            <button class="btn btn-warning btn-lg documentViewBtn" id="forwardedDocumentsBtn"><small>Forwarded Documents</small></button>
-          </div>
-        </div>
-        <div class="box-header">
-          <h4 class="box-title" id="page_tittle">Pending Documents (For Receiving)</h4>
-        </div>
-        <div class="box-body">
-          <div id="documentTableContainer">
-            <div class="tableContainer  table-responsive no-pading" id="for_receiving_document_table">
-              <table class="table table-bordered table-striped table-hover documentsTable" id="pendingTable">
-                <thead>
-                  <tr>
-                    <th>Project Title</th>
-                    <th>Date Plan Added</th>
-                    <th>Location</th>
-                    <th>ABC</th>
-                    <th>Contractor</th>
-                    <th>Source of Fund</th>
-                    <th>Sender</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($pending_documents as $pending_document): ?>
-                    <tr id="<?php echo 'receive' . $pending_document['plan_id'] ?>">
-                      <td class="text-center"><?php echo $pending_document['project_title'] ?></td>
-                      <td class="text-center"><?php echo $pending_document['date_pow_added'] ?></td>
-                      <td class="text-center"><?php echo $pending_document['municipality'] . ', ' . $pending_document['barangay'] ?></td>
-                      <td class="text-center"><?php echo number_format($pending_document['abc'], 2) ?></td>
-                      <td class="text-center"><?php echo $pending_document['businessname'] ?></td>
-                      <td class="text-center"><?php echo $pending_document['source'] ?></td>
-                      <td class="text-center"><?php echo $pending_document['current_doc_loc'] ?></td>
-                      <td class="text-center">
-                        <div class="btn-group">
-                          <button class="btn btn-warning receiveProjectDocumentBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] ?>" >
-                            <i class="fa fa-get-pocket"></i> Receive
-                          </button>
-                          <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $pending_document['plan_id'] . ',' . $pending_document['current_doc_loc'] . ',' . $pending_document['receiver'] . ',' . 'pending' ?>">
-                            <i class="fa fa-eye"></i> View
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
-                </tbody>
-              </table>
-            </div>
-            <div class="tableContainer table-responsive no-pading" id="onhand_documents_table" hidden="hidden"> 
-              <table class="table table-bordered table-striped table-hover documentsTable" id="onhandTable"> 
-                <thead>
-                  <tr>
-                    <th>Project Title</th>
-                    <th>Date Plan Added</th>
-                    <th>Location</th>
-                    <th>ABC</th>
-                    <th>Contractor</th>
-                    <th>Source of Fund</th>
-                    <th>Sender</th>
-                    <th>Action</th>
-                  </tr>
-                </thead> 
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table> 
-            </div>
-            <div class="tableContainer  table-responsive no-pading" id="forwarded_documents_table" hidden="hidden">
-              <table class="table table-bordered table-striped table-hover documentsTable" id="forwardedTable">
-                <thead>
-                  <tr>
-                    <th>Project Title</th>
-                    <th>Date Plan Added</th>
-                    <th>Location</th>
-                    <th>ABC</th>
-                    <th>Contractor</th>
-                    <th>Source of Fund</th>
-                    <th>Destination</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-	  	</div>
-	  </div>
-  </div>
+    </div>
+	</div>
 </section>
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -227,7 +223,7 @@
     }
 
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: '<?php echo base_url("doctrack/getProjectDocumentHistory") ?>',
       data: { plan_id: document_details[0], current_doc_loc: document_details[1], receiver: document_details[2], type: document_details[3]},
       dataType: 'json',
@@ -297,7 +293,7 @@
     $('#pendingTable').DataTable().destroy();
 
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: '<?php echo base_url('doctrack/getPendingDocuments') ?>',
       dataType: 'json',
       success: function(response){
@@ -352,7 +348,7 @@
     $('#onhandTable').DataTable().destroy();
 
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: '<?php echo base_url('doctrack/getOnhandDocuments') ?>',
       dataType: 'json',
       success: function(response){
@@ -409,7 +405,7 @@
     $('#forwardedTable').DataTable().destroy();
 
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: '<?php echo base_url('doctrack/getForwardedDocuments') ?>',
       dataType: 'json',
       success: function(response){
@@ -561,22 +557,13 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title">Confirmation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="text-center">Confirm Document Receival</p>
-        <div class="alert alert-success" hidden="hidden" id="receiveDocumentSuccessAlert">
-          <h4><i class="icon fa fa-check"></i> Alert!</h4>
-          <p>Receive Document Success!</p>
-        </div>
-        <div class="alert alert-warning" hidden="hidden" id="receiveDocumentFailedAlert">
-          <h4><i class="icon fa fa-check"></i> Alert!</h4>
-          <p>Document Receival Failed!</p>
-          <p>Document Forwarding Cancelled!</p>
-        </div>
+        <p class="text-center" id="receival_message"></p>
         <form action="<?php if ($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('docTrack/receiveDocument');}else{ echo base_url('capitol/receiveDocument'); } ?>" method="POST" id="receiveDocumentForm">
           <input type="text" name="plan_id" id="receive_plan_id" hidden>
           <input type="text" name="sender" id="receive_sender" hidden>
@@ -597,31 +584,29 @@
 
     $('#receive_plan_id').val(project_document_details[0]);
     $('#receive_sender').val(project_document_details[1]);
-
+    $('#receival_message').html('Receive Document?');
     $('#confirmDocumentReceivalModal').modal('show');    
   });
 
   $('#receiveDocumentForm').submit(function(e){
     e.preventDefault();
-    $('#receiveDocumentSuccessAlert').prop('hidden', 'hidden');
-    $('#receiveDocumentFailedAlert').prop('hidden', 'hidden');
+    
     var plan_id = $('#receive_plan_id').val();
     var row_name = '#receive' + plan_id;
     $.ajax({
       type: 'POST',
       url: $(this).attr('action'),
       data: $('#receiveDocumentForm').serialize(),
-      dataType: 'json',
-      success: function(response){
-        if (response.success == true) {
-          getPendingDocuments('e');
-          $('#receiveDocumentSuccessAlert').prop('hidden', false);
-          getAlertCount();
-        }else{
-          $('#receiveDocumentFailedAlert').prop('hidden', false);
-        }
+      dataType: 'json'
+    }).done(function(response){
+      if (response.success == true) {
+        getPendingDocuments();
+        $('#receival_message').html('Documents Marked Received!');
+        getAlertCount();
+      }else{
+        $('#receival_message').html('Document was already receieved!');
       }
-    }).done();
+    });
   })
 </script>
 

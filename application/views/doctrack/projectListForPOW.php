@@ -1,44 +1,43 @@
 
-<section class="content-header">
-
-</section>
 <section class="content">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Documents</h2>
-        </div>
-        <div class="box-body">
-          <table class="table table-striped table-bordered" id="documentTable">
-            <thead style='font-size:12px;'>
-              <tr>
-                <th class="text-center">Project title</th>
-                <th class="text-center">Location</th>
-                <th class="text-center">ABC</th>
-                <th class="text-center">Source of Fund</th>
-                <th class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($plans as $plan): ?>
-                <tr id="<?php echo 'projectPOW' . $plan['plan_id'] ?>">
-                  <td><?php echo $plan['project_title'] ?></td>
-                  <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
-                  <td><?php echo $plan['abc'] ?></td>
-                  <td><?php echo $plan['source'] ?></td>
-                  <td class="text-center">
-                    <form action="">
-                      <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
-                    </form>
-                    <button class="btn btn-primary addProjectPOWBtn" value="<?php echo $plan['plan_id'] ?>">Add POW</button>
-                  </td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="col-md-12">
+      <h3 class="pull-left">Program Of Work Adding Page</h3>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title"><i class="fa fa-list"></i> Project Plan Records</h2>
+      <small>(Listed Here are Those Projects without a POW.)</small>
+    </div>
+    <div class="box-body">
+      <table class="table table-striped table-bordered" id="documentTable">
+        <thead style='font-size:12px;'>
+          <tr>
+            <th class="text-center">Project title</th>
+            <th class="text-center">Location</th>
+            <th class="text-center">ABC</th>
+            <th class="text-center">Source of Fund</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($plans as $plan): ?>
+            <tr id="<?php echo 'projectPOW' . $plan['plan_id'] ?>">
+              <td><?php echo $plan['project_title'] ?></td>
+              <td><?php echo $plan['barangay'] . ', ' .$plan['municipality'] ?></td>
+              <td><?php echo $plan['abc'] ?></td>
+              <td><?php echo $plan['source'] ?></td>
+              <td class="text-center">
+                <form action="">
+                  <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
+                </form>
+                <button class="btn btn-primary addProjectPOWBtn" value="<?php echo $plan['plan_id'] ?>">Add POW</button>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

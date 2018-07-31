@@ -205,10 +205,10 @@ class Doctrack extends CI_Controller {
 	}
 
 	public function getProjectDocumentHistory(){
-		$plan_id = $this->input->post('plan_id');
-		$current_doc_loc = $this->input->post('current_doc_loc');
-		$receiver = $this->input->post('receiver');
-		$type = $this->input->post('type');
+		$plan_id = $this->input->get('plan_id');
+		$current_doc_loc = $this->input->get('current_doc_loc');
+		$receiver = $this->input->get('receiver');
+		$type = $this->input->get('type');
 
 
 		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
@@ -220,7 +220,7 @@ class Doctrack extends CI_Controller {
 	}
 
 	public function getFullProjectDocumentHistory(){
-		$plan_id = $this->input->post('plan_id');
+		$plan_id = $this->input->get('plan_id');
 
 		$data['forwarding_logs'] = $this->doctrack_model->getProjectDocumentHistoryForwarding($plan_id);
 		$data['receiving_logs'] = $this->doctrack_model->getProjectDocumentHistoryReceiving($plan_id);

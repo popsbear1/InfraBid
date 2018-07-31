@@ -163,8 +163,14 @@
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('current_doc_loc', $current_doc_loc);
+			if ($type == 'pending' || $type == 'forwarded') {
+				$this->db->where('project_document.status', 'sent');
+			}
 			if ($type != 'onhand') {
 				$this->db->where('receiver', $receiver);
+			}
+			if ($type == 'onhand') {
+				$this->db->where('project_document.status', 'received');
 			}
 
 			$query = $this->db->get();
@@ -207,6 +213,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('project_document.receiver', $user_type);
+			$this->db->group_by('project_plan.plan_id');
 			$this->db->group_by('project_document.current_doc_loc');
 
 			$query = $this->db->get();
@@ -428,14 +435,17 @@
 		}
 
 		public function getIncomingDocAlerts($user_type){
-			$this->db->select('*');
+			$this->db->select('project_title, current_doc_loc');
 			$this->db->from('project_plan');
+			$this->db->join('municipalities','project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays','project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('contractors','project_plan.contractor_id = contractors.contractor_id', 'Left');
 			$this->db->join('project_document', 'project_document.plan_id = project_plan.plan_id');
-			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('project_document.receiver', $user_type);
+			$this->db->group_by('project_plan.plan_id');
 			$this->db->group_by('project_document.current_doc_loc');
-			$this->db->order_by('project_document.current_doc_loc');
 
 			$query = $this->db->get();
 
