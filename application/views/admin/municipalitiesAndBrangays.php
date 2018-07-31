@@ -21,7 +21,7 @@
             </thead>
             <tbody>
               <?php foreach ($municipalities as $municipality): ?>
-                <tr>
+                <tr id="<?php echo 'municipality' . $municipality['municipality_id'] ?>">
                   <td class="text-center"><?php echo $municipality['municipality_code'] ?></td>
                   <td class="text-center"><?php echo $municipality['municipality'] ?></td>
                   <td class="text-center"><?php echo $municipality['status'] ?></td>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteMunicipalitiesAndBarangays') ?>" method="POST">
+                      <form action="<?php echo base_url('admin/deleteMunicipalitiesAndBarangays') ?>" method="POST" id="delete_municipality_form">
                         <input type="text" name="municipality_id" value="<?php echo $municipality['municipality_id']?>" hidden>
                           <button class="btn btn-danger" type="submit">Delete</button>                       
                       </form>
@@ -52,7 +52,7 @@
 
                       <?php if ($municipality['status']=='inactive'): ?>
                         <form action="<?php echo base_url('admin/activateMunicipalitiesAndBarangays') ?>" method="POST">
-                          <input type="text" name="fund_id" value="<?php echo $municipality['municipality_id'] ?>" hidden>
+                          <input type="text" name="municipality_id" value="<?php echo $municipality['municipality_id'] ?>" hidden>
                           <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
                         </form>                          
                       <?php endif ?>
@@ -103,10 +103,125 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">The Data has been Removed Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_failed">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Failed!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Error Occured!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  $(document).ready( 
-    function () {
-      $('#municipalityTable').DataTable();
-    } 
-  );
+
+  var table = $('#municipalityTable').DataTable({
+  });
+
+  $(document).on('submit', '#addMunicipalityForm', function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addMunicipalityForm').attr('action'),
+      data: $('#addMunicipalityForm').serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#alert-success').attr('hidden', false);
+          $('.has-error').remove();
+          $('.has-success').remove();
+          $('.alert-success').delay(500).show(10, function() {
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
+          });
+
+          var rowNode = table.row.add([
+            response.municipality['municipality_id'],
+            response.municipality['municipality_code'],
+            response.municipality['municipality'],
+            response.municipality['status'],
+            '<p>Refresh To do More</p>'
+          ]).draw().node();
+
+          $(rowNode).css({
+            'text-align': 'center',
+            'background-color': '#c1f0c1'
+          });
+
+          $('#addMunicipalityForm input').val('');
+        }else if(response.success == 'failed'){
+          $('#alert-failed').attr('hidden', false);
+          $('.has-error').remove();
+          $('.has-success').remove();
+          $('.alert-failed').delay(500).show(10, function() {
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
+          });
+          $('#addMunicipalityForm input').val('');
+        }else{
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
+        }
+      }
+    });
+  });
+
+  $(document).on('submit', '#delete_municipality_form', function(e){
+    e.preventDefault();
+
+    var form_name = $(this).attr('id');
+    console.log(form_name);
+    var municipality_id =  $(this).find("input[name='municipality_id']").val();
+    console.log(municipality_id);
+    var row_id = 'municipality' + municipality_id;
+
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: 'json',
+      success: function(response){
+        if (response.success == true) {
+          $('#' + row_id).remove();
+          $('#action_success').modal('show');
+        }else{
+          $('#action_failed').modal('show');
+        }
+      }
+    });
+  });
 </script>

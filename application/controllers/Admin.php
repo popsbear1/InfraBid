@@ -38,8 +38,10 @@ class Admin extends CI_Controller {
 		$quarter = null;
 		$status = null;
 		$municipality = null;
+		$source = null;
+		$projecttype = null;
 
-		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality);
+		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -52,6 +54,8 @@ class Admin extends CI_Controller {
 		$quarter = $this->input->post('quarter');
 		$status = $this->input->post('status');
 		$municipality = $this->input->post('municipality');
+		$source = $this->input->post('source');
+		$projecttype = $this->input->post('projecttype');
 
 		if (empty($year)) {
 			$year = date('Y');
@@ -65,8 +69,14 @@ class Admin extends CI_Controller {
 		if (empty($municipality)) {
 			$municipality = null;
 		}
+		if(empty($source)) {
+			$source = null;
+		}
+		if(empty($projecttype)){
+			$projecttype = null;
+		}
 
-		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality);
+		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype);
 
 		echo json_encode($data);
 	}
@@ -1147,12 +1157,12 @@ class Admin extends CI_Controller {
 		if (!empty($_POST['document_name'])) {
 			$document_name = $this->input->post('document_name');
 			$this->admin_model->updateDocumentDetails($document_name, $documentID);
+			
 			$document_number = $this->input->post('doc_no');
 			$this->admin_model->updateDocumentNumber($document_number, $documentID);
 		}
 	redirect('admin/editDocumentsView');
 	}
-
 	
 
 	/** End of Manage Document */
@@ -1616,7 +1626,7 @@ class Admin extends CI_Controller {
 	public function deleteMunicipalitiesAndBarangays(){
 		$data['success'] = false;
 		$municipality_id=$this->input->post('municipality_id');
-		if ($this->admin_model->deleteFund($municipality_id)) {
+		if ($this->admin_model->deleteMunicipalitiesAndBarangays($municipality_id)) {
 			$data['success'] = true;
 		}
 

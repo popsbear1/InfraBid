@@ -160,22 +160,22 @@
             <div class="form-group">
               <label for="" class="control-label col-sm-4">Barangay ID</label>
               <div class="col-sm-8">
-                <input type="text" name="barangay_id" id="barangay_id" class="form-control" disabled>
+                <input type="text" name="barangay_id" id="barangay_id" class="form-control" disabled required>
               </div>
             </div>
             <div class="form-group">
               <label for="" class="control-label col-sm-4">Barangay Code</label>
               <div class="col-sm-8">
-                <input type="text" name="barangay_code" id="barangay_code" class="form-control">
+                <input type="text" name="barangay_code" id="barangay_code" class="form-control" required>
               </div>
             </div>
             <div class="form-group">
               <label for="" class="control-label col-sm-4">Barangay Name</label>
               <div class="col-sm-8">
-                <input type="text" name="barangay" id="barangay"  class="form-control">
+                <input type="text" name="barangay" id="barangay"  class="form-control" required>
               </div>
             </div>
-            <input type="text" hidden name="current_barangay_id" id="current_barangay_id">
+            <input type="text" hidden name="current_barangay_id" id="current_barangay_id" required>
           </form>
         </div>
         <div class="modal-footer">
@@ -266,7 +266,7 @@
                 '<div class="form-group">' +
                   '<label class="control-label col-sm-3">Barangay Name</label>' +
                   '<div class="col-sm-6">' +
-                    '<input type="text" class="form-control" name="barangay_name[]">' +
+                    '<input type="text" class="form-control" name="barangay_name[]" required>' +
                   '</div>' +
                 '</div>' +
               '</div>' +

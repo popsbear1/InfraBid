@@ -37,7 +37,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="doc_no" placeholder="<?php echo $documentDetail['doc_no']; ?>" name="doc_no" class="form-control col-md-7 col-xs-12" required>
+                <input type="text" step="any" value="" id="docno" placeholder="<?php echo $documentDetail['doc_no']; ?>" name="docno" class="form-control col-md-7 col-xs-12" required>
               </div>
             </div>
 
@@ -45,13 +45,13 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Document Name
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="doc_number" placeholder="<?php echo $documentDetail['document_name']; ?>" name="doc_number" class="form-control col-md-7 col-xs-12">
+                <input type="text" step="any"  id="docname" value="" placeholder="<?php echo $documentDetail['document_name']; ?>" name="docname" class="form-control col-md-7 col-xs-12" required>
               </div>
             </div>
          </form> 
         </div>
         <div class="box-footer text-center">
-          <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+          <button href="#myModal" type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
         </div>
       </div>
     </div>
@@ -95,8 +95,8 @@
     <script>
       $(document).ready(function() {
         $('#myModal').on('show.bs.modal' , function (e) {
-         $('#dono').html($('#doc_no').val());
-         $('#dona').html($('#doc_number').val());
+         $('#dono').html($('#docno').val());
+         $('#dona').html($('#docname').val());
        });
 
       });
