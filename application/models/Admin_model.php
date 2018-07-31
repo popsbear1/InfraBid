@@ -416,10 +416,10 @@
 			return $query->result_array();
 		}
 
-		public function getDocumentDetails($doc_type_id){
+		public function getDocumentDetails($currentDocumentID){
 			$this->db->select('*');
 			$this->db->from('document_type');
-			$this->db->where('doc_type_id', $doc_type_id);
+			$this->db->where('doc_type_id', $currentDocumentID);
 
 			$query = $this->db->get();
 
@@ -1168,21 +1168,39 @@
 	}
 
 
-	public function updateDocumentDetails($document_name, $doc_type_id){
+	// public function updateDocumentDetails($document_name, $doc_type_id){
+	// 	$data = array(
+	// 		'document_name' => $document_name
+	// 	);
+
+	// 	$this->db->where('doc_type_id', $doc_type_id);
+	// 	$this->db->update('document_type', $data);
+	// }
+
+	// public function updateDocumentNumber($document_number, $doc_type_id){
+	// 	$data = array(
+	// 		'doc_no' => $document_number
+	// 	);
+
+	// 	$this->db->where('doc_type_id', $doc_type_id);
+	// 	$this->db->update('document_type', $data);
+	// }
+
+	public function updateDocumentDetails($document_name, $currentDocumentID){
 		$data = array(
 			'document_name' => $document_name
 		);
 
-		$this->db->where('doc_type_id', $doc_type_id);
+		$this->db->where('doc_type_id', $currentDocumentID);
 		$this->db->update('document_type', $data);
 	}
 
-	public function updateDocumentNumber($document_number, $doc_type_id){
+	public function updateDocumentNumber($doc_no, $currentDocumentID){
 		$data = array(
-			'doc_no' => $document_number
+			'doc_no' => $doc_no
 		);
 
-		$this->db->where('doc_type_id', $doc_type_id);
+		$this->db->where('doc_type_id', $currentDocumentID);
 		$this->db->update('document_type', $data);
 	}
 

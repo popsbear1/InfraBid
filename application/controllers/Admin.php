@@ -1136,8 +1136,8 @@ class Admin extends CI_Controller {
 
 
 	public function editDocumentsView(){
-		$doc_type_id = $this->session->userdata('doc_type_id');
-		$data['documentDetail'] = $this->admin_model->getDocumentDetails($doc_type_id);
+		$currentDocumentID = $this->session->userdata('doc_type_id');
+		$data['documentDetail'] = $this->admin_model->getDocumentDetails($currentDocumentID);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/editDocument', $data);
@@ -1153,15 +1153,20 @@ class Admin extends CI_Controller {
 	}
 
 	public function editDocument(){
-		$documentID = $this->session->userdata('doc_type_id');
+		$currentDocumentID = $this->session->userdata('doc_type_id');
 		if (!empty($_POST['document_name'])) {
 			$document_name = $this->input->post('document_name');
-			$this->admin_model->updateDocumentDetails($document_name, $documentID);
-			
-			$document_number = $this->input->post('doc_no');
-			$this->admin_model->updateDocumentNumber($document_number, $documentID);
+			$this->admin_model->updateDocumentDetails($document_name, $currentDocumentID);
 		}
-	redirect('admin/editDocumentsView');
+
+		if(!empty($_POST['doc_no'])) {
+			$doc_no = $this->input->post('doc_no');
+			$this->admin_model->updateDocumentNumber($doc_no,$currentDocumentID);
+		}
+
+
+		$this->session->set_flashdata('success', 'Document Details Successfully Updated.');
+		redirect('admin/editDocumentsView');
 	}
 	
 
