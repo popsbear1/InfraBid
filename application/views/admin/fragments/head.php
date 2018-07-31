@@ -32,5 +32,6 @@
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo base_url() ?>public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/custom.css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
     </head>

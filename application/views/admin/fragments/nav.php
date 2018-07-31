@@ -24,83 +24,38 @@
         <a id="sideBarControl" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
+        <audio src="<?php echo base_url('public/sound/alert.mp3')?>" id="alertSound"></audio>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-envelope-o"></i>
-                <span class="label label-success">4</span>
+            <li class="dropdown notifications-menu">
+              <!-- Menu toggle button -->
+              <a href="#" class="dropdown-toggle" id="alertBtn" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <span class="label label-success" id="alertCount"></span>
               </a>
               <ul class="dropdown-menu">
-                <li class="header">You have 4 messages</li>
+                <li class="header text-center" id="alertHeader"></li>
+                <li class="header">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                      <small class="fa fa-tasks"> Project Name</small>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                      <small class="fa fa-user"> Sender</small>
+                    </div>
+                  </div>
+                </li>
                 <li>
-                  <!-- inner menu: contains the actual data -->
-                  <ul class="menu">
+                  <!-- inner menu: contains the messages -->
+                  <ul class="menu" id="alertMenu">
                     <li><!-- start message -->
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="<?php echo base_url() ?>uploads/default" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Support Team
-                          <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
+                      
                     </li>
                     <!-- end message -->
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="<?php echo base_url() ?>uploads/default" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          AdminLTE Design Team
-                          <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Developers
-                          <small><i class="fa fa-clock-o"></i> Today</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Sales Department
-                          <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Reviewers
-                          <small><i class="fa fa-clock-o"></i> 2 days</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
                   </ul>
+                  <!-- /.menu -->
                 </li>
-                <li class="footer"><a href="#">See All Messages</a></li>
               </ul>
             </li>
             <!-- Notifications: style can be found in dropdown.less -->

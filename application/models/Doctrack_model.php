@@ -102,6 +102,60 @@
 			return $query->result_array();
 		}
 
+		public function getProjectDocumentsOnhandWithoutImage($plan_id, $user_type){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->where('current_doc_loc', $user_type);
+			$this->db->where('receiver', null);
+			$this->db->where('project_document.status', 'received');
+			$this->db->where('project_document.image_status', 'false');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getProjectDocumentsOnhandWithImage($plan_id, $user_type){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->where('current_doc_loc', $user_type);
+			$this->db->where('receiver', null);
+			$this->db->where('project_document.status', 'received');
+			$this->db->where('project_document.image_status', 'true');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getAllImageURL($project_document_id){
+			$this->db->select('*');
+			$this->db->from('project_document_images');
+			$this->db->where('project_document_id', $project_document_id);
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function markProjectForImplementation($plan_id){
+			$data = array(
+				'status' => 'for_implementation'
+			);
+
+			$this->db->where('plan_id', $plan_id);
+			if ($this->db->update('project_plan', $data)) {
+				return true;
+			}else{
+				return false;
+			}
+
+		}
+
 		public function getProjectDocumentsToDisplay($plan_id, $current_doc_loc, $receiver, $type){
 			$this->db->select('*');
 			$this->db->from('project_document');
@@ -109,8 +163,14 @@
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
 			$this->db->where('current_doc_loc', $current_doc_loc);
+			if ($type == 'pending' || $type == 'forwarded') {
+				$this->db->where('project_document.status', 'sent');
+			}
 			if ($type != 'onhand') {
 				$this->db->where('receiver', $receiver);
+			}
+			if ($type == 'onhand') {
+				$this->db->where('project_document.status', 'received');
 			}
 
 			$query = $this->db->get();
@@ -153,6 +213,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('project_document.receiver', $user_type);
+			$this->db->group_by('project_plan.plan_id');
 			$this->db->group_by('project_document.current_doc_loc');
 
 			$query = $this->db->get();
@@ -355,6 +416,40 @@
 			}else{
 				return false;
 			}
+		}
+
+		public function addDocumentImageURL($project_document_id, $url){
+			$data = array(
+				'project_document_id' => $project_document_id,
+				'image_url' => base_url() . $url
+			);
+
+			if ($this->db->insert('project_document_images', $data)) {
+				$image_status = array(
+					'image_status' => 'true'
+				);
+
+				$this->db->where('project_document_id', $project_document_id);
+				$this->db->update('project_document', $image_status);
+			}
+		}
+
+		public function getIncomingDocAlerts($user_type){
+			$this->db->select('project_title, current_doc_loc');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities','project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays','project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('contractors','project_plan.contractor_id = contractors.contractor_id', 'Left');
+			$this->db->join('project_document', 'project_document.plan_id = project_plan.plan_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
+			$this->db->where('project_document.status', 'sent');
+			$this->db->where('project_document.receiver', $user_type);
+			$this->db->group_by('project_plan.plan_id');
+			$this->db->group_by('project_document.current_doc_loc');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
 		}
 	}
 ?>

@@ -50,6 +50,18 @@
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
               <div class="document_add">
+                <?php if ($this->session->userdata('user_type') == 'PEO'): ?>
+                  <button class="btn btn-primary pull-left" data-toggle="modal" data-target="#finishDocumentTrackingModal">
+                    <i class="fa fa-check"></i>
+                    For Implementation
+                  </button>
+                <?php endif ?>
+                <?php if ($this->session->userdata('user_type') == 'BAC_SEC'): ?>
+                  <a class="btn btn-primary pull-left" href="<?php echo base_url('doctrack/addProjectDocumentImages') ?>">
+                    <i class="fa fa-image"></i>
+                    Add Document Images
+                  </a>
+                <?php endif ?>
                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
                   <i class="fa fa-plus"></i>
                   Add Item
@@ -160,7 +172,7 @@
 </script>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="sendDocumentsModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="sendDocumentsModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -323,6 +335,31 @@
   </div>
 </div>
 
-<script>
-  
-</script>
+<div class="modal fade" tabindex="-1" role="dialog" id="finishDocumentTrackingModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <form action="<?php echo base_url('doctrack/markProjectForImplementation') ?>" method="POST" id="markProjectForImplementationForm" >
+              <div class="form-group">
+                <label>Remarks:</label>
+                <textarea class="form-control" name="remark_for_implementation" form="markProjectForImplementationForm" cols="30" rows="10" style="resize: none" ></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" form="markProjectForImplementationForm">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
