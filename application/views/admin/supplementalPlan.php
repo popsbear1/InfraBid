@@ -2,71 +2,100 @@
     
       <section class="content-header"></section>
       <section class="content">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="box">
-              <div class="box-header">
-                <h2 class="box-title">(Supplemental)
-                  <medium>Procurement  Monitoring Report for Public Bidding and Negotiated</medium></h2>
+        <div class="box">
+          <div class="box-header">
+            <h2 class="box-title"><b>(Supplemental) </b>Project Procurement Plan Records</h2>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <p>Filters: </p>
               </div>
-              <div class="box-body">
-                <div class="row">                   
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <p>Filters: </p>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12">
-                    <div class="form-group">
-                      <label for="year">Year: </label>
-                      <input type="text" id="year" class="form-control">  
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12">
-                    <div class="form-group">
-                      <label for="quarter">Quarter: </label>
-                      <select name="quarter" id="quarter" class="form-control">
-                        <option hidden disabled selected>Choose Quarter</option>
-                        <option value="1stQ">1st Q</option>
-                        <option value="2ndQ">2nd Q</option>
-                        <option value="3rdQ">3rd Q</option>
-                        <option value="4thQ">4th Q</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12">
-                    <div class="form-group">
-                      <label for="status">Status: </label>
-                      <select name="status" id="status" class="form-control">
-                        <option hidden disabled selected>Choose Status</option>
-                        <option value="pending">Pending</option>
-                        <option value="onprocess">On process</option>
-                        <option value="for_implementation">For Implementation</option>
-                        <option value="for_rebid">For Rebid</option>
-                        <option value="for_review">For Review</option>
-                        <option value="completed">Completed</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12">
-                    <div class="form-group">
-                      <label for="municipality">Municipality: </label>
-                      <select name="municipality" id="municipality" class="form-control">
-                        <option hidden disabled selected>Choose Municipality</option>
-                        <?php foreach ($municipalities as $municipality): ?>
-                          <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4">
-                    <div class="form-group">
-                      <label>Action:</label>
-                      <button class="btn btn-primary form-control" id="filterBtn" type="button">Find</button>
-                    </div>
-                  </div>
+            </div>
+            <div class="row">                   
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="year">Year: </label>
+                  <input type="text" id="year" class="form-control">  
                 </div>
               </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="quarter">Quarter: </label>
+                  <select name="quarter" id="quarter" class="form-control">
+                    <option hidden disabled selected>Choose Quarter</option>
+                    <option value="1stQ">1st Q</option>
+                    <option value="2ndQ">2nd Q</option>
+                    <option value="3rdQ">3rd Q</option>
+                    <option value="4thQ">4th Q</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="status">Status: </label>
+                  <select name="status" id="status" class="form-control">
+                    <option hidden disabled selected>Choose Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="onprocess">On process</option>
+                    <option value="for_implementation">For Implementation</option>
+                    <option value="for_rebid">For Rebid</option>
+                    <option value="for_review">For Review</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="municipality">Municipality: </label>
+                  <select name="municipality" id="municipality" class="form-control">
+                    <option hidden disabled selected>Choose Municipality</option>
+                    <?php foreach ($municipalities as $municipality): ?>
+                      <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="municipality">Municipality: </label>
+                  <select name="municipality" id="municipality" class="form-control">
+                    <option hidden disabled selected>Choose Municipality</option>
+                    <?php foreach ($municipalities as $municipality): ?>
+                      <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="municipality">Municipality: </label>
+                  <select name="municipality" id="municipality" class="form-control">
+                    <option hidden disabled selected>Choose Municipality</option>
+                    <?php foreach ($municipalities as $municipality): ?>
+                      <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <div class="form-group">
+                  <label>Action:</label>
+                  <button class="btn btn-primary" id="filterBtn" type="button">
+                    <i class="fa fa-search"></i>
+                    Find
+                  </button>
+                  <button class="btn btn-default" type="button">
+                    <i class="fa fa-print"></i>
+                    Print
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
                 <table class="table table-bordered table-striped" id="plan_table">
                   <thead style='font-size:12px;'>
                     <tr>
@@ -187,7 +216,7 @@
 
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url("admin/getFilteredSupplementaryPlanData") ?>',
+      url: '<?php echo base_url("admin/getFilteredRegularPlanData") ?>',
       data: { year: year, quarter: quarter, status: status, municipality: municipality},
       dataType: 'json',
       success: function(response){

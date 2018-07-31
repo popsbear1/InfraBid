@@ -48,7 +48,7 @@
 			}
 
 			if ($status != null) {
-				$this->db->where('status', $status);
+				$this->db->where('project_plan.status', $status);
 			}
 
 			if ($municipality != null) {

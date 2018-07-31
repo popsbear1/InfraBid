@@ -158,7 +158,9 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+
 <script>
+
   $(document).ready( 
     function () {
       $('.documentsTable').DataTable();
@@ -614,11 +616,12 @@
         if (response.success == true) {
           getPendingDocuments('e');
           $('#receiveDocumentSuccessAlert').prop('hidden', false);
+          getAlertCount();
         }else{
           $('#receiveDocumentFailedAlert').prop('hidden', false);
         }
       }
-    });
+    }).done();
   })
 </script>
 

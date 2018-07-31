@@ -8,6 +8,7 @@ class Doctrack extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('doctrack_model');
+		$this->load->model('admin_model');
 		$this->load->library('session');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -88,6 +89,69 @@ class Doctrack extends CI_Controller {
 		$this->session->set_userdata('plan_id_doctrack', $plan_id);
 
 		redirect('doctrack/documentDetailsView');
+	}
+
+	public function addProjectDocumentImages(){
+		$plan_id = $this->session->userdata('plan_id_doctrack');
+		$user_type = $this->session->userdata('user_type');
+		$data['onhand_project_documents'] = $this->doctrack_model->getProjectDocumentsOnhandWithoutImage($plan_id, $user_type);
+		$data['onhand_project_documents_with_image'] = $this->doctrack_model->getProjectDocumentsOnhandWithImage($plan_id, $user_type);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/addDocumentImages', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function uploadPhoto(){
+		$project_document_id = $this->input->post('document_id');
+
+		$countfiles = count($_FILES['files']['name']);
+
+		$config['upload_path'] = './uploads/document_image/';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+
+		for($i = 0 ; $i < $countfiles ; $i++){
+
+			$_FILES['file']['name']     = $_FILES['files']['name'][$i];
+            $_FILES['file']['type']     = $_FILES['files']['type'][$i];
+            $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+            $_FILES['file']['error']     = $_FILES['files']['error'][$i];
+            $_FILES['file']['size']     = $_FILES['files']['size'][$i];
+
+			
+			
+			$config['file_name'] = $project_document_id . '_' . ltrim($i, '0');
+			$this->load->library('upload', $config);
+
+			$this->upload->do_upload('file');
+
+			$url = 'uploads/document_image/' . $config['file_name'];
+			$this->doctrack_model->addDocumentImageURL($project_document_id, $url);
+		}
+			
+		redirect('doctrack/addProjectDocumentImages');
+
+	}
+
+	public function markProjectForImplementation(){
+		$plan_id = $this->session->userdata('plan_id_doctrack');
+		$user_id = $this->session->userdata('user_id');
+		$remark = $this->input->post('remark_for_implementation');
+
+		$this->doctrack_model->markProjectForImplementation($plan_id);
+
+		$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
+
+		redirect('capitol/docTrackView');
+
+	}
+
+	public function getAllImageURL(){
+		$project_document_id = $this->input->post('project_document_id');
+
+		$data['image_urls'] = $this->doctrack_model->getAllImageURL($project_document_id);
+
+		echo json_encode($data);
 	}
 
 	public function sendProjectDocuments(){
@@ -177,6 +241,18 @@ class Doctrack extends CI_Controller {
 			$data['success'] = false;
 		}
 		
+		echo json_encode($data);
+	}
+
+	public function getIncomingDocAlertsCount(){
+		$user_type = $this->session->userdata('user_type');
+		$data['alertCount'] = count($this->doctrack_model->getIncomingDocAlerts($user_type));
+		echo json_encode($data);
+	}
+
+	public function getIncomingDocAlerts(){
+		$user_type = $this->session->userdata('user_type');
+		$data['alerts'] = $this->doctrack_model->getIncomingDocAlerts($user_type);
 		echo json_encode($data);
 	}
 }
