@@ -168,6 +168,14 @@
                 </table>
               </div>
             </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6" style="border: solid">
+                <p>Project Count: </p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6" style="border: solid">
+                <p>Total of all ABC: </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

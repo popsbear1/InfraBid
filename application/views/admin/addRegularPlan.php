@@ -10,117 +10,108 @@
           <h2 class="box-title">Input Regular Project Plan Details</h2>
         </div>
         <div class="box-body">
-          <div class="alert alert-success text-center" id="adding_success" hidden>
-            <p class="text-left"><b>SUCCESS!</b></p>
-            <p>The data has been entered successfully!</p>
-          </div>
-          <div class="alert alert-warning text-center" id="adding_failed" hidden>
-            <p class="text-left"><b>FAILED!</b></p>
-            <p>A problem has been encountered! Please try again!</p>
-          </div>
+          <form id="addPlanForm" method="POST" action="<?php echo base_url('admin/addRegularPlan') ?>" autocomplete="off">
 
-          <form id="addPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addRegularPlan') ?>" autocomplete="off">
-            <!-- Date -->
-            <div class="form-group">
-              <label  class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" class="form-control pull-right" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label>Date Added *</label>
+                      <input type="text" class="form-control" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label>Project Year *</label>
+                      <input type="text" class="form-control" id="year" name="year" value="<?php echo $currentYear ?>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Project Number *</label>
+                  <input type="text" id="project_no" value="" name="project_no" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Project Title *</label>
+                  <input type="text" id="project_title" value="" name="project_title" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Municipality *</label>
+                  <select class="form-control" id="municipality" name ="municipality">
+                    <option selected hidden disabled>Choose Municipality</option>
+                    <?php foreach ($municipalities as $municipality): ?>
+                      <option value="<?php echo $municipality['municipality_id'] ?>" class="municipality"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipality_code'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Barangay *</label>
+                  <select class="form-control" id="barangay" name ="barangay">
+                    <option selected disabled hidden>Choose Barangay</option>
+          
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Type of Project *</label>
+                  <select class="form-control" id="type" name ="type">
+                    <option selected disabled hidden>Choose Type of Project</option>
+                    <?php foreach ($projTypes as $projType): ?>
+                      <option value="<?php echo $projType['projtype_id'] ?>"><?php echo $projType['type'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Mode of Procurement *</label>
+                  <select class="form-control" id="mode" name ="mode">
+                    <option selected hidden disabled>Mode of Procurement</option>
+                    <?php foreach ($modes as $mode): ?>
+                      <option value="<?php echo $mode['mode_id'] ?>"><?php echo $mode['mode'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
               </div>
-              <!-- /.input group -->
-            </div>
-            <div class="form-group">
-              <label  class="control-label col-md-3 col-sm-3 col-xs-12">Project Year *</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" class="form-control pull-right" id="year" name="year" value="<?php echo $currentYear ?>">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="form-group">
+                  <label>Approved Budget Cost(ABC) *</label>
+                  <input type="text" id="ABC" value="" name="ABC"  class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Source of Fund *</label>
+                  <select class="form-control" id="source" name ="source">
+                    <option selected hidden disabled>Choose Source of Fund</option>
+                    <?php foreach ($sourceFunds as $sourceFund): ?>
+                      <option value="<?php echo $sourceFund['fund_id'] ?>"><?php echo $sourceFund['source'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Account Classification *</label>
+                  <select class="form-control" id="account" name ="account">
+                    <option selected hidden disabled>Choose Account Classification</option>
+                    <?php foreach ($accounts as $account): ?>
+                      <option value="<?php echo $account['account_id'] ?>"><?php echo $account['classification'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>ABC/POST OF IB/REI *</label>
+                  <input type="text" class="form-control" name="abc_post_date" id="abc_post_date" placeholder="mm-yyyy">
+                </div>
+                <div class="form-group">
+                  <label>SUB/OPEN OF BIDS *</label>
+                  <input type="text" class="form-control" name="sub_open_date" id="sub_open_date" placeholder="mm-yyyy">
+                </div>
+                <div class="form-group">
+                  <label>NOTICE OF AWARD *</label>
+                  <input type="text" class="form-control" name="award_notice_date" id="award_notice_date" placeholder="mm-yyyy">
+                </div>
+                <div class="form-group">
+                  <label>CONTRACT SIGNING *</label>
+                  <input type="text" class="form-control" name="contract_signing_date" id="contract_signing_date" placeholder="mm-yyyy">
+                </div>
               </div>
-              <!-- /.input group -->
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Number *</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="project_no" value="" name="project_no" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title *</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="project_title" value="" name="project_title" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipality *</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="municipality" name ="municipality">
-                  <option selected hidden disabled>Choose Municipality</option>
-                  <?php foreach ($municipalities as $municipality): ?>
-                    <option value="<?php echo $municipality['municipality_id'] ?>" class="municipality"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipality_code'] ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Barangay *</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="barangay" name ="barangay">
-                  <option selected disabled hidden>Choose Barangay</option>
-        
-                </select>
-              </div> 
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project *</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="type" name ="type">
-                  <option selected disabled hidden>Choose Type of Project</option>
-                  <?php foreach ($projTypes as $projType): ?>
-                    <option value="<?php echo $projType['projtype_id'] ?>"><?php echo $projType['type'] ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement *</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="mode" name ="mode">
-                  <option selected hidden disabled>Mode of Procurement</option>
-                  <?php foreach ($modes as $mode): ?>
-                    <option value="<?php echo $mode['mode_id'] ?>"><?php echo $mode['mode'] ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) *</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="ABC" value="" name="ABC"  class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund *</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="source" name ="source">
-                  <option selected hidden disabled>Choose Source of Fund</option>
-                  <?php foreach ($sourceFunds as $sourceFund): ?>
-                    <option value="<?php echo $sourceFund['fund_id'] ?>"><?php echo $sourceFund['source'] ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification *</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="account" name ="account">
-                  <option selected hidden disabled>Choose Account Classification</option>
-                  <?php foreach ($accounts as $account): ?>
-                    <option value="<?php echo $account['account_id'] ?>"><?php echo $account['classification'] ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
-            </div>
+            </div> 
           </form>
         </div>
         <div class="box-footer text-center">
@@ -168,11 +159,46 @@
   //Date picker
   $('#year').datepicker({
     autoclose: true,
+    orientation: 'bottom auto',
     minViewMode: 2,
     format: 'yyyy'
   })
-</script>
-<script>
+
+  $('#date_added').datepicker();
+
+  $('#abc_post_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'bottom auto'
+  });
+
+  $('#sub_open_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'bottom auto'
+  });
+
+  $('#award_notice_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'top auto'
+  });
+
+  $('#contract_signing_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'top auto'
+  });
+
+  //Script for displaying/sorting/etc dagijy kwa barangays kanu
   var barangayData = '<?php echo json_encode($barangays) ?>';
   var barangays = JSON.parse(barangayData);
 
@@ -191,45 +217,9 @@
         );
       }
     }
-  })
+  });
 
-  // $(document).ready(function() {
-  //   $('#myModal').on('show.bs.modal' , function (e) {
-  //     $('#dAdd').html($('#date_added').val());
-  //     $('#y').html($('#year').val());
-  //     $('#proj').html($('#project_no').val());
-  //     $('#title').html($('#project_title').val());
-  //     $('#mun').html($('#municipality option:selected').html());
-  //     $('#bar').html($('#barangaySelection option:selected').html());
-  //     $('#typ').html($('#type option:selected').html());
-  //     $('#mod').html($('#mode option:selected').html());
-  //     $('#abc').html($('#ABC').val());
-  //     $('#fun').html($('#source option:selected').html());
-  //     $('#accoun').html($('#account option:selected').html());
-  //     $('#statu').html($('#status').val());
-  //     $('#remar').html($('#remarks').val());
-  //  });
-    
-  // });
-</script>
-
-<script>
-  $(document).ready( 
-    function () {
-      $('#project_year').datepicker({
-        autoclose: true,
-        format: 'yyyy',
-        startView: 'years',
-        minViewMode: 'years',
-        orientation: 'bottom auto'
-      });
-
-      $('#date_added').datepicker();
-    } 
-  );
-</script>
-
-<script>
+  //ajax ti adding of regular plan atoy
   $('#addPlanForm').submit(function(e){
     e.preventDefault();
 
@@ -240,14 +230,9 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('.has-error').remove();
-          $('.has-success').remove();
-          $('#alert-success').prop('hidden', false);
-          $('.alert-success').delay(500).show(10, function() {
-          $(this).delay(3000).hide(10, function() {
-            $(this).remove();
-          });
-          })
+          $('#planAddingSuccessModal').modal('show');
+          $('#addPlanForm')[0].reset();
+          $('#barangay').val('');
         }else{
           $.each(response.messages, function(key, value) {
             var element = $('#' + key);
@@ -265,4 +250,40 @@
     });
   })
 </script>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="planAddingSuccessModal" >
+  <div class="modal-dialog modal-sm" style="background: #b3ffb3">
+    <div class="modal-content" style="background: #b3ffb3">
+      <div class="modal-header">
+        <p><span><i class="fa fa-check"></i></span> Success!</p>
+      </div>
+      <div class="modal-body text-center">
+        <p>New Regular Project Plan Successfully Recorded!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal">
+          close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="planAddingFailModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p><span><i class="fa fa-check"></i></span> Alert!</p>
+      </div>
+      <div class="modal-body">
+        <p>New Regular Project Plan Not Recorded!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button">
+          close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
