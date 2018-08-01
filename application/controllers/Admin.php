@@ -84,12 +84,12 @@ class Admin extends CI_Controller {
 	}
 
 	public function getFilteredSupplementaryPlanData(){
-		$year = $this->input->post('year');
-		$quarter = $this->input->post('quarter');
-		$status = $this->input->post('status');
-		$municipality = $this->input->post('municipality');
+		$year = $this->input->get('year');
+		$quarter = $this->input->get('quarter');
+		$status = $this->input->get('status');
+		$municipality = $this->input->get('municipality');
 		$source = $this->input->get('source');
-		$type = $this->input->post('type');
+		$type = $this->input->get('type');
 
 		if (empty($year)) {
 			$year = null;
@@ -183,14 +183,14 @@ class Admin extends CI_Controller {
 		$data = array('success' => false, 'messages' => array());
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
-		$this->form_validation->set_rules('year', 'Project year', 'trim|required');
-		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|integer|is_natural');
+		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|is_natural');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
 		$this->form_validation->set_rules('mode', 'Mode of Procurement', 'trim|required');
-		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required');
+		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|is_natural');
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
 		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
 		$this->form_validation->set_rules('abc_post_date', 'abc/post of ib/rei', 'trim|required');
@@ -252,14 +252,14 @@ class Admin extends CI_Controller {
 		$data = array('success' => false, 'messages' => array());
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
-		$this->form_validation->set_rules('year', 'Project year', 'trim|required');
+		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
 		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|integer|is_natural');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
 		$this->form_validation->set_rules('mode', 'Mode of Procurement', 'trim|required');
-		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required');
+		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|is_natural');
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
 		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
