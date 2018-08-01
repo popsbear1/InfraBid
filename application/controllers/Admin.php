@@ -40,10 +40,10 @@ class Admin extends CI_Controller {
 		$municipality = null;
 		$source = null;
 		$projecttype = null;
-
+		$data['year'] = date('Y');
 		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
-		$data['sources'] = $this->admin_model->getSourceofFunds();
+		$data['sources'] = $this->admin_model->getRegularFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -60,7 +60,7 @@ class Admin extends CI_Controller {
 		$type = $this->input->get('type');
 
 		if (empty($year)) {
-			$year = date('Y');
+			$year = null;
 		}
 		if (empty($quarter)) {
 			$quarter = null;
@@ -92,7 +92,7 @@ class Admin extends CI_Controller {
 		$type = $this->input->post('type');
 
 		if (empty($year)) {
-			$year = date('Y');
+			$year = null;
 		}
 		if (empty($quarter)) {
 			$quarter = null;
@@ -121,10 +121,10 @@ class Admin extends CI_Controller {
 		$municipality = null;
 		$source = null;
 		$projecttype = null;
-
+		$data['year'] = date('Y');
 		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
-		$data['sources'] = $this->admin_model->getSourceofFunds();
+		$data['sources'] = $this->admin_model->getSupplementalFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');

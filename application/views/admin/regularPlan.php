@@ -21,7 +21,7 @@
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <input type="text" id="year" class="form-control">
+                  <input type="text" id="year" class="form-control" value="<?php echo $year ?>">
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
