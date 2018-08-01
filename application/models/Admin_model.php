@@ -243,17 +243,18 @@
 		public function getMunicipalities(){
 			$this->db->select('*');
 			$this->db->from('municipalities');
-
+			$this->db->order_by('municipality ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
+
 		}
 
 		public function getActiveMunicipalities(){
 			$this->db->select('*');
 			$this->db->from('municipalities');
 			$this->db->where('status', 'active');
-
+			$this->db->order_by('municipality ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -262,7 +263,7 @@
 		public function getBarangays(){
 			$this->db->select('*');
 			$this->db->from('barangays');
-
+			$this->db->order_by('barangay ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -271,7 +272,7 @@
 		public function getProjectType(){
 			$this->db->select('*');
 			$this->db->from('projtype');
-
+			$this->db->order_by('type ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -281,7 +282,7 @@
 			$this->db->select('*');
 			$this->db->from('projtype');
 			$this->db->where('status', 'active');
-
+			$this->db->order_by('type ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -290,7 +291,7 @@
 		public function getSourceofFunds(){
 			$this->db->select('*');
 			$this->db->from('funds');
-
+			$this->db->order_by('source ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -300,7 +301,7 @@
 			$this->db->select('*');
 			$this->db->from('funds');
 			$this->db->where('fund_type', 'regular');
-
+			$this->db->order_by('source ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -310,7 +311,7 @@
 			$this->db->select('*');
 			$this->db->from('funds');
 			$this->db->where('fund_type', 'supplemental');
-
+			$this->db->order_by('source ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -321,7 +322,7 @@
 			$this->db->from('funds');
 			$this->db->where('fund_type', $fund_type);
 			$this->db->where('status', 'active');
-
+			$this->db->order_by('source ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -331,7 +332,7 @@
 			$this->db->select('*');
 			$this->db->from('account_classification');
 			$this->db->where('status', 'active');
-
+			$this->db->order_by('classification ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -341,7 +342,7 @@
 			$this->db->select('*');
 			$this->db->from('procurement_mode');
 			$this->db->where('status', 'active');
-
+			$this->db->order_by('mode ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -399,7 +400,7 @@
 		public function getContractors(){
 			$this->db->select('*');
 			$this->db->from('contractors');
-
+			$this->db->order_by('owner ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -409,7 +410,7 @@
 			$this->db->select('*');
 			$this->db->from('contractors');
 			$this->db->where('contractor_id', $currentContractorID);
-
+			$this->db->order_by('owner ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
@@ -418,7 +419,7 @@
 		public function getFunds(){
 			$this->db->select('*');
 			$this->db->from('funds');
-
+			$this->db->order_by('source ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -428,7 +429,7 @@
 			$this->db->select('*');
 			$this->db->from('funds');
 			$this->db->where('fund_id', $fund_id);
-
+			$this->db->order_by('source ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
@@ -437,7 +438,7 @@
 		public function getProjectTypes(){
 			$this->db->select('*');
 			$this->db->from('projtype');
-
+			$this->db->order_by('type ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -447,7 +448,7 @@
 			$this->db->select('*');
 			$this->db->from('projtype');
 			$this->db->where('projtype_id', $projtype_id);
-
+			$this->db->order_by('type ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
@@ -456,25 +457,18 @@
 		public function getUsers(){
 			$this->db->select('*');
 			$this->db->from('users');
-
+			$this->db->order_by('last_name ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
 		}
 
 		public function getUserDetails($userID){
-		// 	$this->db->select('*');
-		// 	$this->db->from('users');
-		// 	$this->db->where('user_id', $userID);
 
-		// 	$query = $this->db->get();
-
-		// 	return $query->row_array();
-		// }
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('user_id', $userID);
-
+			$this->db->order_by('last_name ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
@@ -503,7 +497,7 @@
 			$this->db->select('*');
 			$this->db->from('municipalities');
 			$this->db->where('municipality_id', $municipality_id);
-
+			$this->db->order_by('municipality ASC');
 			$query = $this->db->get();
 
 			return $query->row();
@@ -513,7 +507,7 @@
 			$this->db->select('*');
 			$this->db->from('barangays');
 			$this->db->where('municipality_id', $municipality_id);
-
+			$this->db->order_by('municipality ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -525,7 +519,7 @@
 			$this->db->select('*');
 			$this->db->from('procurement_mode');
 			$this->db->where('mode_id', $procurementMode);
-
+			$this->db->order_by('mode ASC');
 			$query = $this->db->get();
 			return $query->row();
 		}
@@ -533,7 +527,7 @@
 		public function getProcurementMode(){
 			$this->db->select('*');
 			$this->db->from('procurement_mode');
-
+			$this->db->order_by('mode ASC');
 			$query = $this->db->get();
 			return $query->result_array();
 		}
@@ -542,7 +536,7 @@
 
 			$this->db->select('*');
 			$this->db->from('account_classification');
-
+			$this->db->order_by('classification ASC');
 			$query = $this->db->get();
 			return $query->result_array();
 		}
@@ -552,7 +546,7 @@
 			$this->db->select('*');
 			$this->db->from('account_classification');
 			$this->db->where('account_id', $classificationDetails);
-
+			$this->db->order_by('classification ASC');
 			$query = $this->db->get();
 			return $query->row();
 		}
@@ -560,7 +554,7 @@
 		public function getDocument(){
 			$this->db->select('*');
 			$this->db->from('document_type');
-
+			$this->db->order_by('document_name ASC');
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -570,7 +564,7 @@
 			$this->db->select('*');
 			$this->db->from('document_type');
 			$this->db->where('doc_type_id', $currentDocumentID);
-
+			$this->db->order_by('document_name ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
