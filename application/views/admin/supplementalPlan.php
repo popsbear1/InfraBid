@@ -126,54 +126,67 @@
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
-                <table class="table table-bordered table-striped" id="plan_table">
-                  <thead style='font-size:12px;'>
-                    <tr>
-                      <th class="text-center">Project No.</th>
-                      <th class="text-center">Project Title</th>
-                      <th class="text-center">Project Year</th>
-                      <th class="text-center">Location</th>
-                      <th class="text-center">Type of Project</th>
-                      <th class="text-center">Mode of Procurement</th>
-                      <th class="text-center">Approved Budget Cost</th>
-                      <th class="text-center">Source of Fund</th>
-                      <th class="text-center">Account Classification</th>
-                      <th class="text-center">Edit</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($plans as $plan): ?>
+                <div class="tableContainer table-responsive no-pading">
+                  <table class="table table-bordered table-hover" id="plan_table">
+                    <thead style='font-size:12px;'>
                       <tr>
-                        <td><?php echo $plan['project_no'] ?></td>
-                        <td><?php echo $plan['project_title'] ?></td>
-                        <td><?php echo $plan['project_year'] ?></td>
-                        <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
-                        <td><?php echo $plan['type'] ?></td>
-                        <td><?php echo $plan['mode'] ?></td>
-                        <td><?php echo $plan['abc'] ?></td>
-                        <td><?php echo $plan['source'] ?></td>
-                        <td><?php echo $plan['classification'] ?></td>
-                        <td>
-                          <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                            <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
-                            <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
-                            <button class="btn btn-info" type="submit">
-                              <i class="fa fa-eye"></i>
-                            </button>
-                          </form>
-                        </td>
+                        <th class="text-center">Project No.</th>
+                        <th class="text-center">Project Title</th>
+                        <th class="text-center">Location</th>
+                        <th class="text-center">Mode of Procurement</th>
+                        <th class="text-center">ADS/POST OF IB/REI</th>
+                        <th class="text-center">SUB/ OPEN OF BIDS</th>
+                        <th class="text-center">NOTICE OF AWARD</th>
+                        <th class="text-center">CONTRACT SIGNING</th>
+                        <th class="text-center">Source of Fund</th>
+                        <th class="text-center">Type of Project</th>
+                        <th class="text-center">Approved Budget Cost</th>
+                        <th class="text-center">Project Year</th>
+                        <th class="text-center">Edit</th>
                       </tr>
-                    <?php endforeach ?>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($plans as $plan): ?>
+                        <tr>
+                          <td><?php echo $plan['project_no'] ?></td>
+                          <td><?php echo $plan['project_title'] ?></td>
+                          <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
+                          <td><?php echo $plan['mode'] ?></td>
+                          <td><?php echo $plan['abc_post_date'] ?></td>
+                          <td><?php echo $plan['sub_open_date'] ?></td>
+                          <td><?php echo $plan['award_notice_date'] ?></td>
+                          <td><?php echo $plan['contract_signing_date'] ?></td>
+                          <td><?php echo $plan['source'] ?></td>
+                          <td><?php echo number_format($plan['abc'], 2) ?></td>
+                          <td><?php echo $plan['type'] ?></td>
+                          <td><?php echo $plan['project_year'] ?></td>
+                          <td>
+                            <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
+                              <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
+                              <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
+                              <button class="btn btn-info" type="submit">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </form>
+                          </td>
+                        </tr>
+                      <?php endforeach ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <p>Project Count: </p>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <p>Total of all ABC: </p>
+            <div class="callout" style="background: #f2f2f2">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                  <h4>Project Count:</h4>
+                  <p id="project_count"><?php echo $count_total['project_count'] ?></p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                  <h4>Total of all ABC:</h4>
+                  <p id="total_abc"><?php echo number_format($count_total['total_abc'], 2)?></p>
+                  <p id="total_abc_word_format"><?php echo '(' . $count_total['total_abc_word_format'] . ')' ?></p>
+                </div>
               </div>
             </div>
           </div>
@@ -285,48 +298,46 @@
       type: 'GET',
       url: '<?php echo base_url("admin/getFilteredSupplementaryPlanData") ?>',
       data: { year: year, quarter: quarter, status: status, municipality: municipality, source: source, type: type},
-      dataType: 'json',
-      success: function(response){
-
-        $('#plan_table').DataTable({
-          data: response.plans,
-          columns: [
-              { data: 'project_no' },
-              { data: 'project_title' },
-              { data: 'project_year' },
-              { 
-                data: null,
-                render: function(data, type, row){
-                  return data.barangay + ', ' + data.municipality;
-                },
-                editField: ['barangay', 'municipality']
+      dataType: 'json'
+    }).done(function(response){
+      $('#project_count').html(response.count_total['project_count']);
+      $('#total_abc').html(response.count_total['total_abc']);
+      $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
+      $('#plan_table').DataTable({
+        data: response.plans,
+        columns: [
+            { data: 'project_no' },
+            { data: 'project_title' },
+            { 
+              data: null,
+              render: function(data, type, row){
+                return data.barangay + ', ' + data.municipality;
               },
-              { data: 'type' },
-              { data: 'mode' },
-              { data: 'abc' },
-              { data: 'source' },
-              { data: 'classification' },
-              { 
-                data: null,
-                render: function ( data, type, row ) {
-                  return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                            '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                              '<i class="fa fa-eye"></i>' +
-                            '</button>' +
-                          '</form>';
-                }
+              editField: ['barangay', 'municipality']
+            },
+            { data: 'mode' },
+            { data: 'abc_post_date' },
+            { data: 'sub_open_date' },
+            { data: 'award_notice_date' },
+            { data: 'contract_signing_date' },
+            { data: 'source' },
+            { data: 'type' },
+            { data: 'abc' },
+            { data: 'project_year' },
+            { 
+              data: null,
+              render: function ( data, type, row ) {
+                return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                          '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                            '<i class="fa fa-eye"></i>' +
+                          '</button>' +
+                        '</form>';
               }
-          ],
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : true,
-          'ordering'    : true,
-          'info'        : true,
-          'autoWidth'   : true
-        });
+            }
+        ]
+      });
 
-      }
-    });
+    })
   });
 </script>
 
