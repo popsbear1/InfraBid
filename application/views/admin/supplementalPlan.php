@@ -21,7 +21,7 @@
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <input type="text" id="year" class="form-control">
+                  <input type="text" id="year" class="form-control"  value="<?php echo $year ?>">
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
@@ -168,6 +168,17 @@
                 </table>
               </div>
             </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <p>Project Count: </p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <p>Total of all ABC: </p>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            
           </div>
         </div>
       </section>

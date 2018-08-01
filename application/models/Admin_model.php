@@ -26,7 +26,9 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_type', 'regular');
-			$this->db->where('project_year', $year);
+			if ($year != null) {
+				$this->db->where('project_year', $year);
+			}
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
 					$this->db->where('MONTH(date_added)', '01');
@@ -80,7 +82,9 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_type', 'supplementary');
-			$this->db->where('project_year', $year);
+			if ($year != null) {
+				$this->db->where('project_year', $year);
+			}
 			if ($quarter != null) {
 				if ($quarter == '1stQ') {
 					$this->db->where('MONTH(date_added)', '01');
@@ -174,6 +178,26 @@
 		public function getSourceofFunds(){
 			$this->db->select('*');
 			$this->db->from('funds');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getRegularFunds(){
+			$this->db->select('*');
+			$this->db->from('funds');
+			$this->db->where('fund_type', 'regular');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getSupplementalFunds(){
+			$this->db->select('*');
+			$this->db->from('funds');
+			$this->db->where('fund_type', 'supplemental');
 
 			$query = $this->db->get();
 
@@ -490,7 +514,7 @@
 	* All functions bellow are used to insert data on Database.
 	**/
 		//Function for inserting new project.
-	public function insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+	public function insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date){
 
 		$data = array(
 			'date_added' => $date_added,
@@ -504,6 +528,10 @@
 			'fund_id' => $source,
 			'account_id' => $account,
 			'abc' => $ABC,
+			'abc_post_date' => $abc_post_date,
+			'sub_open_date' => $sub_open_date,
+			'award_notice_date' => $award_notice_date,
+			'contract_signing_date' => $contract_signing_date,
 			'status' => 'pending',
 			'project_type' => 'regular',
 			'pow_ready' => 'false'
