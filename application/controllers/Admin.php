@@ -88,6 +88,8 @@ class Admin extends CI_Controller {
 		$quarter = $this->input->post('quarter');
 		$status = $this->input->post('status');
 		$municipality = $this->input->post('municipality');
+		$source = $this->input->get('source');
+		$type = $this->input->post('type');
 
 		if (empty($year)) {
 			$year = date('Y');
@@ -101,8 +103,13 @@ class Admin extends CI_Controller {
 		if (empty($municipality)) {
 			$municipality = null;
 		}
-
-		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality);
+		if(empty($source)) {
+			$source = null;
+		}
+ 		if(empty($projecttype)){
+ 			$type = null;
+ 		}
+		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality,$source,$type);
 
 		echo json_encode($data);
 	}
@@ -112,9 +119,13 @@ class Admin extends CI_Controller {
 		$quarter = null;
 		$status = null;
 		$municipality = null;
+		$source = null;
+		$projecttype = null;
 
-		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality);
+		$data['plans'] = $this->admin_model->getSupplementaryProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['sources'] = $this->admin_model->getSourceofFunds();
+		$data['types'] = $this->admin_model->getProjectType();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/supplementalPlan', $data);

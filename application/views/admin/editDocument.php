@@ -1,24 +1,19 @@
 <section class="content-header">
-  <h2>Details</h2>
+  <h2>Edit Document Details</h2>
 </section>
 <section class="content">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="box-title">Edit Document </h2>
-            </div>
-          </div>
+          <h2 class="box-title">Edit Document<small></small></h2>
+        </div>
           <div class="row">
             <div class="col-lg-12">
               <a href="<?php echo base_url('admin/manageDocumentsView') ?>" class="btn btn-primary">Back</a>
             </div>
           </div>
-        </div>
         <div class="box-body">
-
           <?php if (isset($_SESSION['success'])): ?>
             <div class="alert alert-success">
               <p><?php echo $_SESSION['success'] ?></p>
@@ -29,34 +24,35 @@
               <p><?php echo $_SESSION['error'] ?></p>
             </div>
           <?php endif ?>
-
-          <form id="editDocumentsForm" method="POST" action="<?php echo base_url('admin/editDocument') ?>" data-parsley-validate class="form-horizontal form-label-left">
-
+          <form id="editDocumentsForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editDocument') ?>">
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Number
-                <span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Number<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any" value="" id="docno" placeholder="<?php echo $documentDetail['doc_no']; ?>" name="docno" class="form-control col-md-7 col-xs-12" required>
+                <input type="text" step="any"  id="doc_no" name="doc_no" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $documentDetail['doc_no'] ?>" required>
               </div>
             </div>
-
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Document Name
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Document Name<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="docname" value="" placeholder="<?php echo $documentDetail['document_name']; ?>" name="docname" class="form-control col-md-7 col-xs-12" required>
+                <input type="text" step="any"  id="document_name" name="document_name" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $documentDetail['document_name'] ?>" required>
               </div>
             </div>
-         </form> 
-        </div>
-        <div class="box-footer text-center">
-          <button href="#myModal" type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editDocumentModal">Submit</button>            
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-ui/jquery-ui.min.js"></script>
@@ -89,32 +85,38 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('#myModal').on('show.bs.modal' , function (e) {
-         $('#dono').html($('#docno').val());
-         $('#dona').html($('#docname').val());
-       });
 
-      });
-    </script>
+<script>
+  $(document).ready(function() {
+    $('#editDocumentModal').on('show.bs.modal' , function (e) {
+      $('#documentnumber').html($('#doc_no').val());
+      $('#documentname').html($('#document_name').val());
+    });
+  });
+</script>
 
 
-    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- modal for data confirmation -->
+    <div id="editDocumentModal" class="modal fade" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
+
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModal">Confirm Input Values</h4>
+            <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
           </div>
           <div class="modal-body">
             <table class='table table-striped table-bordered' style='font-size:13px;'>
               <thead>
-                <tr>
+                <tr >
                   <th style='text-align: center'>Attributes</th>
                   <th style='text-align: center'>Values</th>
                 </tr> 
@@ -122,19 +124,20 @@
               <tbody>
                 <tr>
                   <td>Document Number</td>
-                  <td><span id="dono"></span></td>
+                  <td><span id="documentnumber"></span></td>
                 </tr>
                 <tr>
                   <td>Document Name</td>
-                  <td><span id="dona"></span></td>
+                  <td><span id="documentname"></span></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" form="editDocumentsForm" name="submit" class="btn btn-primary" id="editDocumentsForm">Confirm</button>
+            <button type="submit" form="editDocumentsForm" name="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
     </div>
+    <!-- end of modal -->

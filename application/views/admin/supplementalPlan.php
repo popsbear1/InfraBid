@@ -14,14 +14,24 @@
             </div>
             <div class="row">                   
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <div class="form-group">
-                  <label for="year">Year: </label>
-                  <input type="text" id="year" class="form-control">  
+                <label for="year">Year: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="year_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <input type="text" id="year" class="form-control">
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <div class="form-group">
-                  <label for="quarter">Quarter: </label>
+                <label for="quarter">Quarter: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="quarter_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
                   <select name="quarter" id="quarter" class="form-control">
                     <option hidden disabled selected>Choose Quarter</option>
                     <option value="1stQ">1st Q</option>
@@ -32,8 +42,13 @@
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <div class="form-group">
-                  <label for="status">Status: </label>
+                <label for="status">Status: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="status_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
                   <select name="status" id="status" class="form-control">
                     <option hidden disabled selected>Choose Status</option>
                     <option value="pending">Pending</option>
@@ -46,8 +61,13 @@
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <div class="form-group">
-                  <label for="municipality">Municipality: </label>
+                <label for="municipality">Municipality: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="municipality_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
                   <select name="municipality" id="municipality" class="form-control">
                     <option hidden disabled selected>Choose Municipality</option>
                     <?php foreach ($municipalities as $municipality): ?>
@@ -57,30 +77,40 @@
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <div class="form-group">
-                  <label for="municipality">Municipality: </label>
-                  <select name="municipality" id="municipality" class="form-control">
-                    <option hidden disabled selected>Choose Municipality</option>
-                    <?php foreach ($municipalities as $municipality): ?>
-                      <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                <label for="source">Source of Fund: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="fund_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="source" id="source" class="form-control">
+                    <option hidden disabled selected>Choose Source</option>
+                    <?php foreach ($sources as $source): ?>
+                      <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <div class="form-group">
-                  <label for="municipality">Municipality: </label>
-                  <select name="municipality" id="municipality" class="form-control">
-                    <option hidden disabled selected>Choose Municipality</option>
-                    <?php foreach ($municipalities as $municipality): ?>
-                      <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                <label for="type">Project Type: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="type_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="type" id="type" class="form-control">
+                    <option hidden disabled selected>Choose Type</option>
+                    <?php foreach ($types as $type): ?>
+                      <option value="<?php echo $type['projtype_id'] ?>"><?php echo $type['type'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+              <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
                 <div class="form-group">
                   <label>Action:</label>
                   <button class="btn btn-primary" id="filterBtn" type="button">
@@ -189,7 +219,7 @@
         'paging'      : true,
         'lengthChange': false,
         'searching'   : true,
-        'ordering'    : false,
+        'ordering'    : true,
         'info'        : true,
         'autoWidth'   : true
       });
@@ -205,19 +235,45 @@
     } 
   );
 
+  $('#year_btn').click(function(){
+    $('#year').val('');
+  });
+
+  $('#quarter_btn').click(function(){
+    $('#quarter').val('');
+  });
+
+  $('#status_btn').click(function(){
+    $('#status').val('');
+  });
+
+  $('#municipality_btn').click(function(){
+    $('#municipality').val('');
+  });
+
+  $('#fund_btn').click(function(){
+    $('#source').val('');
+  });
+
+  $('#type_btn').click(function(){
+    $('#type').val('');
+  });
+
   $('#filterBtn').click(function(e){
     e.preventDefault();
     var year = $('#year').val();
     var quarter = $('#quarter').val();
     var status = $('#status').val();
     var municipality = $('#municipality').val();
+    var source = $('#source').val();
+    var type = $('#type').val();
 
     $('#plan_table').DataTable().destroy();
 
     $.ajax({
-      type: 'POST',
-      url: '<?php echo base_url("admin/getFilteredRegularPlanData") ?>',
-      data: { year: year, quarter: quarter, status: status, municipality: municipality},
+      type: 'GET',
+      url: '<?php echo base_url("admin/getFilteredSupplementaryPlanData") ?>',
+      data: { year: year, quarter: quarter, status: status, municipality: municipality, source: source, type: type},
       dataType: 'json',
       success: function(response){
 
@@ -253,7 +309,7 @@
           'paging'      : true,
           'lengthChange': false,
           'searching'   : true,
-          'ordering'    : false,
+          'ordering'    : true,
           'info'        : true,
           'autoWidth'   : true
         });
@@ -262,3 +318,4 @@
     });
   });
 </script>
+

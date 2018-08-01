@@ -70,7 +70,7 @@
 			return $query->result_array();
 		}
 
-		public function getSupplementaryProjectPlan($year, $quarter, $status, $municipality){
+		public function getSupplementaryProjectPlan($year, $quarter, $status, $municipality,$source,$type){
 			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -110,6 +110,13 @@
 				$this->db->where('project_plan.municipality_id', $municipality);
 			}
 
+			if ($source !=null) {
+				$this->db->where('project_plan.fund_id',$source);
+			}
+
+			if ($type !=null){
+				$this->db->where('project_plan.projtype_id',$projecttype);
+			}
 			$this->db->order_by('municipality ASC', 'barangay ASC');
 
 			$query = $this->db->get();
@@ -385,6 +392,14 @@
 
 			$query = $this->db->get();
 			return $query->row();
+		}
+
+		public function getProcurementMode(){
+			$this->db->select('*');
+			$this->db->from('procurement_mode');
+
+			$query = $this->db->get();
+			return $query->result_array();
 		}
 
 		public function getClassification(){
