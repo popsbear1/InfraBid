@@ -666,7 +666,7 @@
 	}
 
 	
-	public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account){
+	public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date){
 
 		$data = array(
 			'date_added' => $date_added,
@@ -680,6 +680,10 @@
 			'fund_id' => $source,
 			'account_id' => $account,
 			'abc' => $ABC,
+			'abc_post_date' => $abc_post_date,
+			'sub_open_date' => $sub_open_date,
+			'award_notice_date' => $award_notice_date,
+			'contract_signing_date' => $contract_signing_date,
 			'status' => 'pending',
 			'project_type' => 'supplementary',
 			'pow_ready' => 'false'

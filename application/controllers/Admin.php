@@ -46,9 +46,13 @@ class Admin extends CI_Controller {
 		$data['sources'] = $this->admin_model->getRegularFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $quarter, $status, $municipality,$source,$projecttype);
-		$total = explode('.', $data['count_total']['total_abc']);
-		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
-		$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		if ($data['count_total']['total_abc'] > 0 ) {
+			$total = explode('.', $data['count_total']['total_abc']);
+			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+			$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		}else{
+			$data['count_total']['total_abc_word_format'] = 'none';
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/regularPlan', $data);
@@ -68,9 +72,13 @@ class Admin extends CI_Controller {
 		$data['sources'] = $this->admin_model->getSupplementalFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['count_total'] = $this->admin_model->getSupplementaryProjectPlanCountTotal($year, $quarter, $status, $municipality,$source,$projecttype);
-		$total = explode('.', $data['count_total']['total_abc']);
-		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
-		$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		if ($data['count_total']['total_abc'] > 0 ) {
+			$total = explode('.', $data['count_total']['total_abc']);
+			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+			$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		}else{
+			$data['count_total']['total_abc_word_format'] = 'none';
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/supplementalPlan', $data);
@@ -291,6 +299,10 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|is_natural');
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
 		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
+		$this->form_validation->set_rules('abc_post_date', 'abc/post of ib/rei', 'trim|required');
+		$this->form_validation->set_rules('sub_open_date', 'sub/open of bids', 'trim|required');
+		$this->form_validation->set_rules('award_notice_date', 'notice of award', 'trim|required');
+		$this->form_validation->set_rules('contract_signing_date', 'contract signing', 'trim|required');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
@@ -305,8 +317,13 @@ class Admin extends CI_Controller {
 			$ABC = htmlspecialchars($this->input->post('ABC'));
 			$source = htmlspecialchars($this->input->post('source'));
 			$account = htmlspecialchars($this->input->post('account'));
+			$abc_post_date = htmlspecialchars($this->input->post('abc_post_date'));
+			$sub_open_date = htmlspecialchars($this->input->post('sub_open_date'));
+			$award_notice_date = htmlspecialchars($this->input->post('award_notice_date'));
+			$contract_signing_date = htmlspecialchars($this->input->post('contract_signing_date'));
 
-			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account)) {
+
+			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date)) {
 				$data['success'] = true;
 			}
 
