@@ -227,27 +227,26 @@
       type: 'POST',
       url: $('#addPlanForm').attr('action'),
       data: $('#addPlanForm').serialize(),
-      dataType: 'json',
-      success: function(response){
-        if (response.success == true) {
-          $('#planAddingSuccessModal').modal('show');
-          $('#addPlanForm')[0].reset();
-          $('#barangay').val('');
-        }else{
-          $.each(response.messages, function(key, value) {
-            var element = $('#' + key);
-            
-            element.closest('div.form-group')
-            .removeClass('has-error')
-            .addClass(value.length > 0 ? 'has-error' : 'has-success')
-            .find('.text-danger')
-            .remove();
-            
-            element.after(value);
-          });
-        }
+      dataType: 'json'
+    }).done(function(response){
+      if (response.success == true) {
+        $('#planAddingSuccessModal').modal('show');
+        $('#addPlanForm')[0].reset();
+        $('#barangay').val('');
+      }else{
+        $.each(response.messages, function(key, value) {
+          var element = $('#' + key);
+          
+          element.closest('div.form-group')
+          .removeClass('has-error')
+          .addClass(value.length > 0 ? 'has-error' : 'has-success')
+          .find('.text-danger')
+          .remove();
+          
+          element.after(value);
+        });
       }
-    });
+    })
   })
 </script>
 
