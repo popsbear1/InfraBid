@@ -87,7 +87,7 @@
                   <select name="source" id="source" class="form-control">
                     <option hidden disabled selected>Choose Source</option>
                     <?php foreach ($sources as $source): ?>
-                      <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?></option>
+                      <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?>  </option>
                     <?php endforeach ?>
                   </select>
                 </div>

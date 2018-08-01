@@ -56,7 +56,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title *</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="project_title" value="" name="project_title"  required="required" class="form-control">
+                    <input type="text" id="project_title" value="" name="project_title" class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
