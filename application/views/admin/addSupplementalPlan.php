@@ -1,68 +1,44 @@
 
-    <section class="content-header">
-      <h3>ADD NEW PROJECT PLAN (SUPPLEMENTAL)</h3>
-    </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h2 class="box-title">Input Project Plan Details</h2>
-            </div>
-            <div class="box-body">
-              <?php if (isset($_SESSION['success'])): ?>
-                <div class="alert alert-success">
-                  <p><?php echo $_SESSION['success'] ?></p>
-                </div>
-              <?php endif ?>
-              <?php if (isset($_SESSION['error'])): ?>
-                <div class="alert alert-warning">
-                  <p><?php echo $_SESSION['error'] ?></p>
-                </div>
-              <?php endif ?>
+        <div class="col-md-12">
+          <h3 class="pull-left">Add New Supplemental Project Plans</h3>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-header">
+          <h2 class="box-title">Input Supplemental Project Plan Details</h2>
+        </div>
+        <div class="box-body">
+          <div class="form_container" style="background: #f2f2f2; padding: 5%;">
+            <form id="addSupplementalPlanForm" method="POST" action="<?php echo base_url('admin/addSupplementalPlan') ?>" autocomplete="off">
 
-            <div class="alert alert-success text-center" id="adding_success" hidden>
-              <p class="text-left"><b>SUCCESS!</b></p>
-              <p>The data has been entered successfully!</p>
-            </div>
-            <div class="alert alert-warning text-center" id="adding_failed" hidden>
-              <p class="text-left"><b>FAILED!</b></p>
-              <p>A problem has been encountered! Please try again!</p>
-            </div>
-              <form id="addSupplementalPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addSupplementalPlan') ?>">
-                <!-- Date -->
-                <div class="form-group">
-                  <label  class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control pull-right" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>Date Added <span style="color: red">* </span>:</label>
+                        <input type="text" class="form-control" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>Project Year <span style="color: red">* </span>:</label>
+                        <input type="text" class="form-control" id="year" name="year" value="<?php echo $currentYear ?>">
+                      </div>
+                    </div>
                   </div>
-                  <!-- /.input group -->
-                </div>
-                <div class="form-group">
-                  <label  class="control-label col-md-3 col-sm-3 col-xs-12">Project Year *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control pull-right" id="year" name="year" value="<?php echo $currentYear ?>">
+                  <div class="form-group">
+                    <label>Project Number <span style="color: red">* </span>:</label>
+                    <input type="text" id="project_no" value="" name="project_no" class="form-control" placeholder="Input project number here ... ">
                   </div>
-                  <!-- /.input group -->
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Number *</span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="project_no" value="" name="project_no" class="form-control">
+                  <div class="form-group">
+                    <label>Project Title <span style="color: red">* </span>:</label>
+                    <input type="text" id="project_title" value="" name="project_title" class="form-control" placeholder="Input project title here ... ">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title *</span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="project_title" value="" name="project_title" class="form-control">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipality *</span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Municipality <span style="color: red">* </span>:</label>
                     <select class="form-control" id="municipality" name ="municipality">
                       <option selected hidden disabled>Choose Municipality</option>
                       <?php foreach ($municipalities as $municipality): ?>
@@ -70,20 +46,15 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Barangay *</span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control" id="barangaySelection" name ="barangay">
+                  <div class="form-group">
+                    <label>Barangay <span style="color: red">* </span>:</label>
+                    <select class="form-control" id="barangay" name ="barangay">
                       <option selected disabled hidden>Choose Barangay</option>
             
                     </select>
-                  </div> 
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project *</span></label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  </div>
+                  <div class="form-group">
+                    <label>Type of Project <span style="color: red">* </span>:</label>
                     <select class="form-control" id="type" name ="type">
                       <option selected disabled hidden>Choose Type of Project</option>
                       <?php foreach ($projTypes as $projType): ?>
@@ -91,10 +62,8 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement *</span></label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Mode of Procurement <span style="color: red">* </span>:</label>
                     <select class="form-control" id="mode" name ="mode">
                       <option selected hidden disabled>Mode of Procurement</option>
                       <?php foreach ($modes as $mode): ?>
@@ -103,15 +72,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) *</span></label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="ABC" value="" name="ABC"  class="form-control">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label>Approved Budget Cost (ABC) <span style="color: red">* </span>:</label>
+                    <input type="text" id="ABC" value="" name="ABC"  class="form-control" placeholder="Input ABC here ... ">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund *</span></label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Source of Fund <span style="color: red">* </span>:</label>
                     <select class="form-control" id="source" name ="source">
                       <option selected hidden disabled>Choose Source of Fund</option>
                       <?php foreach ($sourceFunds as $sourceFund): ?>
@@ -119,10 +86,8 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification *</span></label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Account Classification <span style="color: red">* </span>:</label>
                     <select class="form-control" id="account" name ="account">
                       <option selected hidden disabled>Choose Account Classification</option>
                       <?php foreach ($accounts as $account): ?>
@@ -130,13 +95,29 @@
                       <?php endforeach ?>
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label>ABC/Post of IB/REI <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="abc_post_date" id="abc_post_date" placeholder="mm-yyyy">
+                  </div>
+                  <div class="form-group">
+                    <label>Sub/Open of Bids <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="sub_open_date" id="sub_open_date" placeholder="mm-yyyy">
+                  </div>
+                  <div class="form-group">
+                    <label>Notice of Award <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="award_notice_date" id="award_notice_date" placeholder="mm-yyyy">
+                  </div>
+                  <div class="form-group">
+                    <label>Contract Signing <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="contract_signing_date" id="contract_signing_date" placeholder="mm-yyyy">
+                  </div>
                 </div>
-              </form>
-            </div>
-            <div class="box-footer text-center">
-              <button type="submit" class="btn btn-primary" form="addSupplementalPlanForm">Submit</button>
-            </div>
+              </div> 
+            </form>
           </div>
+        </div>
+        <div class="box-footer text-center">
+          <button type="submit" class="btn btn-primary" form="addSupplementalPlanForm">Submit</button>
         </div>
       </div>
     </section>
@@ -150,9 +131,6 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url() ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="<?php echo base_url() ?>public/bower_components/raphael/raphael.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/morris.js/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -162,8 +140,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="<?php echo base_url() ?>public/bower_components/moment/min/moment.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
 <script src="<?php echo base_url() ?>public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url() ?>public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
@@ -181,11 +157,46 @@
   //Date picker
   $('#year').datepicker({
     autoclose: true,
+    orientation: 'bottom auto',
     minViewMode: 2,
     format: 'yyyy'
   })
-</script>
-<script>
+
+  $('#date_added').datepicker();
+
+  $('#abc_post_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'bottom auto'
+  });
+
+  $('#sub_open_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'bottom auto'
+  });
+
+  $('#award_notice_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'top auto'
+  });
+
+  $('#contract_signing_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'top auto'
+  });
+
+  //Script for displaying/sorting/etc dagijy kwa barangays kanu
   var barangayData = '<?php echo json_encode($barangays) ?>';
   var barangays = JSON.parse(barangayData);
 
@@ -194,54 +205,19 @@
   console.log(barangays[1]['municipality_id']);
 
   $('#municipality').change(function(e){
-    $('#barangaySelection').empty();
+    $('#barangay').empty();
     var municipality_id = $(this).val();
 
     for (var i = barangays.length - 1; i >= 0; i--) {
       if (municipality_id == barangays[i]['municipality_id']) {
-        $('#barangaySelection').append(
+        $('#barangay').append(
           '<option class="barangay" value="' + barangays[i]['barangay_id'] + '">' +  barangays[i]['barangay'] + ' - ' + barangays[i]['barangay_code'] + '</option>'
         );
       }
     }
-  })
+  });
 
-  // $(document).ready(function() {
-  //   $('#myModal').on('show.bs.modal' , function (e) {
-  //     $('#dAdd').html($('#date_added').val());
-  //     $('#y').html($('#year').val());
-  //     $('#proj').html($('#project_no').val());
-  //     $('#title').html($('#project_title').val());
-  //     $('#mun').html($('#municipality option:selected').html());
-  //     $('#bar').html($('#barangaySelection option:selected').html());
-  //     $('#typ').html($('#type option:selected').html());
-  //     $('#mod').html($('#mode option:selected').html());
-  //     $('#abc').html($('#ABC').val());
-  //     $('#fun').html($('#source option:selected').html());
-  //     $('#accoun').html($('#account option:selected').html());
-  //     $('#statu').html($('#status').val());
-  //     $('#remar').html($('#remarks').val());
-  //  });
-    
-  // });
-</script>
-<script>
-  $(document).ready( 
-    function () {
-      $('#project_year').datepicker({
-        autoclose: true,
-        format: 'yyyy',
-        startView: 'years',
-        minViewMode: 'years',
-        orientation: 'bottom auto'
-      });
-
-      $('#date_added').datepicker();
-    } 
-  );
-</script>
-
-<script>
+  //ajax ti adding of regular plan atoy
   $('#addSupplementalPlanForm').submit(function(e){
     e.preventDefault();
 
@@ -249,32 +225,25 @@
       type: 'POST',
       url: $('#addSupplementalPlanForm').attr('action'),
       data: $('#addSupplementalPlanForm').serialize(),
-      dataType: 'json',
-      success: function(response){
-        if (response.success == true) {
-          $('.has-error').remove();
-          $('.has-success').remove();
-          $('#alert-success').prop('hidden', false);
-          $('.alert-success').delay(500).show(10, function() {
-          $(this).delay(3000).hide(10, function() {
-            $(this).remove();
-          });
-          })
-        }else{
-          $.each(response.messages, function(key, value) {
-            var element = $('#' + key);
-            
-            element.closest('div.form-group')
-            .removeClass('has-error')
-            .addClass(value.length > 0 ? 'has-error' : 'has-success')
-            .find('.text-danger')
-            .remove();
-            
-            element.after(value);
-          });
-        }
+      dataType: 'json'
+    }).done(function(response){
+      if (response.success == true) {
+        window.location.replace("<?php echo base_url('admin/supplementalPlanView') ?>");
+      }else{
+        $.each(response.messages, function(key, value) {
+          var element = $('#' + key);
+          
+          element.closest('div.form-group')
+          .removeClass('has-error')
+          .addClass(value.length > 0 ? 'has-error' : 'has-success')
+          .find('.text-danger')
+          .remove();
+          
+          element.after(value);
+        });
       }
-    });
+    })
   })
 </script>
+
 
