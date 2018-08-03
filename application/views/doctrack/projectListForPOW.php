@@ -185,35 +185,14 @@
         <p>Proceed to adding documents!</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
-<!-- Modal -->
-<div class="modal fade" id="pow_adding_success" tabindex="-1" role="dialog" aria-labelledby="pow_adding_success" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <p>Successfully added project POW!</p>
-        <p>Proceed to adding documents!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="pow_adding_warning" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
@@ -230,7 +209,7 @@
         <p>Try again later!</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

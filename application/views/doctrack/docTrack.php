@@ -326,13 +326,7 @@
                         '</div>';
               }
             }
-          ],
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : true,
-          'ordering'    : false,
-          'info'        : true,
-          'autoWidth'   : true
+          ]
         });
       }
     });
@@ -382,13 +376,7 @@
                       '</form>';
               }
             }
-          ],
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : true,
-          'ordering'    : false,
-          'info'        : true,
-          'autoWidth'   : true
+          ]
         });
       }
     });    
@@ -436,13 +424,7 @@
                         '</button>';
               }
             }
-          ],
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : true,
-          'ordering'    : false,
-          'info'        : true,
-          'autoWidth'   : true
+          ]
         });
       }
     });
