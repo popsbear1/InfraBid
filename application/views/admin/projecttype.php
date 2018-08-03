@@ -113,15 +113,6 @@
         <h4 class="modal-title">Add Project Type</h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-success text-center" id="adding_success" hidden>
-          <p class="text-left"><b>SUCESS!</b></p><p>
-            Project Type has been sucessfully added!
-          </p>
-        </div>
-        <div class="alert alert-warning text-center" id="adding_failed" hidden>
-          <p class="text-left"><b>FAILED!</b></p><p>
-            An error was encountered. The Project Type was not recorded.</p>
-        </div>
         <form id="addProjectForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addProjectType') ?>">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project*</label>
@@ -175,6 +166,47 @@
   </div>
 </div>
 
+<div class="modal fade" id="addsuccess">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Project Type</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added Project Type!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addfail" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Project Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error adding type of project!</p>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_failed">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -207,7 +239,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
+          $('#addFundModal').modal('hide');
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-success').delay(500).show(10, function() {
@@ -230,7 +263,7 @@
 
           $('#addProjectForm input').val('');
         }else if(response.success == 'failed'){
-          $('#alert-failed').attr('hidden', false);
+          $('#addfail').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-failed').delay(500).show(10, function() {

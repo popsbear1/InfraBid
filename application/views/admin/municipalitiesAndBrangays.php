@@ -135,6 +135,47 @@
   </div>
 </div>
 
+<div class="modal fade" id="addsuccess">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Funds</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added Funds!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addfail" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Funds</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error adding funds!</p>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 
   var table = $('#municipalityTable').DataTable({
@@ -150,7 +191,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
+          $('#addFundModal').modal('hide');
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-success').delay(500).show(10, function() {
@@ -174,7 +216,7 @@
 
           $('#addMunicipalityForm input').val('');
         }else if(response.success == 'failed'){
-          $('#alert-failed').attr('hidden', false);
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-failed').delay(500).show(10, function() {

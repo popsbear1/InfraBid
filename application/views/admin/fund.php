@@ -114,13 +114,6 @@
         <h4 class="modal-title">Add New Fund</h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-success text-center" id="adding_success" hidden>
-          <p class="text-left"><b>SUCCESS!</b></p>
-          <p>Type of Fund has been Sucessfully Added!</p>
-        </div>
-        <div class="alert alert-warning text-center" id="
-        adding_failed" hidden><p class="text-left"><b>FAILED!</b></p><p>An error was encountered. The Type of Fund was not Recorded!</p> 
-        </div>
         <form id="addFundsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addFunds') ?>" autocomplete="off">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund:</label>
@@ -182,6 +175,46 @@
   </div>
 </div>
 
+<div class="modal fade" id="addsuccess">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Funds</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added Funds!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addfail" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Funds</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error adding funds!</p>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -198,7 +231,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
+          $('#addFundModal').modal('hide');
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-success').delay(500).show(10, function() {
@@ -222,9 +256,7 @@
 
           $('#addFundsForm input').val('');
         }else if(response.success == 'failed'){
-          $('#alert-failed').attr('hidden', false);
-          $('.has-error').remove();
-          $('.has-success').remove();
+          $('#addfail').modal('show');
           $('.alert-failed').delay(500).show(10, function() {
             $(this).delay(3000).hide(10, function() {
               $(this).remove();

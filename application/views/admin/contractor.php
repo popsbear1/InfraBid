@@ -8,7 +8,7 @@
       <div class="box">
         <div class="box-header">
           <h2 class="box-title">Contractor Records<small></small></h2>
-          <button class="btn btn-primary pull-right addContractorBtn" type="button" data-target="#addContractorModal" data-toggle="modal">Add New Contractor</button>
+          <button class="btn btn-primary pull-right" type="button" data-target="#addContractorModal" data-toggle="modal">Add New Contractor</button>
         </div>
         <div class="box-body">
           <table class="table table-striped table-bordered" id="contractorTable">
@@ -118,14 +118,6 @@
         <h4 class="modal-title">Add New Contractor</h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-success text-center" id="adding_success" hidden>
-          <p class="text-left"><b>SUCCESS!</b></p>
-          <p>The new contractor was successfuly added and recorded!</p>
-        </div>
-        <div class="alert alert-warning text-center" id="adding_failed" hidden>
-          <p class="text-left"><b>FAILED!</b></p>
-          <p>An error was encountered. The new contractor was not recorded!</p>
-        </div>
         <form id="addContractorForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addNewContractor') ?>" autocomplete="off">
 
           <div class="form-group">
@@ -202,8 +194,29 @@
   </div>
 </div>
 
+<div class="modal fade" id="contractor_adding_success">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Success!</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Succesfully added contractor!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
 <!-- Modal -->
-<div class="modal fade" id="contractor_adding_success" tabindex="-1" role="dialog" aria-labelledby="contractor_adding_warning" aria-hidden="true">
+<div class="modal fade" id="contractor_adding_fail" tabindex="-1" role="dialog" aria-labelledby="contractor_adding_fail" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -213,8 +226,8 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <p>Error updating POW availability!</p>
-        <p>Try again later!</p>
+        <p>Adding Contractor Failed!</p>
+        <p>Error Occured!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -223,57 +236,73 @@
   </div>
 </div>
 
+
 <script>
-  $(document).ready(
-    function () {
-      $('#contractorTable').DataTable();
-    }
-  );
 
-  $('.addContractorBtn').click(function(){
+  var table = $('#contractorTable').DataTable({
+  });
 
-     var contractor_id = $(this).val();
-
-     $('#contractor_id').val(contractor_id);
-
-     $.ajax({
-      type: 'POST',
-      url: '<?php echo base_url("admin/getContractorDetails") ?>',
-      data: {contractor_id:contractor_id},
-      dataType:'json',
-      success:function(response){
-        $('#businessname').html(response.contractor_details['businessname']);
-        $('#owner').html(response.contractor_details['owner']);
-        $('#address').html(response.contractor_details['address']);
-        $('#contactnumber').html(response.contractor_details['contactnumber']);
-      }
-    });
-
-     $('#addContractorModal').modal('show');
-   })
-
-  $('#addContractorForm').submit(function(e){
+  $(document).on('submit', '#addContractorForm', function(e){
     e.preventDefault();
-    var contractor_id = $('#contractor_id').val();
-    var row_name = '#contractor' + contractor_id;
+
     $.ajax({
-      type:'POST',
-      url: $(this).attr('action'),
+      type: 'POST',
+      url: $('#addContractorForm').attr('action'),
       data: $('#addContractorForm').serialize(),
       dataType: 'json',
       success: function(response){
+        $('#addContractorModal').modal('hide');
 
-        $('#addContractorForm').modal('hide');
-
-        if (response.success == true){
+        if (response.success == true) {
           $('#contractor_adding_success').modal('show');
-          $(row_name).remove();
+          $('.has-error').remove();
+          $('.has-success').remove();
+          $('.contractor_adding_success').delay(500).show(10, function() {
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
+          });
+
+          var rowNode = table.row.add([
+            response.contractor['businessname'],
+            response.contractor['owner'],
+            response.contractor['address'],
+            response.contractor['contactnumber'],
+            response.contractor['status'],
+            '<p>Refresh To do More</p>'
+          ]).draw().node();
+
+          $(rowNode).css({
+            'text-align': 'center',
+            'background-color': '#c1f0c1'
+          });
+
+          $('#addContractorForm input').val('');
+        }else if(response.success == 'failed'){
+          $('#contractor_adding_fail').modal('show');
+          $('.contractor_adding_fail').delay(500).show(10, function() {
+            $(this).delay(3000).hide(10, function() {
+              $(this).remove();
+            });
+          });
+          $('#addContractorForm input').val('');
         }else{
-          $('#contractor_adding_warning').modal('show');
+          $.each(response.messages, function(key, value) {
+            var element = $('#' + key);
+            
+            element.closest('div.form-group')
+            .removeClass('has-error')
+            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+            .find('.text-danger')
+            .remove();
+            
+            element.after(value);
+          });
         }
       }
     });
-  })
+  });
+
   $(document).on('submit', '#delete_contractor_form', function(e){
     e.preventDefault();
 

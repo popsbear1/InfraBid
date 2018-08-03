@@ -19,14 +19,6 @@
               <p><?php echo $_SESSION['error'] ?></p>
             </div>
             <?php endif ?>
-          <div class="alert alert-success text-center" id="adding_success" hidden>
-            <p class="text-left"><b>SUCCESS!</b></p>
-            <p>The Municipality and Barangay has been added!</p>
-          </div>
-          <div class="alert alert-warning text-center" id="adding_failed" hidden>
-            <p class="text-left"><b>FAILED!</b></p>
-            <p>An error was encountered. The Operation has been failed!</p>  
-          </div>
           <form id="addMunicipalityForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addNewMunicipality') ?>">
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="municipality_code">Municipality Code
@@ -117,6 +109,47 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+<div class="modal fade" id="addsuccess">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Municipality</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully Added Municipality</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addfail" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Municipality</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error Adding a Municipality!</p>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   $(document).ready( 
     function () {
@@ -182,9 +215,10 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
+          $('#addFundModal').modal('hide');
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
-          $('#alert-success').prop('hidden', false);
           $('.alert-success').delay(500).show(10, function() {
           $(this).delay(3000).hide(10, function() {
             $(this).remove();
