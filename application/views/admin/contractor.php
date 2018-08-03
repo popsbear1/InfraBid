@@ -8,7 +8,7 @@
       <div class="box">
         <div class="box-header">
           <h2 class="box-title">Contractor Records<small></small></h2>
-          <button class="btn btn-primary pull-right" type="button" data-target="#addContractorModal" data-toggle="modal">Add New Contractor</button>
+          <button class="btn btn-primary pull-right addContractorBtn" type="button" data-target="#addContractorModal" data-toggle="modal">Add New Contractor</button>
         </div>
         <div class="box-body">
           <table class="table table-striped table-bordered" id="contractorTable">
@@ -202,73 +202,78 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="contractor_adding_success" tabindex="-1" role="dialog" aria-labelledby="contractor_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error updating POW availability!</p>
+        <p>Try again later!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
+  $(document).ready(
+    function () {
+      $('#contractorTable').DataTable();
+    }
+  );
 
-  var table = $('#contractorTable').DataTable({
-  });
+  $('.addContractorBtn').click(function(){
 
-  $(document).on('submit', '#addContractorForm', function(e){
-    e.preventDefault();
+     var contractor_id = $(this).val();
 
-    $.ajax({
+     $('#contractor_id').val(contractor_id);
+
+     $.ajax({
       type: 'POST',
-      url: $('#addContractorForm').attr('action'),
+      url: '<?php echo base_url("admin/getContractorDetails") ?>',
+      data: {contractor_id:contractor_id},
+      dataType:'json',
+      success:function(response){
+        $('#businessname').html(response.contractor_details['businessname']);
+        $('#owner').html(response.contractor_details['owner']);
+        $('#address').html(response.contractor_details['address']);
+        $('#contactnumber').html(response.contractor_details['contactnumber']);
+      }
+    });
+
+     $('#addContractorModal').modal('show');
+   })
+
+  $('#addContractorForm').submit(function(e){
+    e.preventDefault();
+    var contractor_id = $('#contractor_id').val();
+    var row_name = '#contractor' + contractor_id;
+    $.ajax({
+      type:'POST',
+      url: $(this).attr('action'),
       data: $('#addContractorForm').serialize(),
       dataType: 'json',
       success: function(response){
-        if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
-          $('.has-error').remove();
-          $('.has-success').remove();
-          $('.alert-success').delay(500).show(10, function() {
-            $(this).delay(3000).hide(10, function() {
-              $(this).remove();
-            });
-          });
 
-          var rowNode = table.row.add([
-            response.contractor['businessname'],
-            response.contractor['owner'],
-            response.contractor['address'],
-            response.contractor['contactnumber'],
-            response.contractor['status'],
-            '<p>Refresh To do More</p>'
-          ]).draw().node();
+        $('#addContractorForm').modal('hide');
 
-          $(rowNode).css({
-            'text-align': 'center',
-            'background-color': '#c1f0c1'
-          });
-
-          $('#addContractorForm input').val('');
-        }else if(response.success == 'failed'){
-          $('#alert-failed').attr('hidden', false);
-          $('.has-error').remove();
-          $('.has-success').remove();
-          $('.alert-failed').delay(500).show(10, function() {
-            $(this).delay(3000).hide(10, function() {
-              $(this).remove();
-            });
-          });
-          $('#addContractorForm input').val('');
+        if (response.success == true){
+          $('#contractor_adding_success').modal('show');
+          $(row_name).remove();
         }else{
-          $.each(response.messages, function(key, value) {
-            var element = $('#' + key);
-            
-            element.closest('div.form-group')
-            .removeClass('has-error')
-            .addClass(value.length > 0 ? 'has-error' : 'has-success')
-            .find('.text-danger')
-            .remove();
-            
-            element.after(value);
-          });
+          $('#contractor_adding_warning').modal('show');
         }
       }
     });
-  });
-
+  })
   $(document).on('submit', '#delete_contractor_form', function(e){
     e.preventDefault();
 
