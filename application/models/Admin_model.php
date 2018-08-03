@@ -580,31 +580,6 @@
 			return $query->row();
 		}
 
-		public function getABC($plan_id){
-			$this->db->select('abc');
-			$this->db->from('project_plan');
-			$this->db->where('abc >=', 5000000);
-			$this->db->where('plan_id', $plan_id);
-
-			$query = $this->db->get();
-			if (sizeof($query->row()) > 0) {
-				return true;
-			}else{
-				return false;
-			}
-			
-		}
-
-		public function getCurrentABC($plan_id){
-			$this->db->select('abc');
-			$this->db->from('project_plan');
-			$this->db->where('abc >=', 5000000);
-			$this->db->where('plan_id', $plan_id);
-
-			$query = $this->db->get();
-			return $query->row();
-			
-		}
 
 		public function getProjectActivityStatus($plan_id){
 			$this->db->select('*');

@@ -411,11 +411,11 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		$abc = $this->admin_model->getABC('$plan_id');
+		$status = $this->admin_model->getProjectActivityStatus($plan_id);
 
-		//if ($abc) {
+		if ($status['pre_proc'] == 'pending') {
 			$this->admin_model->updatePreProcConfDate($plan_id, $pre_proc_date);
-		//}
+		}
 
 		redirect('admin/projectTimelineView');
 		 
