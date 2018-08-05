@@ -36,6 +36,11 @@
     text-align: right;
   }
 
+  img {
+    max-width: 100%;
+    max-height: auto;
+}
+
 }
 </style>  
 <section class="content-header">

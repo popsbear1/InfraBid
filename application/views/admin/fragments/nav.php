@@ -253,12 +253,12 @@
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url('admin/regularPlanView') ?>">
+            <a href="<?php echo base_url('admin/setPlanTypeRegular') ?>">
               <i class="fa fa-tasks"></i> <span>Regular Records</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url('admin/supplementalPlanView') ?>"><i class="fa fa-tasks">
+            <a href="<?php echo base_url('admin/setPlanTypeSupplemental') ?>"><i class="fa fa-tasks">
               </i> <span>Supplemental Records</span>
             </a>
           </li>

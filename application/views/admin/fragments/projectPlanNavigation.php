@@ -5,7 +5,14 @@
           <nav class="navbar navbar-default">
             <div class="container-fluid">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <a class="navbar-brand" href="#">IPB</a>
+              <a class="navbar-brand" href="<?php if($this->session->userdata('project_type') == 'regular'){
+                echo base_url('admin/regularPlanView');
+              }else{
+                echo base_url('admin/supplementalPlanView');
+              } ?>">
+                <i class="fa fa-angle-double-left"></i>
+                <b>BACK</b>
+              </a>
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                   <span class="sr-only">Toggle navigation</span>

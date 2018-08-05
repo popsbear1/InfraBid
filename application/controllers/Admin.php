@@ -33,6 +33,11 @@ class Admin extends CI_Controller {
 		
 	}
 
+	public function setPlanTypeRegular(){
+		$this->session->set_userdata('project_type', 'regular');
+		$this->regularPlanView();
+	}
+
 	public function regularPlanView(){
 		$year = date('Y');
 		$quarter = null;
@@ -57,6 +62,11 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/regularPlan', $data);
 		$this->load->view('admin/fragments/footer');
+	}
+
+	public function setPlanTypeSupplemental(){
+		$this->session->set_userdata('project_type', 'supplemental');
+		$this->supplementalPlanView();
 	}
 
 	public function supplementalPlanView(){
@@ -362,7 +372,7 @@ class Admin extends CI_Controller {
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
 		$data['sourceFunds'] = $this->admin_model->getSourceofFunds();
-		$data['accounts'] = $this->admin_model->getAccountClassification();
+		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$this->load->view('admin/fragments/head');
