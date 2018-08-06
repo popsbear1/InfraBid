@@ -1,8 +1,10 @@
 
-    <section class="content-header">
-      <h2>Project Plan Details Collective Report</h2>
-    </section>
     <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="pull-left">Collective Project Plan Details</h3>
+        </div>
+      </div>
       <div class="row">
         <div class="col-lg-7 col-md-7">
           <div class="box box-info">
@@ -11,64 +13,88 @@
             </div>
             <div class="box-body">
               <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="">Project Title:</label>
+                    <p class="form-control input-lg text-center"><?php echo $projectDetails['project_title'] ?></p>  
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
                     <label for="">Project Status:</label>
-                    <p class="form-control"><?php echo $projectDetails['project_status'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['project_status'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Date POW Added:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['date_pow_added'] ?></p>
                   </div>
                   <div class="form-group">
                     <label for="">Date Added:</label>
-                    <p class="form-control"><?php echo $projectDetails['date_added'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['date_added'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">Project Year:</label>
-                    <p class="form-control"><?php echo $projectDetails['project_year'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['project_year'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">Project Number:</label>
-                    <p class="form-control"><?php echo $projectDetails['project_no'] ?></p>  
-                  </div>
-                  <div class="form-group">
-                    <label for="">Project Title:</label>
-                    <p class="form-control"><?php echo $projectDetails['project_title'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['project_no'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">Location:</label>
-                    <p class="form-control"><?php echo $projectDetails['barangay'] . ', ' . $projectDetails['municipality'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['barangay'] . ', ' . $projectDetails['municipality'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">Project Type:</label>
-                    <p class="form-control"><?php echo $projectDetails['type'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['type'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Mode:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['mode'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Source of Fund:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['source'] ?></p>  
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
-                    <label for="">Mode:</label>
-                    <p class="form-control"><?php echo $projectDetails['mode'] ?></p>  
-                  </div>
-                  <div class="form-group">
-                    <label for="">Source of Fund:</label>
-                    <p class="form-control"><?php echo $projectDetails['source'] ?></p>  
-                  </div>
-                  <div class="form-group">
                     <label for="">Account Classification:</label>
-                    <p class="form-control"><?php echo $projectDetails['classification'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['classification'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">ABC</label>
-                    <p class="form-control"><?php echo $projectDetails['abc'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['abc'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Abc/PPost Date:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['abc_post_date'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Sub/open of Date:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['sub_open_date'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Notice of Award Date:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['award_notice_date'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Contract Signing Date:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['contract_signing_date'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">Rebid Count:</label>
-                    <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['re_bid_count'] ?></p>  
                   </div>
                   <div class="form-group">
                     <label for="">Contractor:</label>
-                    <p class="form-control"><?php echo $projectDetails['businessname'] ?></p>  
+                    <p class="form-control input-sm"><?php echo $projectDetails['businessname'] ?></p>  
                   </div>
                   <div class="form-group">
-                    <label for="">Proposed Date:</label>
-                    <p class="form-control"><?php echo $projectDetails['proposed_bid'] ?></p>  
+                    <label for="">Proposed Bid:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['proposed_bid'] ?></p>  
                   </div>
                 </div>
               </div>

@@ -1281,17 +1281,40 @@
 		}
 	}
 
-	public function updateProcActFinalRemark($plan_id, $remark){
+	public function update_abc_post_date($abc_post_date, $plan_id){
 		$data = array(
-			'remark' => $remark
+			'abc_post_date' => $abc_post_date
 		);
 
 		$this->db->where('plan_id', $plan_id);
-		if ($this->db->update('procact', $data)) {
-			return true;
-		}else{
-			return false;
-		}
+		$this->db->update('project_plan', $data);
+	}
+
+	public function update_award_notice_date($award_notice_date, $plan_id){
+		$data = array(
+			'award_notice_date' => $award_notice_date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function update_contract_signing_date($contract_signing_date, $plan_id){
+		$data = array(
+			'contract_signing_date' => $contract_signing_date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function update_sub_open_date($sub_open_date, $plan_id){
+		$data = array(
+			'sub_open_date' => $sub_open_date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
 	}
 
 

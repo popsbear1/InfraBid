@@ -186,10 +186,9 @@
               </table>
             </div>
           </div>
-          <div class="ln_solid"></div>
           <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#timelineModal" id="timelineModalConfirmBtn">Submit</button>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#timelineModal" id="timelineModalConfirmBtn">Submit</button>
             </div>
           </div>
         </div>
@@ -397,7 +396,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{  
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -420,7 +419,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -441,7 +440,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -460,7 +459,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -477,7 +476,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -492,7 +491,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -505,7 +504,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -516,7 +515,7 @@
     if (daysToAdd) {
       setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
-      alert("place an input adi sika met");
+      $('#update_warning').modal('show');
     }
   });
 
@@ -772,3 +771,22 @@
     </div>
   </div>
       <!-- end of modal -->
+
+<div class="modal fade" id="update_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Warning</h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Input Number of days to add before pressing UPDATE button!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

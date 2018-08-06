@@ -371,7 +371,7 @@ class Admin extends CI_Controller {
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSourceofFunds();
+		$data['sourceFunds'] = $this->admin_model->getSupplementalFunds();
 		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
@@ -466,7 +466,7 @@ class Admin extends CI_Controller {
 		$currentPlanID = $this->session->userdata('plan_id');
 		if (!empty($_POST['date_added']) && $_POST['date_added'] != null) {
 			$date_added = $this->input->post('date_added');
-			$this->admin_model->updateDate_added($$date_added, $currentPlanID);
+			$this->admin_model->updateDate_added($date_added, $currentPlanID);
 		}
 
 		if (!empty($_POST['year']) && $_POST['year'] != null) {
@@ -518,7 +518,26 @@ class Admin extends CI_Controller {
 			$account = $this->input->post('account');
 			$this->admin_model->updateAccount($account, $currentPlanID);
 		}
+
+		if (!empty($_POST['abc_post_date']) && $_POST['abc_post_date'] != null) {
+			$abc_post_date = $this->input->post('abc_post_date');
+			$this->admin_model->update_abc_post_date($abc_post_date, $currentPlanID);
+		}
+
+		if (!empty($_POST['award_notice_date']) && $_POST['award_notice_date'] != null) {
+			$award_notice_date = $this->input->post('award_notice_date');
+			$this->admin_model->update_award_notice_date($award_notice_date, $currentPlanID);
+		}
 		
+		if (!empty($_POST['contract_signing_date']) && $_POST['contract_signing_date'] != null) {
+			$contract_signing_date = $this->input->post('contract_signing_date');
+			$this->admin_model->update_contract_signing_date($contract_signing_date, $currentPlanID);
+		}
+
+		if (!empty($_POST['sub_open_date']) && $_POST['sub_open_date'] != null) {
+			$sub_open_date = $this->input->post('sub_open_date');
+			$this->admin_model->update_sub_open_date($sub_open_date, $currentPlanID);
+		}
 
 		$this->session->set_flashdata('success', 'Plan Details Updated.');
 

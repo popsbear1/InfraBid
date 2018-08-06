@@ -1,83 +1,59 @@
 
-    <section class="content-header">
-      <h2>Edit Project Plan Details</h2>
-    </section>
     <section class="content">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="box">
-            <div class="box-header">
-              <h2 class="box-title">Edit Project<small></small></h2>
-            </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <a href="<?php echo base_url('admin/') ?>" class="btn btn-primary">Back</a>
-            </div>
-          </div>
-            <div class="box-body">
-              <?php if (isset($_SESSION['success'])): ?>
-                <div class="alert alert-success">
-                  <p><?php echo $_SESSION['success'] ?></p>
-                </div>
-              <?php endif ?>
-              <?php if (isset($_SESSION['error'])): ?>
-                <div class="alert alert-warning">
-                  <p><?php echo $_SESSION['error'] ?></p>
-                </div>
-              <?php endif ?>
-              <form id="editPlanForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/editPlan') ?>" autocomplete="off">
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Added *
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" id="date_added" name="date_added" placeholder="<?php echo $projectDetails['date_added'] ?>">
+        <div class="col-md-12">
+          <h3 class="pull-left">Edit Project Plan Details</h3>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-header">
+          <h2 class="box-title">Project Details Input Fields<small></small></h2>
+        </div>
+        <div class="box-body">
+          <div class="form_container" style="background: #f2f2f2; padding: 5%;">
+            <form id="editPlanForm" method="POST" action="<?php echo base_url('admin/editPlan') ?>" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>Date Added <span style="color: red">* </span>:</label>
+                        <input type="text" class="form-control" id="date_added" name="date_added" placeholder="<?php echo $projectDetails['date_added'] ?>">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>Project Year <span style="color: red">* </span>:</label>
+                        <input type="text" class="form-control" id="year" name="year" placeholder="<?php echo $projectDetails['project_year'] ?>">
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Year *
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" id="year" name="year" placeholder="<?php echo $projectDetails['project_year'] ?>">
+                  <div class="form-group">
+                    <label>Project Number <span style="color: red">* </span>:</label>
+                    <input type="text" id="project_no" value="" name="project_no" class="form-control" placeholder="<?php echo $projectDetails['project_no'] ?>">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Number *
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="project_no" name="project_no" class="form-control" placeholder="<?php echo $projectDetails['project_no'] ?>">
+                  <div class="form-group">
+                    <label>Project Title <span style="color: red">* </span>:</label>
+                    <input type="text" id="project_title" value="" name="project_title" class="form-control" placeholder="<?php echo $projectDetails['project_title'] ?>">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Title *
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="project_title" name="project_title" class="form-control" placeholder="<?php echo $projectDetails['project_title'] ?>">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipality *
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Municipality <span style="color: red">* </span>:</label>
                     <select class="form-control" id="municipality" name ="municipality">
-                      <option selected hidden disabled><?php echo $projectDetails['municipality'] ?></option>
+                      <option selected hidden disabled><?php echo $projectDetails['municipality'] . ' - ' . $projectDetails['municipality_code'] ?></option>
                       <?php foreach ($municipalities as $municipality): ?>
                         <option value="<?php echo $municipality['municipality_id'] ?>" class="municipality"><?php echo $municipality['municipality'] . ' - ' . $municipality['municipality_code'] ?></option>
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Barangay *
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control" id="barangaySelection" name ="barangay">
-                      <option selected disabled hidden><?php echo $projectDetails['barangay'] ?></option>
+                  <div class="form-group">
+                    <label>Barangay <span style="color: red">* </span>:</label>
+                    <select class="form-control" id="barangay" name ="barangay">
+                      <option selected disabled hidden><?php echo $projectDetails['barangay'] . ' - ' . $projectDetails['barangay_code'] ?></option>
+            
                     </select>
-                  </div> 
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Project *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  </div>
+                  <div class="form-group">
+                    <label>Type of Project <span style="color: red">* </span>:</label>
                     <select class="form-control" id="type" name ="type">
                       <option selected disabled hidden><?php echo $projectDetails['type'] ?></option>
                       <?php foreach ($projTypes as $projType): ?>
@@ -85,10 +61,8 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode of Procurement *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Mode of Procurement <span style="color: red">* </span>:</label>
                     <select class="form-control" id="mode" name ="mode">
                       <option selected hidden disabled><?php echo $projectDetails['mode'] ?></option>
                       <?php foreach ($modes as $mode): ?>
@@ -97,15 +71,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Approved Budget Cost(ABC) *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="ABC" name="ABC"  class="form-control" placeholder="<?php echo $projectDetails['abc'] ?>">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label>Approved Budget Cost (ABC) <span style="color: red">* </span>:</label>
+                    <input type="text" id="ABC" value="" name="ABC"  class="form-control" placeholder="<?php echo number_format($projectDetails['abc'], 2) ?>">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Source of Fund *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Source of Fund <span style="color: red">* </span>:</label>
                     <select class="form-control" id="source" name ="source">
                       <option selected hidden disabled><?php echo $projectDetails['source'] ?></option>
                       <?php foreach ($sourceFunds as $sourceFund): ?>
@@ -113,10 +85,8 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Classification *</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Account Classification <span style="color: red">* </span>:</label>
                     <select class="form-control" id="account" name ="account">
                       <option selected hidden disabled><?php echo $projectDetails['classification'] ?></option>
                       <?php foreach ($accounts as $account): ?>
@@ -124,80 +94,31 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <button href="#myModal" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+                  <div class="form-group">
+                    <label>ABC/Post of IB/REI <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="abc_post_date" id="abc_post_date" placeholder="<?php echo $projectDetails['abc_post_date'] ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Sub/Open of Bids <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="sub_open_date" id="sub_open_date" placeholder="<?php echo $projectDetails['sub_open_date'] ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Notice of Award <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="award_notice_date" id="award_notice_date" placeholder="<?php echo $projectDetails['award_notice_date'] ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Contract Signing <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="contract_signing_date" id="contract_signing_date" placeholder="<?php echo $projectDetails['contract_signing_date'] ?>">
                   </div>
                 </div>
-              </form>
-            </div>
+              </div> 
+            </form>
           </div>
         </div>
-      </div>
-      <!-- modal for data confirmation -->
-      <div id="myModal" class="modal fade bs-example-modal-lg" role="dialog" >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×
-              </button>
-              <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-            </div>
-            <div class="modal-body">
-              <table class='table table-striped table-bordered' style='font-size:13px;'>
-                <thead>
-                  <tr >
-                    <th style='text-align: center'>Attributes</th>
-                    <th style='text-align: center'>Values</th>
-                  </tr> 
-                </thead>
-                <tbody>
-                  <tr><td>Date Added</td>
-                    <td><span id="dAdd"></td>
-                  </tr>
-                  <tr><td>Project Year</td>
-                    <td><span id="y"></td>
-                  </tr>
-                  <tr><td>Project No.</td>
-                    <td><span id="proj"></td>
-                  </tr>
-                  <tr><td>Project Title</td>
-                    <td><span id="title"></td>
-                  </tr>
-                  <tr><td>Municipality</td>
-                    <td><span id="mun"></td>
-                  </tr>
-                  <tr><td>Barangay</td>
-                    <td><span id="bar"></td>
-                  </tr>
-                  <tr><td>Type of Project</td>
-                    <td><span id="typ"></td>
-                  </tr>
-                  <tr><td>Mode of Procurement</td>
-                    <td><span id="mod"></td>
-                  </tr>
-                  <tr><td>Approved Budget Cost(ABC)</td>
-                    <td><span id="abc"></td>
-                  </tr>
-                  <tr><td>Source of Fund</td>
-                    <td><span id="fun"></td>
-                  </tr>
-                  <tr><td>Account Classification</td>
-                    <td><span id="accoun"></td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" form="editPlanForm"class="btn btn-primary">Confirm</button>
-            </div>
-          </div>
+        <div class="box-footer text-center">
+          <button type="button" id="editPlanFormSubmitBtn" class="btn btn-primary" >Submit</button>
         </div>
       </div>
-      <!-- end of modal -->
     </section>
       
 
@@ -237,6 +158,49 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
+
+    //Date picker
+  $('#year').datepicker({
+    autoclose: true,
+    orientation: 'bottom auto',
+    minViewMode: 2,
+    format: 'yyyy'
+  })
+
+  $('#date_added').datepicker();
+
+  $('#abc_post_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'bottom auto'
+  });
+
+  $('#sub_open_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'bottom auto'
+  });
+
+  $('#award_notice_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'top auto'
+  });
+
+  $('#contract_signing_date').datepicker({
+    autoclose: true,
+    format: 'mm-yyyy',
+    startView: 'months',
+    minViewMode: 'months',
+    orientation: 'top auto'
+  });
+
   var barangayData = '<?php echo json_encode($barangays) ?>';
   var barangays = JSON.parse(barangayData);
 
@@ -255,23 +219,9 @@
         );
       }
     }
-  })
-  $(document).ready(function() {
-    $('#myModal').on('show.bs.modal' , function (e) {
-      $('#dAdd').html($('#date_added').val());
-      $('#y').html($('#year').val());
-     $('#proj').html($('#project_no').val());
-     $('#title').html($('#project_title').val());
-     $('#mun').html($('#municipality').val());
-     $('#bar').html($('#barangay').val());
-     $('#typ').html($('#type').val());
-     $('#mod').html($('#mode').val());
-     $('#abc').html($('#ABC').val());
-     $('#fun').html($('#source').val());
-     $('#accoun').html($('#account').val());
-     $('#statu').html($('#status').val());
-     $('#remar').html($('#remarks').val());
-   });
+  });
+
+  $('#editPlanFormSubmitBtn').click(function(){
     
   });
 </script>
