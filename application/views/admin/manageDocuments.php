@@ -1,71 +1,69 @@
 
-<section class="content-header">
-<h2>Manage Documents</h2>
-</section>
 <section class="content">
-<div class="row">
-<div class="col-md-12 col-sm-12 col-xs-12">
-<div class="box">
-  <div class="box-header">
-    <h2 class="box-title">Document Records<small></small></h2>
-    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addDocumentsModal">Add Document</button>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3 class="pull-left">Manage Documents</h3>
+    </div>
   </div>
-  <div class="box-body">
-    <table class="table table-bordered table-striped" id="documentsTable">
-      <thead>
-        <tr>
-          <th class="text-center">Document Number</th>
-          <th class="text-center">Document Name</th>
-          <th class="text-center">Status</th>
-          <th class="text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($document_type as $document): ?>
-          <tr id="<?php echo 'document' . $document['doc_type_id'] ?>">
-            <td class="text-center"><?php echo $document['doc_no'] ?></td>
-            <td class="text-center"><?php echo $document['document_name'] ?></td>
-            <td class="text-center"><?php echo $document['status'] ?></td>
-            <td class="text-center">
-              <div class="btn-group">
-                <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
-                  <button class="btn btn-success pull-right" id="documentID" name="documentID" value="<?php echo $document['doc_type_id'] ?>" type="submit">
-                    <i class="fa fa-edit">Edit</i>
-                  </button>
-                </form>
-              </div>
-
-              <div class="btn-group">
-                <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST" id="delete_document">
-                  <input type="text" name="document_id" value="<?php echo $document['doc_type_id']?>" hidden>
-                    <button class="btn btn-danger" type="submit">Delete</button>                       
-                </form>
-              </div>
-
-              <div class="btn-group">
-                <?php if ($document['status']=='active'): ?>
-                    <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
-                      <input type="text" name="document_id" value="<?php echo $document['doc_type_id'] ?>" hidden>
-                    <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
-                  </form>                          
-                <?php endif ?>
-
-                <?php if ($document['status']=='inactive'): ?>
-                    <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
-                      <input type="text" name="document_id" value="<?php echo $document['doc_type_id'] ?>" hidden>
-                    <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
-                  </form>                          
-                <?php endif ?>
-              </div> 
-            </td>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title">Document Records<small></small></h2>
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addDocumentsModal">Add Document</button>
+    </div>
+    <div class="box-body">
+      <table class="table table-bordered table-striped" id="documentsTable">
+        <thead>
+          <tr>
+            <th class="text-center">Document Number</th>
+            <th class="text-center">Document Name</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
           </tr>
-        <?php endforeach ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($document_type as $document): ?>
+            <tr id="<?php echo 'document' . $document['doc_type_id'] ?>">
+              <td class="text-center"><?php echo $document['doc_no'] ?></td>
+              <td class="text-center"><?php echo $document['document_name'] ?></td>
+              <td class="text-center"><?php echo $document['status'] ?></td>
+              <td class="text-center">
+                <div class="btn-group">
+                  <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
+                    <button class="btn btn-success pull-right" id="documentID" name="documentID" value="<?php echo $document['doc_type_id'] ?>" type="submit">
+                      <i class="fa fa-edit">Edit</i>
+                    </button>
+                  </form>
+                </div>
+
+                <div class="btn-group">
+                  <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST" id="delete_document">
+                    <input type="text" name="document_id" value="<?php echo $document['doc_type_id']?>" hidden>
+                      <button class="btn btn-danger" type="submit">Delete</button>                       
+                  </form>
+                </div>
+
+                <div class="btn-group">
+                  <?php if ($document['status']=='active'): ?>
+                      <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
+                        <input type="text" name="document_id" value="<?php echo $document['doc_type_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                    </form>                          
+                  <?php endif ?>
+
+                  <?php if ($document['status']=='inactive'): ?>
+                      <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
+                        <input type="text" name="document_id" value="<?php echo $document['doc_type_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                    </form>                          
+                  <?php endif ?>
+                </div> 
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-</div>
-</div>
 </section>
 
 

@@ -1,70 +1,69 @@
-<section class="content-header">
-  <h2>Manage Procurement Mode</h2>
-</section>
+
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Procurement Mode Record<small></small></h2>
-          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addProcurementModeModal">Add Procurement Mode</button>
-        </div>
-        <div class="box-body">
-          
-          <table class="table table-striped table-bordered" id="modeTable">
-            <thead style='font-size:12px;'>
-              <tr>
-                <th style='text-align: center'>ID</th>
-                <th style='text-align: center'>Project Type</tph>
-                <th style='text-align: center;'>Status</th>
-                <th style='text-align: center'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($modes as $mode): ?>
-                <tr id="<?php echo 'mode' . $mode['mode_id'] ?>">
-                  <td class="text-center"><?php echo $mode['mode_id']?></td>
-                  <td class="text-center"><?php echo $mode['mode']?></td>
-                  <td class="text-center"><?php echo $mode['status']?></td>
-                    <td class="text-center row">
-                    <div class="btn-group">
-                    <form action="<?php echo base_url('admin/setProcurementMode') ?>" method="post">
-                      <input type="text" name="mode" value="<?php echo $mode['mode_id'] ?>" hidden>
-                      <button class="btn btn-success" type="submit">
-                        <i class="fa fa-edit"></i>Edit
-                      </button>
-                    </form>
-                  </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3 class="pull-left">Manage Procurement Mode</h3>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title">Procurement Mode Record<small></small></h2>
+      <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addProcurementModeModal">Add Procurement Mode</button>
+    </div>
+    <div class="box-body">
+      
+      <table class="table table-striped table-bordered" id="modeTable">
+        <thead style='font-size:12px;'>
+          <tr>
+            <th style='text-align: center'>ID</th>
+            <th style='text-align: center'>Project Type</tph>
+            <th style='text-align: center;'>Status</th>
+            <th style='text-align: center'>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($modes as $mode): ?>
+            <tr id="<?php echo 'mode' . $mode['mode_id'] ?>">
+              <td class="text-center"><?php echo $mode['mode_id']?></td>
+              <td class="text-center"><?php echo $mode['mode']?></td>
+              <td class="text-center"><?php echo $mode['status']?></td>
+                <td class="text-center row">
+                <div class="btn-group">
+                <form action="<?php echo base_url('admin/setProcurementMode') ?>" method="post">
+                  <input type="text" name="mode" value="<?php echo $mode['mode_id'] ?>" hidden>
+                  <button class="btn btn-success" type="submit">
+                    <i class="fa fa-edit"></i>Edit
+                  </button>
+                </form>
+              </div>
 
-                    <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteMode') ?>" method="POST" id="delete_mode_form">
-                        <input type="text" name="mode_id" value="<?php echo $mode['mode_id']?>" hidden>
-                          <button class="btn btn-danger" type="submit">Delete</button>                       
-                      </form>
-                    </div>
+                <div class="btn-group">
+                  <form action="<?php echo base_url('admin/deleteMode') ?>" method="POST" id="delete_mode_form">
+                    <input type="text" name="mode_id" value="<?php echo $mode['mode_id']?>" hidden>
+                      <button class="btn btn-danger" type="submit">Delete</button>                       
+                  </form>
+                </div>
 
-                    <div class="btn-group">
-                      <?php if ($mode['status']=='active'): ?>
-                          <form action="<?php echo base_url('admin/deactivateMode') ?>" method="POST">
-                            <input type="text" name="mode_id" value="<?php echo $mode['mode_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
-                        </form>                          
-                      <?php endif ?>
-                      
-                      <?php if ($mode['status']=='inactive'): ?>
-                          <form action="<?php echo base_url('admin/activateMode') ?>" method="POST">
-                            <input type="text" name="mode_id" value="<?php echo $mode['mode_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
-                        </form>                          
-                      <?php endif ?>
-                    </div> 
-                  </td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                <div class="btn-group">
+                  <?php if ($mode['status']=='active'): ?>
+                      <form action="<?php echo base_url('admin/deactivateMode') ?>" method="POST">
+                        <input type="text" name="mode_id" value="<?php echo $mode['mode_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                    </form>                          
+                  <?php endif ?>
+                  
+                  <?php if ($mode['status']=='inactive'): ?>
+                      <form action="<?php echo base_url('admin/activateMode') ?>" method="POST">
+                        <input type="text" name="mode_id" value="<?php echo $mode['mode_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                    </form>                          
+                  <?php endif ?>
+                </div> 
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -176,11 +175,52 @@
   </div>
 </div>
 
+<div class="modal fade" id="addsuccess">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">SUCCESS!!</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added Project Type!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="addfail">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">ERROR!!</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Erro Adding Project Type!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+
 
 <script>
 
-  var table = $('#modeTable').DataTable({
-  });
+  var table = $('#modeTable').DataTable();
 
   $(document).on('submit', '#addProcurementForm', function(e){
     e.preventDefault();
@@ -192,14 +232,10 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
+          $('#addProcurementModeModal').modal('hide');
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
-          $('.alert-success').delay(500).show(10, function() {
-            $(this).delay(3000).hide(10, function() {
-              $(this).remove();
-            });
-          });
 
           var rowNode = table.row.add([
             response.mode['mode_id'],
@@ -215,14 +251,10 @@
 
           $('#addProcurementForm input').val('');
         }else if(response.success == 'failed'){
-          $('#alert-failed').attr('hidden', false);
+          $('#addProcurementModeModal').modal('hide');
+          $('#addfail').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
-          $('.alert-failed').delay(500).show(10, function() {
-            $(this).delay(3000).hide(10, function() {
-              $(this).remove();
-            });
-          });
           $('#addProcurementForm input').val('');
         }else{
           $.each(response.messages, function(key, value) {

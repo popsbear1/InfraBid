@@ -1,48 +1,46 @@
-<section class="content-header">
-  <h2>Edit Procurement Mode Details</h2>
-</section>
+
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Procurement Mode Details<small></small></h2>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3 class="pull-left">Edit Procurement Mode Details</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <a href="<?php echo base_url('admin/manageProcurementMode') ?>" class="btn btn-success">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </a>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title">Procurement Mode Details<small></small></h2>
+    </div>
+    <div class="box-body">
+      <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success text-center">
+          <p><?php echo $_SESSION['success'] ?></p>
         </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <a href="<?php echo base_url('admin/manageProcurementMode') ?>" class="btn btn-primary">Back</a>
-            </div>
+      <?php endif ?>
+      <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-warning text-center">
+          <p><?php echo $_SESSION['error'] ?></p>
+        </div>
+      <?php endif ?>
+      <form id="editProcurementForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editProcurement') ?>">
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Name of Procurement Mode<span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="editProcurement" name="mode" placeholder="<?php echo $mode->mode ?>" class="form-control col-md-7 col-xs-12" required>
           </div>
-        <div class="box-body">
-          <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success">
-              <p><?php echo $_SESSION['success'] ?></p>
-            </div>
-          <?php endif ?>
-          <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-warning">
-              <p><?php echo $_SESSION['error'] ?></p>
-            </div>
-          <?php endif ?>
-          <form id="editProcurementForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editProcurement') ?>">
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Name of Procurement Mode<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="editProcurement" name="mode" placeholder="<?php echo $mode->mode ?>" class="form-control col-md-7 col-xs-12" required>
-              </div>
-            </div>
-
-           <div class="ln_solid"></div>
-            <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-              </div>
-            </div>
-          </form>
         </div>
-      </div>
+      </form>
+    </div>
+    <div class="box-footer text-center">
+      <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
     </div>
   </div>
 </section>

@@ -1,81 +1,83 @@
-<section class="content-header">
-  <h2>Edit User Details</h2>
-</section>
+
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="box-title">User Details</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <a href="<?php echo base_url('admin/manageUsers') ?>" class="btn btn-primary">Back</a>
-            </div>
-          </div>
-        </div>
-        <div class="box-body">
-
-          <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success">
-              <p><?php echo $_SESSION['success'] ?></p>
-            </div>
-          <?php endif ?>
-          <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-warning">
-              <p><?php echo $_SESSION['error'] ?></p>
-            </div>
-          <?php endif ?>
-
-          <form id="editUsersForm" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left">
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Middle Name
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="middlename" placeholder="<?php echo $userDetails['middle_name']; ?>" name="middlename" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name  
-                <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">User Type <span class="required">*</span></label>
-              <div class="col-md-6 col-sm-9 col-xs-12">
-                <select class="select2_single form-control" step="any"  id="usertype" value="<?php echo $row['user_type']; ?>" name="usertype" tabindex="-1">
-                  <option selected hidden disabled>Choose User Type</option>
-                  <option value="BAC_SEC">Bac SEC</option>
-                  <option value="BAC_TWG">Bac TWG</option>
-                  <option value="PEO">PEO</option>
-                  <option value="PGO">PGO</option>
-                </select>
-              </div>
-            </div>
-          </form> 
-        </div>
-        <div class="box-footer text-center">
-          <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3 class="pull-left">Edit User Details</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <a href="<?php echo base_url('admin/manageUsers') ?>" class="btn btn-success">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </a>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="box-title">User Details</h2>
         </div>
       </div>
+    </div>
+    <div class="box-body">
+
+      <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success text-center">
+          <p><?php echo $_SESSION['success'] ?></p>
+        </div>
+      <?php endif ?>
+      <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-warning text-center">
+          <p><?php echo $_SESSION['error'] ?></p>
+        </div>
+      <?php endif ?>
+
+      <form id="editUsersForm" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left">
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
+            <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Middle Name
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="middlename" placeholder="<?php echo $userDetails['middle_name']; ?>" name="middlename" class="form-control col-md-7 col-xs-12">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name  
+            <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">User Type <span class="required">*</span></label>
+          <div class="col-md-6 col-sm-9 col-xs-12">
+            <select class="select2_single form-control" step="any"  id="usertype" name="usertype" tabindex="-1">
+              <option selected hidden disabled><?php echo $userDetails['user_type'] ?></option>
+              <option value="BAC_SEC">BAC_SEC</option>
+              <option value="BAC_TWG">BAC_TWG</option>
+              <option value="PEO">PEO</option>
+              <option value="PGO">PGO</option>
+            </select>
+          </div>
+        </div>
+      </form> 
+    </div>
+    <div class="box-footer text-center">
+      <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
     </div>
   </div>
 </section>

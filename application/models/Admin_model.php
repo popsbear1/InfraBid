@@ -766,7 +766,7 @@
 		);
 
 		if($this->db->insert('procurement_mode',$data)){
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}
@@ -988,7 +988,7 @@
 
 	public function updateUserType($usertype, $userID){
 		$data = array(
-			'usertype' => $usertype
+			'user_type' => $usertype
 		);
 
 		$this->db->where('user_id', $userID);

@@ -1236,12 +1236,12 @@ class Admin extends CI_Controller {
 
 	public function editDocument(){
 		$currentDocumentID = $this->session->userdata('doc_type_id');
-		if (!empty($_POST['document_name'])) {
+		if (!empty(trim($_POST['document_name']))) {
 			$document_name = $this->input->post('document_name');
 			$this->admin_model->updateDocumentDetails($document_name, $currentDocumentID);
 		}
 
-		if(!empty($_POST['doc_no'])) {
+		if(!empty(trim($_POST['doc_no']))) {
 			$doc_no = $this->input->post('doc_no');
 			$this->admin_model->updateDocumentNumber($doc_no,$currentDocumentID);
 		}
