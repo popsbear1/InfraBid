@@ -1636,9 +1636,9 @@ class Admin extends CI_Controller {
 		redirect('admin/manageProjectTypeView');	
 	}
 
-		public function deleteClassification(){
+	public function deleteClassification(){
 		$data['success'] = false;
-		$account_id=$this->input->post('account_id');
+		$account_id=$this->input->post('classification');
 		if ($this->admin_model->deleteClassification($account_id)) {
 			$data['success'] = true;
 		}

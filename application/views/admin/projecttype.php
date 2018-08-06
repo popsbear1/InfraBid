@@ -1,69 +1,68 @@
-<section class="content-header">
-  <h2>Project Type Management</h2>
-</section>
+
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Manage Project Types<small></small></h2>
-          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addProjectTypeModal">Add New Project Type</button>
-        </div>
-        <div class="box-body">
-          <table class="table table-striped table-bordered" id="projectTypeTable">
-            <thead style='font-size:12px;'>
-              <tr>
-                <th style='text-align: center'>ID</th>
-                <th style='text-align: center'>Project Type</th>
-                <th style='text-align: center'>Status</th>
-                <th style='text-align: center'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($projectTypes as $projectType): ?>
-                <tr id="<?php echo 'projectType' . $projectType['projtype_id'] ?>">
-                  <td class="text-center"><?php echo $projectType['projtype_id'] ?></td>
-                  <td class="text-center"><?php echo $projectType['type'] ?></td>
-                  <td class="text-center"><?php echo $projectType['status'] ?></td>
-                  <td class="text-center row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3 class="pull-left">Project Type Management</h3>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title">Manage Project Types<small></small></h2>
+      <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addProjectTypeModal">Add New Project Type</button>
+    </div>
+    <div class="box-body">
+      <table class="table table-striped table-bordered" id="projectTypeTable">
+        <thead style='font-size:12px;'>
+          <tr>
+            <th style='text-align: center'>ID</th>
+            <th style='text-align: center'>Project Type</th>
+            <th style='text-align: center'>Status</th>
+            <th style='text-align: center'>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($projectTypes as $projectType): ?>
+            <tr id="<?php echo 'projectType' . $projectType['projtype_id'] ?>">
+              <td class="text-center"><?php echo $projectType['projtype_id'] ?></td>
+              <td class="text-center"><?php echo $projectType['type'] ?></td>
+              <td class="text-center"><?php echo $projectType['status'] ?></td>
+              <td class="text-center row">
 
-                   <div class="btn-group">
-                      <form action="<?php echo base_url('admin/setCurrentProjectTypeID') ?>" method="post">
-                        <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['projtype_id'] ?>">
-                          <i class="fa fa-edit">Edit</i>
-                        </button>
-                      </form>
-                    </div>
+               <div class="btn-group">
+                  <form action="<?php echo base_url('admin/setCurrentProjectTypeID') ?>" method="post">
+                    <button class="btn btn-success" name="type" type="submit" value="<?php echo $projectType['projtype_id'] ?>">
+                      <i class="fa fa-edit">Edit</i>
+                    </button>
+                  </form>
+                </div>
 
-                    <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteProjectType') ?>" method="POST" id="delete_project_form">
-                        <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id']?>" hidden>
-                          <button class="btn btn-danger" type="submit">Delete</button>                       
-                      </form>
-                    </div>
+                <div class="btn-group">
+                  <form action="<?php echo base_url('admin/deleteProjectType') ?>" method="POST" id="delete_project_form">
+                    <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id']?>" hidden>
+                      <button class="btn btn-danger" type="submit">Delete</button>                       
+                  </form>
+                </div>
 
-                    <div class="btn-group">
-                      <?php if ($projectType['status']=='active'): ?>
-                          <form action="<?php echo base_url('admin/deactivateProjectType') ?>" method="POST">
-                            <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
-                        </form>                          
-                      <?php endif ?>
+                <div class="btn-group">
+                  <?php if ($projectType['status']=='active'): ?>
+                      <form action="<?php echo base_url('admin/deactivateProjectType') ?>" method="POST">
+                        <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                    </form>                          
+                  <?php endif ?>
 
-                      <?php if ($projectType['status']=='inactive'): ?>
-                          <form action="<?php echo base_url('admin/activateProjectType') ?>" method="POST">
-                            <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
-                        </form>                          
-                      <?php endif ?>
-                    </div>
-                  </td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                  <?php if ($projectType['status']=='inactive'): ?>
+                      <form action="<?php echo base_url('admin/activateProjectType') ?>" method="POST">
+                        <input type="text" name="projtype_id" value="<?php echo $projectType['projtype_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                    </form>                          
+                  <?php endif ?>
+                </div>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -167,7 +166,7 @@
 </div>
 
 <div class="modal fade" id="addsuccess">
-  <div class="modal-dialog modal-sm modal-dialog-centered">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -239,7 +238,7 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#addFundModal').modal('hide');
+          $('#addProjectTypeModal').modal('hide');
           $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();

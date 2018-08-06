@@ -1,71 +1,68 @@
-<section class="content-header">
-  <h2>Edit Contractor Details</h2>
-</section>
+
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Edit Contractor<small></small></h2>
+    <div class="col-md-12">
+      <h3 class="pull-left">Edit Contractor Details</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <a href="<?php echo base_url('admin/manageContractorsView') ?>" class="btn btn-success">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </a>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title">Edit Contractor<small></small></h2>
+    </div>
+    <div class="box-body">
+      <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success text-center">
+          <p><?php echo $_SESSION['success'] ?></p>
         </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <a href="<?php echo base_url('admin/manageContractorsView') ?>" class="btn btn-primary">Back</a>
-            </div>
+      <?php endif ?>
+      <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-warning text-center">
+          <p><?php echo $_SESSION['error'] ?></p>
+        </div>
+      <?php endif ?>
+      <form id="editContractorDetailsForm" method="POST" class="form-horizontal" action="<?php echo base_url('admin/editContractor') ?>" autocomplete="off" >
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Business Name *</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="businessname" value="" name="businessname" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['businessname'] ?>">
           </div>
-        <div class="box-body">
-          <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success">
-              <p><?php echo $_SESSION['success'] ?></p>
-            </div>
-          <?php endif ?>
-          <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-warning">
-              <p><?php echo $_SESSION['error'] ?></p>
-            </div>
-          <?php endif ?>
-          <form id="addContructorForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/editContractor') ?>">
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Business Name<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="businessname" value="" name="businessname" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['businessname'] ?>" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Owner/Manager  <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="owner" value="" name="owner" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['owner'] ?>" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Address <span class="required">*</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="address" value="" name="address"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['address'] ?>" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Number <span class="required">*</span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" step="any"  id="contactnumber" value="" name="contactnumber"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['contactnumber'] ?>" required>
-              </div>
-            </div>
-
-
-            <div class="ln_solid"></div>
-            <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
-              </div>
-            </div>
-          </form>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Owner/Manager *</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="owner" value="" name="owner" class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['owner'] ?>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Address *</span></label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="address" value="" name="address"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['address'] ?>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Number *</span></label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="contactnumber" value="" name="contactnumber"  class="form-control col-md-7 col-xs-12" placeholder="<?php echo $contractorDetails['contactnumber'] ?>">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="box-footer text-center">
+      <button href="#myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Submit</button>
     </div>
   </div>
 </section>
@@ -153,7 +150,7 @@
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" form="addContructorForm" name="submit" class="btn btn-primary">Confirm</button>
+      <button type="submit" form="editContractorDetailsForm" name="submit" class="btn btn-primary">Confirm</button>
       </div>
     </div>
   </div>

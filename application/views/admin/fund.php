@@ -1,71 +1,69 @@
 
-<section class="content-header">
-  <h2>Manage Funds</h2>
-</section>
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2 class="box-title">Funds Records<small></small></h2>
-          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addFundModal">Add New Fund</button>
-        </div>
-        <div class="box-body">
-          <table class="table table-bordered table-striped" id="fundTable">
-            <thead>
-              <tr>
-                <th class="text-center">ID</th>
-                <th class="text-center">Type of Fund</th>
-                <th class="text-center">Source of Fund</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($funds as $fund): ?>
-                <tr id="<?php echo 'fund' . $fund['fund_id'] ?>">
-                  <td class="text-center"><?php echo $fund['fund_id'] ?></td>
-                  <td class="text-center"><?php echo $fund['fund_type'] ?></td>
-                  <td class="text-center"><?php echo $fund['source'] ?></td>
-                  <td class="text-center"><?php echo $fund['status'] ?></td>
-                  <td class="text-center row">
-                    <div class="btn-group">
-                      <form method="POST" action="<?php echo base_url('admin/setCurrentFundID') ?>">
-                        <button class="btn btn-success" name="source" value="<?php echo $fund['fund_id'] ?>" type="submit">
-                          <i class="fa fa-edit"></i>Edit
-                        </button>
-                      </form>
-                    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3 class="pull-left">Manage Funds</h3>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2 class="box-title"> Source of Fund Records<small></small></h2>
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addFundModal">Add New Fund</button>
+    </div>
+    <div class="box-body">
+      <table class="table table-bordered table-striped" id="fundTable">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Type of Fund</th>
+            <th class="text-center">Source of Fund</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($funds as $fund): ?>
+            <tr id="<?php echo 'fund' . $fund['fund_id'] ?>">
+              <td class="text-center"><?php echo $fund['fund_id'] ?></td>
+              <td class="text-center"><?php echo $fund['fund_type'] ?></td>
+              <td class="text-center"><?php echo $fund['source'] ?></td>
+              <td class="text-center"><?php echo $fund['status'] ?></td>
+              <td class="text-center row">
+                <div class="btn-group">
+                  <form method="POST" action="<?php echo base_url('admin/setCurrentFundID') ?>">
+                    <button class="btn btn-success" name="source" value="<?php echo $fund['fund_id'] ?>" type="submit">
+                      <i class="fa fa-edit"></i>Edit
+                    </button>
+                  </form>
+                </div>
 
-                    <div class="btn-group">
-                      <form action="<?php echo base_url('admin/deleteFund') ?>" method="POST" id ="delete_fund_form">
-                        <input type="text" name="fund_id" value="<?php echo $fund['fund_id']?>" hidden>
-                          <button class="btn btn-danger" type="submit">Delete</button>                       
-                      </form>
-                    </div>
+                <div class="btn-group">
+                  <form action="<?php echo base_url('admin/deleteFund') ?>" method="POST" id ="delete_fund_form">
+                    <input type="text" name="fund_id" value="<?php echo $fund['fund_id']?>" hidden>
+                      <button class="btn btn-danger" type="submit">Delete</button>                       
+                  </form>
+                </div>
 
-                    <div class="btn-group">
-                      <?php if ($fund['status']=='active'): ?>
-                        <form action="<?php echo base_url('admin/deactivateFund') ?>" method="POST">
-                          <input type="text" name="fund_id" value="<?php echo $fund['fund_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
-                        </form>                          
-                      <?php endif ?>
+                <div class="btn-group">
+                  <?php if ($fund['status']=='active'): ?>
+                    <form action="<?php echo base_url('admin/deactivateFund') ?>" method="POST">
+                      <input type="text" name="fund_id" value="<?php echo $fund['fund_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
+                    </form>                          
+                  <?php endif ?>
 
-                      <?php if ($fund['status']=='inactive'): ?>
-                        <form action="<?php echo base_url('admin/activateFund') ?>" method="POST">
-                          <input type="text" name="fund_id" value="<?php echo $fund['fund_id'] ?>" hidden>
-                          <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
-                        </form>                          
-                      <?php endif ?>
-                    </div>                           
-                  </td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                  <?php if ($fund['status']=='inactive'): ?>
+                    <form action="<?php echo base_url('admin/activateFund') ?>" method="POST">
+                      <input type="text" name="fund_id" value="<?php echo $fund['fund_id'] ?>" hidden>
+                      <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
+                    </form>                          
+                  <?php endif ?>
+                </div>                           
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -218,8 +216,7 @@
 
 <script>
 
-  var table = $('#fundTable').DataTable({
-  });
+  var table = $('#fundTable').DataTable();
 
   $(document).on('submit', '#addFundsForm', function(e){
     e.preventDefault();

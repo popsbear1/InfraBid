@@ -1,12 +1,15 @@
-<section class="content-header">
-  <h3>Manage Account Classifications</h3>
-</section>
+
 <section class="content">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <h3 class="pull-left">Manage Account Classifications</h3>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h2 class="box-title">Manage Account Classifications<small></small></h2>
+          <h2 class="box-title">Account Classification Records<small></small></h2>
           <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addAccountClassificationModal">Add Account Classification</button>
         </div>
         <div class="box-body">
@@ -114,16 +117,6 @@
         <h4 class="modal-title">Manage Classifications</h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-success text-center" id="adding_success" hidden>
-          <p class="text-left"><b>SUCESS!</b></p><p>
-            Account Classification has been sucessfully added!
-          </p>
-        </div>
-        <div class="alert alert-warning text-center" id="adding_failed" hidden>
-          <p class="text-left"><b>FAILED!</b></p><p>
-            An error was encountered. The Classification was not recorded!</p>
-        </div>
-
         <form id="addClassificationForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/addClassification') ?>">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" >Classification<span>*</span>
@@ -154,6 +147,24 @@
       </div>
       <div class="modal-body">
         <p class="text-center">The Data has been Removed Successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="adding_success">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">SUCCESS!</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>
+          Account Classification has been sucessfully added!
+        </p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" data-dismiss="modal">Close</button>
@@ -194,7 +205,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
+          $('#addAccountClassificationModal').modal('hide');
+          $('#adding_success').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-success').delay(500).show(10, function() {
@@ -248,7 +260,7 @@
 
     var form_name = $(this).attr('id');
     console.log(form_name);
-    var account_id =  $(this).find("input[name='account_id']").val();
+    var account_id =  $(this).find("input[name='classification']").val();
     console.log(account_id);
     var row_id = 'classification' + account_id;
 
