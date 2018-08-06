@@ -289,22 +289,6 @@
               </li>
             </ul>
           </li>
-          <li class="header">Others</li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-laptop"></i>
-              <span>Reports</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="<?php echo base_url('admin/procurementMonitoringReport') ?>"><i class="fa fa-list"></i>Monitoring Reports</a>
-              </li>
-              <li><a href="<?php echo base_url('admin/procurementTimelineReport') ?>"><i class="fa fa-list"></i>Timeline Reports</a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </section>
       <!-- /.sidebar -->

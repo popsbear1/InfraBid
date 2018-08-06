@@ -1149,20 +1149,6 @@ class Admin extends CI_Controller {
 
 	}
 
-	public function procurementMonitoringReport(){
-		$data['procacts'] = $this->admin_model->getProcurementProjects();
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/procurementMonitoringReport', $data);
-		$this->load->view('admin/fragments/footer');
-	}
-
-	public function procurementTimelineReport(){
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/projectProcurementTimelineReport');
-		$this->load->view('admin/fragments/footer');
-	}
 	/** Start of Manage Documents */
 
 		public function manageDocumentsView(){
