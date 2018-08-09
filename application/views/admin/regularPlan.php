@@ -20,22 +20,22 @@
                 <label for="year">Year: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="year_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="year_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <input type="text" id="year" class="form-control" value="<?php echo $year ?>">
+                  <input type="text" id="year" class="form-control input-sm" value="<?php echo $year ?>">
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
                 <label for="quarter">Quarter: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="quarter_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="quarter_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="quarter" id="quarter" class="form-control">
+                  <select name="quarter" id="quarter" class="form-control input-sm">
                     <option hidden disabled selected>Choose Quarter</option>
                     <option value="1stQ">1st Q</option>
                     <option value="2ndQ">2nd Q</option>
@@ -48,11 +48,11 @@
                 <label for="status">Status: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="status_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="status_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="status" id="status" class="form-control">
+                  <select name="status" id="status" class="form-control input-sm">
                     <option hidden disabled selected>Choose Status</option>
                     <option value="pending">Pending</option>
                     <option value="onprocess">On process</option>
@@ -67,11 +67,11 @@
                 <label for="municipality">Municipality: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="municipality_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="municipality_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="municipality" id="municipality" class="form-control">
+                  <select name="municipality" id="municipality" class="form-control input-sm">
                     <option hidden disabled selected>Choose Municipality</option>
                     <?php foreach ($municipalities as $municipality): ?>
                       <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
@@ -83,11 +83,11 @@
                 <label for="source">Source of Fund: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="fund_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="fund_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="source" id="source" class="form-control">
+                  <select name="source" id="source" class="form-control input-sm">
                     <option hidden disabled selected>Choose Source</option>
                     <?php foreach ($sources as $source): ?>
                       <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?></option>
@@ -99,11 +99,11 @@
                 <label for="type">Project Type: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="type_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="type_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="type" id="type" class="form-control">
+                  <select name="type" id="type" class="form-control input-sm">
                     <option hidden disabled selected>Choose Type</option>
                     <?php foreach ($types as $type): ?>
                       <option value="<?php echo $type['projtype_id'] ?>"><?php echo $type['type'] ?></option>
@@ -115,14 +115,10 @@
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
                 <div class="form-group">
-                  <label>Action:</label>
-                  <button class="btn btn-primary" id="filterBtn" type="button">
+                  <label><small>Action:</small></label>
+                  <button class="btn btn-primary btn-xs" id="filterBtn" type="button">
                     <i class="fa fa-search"></i>
                     Find
-                  </button>
-                  <button class="btn btn-default" type="button" id="print_btn">
-                    <i class="fa fa-print"></i>
-                    Print
                   </button>
                 </div>
               </div>
@@ -159,8 +155,8 @@
                         <td><?php echo $plan['award_notice_date'] ?></td>
                         <td><?php echo $plan['contract_signing_date'] ?></td>
                         <td><?php echo $plan['source'] ?></td>
-                        <td><?php echo number_format($plan['abc'], 2) ?></td>
                         <td><?php echo $plan['type'] ?></td>
+                        <td><?php echo number_format($plan['abc'], 2) ?></td>
                         <td><?php echo $plan['project_year'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
@@ -233,74 +229,42 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
-<div class="modal fade" id="printRegularPlanModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Print Regular Plans</h4>
-      </div>
-      <div class="modal-body">
-        <h5 class="text-center">Print result will depend on the current Filters.</h5>
-        <p><b>Current Filters:</b></p>
-        <div class="well">
-          <form method="GET" action="<?php echo base_url('printDetailsAndReports/print_regular_projects') ?>" class="form-horizontal" id="print_regular_project_form">
-            <div class="form-group">
-              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Year:</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input class="form-control" name="year_filter" id="year_filter" readonly>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Quarter:</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input class="form-control" name="quarter_filter" id="quarter_filter" readonly>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Status:</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input class="form-control" name="status_filter" id="status_filter" readonly>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Municipality:</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input name="municipality_filter" id="municipality_filter" hidden>
-                <p class="form-control" id="municipality_filter_name" ></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Source of Fund:</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input name="fund_filter" id="fund_filter" hidden>
-                <p class="form-control" id="fund_filter_name" ></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Project Type:</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input name="type_filter" id="type_filter" hidden>
-                <p class="form-control" id="type_filter_name" ></p>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" form="print_regular_project_form">Confirm</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/jszip.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/pdfmake.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/vfs_fonts.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
+
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
+
 <script>
   $(document).ready( 
     function () {
-      $('#plan_table').DataTable();
+      $('#plan_table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+                }
+            },
+            'colvis'
+        ]
+      });
       $('#year').datepicker({
         autoclose: true,
         format: 'yyyy',
@@ -312,20 +276,6 @@
       $('#year').attr('placeholder', 'yyyy');
     } 
   );
-
-  $('#print_btn').click(function(){
-    $('#year_filter').val($('#year').val());
-    $('#quarter_filter').val($('#quarter').val());
-    $('#status_filter').val($('#status').val());
-    $('#municipality_filter').val($('#municipality').val());
-    $('#municipality_filter_name').html($('#municipality').find(":selected").html());
-    $('#fund_filter').val($('#source').val());
-    $('#fund_filter_name').html($('#source').find(":selected").html());
-    $('#type_filter').val($('#type').val());
-    $('#type_filter_name').html($('#type').find(":selected").html());
-
-    $('#printRegularPlanModal').modal('show');
-  });
 
   $('#year_btn').click(function(){
     $('#year').val('');
@@ -402,6 +352,10 @@
                         '</form>';
               }
             }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
         ]
       });
 

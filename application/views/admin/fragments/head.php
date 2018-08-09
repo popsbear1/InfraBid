@@ -41,5 +41,5 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>public/custom.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/responsive.dataTables.min.css">
-
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/buttons.dataTables.min.css">
     </head>

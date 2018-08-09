@@ -239,7 +239,7 @@ class Admin extends CI_Controller {
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
-		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|is_natural');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
@@ -266,10 +266,14 @@ class Admin extends CI_Controller {
 			$ABC = htmlspecialchars($this->input->post('ABC'));
 			$source = htmlspecialchars($this->input->post('source'));
 			$account = htmlspecialchars($this->input->post('account'));
-			$abc_post_date = htmlspecialchars($this->input->post('abc_post_date'));
-			$sub_open_date = htmlspecialchars($this->input->post('sub_open_date'));
-			$award_notice_date = htmlspecialchars($this->input->post('award_notice_date'));
-			$contract_signing_date = htmlspecialchars($this->input->post('contract_signing_date'));
+			$abc_post_date = date_create_from_format('m-Y', $this->input->post('abc_post_date'));
+			$abc_post_date = date_format($abc_post_date, 'M-Y');
+			$sub_open_date = date_create_from_format('m-Y', $this->input->post('sub_open_date'));
+			$sub_open_date = date_format($sub_open_date, 'M-Y');
+			$award_notice_date = date_create_from_format('m-Y', $this->input->post('award_notice_date'));
+			$award_notice_date = date_format($award_notice_date, 'M-Y');
+			$contract_signing_date = date_create_from_format('m-Y', $this->input->post('contract_signing_date'));
+			$contract_signing_date = date_format($contract_signing_date, 'M-Y');
 
 			if ($this->admin_model->insertNewRegularProject($date_added, $year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date)) {
 				$data['success'] = true;
@@ -308,7 +312,7 @@ class Admin extends CI_Controller {
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
-		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|integer|is_natural');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
@@ -335,10 +339,14 @@ class Admin extends CI_Controller {
 			$ABC = htmlspecialchars($this->input->post('ABC'));
 			$source = htmlspecialchars($this->input->post('source'));
 			$account = htmlspecialchars($this->input->post('account'));
-			$abc_post_date = htmlspecialchars($this->input->post('abc_post_date'));
-			$sub_open_date = htmlspecialchars($this->input->post('sub_open_date'));
-			$award_notice_date = htmlspecialchars($this->input->post('award_notice_date'));
-			$contract_signing_date = htmlspecialchars($this->input->post('contract_signing_date'));
+			$abc_post_date = date_create_from_format('m-Y', $this->input->post('abc_post_date'));
+			$abc_post_date = date_format($abc_post_date, 'M-Y');
+			$sub_open_date = date_create_from_format('m-Y', $this->input->post('sub_open_date'));
+			$sub_open_date = date_format($sub_open_date, 'M-Y');
+			$award_notice_date = date_create_from_format('m-Y', $this->input->post('award_notice_date'));
+			$award_notice_date = date_format($award_notice_date, 'M-Y');
+			$contract_signing_date = date_create_from_format('m-Y', $this->input->post('contract_signing_date'));
+			$contract_signing_date = date_format($contract_signing_date, 'M-Y');
 
 
 			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date)) {

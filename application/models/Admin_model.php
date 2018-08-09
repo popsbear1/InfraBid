@@ -51,9 +51,6 @@
 
 			if ($status != null) {
 				$this->db->where('project_plan.status', $status);
-			}else{
-				$this->db->where('project_plan.status', 'onprocess');
-				$this->db->or_where('project_plan.status', 'for_rebid');
 			}
 
 			if ($municipality != null) {

@@ -17,22 +17,22 @@
                 <label for="year">Year: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="year_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="year_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <input type="text" id="year" class="form-control"  value="<?php echo $year ?>">
+                  <input type="text" id="year" class="form-control input-sm" value="<?php echo $year ?>">
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
                 <label for="quarter">Quarter: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="quarter_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="quarter_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="quarter" id="quarter" class="form-control">
+                  <select name="quarter" id="quarter" class="form-control input-sm">
                     <option hidden disabled selected>Choose Quarter</option>
                     <option value="1stQ">1st Q</option>
                     <option value="2ndQ">2nd Q</option>
@@ -45,11 +45,11 @@
                 <label for="status">Status: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="status_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="status_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="status" id="status" class="form-control">
+                  <select name="status" id="status" class="form-control input-sm">
                     <option hidden disabled selected>Choose Status</option>
                     <option value="pending">Pending</option>
                     <option value="onprocess">On process</option>
@@ -64,11 +64,11 @@
                 <label for="municipality">Municipality: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="municipality_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="municipality_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="municipality" id="municipality" class="form-control">
+                  <select name="municipality" id="municipality" class="form-control input-sm">
                     <option hidden disabled selected>Choose Municipality</option>
                     <?php foreach ($municipalities as $municipality): ?>
                       <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
@@ -80,14 +80,14 @@
                 <label for="source">Source of Fund: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="fund_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="fund_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="source" id="source" class="form-control">
+                  <select name="source" id="source" class="form-control input-sm">
                     <option hidden disabled selected>Choose Source</option>
                     <?php foreach ($sources as $source): ?>
-                      <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?>  </option>
+                      <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
@@ -96,11 +96,11 @@
                 <label for="type">Project Type: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="type_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="type_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="type" id="type" class="form-control">
+                  <select name="type" id="type" class="form-control input-sm">
                     <option hidden disabled selected>Choose Type</option>
                     <?php foreach ($types as $type): ?>
                       <option value="<?php echo $type['projtype_id'] ?>"><?php echo $type['type'] ?></option>
@@ -112,68 +112,62 @@
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
                 <div class="form-group">
-                  <label>Action:</label>
-                  <button class="btn btn-primary" id="filterBtn" type="button">
+                  <label><small>Action:</small></label>
+                  <button class="btn btn-primary btn-xs" id="filterBtn" type="button">
                     <i class="fa fa-search"></i>
                     Find
-                  </button>
-                  <button class="btn btn-default" type="button">
-                    <i class="fa fa-print"></i>
-                    Print
                   </button>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="tableContainer table-responsive no-pading">
-                  <table class="table table-bordered table-hover" id="plan_table">
-                    <thead style='font-size:12px;'>
+                <table class="display responsive nowrap" width="100%" cellspacing="0" id="plan_table">
+                  <thead style='font-size:12px;'>
+                    <tr>
+                      <th class="text-center">Project No.</th>
+                      <th class="text-center">Project Title</th>
+                      <th class="text-center">Location</th>
+                      <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">SUB/ OPEN OF BIDS</th>
+                      <th class="text-center">NOTICE OF AWARD</th>
+                      <th class="text-center">CONTRACT SIGNING</th>
+                      <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Type of Project</th>
+                      <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">Project Year</th>
+                      <th class="text-center">Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($plans as $plan): ?>
                       <tr>
-                        <th class="text-center">Project No.</th>
-                        <th class="text-center">Project Title</th>
-                        <th class="text-center">Location</th>
-                        <th class="text-center">Mode of Procurement</th>
-                        <th class="text-center">ADS/POST OF IB/REI</th>
-                        <th class="text-center">SUB/ OPEN OF BIDS</th>
-                        <th class="text-center">NOTICE OF AWARD</th>
-                        <th class="text-center">CONTRACT SIGNING</th>
-                        <th class="text-center">Source of Fund</th>
-                        <th class="text-center">Type of Project</th>
-                        <th class="text-center">Approved Budget Cost</th>
-                        <th class="text-center">Project Year</th>
-                        <th class="text-center">Edit</th>
+                        <td><?php echo $plan['project_no'] ?></td>
+                        <td><?php echo $plan['project_title'] ?></td>
+                        <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
+                        <td><?php echo $plan['mode'] ?></td>
+                        <td><?php echo $plan['abc_post_date'] ?></td>
+                        <td><?php echo $plan['sub_open_date'] ?></td>
+                        <td><?php echo $plan['award_notice_date'] ?></td>
+                        <td><?php echo $plan['contract_signing_date'] ?></td>
+                        <td><?php echo $plan['source'] ?></td>
+                        <td><?php echo number_format($plan['abc'], 2) ?></td>
+                        <td><?php echo $plan['type'] ?></td>
+                        <td><?php echo $plan['project_year'] ?></td>
+                        <td>
+                          <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
+                            <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
+                            <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
+                            <button class="btn btn-info" type="submit">
+                              <i class="fa fa-eye"></i>
+                            </button>
+                          </form>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($plans as $plan): ?>
-                        <tr>
-                          <td><?php echo $plan['project_no'] ?></td>
-                          <td><?php echo $plan['project_title'] ?></td>
-                          <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
-                          <td><?php echo $plan['mode'] ?></td>
-                          <td><?php echo $plan['abc_post_date'] ?></td>
-                          <td><?php echo $plan['sub_open_date'] ?></td>
-                          <td><?php echo $plan['award_notice_date'] ?></td>
-                          <td><?php echo $plan['contract_signing_date'] ?></td>
-                          <td><?php echo $plan['source'] ?></td>
-                          <td><?php echo number_format($plan['abc'], 2) ?></td>
-                          <td><?php echo $plan['type'] ?></td>
-                          <td><?php echo $plan['project_year'] ?></td>
-                          <td>
-                            <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                              <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
-                              <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
-                              <button class="btn btn-info" type="submit">
-                                <i class="fa fa-eye"></i>
-                              </button>
-                            </form>
-                          </td>
-                        </tr>
-                      <?php endforeach ?>
-                    </tbody>
-                  </table>
-                </div>
+                    <?php endforeach ?>
+                  </tbody>
+                </table>
               </div>
             </div>
             <div class="callout" style="background: #f2f2f2">
@@ -234,18 +228,42 @@
 <script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/jszip.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/pdfmake.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/vfs_fonts.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
+
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
 
 <script>
   $(document).ready( 
     function () {
       $('#plan_table').DataTable({
-        'paging'      : true,
-        'lengthChange': false,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : true
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+                }
+            },
+            'colvis'
+        ]
       });
       $('#year').datepicker({
         autoclose: true,
@@ -334,6 +352,10 @@
                         '</form>';
               }
             }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
         ]
       });
 
