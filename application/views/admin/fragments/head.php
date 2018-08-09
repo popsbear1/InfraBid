@@ -11,7 +11,6 @@
 
         <!-- Bootstrap 3.3.7 -->
         <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.js">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/font-awesome/css/font-awesome.min.css">
         <!-- Ionicons -->
@@ -32,6 +31,7 @@
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo base_url() ?>public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>public/custom.css">
-        <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>public/bower_components/datatables.net-bs/css/responsive.dataTables.min.css">
 
     </head>

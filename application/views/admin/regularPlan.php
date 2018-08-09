@@ -129,54 +129,52 @@
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="tableContainer table-responsive no-pading">
-                  <table class="table table-bordered table-hover" id="plan_table">
-                    <thead style='font-size:12px;'>
+                <table class="display responsive nowrap" width="100%" cellspacing="0" id="plan_table">
+                  <thead style='font-size:12px;'>
+                    <tr>
+                      <th class="text-center">Project No.</th>
+                      <th class="text-center">Project Title</th>
+                      <th class="text-center">Location</th>
+                      <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">SUB/ OPEN OF BIDS</th>
+                      <th class="text-center">NOTICE OF AWARD</th>
+                      <th class="text-center">CONTRACT SIGNING</th>
+                      <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Type of Project</th>
+                      <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">Project Year</th>
+                      <th class="text-center">Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($plans as $plan): ?>
                       <tr>
-                        <th class="text-center">Project No.</th>
-                        <th class="text-center">Project Title</th>
-                        <th class="text-center">Location</th>
-                        <th class="text-center">Mode of Procurement</th>
-                        <th class="text-center">ADS/POST OF IB/REI</th>
-                        <th class="text-center">SUB/ OPEN OF BIDS</th>
-                        <th class="text-center">NOTICE OF AWARD</th>
-                        <th class="text-center">CONTRACT SIGNING</th>
-                        <th class="text-center">Source of Fund</th>
-                        <th class="text-center">Type of Project</th>
-                        <th class="text-center">Approved Budget Cost</th>
-                        <th class="text-center">Project Year</th>
-                        <th class="text-center">Edit</th>
+                        <td><?php echo $plan['project_no'] ?></td>
+                        <td><?php echo $plan['project_title'] ?></td>
+                        <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
+                        <td><?php echo $plan['mode'] ?></td>
+                        <td><?php echo $plan['abc_post_date'] ?></td>
+                        <td><?php echo $plan['sub_open_date'] ?></td>
+                        <td><?php echo $plan['award_notice_date'] ?></td>
+                        <td><?php echo $plan['contract_signing_date'] ?></td>
+                        <td><?php echo $plan['source'] ?></td>
+                        <td><?php echo number_format($plan['abc'], 2) ?></td>
+                        <td><?php echo $plan['type'] ?></td>
+                        <td><?php echo $plan['project_year'] ?></td>
+                        <td>
+                          <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
+                            <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
+                            <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
+                            <button class="btn btn-info" type="submit">
+                              <i class="fa fa-eye"></i>
+                            </button>
+                          </form>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($plans as $plan): ?>
-                        <tr>
-                          <td><?php echo $plan['project_no'] ?></td>
-                          <td><?php echo $plan['project_title'] ?></td>
-                          <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
-                          <td><?php echo $plan['mode'] ?></td>
-                          <td><?php echo $plan['abc_post_date'] ?></td>
-                          <td><?php echo $plan['sub_open_date'] ?></td>
-                          <td><?php echo $plan['award_notice_date'] ?></td>
-                          <td><?php echo $plan['contract_signing_date'] ?></td>
-                          <td><?php echo $plan['source'] ?></td>
-                          <td><?php echo number_format($plan['abc'], 2) ?></td>
-                          <td><?php echo $plan['type'] ?></td>
-                          <td><?php echo $plan['project_year'] ?></td>
-                          <td>
-                            <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                              <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
-                              <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
-                              <button class="btn btn-info" type="submit">
-                                <i class="fa fa-eye"></i>
-                              </button>
-                            </form>
-                          </td>
-                        </tr>
-                      <?php endforeach ?>
-                    </tbody>
-                  </table>
-                </div>
+                    <?php endforeach ?>
+                  </tbody>
+                </table>
               </div>
             </div>
             <div class="callout" style="background: #f2f2f2">
@@ -234,7 +232,7 @@
 <script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
 
 <script>
   $(document).ready( 

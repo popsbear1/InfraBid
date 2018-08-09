@@ -194,6 +194,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');	
 	}
 
+	public function procActStatusView(){
+		$data['projects'] = $this->admin_model->getAllProjectActivityStatus();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/procActStatus', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
 
 	public function addRegularPlanView(){
 		$data['currentDate'] = date('Y-m-d');

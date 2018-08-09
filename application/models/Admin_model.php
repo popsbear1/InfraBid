@@ -591,6 +591,17 @@
 			return $query->row_array();
 		}
 
+		public function getAllProjectActivityStatus(){
+			$this->db->select('*');
+			$this->db->from('project_activity_status');
+			$this->db->join('project_plan', 'project_activity_status.plan_id = project_plan.plan_id');
+
+			$query =$this->db->get();
+
+			return $query->result_array();
+		}
+
+
 	/**
 	* All functions bellow are used to insert data on Database.
 	**/

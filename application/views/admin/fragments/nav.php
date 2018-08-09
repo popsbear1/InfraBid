@@ -241,16 +241,17 @@
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">PROCESS</li>
           <li class="treeview">
-            <a>
-              <i class="fa fa-plus"></i><span>ADD PLAN</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              <ul class=treeview-menu>
-                <li><a href="<?php echo base_url('admin/addRegularPlanView') ?>">Regular Plan</a></li>
-                <li><a href="<?php echo base_url('admin/addSupplementalPlanView') ?>">Supplemental Plan</a></li>
-              </ul>
+            <a href="#">
+              <i class="fa fa-file"></i>
+              <span>ADD PLAN</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
             </a>
+            <ul class=treeview-menu>
+              <li><a href="<?php echo base_url('admin/addRegularPlanView') ?>">Regular Plan</a></li>
+              <li><a href="<?php echo base_url('admin/addSupplementalPlanView') ?>">Supplemental Plan</a></li>
+            </ul>
           </li>
           <li>
             <a href="<?php echo base_url('admin/setPlanTypeRegular') ?>">
@@ -262,11 +263,16 @@
               </i> <span>Supplemental Records</span>
             </a>
           </li>
+          <li>
+            <a href="<?php echo base_url('admin/procActStatusView') ?>">
+              <i class="fa fa-list"></i> <span>Project Status Check</span>
+            </a>
+          </li>
           <li class="header">Document Management</li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-file"></i>
-              <span>Document Tracking</span>
+              <span>Document</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
