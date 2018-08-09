@@ -51,6 +51,9 @@
 
 			if ($status != null) {
 				$this->db->where('project_plan.status', $status);
+			}else{
+				$this->db->where('project_plan.status', 'onprocess');
+				$this->db->or_where('project_plan.status', 'for_rebid');
 			}
 
 			if ($municipality != null) {
@@ -595,6 +598,9 @@
 			$this->db->select('*');
 			$this->db->from('project_activity_status');
 			$this->db->join('project_plan', 'project_activity_status.plan_id = project_plan.plan_id');
+			$this->db->not_like('project_plan.status', 'pending');
+			$this->db->or_not_like('project_plan.status', 'completed');
+			$this->db->or_not_like('project_plan.status', 'for_review');
 
 			$query =$this->db->get();
 

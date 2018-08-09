@@ -120,7 +120,7 @@
                     <i class="fa fa-search"></i>
                     Find
                   </button>
-                  <button class="btn btn-default" type="button">
+                  <button class="btn btn-default" type="button" id="print_btn">
                     <i class="fa fa-print"></i>
                     Print
                   </button>
@@ -233,7 +233,70 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
-
+<div class="modal fade" id="printRegularPlanModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Print Regular Plans</h4>
+      </div>
+      <div class="modal-body">
+        <h5 class="text-center">Print result will depend on the current Filters.</h5>
+        <p><b>Current Filters:</b></p>
+        <div class="well">
+          <form method="GET" action="<?php echo base_url('printDetailsAndReports/print_regular_projects') ?>" class="form-horizontal" id="print_regular_project_form">
+            <div class="form-group">
+              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Year:</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input class="form-control" name="year_filter" id="year_filter" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Quarter:</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input class="form-control" name="quarter_filter" id="quarter_filter" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Status:</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input class="form-control" name="status_filter" id="status_filter" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Municipality:</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input name="municipality_filter" id="municipality_filter" hidden>
+                <p class="form-control" id="municipality_filter_name" ></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Source of Fund:</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input name="fund_filter" id="fund_filter" hidden>
+                <p class="form-control" id="fund_filter_name" ></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-md-4 col-sm-4 control-label">Project Type:</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input name="type_filter" id="type_filter" hidden>
+                <p class="form-control" id="type_filter_name" ></p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" form="print_regular_project_form">Confirm</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <script>
   $(document).ready( 
     function () {
@@ -249,6 +312,20 @@
       $('#year').attr('placeholder', 'yyyy');
     } 
   );
+
+  $('#print_btn').click(function(){
+    $('#year_filter').val($('#year').val());
+    $('#quarter_filter').val($('#quarter').val());
+    $('#status_filter').val($('#status').val());
+    $('#municipality_filter').val($('#municipality').val());
+    $('#municipality_filter_name').html($('#municipality').find(":selected").html());
+    $('#fund_filter').val($('#source').val());
+    $('#fund_filter_name').html($('#source').find(":selected").html());
+    $('#type_filter').val($('#type').val());
+    $('#type_filter_name').html($('#type').find(":selected").html());
+
+    $('#printRegularPlanModal').modal('show');
+  });
 
   $('#year_btn').click(function(){
     $('#year').val('');
