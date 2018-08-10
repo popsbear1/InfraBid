@@ -116,16 +116,20 @@
               <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
                 <div class="form-group">
                   <label><small>Action:</small></label>
-                  <button class="btn btn-primary btn-xs" id="filterBtn" type="button">
+                  <button class="btn btn-primary btn-sm" id="filterBtn" type="button">
                     <i class="fa fa-search"></i>
                     Find
+                  </button>
+                  <button class="btn btn-success btn-sm" id="printBtn" type="button">
+                    <i class="fa fa-print"></i>
+                    Print
                   </button>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
-                <table class="display responsive nowrap" width="100%" cellspacing="0" id="plan_table">
+                <table width="100%" id="plan_table">
                   <thead style='font-size:12px;'>
                     <tr>
                       <th class="text-center">Project No.</th>
@@ -156,7 +160,7 @@
                         <td><?php echo $plan['contract_signing_date'] ?></td>
                         <td><?php echo $plan['source'] ?></td>
                         <td><?php echo $plan['type'] ?></td>
-                        <td><?php echo number_format($plan['abc'], 2) ?></td>
+                        <td><?php echo $plan['abc'] ?></td>
                         <td><?php echo $plan['project_year'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
@@ -222,10 +226,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
@@ -237,33 +237,31 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
 
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
 
 <script>
   $(document).ready( 
     function () {
       $('#plan_table').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'copyHtml5',
-                exportOptions: {
-                    columns: [ 0, ':visible' ]
-                }
-            },
-            {
-                extend: 'excelHtml5',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
-                }
-            },
-            'colvis'
-        ]
+        order: [[8, 'asc']],
+        rowGroup: {
+          startRender: null,
+          endRender: function (rows, group) {
+            var total = rows
+            .data()
+            .pluck(10)
+            .reduce( function (a, b) {
+              return a + b*1;
+            }, 0);
+
+            return $('<tr/>')
+            .append('<td colspan="10"> Total for ' + group + '</td>')
+            .append('<td>' + total + '</td>')
+            .append('<td/>')
+            .append('<td/>');
+          },
+          dataSrc: 8
+        }
       });
       $('#year').datepicker({
         autoclose: true,
@@ -321,7 +319,7 @@
       $('#project_count').html(response.count_total['project_count']);
       $('#total_abc').html(response.count_total['total_abc']);
       $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
-      $('#plan_table').DataTable({
+      var table = $('#plan_table').DataTable({
         data: response.plans,
         columns: [
             { data: 'project_no' },
@@ -353,10 +351,25 @@
               }
             }
         ],
-        dom: 'Bfrtip',
-        buttons: [
-            'print'
-        ]
+        order: [[8, 'asc']],
+        rowGroup: {
+          startRender: null,
+          endRender: function (rows, group) {
+            var total = rows
+            .data()
+            .pluck(11)
+            .reduce( function (a, b) {
+              return a + b*1;
+            }, 0);
+
+            return $('<tr/>')
+            .append('<td colspan="10"> Total for ' + group + '</td>')
+            .append('<td>' + total + '</td>')
+            .append('<td/>')
+            .append('<td/>');
+          },
+          dataSrc: 8
+        }
       });
 
     })

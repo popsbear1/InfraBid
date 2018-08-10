@@ -117,6 +117,10 @@
                     <i class="fa fa-search"></i>
                     Find
                   </button>
+                  <button class="btn btn-success btn-sm" id="printBtn" type="button">
+                    <i class="fa fa-print"></i>
+                    Print
+                  </button>
                 </div>
               </div>
             </div>
@@ -242,28 +246,25 @@
   $(document).ready( 
     function () {
       $('#plan_table').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'copyHtml5',
-                exportOptions: {
-                    columns: [ 0, ':visible' ]
-                }
-            },
-            {
-                extend: 'excelHtml5',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
-                }
-            },
-            'colvis'
-        ]
+        order: [[8, 'asc']],
+        rowGroup: {
+          startRender: null,
+          endRender: function (rows, group) {
+            var total = rows
+            .data()
+            .pluck(10)
+            .reduce( function (a, b) {
+              return a + b*1;
+            }, 0);
+
+            return $('<tr/>')
+            .append('<td colspan="10"> Total for ' + group + '</td>')
+            .append('<td>' + total + '</td>')
+            .append('<td/>')
+            .append('<td/>');
+          },
+          dataSrc: 8
+        }
       });
       $('#year').datepicker({
         autoclose: true,
@@ -353,10 +354,25 @@
               }
             }
         ],
-        dom: 'Bfrtip',
-        buttons: [
-            'print'
-        ]
+        order: [[8, 'asc']],
+        rowGroup: {
+          startRender: null,
+          endRender: function (rows, group) {
+            var total = rows
+            .data()
+            .pluck(11)
+            .reduce( function (a, b) {
+              return a + b*1;
+            }, 0);
+
+            return $('<tr/>')
+            .append('<td colspan="10"> Total for ' + group + '</td>')
+            .append('<td>' + total + '</td>')
+            .append('<td/>')
+            .append('<td/>');
+          },
+          dataSrc: 8
+        }
       });
 
     })
