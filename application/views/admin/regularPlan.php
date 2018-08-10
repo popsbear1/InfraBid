@@ -130,7 +130,7 @@
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <table width="100%" id="plan_table">
-                  <thead style='font-size:12px;'>
+                  <thead style='font-size:12px;background: #ffcccc'>
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
@@ -174,6 +174,23 @@
                       </tr>
                     <?php endforeach ?>
                   </tbody>
+                  <tfoot style='font-size:12px;background: #ffcccc'>
+                    <tr>
+                      <th class="text-center">Project No.</th>
+                      <th class="text-center">Project Title</th>
+                      <th class="text-center">Location</th>
+                      <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">SUB/ OPEN OF BIDS</th>
+                      <th class="text-center">NOTICE OF AWARD</th>
+                      <th class="text-center">CONTRACT SIGNING</th>
+                      <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Type of Project</th>
+                      <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">Project Year</th>
+                      <th class="text-center">Edit</th>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
@@ -357,7 +374,7 @@
           endRender: function (rows, group) {
             var total = rows
             .data()
-            .pluck(11)
+            .pluck('abc')
             .reduce( function (a, b) {
               return a + b*1;
             }, 0);
@@ -368,7 +385,7 @@
             .append('<td/>')
             .append('<td/>');
           },
-          dataSrc: 8
+          dataSrc: 'source'
         }
       });
 
