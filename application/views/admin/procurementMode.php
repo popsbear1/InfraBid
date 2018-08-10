@@ -184,7 +184,7 @@
         <h4 class="modal-title">SUCCESS!!</h4>
       </div>
       <div class="modal-body text-center">
-        <p>Successfully added Project Type!</p>
+        <p>Successfully added Procurement Mode!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -204,7 +204,7 @@
         <h4 class="modal-title">ERROR!!</h4>
       </div>
       <div class="modal-body text-center">
-        <p>Erro Adding Project Type!</p>
+        <p>Erro Adding Procurement Mode!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

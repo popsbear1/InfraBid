@@ -185,7 +185,7 @@
         <h4 class="text-center">Failed!</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">Error Occured!</p>
+        <p class="text-center">The Data has already been used! Please deactivate or activate</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" data-dismiss="modal">Close</button>

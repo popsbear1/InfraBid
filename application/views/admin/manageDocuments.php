@@ -115,12 +115,6 @@
           </div>
           <div class="modal-body">
 
-            <div class="alert alert-success text-centert" id="adding_sucess" hidden=""> <p class="text-left"><b>SUCESS!</b></p>
-              <p>Document has been addded Sucessfully!</p></div>
-
-            <div class="alert alert-warning text-center" id="adding_failed" hidden><p class="text-left"><b>FAILED</b></p><p>An error was encountered. The document was not recorded!</p></div>
-
-
             <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addDocuments') ?>">
 
               <div class="form-group">
@@ -178,10 +172,51 @@
         <h4 class="text-center">Failed!</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">Error Occured!</p>
+        <p class="text-center">The Data has already been used! Please deactivate or activate</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addsuccess">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Documents</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p>Successfully added Document!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addfail" tabindex="-1" role="dialog" aria-labelledby="pow_adding_warning" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Documents</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Error adding Document!</p>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -203,7 +238,8 @@
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          $('#alert-success').attr('hidden', false);
+          $('#addDocumentsModal').modal('hide');
+          $('#addsuccess').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-success').delay(500).show(10, function() {
@@ -226,7 +262,7 @@
 
           $('#addDocumentsForm input').val('');
         }else if(response.success == 'failed'){
-          $('#alert-failed').attr('hidden', false);
+          $('#addfail').modal('show');
           $('.has-error').remove();
           $('.has-success').remove();
           $('.alert-failed').delay(500).show(10, function() {
