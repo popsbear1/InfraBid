@@ -149,22 +149,6 @@
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="action_success">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="text-center">Success!</h4>
-      </div>
-      <div class="modal-body">
-        <p class="text-center">The Data has been Removed Successfully!</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="modal fade" id="addsuccess">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">

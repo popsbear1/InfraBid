@@ -2,7 +2,7 @@
       <section class="content">
         <div class="row">
           <div class="col-md-12">
-            <h3 class="pull-left">Anual Regular Procurement Plan Report</h3>
+            <h3 class="pull-left">Annual Regular Procurement Plan Report</h3>
           </div>
         </div>
         <div class="box">
