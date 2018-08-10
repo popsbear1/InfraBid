@@ -138,9 +138,9 @@ class Admin extends CI_Controller {
 		}
 
 		$data['plans'] = $this->admin_model->getRegularProjectPlan($year, $quarter, $status, $municipality, $source, $type);
-		for ($i=0; $i < count($data['plans']); $i++) { 
-			$data['plans'][$i]['abc'] = number_format($data['plans'][$i]['abc']); 
-		}
+		// for ($i=0; $i < count($data['plans']); $i++) { 
+		// 	$data['plans'][$i]['abc'] = number_format($data['plans'][$i]['abc']); 
+		// }
 		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $quarter, $status, $municipality, $source, $type);		
 		$total = explode('.', $data['count_total']['total_abc']);
 		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);

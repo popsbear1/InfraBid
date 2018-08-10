@@ -2,7 +2,7 @@
 <section class="content">
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-md-12">
-      <h3 class="pull-left">Procurement Monitoring Report</h3>
+      <h3 class="pull-left">Procurement Monitoring Status</h3>
     </div>
   </div>
   <div class="box box-info">
@@ -10,6 +10,29 @@
   		<h2 class="box-title">Project List</h2> 
   	</div>
   	<div class="box-body">
+  		<div class="row">
+	  		<div class="col-lg-12 col-sm-12 col-md-12">
+	  			<p>Filter:</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-lg-2 col-sm-2 col-md-2">
+	  			<div class="form-group">
+	  				<label>Activity: </label>
+		  			<div class="input-group">
+		  				<select name="" id="" class="form-control input-sm">
+		  					<option selected disabled hidden>Choose Activity</option>
+
+		  				</select>
+			  			<div class="input-group-btn">
+			  				<button class="btn btn-primary btn-sm" type="button">
+			  					<i class="fa fa-search"></i>	
+			  				</button>
+			  			</div>
+		  			</div>
+	  			</div>
+	  		</div>
+	  	</div>
 		<table class="display responsive nowrap" width="100%" cellspacing="0" id="projectListTable">
 			<thead>
 				<tr class="text-center">
