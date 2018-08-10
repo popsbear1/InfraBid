@@ -113,7 +113,7 @@
               <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
                 <div class="form-group">
                   <label><small>Action:</small></label>
-                  <button class="btn btn-primary btn-xs" id="filterBtn" type="button">
+                  <button class="btn btn-primary btn-sm" id="filterBtn" type="button">
                     <i class="fa fa-search"></i>
                     Find
                   </button>
@@ -126,8 +126,8 @@
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
-                <table class="display responsive nowrap" width="100%" cellspacing="0" id="plan_table">
-                  <thead style='font-size:12px;'>
+                <table width="100%" id="plan_table">
+                  <thead style='font-size:12px;background: #ffcccc'>
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
@@ -171,6 +171,23 @@
                       </tr>
                     <?php endforeach ?>
                   </tbody>
+                  <tfoot style='font-size:12px;background: #ffcccc'>
+                    <tr>
+                      <th class="text-center">Project No.</th>
+                      <th class="text-center">Project Title</th>
+                      <th class="text-center">Location</th>
+                      <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">SUB/ OPEN OF BIDS</th>
+                      <th class="text-center">NOTICE OF AWARD</th>
+                      <th class="text-center">CONTRACT SIGNING</th>
+                      <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Type of Project</th>
+                      <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">Project Year</th>
+                      <th class="text-center">Edit</th>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
@@ -226,10 +243,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
@@ -360,7 +373,7 @@
           endRender: function (rows, group) {
             var total = rows
             .data()
-            .pluck(11)
+            .pluck('abc')
             .reduce( function (a, b) {
               return a + b*1;
             }, 0);
@@ -371,7 +384,7 @@
             .append('<td/>')
             .append('<td/>');
           },
-          dataSrc: 8
+          dataSrc: 'source'
         }
       });
 

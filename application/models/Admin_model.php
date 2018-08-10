@@ -62,7 +62,7 @@
 			}
 
 			if ($type !=null){
-				$this->db->where('project_plan.projtype_id',$projecttype);
+				$this->db->where('project_plan.projtype_id', $type);
 			}
 
 			$this->db->order_by('municipality ASC', 'barangay ASC');
@@ -118,7 +118,7 @@
 			}
 
 			if ($type !=null){
-				$this->db->where('project_plan.projtype_id',$projecttype);
+				$this->db->where('project_plan.projtype_id',$type);
 			}
 
 			$this->db->order_by('municipality ASC', 'barangay ASC');
@@ -175,7 +175,7 @@
 			}
 
 			if ($type !=null){
-				$this->db->where('project_plan.projtype_id',$projecttype);
+				$this->db->where('project_plan.projtype_id',$type);
 			}
 			$this->db->order_by('municipality ASC', 'barangay ASC');
 
@@ -231,7 +231,7 @@
 			}
 
 			if ($type !=null){
-				$this->db->where('project_plan.projtype_id',$projecttype);
+				$this->db->where('project_plan.projtype_id',$type);
 			}
 			$this->db->order_by('municipality ASC', 'barangay ASC');
 

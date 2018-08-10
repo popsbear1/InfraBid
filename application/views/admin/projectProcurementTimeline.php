@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="left-col"><b class="pull-right">Advertisement:</b></td>
+                    <td class="left-col"><b class="pull-right">ADS/Post:</b></td>
                     <td class="center"><input type="date" class="form-control" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm"></td>
                     <td class="center"><input type="date" class="form-control" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm"></td>
                     <td class="reight-col"></td>
@@ -236,9 +236,9 @@
 
   <script>
 
-    var pre_proc_status = '<?php echo $actStatus['pre_proc'] ?>';
-    var advertisement_status = '<?php echo $actStatus['advertisement'] ?>';
-    var pre_bid_status = '<?php echo $actStatus['pre_bid'] ?>';
+    //var pre_proc_status = '<?php echo $actStatus['pre_proc'] ?>';
+    //var advertisement_status = '<?php echo $actStatus['advertisement'] ?>';
+    //var pre_bid_status = '<?php echo $actStatus['pre_bid'] ?>';
 
     $('#timelineModalConfirmBtn').click(function(e){
       $('#preproc').html($('#pre_proc_date').val());
@@ -282,21 +282,21 @@
       $('#proceedNoticeStart').val("<?php echo $timeLine['proceed_notice_start'] ?>");
       $('#proceedNoticeEnd').val("<?php echo $timeLine['proceed_notice_end'] ?>");
 
-      if (advertisement_status == 'not_needed' && pre_bid_status != 'not_needed') {
-        $('#advertisement_start').prop('disabled', 'disabled');
-        $('#advertisement_end').prop('disabled', 'disabled');
-      }
+      // if (advertisement_status == 'not_needed' && pre_bid_status != 'not_needed') {
+      //   $('#advertisement_start').prop('disabled', 'disabled');
+      //   $('#advertisement_end').prop('disabled', 'disabled');
+      // }
 
-      if (advertisement_status == 'not_needed' && pre_bid_status == 'not_needed') {
-        $('#advertisement_start').prop('disabled', 'disabled');
-        $('#advertisement_end').prop('disabled', 'disabled');
-        $('#yesPreBid').prop('disabled', 'disabled');
-        $('#noPreBid').prop('disabled', 'disabled');
-        $('#preBidStart').prop('disabled', 'disabled');
-        $('#preBidEnd').prop('disabled', 'disabled');
-        $('#preBidNumber').prop('disabled', 'disabled');
-        $('#preBidUpdateBtn').prop('disabled', 'disabled');
-      }
+      // if (advertisement_status == 'not_needed' && pre_bid_status == 'not_needed') {
+      //   $('#advertisement_start').prop('disabled', 'disabled');
+      //   $('#advertisement_end').prop('disabled', 'disabled');
+      //   $('#yesPreBid').prop('disabled', 'disabled');
+      //   $('#noPreBid').prop('disabled', 'disabled');
+      //   $('#preBidStart').prop('disabled', 'disabled');
+      //   $('#preBidEnd').prop('disabled', 'disabled');
+      //   $('#preBidNumber').prop('disabled', 'disabled');
+      //   $('#preBidUpdateBtn').prop('disabled', 'disabled');
+      // }
 
 
   var advertisementMinBase = 0;

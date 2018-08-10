@@ -242,15 +242,15 @@
           <li class="header">PROCESS</li>
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-file"></i>
-              <span>ADD PLAN</span>
+              <i class="fa fa-list"></i>
+              <span>APP View</span>
               <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-cogs"></i>
               </span>
             </a>
             <ul class=treeview-menu>
-              <li><a href="<?php echo base_url('admin/addRegularPlanView') ?>">Regular Plan</a></li>
-              <li><a href="<?php echo base_url('admin/addSupplementalPlanView') ?>">Supplemental Plan</a></li>
+              <li><a href="<?php echo base_url('admin/regularPlanListView') ?>">Regular Plan</a></li>
+              <li><a href="<?php echo base_url('admin/supplementalPlanListView') ?>">Supplemental Plan</a></li>
             </ul>
           </li>
           <li>

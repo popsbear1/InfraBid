@@ -48,6 +48,20 @@ class Admin extends CI_Controller {
 		
 	}
 
+	public function regularPlanListView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/regularPlanList');
+		$this->load->view('admin/fragments/footer');		
+	}
+
+	public function supplementalPlanListView(){
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/supplementalPlanList');
+		$this->load->view('admin/fragments/footer');		
+	}
+
 	public function setPlanTypeRegular(){
 		$this->session->set_userdata('project_type', 'regular');
 		$this->regularPlanView();
