@@ -565,7 +565,7 @@
 
   function setDatesToEarliestPossibleTime(startDate){
     if (pre_proc_status != 'not_needed' && advertisement_status != 'not_needed' && pre_bid_status != 'not_needed') {
-      setAdvertisementDate(startDate, 0, 7);
+      setAdvertisementDate(startDate, 1, 7);
       setPreBidDate(startDate, 8, 8);
       setBidSubmissionDate(startDate, 20, 20);
       setBidEvaluationDate(startDate, 21, 21);
@@ -575,7 +575,7 @@
       setAuthorityApprovalDate(startDate, 25, 25);
       setProceedNoticeDate(startDate, 26, 26);
     }else if(pre_proc_status == 'not_needed' && advertisement_status == 'not_needed' && pre_bid_status != 'not_needed'){
-      setPreBidDate(startDate, 0, 0);
+      setPreBidDate(startDate, 1, 1);
       setBidSubmissionDate(startDate, 12, 12);
       setBidEvaluationDate(startDate, 13, 13);
       setPostQualificationDate(startDate, 14, 14);
@@ -585,13 +585,13 @@
       setProceedNoticeDate(startDate, 18, 18);
 
     }else if (pre_proc_status == 'not_needed' && advertisement_status == 'not_needed' && pre_bid_status == 'not_needed') {
-      setBidSubmissionDate(startDate, 0, 0);
-      setBidEvaluationDate(startDate, 1, 1);
-      setPostQualificationDate(startDate, 2, 2);
-      setAwardNoticeIssuanceDate(startDate, 3, 3);
-      setContractSigningDate(startDate, 4, 4);
-      setAuthorityApprovalDate(startDate, 5, 5);
-      setProceedNoticeDate(startDate, 6, 6);
+      setBidSubmissionDate(startDate, 1, 1);
+      setBidEvaluationDate(startDate, 2, 2);
+      setPostQualificationDate(startDate, 3, 3);
+      setAwardNoticeIssuanceDate(startDate, 4, 4);
+      setContractSigningDate(startDate, 5, 5);
+      setAuthorityApprovalDate(startDate, 6, 6);
+      setProceedNoticeDate(startDate, 7, 7);
     }
   }
 

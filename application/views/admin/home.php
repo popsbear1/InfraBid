@@ -1,4 +1,3 @@
-
 <section class="content">
   <div class="row">
     <div class="col-md-12">
@@ -10,10 +9,35 @@
       <h2 class="box-title"><b>(Regular) </b>Project Procurement Plan Records</h2>
     </div>
     <div class="box-body">
-      
+      <p id="advertisement_incoming"></p>
+      <p><?php echo count($advertisement_incoming) ?></p>
+      <p><?php echo count($pre_bid_incoming) ?></p>
+      <p><?php echo count($advertisement) ?></p>
     </div>
   </div>
 </section>
+
+<script>
+  var advertisement_incoming = JSON.parse('<?php echo json_encode($advertisement_incoming) ?>');
+  var pre_bid_incoming = JSON.parse('<?php echo json_encode($pre_bid_incoming) ?>');
+  var bid_submission_incoming = JSON.parse('<?php echo json_encode($bid_submission_incoming) ?>');
+  var post_qualification_incoming = JSON.parse('<?php echo json_encode($post_qualification_incoming) ?>');
+  var award_notice_incoming = JSON.parse('<?php echo json_encode($award_notice_incoming) ?>');
+  var contract_signing_incoming = JSON.parse('<?php echo json_encode($contract_signing_incoming) ?>');
+  var authority_approval_incoming = JSON.parse('<?php echo json_encode($authority_approval_incoming) ?>');
+  var proceed_notice_incoming = JSON.parse('<?php echo json_encode($proceed_notice_incoming) ?>');
+
+  if (typeof Storage !== "undefined") {
+    sessionStorage.setItem("advertisement_incoming", JSON.stringify(advertisement_incoming));
+
+    document.getElementById("advertisement_incoming").innerHTML = sessionStorage.getItem("advertisement_incoming").length;
+
+    console.log(sessionStorage.getItem("advertisement_incoming"));  
+  }else{
+
+  }
+</script>
+
 
 <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

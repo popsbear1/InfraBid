@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('admin_model');
+		$this->load->model('notif_model');
 		$this->load->library('session');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -15,10 +16,24 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		
+		$cur_date = date('Y-m-d');
+		$end = date_format(date_add(date_create($cur_date),date_interval_create_from_date_string("2 days")), 'Y-m-d');
+		//incoming
+		$data['advertisement_incoming'] = $this->notif_model->getIncomingAdvertisement($cur_date, $end);
+		$data['pre_bid_incoming'] = $this->notif_model->getIncomingPre_bid($cur_date, $end);
+		$data['bid_submission_incoming'] = $this->notif_model->getIncomingBid_submission($cur_date, $end);
+		$data['post_qualification_incoming'] = $this->notif_model->getIncomingPost_qualification($cur_date, $end);
+		$data['award_notice_incoming'] = $this->notif_model->getIncomingAward_notice($cur_date, $end);
+		$data['contract_signing_incoming'] = $this->notif_model->getIncomingContract_signing($cur_date, $end);
+		$data['authority_approval_incoming'] = $this->notif_model->getIncomingAuthority_approval($cur_date, $end);
+		$data['proceed_notice_incoming'] = $this->notif_model->getIncomingProceed_notice($cur_date, $end);
+
+		//ending
+		$data['advertisement'] = $this->notif_model->getDueAdvertisementDate($cur_date, $end);
+
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/home');
+		$this->load->view('admin/home', $data);
 		$this->load->view('admin/fragments/footer');
 
 	}
