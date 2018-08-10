@@ -604,6 +604,16 @@
 			return $query->result_array();
 		}
 
+		public function getCurrentABC($plan_id){
+			$this->db->select('abc');
+			$this->db->from('project_plan');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->row();
+		}
+
 
 	/**
 	* All functions bellow are used to insert data on Database.
@@ -1401,7 +1411,8 @@
 
 		if ($action == 're_bid') {
 			$data = array(
-				'status' => 'for_rebid'
+				'status' => 'for_rebid',
+				'proposed_bid' => null
 			);
 		}
 		if ($action == 're_review') {

@@ -1307,22 +1307,26 @@ class Admin extends CI_Controller {
 		}
 
 		if ($activity_name === "open_bid") {
+			$contractor_id = $this->input->post('contractor');
+			$bid_proposal = $this->input->post('bid_proposal');
 			if ($this->admin_model->updateOpenBidDate($plan_id, $date)) {
+				$this->admin_model->updateEligibilityCheckDate($plan_id, $date, $contractor_id, $bid_proposal);
 				$this->session->set_flashdata('success', "Bid Oppening Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Bid Oppening Date Was Not Updated! Try again.");
 			}
 		}
 
-		if ($activity_name === "eligibility_check") {
-			$contractor_id = $this->input->post('contractor');
-			$bid_proposal = $this->input->post('bid_proposal');
-			if ($this->admin_model->updateEligibilityCheckDate($plan_id, $date, $contractor_id, $bid_proposal)) {
-				$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
-			}else{
-				$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
-			}
-		}
+		// if ($activity_name === "eligibility_check") {
+		// 	$contractor_id = $this->input->post('contractor');
+		// 	$bid_proposal = $this->input->post('bid_proposal');
+		// 	if (
+		// 	$this->admin_model->updateEligibilityCheckDate($plan_id, $date, $contractor_id, $bid_proposal)) {
+		// 		$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
+		// 	}else{
+		// 		$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
+		// 	}
+		// }
 
 		if ($activity_name === "bid_evaluation") {
 			if ($this->admin_model->updateBidEvaluationDate($plan_id, $date)) {

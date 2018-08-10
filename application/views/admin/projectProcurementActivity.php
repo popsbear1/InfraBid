@@ -83,7 +83,7 @@ function convertDate($date){
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="open_bid_btn">Sub/Open of Bids</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="eligibility_btn">Eligibility Check</button>
+        <!-- <button class="activityBtn btn btn-default btn-block" type="button" id="eligibility_btn">Eligibility Check</button> -->
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="bid_eval_btn">Bid Evaluation</button>
 
@@ -164,7 +164,7 @@ function convertDate($date){
         <?php endif ?>
 
         <div id="bid_open_view" class="activity_view" hidden="hidden">
-          <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/updateOpenBidDate') ?>" class="form-horizontal form-label-left">
+          <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left" autocomplete="off">
 
             <input type="text" name="activity_name" value="open_bid" hidden>
             <div class="form-group">
@@ -185,10 +185,41 @@ function convertDate($date){
                 <input type="date" id="openbid" value="<?php echo $openbid ?>" name="activity_date" class="form-control">
               </div>
             </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Number of Re-bids: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Select Contractor *: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <select name="contractor" id="contractor" class="form-control">
+                  <option hidden selected disabled>
+                    <?php
+                    if ($projectDetails['contractor_id'] == null) {
+                      echo 'Choose Contractor';
+                    }else{
+                      echo $projectDetails['businessname'];
+                    }  
+                    ?>
+                  </option>
+                  <?php foreach ($contractors as $contractor): ?>
+                    <option value="<?php echo $contractor['contractor_id'] ?>"><?php echo $contractor['businessname'] ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Proposed Bid *: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <input type="text" id="bid_proposal" name="bid_proposal" class="form-control" placeholder="<?php echo number_format($projectDetails['proposed_bid'], 2) ?>">
+              </div>
+            </div>
           </form>
         </div>
 
-        <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
+        <!-- <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
           <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
             <input type="text" name="activity_name" value="eligibility_check" hidden>
@@ -230,7 +261,7 @@ function convertDate($date){
               </div>
             </div>
           </form>
-        </div>
+        </div> -->
 
         <div id="bid_evaluation_view" class="activity_view" hidden="hidden">
           <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
@@ -356,7 +387,7 @@ function convertDate($date){
         </div>
 
         <div id="completion_delivery_view" class ="activity_view" hidden="hidden">
-          <form id="competion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+          <form id="completion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
             <input type="text" name="activity_name" value="completion" hidden>
 
@@ -417,17 +448,19 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="open_bid_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="openbid,open_bid_form">Submit</button> 
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="openbid,open_bid_form">Submit</button>
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model">Schedule for re-bid/another SVP</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode">Recommend Project for Review</button> 
             </div>
           </div>
 
-          <div class="row procactsubmitcontainer"  id="eligibility_submit_btn" hidden="hidden">
+          <!-- <div class="row procactsubmitcontainer"  id="eligibility_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
               <button type="button" class="btn btn-primary procactsubmitbutton" value="eligibility,eligibility_check_form">Submit</button> 
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model">Schedule for re-bid/another SVP</button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode">Recommend Project for Review</button>
             </div>
-          </div>
+          </div> -->
 
           <div class="row procactsubmitcontainer" id="bid_eval_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
@@ -463,7 +496,7 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="completion_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="completion,competion_form">Submit</button>
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="completion,completion_form">Submit</button>
             </div>
           </div>
 
@@ -543,8 +576,9 @@ function convertDate($date){
           <div class="modal-footer">
             <form action="<?php echo base_url('admin/rebidProjectPlan') ?>" method="POST" id="rebidProjectForm">
               <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
+              
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Confirm</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </form>
           </div>
         </div>
@@ -570,8 +604,8 @@ function convertDate($date){
                 </form>
               </div>
               <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 <button type="submit" form="recommendForReviewForm" class="btn btn-danger">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -703,10 +737,10 @@ function convertDate($date){
       actname : 'open_bid_status', 
       status : '<?php echo $actStatus['open_bid'] ?>'
     },
-    {
-      actname : 'eligibility_check_status', 
-      status : '<?php echo $actStatus['eligibility_check'] ?>'
-    },
+    // {
+    //   actname : 'eligibility_check_status', 
+    //   status : '<?php echo $actStatus['eligibility_check'] ?>'
+    // },
     {
       actname : 'bid_evaluation_status', 
       status : '<?php echo $actStatus['bid_evaluation'] ?>'
@@ -772,9 +806,9 @@ function convertDate($date){
         setActivityView(activity_status[i].status, '#open_bid_btn', '#bid_open_view', '#open_bid_submit_btn');
       }
 
-      if (activity_status[i].actname == 'eligibility_check_status') {
-        setActivityView(activity_status[i].status, '#eligibility_btn', '#eligibility_check_view', '#eligibility_submit_btn');
-      }
+      // if (activity_status[i].actname == 'eligibility_check_status') {
+      //   setActivityView(activity_status[i].status, '#eligibility_btn', '#eligibility_check_view', '#eligibility_submit_btn');
+      // }
 
       if (activity_status[i].actname == 'bid_evaluation_status') {
         setActivityView(activity_status[i].status, '#bid_eval_btn', '#bid_evaluation_view', '#bid_eval_submit_btn');
@@ -887,6 +921,12 @@ function convertDate($date){
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
+      }
+      if (activity == 'completion') {
+        proceedSubmit('Delivery/Completion', inputValue, activityForm)
+      }
+      if (activity == 'acceptance') {
+        proceedSubmit('Acceptance?Turnover', inputValue, activityForm)
       }
     }
 
@@ -1070,12 +1110,12 @@ function convertDate($date){
     $('#open_bid_submit_btn').attr('hidden', false);
   });
 
-  $('#eligibility_btn').click(function(){
-    setViewHidden();
-    setButtonStyle('#eligibility_btn');
-    $('#eligibility_check_view').removeAttr('hidden');
-    $('#eligibility_submit_btn').attr('hidden', false);
-  });
+  // $('#eligibility_btn').click(function(){
+  //   setViewHidden();
+  //   setButtonStyle('#eligibility_btn');
+  //   $('#eligibility_check_view').removeAttr('hidden');
+  //   $('#eligibility_submit_btn').attr('hidden', false);
+  // });
 
   $('#bid_eval_btn').click(function(){
     setViewHidden();
