@@ -2,12 +2,12 @@
       <section class="content">
         <div class="row">
           <div class="col-md-12">
-            <h3 class="pull-left">APP for Implementation</h3>
+            <h3 class="pull-left">Ongoing Annual Pprocurement Plan</h3>
           </div>
         </div>
         <div class="box">
           <div class="box-header">
-            <h2 class="box-title">Project Procurement Plan Records</h2>
+            <h2 class="box-title">Project Procurement Plan Records <small>(Plans with status of On Process, For Implementation and For Rebid will Appear in this table.)</small></h2>
           </div>
           <div class="box-body">
             <div class="row">
@@ -52,12 +52,9 @@
                   </div>
                   <select name="status" id="status" class="form-control input-sm">
                     <option hidden disabled selected>Choose Status</option>
-                    <option value="pending">Pending</option>
                     <option value="onprocess">On process</option>
                     <option value="for_implementation">For Implementation</option>
                     <option value="for_rebid">For Rebid</option>
-                    <option value="for_review">For Review</option>
-                    <option value="completed">Completed</option>
                   </select>
                 </div>
               </div>
@@ -146,31 +143,7 @@
                     </tr>
                   </thead>
                   <tbody style='font-size:12px;'>
-                    <?php foreach ($plans as $plan): ?>
-                      <tr>
-                        <td><?php echo $plan['project_no'] ?></td>
-                        <td><?php echo $plan['project_title'] ?></td>
-                        <td><?php echo $plan['barangay'] . ', ' . $plan['municipality']?></td>
-                        <td><?php echo $plan['mode'] ?></td>
-                        <td><?php echo $plan['abc_post_date'] ?></td>
-                        <td><?php echo $plan['sub_open_date'] ?></td>
-                        <td><?php echo $plan['award_notice_date'] ?></td>
-                        <td><?php echo $plan['contract_signing_date'] ?></td>
-                        <td><?php echo $plan['source'] ?></td>
-                        <td><?php echo $plan['type'] ?></td>
-                        <td><?php echo $plan['abc'] ?></td>
-                        <td><?php echo $plan['project_year'] ?></td>
-                        <td>
-                          <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
-                            <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden="hidden" >
-                            <input type="text" name="project_status" value="<?php echo $plan['project_status'] ?>" hidden="hidden" >
-                            <button class="btn btn-info" type="submit">
-                              <i class="fa fa-eye"></i>
-                            </button>
-                          </form>
-                        </td>
-                      </tr>
-                    <?php endforeach ?>
+                    
                   </tbody>
                   <tfoot style='font-size:12px;background: #ffcccc'>
                     <tr>
@@ -255,16 +228,49 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
 
 <script>
+  var plan_data = '<?php echo json_encode($plans) ?>';
+  var plans = JSON.parse(plan_data);
   $(document).ready( 
     function () {
       $('#plan_table').DataTable({
+        data: plans,
+        columns: [
+            { data: 'project_no' },
+            { data: 'project_title' },
+            { 
+              data: null,
+              render: function(data, type, row){
+                return data.barangay + ', ' + data.municipality;
+              },
+              editField: ['barangay', 'municipality']
+            },
+            { data: 'mode' },
+            { data: 'abc_post_date' },
+            { data: 'sub_open_date' },
+            { data: 'award_notice_date' },
+            { data: 'contract_signing_date' },
+            { data: 'source' },
+            { data: 'type' },
+            { data: 'abc' },
+            { data: 'project_year' },
+            { 
+              data: null,
+              render: function ( data, type, row ) {
+                return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                          '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                            '<i class="fa fa-eye"></i>' +
+                          '</button>' +
+                        '</form>';
+              }
+            }
+        ],
         order: [[8, 'asc']],
         rowGroup: {
           startRender: null,
           endRender: function (rows, group) {
             var total = rows
             .data()
-            .pluck(10)
+            .pluck('abc')
             .reduce( function (a, b) {
               return a + b*1;
             }, 0);
@@ -275,7 +281,7 @@
             .append('<td/>')
             .append('<td/>');
           },
-          dataSrc: 8
+          dataSrc: 'source'
         }
       });
       $('#year').datepicker({

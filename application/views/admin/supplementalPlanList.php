@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <table width="100%" id="supplemental_plan_table">
-                  <thead style="font-size: 12px">
+                  <thead style='font-size:12px;background: #ffcccc'>
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
@@ -33,7 +33,7 @@
                   <tbody>
                     
                   </tbody>
-                  <tfoot style="font-size: 12px">
+                  <tfoot style='font-size:12px;background: #ffcccc'>
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
@@ -127,8 +127,8 @@
                       '<div class="col-lg-6 col-md-6 col-sm-6">' +
                         '<form method="POST" action="<?php echo base_url('admin/editPlanView') ?>">' +
                         '<input name="project_type" value="' + data.project_type + '" hidden>' +
-                          '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                            '<i class="fa fa-eye"></i>' +
+                          '<button class="btn btn-primary" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                            '<i class="fa fa-pencil"></i>' +
                           '</button>' +
                         '</form>' +
                       '</div>' +
@@ -145,5 +145,6 @@
           }
         ]
       });
-  })
+  });
+
 </script>

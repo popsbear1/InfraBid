@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <table width="100%" id="regular_plan_table">
-                  <thead style="font-size: 12px">
+                  <thead style='font-size:12px;background: #ffcccc'>
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
@@ -33,7 +33,7 @@
                   <tbody>
                     
                   </tbody>
-                  <tfoot style="font-size: 12px">
+                  <tfoot style='font-size:12px;background: #ffcccc'>
                     <tr>
                       <th class="text-center">Project No.</th>
                       <th class="text-center">Project Title</th>
