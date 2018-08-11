@@ -14,7 +14,41 @@
             <h2 class="box-title"><b>(Regular) </b>Project Procurement Plan Records</h2>
           </div>
           <div class="box-body">
-            
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <table width="100%" id="regular_plan_table">
+                  <thead style="font-size: 12px">
+                    <tr>
+                      <th class="text-center">Project No.</th>
+                      <th class="text-center">Project Title</th>
+                      <th class="text-center">Location</th>
+                      <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Type of Project</th>
+                      <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">Project Year</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                  </tbody>
+                  <tfoot style="font-size: 12px">
+                    <tr>
+                      <th class="text-center">Project No.</th>
+                      <th class="text-center">Project Title</th>
+                      <th class="text-center">Location</th>
+                      <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Type of Project</th>
+                      <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">Project Year</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -63,3 +97,53 @@
 
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
+
+<script>
+  var plans_data = '<?php echo json_encode($plans) ?>';
+  var plans = JSON.parse(plans_data);
+  console.log(plans);
+  $(document).ready(function(){
+      $('#regular_plan_table').DataTable({
+        data: plans,
+        columns: [
+          { data: 'project_no' },
+          { data: 'project_title' },
+          { 
+            data: null,
+            render: function(data, type, row){
+              return data.barangay + ', ' + data.municipality;
+            },
+            editField: ['barangay', 'municipality']
+          },
+          { data: 'mode' },
+          { data: 'source' },
+          { data: 'type' },
+          { data: 'abc' },
+          { data: 'project_year' },
+          { 
+            data: null,
+            render: function ( data, type, row ) {
+              return '<div class="row">' +
+                      '<div class="col-lg-6 col-md-6 col-sm-6">' +
+                        '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
+                          '<input name="project_type" value="' + data.project_type + '" hidden>' +
+                          '<button class="btn btn-primary" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                            '<i class="fa fa-pencil"></i>' +
+                          '</button>' +
+                        '</form>' +
+                      '</div>' +
+                      '<div class="col-lg-6 col-md-6 col-sm-6">' +
+                        '<form method="GET" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                          '<button class="btn btn-danger" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                            '<i class="fa fa-trash"></i>' +
+                          '</button>' +
+                        '</form>' +
+                      '</div>' +      
+                    '</div>'
+                    ;
+            }
+          }
+        ]
+      });
+  })
+</script>

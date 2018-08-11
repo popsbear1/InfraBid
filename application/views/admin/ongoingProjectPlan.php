@@ -1,10 +1,13 @@
 
-    
-      <section class="content-header"></section>
       <section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="pull-left">APP for Implementation</h3>
+          </div>
+        </div>
         <div class="box">
           <div class="box-header">
-            <h2 class="box-title"><b>(Supplemental) </b>Project Procurement Plan Records</h2>
+            <h2 class="box-title">Project Procurement Plan Records</h2>
           </div>
           <div class="box-body">
             <div class="row">
@@ -25,19 +28,17 @@
                 </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12">
-                <label for="quarter">Quarter: </label>
+                <label for="apptype">APP Type: </label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <button class="btn btn-default btn-sm" type="button" id="quarter_btn">
+                    <button class="btn btn-default btn-sm" type="button" id="apptype_btn">
                       <i class="fa fa-close"></i>
                     </button>
                   </div>
-                  <select name="quarter" id="quarter" class="form-control input-sm">
-                    <option hidden disabled selected>Choose Quarter</option>
-                    <option value="1stQ">1st Q</option>
-                    <option value="2ndQ">2nd Q</option>
-                    <option value="3rdQ">3rd Q</option>
-                    <option value="4thQ">4th Q</option>
+                  <select name="apptype" id="apptype" class="form-control input-sm">
+                    <option hidden disabled selected>Choose APP Type</option>
+                    <option value="regular">Regular APP</option>
+                    <option value="supplementary">Supplemental APP</option>
                   </select>
                 </div>
               </div>
@@ -144,7 +145,7 @@
                       <th class="text-center">Edit</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody style='font-size:12px;'>
                     <?php foreach ($plans as $plan): ?>
                       <tr>
                         <td><?php echo $plan['project_no'] ?></td>
@@ -156,8 +157,8 @@
                         <td><?php echo $plan['award_notice_date'] ?></td>
                         <td><?php echo $plan['contract_signing_date'] ?></td>
                         <td><?php echo $plan['source'] ?></td>
-                        <td><?php echo number_format($plan['abc'], 2) ?></td>
                         <td><?php echo $plan['type'] ?></td>
+                        <td><?php echo $plan['abc'] ?></td>
                         <td><?php echo $plan['project_year'] ?></td>
                         <td>
                           <form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">
@@ -205,9 +206,6 @@
               </div>
             </div>
           </div>
-          <div class="box-footer">
-            
-          </div>
         </div>
       </section>
 
@@ -254,6 +252,7 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
 
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
 
 <script>
   $(document).ready( 
@@ -295,8 +294,8 @@
     $('#year').val('');
   });
 
-  $('#quarter_btn').click(function(){
-    $('#quarter').val('');
+  $('#apptype_btn').click(function(){
+    $('#apptype').val('');
   });
 
   $('#status_btn').click(function(){
@@ -318,7 +317,7 @@
   $('#filterBtn').click(function(e){
     e.preventDefault();
     var year = $('#year').val();
-    var quarter = $('#quarter').val();
+    var apptype = $('#apptype').val();
     var status = $('#status').val();
     var municipality = $('#municipality').val();
     var source = $('#source').val();
@@ -328,14 +327,14 @@
 
     $.ajax({
       type: 'GET',
-      url: '<?php echo base_url("admin/getFilteredSupplementaryPlanData") ?>',
-      data: { year: year, quarter: quarter, status: status, municipality: municipality, source: source, type: type},
+      url: '<?php echo base_url("admin/getFilteredOngoingPlanData") ?>',
+      data: { year: year, apptype: apptype, status: status, municipality: municipality, source: source, type: type},
       dataType: 'json'
     }).done(function(response){
       $('#project_count').html(response.count_total['project_count']);
       $('#total_abc').html(response.count_total['total_abc']);
       $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
-      $('#plan_table').DataTable({
+      var table = $('#plan_table').DataTable({
         data: response.plans,
         columns: [
             { data: 'project_no' },
@@ -391,4 +390,3 @@
     })
   });
 </script>
-

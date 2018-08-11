@@ -5,11 +5,7 @@
           <nav class="navbar navbar-default">
             <div class="container-fluid">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <a class="navbar-brand" href="<?php if($this->session->userdata('project_type') == 'regular'){
-                echo base_url('admin/regularPlanView');
-              }else{
-                echo base_url('admin/supplementalPlanView');
-              } ?>">
+              <a class="navbar-brand" href="<?php echo base_url('admin/ongoingProjectPlanView') ?>">
                 <i class="fa fa-angle-double-left"></i>
                 <b>BACK</b>
               </a>
@@ -58,18 +54,6 @@
                 ?>
                 >
                   <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('timeLine_status') == 'pending' || $this->session->userdata('project_status') == 'for_review' || $this->session->userdata('project_status') == 'completed'){ echo '#'; }else{ echo base_url('admin/procurementActivityView'); } ?>">Procurement Activity</a>
-                </li>
-              </ul>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li 
-                  <?php 
-                    if($pageName == "edit") { 
-                      echo 'class="active"';
-                    } 
-                  ?>
-                >
-                  <a href="<?php echo base_url('admin/editPlanView') ?>">Edit Project Details</a>
                 </li>
               </ul>
             </div><!-- /.container-fluid -->
