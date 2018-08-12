@@ -2,7 +2,15 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="pull-left">Edit Project Plan Details</h3>
+          <a class="btn btn-default" href="<?php if($project_type == 'regular'){
+            echo base_url('admin/regularPlanListView');
+          }else{
+            echo base_url('admin/supplementalPlanListView');
+          } ?>">
+            <i class="fa fa-angle-double-left"></i>
+            Back
+          </a>
+          <h3>Edit Project Plan Details</h3>
         </div>
       </div>
       <div class="box">

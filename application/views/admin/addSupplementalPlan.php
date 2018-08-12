@@ -2,7 +2,11 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="pull-left">Add New Supplemental Project Plans</h3>
+          <a class="btn btn-default" href="<?php echo base_url('admin/supplementalPlanListView') ?>">
+            <i class="fa fa-angle-double-left"></i>
+            Back
+          </a>
+          <h3>Add New Supplemental Project Plans</h3>
         </div>
       </div>
       <div class="box">
@@ -228,7 +232,7 @@
       dataType: 'json'
     }).done(function(response){
       if (response.success == true) {
-        window.location.replace("<?php echo base_url('admin/supplementalPlanView') ?>");
+        window.location.replace("<?php echo base_url('admin/supplementalPlanListView') ?>");
       }else{
         $.each(response.messages, function(key, value) {
           var element = $('#' + key);

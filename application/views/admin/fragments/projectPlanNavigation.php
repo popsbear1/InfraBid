@@ -5,11 +5,7 @@
           <nav class="navbar navbar-default">
             <div class="container-fluid">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <a class="navbar-brand" href="<?php if($this->session->userdata('project_type') == 'regular'){
-                echo base_url('admin/regularPlanView');
-              }else{
-                echo base_url('admin/supplementalPlanView');
-              } ?>">
+              <a class="navbar-brand" href="<?php echo base_url('admin/ongoingProjectPlanView') ?>">
                 <i class="fa fa-angle-double-left"></i>
                 <b>BACK</b>
               </a>
@@ -35,7 +31,7 @@
                 </li>
                 <li 
                 <?php 
-                  if ($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid') {
+                  if ($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_review' || $this->session->userdata('project_status') == 'completed') {
                     echo 'class="disabled"';   
                   }else{
                     if ($pageName == "timeline") {
@@ -44,11 +40,11 @@
                   } 
                 ?>
                 >
-                  <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid'){ echo '#'; }else{ echo base_url('admin/projectTimelineView'); }  ?>">Project Timeline</a>
+                  <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_review' || $this->session->userdata('project_status') == 'completed'){ echo '#'; }else{ echo base_url('admin/projectTimelineView'); }  ?>">Project Timeline</a>
                 </li>
                 <li
                 <?php 
-                  if ($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid' || $this->session->userdata('timeLine_status') == 'pending') {
+                  if ($this->session->userdata('project_status') == 'pending' || $this->session->userdata('project_status') == 'for_review' || $this->session->userdata('project_status') == 'completed' || $this->session->userdata('timeLine_status') == 'pending') {
                     echo 'class="disabled"';   
                   }else{
                     if ($pageName == "activity") {
@@ -57,19 +53,7 @@
                   } 
                 ?>
                 >
-                  <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('timeLine_status') == 'pending' || $this->session->userdata('project_status') == 'for_rebid'){ echo '#'; }else{ echo base_url('admin/procurementActivityView'); } ?>">Procurement Activity</a>
-                </li>
-              </ul>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li 
-                  <?php 
-                    if($pageName == "edit") { 
-                      echo 'class="active"';
-                    } 
-                  ?>
-                >
-                  <a href="<?php echo base_url('admin/editPlanView') ?>">Edit Project Details</a>
+                  <a href="<?php if($this->session->userdata('project_status') == 'pending' || $this->session->userdata('timeLine_status') == 'pending' || $this->session->userdata('project_status') == 'for_review' || $this->session->userdata('project_status') == 'completed'){ echo '#'; }else{ echo base_url('admin/procurementActivityView'); } ?>">Procurement Activity</a>
                 </li>
               </ul>
             </div><!-- /.container-fluid -->
