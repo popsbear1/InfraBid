@@ -10,7 +10,7 @@
               <div class="form-group">
                 <label class="control-label col-lg-7">Select date to begin with:</label>
                 <div class="col-lg-5">
-                  <input type="date" class="form-control" id="pre_proc_date" name="pre_proc_date" form="updateProcurementTimelineForm">
+                  <input type="date" class="form-control" id="startDate" name="startDate" form="updateProcurementTimelineForm">
                 </div>
               </div>
             </div>
@@ -236,12 +236,7 @@
 
   <script>
 
-    //var pre_proc_status = '<?php echo $actStatus['pre_proc'] ?>';
-    //var advertisement_status = '<?php echo $actStatus['advertisement'] ?>';
-    //var pre_bid_status = '<?php echo $actStatus['pre_bid'] ?>';
-
     $('#timelineModalConfirmBtn').click(function(e){
-      $('#preproc').html($('#pre_proc_date').val());
       $('#addStart').html($('#advertisement_start').val());
       $('#addEnd').html($('#advertisement_end').val());
       $('#pbcStart').html($('#preBidStart').val());
@@ -262,7 +257,7 @@
       $('#ntpEnd').html($('#proceedNoticeEnd').val());
     });
     $(document).ready(function(e){
-      $('#pre_proc_date').val("<?php echo $timeLine['pre_proc_date'] ?>");
+      $('#startDate').val("<?php echo $timeLine['advertisement_start'] ?>");
       $('#advertisement_start').val("<?php echo $timeLine['advertisement_start'] ?>");
       $('#advertisement_end').val("<?php echo $timeLine['advertisement_end'] ?>");
       $('#preBidStart').val("<?php echo $timeLine['pre_bid_start'] ?>");
@@ -281,22 +276,6 @@
       $('#authorityApprovalEnd').val("<?php echo $timeLine['authority_approval_end'] ?>");
       $('#proceedNoticeStart').val("<?php echo $timeLine['proceed_notice_start'] ?>");
       $('#proceedNoticeEnd').val("<?php echo $timeLine['proceed_notice_end'] ?>");
-
-      // if (advertisement_status == 'not_needed' && pre_bid_status != 'not_needed') {
-      //   $('#advertisement_start').prop('disabled', 'disabled');
-      //   $('#advertisement_end').prop('disabled', 'disabled');
-      // }
-
-      // if (advertisement_status == 'not_needed' && pre_bid_status == 'not_needed') {
-      //   $('#advertisement_start').prop('disabled', 'disabled');
-      //   $('#advertisement_end').prop('disabled', 'disabled');
-      //   $('#yesPreBid').prop('disabled', 'disabled');
-      //   $('#noPreBid').prop('disabled', 'disabled');
-      //   $('#preBidStart').prop('disabled', 'disabled');
-      //   $('#preBidEnd').prop('disabled', 'disabled');
-      //   $('#preBidNumber').prop('disabled', 'disabled');
-      //   $('#preBidUpdateBtn').prop('disabled', 'disabled');
-      // }
 
 
   var advertisementMinBase = 0;
@@ -325,7 +304,7 @@
     $('#preBidEnd').prop('disabled', true);
     $('#preBidNumber').prop('disabled', true);
     $('#preBidUpdateBtn').prop('disabled', true);   
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     if ($('#noApproval').is(":checked")) {
       setDatesToEarliestPossibleTimeWithoutPBCandAHA(startDate);
     }else{
@@ -338,7 +317,7 @@
     $('#preBidEnd').prop('disabled', false);
     $('#preBidNumber').prop('disabled', false);
     $('#preBidUpdateBtn').prop('disabled', false);
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     if ($('#yesApproval').is(":checked")) {
       setDatesToEarliestPossibleTime(startDate);
     }else{
@@ -353,7 +332,7 @@
     $('#authorityApprovalEnd').prop('disabled', true);
     $('#authorityApprovalNumber').prop('disabled', true);
     $('#authorityApprovalUpdateBtn').prop('disabled', true);
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     if ($('#noPreBid').is(":checked")) {
       setDatesToEarliestPossibleTimeWithoutPBCandAHA(startDate);
     }else{
@@ -366,7 +345,7 @@
     $('#authorityApprovalEnd').prop('disabled', false);
     $('#authorityApprovalNumber').prop('disabled', false);
     $('#authorityApprovalUpdateBtn').prop('disabled', false);
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     if ($('#yesPreBid').is(":checked")) {
       setDatesToEarliestPossibleTime(startDate);
     }else{
@@ -376,7 +355,7 @@
 
 
   $('#preBidUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#preBidNumber').val();
     prebidMaxBase = prebidMinBase + (parseFloat(daysToAdd)-1);
     bidSubmissionMinBase = prebidMaxBase + 12;
@@ -401,7 +380,7 @@
   });
 
   $('#bidSubmissionUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#bidSubmissionNumber').val();
     bidSubmissionMaxBase = bidSubmissionMinBase + (parseFloat(daysToAdd)-1);
     bidEvaluationMinBase = bidSubmissionMaxBase + 1;
@@ -424,7 +403,7 @@
   });
 
   $('#bidEvaluationUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#bidEvaluationNumber').val();
     bidEvaluationMaxBase = bidEvaluationMinBase + (parseFloat(daysToAdd)-1);
     postQualificationMinBase = bidSubmissionMaxBase + 1;
@@ -445,7 +424,7 @@
   });
 
   $('#postQualificationUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#postQualificationNumber').val();
     postQualificationMaxBase = postQualificationMinBase + (parseFloat(daysToAdd)-1);
     awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
@@ -464,7 +443,7 @@
   });
 
   $('#awardNoticeIssuanceUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#awardNoticeIssuanceNumber').val();
     awardNoticeIssuanceMaxBase = awardNoticeIssuanceMinBase + (parseFloat(daysToAdd)-1);
     contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
@@ -481,7 +460,7 @@
   });
 
   $('#contractSigningUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#contractSigningNumber').val();
     contractSigningMaxBase = contractSigningMinBase + (parseFloat(daysToAdd)-1);
     authorityApprovalMinBase = contractSigningMaxBase + 1;
@@ -496,7 +475,7 @@
   });
 
   $('#authorityApprovalUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#authorityApprovalNumber').val();
     authorityApprovalMaxBase = authorityApprovalMinBase + (parseFloat(daysToAdd)-1);
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
@@ -509,7 +488,7 @@
   });
 
   $('#proceedNoticeUpdateBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
     var daysToAdd = $('#proceedNoticeNumber').val();
     proceedNoticeMaxBase = proceedNoticeMinBase + (parseFloat(daysToAdd)-1);
     if (daysToAdd) {
@@ -545,7 +524,7 @@
   }
 
   $('#timeLineComputeBtn').click(function(event){
-    var startDate = $('#pre_proc_date').val();
+    var startDate = $('#startDate').val();
 
     if (startDate == null || startDate == "") {
       alert("Select Start Date First!");
@@ -564,35 +543,15 @@
   });
 
   function setDatesToEarliestPossibleTime(startDate){
-    if (pre_proc_status != 'not_needed' && advertisement_status != 'not_needed' && pre_bid_status != 'not_needed') {
-      setAdvertisementDate(startDate, 1, 7);
-      setPreBidDate(startDate, 8, 8);
-      setBidSubmissionDate(startDate, 20, 20);
-      setBidEvaluationDate(startDate, 21, 21);
-      setPostQualificationDate(startDate, 22, 22);
-      setAwardNoticeIssuanceDate(startDate, 23, 23);
-      setContractSigningDate(startDate, 24, 24);
-      setAuthorityApprovalDate(startDate, 25, 25);
-      setProceedNoticeDate(startDate, 26, 26);
-    }else if(pre_proc_status == 'not_needed' && advertisement_status == 'not_needed' && pre_bid_status != 'not_needed'){
-      setPreBidDate(startDate, 1, 1);
-      setBidSubmissionDate(startDate, 12, 12);
-      setBidEvaluationDate(startDate, 13, 13);
-      setPostQualificationDate(startDate, 14, 14);
-      setAwardNoticeIssuanceDate(startDate, 15, 15);
-      setContractSigningDate(startDate, 16, 16);
-      setAuthorityApprovalDate(startDate, 17, 17);
-      setProceedNoticeDate(startDate, 18, 18);
-
-    }else if (pre_proc_status == 'not_needed' && advertisement_status == 'not_needed' && pre_bid_status == 'not_needed') {
-      setBidSubmissionDate(startDate, 1, 1);
-      setBidEvaluationDate(startDate, 2, 2);
-      setPostQualificationDate(startDate, 3, 3);
-      setAwardNoticeIssuanceDate(startDate, 4, 4);
-      setContractSigningDate(startDate, 5, 5);
-      setAuthorityApprovalDate(startDate, 6, 6);
-      setProceedNoticeDate(startDate, 7, 7);
-    }
+    setAdvertisementDate(startDate, 0, 7);
+    setPreBidDate(startDate, 8, 8);
+    setBidSubmissionDate(startDate, 20, 20);
+    setBidEvaluationDate(startDate, 21, 21);
+    setPostQualificationDate(startDate, 22, 22);
+    setAwardNoticeIssuanceDate(startDate, 23, 23);
+    setContractSigningDate(startDate, 24, 24);
+    setAuthorityApprovalDate(startDate, 25, 25);
+    setProceedNoticeDate(startDate, 26, 26);
   }
 
   function setDates(startDate, advertisementMin, advertisementMax, prebidMin, prebidMax, bidSubmissionMin, bidSubmissionMax, bidEvaluationMin, bidEvaluationMax, postQualificationMin, postQualificationMax, awardNoticeIssuanceMin, awardNoticeIssuanceMax, contractSigningMin, contractSigningMax, authorityApprovalMin, authorityApprovalMax, proceedNoticeMin, proceedNoticeMax){
@@ -700,12 +659,6 @@
           <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
         </div>
         <div class="modal-body">
-          <table class='table table-striped table-bordered' style='font-size:13px;'>
-            <tbody>
-              <td>Pre-proc Conference</td>
-              <td id="preproc"></td>
-            </tbody>
-          </table>
           <table class='table table-striped table-bordered' style='font-size:13px;'>
             <thead>
               <tr>

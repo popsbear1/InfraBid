@@ -537,7 +537,7 @@
 			$this->db->insert('procact', $plan_id);
 			$this->db->insert('project_timeline', $plan_id);
 
-			$this->updateTimelineProjectStatus($ABC, $new_plan_id);
+			$this->updateTimelineProjectStatus($new_plan_id);
 			return true;
 		}else{
 			return false;
@@ -576,6 +576,9 @@
 
 			$this->db->insert('procact', $plan_id);
 			$this->db->insert('project_timeline', $plan_id);
+
+
+			$this->updateTimelineProjectStatus($new_plan_id);
 			return true;
 		}else{
 			return false;
@@ -1227,6 +1230,24 @@
 		$this->db->update('project_plan', $data);
 	}
 
+	public function updatePreBidStatus($plan_id){
+		$data = array(
+			'pre_bid' => 'not_needed'
+		);
+		
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_activity_status', $data);
+	}
+
+	public function updateAuthorityApprovalStatus($plan_id){
+		$data = array(
+			'authority_approval' => 'not_needed'
+		);
+		
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_activity_status', $data);
+	}
+
 
 	// public function updateDocumentDetails($document_name, $doc_type_id){
 	// 	$data = array(
@@ -1264,9 +1285,8 @@
 		$this->db->update('document_type', $data);
 	}
 
-	public function updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
+	public function updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
 		$data = array(
-			'pre_proc_date' => $pre_proc_date,
 			'timeLine_status' => 'set',
 			'advertisement_start' => $advertisement_start,
 			'advertisement_end' => $advertisement_end,
@@ -1346,106 +1366,45 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateTimelineProjectStatus($ABC, $plan_id){
-		if ($ABC >= 5000000) {
-			$timeLine_status_data = array(
-				'plan_id' => $plan_id,
-				'pre_proc' => 'pending',
-				'advertisement' => 'pending',
-				'pre_bid' => 'pending',
-				'eligibility_check' => 'pending',
-				'open_bid' => 'pending',
-				'bid_evaluation' => 'pending',
-				'post_qual' => 'pending',
-				'award_notice' => 'pending',
-				'contract_signing' => 'pending',
-				'proceed_notice' => 'pending',
-				'delivery_completion' => 'pending',
-				'acceptance_turnover' => 'pending'
-			);
-		}elseif ($ABC < 5000000 && $ABC > 1000000) {
-			$timeLine_status_data = array(
-				'plan_id' => $plan_id,
-				'pre_proc' => 'not_needed',
-				'advertisement' => 'not_needed',
-				'pre_bid' => 'pending',
-				'eligibility_check' => 'pending',
-				'open_bid' => 'pending',
-				'bid_evaluation' => 'pending',
-				'post_qual' => 'pending',
-				'award_notice' => 'pending',
-				'contract_signing' => 'pending',
-				'proceed_notice' => 'pending',
-				'delivery_completion' => 'pending',
-				'acceptance_turnover' => 'pending'
-			);
-		}elseif ($ABC < 1000000) {
-			$timeLine_status_data = array(
-				'plan_id' => $plan_id,
-				'pre_proc' => 'not_needed',
-				'advertisement' => 'not_needed',
-				'pre_bid' => 'not_needed',
-				'eligibility_check' => 'pending',
-				'open_bid' => 'pending',
-				'bid_evaluation' => 'pending',
-				'post_qual' => 'pending',
-				'award_notice' => 'pending',
-				'contract_signing' => 'pending',
-				'proceed_notice' => 'pending',
-				'delivery_completion' => 'pending',
-				'acceptance_turnover' => 'pending'
-			);
-		}
+	public function updateTimelineProjectStatus($plan_id){
+		$timeLine_status_data = array(
+			'plan_id' => $plan_id,
+			'pre_proc' => 'pending',
+			'advertisement' => 'pending',
+			'pre_bid' => 'pending',
+			'eligibility_check' => 'pending',
+			'open_bid' => 'pending',
+			'bid_evaluation' => 'pending',
+			'post_qual' => 'pending',
+			'award_notice' => 'pending',
+			'contract_signing' => 'pending',
+			'authority_approval' => 'pending',
+			'proceed_notice' => 'pending',
+			'delivery_completion' => 'pending',
+			'acceptance_turnover' => 'pending'
+		);
+		
 		$this->db->insert('project_activity_status', $timeLine_status_data);
 	}
 
-		public function resetTimelineProjectStatus($ABC, $plan_id){
-		if ($ABC >= 5000000) {
-			$timeLine_status_data = array(
-				'pre_proc' => 'pending',
-				'advertisement' => 'pending',
-				'pre_bid' => 'pending',
-				'eligibility_check' => 'pending',
-				'open_bid' => 'pending',
-				'bid_evaluation' => 'pending',
-				'post_qual' => 'pending',
-				'award_notice' => 'pending',
-				'contract_signing' => 'pending',
-				'proceed_notice' => 'pending',
-				'delivery_completion' => 'pending',
-				'acceptance_turnover' => 'pending'
-			);
-		}elseif ($ABC < 5000000 && $ABC > 1000000) {
-			$timeLine_status_data = array(
-				'pre_proc' => 'not_needed',
-				'advertisement' => 'not_needed',
-				'pre_bid' => 'pending',
-				'eligibility_check' => 'pending',
-				'open_bid' => 'pending',
-				'bid_evaluation' => 'pending',
-				'post_qual' => 'pending',
-				'award_notice' => 'pending',
-				'contract_signing' => 'pending',
-				'proceed_notice' => 'pending',
-				'delivery_completion' => 'pending',
-				'acceptance_turnover' => 'pending'
-			);
-		}elseif ($ABC < 1000000) {
-			$timeLine_status_data = array(
-				'pre_proc' => 'not_needed',
-				'advertisement' => 'not_needed',
-				'pre_bid' => 'not_needed',
-				'eligibility_check' => 'pending',
-				'open_bid' => 'pending',
-				'bid_evaluation' => 'pending',
-				'post_qual' => 'pending',
-				'award_notice' => 'pending',
-				'contract_signing' => 'pending',
-				'proceed_notice' => 'pending',
-				'delivery_completion' => 'pending',
-				'acceptance_turnover' => 'pending'
-			);
-		}
+		public function resetTimelineProjectStatus($plan_id){
+		
+		$timeLine_status_data = array(
+			'pre_proc' => 'pending',
+			'advertisement' => 'pending',
+			'pre_bid' => 'pending',
+			'eligibility_check' => 'pending',
+			'open_bid' => 'pending',
+			'bid_evaluation' => 'pending',
+			'post_qual' => 'pending',
+			'award_notice' => 'pending',
+			'contract_signing' => 'pending',
+			'authority_approval' => 'pending',
+			'proceed_notice' => 'pending',
+			'delivery_completion' => 'pending',
+			'acceptance_turnover' => 'pending'
+		);
+
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_activity_status', $timeLine_status_data);
 	}

@@ -369,7 +369,6 @@ class Admin extends CI_Controller {
 
 	public function updateProcurementTimeline(){
 		$plan_id = $this->session->userdata('plan_id');
-		$pre_proc_date = $this->input->post('pre_proc_date');
 		$advertisement_start = $this->input->post('advertisement_start');
 		$advertisement_end = $this->input->post('advertisement_end');
 		$pre_bid_start = $this->input->post('preBidStart');
@@ -389,12 +388,14 @@ class Admin extends CI_Controller {
 		$proceed_notice_start = $this->input->post('proceedNoticeStart');
 		$proceed_notice_end = $this->input->post('proceedNoticeEnd');
 
-		$this->admin_model->updateProjectTimeline($plan_id, $pre_proc_date, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
+		$this->admin_model->updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		$status = $this->admin_model->getProjectActivityStatus($plan_id);
+		if ($pre_bid_start == null || $pre_bid_end == null) {
+			$this->admin_model->updatePreBidStatus($plan_id);
+		}
 
-		if ($status['pre_proc'] == 'pending') {
-			$this->admin_model->updatePreProcConfDate($plan_id, $pre_proc_date);
+		if ($authority_approval_start == null || $authority_approval_end == null) {
+			$this->admin_model->updateAuthorityApprovalStatus($plan_id);
 		}
 
 		redirect('admin/projectTimelineView');
