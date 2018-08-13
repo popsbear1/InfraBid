@@ -115,10 +115,11 @@
                     <i class="fa fa-search"></i>
                     Find
                   </button>
-                  <button class="btn btn-success btn-sm" id="printBtn" type="button">
-                    <i class="fa fa-print"></i>
-                    Print
-                  </button>
+                    <a href="<?php echo base_url('admin/fpdfView') ?>" button class="btn btn-success btn-sm" id="printBtn" type="button">
+                      <i class="fa fa-print"></i>
+                      Print
+                    </button>
+                    </a>
                 </div>
               </div>
             </div>
