@@ -470,7 +470,7 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="pre_bid_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="pre_bid,pre_bid_form">Submit</button>
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="pre_bid,pre_bid_form">Confirm</button>
             </div>
           </div>
 

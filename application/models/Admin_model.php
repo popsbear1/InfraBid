@@ -1140,6 +1140,24 @@
 		}else{
 			return false;
 		}
+	}
+
+	public function updateAuthorityApprovalDate($plan_id, $date){
+		$data = array(
+			'authority_approval' => $date
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'authority_approval' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
+			return true;
+		}else{
+			return false;
+		}
 	} 
 
 	public function updateProceedNoticeDate($plan_id, $date){

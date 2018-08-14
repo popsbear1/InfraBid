@@ -1317,6 +1317,14 @@ class Admin extends CI_Controller {
 			}else{
 				$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
 			}
+		}
+
+		if ($activity_name === "authority_approval") {
+			if ($this->admin_model->updateAuthorityApprovalDate($plan_id, $date)) {
+				$this->session->set_flashdata('success', "Pre-proc Conf successfully Updated!");
+			}else{
+				$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
+			}
 		}						
 
 		if ($activity_name === "proceed_notice") {
