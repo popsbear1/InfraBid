@@ -278,24 +278,24 @@
       $('#proceedNoticeEnd').val("<?php echo $timeLine['proceed_notice_end'] ?>");
 
 
-  var advertisementMinBase = 0;
-  var advertisementMaxBase = 7;
-  var prebidMinBase = 8;
-  var prebidMaxBase = 8;
-  var bidSubmissionMinBase = 20;
-  var bidSubmissionMaxBase = 20;
-  var bidEvaluationMinBase = 21;
-  var bidEvaluationMaxBase = 21;
-  var postQualificationMinBase = 22;
-  var postQualificationMaxBase = 22;
-  var awardNoticeIssuanceMinBase = 23;
-  var awardNoticeIssuanceMaxBase = 23;
-  var contractSigningMinBase = 24;
-  var contractSigningMaxBase = 24;
-  var authorityApprovalMinBase = 25;
-  var authorityApprovalMaxBase = 25;
-  var proceedNoticeMinBase = 26;
-  var proceedNoticeMaxBase = 26;
+  var advertisementMinBase = 1;
+  var advertisementMaxBase = 8;
+  var prebidMinBase = 9;
+  var prebidMaxBase = 9;
+  var bidSubmissionMinBase = 21;
+  var bidSubmissionMaxBase = 21;
+  var bidEvaluationMinBase = 22;
+  var bidEvaluationMaxBase = 22;
+  var postQualificationMinBase = 23;
+  var postQualificationMaxBase = 23;
+  var awardNoticeIssuanceMinBase = 24;
+  var awardNoticeIssuanceMaxBase = 24;
+  var contractSigningMinBase = 25;
+  var contractSigningMaxBase = 25;
+  var authorityApprovalMinBase = 26;
+  var authorityApprovalMaxBase = 26;
+  var proceedNoticeMinBase = 27;
+  var proceedNoticeMaxBase = 27;
 
   $('#noPreBid').click(function(event) {
     $('#preBidStart').prop('value', '');
@@ -362,8 +362,8 @@
     bidSubmissionMaxBase = prebidMaxBase + 12;
     bidEvaluationMinBase = bidSubmissionMaxBase + 1;
     bidEvaluationMaxBase = bidSubmissionMaxBase + 1;
-    postQualificationMinBase = bidSubmissionMaxBase + 1;
-    postQualificationMaxBase = bidSubmissionMaxBase + 1;
+    postQualificationMinBase = bidEvaluationMaxBase + 1;
+    postQualificationMaxBase = bidEvaluationMaxBase + 1;
     awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
     awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
     contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
@@ -373,7 +373,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{  
       $('#update_warning').modal('show');
     }
@@ -385,8 +385,8 @@
     bidSubmissionMaxBase = bidSubmissionMinBase + (parseFloat(daysToAdd)-1);
     bidEvaluationMinBase = bidSubmissionMaxBase + 1;
     bidEvaluationMaxBase = bidSubmissionMaxBase + 1;
-    postQualificationMinBase = bidSubmissionMaxBase + 1;
-    postQualificationMaxBase = bidSubmissionMaxBase + 1;
+    postQualificationMinBase = bidEvaluationMaxBase + 1;
+    postQualificationMaxBase = bidEvaluationMaxBase + 1;
     awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
     awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
     contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
@@ -396,7 +396,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -406,8 +406,8 @@
     var startDate = $('#startDate').val();
     var daysToAdd = $('#bidEvaluationNumber').val();
     bidEvaluationMaxBase = bidEvaluationMinBase + (parseFloat(daysToAdd)-1);
-    postQualificationMinBase = bidSubmissionMaxBase + 1;
-    postQualificationMaxBase = bidSubmissionMaxBase + 1;
+    postQualificationMinBase = bidEvaluationMaxBase + 1;
+    postQualificationMaxBase = bidEvaluationMaxBase + 1;
     awardNoticeIssuanceMinBase = postQualificationMaxBase + 1;
     awardNoticeIssuanceMaxBase = postQualificationMaxBase + 1;
     contractSigningMinBase = awardNoticeIssuanceMaxBase + 1;
@@ -417,7 +417,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -436,7 +436,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -453,7 +453,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -468,7 +468,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -481,7 +481,7 @@
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -492,7 +492,7 @@
     var daysToAdd = $('#proceedNoticeNumber').val();
     proceedNoticeMaxBase = proceedNoticeMinBase + (parseFloat(daysToAdd)-1);
     if (daysToAdd) {
-      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMinBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
+      setDates(startDate, advertisementMinBase, advertisementMaxBase, prebidMaxBase, prebidMaxBase, bidSubmissionMinBase, bidSubmissionMaxBase, bidEvaluationMinBase, bidEvaluationMaxBase, postQualificationMinBase, postQualificationMaxBase, awardNoticeIssuanceMinBase, awardNoticeIssuanceMaxBase, contractSigningMinBase, contractSigningMaxBase, authorityApprovalMinBase, authorityApprovalMaxBase, proceedNoticeMinBase, proceedNoticeMaxBase);
     }else{
       $('#update_warning').modal('show');
     }
@@ -543,15 +543,15 @@
   });
 
   function setDatesToEarliestPossibleTime(startDate){
-    setAdvertisementDate(startDate, 0, 7);
-    setPreBidDate(startDate, 8, 8);
-    setBidSubmissionDate(startDate, 20, 20);
-    setBidEvaluationDate(startDate, 21, 21);
-    setPostQualificationDate(startDate, 22, 22);
-    setAwardNoticeIssuanceDate(startDate, 23, 23);
-    setContractSigningDate(startDate, 24, 24);
-    setAuthorityApprovalDate(startDate, 25, 25);
-    setProceedNoticeDate(startDate, 26, 26);
+    setAdvertisementDate(startDate, 1, 8);
+    setPreBidDate(startDate, 9, 9);
+    setBidSubmissionDate(startDate, 21, 21);
+    setBidEvaluationDate(startDate, 22, 22);
+    setPostQualificationDate(startDate, 23, 23);
+    setAwardNoticeIssuanceDate(startDate, 24, 24);
+    setContractSigningDate(startDate, 25, 25);
+    setAuthorityApprovalDate(startDate, 26, 26);
+    setProceedNoticeDate(startDate, 27, 27);
   }
 
   function setDates(startDate, advertisementMin, advertisementMax, prebidMin, prebidMax, bidSubmissionMin, bidSubmissionMax, bidEvaluationMin, bidEvaluationMax, postQualificationMin, postQualificationMax, awardNoticeIssuanceMin, awardNoticeIssuanceMax, contractSigningMin, contractSigningMax, authorityApprovalMin, authorityApprovalMax, proceedNoticeMin, proceedNoticeMax){
@@ -567,35 +567,35 @@
   }
 
   function setDatesToEarliestPossibleTimeWithoutPBC(startDate){
-    setAdvertisementDate(startDate, 0, 7);
-    setBidSubmissionDate(startDate, 8, 8);
-    setBidEvaluationDate(startDate, 9, 9);
-    setPostQualificationDate(startDate, 10, 10);
-    setAwardNoticeIssuanceDate(startDate, 11, 11);
-    setContractSigningDate(startDate, 12, 12);
-    setAuthorityApprovalDate(startDate, 13, 13);
-    setProceedNoticeDate(startDate, 14, 14);
+    setAdvertisementDate(startDate, 1, 8);
+    setBidSubmissionDate(startDate, 9, 9);
+    setBidEvaluationDate(startDate, 10, 10);
+    setPostQualificationDate(startDate, 11, 11);
+    setAwardNoticeIssuanceDate(startDate, 12, 12);
+    setContractSigningDate(startDate, 13, 13);
+    setAuthorityApprovalDate(startDate, 14, 14);
+    setProceedNoticeDate(startDate, 15, 15);
   }
 
   function setDatesToEarliestPossibleTimeWithoutAHA(startDate){
-    setAdvertisementDate(startDate, 0, 7);
-    setPreBidDate(startDate, 8, 8);
-    setBidSubmissionDate(startDate, 20, 20);
-    setBidEvaluationDate(startDate, 21, 21);
-    setPostQualificationDate(startDate, 22, 22);
-    setAwardNoticeIssuanceDate(startDate, 23, 23);
-    setContractSigningDate(startDate, 24, 24);
-    setProceedNoticeDate(startDate, 25, 25);
+    setAdvertisementDate(startDate, 1, 8);
+    setPreBidDate(startDate, 9, 9);
+    setBidSubmissionDate(startDate, 21, 21);
+    setBidEvaluationDate(startDate, 22, 22);
+    setPostQualificationDate(startDate, 23, 23);
+    setAwardNoticeIssuanceDate(startDate, 24, 24);
+    setContractSigningDate(startDate, 25, 25);
+    setProceedNoticeDate(startDate, 26, 26);
   }
 
   function setDatesToEarliestPossibleTimeWithoutPBCandAHA(startDate){
-    setAdvertisementDate(startDate, 0, 7);
-    setBidSubmissionDate(startDate, 8, 8);
-    setBidEvaluationDate(startDate, 9, 9);
-    setPostQualificationDate(startDate, 10, 10);
-    setAwardNoticeIssuanceDate(startDate, 11, 11);
-    setContractSigningDate(startDate, 12, 12);
-    setProceedNoticeDate(startDate, 13, 13);
+    setAdvertisementDate(startDate, 1, 8);
+    setBidSubmissionDate(startDate, 9, 9);
+    setBidEvaluationDate(startDate, 10, 10);
+    setPostQualificationDate(startDate, 11, 11);
+    setAwardNoticeIssuanceDate(startDate, 12, 12);
+    setContractSigningDate(startDate, 13, 13);
+    setProceedNoticeDate(startDate, 14, 14);
   }
 
   function setAdvertisementDate(startDate, min, max){
