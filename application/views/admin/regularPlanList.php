@@ -23,6 +23,10 @@
                       <th class="text-center">Project Title</th>
                       <th class="text-center">Location</th>
                       <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">SUB/ OPEN OF BIDS</th>
+                      <th class="text-center">NOTICE OF AWARD</th>
+                      <th class="text-center">CONTRACT SIGNING</th>
                       <th class="text-center">Source of Fund</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
@@ -39,6 +43,10 @@
                       <th class="text-center">Project Title</th>
                       <th class="text-center">Location</th>
                       <th class="text-center">Mode of Procurement</th>
+                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">SUB/ OPEN OF BIDS</th>
+                      <th class="text-center">NOTICE OF AWARD</th>
+                      <th class="text-center">CONTRACT SIGNING</th>
                       <th class="text-center">Source of Fund</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
@@ -116,6 +124,10 @@
             editField: ['barangay', 'municipality']
           },
           { data: 'mode' },
+          { data: 'abc_post_date' },
+          { data: 'sub_open_date' },
+          { data: 'award_notice_date' },
+          { data: 'contract_signing_date' },
           { data: 'source' },
           { data: 'type' },
           { data: 'abc' },
@@ -127,14 +139,14 @@
                       '<div class="col-lg-6 col-md-6 col-sm-6">' +
                         '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
                           '<input name="project_type" value="' + data.project_type + '" hidden>' +
-                          '<button class="btn btn-primary" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                          '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
                             '<i class="fa fa-pencil"></i>' +
                           '</button>' +
                         '</form>' +
                       '</div>' +
                       '<div class="col-lg-6 col-md-6 col-sm-6">' +
                         '<form method="GET" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                          '<button class="btn btn-danger" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                          '<button class="btn btn-danger btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
                             '<i class="fa fa-trash"></i>' +
                           '</button>' +
                         '</form>' +

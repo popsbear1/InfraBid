@@ -220,7 +220,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/jszip.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/pdfmake.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/vfs_fonts.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
 
@@ -257,7 +256,7 @@
               data: null,
               render: function ( data, type, row ) {
                 return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                          '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                          '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
                             '<i class="fa fa-eye"></i>' +
                           '</button>' +
                         '</form>';
@@ -365,7 +364,7 @@
               data: null,
               render: function ( data, type, row ) {
                 return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                          '<button class="btn btn-info" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                          '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
                             '<i class="fa fa-eye"></i>' +
                           '</button>' +
                         '</form>';
