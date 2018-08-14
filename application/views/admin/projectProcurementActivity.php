@@ -104,6 +104,8 @@ function convertDate($date){
         <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
           <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
             <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>">
+
+            <input type="text" name="activity_name" value="pre_proc" hidden>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
@@ -462,7 +464,7 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="advertisement_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Confirm</button>
             </div>
           </div>
 
@@ -907,6 +909,9 @@ function convertDate($date){
     }else if(inputValue == getValue(activity)){
       showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
     }else{
+      if (activity == 'pre_proc') {
+        proceedSubmit('Pre-Proc Date', inputValue, activityForm);
+      }
       if (activity == 'advertisement') {
         if (compareDates(inputValue, advertisement_start, advertisement_end)) {
           proceedSubmit('Advertisement Date', inputValue, activityForm)

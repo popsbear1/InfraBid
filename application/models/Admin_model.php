@@ -538,6 +538,9 @@
 			$this->db->insert('project_timeline', $plan_id);
 
 			$this->updateTimelineProjectStatus($new_plan_id);
+			if ($ABC < 5000000) {
+				$this->updatePreProctStatus($new_plan_id);
+			}
 			return true;
 		}else{
 			return false;
@@ -797,7 +800,6 @@
 
 		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
-		$this->updateTimelineProjectStatus($ABC, $currentPlanID);
 	}
 
 	public function updateSource($source, $currentPlanID){
@@ -1230,20 +1232,29 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updatePreBidStatus($plan_id){
+	public function updatePreBidStatus($plan_id, $status){
 		$data = array(
-			'pre_bid' => 'not_needed'
+			'pre_bid' => $status
 		);
 		
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_activity_status', $data);
 	}
 
-	public function updateAuthorityApprovalStatus($plan_id){
+	public function updateAuthorityApprovalStatus($plan_id, $status){
 		$data = array(
-			'authority_approval' => 'not_needed'
+			'authority_approval' => $status
 		);
 		
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_activity_status', $data);
+	}
+
+	public function updatePreProctStatus($plan_id){
+		$data = array(
+			'pre_proc' => 'not_needed'
+		);
+
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_activity_status', $data);
 	}

@@ -390,12 +390,16 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		if ($pre_bid_start == null || $pre_bid_end == null) {
-			$this->admin_model->updatePreBidStatus($plan_id);
+		if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
+			$this->admin_model->updatePreBidStatus($plan_id, 'not_needed');
+		}else{
+			$this->admin_model->updatePreBidStatus($plan_id, 'pending');
 		}
 
-		if ($authority_approval_start == null || $authority_approval_end == null) {
-			$this->admin_model->updateAuthorityApprovalStatus($plan_id);
+		if ( !isset($_POST['authorityApprovalStart']) || !isset($_POST['authorityApprovalEnd'])) {
+			$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'not_needed');
+		}else{
+			$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'pending');
 		}
 
 		redirect('admin/projectTimelineView');
