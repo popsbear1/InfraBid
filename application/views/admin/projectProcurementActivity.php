@@ -10,6 +10,7 @@ $bidevaluation = convertDate($procActDate['bid_evaluation']);
 $postqual = convertDate($procActDate['post_qual']);
 $awarddate = convertDate($procActDate['award_notice']);
 $contractsigning = convertDate($procActDate['contract_signing']);
+$authorityapproval = convertDate($procActDate['authority_approval']);
 $proceednotice = convertDate($procActDate['proceed_notice']);
 $completion = convertDate($procActDate['delivery_completion']);
 $acceptance = convertDate($procActDate['acceptance_turnover']);
@@ -73,9 +74,7 @@ function convertDate($date){
           <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
         <?php endif ?>
 
-        <?php if ($actStatus['advertisement'] != 'not_needed'): ?>
-          <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
-        <?php endif ?>
+        <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
 
         <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
           <button class="activityBtn btn btn-default btn-block" type="button" id="pre_bid_btn">Pre-bid Conf</button>
@@ -93,6 +92,8 @@ function convertDate($date){
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="contract_signing_btn">Contract Signing</button>
 
+        <button class="activityBtn btn btn-default btn-block" type="button" id="authority_approval_btn">Authority Approval</button>
+
         <button class="activityBtn btn btn-default btn-block" type="button" id="proceed_notice_btn">Notice to Proceed</button>
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="delivery_completion_btn">Delivery/Completion</button>
@@ -102,40 +103,40 @@ function convertDate($date){
       <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 100%">
         <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
           <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
+            <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="date" id="pre_proc" name="activity_date" placeholder="<?php echo $pre_proc ?>" class="form-control">
+                </div>
+              </div>
+            </form> 
+          </div>
+        <?php endif ?>
+
+        <div id="ads_post_view" class="activity_view" hidden="hidden">
+          <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <input type="text" name="activity_name" value="advertisement" hidden>
             <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $pre_proc_start ?></p>
+                <p class="form-control"><?php echo $advertisement_start ?></p>
               </div>
-            </div> 
-          </div>
-        <?php endif ?>
-        
-        <?php if ($actStatus['advertisement'] != 'not_needed'): ?>
-          <div id="ads_post_view" class="activity_view" hidden="hidden">
-            <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-              <input type="text" name="activity_name" value="advertisement" hidden>
-              <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $advertisement_start ?></p>
-                </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Add/Post of IAEB:</label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <p class="form-control"><?php echo $advertisement_end ?></p>
               </div>
-              <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Add/Post of IAEB:</label>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $advertisement_end ?></p>
-                </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <input type="date" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control">
               </div>
-              <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="date" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control">
-                </div>
-              </div>          
-            </form>
-          </div>
-        <?php endif ?>
+            </div>          
+          </form>
+        </div>
 
         <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
           <div id="pre_bid_view" class ="activity_view" hidden="hidden">
@@ -362,6 +363,31 @@ function convertDate($date){
           </form>
         </div>
 
+        <div id="authority_approval_view" class ="activity_view" hidden="hidden">
+          <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+            <input type="text" name="activity_name" value="authority_approval" hidden>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Authority Approval: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <p class="form-control"><?php echo $authority_approval_start ?></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Authority Approval: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <p class="form-control"><?php echo $authority_approval_end ?></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <input type="date" id="authorityapproval" value="<?php echo $authorityapproval ?>" name="activity_date" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+
         <div id="proceed_notice_view" class="activity_view" hidden="hidden">
           <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
             <input type="text" name="activity_name" value="proceed_notice" hidden>
@@ -430,7 +456,7 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="pre_proc_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="advertisement,advertisement_form">Submit</button>
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="pre_proc,pre_proc_form">Submit</button>
             </div>
           </div>
 
@@ -485,6 +511,12 @@ function convertDate($date){
           <div class="row procactsubmitcontainer" id="contract_signing_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
               <button type="button" class="btn btn-primary procactsubmitbutton" value="contractsigning,contract_signing_form">Submit</button>
+            </div>
+          </div>
+
+          <div class="row procactsubmitcontainer" id="authority_approval_submit_btn" hidden="hidden">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="authorityapproval,authority_approval_form">Submit</button>
             </div>
           </div>
 
@@ -694,6 +726,7 @@ function convertDate($date){
     postqual : '<?php echo $postqual ?>',
     awarddate : '<?php echo $awarddate ?>',
     contractsigning : '<?php echo $contractsigning ?>',
+    authorityapproval : '<?php echo $authorityapproval ?>',
     proceednotice : '<?php echo $proceednotice ?>',
     completion : '<?php echo $completion ?>',
     acceptance : '<?php echo $acceptance ?>'
@@ -756,6 +789,10 @@ function convertDate($date){
     {
       actname : 'contract_signing_status', 
       status : '<?php echo $actStatus['contract_signing'] ?>'
+    },
+    {
+      actname : 'authority_approval_status', 
+      status : '<?php echo $actStatus['authority_approval'] ?>'
     },
     {
       actname : 'proceed_notice_status', 
@@ -824,6 +861,10 @@ function convertDate($date){
 
       if (activity_status[i].actname == 'contract_signing_status') {
         setActivityView(activity_status[i].status, '#contract_signing_btn', '#sign_contract_view', '#contract_signing_submit_btn');
+      }
+
+      if (activity_status[i].actname == 'authority_approval_status') {
+        setActivityView(activity_status[i].status, '#authority_approval_btn', '#authority_approval_view', '#authority_approval_submit_btn');
       }
 
       if (activity_status[i].actname == 'proceed_notice_status') {
@@ -911,6 +952,13 @@ function convertDate($date){
       if (activity == 'contractsigning') {
         if (compareDates(inputValue, contract_signing_start, contract_signing_end)) {
           proceedSubmit('Contact Signing Date', inputValue, activityForm)
+        }else{
+          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+        }
+      }
+      if (activity == 'authorityapproval') {
+        if (compareDates(inputValue, authority_approval_start, authority_approval_end)) {
+          proceedSubmit('Authority Approval Date', inputValue, activityForm)
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
@@ -1143,6 +1191,13 @@ function convertDate($date){
     setButtonStyle('#contract_signing_btn');
     $('#sign_contract_view').removeAttr('hidden');
     $('#contract_signing_submit_btn').attr('hidden', false);
+  });
+
+  $('#authority_approval_btn').click(function(){
+    setViewHidden();
+    setButtonStyle('#authority_approval_btn');
+    $('#authority_approval_view').removeAttr('hidden');
+    $('#authority_approval_submit_btn').attr('hidden', false);
   });
 
   $('#proceed_notice_btn').click(function(){
