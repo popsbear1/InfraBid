@@ -185,7 +185,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Sub/Open of Bids *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="openbid" value="<?php echo $openbid ?>" name="activity_date" class="form-control">
+                <input type="date" id="openbid" placeholder="<?php echo $openbid ?>" name="activity_date" class="form-control">
               </div>
             </div>
             <div class="form-group">
@@ -586,6 +586,51 @@ function convertDate($date){
   </div>
 </div>
 
+
+<div id="openbidmodal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+      </div>
+      <div class="modal-body">
+        <table class='table table-striped table-bordered' style='font-size:13px;'>
+          <thead>
+            <tr >
+              <th style='text-align: center'>Attributes</th>
+              <th style='text-align: center'>Values</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <tr>
+              <td>Project Title</td>
+              <td><span id="project_title_modal"><?php echo $projectDetails['project_title'] ?></td>
+            </tr>
+            <tr>
+              <td id="actNameOpenBid"></td>
+              <td id="actDateValueOpenBid"></td>
+            </tr>
+            <tr>
+              <td>Contractor</td>
+              <td id="contractorName"></td>
+            </tr>
+            <tr>
+              <td>Proposed Bid</td>
+              <td id="proposedBidAmmount"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="formSubmitBtnOpenBid" type="submit" name="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <!--Modal for confirmation -->
 
     <div id="rebid_svp_model" class="modal" tabindex="-1" role="dialog">
@@ -927,10 +972,8 @@ function convertDate($date){
         }
       }
       if (activity == 'openbid') {
-        if (compareDates(inputValue, bid_submission_start, bid_submission_end)) {
-          proceedSubmit('Pre-bid Date', inputValue, activityForm)
-        }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+        if (validateOpenBidInput(inputValue, bid_submission_start, bid_submission_end)) {
+          proceedSubmitOpenBid('Open-bid Date', inputValue, activityForm)
         }
       }
       if (activity == 'bidevaluation') {
@@ -991,6 +1034,11 @@ function convertDate($date){
     element.after(message);
   }
 
+  function removeError(inputId){
+    var element = $('#' + inputId);
+    element.closest('div.form-group').removeClass('has-error').find('.text-danger').remove();
+  }
+
   function compareDates(dateInput, start, end){
     var date = new Date(dateInput).getTime();
     var start_date = new Date(start).getTime();
@@ -998,6 +1046,52 @@ function convertDate($date){
     if (date < start_date || date > end_date) {
       return false;
     }else{
+      return true;
+    }
+  }
+
+  function validateOpenBidInput(dateInput, start, end){
+    var dateValidation = compareDates(dateInput, start, end);
+    var contractorValidation = validateContractor();
+    var bidValidation = validateBid();
+    if (!dateValidation || !contractorValidation || !bidValidation) {
+      if (!$dateValidation) {
+        showError('openbid', '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+      }
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  function validateBid(){
+    var abc = '<?php echo $projectDetails['abc'] ?>';
+    console.log(abc);
+    if (!$('#bid_proposal').val() || $('#bid_proposal').val() == "") {
+      showError('bid_proposal', '<p class="text-danger text-center">The bid proposal input is Required!</p>');
+      return false;
+    }else{
+      if (!isNaN($('#bid_proposal').val())) {
+        if ($('#bid_proposal').val() > abc) {
+          showError('bid_proposal', '<p class="text-danger text-center">Proposed bid must not be higher that the ABC!</p>');
+          return false;
+        }else{
+          removeError('bid_proposal');
+          return true;
+        }
+      }else{
+        showError('bid_proposal', '<p class="text-danger text-center">Proposed bid should be numeric!</p>');
+        return false;
+      }
+    }
+  }
+
+  function validateContractor(){
+    if ($('#contractor').val() == "" || !$('#contractor').val()) {
+      showError('contractor', '<p class="text-danger text-center">Contactor input field is required!</p>');
+      return false;
+    }else{
+      removeError('contractor');
       return true;
     }
   }
@@ -1011,6 +1105,15 @@ function convertDate($date){
     $('#actName').html(activity_name);
     $('#actDateValue').text(inputValue);
     $('#formSubmitBtn').attr('form', activityForm);
+  }
+
+  function proceedSubmitOpenBid(activity_name, inputValue, activityForm){
+    $('#actNameOpenBid').html(activity_name);
+    $('#actDateValueOpenBid').text(inputValue);
+    $('#contractorName').html($('#contractor option:selected, active').html());
+    $('#proposedBidAmmount').html($('#bid_proposal').val());
+    $('#formSubmitBtnOpenBid').attr('form', activityForm);
+    $('#openbidmodal').modal('show');
   }
 
 
