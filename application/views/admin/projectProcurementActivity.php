@@ -50,7 +50,7 @@ function convertDate($date){
 
   if ($date != null) {
     $actdate = date_create($date);
-    $formateddate = date_format($actdate, 'M-d-Y');
+    $formateddate = date_format($actdate, 'Y-m-d');
   }else{
     $formateddate = null;
   }
@@ -68,7 +68,21 @@ function convertDate($date){
       <h3 class="panel-title">Activity View</h3>
     </div>
     <div class="panel-body" style="height: 550px">
-      <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12" style="height: 100%">
+      <div class="row" style="height: 50px">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <?php if (isset($_SESSION['success'])): ?>
+            <div class="text-center alert alert-success">
+              <p><?php echo $_SESSION['success'] ?></p>
+            </div>
+          <?php endif ?>
+          <?php if (isset($_SESSION['error'])): ?>
+            <div class="text-center alert alert-warning">
+              <p><?php echo $_SESSION['error'] ?></p>
+            </div>
+          <?php endif ?>
+        </div>
+      </div>
+      <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12" style="height: 500px">
 
         <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
           <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
@@ -92,7 +106,9 @@ function convertDate($date){
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="contract_signing_btn">Contract Signing</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="authority_approval_btn">Authority Approval</button>
+        <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="authority_approval_btn">Authority Approval</button>
+        <?php endif ?>
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="proceed_notice_btn">Notice to Proceed</button>
 
@@ -100,7 +116,7 @@ function convertDate($date){
 
         <button class="activityBtn btn btn-default btn-block" type="button" id="acceptance_turnover_btn">Acceptance/Turnover</button>
       </div>
-      <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 100%">
+      <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 480px">
         <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
           <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
             <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>">
@@ -134,7 +150,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="advertisement" placeholder="<?php echo $advertisement ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>          
           </form>
@@ -159,7 +175,7 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date" class="form-control procActDateInput">
+                  <input type="text" id="pre_bid" placeholder="<?php echo $pre_bid ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
               </div>
             </form>
@@ -285,7 +301,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Bid Evaluation *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="bidevaluation" value="<?php echo $bidevaluation ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="bidevaluation" placeholder="<?php echo $bidevaluation ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>      
           </form>
@@ -310,7 +326,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Post Qual *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="postqual" value="<?php echo $postqual ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="postqual" placeholder="<?php echo $postqual ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -334,7 +350,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice of Award *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="awarddate" value="<?php echo $awarddate ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="awarddate" placeholder="<?php echo $awarddate ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -359,36 +375,38 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Contract Signing *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="contractsigning" value="<?php echo $contractsigning ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="contractsigning" placeholder="<?php echo $contractsigning ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
         </div>
 
-        <div id="authority_approval_view" class ="activity_view" hidden="hidden">
-          <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+        <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
+          <div id="authority_approval_view" class ="activity_view" hidden="hidden">
+            <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
-            <input type="text" name="activity_name" value="authority_approval" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Authority Approval: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $authority_approval_start ?></p>
+              <input type="text" name="activity_name" value="authority_approval" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Authority Approval: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $authority_approval_start ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Authority Approval: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $authority_approval_end ?></p>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Authority Approval: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $authority_approval_end ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="authorityapproval" value="<?php echo $authorityapproval ?>" name="activity_date" class="form-control procActDateInput">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="authorityapproval" placeholder="<?php echo $authorityapproval ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        <?php endif ?>
 
         <div id="proceed_notice_view" class="activity_view" hidden="hidden">
           <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
@@ -408,7 +426,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice to Proceed *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="proceednotice" value="<?php echo $proceednotice ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="proceednotice" placeholder="<?php echo $proceednotice ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -422,7 +440,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Delivery/Completion *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="completion" value="<?php echo $completion ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="completion" placeholder="<?php echo $completion ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -435,7 +453,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Acceptance/Turnover *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="acceptance" value="<?php echo $acceptance ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="acceptance" placeholder="<?php echo $acceptance ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
 
@@ -874,7 +892,6 @@ function convertDate($date){
           activity_status[j].status = 'comming';
         }
       }
-      //console.log(activity_status[i].actname);
       
     }
 
@@ -959,81 +976,99 @@ function convertDate($date){
     inputElement = $('#' + activity);
     inputValue = inputElement.val();
 
-    if (inputValue == null || inputValue == "") {
-      showError(activity, '<p class="text-danger text-center">The input filed should not be empty!!</p>');
-    }else if(inputValue == getValue(activity)){
-      showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
-    }else{
-      if (activity == 'pre_proc') {
+    if (activity == 'pre_proc') {
+      if (verifyDate(inputValue, activity)) {
         proceedSubmit('Pre-Proc Date', inputValue, activityForm);
       }
-      if (activity == 'advertisement') {
+    }
+    if (activity == 'advertisement') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, advertisement_start, advertisement_end)) {
-          proceedSubmit('Advertisement Date', inputValue, activityForm)
+          proceedSubmit('Advertisement Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'pre_bid') {
+    }
+    if (activity == 'pre_bid') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, pre_bid_start, pre_bid_end)) {
-          proceedSubmit('Pre-bid Date', inputValue, activityForm)
+          proceedSubmit('Pre-bid Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'openbid') {
+    }
+    if (activity == 'openbid') {
+      if (verifyDateOpenBid(inputValue, activity)) {
         if (validateOpenBidInput(inputValue, bid_submission_start, bid_submission_end)) {
-          proceedSubmitOpenBid('Open-bid Date', inputValue, activityForm)
+          proceedSubmitOpenBid('Open-bid Date', inputValue, activityForm);
         }
       }
-      if (activity == 'bidevaluation') {
+    }
+    if (activity == 'bidevaluation') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, bid_evaluation_start, bid_evaluation_end)) {
-          proceedSubmit('Bid Evaluation Date', inputValue, activityForm)
+          proceedSubmit('Bid Evaluation Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
-      }
-      if (activity == 'postqual') {
+      }    
+    }
+    if (activity == 'postqual') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, post_qualification_start, post_qualification_end)) {
-          proceedSubmit('Post Qualification Date', inputValue, activityForm)
+          proceedSubmit('Post Qualification Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'awarddate') {
+    }
+    if (activity == 'awarddate') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, award_notice_start, award_notice_end)) {
-          proceedSubmit('Award Date', inputValue, activityForm)
+          proceedSubmit('Award Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'contractsigning') {
+    }
+    if (activity == 'contractsigning') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, contract_signing_start, contract_signing_end)) {
-          proceedSubmit('Contact Signing Date', inputValue, activityForm)
+          proceedSubmit('Contact Signing Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'authorityapproval') {
+    }
+    if (activity == 'authorityapproval') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, authority_approval_start, authority_approval_end)) {
-          proceedSubmit('Authority Approval Date', inputValue, activityForm)
+          proceedSubmit('Authority Approval Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'proceednotice') {
+    }
+    if (activity == 'proceednotice') {
+      if (verifyDate(inputValue, activity)) {
         if (compareDates(inputValue, proceed_notice_start, proceed_notice_start)) {
-          proceedSubmit('Proceed Notice Date', inputValue, activityForm)
+          proceedSubmit('Proceed Notice Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
       }
-      if (activity == 'completion') {
-        proceedSubmit('Delivery/Completion', inputValue, activityForm)
+    }
+    if (activity == 'completion') {
+      if (verifyDate(inputValue, activity)) {
+        proceedSubmit('Delivery/Completion', inputValue, activityForm);
       }
-      if (activity == 'acceptance') {
-        proceedSubmit('Acceptance?Turnover', inputValue, activityForm)
-      }
+    }
+    if (activity == 'acceptance') {
+      if (verifyDate(inputValue, activity)) {
+        proceedSubmit('Acceptance?Turnover', inputValue, activityForm);
+      } 
     }
 
   });
@@ -1060,6 +1095,25 @@ function convertDate($date){
     }
   }
 
+  function verifyDate(inputValue, activity){
+    if (inputValue == null || inputValue == "") {
+      showError(activity, '<p class="text-danger text-center">The input filed should not be empty!!</p>');
+      return false;
+    }else if(inputValue === getValue(activity)){
+      showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
+      return false;
+    }
+    return true;
+  }
+
+  function verifyDateOpenBid(inputValue, activity){
+    if(inputValue === getValue(activity)){
+      showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
+      return false;
+    }
+    return true;
+  }
+
   function validateOpenBidInput(dateInput, start, end){
     var dateValidation = compareDates(dateInput, start, end);
     var contractorValidation = validateContractor();
@@ -1077,36 +1131,46 @@ function convertDate($date){
   function validateBid(){
     var abc = '<?php echo $projectDetails['abc'] ?>';
     console.log(abc);
-    if (!$('#bid_proposal').val() || $('#bid_proposal').val() == "") {
-      showError('bid_proposal', '<p class="text-danger text-center">The bid proposal input is Required!</p>');
-      return false;
-    }else{
-      if (!isNaN($('#bid_proposal').val())) {
-        if ($('#bid_proposal').val() > abc) {
-          showError('bid_proposal', '<p class="text-danger text-center">Proposed bid must not be higher that the ABC!</p>');
-          return false;
-        }else{
-          removeError('bid_proposal');
-          return true;
-        }
-      }else{
-        showError('bid_proposal', '<p class="text-danger text-center">Proposed bid should be numeric!</p>');
+    if (abc == null) {
+      if (!$('#bid_proposal').val() || $('#bid_proposal').val() == "") {
+        showError('bid_proposal', '<p class="text-danger text-center">The bid proposal input is Required!</p>');
         return false;
+      }else{
+        if (!isNaN($('#bid_proposal').val())) {
+          if ($('#bid_proposal').val() > abc) {
+            showError('bid_proposal', '<p class="text-danger text-center">Proposed bid must not be higher that the ABC!</p>');
+            return false;
+          }else{
+            removeError('bid_proposal');
+            return true;
+          }
+        }else{
+          showError('bid_proposal', '<p class="text-danger text-center">Proposed bid should be numeric!</p>');
+          return false;
+        }
       }
+    }else{
+      return true;
     }
   }
 
   function validateContractor(){
-    if ($('#contractor').val() == "" || !$('#contractor').val()) {
-      showError('contractor', '<p class="text-danger text-center">Contactor input field is required!</p>');
-      return false;
+    var contractor = '<?php echo $projectDetails['contractor_id'] ?>';
+    if (contractor == null) {
+      if ($('#contractor').val() == "" || !$('#contractor').val()) {
+        showError('contractor', '<p class="text-danger text-center">Contactor input field is required!</p>');
+        return false;
+      }else{
+        removeError('contractor');
+        return true;
+      }
     }else{
-      removeError('contractor');
       return true;
     }
   }
 
   function getValue(activity){
+    console.log(planDates);
     return planDates[activity];
   }
 

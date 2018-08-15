@@ -10,7 +10,7 @@
               <div class="form-group">
                 <label class="control-label col-lg-7">Select date to begin with:</label>
                 <div class="col-lg-5">
-                  <input type="text" class="form-control" id="startDate" name="startDate" form="updateProcurementTimelineForm">
+                  <input type="text" class="form-control text-center" id="startDate" name="startDate" form="updateProcurementTimelineForm" placeholder="mm/dd/yyyy">
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@
           </div>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#timelineModal" id="timelineModalConfirmBtn">Submit</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#timelineModal" id="timelineModalConfirmBtn" disabled="disabled">Submit</button>
             </div>
           </div>
         </div>
@@ -236,8 +236,16 @@
 
   <script>
 
+    var abc = '<?php echo $projectDetails['abc'] ?>';
+
+
+
     $(document).ready(function(){
-      $('#startDate').datepicker()
+
+      $('#startDate').datepicker({
+        autoclose: true,
+      })
+
     });
 
     $('#timelineModalConfirmBtn').click(function(e){
@@ -262,24 +270,24 @@
     });
 
     $(document).ready(function(e){
-      $('#advertisement_start').val("<?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?>");
-      $('#advertisement_end').val("<?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?>");
-      $('#preBidStart').val("<?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?>");
-      $('#preBidEnd').val("<?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?>");
-      $('#bidSubmissionStart').val("<?php echo date_format(date_create($timeLine['bid_submission_start']), "M-d-Y") ?>");
-      $('#bidSubmissionEnd').val("<?php echo date_format(date_create($timeLine['bid_submission_end']), "M-d-Y") ?>");
-      $('#bidEvaluationStart').val("<?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?>");
-      $('#bidEvaluationEnd').val("<?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?>");
-      $('#postQualificationStart').val("<?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?>");
-      $('#postQualificationEnd').val("<?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?>");
-      $('#awardNoticeIssuanceStart').val("<?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?>");
-      $('#awardNoticeIssuanceEnd').val("<?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?>");
-      $('#contractSigningStart').val("<?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?>");
-      $('#contractSigningEnd').val("<?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?>");
-      $('#authorityApprovalStart').val("<?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?>");
-      $('#authorityApprovalEnd').val("<?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?>");
-      $('#proceedNoticeStart').val("<?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?>");
-      $('#proceedNoticeEnd').val("<?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?>");
+      $('#advertisement_start').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?>");
+      $('#advertisement_end').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?>");
+      $('#preBidStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?>");
+      $('#preBidEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?>");
+      $('#bidSubmissionStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_start']), "M-d-Y") ?>");
+      $('#bidSubmissionEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_end']), "M-d-Y") ?>");
+      $('#bidEvaluationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?>");
+      $('#bidEvaluationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?>");
+      $('#postQualificationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?>");
+      $('#postQualificationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?>");
+      $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?>");
+      $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?>");
+      $('#contractSigningStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?>");
+      $('#contractSigningEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?>");
+      $('#authorityApprovalStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?>");
+      $('#authorityApprovalEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?>");
+      $('#proceedNoticeStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?>");
+      $('#proceedNoticeEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?>");
 
 
   var advertisementMinBase = 0;
@@ -533,6 +541,7 @@
     if (startDate == null || startDate == "") {
       $('#missing_startdate_warning').modal('show');
     }else{
+      $('#timelineModalConfirmBtn').attr('disabled', false);
       if ($('#noPreBid').is(":checked") && $('#noApproval').is(":checked")) {
         setDatesToEarliestPossibleTimeWithoutPBCandAHA(startDate);
       }else if($('#noApproval').is(":checked")){
