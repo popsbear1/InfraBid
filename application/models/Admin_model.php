@@ -5,7 +5,7 @@
 	 */
 	class Admin_model extends CI_model
 	{
-		public function getRegularPlan(){
+		public function getRegularPlan($year, $mode, $status, $municipality,$source,$projecttype){
 			$this->db->select('*');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
@@ -15,6 +15,29 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->where('project_plan.project_type', 'regular');
+			if ($year != null) {
+				$this->db->where('project_year', $year);
+			}
+
+			if ($mode != null) {
+				$this->db->where('project_plan.mode_id', $mode);
+			}
+
+			if ($status != null) {
+				$this->db->where('project_plan.status', $status);
+			}
+
+			if ($municipality != null) {
+				$this->db->where('project_plan.municipality_id', $municipality);
+			}
+
+			if ($source !=null) {
+				$this->db->where('project_plan.fund_id',$source);
+			}
+
+			if ($projecttype !=null){
+				$this->db->where('project_plan.projtype_id', $projecttype);
+			}
 
 			$query = $this->db->get();
 
@@ -90,7 +113,6 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
-			$this->db->where('project_type', 'regular');
 			if ($year != null) {
 				$this->db->where('project_year', $year);
 			}
@@ -104,6 +126,47 @@
 				$this->db->where('project_plan.status', 'onprocess');
 				$this->db->or_where('project_plan.status', 'for_implementation');
 				$this->db->or_where('project_plan.status', 'for_rebid');
+			}
+
+			if ($municipality != null) {
+				$this->db->where('project_plan.municipality_id', $municipality);
+			}
+
+			if ($source !=null) {
+				$this->db->where('project_plan.fund_id',$source);
+			}
+
+			if ($type !=null){
+				$this->db->where('project_plan.projtype_id',$type);
+			}
+
+			$this->db->order_by('municipality ASC', 'barangay ASC');
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
+		public function getRegularProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type){
+			$this->db->select('count(project_plan.plan_id) as project_count, sum(project_plan.abc) as total_abc');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('projtype', 'project_plan.projtype_id = projtype.projtype_id');
+			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
+			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+
+			$this->db->where('project_type', 'regular');
+			if ($year != null) {
+				$this->db->where('project_year', $year);
+			}
+			if ($mode != null) {
+				$this->db->where('project_plan.mode_id', $mode);
+			}
+
+			if ($status != null) {
+				$this->db->where('project_plan.status', $status);
 			}
 
 			if ($municipality != null) {

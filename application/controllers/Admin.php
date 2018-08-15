@@ -49,11 +49,70 @@ class Admin extends CI_Controller {
 	}
 
 	public function regularPlanListView(){
-		$data['plans'] = $this->admin_model->getRegularPlan();
+		$year = date('Y');
+		$mode = null;
+		$status = null;
+		$municipality = null;
+		$source = null;
+		$projecttype = null;
+		$data['year'] = date('Y');
+		$data['plans'] = $this->admin_model->getRegularPlan($year, $mode, $status, $municipality, $source, $projecttype);
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['sources'] = $this->admin_model->getFunds();
+		$data['types'] = $this->admin_model->getProjectType();
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality,$source,$projecttype);
+		if ($data['count_total']['total_abc'] > 0 ) {
+			$total = explode('.', $data['count_total']['total_abc']);
+			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+			$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		}else{
+			$data['count_total']['total_abc_word_format'] = 'none';
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/regularPlanList', $data);
 		$this->load->view('admin/fragments/footer');		
+	}
+
+	public function getFilteredRegularPlanData(){
+		$year = $this->input->get('year');
+		$mode = $this->input->get('mode');
+		$status = $this->input->get('status');
+		$municipality = $this->input->get('municipality');
+		$source = $this->input->get('source');
+		$type = $this->input->get('type');
+
+		if (empty($year)) {
+			$year = null;
+		}
+		if (empty($mode)) {
+			$mode = null;
+		}
+		if (empty($status)) {
+			$status = null;
+		}
+		if (empty($municipality)) {
+			$municipality = null;
+		}
+		if(empty($source)) {
+			$source = null;
+		}
+		if(empty($type)){
+			$type = null;
+		}
+
+		$data['plans'] = $this->admin_model->getRegularPlan($year, $mode, $status, $municipality, $source, $type);
+
+		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);		
+		$total = explode('.', $data['count_total']['total_abc']);
+		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+		if ($data['count_total']['total_abc'] > 0) {
+			$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		}
+		$data['count_total']['total_abc'] = number_format($data['count_total']['total_abc'], 2);
+
+		echo json_encode($data);
 	}
 
 	public function supplementalPlanListView(){
@@ -66,17 +125,17 @@ class Admin extends CI_Controller {
 
 	public function ongoingProjectPlanView(){
 		$year = date('Y');
-		$quarter = null;
+		$apptype = null;
 		$status = null;
 		$municipality = null;
 		$source = null;
 		$projecttype = null;
 		$data['year'] = date('Y');
-		$data['plans'] = $this->admin_model->getOngoingProjectPlan($year, $quarter, $status, $municipality,$source,$projecttype);
+		$data['plans'] = $this->admin_model->getOngoingProjectPlan($year, $apptype, $status, $municipality,$source,$projecttype);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['sources'] = $this->admin_model->getFunds();
 		$data['types'] = $this->admin_model->getProjectType();
-		$data['count_total'] = $this->admin_model->getOngoingProjectPlanCountTotal($year, $quarter, $status, $municipality,$source,$projecttype);
+		$data['count_total'] = $this->admin_model->getOngoingProjectPlanCountTotal($year, $apptype, $status, $municipality,$source,$projecttype);
 		if ($data['count_total']['total_abc'] > 0 ) {
 			$total = explode('.', $data['count_total']['total_abc']);
 			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
@@ -1289,41 +1348,41 @@ class Admin extends CI_Controller {
 
 		if ($activity_name === "bid_evaluation") {
 			if ($this->admin_model->updateBidEvaluationDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Issuance Of Notice of Award Date Successfully Updated!");
+				$this->session->set_flashdata('success', "Bid Evaluation Date Successfully Updated!");
 			}else{
-				$this->session->set_flashdata('error', "Error! Issuance Of Notice of Award Date Was not Updated! Try again.");
+				$this->session->set_flashdata('error', "Error! Bid Evaluation Date Was not Updated! Try again.");
 			}
 		}
 
 		if ($activity_name === "post_qual") {
 			if ($this->admin_model->updatePostQualDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Contract Preparation and Signing Date Successfully Updated!");
+				$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
 			}else{
-				$this->session->set_flashdata('error', "Error! Contract Preparation and Signing Date Was Not Updated! Try again.");
+				$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
 			}
 		}
 
 		if ($activity_name === "awar_notice") {
 			if ($this->admin_model->updateAwardNoticeDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Approval of Contract by Higher Authority Date Successfully Updated!");
+				$this->session->set_flashdata('success', "Notice of Award Date Successfully Updated!");
 			}else{
-				$this->session->set_flashdata('error', "Error! Approval of Contract by Higher Authority Date Was Not Updated! Try again.");
+				$this->session->set_flashdata('error', "Error! Notice of Award Date Was Not Updated! Try again.");
 			}
 		}
 
 		if ($activity_name === "contract_signing") {
 			if ($this->admin_model->updateContractSigningDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Pre-proc Conf successfully Updated!");
+				$this->session->set_flashdata('success', "Contract Signing Date successfully Updated!");
 			}else{
-				$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
+				$this->session->set_flashdata('error', "Error! Contract Signing Date was not Updated! Try again.");
 			}
 		}
 
 		if ($activity_name === "authority_approval") {
 			if ($this->admin_model->updateAuthorityApprovalDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Pre-proc Conf successfully Updated!");
+				$this->session->set_flashdata('success', "Approval of Higher Authority Date successfully Updated!");
 			}else{
-				$this->session->set_flashdata('error', "Error! Pre-proc Conf was not Updated! Try again.");
+				$this->session->set_flashdata('error', "Error! Approval of Higher Authority Date was not Updated! Try again.");
 			}
 		}						
 
