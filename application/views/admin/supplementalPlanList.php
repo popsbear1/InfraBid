@@ -16,6 +16,123 @@
           <div class="box-body">
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
+                <p>Filters: </p>
+              </div>
+            </div>
+            <div class="row">                   
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <label for="year">Year: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="year_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <input type="text" id="year" class="form-control input-sm" value="<?php echo $year ?>">
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <label for="apptype">Mode: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="mode_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="apptype" id="mode" class="form-control input-sm">
+                    <option hidden disabled selected>Choose Mode</option>
+                    <?php foreach ($modes as $mode): ?>
+                      <option value="<?php echo $mode['mode_id'] ?>"><?php echo $mode['mode'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <label for="status">Status: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="status_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="status" id="status" class="form-control input-sm">
+                    <option hidden disabled selected>Choose Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="onprocess">On process</option>
+                    <option value="for_implementation">For Implementation</option>
+                    <option value="for_rebid">For Rebid</option>
+                    <option value="for_review">For Review</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <label for="municipality">Municipality: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="municipality_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="municipality" id="municipality" class="form-control input-sm">
+                    <option hidden disabled selected>Choose Municipality</option>
+                    <?php foreach ($municipalities as $municipality): ?>
+                      <option value="<?php echo $municipality['municipality_id'] ?>"><?php echo $municipality['municipality'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <label for="source">Source of Fund: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="fund_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="source" id="source" class="form-control input-sm">
+                    <option hidden disabled selected>Choose Source</option>
+                    <?php foreach ($sources as $source): ?>
+                      <option value="<?php echo $source['fund_id'] ?>"><?php echo $source['source'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <label for="type">Project Type: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="type_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="type" id="type" class="form-control input-sm">
+                    <option hidden disabled selected>Choose Type</option>
+                    <?php foreach ($types as $type): ?>
+                      <option value="<?php echo $type['projtype_id'] ?>"><?php echo $type['type'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
+                <div class="form-group">
+                  <label><small>Action:</small></label>
+                  <button class="btn btn-primary btn-sm" id="filterBtn" type="button">
+                    <i class="fa fa-search"></i>
+                    Find
+                  </button>
+                    <a href="<?php echo base_url('admin/fpdfView') ?>" button class="btn btn-success btn-sm" id="printBtn" type="button">
+                      <i class="fa fa-print"></i>
+                      Print
+                    </button>
+                    </a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
                 <table width="100%" id="supplemental_plan_table">
                   <thead style='font-size:12px;background: #ffcccc'>
                     <tr>
@@ -55,6 +172,19 @@
                     </tr>
                   </tfoot>
                 </table>
+              </div>
+            </div>
+            <div class="callout" style="background: #f2f2f2">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                  <h4>Project Count:</h4>
+                  <p id="project_count"><?php echo $count_total['project_count'] ?></p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                  <h4>Total of all ABC:</h4>
+                  <p id="total_abc"><?php echo number_format($count_total['total_abc'], 2)?></p>
+                  <p id="total_abc_word_format"><?php echo '(' . $count_total['total_abc_word_format'] . ')' ?></p>
+                </div>
               </div>
             </div>
           </div>
@@ -154,8 +284,150 @@
                     ;
             }
           }
-        ]
+        ],
+        order: [[8, 'asc']],
+        rowGroup: {
+          startRender: null,
+          endRender: function (rows, group) {
+            var total = rows
+            .data()
+            .pluck('abc')
+            .reduce( function (a, b) {
+              return a + b*1;
+            }, 0);
+
+            return $('<tr/>')
+            .append('<td colspan="10"> Total for ' + group + '</td>')
+            .append('<td>' + total + '</td>')
+            .append('<td/>')
+            .append('<td/>');
+          },
+          dataSrc: 'source'
+        }
       });
+      $('#year').datepicker({
+        autoclose: true,
+        format: 'yyyy',
+        startView: 'years',
+        minViewMode: 'years',
+        orientation: 'bottom auto'
+      });
+
+      $('#year').attr('placeholder', 'yyyy');
+  });
+
+
+  $('#year_btn').click(function(){
+    $('#year').val('');
+  });
+
+  $('#mode_btn').click(function(){
+    $('#mode').val('');
+  });
+
+  $('#status_btn').click(function(){
+    $('#status').val('');
+  });
+
+  $('#municipality_btn').click(function(){
+    $('#municipality').val('');
+  });
+
+  $('#fund_btn').click(function(){
+    $('#source').val('');
+  });
+
+  $('#type_btn').click(function(){
+    $('#type').val('');
+  });
+
+  $('#filterBtn').click(function(e){
+    e.preventDefault();
+    var year = $('#year').val();
+    var mode = $('#mode').val();
+    var status = $('#status').val();
+    var municipality = $('#municipality').val();
+    var source = $('#source').val();
+    var type = $('#type').val();
+
+    $('#supplemental_plan_table').DataTable().destroy();
+
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo base_url("admin/getFilteredSupplementalPlanData") ?>',
+      data: { year: year, mode: mode, status: status, municipality: municipality, source: source, type: type},
+      dataType: 'json'
+    }).done(function(response){
+      $('#project_count').html(response.count_total['project_count']);
+      $('#total_abc').html(response.count_total['total_abc']);
+      $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
+      var table = $('#supplemental_plan_table').DataTable({
+        data: response.plans,
+        columns: [
+            { data: 'project_no' },
+            { data: 'project_title' },
+            { 
+              data: null,
+              render: function(data, type, row){
+                return data.barangay + ', ' + data.municipality;
+              },
+              editField: ['barangay', 'municipality']
+            },
+            { data: 'mode' },
+            { data: 'abc_post_date' },
+            { data: 'sub_open_date' },
+            { data: 'award_notice_date' },
+            { data: 'contract_signing_date' },
+            { data: 'source' },
+            { data: 'type' },
+            { data: 'abc' },
+            { data: 'project_year' },
+            { 
+              data: null,
+              render: function ( data, type, row ) {
+                return '<div class="row">' +
+                        '<div class="col-lg-6 col-md-6 col-sm-6">' +
+                          '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
+                            '<input name="project_type" value="' + data.project_type + '" hidden>' +
+                            '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                              '<i class="fa fa-pencil"></i>' +
+                            '</button>' +
+                          '</form>' +
+                        '</div>' +
+                        '<div class="col-lg-6 col-md-6 col-sm-6">' +
+                          '<form method="GET" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                            '<button class="btn btn-danger btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                              '<i class="fa fa-trash"></i>' +
+                            '</button>' +
+                          '</form>' +
+                        '</div>' +      
+                      '</div>'
+                      ;
+              }
+            }
+        ],
+        order: [[8, 'asc']],
+        rowGroup: {
+          startRender: null,
+          endRender: function (rows, group) {
+            var total = rows
+            .data()
+            .pluck('abc')
+            .reduce( function (a, b) {
+              return a + b*1;
+            }, 0);
+
+            return $('<tr/>')
+            .append('<td colspan="10"> Total for ' + group + '</td>')
+            .append('<td>' + total + '</td>')
+            .append('<td/>')
+            .append('<td/>');
+          },
+          dataSrc: 'source'
+        }
+      });
+
+    })
   });
 
 </script>

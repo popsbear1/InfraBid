@@ -58,7 +58,7 @@ class Admin extends CI_Controller {
 		$data['year'] = date('Y');
 		$data['plans'] = $this->admin_model->getRegularPlan($year, $mode, $status, $municipality, $source, $projecttype);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
-		$data['sources'] = $this->admin_model->getFunds();
+		$data['sources'] = $this->admin_model->getRegularFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality,$source,$projecttype);
@@ -116,11 +116,70 @@ class Admin extends CI_Controller {
 	}
 
 	public function supplementalPlanListView(){
-		$data['plans'] = $this->admin_model->getSupplementalPlan();
+		$year = date('Y');
+		$mode = null;
+		$status = null;
+		$municipality = null;
+		$source = null;
+		$projecttype = null;
+		$data['year'] = date('Y');
+		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $projecttype);
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['sources'] = $this->admin_model->getSupplementalFunds();
+		$data['types'] = $this->admin_model->getProjectType();
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['count_total'] = $this->admin_model->getSupplementalProjectPlanCountTotal($year, $mode, $status, $municipality,$source,$projecttype);
+		if ($data['count_total']['total_abc'] > 0 ) {
+			$total = explode('.', $data['count_total']['total_abc']);
+			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+			$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		}else{
+			$data['count_total']['total_abc_word_format'] = 'none';
+		}	
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/supplementalPlanList', $data);
-		$this->load->view('admin/fragments/footer');		
+		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function getFilteredSupplementalPlanData(){
+		$year = $this->input->get('year');
+		$mode = $this->input->get('mode');
+		$status = $this->input->get('status');
+		$municipality = $this->input->get('municipality');
+		$source = $this->input->get('source');
+		$type = $this->input->get('type');
+
+		if (empty($year)) {
+			$year = null;
+		}
+		if (empty($mode)) {
+			$mode = null;
+		}
+		if (empty($status)) {
+			$status = null;
+		}
+		if (empty($municipality)) {
+			$municipality = null;
+		}
+		if(empty($source)) {
+			$source = null;
+		}
+		if(empty($type)){
+			$type = null;
+		}
+
+		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $type);
+
+		$data['count_total'] = $this->admin_model->getSupplementalProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);		
+		$total = explode('.', $data['count_total']['total_abc']);
+		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+		if ($data['count_total']['total_abc'] > 0) {
+			$data['count_total']['total_abc_word_format'] = $formatter->format($total[0]) . ' and ' . $formatter->format($total[1]);
+		}
+		$data['count_total']['total_abc'] = number_format($data['count_total']['total_abc'], 2);
+
+		echo json_encode($data);
 	}
 
 	public function ongoingProjectPlanView(){
