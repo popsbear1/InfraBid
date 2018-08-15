@@ -34,18 +34,42 @@
 					</div>
 					<div class="form-group">
 						<label>Abc/PPost Date:</label>
-						<p class="form-control input-sm"><?php echo $projectDetails['abc_post_date'] ?></p>  
+						<p class="form-control input-sm"><?php 
+                                                            if ($procActDate['advertisement'] != null) {
+                                                              echo date_format(date_create($procActDate['advertisement']), "M-d-Y");
+                                                            }else{
+                                                              echo $projectDetails['abc_post_date'];
+                                                            } 
+                                                      ?></p>  
 					</div>
 					<div class="form-group">
 						<label>Sub/open of Date:</label>
-						<p class="form-control input-sm"><?php echo $projectDetails['sub_open_date'] ?></p>  
+						<p class="form-control input-sm"><?php 
+                                                            if ($procActDate['open_bid'] != null) {
+                                                              echo date_format(date_create($procActDate['open_bid']), "M-d-Y");
+                                                            }else{
+                                                              echo $projectDetails['sub_open_date'];
+                                                            } 
+                                                      ?></p>  
 					</div>
 					<div class="form-group">
 						<label>Notice of Award Date:</label>
-						<p class="form-control input-sm"><?php echo $projectDetails['award_notice_date'] ?></p>  
+						<p class="form-control input-sm"><?php 
+                                                            if ($procActDate['award_notice'] != null) {
+                                                              echo date_format(date_create($procActDate['award_notice']), "M-d-Y");
+                                                            }else{
+                                                              echo $projectDetails['award_notice_date'];
+                                                            } 
+                                                      ?></p>  
 					</div>
 					<div class="form-group">
 						<label>Contract Signing Date:</label>
-						<p class="form-control input-sm"><?php echo $projectDetails['contract_signing_date'] ?></p>  
+						<p class="form-control input-sm"><?php
+                                                            if ($procActDate['contract_signing'] != null) {
+                                                              echo date_format(date_create($procActDate['contract_signing']), "M-d-Y");    
+                                                            } else{
+                                                              echo $projectDetails['contract_signing_date'];
+                                                            } 
+                                                      ?></p>  
 					</div>
 				</div>

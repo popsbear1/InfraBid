@@ -50,7 +50,7 @@ function convertDate($date){
 
   if ($date != null) {
     $actdate = date_create($date);
-    $formateddate = date_format($actdate, 'Y-m-d');
+    $formateddate = date_format($actdate, 'M-d-Y');
   }else{
     $formateddate = null;
   }

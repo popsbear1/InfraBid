@@ -133,7 +133,8 @@
                                                             } else{
                                                               echo $projectDetails['contract_signing_date'];
                                                             } 
-                                                      ?></p>  
+                                                      ?>
+                      </p>  
                     </div>
                     <div class="form-group">
                       <label for="">Rebid Count:</label>
