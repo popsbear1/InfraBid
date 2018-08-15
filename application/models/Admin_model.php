@@ -5,8 +5,47 @@
 	 */
 	class Admin_model extends CI_model
 	{
+
+		public function deleteProjectPlan($plan_id){
+
+			if ($this->getProjectStatus($plan_id)->status === 'pending') {
+				$this->deleteProcStatus($plan_id);
+				$this->deleteProcActDates($plan_id);
+				$this->deleteTimeline($plan_id);
+
+				$this->db->where('plan_id', $plan_id);
+				$this->db->delete('project_plan');
+			}
+
+		}
+
+		public function deleteProcStatus($plan_id){
+			$this->db->where('plan_id', $plan_id);
+			$this->db->delete('project_activity_status');
+		}
+
+		public function deleteProcActDates($plan_id){
+			$this->db->where('plan_id', $plan_id);
+			$this->db->delete('procact');
+		}
+
+		public function deleteTimeline($plan_id){
+			$this->db->where('plan_id', $plan_id);
+			$this->db->delete('project_timeline');
+		}
+
+		public function getProjectStatus($plan_id){
+			$this->db->select('status');
+			$this->db->from('project_plan');
+			$this->db->where('plan_id', $plan_id);
+
+			$query = $this->db->get();
+
+			return $query->row();
+		}
+
 		public function getRegularPlan($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -45,7 +84,7 @@
 		}
 
 		public function getSupplementalPlan($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as project_status');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');

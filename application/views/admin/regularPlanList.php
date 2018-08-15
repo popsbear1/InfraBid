@@ -236,6 +236,52 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDeletePlan">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Delete This APP?</p>
+        <p><b id="project_title"></b></p>
+        <form method="POST" action="<?php echo base_url('admin/deleteProjectPlan') ?>" id="delete_project_form">
+          <input type="text" name="plan_id" id="plan_id" hidden>
+          <input type="text" name="project_type" id="project_type" hidden>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="delete_project_form" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="alertDeletion">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>This APP have a status of <b id="project_status"></b> and can not be deleted!</p>
+        <p><b id="project_title"></b></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   var plans_data = '<?php echo json_encode($plans) ?>';
   var plans = JSON.parse(plans_data);
@@ -275,11 +321,9 @@
                         '</form>' +
                       '</div>' +
                       '<div class="col-lg-6 col-md-6 col-sm-6">' +
-                        '<form method="GET" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                          '<button class="btn btn-danger btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                            '<i class="fa fa-trash"></i>' +
-                          '</button>' +
-                        '</form>' +
+                        '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
+                          '<i class="fa fa-trash"></i>' +
+                        '</button>' +
                       '</div>' +      
                     '</div>'
                     ;
@@ -396,11 +440,9 @@
                           '</form>' +
                         '</div>' +
                         '<div class="col-lg-6 col-md-6 col-sm-6">' +
-                          '<form method="GET" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                            '<button class="btn btn-danger btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                              '<i class="fa fa-trash"></i>' +
-                            '</button>' +
-                          '</form>' +
+                          '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
+                            '<i class="fa fa-trash"></i>' +
+                          '</button>' +
                         '</div>' +      
                       '</div>'
                       ;
@@ -429,5 +471,18 @@
       });
 
     })
+  });
+
+  $(document).on('click', '.delete_btn', function(){
+    var project_data = $(this).val().split(',');
+    $('#project_title').html(project_data[2]);
+    if (project_data[1] != 'pending') {
+      $('#project_status').html(project_data[1]);
+      $('#alertDeletion').modal('show');
+    }else{
+      $('#plan_id').val(project_data[0]);
+      $('#project_type').val(project_data[3]);
+      $('#confirmDeletePlan').modal('show');
+    }
   });
 </script>

@@ -48,6 +48,19 @@ class Admin extends CI_Controller {
 		
 	}
 
+	public function deleteProjectPlan(){
+		$plan_id = $this->input->post('plan_id');
+		$project_type = $this->input->post('project_type');
+
+		$this->admin_model->deleteProjectPlan($plan_id);
+
+		if ($project_type == 'regular') {
+			redirect('admin/regularPlanListView');
+		}else{
+			redirect('admin/supplementalPlanListView');
+		}
+	}
+
 	public function regularPlanListView(){
 		$year = date('Y');
 		$mode = null;
