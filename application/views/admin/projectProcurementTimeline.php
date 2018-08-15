@@ -10,7 +10,7 @@
               <div class="form-group">
                 <label class="control-label col-lg-7">Select date to begin with:</label>
                 <div class="col-lg-5">
-                  <input type="date" class="form-control" id="startDate" name="startDate" form="updateProcurementTimelineForm">
+                  <input type="text" class="form-control" id="startDate" name="startDate" form="updateProcurementTimelineForm">
                 </div>
               </div>
             </div>
@@ -36,8 +36,8 @@
                 <tbody>
                   <tr>
                     <td class="left-col"><b class="pull-right">ADS/Post:</b></td>
-                    <td class="center"><input type="date" class="form-control" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm"></td>
-                    <td class="center"><input type="date" class="form-control" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm"></td>
+                    <td class="center"><input type="text" class="form-control" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm"></td>
+                    <td class="center"><input type="text" class="form-control" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm"></td>
                     <td class="reight-col"></td>
                   </tr>
                   <tr>
@@ -61,8 +61,8 @@
                         </div>
                       </div>
                     </td>
-                    <td class="center"><input type="date" class="form-control" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm"></td>
-                    <td class="center"><input type="date" class="form-control" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm"></td>
+                    <td class="center"><input type="text" class="form-control" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm"></td>
+                    <td class="center"><input type="text" class="form-control" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm"></td>
                     <td class="row-col">
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="preBidNumber" min="0">
@@ -74,8 +74,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Submission of bid:</b></td>
-                    <td><input type="date" class="form-control" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="bidSubmissionNumber" min="0">
@@ -87,8 +87,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Bid Evaluation:</b></td>
-                    <td><input type="date" class="form-control" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="bidEvaluationNumber" min="0">
@@ -100,8 +100,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Post Qualification:</b></td>
-                    <td><input type="date" class="form-control" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="postQualificationNumber"  min="0">
@@ -113,8 +113,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                    <td><input type="date" class="form-control" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="0">
@@ -126,8 +126,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                    <td><input type="date" class="form-control" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="contractSigningNumber"  min="0">
@@ -158,8 +158,8 @@
                         </div>
                       </div>
                     </td>
-                    <td><input type="date" class="form-control" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="authorityApprovalNumber" min="0">
@@ -171,8 +171,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Notice to Proceed:</b></td>
-                    <td><input type="date" class="form-control" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="date" class="form-control" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="proceedNoticeNumber" min="0">
@@ -236,6 +236,10 @@
 
   <script>
 
+    $(document).ready(function(){
+      $('#startDate').datepicker()
+    });
+
     $('#timelineModalConfirmBtn').click(function(e){
       $('#addStart').html($('#advertisement_start').val());
       $('#addEnd').html($('#advertisement_end').val());
@@ -256,8 +260,8 @@
       $('#ntpStart').html($('#proceedNoticeStart').val());
       $('#ntpEnd').html($('#proceedNoticeEnd').val());
     });
+
     $(document).ready(function(e){
-      $('#startDate').val("<?php echo $timeLine['advertisement_start'] ?>");
       $('#advertisement_start').val("<?php echo $timeLine['advertisement_start'] ?>");
       $('#advertisement_end').val("<?php echo $timeLine['advertisement_end'] ?>");
       $('#preBidStart').val("<?php echo $timeLine['pre_bid_start'] ?>");
@@ -527,7 +531,7 @@
     var startDate = $('#startDate').val();
 
     if (startDate == null || startDate == "") {
-      alert("Select Start Date First!");
+      $('#missing_startdate_warning').modal('show');
     }else{
       if ($('#noPreBid').is(":checked") && $('#noApproval').is(":checked")) {
         setDatesToEarliestPossibleTimeWithoutPBCandAHA(startDate);
@@ -736,6 +740,25 @@
       </div>
       <div class="modal-body text-center">
         <p>Input Number of days to add before pressing UPDATE button!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="missing_startdate_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Alert!</h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Select Start Date First!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

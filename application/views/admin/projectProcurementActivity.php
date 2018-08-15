@@ -109,7 +109,7 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="date" id="pre_proc" name="activity_date" placeholder="<?php echo $pre_proc ?>" class="form-control">
+                  <input type="text" id="pre_proc" name="activity_date" placeholder="<?php echo $pre_proc ?>" class="form-control procActDateInput">
                 </div>
               </div>
             </form> 
@@ -134,7 +134,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control">
+                <input type="text" id="advertisement" value="<?php echo $advertisement ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>          
           </form>
@@ -159,7 +159,7 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="date" id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date" class="form-control">
+                  <input type="text" id="pre_bid" value="<?php echo $pre_bid ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
               </div>
             </form>
@@ -185,7 +185,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Sub/Open of Bids *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="openbid" placeholder="<?php echo $openbid ?>" name="activity_date" class="form-control">
+                <input type="text" id="openbid" placeholder="<?php echo $openbid ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
             <div class="form-group">
@@ -285,7 +285,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Bid Evaluation *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="bidevaluation" value="<?php echo $bidevaluation ?>" name="activity_date" class="form-control">
+                <input type="text" id="bidevaluation" value="<?php echo $bidevaluation ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>      
           </form>
@@ -310,7 +310,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Post Qual *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="postqual" value="<?php echo $postqual ?>" name="activity_date" class="form-control">
+                <input type="text" id="postqual" value="<?php echo $postqual ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -334,7 +334,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice of Award *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="awarddate" value="<?php echo $awarddate ?>" name="activity_date" class="form-control">
+                <input type="text" id="awarddate" value="<?php echo $awarddate ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -359,7 +359,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Contract Signing *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="contractsigning" value="<?php echo $contractsigning ?>" name="activity_date" class="form-control">
+                <input type="text" id="contractsigning" value="<?php echo $contractsigning ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -384,7 +384,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="authorityapproval" value="<?php echo $authorityapproval ?>" name="activity_date" class="form-control">
+                <input type="text" id="authorityapproval" value="<?php echo $authorityapproval ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -408,7 +408,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice to Proceed *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="proceednotice" value="<?php echo $proceednotice ?>" name="activity_date" class="form-control">
+                <input type="text" id="proceednotice" value="<?php echo $proceednotice ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -422,7 +422,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Delivery/Completion *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="completion" value="<?php echo $completion ?>" name="activity_date" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="completion" value="<?php echo $completion ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -435,7 +435,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Acceptance/Turnover *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="acceptance" value="<?php echo $acceptance ?>" name="activity_date" class="form-control">
+                <input type="text" id="acceptance" value="<?php echo $acceptance ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
 
@@ -761,8 +761,18 @@ function convertDate($date){
             <!-- AdminLTE App -->
             <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
 
+            <script src="<?php echo base_url() ?>public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
             <!-- page script -->
 <script>
+
+  $(document).ready(function(){
+    $('.procActDateInput').datepicker({
+      orientation: 'bottom auto',
+      format: 'yyyy-mm-dd',
+      autoclose: true
+    });
+  });
 
   var planDates = {
     pre_proc : '<?php echo $pre_proc ?>',
@@ -1243,6 +1253,7 @@ function convertDate($date){
     setViewHidden();
     setButtonStyle('#pre_proc_btn');
     $('#pre_proc_view').removeAttr('hidden');
+    $('#pre_proc_submit_btn').attr('hidden', false);
   });
 
   $('#advertisement_btn').click(function(){
