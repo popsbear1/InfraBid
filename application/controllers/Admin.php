@@ -1857,7 +1857,8 @@ class Admin extends CI_Controller {
 		$this->load->library('CustomFPDF');
 		$pdf = $this->customfpdf->getInstance();
 		$pdf->AliasNbPages();
-		$pdf->AddPage('L');
+		$pdf->AddPage('L','A4',0);
+		$pdf->headerTable();
 		$pdf->Output(); 
 	}
 }
