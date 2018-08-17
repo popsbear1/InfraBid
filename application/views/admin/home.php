@@ -1,41 +1,127 @@
+<style>
+  #btn-app{
+    height: 50px
+  }
+
+</style>
 <section class="content">
   <div class="row">
-    <div class="col-md-12">
-      <h3 class="pull-left">Anual Regular Procurement Plan Report</h3>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="fa fa-list"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">APP Count</span>
+          <span class="info-box-number"><?php echo $allAPPCount->count ?></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-yellow"><i class="fa fa-spinner"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Ongoing Procurement</span>
+          <span class="info-box-number"><?php echo $ongoingCount->count ?></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-stop-circle-o"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Projects For Review</span>
+          <span class="info-box-number"><?php echo $forReviewCount->count ?></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Completed Projects</span>
+          <span class="info-box-number"><?php echo $completedCount->count ?></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
     </div>
   </div>
-  <div class="box">
-    <div class="box-header">
-      <h2 class="box-title"><b>(Regular) </b>Project Procurement Plan Records</h2>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="well" style="margin-left: 10px;">
+            <div class="form-group">
+              <label>Date range:</label>
+              <p><small>Display plans with activity timeline within the selected date range.</small></p>
+              <div class="input-group">
+                <button type="button" class="btn btn-primary" id="daterange-btn">
+                  <span>
+                    <i class="fa fa-calendar"></i> Date range picker
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <button class="btn btn-primary btn-sm">
+                  <i class="fa fa-find"></i>
+                  GO!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="mainActivityBtn" class="btn btn-block bg-olive btn-app">
+        <span class="badge bg-yellow" id="incoming_badge"></span>
+        Incoming Activities
+      </button>
+      <button id="mainActivityBtn_ending" class="btn btn-block bg-maroon btn-app">
+        <span class="badge bg-yellow" id="due_badge"></span>
+        Ending Activities
+      </button>
     </div>
-    <div class="box-body">
-      <p id="advertisement_incoming"></p>
-      <p><?php echo count($advertisement_incoming) ?></p>
-      <p><?php echo count($pre_bid_incoming) ?></p>
-      <p><?php echo count($advertisement) ?></p>
+    <div class="col-lg-9 col-md-9 col-sm-9">
+      <div class="box box-info">
+        <div class="box-header">
+          <h4 class="box-title" id="table_title"></h4>
+        </div>
+        <div class="box-body">
+          <table class="text-center" width="100%" id="project_table">
+            <thead>
+              <tr>
+                <td>Project No.</td>
+                <td>Project Title</td>
+                <td>Activity Name</td>
+                <td>Start Date</td>
+                <td>End Date</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  var advertisement_incoming = JSON.parse('<?php echo json_encode($advertisement_incoming) ?>');
-  var pre_bid_incoming = JSON.parse('<?php echo json_encode($pre_bid_incoming) ?>');
-  var bid_submission_incoming = JSON.parse('<?php echo json_encode($bid_submission_incoming) ?>');
-  var post_qualification_incoming = JSON.parse('<?php echo json_encode($post_qualification_incoming) ?>');
-  var award_notice_incoming = JSON.parse('<?php echo json_encode($award_notice_incoming) ?>');
-  var contract_signing_incoming = JSON.parse('<?php echo json_encode($contract_signing_incoming) ?>');
-  var authority_approval_incoming = JSON.parse('<?php echo json_encode($authority_approval_incoming) ?>');
-  var proceed_notice_incoming = JSON.parse('<?php echo json_encode($proceed_notice_incoming) ?>');
 
-  if (typeof Storage !== "undefined") {
-    sessionStorage.setItem("advertisement_incoming", JSON.stringify(advertisement_incoming));
-
-    document.getElementById("advertisement_incoming").innerHTML = sessionStorage.getItem("advertisement_incoming").length;
-
-    console.log(sessionStorage.getItem("advertisement_incoming"));  
-  }else{
-
-  }
 </script>
 
 
@@ -71,11 +157,114 @@
 <script src="<?php echo base_url() ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url() ?>public/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>public/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/jszip.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/pdfmake.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/vfs_fonts.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
 
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
+
+<script>
+  var plans_coming_data = '<?php echo json_encode($plans_coming) ?>';
+  var plans_due_data = '<?php echo json_encode($plans_due) ?>';
+
+  var plans_coming = JSON.parse(plans_coming_data);
+  var plans_due = JSON.parse(plans_due_data);
+
+  var plans_coming_count = plans_coming.length;
+  var plans_due_count = plans_due.length;
+
+  $('#incoming_badge').text(plans_coming_count);
+  $('#due_badge').text(plans_due_count);
+
+  $(document).ready(function(){
+    showIncomingPlanActivities();
+
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment(),
+        opens    : 'right'
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+  });
+
+  function showIncomingPlanActivities(){
+    $('#table_title').html("Incoming Activities <small>(2 days or less prior to starting date.)</small>");
+    $('#project_table').DataTable({
+      data: plans_coming,
+      columns: [
+        { data: 'project_no'},
+        { data: 'project_title'},
+        { data: 'activity'},
+        { data: 'start_date'},
+        { data: 'end_date'},
+        {
+          data: null,
+          render: function(data, type, row){
+            return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                      '<input type="text" name="project_status" value="' + data.status + '" hidden />' +
+                      '<input type="text" name="plan_id" value="' + data.plan_id + '" hidden />' +
+                      '<button class="btn btn-primary" type="submit">' +
+                        '<i class="fa fa-view"></i>' +
+                        'View' +
+                      '</button>' + 
+                    '</form>';
+          }
+        }
+      ],
+      order: [[2, 'asc']]
+    });
+  }
+
+  $('#mainActivityBtn').click(function(){
+    $('#project_table').DataTable().destroy();
+    showIncomingPlanActivities();
+  })
+
+  $('#mainActivityBtn_ending').click(function(){
+    $('#table_title').html("Ending Activities <small>(2 days or less prior to ending date.)</small>");
+    $('#project_table').DataTable().destroy();
+    $('#project_table').DataTable({
+      data: plans_due,
+      columns: [
+        { data: 'project_no'},
+        { data: 'project_title'},
+        { data: 'activity'},
+        { data: 'start_date'},
+        { data: 'end_date'},
+        {
+          data: null,
+          render: function(data, type, row){
+            return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                      '<input type="text" name="project_status" value="' + data.status + '" hidden />' +
+                      '<input type="text" name="plan_id" value="' + data.plan_id + '" hidden />' +
+                      '<button class="btn btn-primary" type="submit">' +
+                        '<i class="fa fa-view"></i>' +
+                        'View' +
+                      '</button>' + 
+                    '</form>';
+          }
+        }
+      ],
+      order: [[2, 'asc']]
+    });    
+  });
+</script>

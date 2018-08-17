@@ -18,18 +18,36 @@ class Admin extends CI_Controller {
 	{
 		$cur_date = date('Y-m-d');
 		$end = date_format(date_add(date_create($cur_date),date_interval_create_from_date_string("2 days")), 'Y-m-d');
+
+		$data['allAPPCount'] = $this->notif_model->countAllAPP();
+		$data['ongoingCount'] = $this->notif_model->countAllOngoing();
+		$data['forReviewCount'] = $this->notif_model->countAllReview();
+		$data['completedCount'] = $this->notif_model->countAllCompleted();
 		//incoming
-		$data['advertisement_incoming'] = $this->notif_model->getIncomingAdvertisement($cur_date, $end);
-		$data['pre_bid_incoming'] = $this->notif_model->getIncomingPre_bid($cur_date, $end);
-		$data['bid_submission_incoming'] = $this->notif_model->getIncomingBid_submission($cur_date, $end);
-		$data['post_qualification_incoming'] = $this->notif_model->getIncomingPost_qualification($cur_date, $end);
-		$data['award_notice_incoming'] = $this->notif_model->getIncomingAward_notice($cur_date, $end);
-		$data['contract_signing_incoming'] = $this->notif_model->getIncomingContract_signing($cur_date, $end);
-		$data['authority_approval_incoming'] = $this->notif_model->getIncomingAuthority_approval($cur_date, $end);
-		$data['proceed_notice_incoming'] = $this->notif_model->getIncomingProceed_notice($cur_date, $end);
+		$advertisement_incoming = $this->notif_model->getIncomingAdvertisement($cur_date, $end);
+		$pre_bid_incoming = $this->notif_model->getIncomingPre_bid($cur_date, $end);
+		$bid_submission_incoming = $this->notif_model->getIncomingBid_submission($cur_date, $end);
+		$bid_evaluation_incoming = $this->notif_model->getIncomingBid_evaluation($cur_date, $end);
+		$post_qualification_incoming = $this->notif_model->getIncomingPost_qualification($cur_date, $end);
+		$award_notice_incoming = $this->notif_model->getIncomingAward_notice($cur_date, $end);
+		$contract_signing_incoming = $this->notif_model->getIncomingContract_signing($cur_date, $end);
+		$authority_approval_incoming = $this->notif_model->getIncomingAuthority_approval($cur_date, $end);
+		$proceed_notice_incoming = $this->notif_model->getIncomingProceed_notice($cur_date, $end);
+
+		$data['plans_coming'] = array_merge($advertisement_incoming, $pre_bid_incoming, $bid_submission_incoming, $bid_evaluation_incoming, $post_qualification_incoming, $award_notice_incoming, $contract_signing_incoming, $authority_approval_incoming, $proceed_notice_incoming);
 
 		//ending
-		$data['advertisement'] = $this->notif_model->getDueAdvertisementDate($cur_date, $end);
+		$advertisement_due = $this->notif_model->getDueAdvertisementDate($cur_date, $end);
+		$pre_bid_due = $this->notif_model->getDuePre_bid($cur_date, $end);
+		$bid_submission_due = $this->notif_model->getDueBid_submission($cur_date, $end);
+		$bid_evaluation_due = $this->notif_model->getDueBid_evaluation($cur_date, $end);
+		$post_qualification_due = $this->notif_model->getDuePost_qualification($cur_date, $end);
+		$award_notice_due = $this->notif_model->getDueAward_notice($cur_date, $end);
+		$contract_signing_due = $this->notif_model->getDueContract_signing($cur_date, $end);
+		$authority_approval_due = $this->notif_model->getDueAuthority_approval($cur_date, $end);
+		$proceed_notice_due = $this->notif_model->getDueProceed_notice($cur_date, $end);
+
+		$data['plans_due'] = array_merge($advertisement_due, $pre_bid_due, $bid_submission_due, $bid_evaluation_due, $post_qualification_due, $award_notice_due, $contract_signing_due, $authority_approval_due, $proceed_notice_due);
 
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');

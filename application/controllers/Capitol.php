@@ -48,13 +48,17 @@ class Capitol extends CI_Controller {
 	public function updatePOWAvailability(){
 		$plan_id = $this->input->post('plan_id');
 
-		if ($this->doctrack_model->updatePOWAvailabilitye($plan_id)) {
-			$data['success'] = true;
-		}else{
-			$data['success'] = false;
-		}
+		$this->doctrack_model->updatePOWAvailabilitye($plan_id);
+		$this->session->set_userdata('plan_id_doctrack', $plan_id);
 
-		echo json_encode($data);
+		redirect('capitol/documentDetailsView');
+		// if ($this->doctrack_model->updatePOWAvailabilitye($plan_id)) {
+		// 	$data['success'] = true;
+		// }else{
+		// 	$data['success'] = false;
+		// }
+
+		
 	}
 
 	public function docTrackView(){
