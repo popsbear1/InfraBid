@@ -12,7 +12,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">APP Count</span>
-          <span class="info-box-number">1</span>
+          <span class="info-box-number"><?php echo $allAPPCount->count ?></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -24,7 +24,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Ongoing Procurement</span>
-          <span class="info-box-number">1</span>
+          <span class="info-box-number"><?php echo $ongoingCount->count ?></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -36,7 +36,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Projects For Review</span>
-          <span class="info-box-number">1</span>
+          <span class="info-box-number"><?php echo $forReviewCount->count ?></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -48,7 +48,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Completed Projects</span>
-          <span class="info-box-number">1</span>
+          <span class="info-box-number"><?php echo $completedCount->count ?></span>
         </div>
         <!-- /.info-box-content -->
       </div>

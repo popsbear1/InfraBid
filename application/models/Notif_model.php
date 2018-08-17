@@ -5,6 +5,56 @@
  */
 class Notif_model extends CI_model
 {
+
+	public function countAllAPP(){
+		$date = date('Y');
+		$this->db->select('count(plan_id) as count');
+		$this->db->from('project_plan');
+		$this->db->where('project_year', $date);
+
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	public function countAllOngoing(){
+		$date = date('Y');
+		$this->db->select('count(plan_id) as count');
+		$this->db->from('project_plan');
+		$this->db->where('project_year', $date);
+		$this->db->where('status', 'onprocess');
+		$this->db->or_where('status', 'for_rebid');
+		$this->db->or_where('status', 'for_implementation');
+
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	public function countAllReview(){
+		$date = date('Y');
+		$this->db->select('count(plan_id) as count');
+		$this->db->from('project_plan');
+		$this->db->where('project_year', $date);
+		$this->db->where('status', 'for_review');
+
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	public function countAllCompleted(){
+		$date = date('Y');
+		$this->db->select('count(plan_id) as count');
+		$this->db->from('project_plan');
+		$this->db->where('project_year', $date);
+		$this->db->where('status', 'completed');
+
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
 	//incoming
 	public function getIncomingAdvertisement($cur_date, $end){
 		

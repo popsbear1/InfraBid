@@ -18,6 +18,11 @@ class Admin extends CI_Controller {
 	{
 		$cur_date = date('Y-m-d');
 		$end = date_format(date_add(date_create($cur_date),date_interval_create_from_date_string("2 days")), 'Y-m-d');
+
+		$data['allAPPCount'] = $this->notif_model->countAllAPP();
+		$data['ongoingCount'] = $this->notif_model->countAllOngoing();
+		$data['forReviewCount'] = $this->notif_model->countAllReview();
+		$data['completedCount'] = $this->notif_model->countAllCompleted();
 		//incoming
 		$advertisement_incoming = $this->notif_model->getIncomingAdvertisement($cur_date, $end);
 		$pre_bid_incoming = $this->notif_model->getIncomingPre_bid($cur_date, $end);
