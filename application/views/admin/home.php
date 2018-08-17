@@ -84,11 +84,11 @@
           </div>
         </div>
       </div>
-      <button id="mainActivityBtn" class="btn btn-block btn-app">
+      <button id="mainActivityBtn" class="btn btn-block bg-olive btn-app">
         <span class="badge bg-yellow" id="incoming_badge"></span>
         Incoming Activities
       </button>
-      <button id="mainActivityBtn_ending" class="btn btn-block btn-app">
+      <button id="mainActivityBtn_ending" class="btn btn-block bg-maroon btn-app">
         <span class="badge bg-yellow" id="due_badge"></span>
         Ending Activities
       </button>
