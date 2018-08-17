@@ -57,16 +57,31 @@
   </div>
   <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3">
-      <div class="form-group">
-        <label>Date range button:</label>
-
-        <div class="input-group">
-          <button type="button" class="btn btn-default pull-right" id="daterange-btn">
-            <span>
-              <i class="fa fa-calendar"></i> Date range picker
-            </span>
-            <i class="fa fa-caret-down"></i>
-          </button>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="well" style="margin-left: 10px;">
+            <div class="form-group">
+              <label>Date range:</label>
+              <p><small>Display plans with activity timeline within the selected date range.</small></p>
+              <div class="input-group">
+                <button type="button" class="btn btn-primary" id="daterange-btn">
+                  <span>
+                    <i class="fa fa-calendar"></i> Date range picker
+                  </span>
+                  <i class="fa fa-caret-down"></i>
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <button class="btn btn-primary btn-sm">
+                  <i class="fa fa-find"></i>
+                  GO!
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <button id="mainActivityBtn" class="btn btn-block btn-app">
