@@ -38,14 +38,14 @@ class Admin extends CI_Controller {
 
 		//ending
 		$advertisement_due = $this->notif_model->getDueAdvertisementDate($cur_date, $end);
-		$pre_bid_due = $this->notif_model->getIncomingPre_bid($cur_date, $end);
-		$bid_submission_due = $this->notif_model->getIncomingBid_submission($cur_date, $end);
-		$bid_evaluation_due = $this->notif_model->getIncomingBid_evaluation($cur_date, $end);
-		$post_qualification_due = $this->notif_model->getIncomingPost_qualification($cur_date, $end);
-		$award_notice_due = $this->notif_model->getIncomingAward_notice($cur_date, $end);
-		$contract_signing_due = $this->notif_model->getIncomingContract_signing($cur_date, $end);
-		$authority_approval_due = $this->notif_model->getIncomingAuthority_approval($cur_date, $end);
-		$proceed_notice_due = $this->notif_model->getIncomingProceed_notice($cur_date, $end);
+		$pre_bid_due = $this->notif_model->getDuePre_bid($cur_date, $end);
+		$bid_submission_due = $this->notif_model->getDueBid_submission($cur_date, $end);
+		$bid_evaluation_due = $this->notif_model->getDueBid_evaluation($cur_date, $end);
+		$post_qualification_due = $this->notif_model->getDuePost_qualification($cur_date, $end);
+		$award_notice_due = $this->notif_model->getDueAward_notice($cur_date, $end);
+		$contract_signing_due = $this->notif_model->getDueContract_signing($cur_date, $end);
+		$authority_approval_due = $this->notif_model->getDueAuthority_approval($cur_date, $end);
+		$proceed_notice_due = $this->notif_model->getDueProceed_notice($cur_date, $end);
 
 		$data['plans_due'] = array_merge($advertisement_due, $pre_bid_due, $bid_submission_due, $bid_evaluation_due, $post_qualification_due, $award_notice_due, $contract_signing_due, $authority_approval_due, $proceed_notice_due);
 

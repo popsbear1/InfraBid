@@ -185,7 +185,7 @@ class Notif_model extends CI_model
 	//ending
 	public function getDueAdvertisementDate($cur_date, $end){
 		
-		$this->db->select('*');
+		$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, "Advertisement/Posting" as activity, project_timeline.pre_bid_start as start_date, project_timeline.pre_bid_end as end_date, project_plan.status');
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
