@@ -3,7 +3,7 @@
         <div class="row">
           <div class="col-md-12">
             <h3 class="pull-left">Supplemental Procurement Plan Report</h3>
-            <a href="<?php echo base_url('admin/addSupplementalPlanView') ?>" class="btn btn-primary btn-lg pull-right" type="button">
+            <a href="<?php echo base_url('admin/addSupplementalPlanView') ?>" class="btn btn-app pull-right bg-purple" type="button">
               <i class="fa fa-plus"></i>
               Add Supplemental Plan
             </a>

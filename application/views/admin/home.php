@@ -96,7 +96,7 @@
     <div class="col-lg-9 col-md-9 col-sm-9">
       <div class="box box-info">
         <div class="box-header">
-          
+          <h4 class="box-title" id="table_title"></h4>
         </div>
         <div class="box-body">
           <table class="text-center" width="100%" id="project_table">
@@ -207,6 +207,7 @@
   });
 
   function showIncomingPlanActivities(){
+    $('#table_title').html("Incoming Activities <small>(2 days or less prior to starting date.)</small>");
     $('#project_table').DataTable({
       data: plans_coming,
       columns: [
@@ -239,6 +240,7 @@
   })
 
   $('#mainActivityBtn_ending').click(function(){
+    $('#table_title').html("Ending Activities <small>(2 days or less prior to ending date.)</small>");
     $('#project_table').DataTable().destroy();
     $('#project_table').DataTable({
       data: plans_due,

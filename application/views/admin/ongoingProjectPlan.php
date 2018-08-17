@@ -7,7 +7,7 @@
         </div>
         <div class="box">
           <div class="box-header">
-            <h2 class="box-title">Project Procurement Plan Records <small>(Plans with status of On Process, For Implementation and For Rebid will Appear in this table.)</small></h2>
+            <h2 class="box-title">Project Procurement Plan Records <small>(Regular and Supplemental plans with status of On Process, For Implementation and For Rebid will Appear in this table.)</small></h2>
           </div>
           <div class="box-body">
             <div class="row">

@@ -251,28 +251,28 @@
     $('#addPOWConfirmationModal').modal('show');
   })
 
-  $('#addPOWForm').submit(function(e){
-    e.preventDefault();
-    var plan_id = $('#plan_id').val();
-    var row_name = '#projectPOW' + plan_id;
-    $.ajax({
-      type: 'POST',
-      url: $(this).attr('action'),
-      data: $('#addPOWForm').serialize(),
-      dataType: 'json',
-      success: function(response){
+  // $('#addPOWForm').submit(function(e){
+  //   e.preventDefault();
+  //   var plan_id = $('#plan_id').val();
+  //   var row_name = '#projectPOW' + plan_id;
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: $(this).attr('action'),
+  //     data: $('#addPOWForm').serialize(),
+  //     dataType: 'json',
+  //     success: function(response){
 
-        $('#addPOWConfirmationModal').modal('hide');
+  //       $('#addPOWConfirmationModal').modal('hide');
 
-        if (response.success == true) {
-          $('#pow_adding_success').modal('show');
-          $(row_name).remove();
-        }else{
-          $('#pow_adding_warning').modal('show');
-        }
-      }
-    });
-  })
+  //       if (response.success == true) {
+  //         $('#pow_adding_success').modal('show');
+  //         $(row_name).remove();
+  //       }else{
+  //         $('#pow_adding_warning').modal('show');
+  //       }
+  //     }
+  //   });
+  // })
 
   </script>
 
