@@ -1655,7 +1655,7 @@ class Admin extends CI_Controller {
 
 			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
 
-			$this->admin_model->resetTimelineProjectStatus($abc, $plan_id);
+			$this->admin_model->resetTimelineProjectStatus($plan_id);
 
 			// Record Log
 
@@ -1742,7 +1742,7 @@ class Admin extends CI_Controller {
 
 			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
 
-			$this->admin_model->resetTimelineProjectStatus($abc, $plan_id);
+			$this->admin_model->resetTimelineProjectStatus($plan_id);
 
 			// Record Log
 
