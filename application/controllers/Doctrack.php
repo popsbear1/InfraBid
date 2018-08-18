@@ -34,7 +34,7 @@ class Doctrack extends CI_Controller {
 	}
 
 	public function ongoingDocumentTrackingView(){
-		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW();
+		$data['plans'] = $this->doctrack_model->getOngoingDocumentTracking();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('doctrack/ongoingTracking', $data);

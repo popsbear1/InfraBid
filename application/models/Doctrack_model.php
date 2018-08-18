@@ -56,6 +56,25 @@
 			return $existingDocumentsQuery->result_array();
 		}
 
+		public function getOngoingDocumentTracking(){
+			$this->db->select('*');
+			$this->db->from('project_plan');
+			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
+			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
+			$this->db->join('projtype', 'project_plan.projtype_id = projtype.projtype_id');
+			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
+			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
+			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
+			$this->db->where('pow_ready', 'true');
+			$this->db->where('project_plan.status', 'onprocess');
+			$this->db->or_where('project_plan.status', 'for_rebid');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function getProjectPlansWithPOW(){
 			$this->db->select('*');
 			$this->db->from('project_plan');
@@ -65,7 +84,10 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
 			$this->db->where('pow_ready', 'true');
+			$this->db->where('project_plan.status', 'onprocess');
+			$this->db->or_where('project_plan.status', 'for_rebid');
 
 			$query = $this->db->get();
 
