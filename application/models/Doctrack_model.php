@@ -96,7 +96,7 @@
 		}
 
 		public function getProjectPlansWithPOW(){
-			$this->db->select('*');
+			$this->db->select('*, project_plan.status as projectstatus');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
