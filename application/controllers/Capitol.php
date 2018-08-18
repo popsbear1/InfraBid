@@ -28,10 +28,20 @@ class Capitol extends CI_Controller {
 
 	public function ongoingDocumentTrackingView(){
 		$page['page'] = 'ongoing'; 
-		$data['plans'] = $this->doctrack_model->getProjectPlansWithPOW();
+		$data['plans'] = $this->doctrack_model->getOngoingDocumentTracking();		
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav', $page);
 		$this->load->view('doctrack/ongoingTracking', $data);
+		$this->load->view('doctrack/fragments/footer');
+	}
+
+	public function completedDocumentTrackingView(){
+		$page['page'] = 'completed'; 
+		$data['plans'] = $this->doctrack_model->getCompletedDocumentTracking();
+		//$data['projectstatus'] = $this->doctrack_model->getCompletedDocumentTracking();
+		$this->load->view('doctrack/fragments/head');
+		$this->load->view('doctrack/fragments/nav', $page);
+		$this->load->view('doctrack/completedTracking', $data);
 		$this->load->view('doctrack/fragments/footer');
 	}
 
@@ -77,6 +87,7 @@ class Capitol extends CI_Controller {
 		$page['page'] = '';
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');
+		$data['projectdetails'] = $this->doctrack_model->getProjectAndContractor($plan_id);
 		$data['document_types'] = $this->doctrack_model->getDocumentTypes($plan_id);
 		$data['onhand_project_documents'] = $this->doctrack_model->getProjectDocumentsOnhand($plan_id, $user_type);
 		$data['other_project_documents'] = $this->doctrack_model->getProjectDocuments($plan_id, $user_type);

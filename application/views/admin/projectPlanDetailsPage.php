@@ -65,18 +65,20 @@
                     </div>
                     <div class="form-group">
                       <label for="">Date POW Added:</label>
-                      <p class="form-control input-sm"><?php 
-                                                            $datePOWAdded = date_create($projectDetails['date_pow_added']);    
-                                                            echo date_format($datePOWAdded, "M-d-Y g:i:s:a");
-                                                      ?>                                                        
+                      <p class="form-control input-sm">
+                        <?php 
+                            $datePOWAdded = date_create($projectDetails['date_pow_added']);    
+                            echo date_format($datePOWAdded, "M-d-Y g:i:s:a");
+                          ?>                                                        
                       </p>
                     </div>
                     <div class="form-group">
                       <label for="">Date Project Plan Added:</label>
-                      <p class="form-control input-sm"><?php
-                                                            $dateAdded = date_create($projectDetails['date_added']); 
-                                                            echo date_format($dateAdded, "M-d-Y"); 
-                                                      ?>
+                      <p class="form-control input-sm">
+                        <?php
+                          $dateAdded = date_create($projectDetails['date_added']); 
+                          echo date_format($dateAdded, "M-d-Y"); 
+                      ?>
                       </p>  
                     </div>
                     <div class="form-group">
