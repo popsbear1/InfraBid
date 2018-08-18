@@ -16,12 +16,12 @@ class Doctrack extends CI_Controller {
 
 	public function docTrackView(){
 		$user_type = $this->session->userdata('user_type');
-		$data['pending_documents'] = $this->doctrack_model->getPendingDocuments($user_type);
-		$data['forwarded_documents'] = $this->doctrack_model->getForwardedDocuments($user_type);
-		$data['onhand_documents'] = $this->doctrack_model->getOnHandDocuments($user_type); 
+		// $data['pending_documents'] = $this->doctrack_model->getPendingDocuments($user_type);
+		// $data['forwarded_documents'] = $this->doctrack_model->getForwardedDocuments($user_type);
+		// $data['onhand_documents'] = $this->doctrack_model->getOnHandDocuments($user_type); 
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
-		$this->load->view('doctrack/docTrack', $data);
+		$this->load->view('doctrack/docTrack');
 		$this->load->view('admin/fragments/footer');
 	}
 
@@ -195,13 +195,22 @@ class Doctrack extends CI_Controller {
 		$sender = $this->input->post('sender');
 
 		$receive_id = $this->doctrack_model->getReceivedDocumentID($plan_id, $department, $sender);
-		$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
-		foreach ($receive_id as $id) {
-			$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
-			$this->doctrack_model->updateDocumentDetails($id['project_document_id'], $plan_id, $department, $sender);
+
+		if (count($receive_id) < 1) {
+			$data['success'] = false;
+		}else{
+			$new_log_id = $this->doctrack_model->insertNewReceivedLog($user_id);
+
+			foreach ($receive_id as $id) {
+				$this->doctrack_model->insertNewDocumentLogRelation($new_log_id, $id['project_document_id']);
+				$this->doctrack_model->updateDocumentDetails($id['project_document_id'], $plan_id, $department, $sender);
+			}
+
+			$data['success'] = true;
 		}
+			
 		
-		redirect('doctrack/docTrackView');
+		echo json_encode($data);
 	}
 
 	public function getProjectDocumentHistory(){
@@ -230,19 +239,19 @@ class Doctrack extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function cancelDocumentForward(){
-		$plan_id = $this->input->post('plan_id');
-		$current_doc_loc = $this->input->post('current_doc_loc');
-		$receiver = $this->input->post('receiver');
+	// public function cancelDocumentForward(){
+	// 	$plan_id = $this->input->post('plan_id');
+	// 	$current_doc_loc = $this->input->post('current_doc_loc');
+	// 	$receiver = $this->input->post('receiver');
 
-		if ($this->doctrack_model->cancelDocumentForward($plan_id, $current_doc_loc, $receiver)) {
-			$data['success'] = true;
-		}else{
-			$data['success'] = false;
-		}
+	// 	if ($this->doctrack_model->cancelDocumentForward($plan_id, $current_doc_loc, $receiver)) {
+	// 		$data['success'] = true;
+	// 	}else{
+	// 		$data['success'] = false;
+	// 	}
 		
-		echo json_encode($data);
-	}
+	// 	echo json_encode($data);
+	// }
 
 	public function getIncomingDocAlertsCount(){
 		$user_type = $this->session->userdata('user_type');

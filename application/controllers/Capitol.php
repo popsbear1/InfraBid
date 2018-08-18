@@ -64,12 +64,12 @@ class Capitol extends CI_Controller {
 	public function docTrackView(){
 		$page['page'] = 'doctrack';
 		$user_type = $this->session->userdata('user_type');
-		$data['pending_documents'] = $this->doctrack_model->getPendingDocuments($user_type);
-		$data['forwarded_documents'] = $this->doctrack_model->getForwardedDocuments($user_type);
-		$data['onhand_documents'] = $this->doctrack_model->getOnHandDocuments($user_type); 
+		// $data['pending_documents'] = $this->doctrack_model->getPendingDocuments($user_type);
+		// $data['forwarded_documents'] = $this->doctrack_model->getForwardedDocuments($user_type);
+		// $data['onhand_documents'] = $this->doctrack_model->getOnHandDocuments($user_type); 
 		$this->load->view('doctrack/fragments/head');
 		$this->load->view('doctrack/fragments/nav', $page);
-		$this->load->view('doctrack/docTrack', $data);
+		$this->load->view('doctrack/docTrack');
 		$this->load->view('doctrack/fragments/footer');
 	}
 
@@ -155,18 +155,18 @@ class Capitol extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function cancelDocumentForward(){
-		$plan_id = $this->input->post('plan_id');
-		$current_doc_loc = $this->input->post('current_doc_loc');
-		$receiver = $this->input->post('receiver');
+	// public function cancelDocumentForward(){
+	// 	$plan_id = $this->input->post('plan_id');
+	// 	$current_doc_loc = $this->input->post('current_doc_loc');
+	// 	$receiver = $this->input->post('receiver');
 
-		if ($this->doctrack_model->cancelDocumentForward($plan_id, $current_doc_loc, $receiver)) {
-			$data['success'] = true;
-		}else{
-			$data['success'] = false;
-		}
+	// 	if ($this->doctrack_model->cancelDocumentForward($plan_id, $current_doc_loc, $receiver)) {
+	// 		$data['success'] = true;
+	// 	}else{
+	// 		$data['success'] = false;
+	// 	}
 		
-		echo json_encode($data);
-	}
+	// 	echo json_encode($data);
+	// }
 
 }
