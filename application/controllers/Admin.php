@@ -56,6 +56,25 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function getPlanDateRange(){
+		$start_date = date_format(date_create($this->input->get('start_date')), 'Y-m-d');
+		$end_date = date_format(date_create($this->input->get('end_date')), 'Y-m-d');
+
+		$advertisement = $this->notif_model->getDateRangeAdvertisement($start_date, $end_date);
+		$pre_bid = $this->notif_model->getDateRangePre_bid($start_date, $end_date);
+		$bid_submission = $this->notif_model->getDateRangeBid_submission($start_date, $end_date);
+		$bid_evaluation = $this->notif_model->getDateRangeBid_evaluation($start_date, $end_date);
+		$post_qual = $this->notif_model->getDateRangePost_qualification($start_date, $end_date);
+		$award_notice = $this->notif_model->getDateRangeAward_notice($start_date, $end_date);
+		$contract_signing = $this->notif_model->getDateRangeContract_signing($start_date, $end_date);
+		$authority_approval = $this->notif_model->getDateRangeAuthority_approval($start_date, $end_date);
+		$proceed_notice = $this->notif_model->getDateRangeProceed_notice($start_date, $end_date);
+
+		$data['plans'] = array_merge($advertisement, $pre_bid, $bid_submission, $bid_evaluation, $post_qual, $award_notice, $contract_signing, $authority_approval, $proceed_notice);
+
+		echo json_encode($data);
+	}
+
 	public function setNavControl(){
 		$sideBarControl = $this->session->userdata('sideBarControl');
 		if ($sideBarControl == 1) {
@@ -1879,4 +1898,5 @@ class Admin extends CI_Controller {
 		$pdf->headerTable();
 		$pdf->Output(); 
 	}
+
 }
