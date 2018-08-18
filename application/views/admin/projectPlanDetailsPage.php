@@ -14,176 +14,195 @@
   $acceptanceTurnoverDate = date_create($actdates['acceptance_turnover']);
 
 ?>
+<style>
+  .details_btn{
+    width: 250px;
+    height: 60px;
+  }
+</style>
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="pull-left">Collective Project Plan Details</h3>
+          <h3>Project Details</h3>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-6">
+        <div class="col-md-12">
+          <div class="btn-group">
+            <button class="btn btn-lg btn-default details_btn">
+              Details
+            </button>
+            <button class="btn btn-lg btn-default details_btn">
+              Project Logs
+            </button>
+            <button class="btn btn-lg btn-default details_btn">
+              Timeline and Activity Dates
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="box box-info">
             <div class="box-header">
               <h4>Project Details</h4>
             </div>
             <div class="box-body">
-              <div style="height: 720px">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="form-group">
-                      <label for="">Project Title:</label>
-                      <p class="form-control input-lg text-center"><?php echo $projectDetails['project_title'] ?></p>  
-                    </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="">Project Title:</label>
+                    <p class="form-control input-lg text-center"><?php echo $projectDetails['project_title'] ?></p>  
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6">
-                    <div class="form-group">
-                      <label for="">Project Status:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['project_status'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Date POW Added:</label>
-                      <p class="form-control input-sm"><?php 
-                                                            $datePOWAdded = date_create($projectDetails['date_pow_added']);    
-                                                            echo date_format($datePOWAdded, "M-d-Y g:i:s:a");
-                                                      ?>                                                        
-                      </p>
-                    </div>
-                    <div class="form-group">
-                      <label for="">Date Project Plan Added:</label>
-                      <p class="form-control input-sm"><?php
-                                                            $dateAdded = date_create($projectDetails['date_added']); 
-                                                            echo date_format($dateAdded, "M-d-Y"); 
-                                                      ?>
-                      </p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Project Year:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['project_year'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Project Number:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['project_no'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Location:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['barangay'] . ', ' . $projectDetails['municipality'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Project Type:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['type'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Mode:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['mode'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Source of Fund:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['source'] ?></p>  
-                    </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <div class="form-group">
+                    <label for="">Project Status:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['project_status'] ?></p>  
                   </div>
-                  <div class="col-lg-6 col-md-6">
-                    <div class="form-group">
-                      <label for="">Account Classification:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['classification'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">ABC</label>
-                      <p class="form-control input-sm"><?php echo number_format($projectDetails['abc'], 2) ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Abc/PPost Date:</label>
-                      <p class="form-control input-sm"><?php 
-                                                            if ($actdates['advertisement'] != null) {
-                                                              echo date_format($advertisementDate, "M-d-Y");
-                                                            }else{
-                                                              echo $projectDetails['abc_post_date'];
-                                                            } 
-                                                      ?>
-                      </p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Sub/open of Date:</label>
-                      <p class="form-control input-sm"><?php 
-                                                            if ($actdates['open_bid'] != null) {
-                                                              echo date_format($openBidDate, "M-d-Y");
-                                                            }else{
-                                                              echo $projectDetails['sub_open_date'];
-                                                            } 
-                                                      ?>
-                      </p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Notice of Award Date:</label>
-                      <p class="form-control input-sm"><?php 
-                                                            if ($actdates['award_notice'] != null) {
-                                                              echo date_format($awardNoticeDate, "M-d-Y");
-                                                            }else{
-                                                              echo $projectDetails['award_notice_date'];
-                                                            } 
-                                                      ?>
-                      </p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Contract Signing Date:</label>
-                      <p class="form-control input-sm"><?php
-                                                            if ($actdates['contract_signing'] != null) {
-                                                              echo date_format($contractSigningDate, "M-d-Y");    
-                                                            } else{
-                                                              echo $projectDetails['contract_signing_date'];
-                                                            } 
-                                                      ?>
-                      </p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Rebid Count:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['re_bid_count'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Contractor:</label>
-                      <p class="form-control input-sm"><?php echo $projectDetails['businessname'] ?></p>  
-                    </div>
-                    <div class="form-group">
-                      <label for="">Proposed Bid:</label>
-                      <p class="form-control input-sm"><?php echo number_format($projectDetails['proposed_bid'], 2) ?></p>  
-                    </div>
+                  <div class="form-group">
+                    <label for="">Date POW Added:</label>
+                    <p class="form-control input-sm"><?php 
+                                                          $datePOWAdded = date_create($projectDetails['date_pow_added']);    
+                                                          echo date_format($datePOWAdded, "M-d-Y g:i:s:a");
+                                                    ?>                                                        
+                    </p>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Date Project Plan Added:</label>
+                    <p class="form-control input-sm"><?php
+                                                          $dateAdded = date_create($projectDetails['date_added']); 
+                                                          echo date_format($dateAdded, "M-d-Y"); 
+                                                    ?>
+                    </p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Project Year:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['project_year'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Project Number:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['project_no'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Location:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['barangay'] . ', ' . $projectDetails['municipality'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Project Type:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['type'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Mode:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['mode'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Source of Fund:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['source'] ?></p>  
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="form-group">
+                    <label for="">Account Classification:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['classification'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">ABC</label>
+                    <p class="form-control input-sm"><?php echo number_format($projectDetails['abc'], 2) ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Abc/PPost Date:</label>
+                    <p class="form-control input-sm"><?php 
+                                                          if ($actdates['advertisement'] != null) {
+                                                            echo date_format($advertisementDate, "M-d-Y");
+                                                          }else{
+                                                            echo $projectDetails['abc_post_date'];
+                                                          } 
+                                                    ?>
+                    </p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Sub/open of Date:</label>
+                    <p class="form-control input-sm"><?php 
+                                                          if ($actdates['open_bid'] != null) {
+                                                            echo date_format($openBidDate, "M-d-Y");
+                                                          }else{
+                                                            echo $projectDetails['sub_open_date'];
+                                                          } 
+                                                    ?>
+                    </p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Notice of Award Date:</label>
+                    <p class="form-control input-sm"><?php 
+                                                          if ($actdates['award_notice'] != null) {
+                                                            echo date_format($awardNoticeDate, "M-d-Y");
+                                                          }else{
+                                                            echo $projectDetails['award_notice_date'];
+                                                          } 
+                                                    ?>
+                    </p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Contract Signing Date:</label>
+                    <p class="form-control input-sm"><?php
+                                                          if ($actdates['contract_signing'] != null) {
+                                                            echo date_format($contractSigningDate, "M-d-Y");    
+                                                          } else{
+                                                            echo $projectDetails['contract_signing_date'];
+                                                          } 
+                                                    ?>
+                    </p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Rebid Count:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['re_bid_count'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Contractor:</label>
+                    <p class="form-control input-sm"><?php echo $projectDetails['businessname'] ?></p>  
+                  </div>
+                  <div class="form-group">
+                    <label for="">Proposed Bid:</label>
+                    <p class="form-control input-sm"><?php echo number_format($projectDetails['proposed_bid'], 2) ?></p>  
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6">
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="box box-primary">
             <div class="box-header">
               <h4>Project Logs</h4>
             </div>
             <div class="box-body">
-              <div style="height: 720px; overflow-y: scroll;">
-                <table class="table table-striped table-bordered">
-                  <thead>
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center">User</th>
+                    <th class="text-center">Log Date</th>
+                    <th class="text-center">Remark</th>
+                  </tr> 
+                </thead>
+                <tbody>
+                  <?php foreach ($logs as $log): ?>
                     <tr>
-                      <th class="text-center">User</th>
-                      <th class="text-center">Log Date</th>
-                      <th class="text-center">Remark</th>
-                    </tr> 
-                  </thead>
-                  <tbody>
-                    <?php foreach ($logs as $log): ?>
-                      <tr>
-                        <td><?php echo $log['username'] ?></td>
-                        <td><?php 
-                                  $logDate = date_create($log['log_date']);
-                                  echo date_format($logDate, "M-d-Y g:i:s:a");  
-                            ?>
-                        </td>
-                        <td><?php echo $log['remark'] ?></td>
-                      </tr>
-                    <?php endforeach ?>
-                  </tbody>
-                </table>
-              </div>
+                      <td><?php echo $log['username'] ?></td>
+                      <td><?php 
+                                $logDate = date_create($log['log_date']);
+                                echo date_format($logDate, "M-d-Y g:i:s:a");  
+                          ?>
+                      </td>
+                      <td><?php echo $log['remark'] ?></td>
+                    </tr>
+                  <?php endforeach ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -391,6 +410,11 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
+<script>
+  $('.details_btn').click(function(){
+    $('.details_btn').
+    $(this).css('background', '#cccccc');
+  });
+</script>
 
 
