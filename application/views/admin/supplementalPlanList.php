@@ -148,29 +148,13 @@
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
                       <th class="text-center">Project Year</th>
+                      <th class="text-center">Status</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     
                   </tbody>
-                  <tfoot style='font-size:12px;background: #ffcccc'>
-                    <tr>
-                      <th class="text-center">Project No.</th>
-                      <th class="text-center">Project Title</th>
-                      <th class="text-center">Location</th>
-                      <th class="text-center">Mode of Procurement</th>
-                      <th class="text-center">ADS/POST OF IB/REI</th>
-                      <th class="text-center">SUB/ OPEN OF BIDS</th>
-                      <th class="text-center">NOTICE OF AWARD</th>
-                      <th class="text-center">CONTRACT SIGNING</th>
-                      <th class="text-center">Source of Fund</th>
-                      <th class="text-center">Type of Project</th>
-                      <th class="text-center">Approved Budget Cost</th>
-                      <th class="text-center">Project Year</th>
-                      <th class="text-center">Action</th>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
             </div>
@@ -305,6 +289,7 @@
           { data: 'type' },
           { data: 'abc' },
           { data: 'project_year' },
+          { data: 'project_status'},
           { 
             data: null,
             render: function ( data, type, row ) {
@@ -341,6 +326,7 @@
             return $('<tr/>')
             .append('<td colspan="10"> Total for ' + group + '</td>')
             .append('<td>' + total + '</td>')
+            .append('<td/>')
             .append('<td/>')
             .append('<td/>');
           },
@@ -424,6 +410,7 @@
             { data: 'type' },
             { data: 'abc' },
             { data: 'project_year' },
+            { data: 'project_status'},
             { 
               data: null,
               render: function ( data, type, row ) {
@@ -460,6 +447,7 @@
             return $('<tr/>')
             .append('<td colspan="10"> Total for ' + group + '</td>')
             .append('<td>' + total + '</td>')
+            .append('<td/>')
             .append('<td/>')
             .append('<td/>');
           },

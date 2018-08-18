@@ -139,6 +139,18 @@
 				$this->db->where('project_plan.project_type', $apptype);
 			}
 
+			if ($municipality != null) {
+				$this->db->where('project_plan.municipality_id', $municipality);
+			}
+
+			if ($source != null) {
+				$this->db->where('project_plan.fund_id',$source);
+			}
+
+			if ($type != null){
+				$this->db->where('project_plan.projtype_id', $type);
+			}
+
 			if ($status != null) {
 				$this->db->where('project_plan.status', $status);
 			}else{
@@ -146,20 +158,6 @@
 				$this->db->or_where('project_plan.status', 'for_implementation');
 				$this->db->or_where('project_plan.status', 'for_rebid');
 			}
-
-			if ($municipality != null) {
-				$this->db->where('project_plan.municipality_id', $municipality);
-			}
-
-			if ($source !=null) {
-				$this->db->where('project_plan.fund_id',$source);
-			}
-
-			if ($type !=null){
-				$this->db->where('project_plan.projtype_id', $type);
-			}
-
-			$this->db->order_by('municipality ASC', 'barangay ASC');
 
 			$query = $this->db->get();
 
