@@ -14,20 +14,41 @@
   $acceptanceTurnoverDate = date_create($actdates['acceptance_turnover']);
 
 ?>
+<style>
+  .details_btn{
+    width: 250px;
+    height: 60px;
+  }
+</style>
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="pull-left">Collective Project Plan Details</h3>
+          <h3>Project Details</h3>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-6">
-          <div class="box box-info">
-            <div class="box-header">
-              <h4>Project Details</h4>
-            </div>
-            <div class="box-body">
-              <div style="height: 720px">
+        <div class="col-md-12">
+          <div class="btn-group">
+            <button class="btn btn-lg btn-default details_btn" id="project_details_btn">
+              Details
+            </button>
+            <button class="btn btn-lg btn-default details_btn" id="project_logs_btn">
+              Project Logs
+            </button>
+            <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
+              Timeline and Activity Dates
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="details_view" id="project_details" hidden="hidden">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="box box-info">
+              <div class="box-header">
+                <h4>Project Details</h4>
+              </div>
+              <div class="box-body">
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="form-group">
@@ -154,13 +175,15 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h4>Project Logs</h4>
-            </div>
-            <div class="box-body">
-              <div style="height: 720px; overflow-y: scroll;">
+      </div>
+      <div class="details_view" id="project_logs" hidden="hidden">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="box box-primary">
+              <div class="box-header">
+                <h4>Project Logs</h4>
+              </div>
+              <div class="box-body">
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
@@ -188,166 +211,168 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-6 col-md-6">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h4>Project Procurement Timeline</h4>
-            </div>
-            <div class="box-body">
-              <div style="height: 450px">
-                <table class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th class="text-center">Activity</th>
-                      <th class="text-center">Start Date</th>
-                      <th class="text-center">End Date</th>
-                    </tr> 
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Advertisement</td>
-                      <td><?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Pre-bid Conference</td>
-                      <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Submission of Bid</td>
-                      <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Bid Evaluation</td>
-                      <td><?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Post Qualification</td>
-                      <td><?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Issuance of Notice of Award</td>
-                      <td><?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Contract Preparation and Signing</td>
-                      <td><?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Approval by Higher Authority</td>
-                      <td><?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?></td>
-                    </tr>
-                    <tr>
-                      <td>Notice to Proceed</td>
-                      <td><?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?></td>
-                      <td><?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?></td>
-                    </tr>
-                  </tbody>
-                </table>
+      <div class="details_view" id="timeline_procact" hidden="hidden">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="box box-primary">
+              <div class="box-header">
+                <h4>Project Procurement Timeline</h4>
+              </div>
+              <div class="box-body">
+                <div style="height: 450px">
+                  <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="text-center">Activity</th>
+                        <th class="text-center">Start Date</th>
+                        <th class="text-center">End Date</th>
+                      </tr> 
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Advertisement</td>
+                        <td><?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Pre-bid Conference</td>
+                        <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Submission of Bid</td>
+                        <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Bid Evaluation</td>
+                        <td><?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Post Qualification</td>
+                        <td><?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Issuance of Notice of Award</td>
+                        <td><?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Contract Preparation and Signing</td>
+                        <td><?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Approval by Higher Authority</td>
+                        <td><?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?></td>
+                      </tr>
+                      <tr>
+                        <td>Notice to Proceed</td>
+                        <td><?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?></td>
+                        <td><?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <div class="box box-warning">
-            <div class="box-header">
-              <h4>Procurment Activity Dates List</h4>
-            </div>
-            <div class="box-body">
-              <div style="height: 450px">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Pre-proc Conference</label>
-                      <p class="form-control"><?php echo date_format($preProcDate, "M-d-Y") ?></p>
+          <div class="col-lg-6 col-md-6">
+            <div class="box box-warning">
+              <div class="box-header">
+                <h4>Procurment Activity Dates List</h4>
+              </div>
+              <div class="box-body">
+                <div style="height: 450px">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Pre-proc Conference</label>
+                        <p class="form-control"><?php echo date_format($preProcDate, "M-d-Y") ?></p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Ads/Post of IAEB</label>
+                        <p class="form-control"><?php echo date_format($advertisementDate, "M-d-Y") ?></p>
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Pre-bid Cof</label>
+                        <p class="form-control"><?php echo date_format($preBidDate, "M-d-Y") ?></p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Sub/Open of Bids</label>
+                        <p class="form-control"><?php echo date_format($openBidDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Ads/Post of IAEB</label>
-                      <p class="form-control"><?php echo date_format($advertisementDate, "M-d-Y") ?></p>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Eligibility Check</label>
+                        <p class="form-control"><?php echo date_format($eligibilityCheckDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
-                  </div> 
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Pre-bid Cof</label>
-                      <p class="form-control"><?php echo date_format($preBidDate, "M-d-Y") ?></p>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Sub/Open of Bids</label>
-                      <p class="form-control"><?php echo date_format($openBidDate, "M-d-Y") ?></p>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Bid Evaluation</label>
+                        <p class="form-control"><?php echo date_format($bidEvaluationDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Eligibility Check</label>
-                      <p class="form-control"><?php echo date_format($eligibilityCheckDate, "M-d-Y") ?></p>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Post Qual</label>
+                        <p class="form-control"><?php echo date_format($postQualDate, "M-d-Y") ?></p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Notice of Award</label>
+                        <p class="form-control"><?php echo date_format($awardNoticeDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Bid Evaluation</label>
-                      <p class="form-control"><?php echo date_format($bidEvaluationDate, "M-d-Y") ?></p>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Contract Signing</label>
+                        <p class="form-control"><?php echo date_format($contractSigningDate, "M-d-Y") ?></p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Notice to Proceed</label>
+                        <p class="form-control"><?php echo date_format($proceedNoticeDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Post Qual</label>
-                      <p class="form-control"><?php echo date_format($postQualDate, "M-d-Y") ?></p>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Delivery/Completion</label>
+                        <p class="form-control"><?php echo date_format($deliveryCompletionDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Notice of Award</label>
-                      <p class="form-control"><?php echo date_format($awardNoticeDate, "M-d-Y") ?></p>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label for="">Acceptance/Turnover</label>
+                        <p class="form-control"><?php echo date_format($acceptanceTurnoverDate, "M-d-Y") ?></p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Contract Signing</label>
-                      <p class="form-control"><?php echo date_format($contractSigningDate, "M-d-Y") ?></p>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Notice to Proceed</label>
-                      <p class="form-control"><?php echo date_format($proceedNoticeDate, "M-d-Y") ?></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Delivery/Completion</label>
-                      <p class="form-control"><?php echo date_format($deliveryCompletionDate, "M-d-Y") ?></p>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                      <label for="">Acceptance/Turnover</label>
-                      <p class="form-control"><?php echo date_format($acceptanceTurnoverDate, "M-d-Y") ?></p>
-                    </div>
-                  </div>
-                </div>   
-              </div>                 
+                  </div>   
+                </div>                 
+              </div>
             </div>
           </div>
         </div>
@@ -391,6 +416,31 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('#project_details_btn').css('background', '#cccccc');
+    $('#project_details').prop('hidden', false);
+  });
 
+  $('.details_btn').click(function(){
+    $('.details_btn').removeAttr('style');
+    $(this).css('background', '#cccccc');
+  });
+
+  $('#project_details_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#project_details').prop('hidden', false);
+  });
+
+  $('#project_logs_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#project_logs').prop('hidden', false);
+  });
+
+  $('#timeline_procact_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#timeline_procact').prop('hidden', false);
+  });
+</script>
 
 

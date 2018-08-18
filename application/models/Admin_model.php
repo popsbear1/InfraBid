@@ -1225,6 +1225,7 @@
 		);
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_activity_status', $status);
+		return true;
 		
 	}
 

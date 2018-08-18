@@ -8,7 +8,7 @@
   <div class="box">
     <div class="box-header">
       <h2 class="box-title"><i class="fa fa-list"></i> Project Plan Records</h2>
-      <small>(Listed Here are Those Projects which are currently being processed.)</small>
+      <small>(Listed here are those projects whith status of Onprocess or For rebid.)</small>
     </div>
     <div class="box-body">
       <table class="table table-striped table-bordered" id="documentTable">
@@ -19,6 +19,7 @@
             <th class="text-center">ABC</th>
             <th class="text-center">Source of Fund</th>
             <th class="text-center">Date POW Added</th>
+            <th class="text-center">Contractor</th>
             <th class="text-center">Action</th>
           </tr>
         </thead>
@@ -30,6 +31,7 @@
               <td><?php echo $plan['abc'] ?></td>
               <td><?php echo $plan['source'] ?></td>
               <td><?php echo $plan['date_pow_added'] ?></td>
+              <td><?php echo $plan['businessname'] ?></td>
               <td class="text-center">
                 <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $plan['plan_id']?>">
                   <i class="fa fa-eye"></i> History
