@@ -159,7 +159,8 @@
               </li>
               <li>
                 <a href="<?php echo base_url('doctrack/completedDocumentTrackingView') ?>">
-                <i class="fa fa-file"></i> <span>Completed</span>               
+                <i class="fa fa-file"></i> <span>Completed</span>
+                </a>               
               </li>
             </ul>
           </li>
