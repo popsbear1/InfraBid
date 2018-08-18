@@ -112,6 +112,20 @@ class Admin extends CI_Controller {
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality,$source,$projecttype);
+		for($i=0; $i < count($data['plans']); $i++) {
+			if ($data['plans'][$i]['advertisement'] != null) {
+				$data['plans'][$i]['abc_post_date'] = date_format(date_create($data['plans'][$i]['advertisement']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['open_bid'] != null) {
+				$data['plans'][$i]['sub_open_date'] = date_format(date_create($data['plans'][$i]['open_bid']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['award_notice'] != null) {
+				$data['plans'][$i]['award_notice_date'] = date_format(date_create($data['plans'][$i]['award_notice']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['contract_signing'] != null) {
+				$data['plans'][$i]['contract_signing_date'] = date_format(date_create($data['plans'][$i]['contract_signing']), 'M-d-y');
+			}
+		}
 		if ($data['count_total']['total_abc'] > 0 ) {
 			$total = explode('.', $data['count_total']['total_abc']);
 			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
@@ -154,7 +168,21 @@ class Admin extends CI_Controller {
 
 		$data['plans'] = $this->admin_model->getRegularPlan($year, $mode, $status, $municipality, $source, $type);
 
-		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);		
+		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);
+		for($i=0; $i < count($data['plans']); $i++) {
+			if ($data['plans'][$i]['advertisement'] != null) {
+				$data['plans'][$i]['abc_post_date'] = date_format(date_create($data['plans'][$i]['advertisement']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['open_bid'] != null) {
+				$data['plans'][$i]['sub_open_date'] = date_format(date_create($data['plans'][$i]['open_bid']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['award_notice'] != null) {
+				$data['plans'][$i]['award_notice_date'] = date_format(date_create($data['plans'][$i]['award_notice']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['contract_signing'] != null) {
+				$data['plans'][$i]['contract_signing_date'] = date_format(date_create($data['plans'][$i]['contract_signing']), 'M-d-y');
+			}
+		}		
 		$total = explode('.', $data['count_total']['total_abc']);
 		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
 		if ($data['count_total']['total_abc'] > 0) {
@@ -179,6 +207,20 @@ class Admin extends CI_Controller {
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['count_total'] = $this->admin_model->getSupplementalProjectPlanCountTotal($year, $mode, $status, $municipality,$source,$projecttype);
+		for($i=0; $i < count($data['plans']); $i++) {
+			if ($data['plans'][$i]['advertisement'] != null) {
+				$data['plans'][$i]['abc_post_date'] = date_format(date_create($data['plans'][$i]['advertisement']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['open_bid'] != null) {
+				$data['plans'][$i]['sub_open_date'] = date_format(date_create($data['plans'][$i]['open_bid']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['award_notice'] != null) {
+				$data['plans'][$i]['award_notice_date'] = date_format(date_create($data['plans'][$i]['award_notice']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['contract_signing'] != null) {
+				$data['plans'][$i]['contract_signing_date'] = date_format(date_create($data['plans'][$i]['contract_signing']), 'M-d-y');
+			}
+		}
 		if ($data['count_total']['total_abc'] > 0 ) {
 			$total = explode('.', $data['count_total']['total_abc']);
 			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
@@ -221,7 +263,21 @@ class Admin extends CI_Controller {
 
 		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $type);
 
-		$data['count_total'] = $this->admin_model->getSupplementalProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);		
+		$data['count_total'] = $this->admin_model->getSupplementalProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);
+		for($i=0; $i < count($data['plans']); $i++) {
+			if ($data['plans'][$i]['advertisement'] != null) {
+				$data['plans'][$i]['abc_post_date'] = date_format(date_create($data['plans'][$i]['advertisement']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['open_bid'] != null) {
+				$data['plans'][$i]['sub_open_date'] = date_format(date_create($data['plans'][$i]['open_bid']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['award_notice'] != null) {
+				$data['plans'][$i]['award_notice_date'] = date_format(date_create($data['plans'][$i]['award_notice']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['contract_signing'] != null) {
+				$data['plans'][$i]['contract_signing_date'] = date_format(date_create($data['plans'][$i]['contract_signing']), 'M-d-y');
+			}
+		}		
 		$total = explode('.', $data['count_total']['total_abc']);
 		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
 		if ($data['count_total']['total_abc'] > 0) {
@@ -245,6 +301,20 @@ class Admin extends CI_Controller {
 		$data['sources'] = $this->admin_model->getFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['count_total'] = $this->admin_model->getOngoingProjectPlanCountTotal($year, $apptype, $status, $municipality,$source,$projecttype);
+		for($i=0; $i < count($data['plans']); $i++) {
+			if ($data['plans'][$i]['advertisement'] != null) {
+				$data['plans'][$i]['abc_post_date'] = date_format(date_create($data['plans'][$i]['advertisement']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['open_bid'] != null) {
+				$data['plans'][$i]['sub_open_date'] = date_format(date_create($data['plans'][$i]['open_bid']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['award_notice'] != null) {
+				$data['plans'][$i]['award_notice_date'] = date_format(date_create($data['plans'][$i]['award_notice']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['contract_signing'] != null) {
+				$data['plans'][$i]['contract_signing_date'] = date_format(date_create($data['plans'][$i]['contract_signing']), 'M-d-y');
+			}
+		}
 		if ($data['count_total']['total_abc'] > 0 ) {
 			$total = explode('.', $data['count_total']['total_abc']);
 			$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
@@ -288,10 +358,21 @@ class Admin extends CI_Controller {
 		}
 
 		$data['plans'] = $this->admin_model->getOngoingProjectPlan($year, $apptype, $status, $municipality, $source, $type);
-		// for ($i=0; $i < count($data['plans']); $i++) { 
-		// 	$data['plans'][$i]['abc'] = number_format($data['plans'][$i]['abc']); 
-		// }
-		$data['count_total'] = $this->admin_model->getOngoingProjectPlanCountTotal($year, $apptype, $status, $municipality, $source, $type);		
+		$data['count_total'] = $this->admin_model->getOngoingProjectPlanCountTotal($year, $apptype, $status, $municipality, $source, $type);
+		for($i=0; $i < count($data['plans']); $i++) {
+			if ($data['plans'][$i]['advertisement'] != null) {
+				$data['plans'][$i]['abc_post_date'] = date_format(date_create($data['plans'][$i]['advertisement']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['open_bid'] != null) {
+				$data['plans'][$i]['sub_open_date'] = date_format(date_create($data['plans'][$i]['open_bid']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['award_notice'] != null) {
+				$data['plans'][$i]['award_notice_date'] = date_format(date_create($data['plans'][$i]['award_notice']), 'M-d-y');
+			}
+			if ($data['plans'][$i]['contract_signing'] != null) {
+				$data['plans'][$i]['contract_signing_date'] = date_format(date_create($data['plans'][$i]['contract_signing']), 'M-d-y');
+			}
+		}		
 		$total = explode('.', $data['count_total']['total_abc']);
 		$formatter = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
 		if ($data['count_total']['total_abc'] > 0) {

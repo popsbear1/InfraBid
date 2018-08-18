@@ -53,6 +53,7 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('procact', 'project_plan.plan_id = procact.plan_id');
 			$this->db->where('project_plan.project_type', 'regular');
 			if ($year != null) {
 				$this->db->where('project_year', $year);
@@ -92,6 +93,7 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('procact', 'project_plan.plan_id = procact.plan_id');
 			$this->db->where('project_plan.project_type', 'supplementary');
 			if ($year != null) {
 				$this->db->where('project_year', $year);
@@ -131,6 +133,7 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
+			$this->db->join('procact', 'project_plan.plan_id = procact.plan_id');
 			if ($year != null) {
 				$this->db->where('project_year', $year);
 			}
