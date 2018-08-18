@@ -20,6 +20,7 @@
             <th class="text-center">Source of Fund</th>
             <th class="text-center">Date POW Added</th>
             <th class="text-center">Contractor</th>
+            <th class="text-center">Status</th>
             <th class="text-center">Action</th>
           </tr>
         </thead>
@@ -32,6 +33,7 @@
               <td><?php echo $plan['source'] ?></td>
               <td><?php echo $plan['date_pow_added'] ?></td>
               <td><?php echo $plan['businessname'] ?></td>
+              <td><?php echo $plan['projectstatus'] ?></td>
               <td class="text-center">
                 <button class="btn btn-info viewDocumentDataBtn" type="button" value="<?php echo $plan['plan_id']?>">
                   <i class="fa fa-eye"></i> History

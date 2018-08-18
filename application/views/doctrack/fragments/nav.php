@@ -58,6 +58,14 @@
               <a href="<?php echo base_url('capitol/ongoingDocumentTrackingView') ?>">Ongoing
               </a>
             </li>
+            <li
+            <?php if ($page == 'completed'):?>
+              class="active"
+            <?php endif?>
+            >
+              <a href="<?php echo base_url('capitol/completedDocumentTrackingView')?>">Completed
+              </a>
+            </li>            
           </ul>
         </div>
         <!-- /.navbar-collapse -->

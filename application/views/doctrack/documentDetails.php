@@ -66,7 +66,48 @@
                   <i class="fa fa-plus"></i>
                   Add Item
                 </button>
-              </div> 
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div style="background-color: #C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px;margin:0 5px 0 5px; border-width: 1px;border-style: groove;">
+                      <h5>Project and Contractor Details</h5>
+                    </div>
+                    <div>               
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                          <div class="form-group ">
+                            <label>Project Number:</label>
+                            <p class="form-control"><?php echo $projectdetails['project_no'] ?></p>
+                          </div> 
+                        <div class="form-group">
+                            <label>Project Title:</label>
+                            <p class="form-control"><?php echo $projectdetails['project_title'] ?></p>
+                        </div>
+                      </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                          <div class="form-group">
+                            <label>Contractor's Businessname:</label>
+                            <p class="form-control"><?php echo $projectdetails['businessname'] ?></p>
+                        </div>
+                          <div class="form-group">
+                            <label>Contractor's Name:</label>
+                            <p class="form-control"><?php echo $projectdetails['owner'] ?></p>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                          <div class="form-group">
+                            <label>Contractor's Address:</label>
+                            <p class="form-control"><?php echo $projectdetails['address'] ?></p>
+                        </div>
+                          <div class="form-group">
+                            <label>Contact Number:</label>
+                            <p class="form-control"><?php echo $projectdetails['contactnumber'] ?></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                
+                </div>
+              </div>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                   <div style="background-color:#C0C0C0; font-size: 25px; text-align: center; padding: 7px 10px; margin: 0 5px 0 5px; border-width: 1px; border-style: groove;">

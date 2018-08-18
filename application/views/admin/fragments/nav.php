@@ -157,6 +157,10 @@
                   <i class="fa fa-file"></i> <span>Ongoing</span>
                 </a>
               </li>
+              <li>
+                <a href="<?php echo base_url('doctrack/completedDocumentTrackingView') ?>">
+                <i class="fa fa-file"></i> <span>Completed</span>               
+              </li>
             </ul>
           </li>
         </ul>
