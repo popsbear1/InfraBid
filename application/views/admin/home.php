@@ -60,22 +60,31 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="well" style="margin-left: 10px;">
+            <p class="text-center"><b>Date Range:</b></p>
+            <p class="text-center">View scheduled activities beetween this date range.</p>
             <div class="form-group">
-              <label>Date range:</label>
-              <p><small>Display plans with activity timeline within the selected date range.</small></p>
               <div class="input-group">
-                <button type="button" class="btn btn-primary" id="daterange-btn">
-                  <span>
-                    <i class="fa fa-calendar"></i> Date range picker
-                  </span>
-                  <i class="fa fa-caret-down"></i>
-                </button>
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="start_date">
               </div>
+              <!-- /.input group -->
+            </div>
+            <p class="text-center">TO</p>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="end_date">
+              </div>
+              <!-- /.input group -->
             </div>
             <hr>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                <button class="btn btn-primary btn-sm">
+                <button class="btn btn-primary btn-sm" id="daterange_btn">
                   <i class="fa fa-find"></i>
                   GO!
                 </button>
@@ -185,25 +194,51 @@
 
   $(document).ready(function(){
     showIncomingPlanActivities();
+    $('#start_date').datepicker();
+    $('#end_date').datepicker();
+  });
 
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment(),
-        opens    : 'right'
-      },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
+  $('#daterange_btn').click(function(){
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
+    if (!start_date || !end_date) {
+      alert('kwa kasjy');
+    }else{
+      $.ajax({
+        type: 'GET',
+        url: '<?php echo base_url('admin/getPlanDateRange') ?>',
+        data: { start_date: start_date, end_date : end_date},
+        dataType: 'json'
+      }).done(function(response){
+
+        $('#project_table').DataTable().destroy();
+        $('#table_title').html("Activities During Date Range <small>(Activity scheduled in the date range.)</small>");
+        $('#project_table').DataTable({
+          data: response.plans,
+          columns: [
+            { data: 'project_no'},
+            { data: 'project_title'},
+            { data: 'activity'},
+            { data: 'start_date'},
+            { data: 'end_date'},
+            {
+              data: null,
+              render: function(data, type, row){
+                return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                          '<input type="text" name="project_status" value="' + data.status + '" hidden />' +
+                          '<input type="text" name="plan_id" value="' + data.plan_id + '" hidden />' +
+                          '<button class="btn btn-primary" type="submit">' +
+                            '<i class="fa fa-view"></i>' +
+                            'View' +
+                          '</button>' + 
+                        '</form>';
+              }
+            }
+          ],
+          order: [[2, 'asc']]
+        });
+      })
+    }
   });
 
   function showIncomingPlanActivities(){
