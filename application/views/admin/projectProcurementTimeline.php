@@ -238,7 +238,15 @@
 
     var abc = '<?php echo $projectDetails['abc'] ?>';
 
-
+    if (abc < 1000000) {
+      $('#noPreBid').attr('checked', true);
+      $('#preBidStart').prop('value', '');
+      $('#preBidEnd').prop('value', '');
+      $('#preBidStart').prop('disabled', true);
+      $('#preBidEnd').prop('disabled', true);
+      $('#preBidNumber').prop('disabled', true);
+      $('#preBidUpdateBtn').prop('disabled', true);  
+    }
 
     $(document).ready(function(){
 
