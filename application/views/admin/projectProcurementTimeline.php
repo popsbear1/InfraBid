@@ -10,7 +10,7 @@
               <div class="form-group">
                 <label class="control-label col-lg-7">Select date to begin with:</label>
                 <div class="col-lg-5">
-                  <input type="text" class="form-control text-center" id="startDate" name="startDate" form="updateProcurementTimelineForm" placeholder="mm/dd/yyyy">
+                  <input type="text" class="form-control text-center" id="startDate" name="startDate" form="updateProcurementTimelineForm" placeholder="mm/dd/yyyy" autocomplete="off">
                 </div>
               </div>
             </div>
@@ -36,8 +36,8 @@
                 <tbody>
                   <tr>
                     <td class="left-col"><b class="pull-right">ADS/Post:</b></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm"></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm"></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td class="reight-col"></td>
                   </tr>
                   <tr>
@@ -61,11 +61,11 @@
                         </div>
                       </div>
                     </td>
-                    <td class="center"><input type="text" class="form-control text-center" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm"></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm"></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td class="row-col">
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="preBidNumber" min="0">
+                        <input type="number" class="form-control" id="preBidNumber" min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="preBidUpdateBtn" type="button">Update</button>
@@ -74,11 +74,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Submission of bid:</b></td>
-                    <td><input type="text" class="form-control text-center" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="bidSubmissionNumber" min="0">
+                        <input type="number" class="form-control" id="bidSubmissionNumber" min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="bidSubmissionUpdateBtn" type="button">Update</button>
@@ -87,11 +87,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Bid Evaluation:</b></td>
-                    <td><input type="text" class="form-control text-center" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="bidEvaluationNumber" min="0">
+                        <input type="number" class="form-control" id="bidEvaluationNumber" min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="bidEvaluationUpdateBtn" type="button">Update</button>
@@ -100,11 +100,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Post Qualification:</b></td>
-                    <td><input type="text" class="form-control text-center" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="postQualificationNumber"  min="0">
+                        <input type="number" class="form-control" id="postQualificationNumber"  min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="postQualificationUpdateBtn" type="button">Update</button>
@@ -113,11 +113,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="0">
+                        <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="awardNoticeIssuanceUpdateBtn" type="button">Update</button>
@@ -126,11 +126,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                    <td><input type="text" class="form-control text-center" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="contractSigningNumber"  min="0">
+                        <input type="number" class="form-control" id="contractSigningNumber"  min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="contractSigningUpdateBtn" type="button">Update</button>
@@ -158,11 +158,11 @@
                         </div>
                       </div>
                     </td>
-                    <td><input type="text" class="form-control text-center" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="authorityApprovalNumber" min="0">
+                        <input type="number" class="form-control" id="authorityApprovalNumber" min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn" type="button">Update</button>
@@ -171,11 +171,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Notice to Proceed:</b></td>
-                    <td><input type="text" class="form-control text-center" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm"></td>
-                    <td><input type="text" class="form-control text-center" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm"></td>
+                    <td><input type="text" class="form-control text-center" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="proceedNoticeNumber" min="0">
+                        <input type="number" class="form-control" id="proceedNoticeNumber" min="0" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="proceedNoticeUpdateBtn" type="button">Update</button>
@@ -270,25 +270,50 @@
     });
 
     $(document).ready(function(e){
-      $('#advertisement_start').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?>");
-      $('#advertisement_end').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?>");
-      $('#preBidStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?>");
-      $('#preBidEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?>");
-      $('#bidSubmissionStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_start']), "M-d-Y") ?>");
-      $('#bidSubmissionEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_end']), "M-d-Y") ?>");
-      $('#bidEvaluationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?>");
-      $('#bidEvaluationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?>");
-      $('#postQualificationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?>");
-      $('#postQualificationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?>");
-      $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?>");
-      $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?>");
-      $('#contractSigningStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?>");
-      $('#contractSigningEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?>");
-      $('#authorityApprovalStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?>");
-      $('#authorityApprovalEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?>");
-      $('#proceedNoticeStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?>");
-      $('#proceedNoticeEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?>");
+      var timeline_status = '<?php echo $timeLine['timeline_status'] ?>';
+      if (timeline_status == 'set') {
+        $('#advertisement_start').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?>");
+        $('#advertisement_end').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?>");
+        $('#preBidStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?>");
+        $('#preBidEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?>");
+        $('#bidSubmissionStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_start']), "M-d-Y") ?>");
+        $('#bidSubmissionEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_end']), "M-d-Y") ?>");
+        $('#bidEvaluationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?>");
+        $('#bidEvaluationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?>");
+        $('#postQualificationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?>");
+        $('#postQualificationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?>");
+        $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?>");
+        $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?>");
+        $('#contractSigningStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?>");
+        $('#contractSigningEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?>");
+        $('#authorityApprovalStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?>");
+        $('#authorityApprovalEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?>");
+        $('#proceedNoticeStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?>");
+        $('#proceedNoticeEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?>");
+      }
 
+      if (timeline_status == 'pending') {
+        $('#advertisement_start').attr('placeholder', "None");
+        $('#advertisement_end').attr('placeholder', "None");
+        $('#preBidStart').attr('placeholder', "None");
+        $('#preBidEnd').attr('placeholder', "None");
+        $('#bidSubmissionStart').attr('placeholder', "None");
+        $('#bidSubmissionEnd').attr('placeholder', "None");
+        $('#bidEvaluationStart').attr('placeholder', "None");
+        $('#bidEvaluationEnd').attr('placeholder', "None");
+        $('#postQualificationStart').attr('placeholder', "None");
+        $('#postQualificationEnd').attr('placeholder', "None");
+        $('#awardNoticeIssuanceStart').attr('placeholder', "None");
+        $('#awardNoticeIssuanceEnd').attr('placeholder', "None");
+        $('#contractSigningStart').attr('placeholder', "None");
+        $('#contractSigningEnd').attr('placeholder', "None");
+        $('#authorityApprovalStart').attr('placeholder', "None");
+        $('#authorityApprovalEnd').attr('placeholder', "None");
+        $('#proceedNoticeStart').attr('placeholder', "None");
+        $('#proceedNoticeEnd').attr('placeholder', "None");
+      }
+        
+    });
 
   var advertisementMinBase = 0;
   var advertisementMaxBase = 7;
@@ -655,9 +680,6 @@
     $('#proceedNoticeStart').val(setStartDate(startDate, min));
     $('#proceedNoticeEnd').val(setEndDate(startDate, max));
   }
-
-
-    });
 
 
   </script>

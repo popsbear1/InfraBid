@@ -67,7 +67,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control pull-right" id="start_date">
+                <input type="text" class="form-control pull-right" id="start_date" placeholder="Start Date..">
               </div>
               <!-- /.input group -->
             </div>
@@ -77,7 +77,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control pull-right" id="end_date">
+                <input type="text" class="form-control pull-right" id="end_date" placeholder="End Date..">
               </div>
               <!-- /.input group -->
             </div>
@@ -143,20 +143,6 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url() ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="<?php echo base_url() ?>public/bower_components/raphael/raphael.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url() ?>public/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="<?php echo base_url() ?>public/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="<?php echo base_url() ?>public/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url() ?>public/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo base_url() ?>public/bower_components/moment/min/moment.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
 <script src="<?php echo base_url() ?>public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url() ?>public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
@@ -168,16 +154,27 @@
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/jszip.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/pdfmake.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/vfs_fonts.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
-
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.colVis.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="date_range_error">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Alert!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        Select date range first!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   var plans_coming_data = '<?php echo json_encode($plans_coming) ?>';
@@ -194,15 +191,23 @@
 
   $(document).ready(function(){
     showIncomingPlanActivities();
-    $('#start_date').datepicker();
-    $('#end_date').datepicker();
+    $('#start_date').datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true,
+      orientation: 'bottom auto'
+    });
+    $('#end_date').datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true,
+      orientation: 'bottom auto'
+    });
   });
 
   $('#daterange_btn').click(function(){
     var start_date = $('#start_date').val();
     var end_date = $('#end_date').val();
     if (!start_date || !end_date) {
-      alert('kwa kasjy');
+     $('#date_range_error').modal('show');
     }else{
       $.ajax({
         type: 'GET',
