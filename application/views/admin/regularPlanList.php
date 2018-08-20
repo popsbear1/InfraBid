@@ -309,7 +309,12 @@
                           '</div>' +
                         '</form>';
               }else{
-                return '</tr>';
+                return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                          '<input type="text" name="prev_loc" value="regularPlanView" hidden/>' +
+                          '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                            '<i class="fa fa-eye"></i>' +
+                          '</button>' +
+                        '</form>';
               }
             }
           }

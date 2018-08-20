@@ -5,7 +5,15 @@
           <nav class="navbar navbar-default">
             <div class="container-fluid">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <a class="navbar-brand" href="<?php echo base_url('admin/ongoingProjectPlanView') ?>">
+              <a class="navbar-brand" href="<?php if($prev_loc == 'regularPlanView') {
+                                                    echo base_url('admin/regularPlanListView');
+                                                    }else if($prev_loc == 'supplementalPlanView'){
+                                                        echo base_url('admin/supplementalPlanListView'); 
+                                                      }else if($prev_loc == 'ongoingPlanView'){
+                                                        echo base_url('admin/ongoingProjectPlanView');
+                                                      }
+                                            ?>"
+              >
                 <i class="fa fa-angle-double-left"></i>
                 <b>BACK</b>
               </a>

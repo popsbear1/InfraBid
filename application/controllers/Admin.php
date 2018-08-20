@@ -386,7 +386,8 @@ class Admin extends CI_Controller {
 
 	public function projectDetailsView(){
 		$projectNavControl['pageName'] = "details";
-		$plan_id = $this->session->userdata('plan_id');	
+		$plan_id = $this->session->userdata('plan_id');
+		$projectNavControl['prev_loc'] = $this->session->userdata('prev_loc');	
 		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['logs'] = $this->admin_model->getProjectLogs($plan_id);
@@ -604,6 +605,7 @@ class Admin extends CI_Controller {
 	public function projectTimelineView(){
 		$projectNavControl['pageName'] = "timeline";
 		$plan_id = $this->session->userdata('plan_id');
+		$projectNavControl['prev_loc'] = $this->session->userdata('prev_loc');
 		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;	
 		$data['actStatus'] = $this->admin_model->getProjectActivityStatus($plan_id);
 		$data['procActDate'] = $this->admin_model->getProcActivityDates($plan_id);
@@ -659,6 +661,7 @@ class Admin extends CI_Controller {
 	public function procurementActivityView(){
 		$plan_id = $this->session->userdata('plan_id');
 		$projectNavControl['pageName'] = "activity";
+		$projectNavControl['prev_loc'] = $this->session->userdata('prev_loc');
 		$projectNavControl['projectStatus'] = $this->admin_model->getProjectPlanStatus($plan_id)->status;
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
 		$data['actStatus'] = $this->admin_model->getProjectActivityStatus($plan_id);
@@ -676,12 +679,12 @@ class Admin extends CI_Controller {
 
 	public function setCurrentPlanID(){
 		$plan_id = $this->input->post('plan_id');
-		$project_status = $this->input->post('project_status');
+		$prev_loc = $this->input->post('prev_loc');
 
 		$timeLine_status = $this->admin_model->getProjectTimelineStatus($plan_id);
 
 		$this->session->set_userdata('plan_id', $plan_id);
-		$this->session->set_userdata('project_status', $project_status);
+		$this->session->set_userdata('prev_loc', $prev_loc);
 		$this->session->set_userdata('timeLine_status', $timeLine_status['timeLine_status']);
 
 		redirect('admin/projectDetailsView');

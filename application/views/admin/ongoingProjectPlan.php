@@ -234,6 +234,7 @@
               data: null,
               render: function ( data, type, row ) {
                 return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                          '<input type="text" name="prev_loc" value="ongoingPlanView" hidden/>' +
                           '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
                             '<i class="fa fa-eye"></i>' +
                           '</button>' +
