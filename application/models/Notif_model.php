@@ -333,6 +333,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.pre_bid', 'pending');
 		$this->db->where("project_timeline.pre_bid_end >=", $cur_date);
 		$this->db->where("project_timeline.pre_bid_end <=", $end);
 
@@ -347,6 +348,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.open_bid', 'pending');
 		$this->db->where("project_timeline.bid_submission_end >=", $cur_date);
 		$this->db->where("project_timeline.bid_submission_end <=", $end);
 
@@ -361,6 +363,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.bid_evaluation', 'pending');
 		$this->db->where("project_timeline.bid_evaluation_end >=", $cur_date);
 		$this->db->where("project_timeline.bid_evaluation_end <=", $end);
 
@@ -375,6 +378,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.post_qual', 'pending');
 		$this->db->where("project_timeline.post_qualification_end >=", $cur_date);
 		$this->db->where("project_timeline.post_qualification_end <=", $end);
 
@@ -389,6 +393,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.award_notice', 'pending');
 		$this->db->where("project_timeline.award_notice_end >=", $cur_date);
 		$this->db->where("project_timeline.award_notice_end <=", $end);
 
@@ -403,6 +408,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.contract_signing', 'pending');
 		$this->db->where("project_timeline.contract_signing_end >=", $cur_date);
 		$this->db->where("project_timeline.contract_signing_end <=", $end);
 
@@ -417,6 +423,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.authority_approval', 'pending');
 		$this->db->where("project_timeline.authority_approval_end >=", $cur_date);
 		$this->db->where("project_timeline.authority_approval_end <=", $end);
 
@@ -431,6 +438,7 @@ class Notif_model extends CI_model
 		$this->db->from('project_plan');
 		$this->db->join('project_timeline', 'project_plan.plan_id = project_timeline.plan_id');
 		$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+		$this->db->where('project_activity_status.proceed_notice', 'pending');
 		$this->db->where("project_timeline.proceed_notice_end >=", $cur_date);
 		$this->db->where("project_timeline.proceed_notice_end <=", $end);
 
