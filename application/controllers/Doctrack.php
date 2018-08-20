@@ -135,7 +135,9 @@ class Doctrack extends CI_Controller {
 			$this->upload->do_upload('file');
 
 			$url = 'uploads/document_image/' . $config['file_name'];
-			$this->doctrack_model->addDocumentImageURL($project_document_id, $url);
+			$path = './uploads/document_image/' . $config['file_name'];
+
+			$this->doctrack_model->addDocumentImageURL($project_document_id, $url, $path);
 		}
 			
 		redirect('doctrack/addProjectDocumentImages');
@@ -272,6 +274,22 @@ class Doctrack extends CI_Controller {
 		$user_type = $this->session->userdata('user_type');
 		$data['alerts'] = $this->doctrack_model->getIncomingDocAlerts($user_type);
 		echo json_encode($data);
+	}
+
+	public function deleteDocumentImage(){
+		$document_id = $this->input->post('document_id');
+
+		$image_url = $this->doctrack_model->getAllImageURL($document_id);
+
+		foreach ($image_url as $url) {
+			$path = glob($url['upload_path'] . '.*');
+			if (!empty($path)) {
+				unlink($path[0]);
+			}
+		}
+
+		$this->doctrack_model->deleteDocumentImage($document_id);
+		redirect('doctrack/addProjectDocumentImages');
 	}
 
 }

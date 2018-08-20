@@ -460,10 +460,11 @@
 			}
 		}
 
-		public function addDocumentImageURL($project_document_id, $url){
+		public function addDocumentImageURL($project_document_id, $url, $path){
 			$data = array(
 				'project_document_id' => $project_document_id,
-				'image_url' => base_url() . $url
+				'image_url' => base_url() . $url,
+				'upload_path' => $path
 			);
 
 			if ($this->db->insert('project_document_images', $data)) {
@@ -503,6 +504,21 @@
 			$query = $this->db->get();
 
 			return $query->row_array();
+		}
+
+		public function deleteDocumentImage($document_id){
+			//delete image records in 
+			$this->db->where('project_document_id', $document_id);
+			$this->db->delete('project_document_images');
+
+			//update document availability status
+
+			$data = array(
+				'image_status' => 'false'
+			);
+
+			$this->db->where('project_document_id', $document_id);
+			$this->db->update('project_document', $data);
 		}
 	}
 ?>

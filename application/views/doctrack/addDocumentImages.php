@@ -90,7 +90,9 @@
                           <li class="pull-right">
                             <button value="<?php echo $doc_image['project_document_id'] ?>" class="image_view_btn" >
                               <i class="fa fa-eye"></i>
-                              View Image
+                            </button>
+                            <button value="<?php echo $doc_image['project_document_id'] . ',' . $doc_image['document_name'] ?>" class="image_delete_btn" >
+                              <i class="fa fa-trash"></i>
                             </button>
                           </li>
                         </ul>
@@ -193,6 +195,30 @@
   </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmDocumentImageDeleteModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Delete Image for Document</p>
+        <p class="text-center"><b id="document_name"></b></p>
+        <form method="POST" action="<?php echo base_url('doctrack/deleteDocumentImage') ?>" id="documentImageDeleteForm">
+          <input type="text" name="document_id" id="document_id" hidden>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="documentImageDeleteForm" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   $(document).on('click', '.image_view_btn', function(e){
 
@@ -204,15 +230,24 @@
       type: 'POST',
       url: "<?php echo base_url('doctrack/getAllImageURL') ?>",
       data: { project_document_id: project_document_id},
-      dataType: 'json',
-      success: function(response){
-        for (var i = 0; i < response.image_urls.length; i++) {
-          $('#image_container').append('<img src="' + response.image_urls[i]['image_url'] + '" alt="image">');
-          console.log(response.image_urls[i]['image_url']);
-        }
+      dataType: 'json'
+    }).done(function(response){
+      for (var i = 0; i < response.image_urls.length; i++) {
+        $('#image_container').append('<img src="' + response.image_urls[i]['image_url'] + '" alt="image">');
+        console.log(response.image_urls[i]['image_url']);
       }
-    });
+    })
 
     $('#viewDocumentImageModal').modal('show');
-  })
+  });
+
+  $(document).on('click', '.image_delete_btn', function(){
+
+    var document_Details = $(this).val().split(',');
+
+    $('#document_name').html(document_Details[1]);
+    $('#document_id').val(document_Details[0]);
+    $('#confirmDocumentImageDeleteModal').modal('show');
+
+  });
 </script>
