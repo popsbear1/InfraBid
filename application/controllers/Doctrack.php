@@ -100,7 +100,7 @@ class Doctrack extends CI_Controller {
 		redirect('doctrack/documentDetailsView');
 	}
 
-	public function addProjectDocumentImages(){
+	public function projectDocumentImages(){
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');
 		$data['onhand_project_documents'] = $this->doctrack_model->getProjectDocumentsOnhandWithoutImage($plan_id, $user_type);

@@ -56,9 +56,15 @@
                   </button>
                 <?php endif ?>
                 <?php if ($this->session->userdata('user_type') == 'BAC_SEC'): ?>
-                  <a class="btn btn-primary pull-left" href="<?php echo base_url('doctrack/addProjectDocumentImages') ?>">
+                  <a class="btn btn-primary pull-left" href="<?php echo base_url('doctrack/projectDocumentImages') ?>">
                     <i class="fa fa-image"></i>
                     Add Document Images
+                  </a>
+                <?php endif ?>
+                <?php if ($this->session->userdata('user_type') == 'PEO' || $this->session->userdata('user_type') == 'PGO' || $this->session->userdata('user_type') == 'BAC_TWG'): ?>
+                  <a class="btn bg-purple pull-left" href="<?php echo base_url('doctrack/projectDocumentImages') ?>">
+                    <i class="fa fa-image"></i>
+                    View Document Images
                   </a>
                 <?php endif ?>
                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
