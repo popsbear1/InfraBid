@@ -592,7 +592,7 @@ class Admin extends CI_Controller {
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSupplementalFunds();
+		$data['sourceFunds'] = $this->admin_model->getRegularFunds();
 		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
@@ -602,6 +602,21 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');	
 	}
 
+	public function editSupplementalPlanView(){
+		$plan_id = $this->input->get('plan_id');
+		$data['project_type'] = $this->input->get('project_type');
+		$data['municipalities'] = $this->admin_model->getMunicipalities();
+		$data['barangays'] = $this->admin_model->getBarangays();
+		$data['projTypes'] = $this->admin_model->getProjectType();
+		$data['sourceFunds'] = $this->admin_model->getSupplementalFunds();
+		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
+		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/editPlan', $data);
+		$this->load->view('admin/fragments/footer');	
+	}
 	public function projectTimelineView(){
 		$projectNavControl['pageName'] = "timeline";
 		$plan_id = $this->session->userdata('plan_id');

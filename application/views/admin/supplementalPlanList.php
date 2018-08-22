@@ -420,7 +420,7 @@
               render: function ( data, type, row ) {
                 return '<div class="row">' +
                         '<div class="col-lg-6 col-md-6 col-sm-6">' +
-                          '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
+                          '<form method="GET" action="<?php echo base_url('admin/editSupplementalPlanView') ?>">' +
                             '<input name="project_type" value="' + data.project_type + '" hidden>' +
                             '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
                               '<i class="fa fa-pencil"></i>' +
