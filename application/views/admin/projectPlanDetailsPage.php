@@ -172,7 +172,7 @@
             </div>
           </div>
           <div class="details_view" id="project_logs" hidden="hidden">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" id="remark_table" >
               <thead>
                 <tr>
                   <th class="text-center">User</th>
@@ -204,7 +204,7 @@
                   </div>
                   <div class="box-body">
                     <div style="height: 450px">
-                      <table class="table table-striped table-bordered">
+                      <table class="table table-striped table-bordered" id="timeline_table">
                         <thead>
                           <tr>
                             <th class="text-center">Activity</th>
@@ -401,9 +401,24 @@
 <script src="<?php echo base_url() ?>public/dist/js/adminlte.min.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
   $(document).ready(function(){
+    $('#timeline_table').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : false
+    });
+    $('#remark_table').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : false
+    });
     setButtonStyle();
     $('#project_details_btn').css('background', '#cccccc');
     $('#project_details').prop('hidden', false);
