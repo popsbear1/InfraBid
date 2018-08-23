@@ -12,7 +12,18 @@
   $proceedNoticeDate = date_create($actdates['proceed_notice']);
   $deliveryCompletionDate = date_create($actdates['delivery_completion']);
   $acceptanceTurnoverDate = date_create($actdates['acceptance_turnover']);
+  
 
+  function convertDateTextual($date){
+    if ($date != null) {
+      $timelineDate = date_create($date);
+      $formatedTimelineDate = date_format($timelineDate, 'M-d-Y');
+    }else{
+      $formatedTimelineDate = null;
+    }
+
+    return $formatedTimelineDate;
+  }
 ?>
 <style>
   .details_btn{
