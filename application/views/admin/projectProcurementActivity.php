@@ -125,7 +125,7 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="pre_proc" name="activity_date" placeholder="<?php echo $pre_proc ?>" class="form-control procActDateInput">
+                  <input type="text" id="pre_proc" name="activity_date" placeholder="<?php echo convertDateTextual($pre_proc) ?>" class="form-control procActDateInput">
                 </div>
               </div>
             </form> 
@@ -150,7 +150,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="advertisement" placeholder="<?php echo $advertisement ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="advertisement" placeholder="<?php echo convertDateTextual($advertisement) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>          
           </form>
@@ -175,7 +175,7 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="pre_bid" placeholder="<?php echo $pre_bid ?>" name="activity_date" class="form-control procActDateInput">
+                  <input type="text" id="pre_bid" placeholder="<?php echo convertDateTextual($pre_bid) ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
               </div>
             </form>
@@ -201,7 +201,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Sub/Open of Bids *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="openbid" placeholder="<?php echo $openbid ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="openbid" placeholder="<?php echo convertDateTextual($openbid) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
             <div class="form-group">
@@ -301,7 +301,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Bid Evaluation *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="bidevaluation" placeholder="<?php echo $bidevaluation ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="bidevaluation" placeholder="<?php echo convertDateTextual($bidevaluation) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>      
           </form>
@@ -326,7 +326,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Post Qual *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="postqual" placeholder="<?php echo $postqual ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="postqual" placeholder="<?php echo convertDateTextual($postqual) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -350,7 +350,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice of Award *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="awarddate" placeholder="<?php echo $awarddate ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="awarddate" placeholder="<?php echo convertDateTextual($awarddate) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -375,7 +375,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Contract Signing *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="contractsigning" placeholder="<?php echo $contractsigning ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="contractsigning" placeholder="<?php echo convertDateTextual($contractsigning) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
@@ -401,7 +401,7 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="authorityapproval" placeholder="<?php echo $authorityapproval ?>" name="activity_date" class="form-control procActDateInput">
+                  <input type="text" id="authorityapproval" placeholder="<?php echo convertDateTextual($authorityapproval) ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
               </div>
             </form>
@@ -426,7 +426,7 @@ function convertDate($date){
             <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice to Proceed *: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="proceednotice" placeholder="<?php echo $proceednotice ?>" name="activity_date" class="form-control procActDateInput">
+                <input type="text" id="proceednotice" placeholder="<?php echo convertDateTextual($proceednotice) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
           </form>
