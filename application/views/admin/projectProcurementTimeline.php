@@ -416,7 +416,7 @@
     authorityApprovalMinBase = contractSigningMaxBase + 1;
     authorityApprovalMaxBase = contractSigningMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{  
@@ -439,7 +439,7 @@
     authorityApprovalMinBase = contractSigningMaxBase + 1;
     authorityApprovalMaxBase = contractSigningMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{
@@ -460,7 +460,7 @@
     authorityApprovalMinBase = contractSigningMaxBase + 1;
     authorityApprovalMaxBase = contractSigningMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{
@@ -479,7 +479,7 @@
     authorityApprovalMinBase = contractSigningMaxBase + 1;
     authorityApprovalMaxBase = contractSigningMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{
@@ -496,7 +496,7 @@
     authorityApprovalMinBase = contractSigningMaxBase + 1;
     authorityApprovalMaxBase = contractSigningMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{
@@ -511,7 +511,7 @@
     authorityApprovalMinBase = contractSigningMaxBase + 1;
     authorityApprovalMaxBase = contractSigningMaxBase + 1;
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{
@@ -524,7 +524,7 @@
     var daysToAdd = $('#authorityApprovalNumber').val();
     authorityApprovalMaxBase = authorityApprovalMinBase + (parseFloat(daysToAdd)-1);
     proceedNoticeMinBase = authorityApprovalMaxBase + 1;
-    proceedNoticeMinBase = authorityApprovalMaxBase + 1;
+    proceedNoticeManBase = authorityApprovalMaxBase + 1;
     if (daysToAdd) {
       setDatesWithAdditions(startDate);
     }else{
