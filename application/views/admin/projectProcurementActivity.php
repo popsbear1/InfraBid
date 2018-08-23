@@ -1107,19 +1107,27 @@ function convertDate($date){
   }
 
   function verifyDateOpenBid(inputValue, activity){
-    if(inputValue === getValue(activity)){
-      showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
-      return false;
+    if (getValue(activity) == null || getValue(activity) == "") {
+      if (inputValue == null || inputValue == "") {
+        showError(activity, '<p class="text-danger text-center">The input filed should not be empty!!</p>');
+        return false;
+      }else if(inputValue === getValue(activity)){
+        showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
+        return false;
+      }
     }
     return true;
   }
 
   function validateOpenBidInput(dateInput, start, end){
     var dateValidation = compareDates(dateInput, start, end);
+    console.log(dateValidation);
     var contractorValidation = validateContractor();
+    console.log(contractorValidation);
     var bidValidation = validateBid();
+    console.log(bidValidation);
     if (!dateValidation || !contractorValidation || !bidValidation) {
-      if (!$dateValidation) {
+      if (!dateValidation) {
         showError('openbid', '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
       }
       return false;
@@ -1130,8 +1138,10 @@ function convertDate($date){
 
   function validateBid(){
     var abc = '<?php echo $projectDetails['abc'] ?>';
+    var proposed_bid = '<?php echo $projectDetails['proposed_bid'] ?>';
     console.log(abc);
-    if (abc == null) {
+    console.log(proposed_bid);
+    if (proposed_bid == null || proposed_bid == "") {
       if (!$('#bid_proposal').val() || $('#bid_proposal').val() == "") {
         showError('bid_proposal', '<p class="text-danger text-center">The bid proposal input is Required!</p>');
         return false;
@@ -1156,7 +1166,7 @@ function convertDate($date){
 
   function validateContractor(){
     var contractor = '<?php echo $projectDetails['contractor_id'] ?>';
-    if (contractor == null) {
+    if (contractor == null || contractor == "") {
       if ($('#contractor').val() == "" || !$('#contractor').val()) {
         showError('contractor', '<p class="text-danger text-center">Contactor input field is required!</p>');
         return false;
@@ -1170,7 +1180,6 @@ function convertDate($date){
   }
 
   function getValue(activity){
-    console.log(planDates);
     return planDates[activity];
   }
 
