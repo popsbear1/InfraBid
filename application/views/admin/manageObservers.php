@@ -7,44 +7,50 @@
   </div>
   <div class="box">
     <div class="box-header">
-      <h2 class="box-title">Observer Records<small></small></h2>
-      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addObserverModal">Add Observer</button>
+      <h2 class="box-title">Observers<small></small></h2>
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addDocumentsModal">Add Observer</button>
     </div>
     <div class="box-body">
       <table class="table table-bordered table-striped" id="documentsTable">
         <thead>
           <tr>
-            <th class="text-center">Observer Department Name</th>
+            <th class="text-center">Department Name(Observers)</th>
             <th class="text-center">Status</th>
             <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($observers as $observer): ?>
-            <tr>
-              <td><?php echo $observer['observer_dept_name'] ?></td>
-              <td><?php echo $observer['status'] ?></td>
-              <td>
+            <tr id="<?php echo 'observer' . $observer['observer_id'] ?>">
+              <td class="text-center"><?php echo $observer['observer_dept_name'] ?></td>
+              <td class="text-center"><?php echo $observer['status'] ?></td>
+              <td class="text-center">
                 <div class="btn-group">
-                  <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
-                    <button class="btn btn-success pull-right" id="documentID" name="documentID" value="<?php echo $observer['observer_id'] ?>" type="submit">
+                  <form method="POST" action="<?php echo base_url('admin/setCurrentObserverID') ?>">
+                    <button class="btn btn-success pull-right" id="observerID" name="observerID" value="<?php echo $observer['observer_id'] ?>" type="submit">
                       <i class="fa fa-edit">Edit</i>
                     </button>
                   </form>
-                  <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST" id="delete_document">
-                    <input type="text" name="document_id" value="<?php echo $observer['observer_id']?>" hidden>
+                </div>
+
+                <div class="btn-group">
+                  <form action="<?php echo base_url('admin/deleteObservers') ?>" method="POST" id="delete_document">
+                    <input type="text" name="observer_id" value="<?php echo $observer['observer_id']?>" hidden>
                       <button class="btn btn-danger" type="submit">Delete</button>                       
                   </form>
+                </div>
+
+                <div class="btn-group">
                   <?php if ($observer['status']=='active'): ?>
                       <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
-                        <input type="text" name="document_id" value="<?php echo $observer['observer_id'] ?>" hidden>
+                        <input type="text" name="observer_id" value="<?php echo $observer['observer_id'] ?>" hidden>
                       <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
                     </form>                          
                   <?php endif ?>
 
                   <?php if ($observer['status']=='inactive'): ?>
-                      <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
-                        <input type="text" name="document_id" value="<?php echo $observer['observer_id'] ?>" hidden>
+                      <form action="<?php echo base_url('admin/activateObserver') ?>" method="POST">
+                        <input type="text" name="observer_id" value="<?php echo $observer['observer_id'] ?>" hidden>
                       <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
                     </form>                          
                   <?php endif ?>
@@ -97,7 +103,7 @@
 <!-- <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
 
 
-  <div class="modal fade" id="addObserverModal">
+  <div class="modal fade" id="addDocumentsModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -106,16 +112,19 @@
             <h4 class="modal-title">Add New Observer</h4>
           </div>
           <div class="modal-body">
-            <form id="addObserverForm" method="POST" class="form-label-left" action="<?php echo base_url('admin/addObserver') ?>">
+            <form id="addDocumentsForm" method="POST" class="form-horizontal form-label-left" action="<?php echo base_url('admin/addObserver') ?>">
               <div class="form-group">
-                <label>Observer Organization Name *: </label>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Observer Name/Department
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
                   <input type="text" id="observer_dept_name" name="observer_dept_name" class="form-control">
+                </div>
               </div>
             </form>  
           </div>
-         <div class="modal-footer">
+          <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" form="addObserverForm">Submit</button> 
+            <button type="submit" class="btn btn-primary" form="addDocumentsForm">Submit</button> 
           </div>
         </div>
         <!-- /.modal-content -->
@@ -163,10 +172,10 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Success!</h4>
+        <h4 class="modal-title">Observer Details</h4>
       </div>
       <div class="modal-body text-center">
-        <p>Successfully added Observer!</p>
+        <p>Successfully added observer!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -183,13 +192,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Error!</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Observer</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-center">
-        <p>Error adding Document!</p>
+        <p>Error adding observer!</p>
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -204,13 +213,13 @@
   var table = $('#documentsTable').DataTable({
   });
 
-  $(document).on('submit', '#addObserverForm', function(e){
+  $(document).on('submit', '#addDocumentsForm', function(e){
     e.preventDefault();
 
     $.ajax({
       type: 'POST',
-      url: $('#addObserverForm').attr('action'),
-      data: $('#addObserverForm').serialize(),
+      url: $('#addDocumentsForm').attr('action'),
+      data: $('#addDocumentsForm').serialize(),
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
@@ -235,7 +244,7 @@
             'background-color': '#c1f0c1'
           });
 
-          $('#addObserverForm input').val('');
+          $('#addDocumentsForm input').val('');
         }else if(response.success == 'failed'){
           $('#addfail').modal('show');
           $('.has-error').remove();
@@ -245,7 +254,7 @@
               $(this).remove();
             });
           });
-          $('#addObserverForm input').val('');
+          $('#addDocumentsForm input').val('');
         }else{
           $.each(response.messages, function(key, value) {
             var element = $('#' + key);
@@ -268,9 +277,9 @@
 
     var form_name = $(this).attr('id');
     console.log(form_name);
-    var document_id =  $(this).find("input[name='document_id']").val();
-    console.log(document_id);
-    var row_id = 'document' + document_id;
+    var observer_id =  $(this).find("input[name='observer_id']").val();
+    console.log(observer_id);
+    var row_id = 'observers' + observer_id;
 
     $.ajax({
       type: 'POST',

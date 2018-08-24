@@ -515,11 +515,11 @@
 			return $query->result_array();
 		}
 
-		public function getObserverDetails($observer_id){
+		public function getObserverDetails($currentObserverID){
 			$this->db->select('*');
 			$this->db->from('observers');
-			$this->db->where('observer_id', $observer_id);
-
+			$this->db->where('observer_id', $currentObserverID);
+			$this->db->order_by('observer_dept_name ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
@@ -1534,6 +1534,15 @@
 		$this->db->update('document_type', $data);
 	}
 
+	public function updateObserverDetails($observer_dept_name, $currentObserverID){
+		$data = array(
+			'observer_dept_name' => $observer_dept_name
+		);
+
+		$this->db->where('observer_id', $currentObserverID);
+		$this->db->update('observers', $data);
+	}
+
 	public function updateDocumentNumber($doc_no, $currentDocumentID){
 		$data = array(
 			'doc_no' => $doc_no
@@ -1679,6 +1688,15 @@
 		}
 	}
 
+	public function deleteObservers($observer_id){
+
+		$this->db->where('observer_id', $observer_id);
+		if($this->db->delete('observers')){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function resetProjectTimeline($plan_id){
 
 		$data = array(
@@ -1749,6 +1767,22 @@
 
 		$this->db->where('doc_type_id', $doc_type_id);
 		$this->db->update('document_type', $data);
+	}
+
+	public function updateObserverStatus($observer_id, $action){
+
+		if ($action=='deactivate') {
+			$data = array(
+				'status' => 'inactive'
+			);
+		}else{
+			$data=array(
+				'status' => 'active'
+			);
+		}
+
+		$this->db->where('observer_id', $observer_id);
+		$this->db->update('observers', $data);
 	}
 
 	public function recordProjectLog($plan_id, $user_id, $remark){

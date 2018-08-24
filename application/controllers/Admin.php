@@ -1041,7 +1041,7 @@ class Admin extends CI_Controller {
 		redirect('admin/editProjectTypeView');
 	}
 
-	public function manageObservers(){
+	public function manageObserversView(){
 		$data['observers'] = $this->admin_model->getObservers();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
@@ -1515,6 +1515,32 @@ class Admin extends CI_Controller {
 		redirect('admin/editDocumentsView');
 	}
 
+	public function editObserversView(){
+		$setCurrentObserverID = $this->session->userdata('observer_id');
+		$data['observerDetail'] = $this->admin_model->getObserverDetails($setCurrentObserverID);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/editObserver', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+	public function setCurrentObserverID(){
+		$observerID = $this->input->post('observerID');
+		$this->session->set_userdata('observer_id', $observerID);
+		redirect('admin/editObserversView');
+	}
+
+	public function editObservers(){
+		$setCurrentObserverID = $this->session->userdata('
+			observer_id');
+		if(!empty(trim($_POST['observer_dept_name']))){
+			$observer_dept_name = $this->input->post('observer_dept_name');
+			$this->admin_model->updateObserverDetails($observer_dept_name);
+		}
+
+		$this->session->set_flashdata('success', 'Observer Details Successfully Updated.');
+		redirect('admin/editObserversView');
+	}
+
 	public function editDocument(){
 		$currentDocumentID = $this->session->userdata('doc_type_id');
 		if (!empty(trim($_POST['document_name']))) {
@@ -1858,6 +1884,30 @@ class Admin extends CI_Controller {
 		$this->admin_model->updateDocumentTypeStatus($doc_type_id, 'activate');
 
 		redirect('admin/manageDocumentsView');	
+	}
+
+	public function deleteObservers(){
+		$data['success'] = false;
+		$observer_id=$this->input->post('observer_id');
+		if ($this->admin_model->deleteObservers($observer_id)) {
+			$data['success'] = true;
+		}
+
+		echo json_encode($data);
+	}
+
+	public function deactivateObserver(){
+		$observer_id=$this->input->post('observer_id');
+		$this->admin_model->updateObserverDetails($observer_id,'activate');
+
+		redirect('admin/manageObserversView');
+	}
+
+	public function activateObserver(){
+		$observer_id=$this->input->post('observer_id');
+		$this->admin_model->updateObserverDetails($observer_id,'deactivavte');
+
+		redirect('admin/manageObserversView');
 	}
 
 	public function deleteContractor(){
