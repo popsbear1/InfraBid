@@ -1041,6 +1041,44 @@ class Admin extends CI_Controller {
 		redirect('admin/editProjectTypeView');
 	}
 
+	public function manageObservers(){
+		$data['observers'] = $this->admin_model->getObservers();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/manageObservers', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addObserver(){
+
+		$data = array('success' => false, 'messages' => array());
+
+
+		$this->form_validation->set_rules('observer_dept_name', 'Observer Organization Name', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+
+			$observer_dept_name = htmlspecialchars($this->input->post('observer_dept_name'));
+
+			$return_value = $this->admin_model->insertNewObserver($observer_dept_name);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['observer'] = $this->admin_model->getObserverDetails($return_value);
+				$data['success'] = true;
+			}
+
+		}else{
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+		}
+		
+		echo json_encode($data);
+	}
+
 	public function manageUsers(){
 		$data['users'] = $this->admin_model->getUsers();
 		$this->load->view('admin/fragments/head');
@@ -1534,14 +1572,22 @@ class Admin extends CI_Controller {
 		}
 
 		if ($activity_name === "open_bid") {
-			$contractor_id = $this->input->post('contractor');
-			$bid_proposal = $this->input->post('bid_proposal');
-			if ($this->admin_model->updateOpenBidDate($plan_id, $date, $contractor_id, $bid_proposal)) {
+			if ($this->admin_model->updateOpenBidDate($plan_id, $date)) {
 				$this->session->set_flashdata('success', "Bid Oppening Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Bid Oppening Date Was Not Updated! Try again.");
 			}
 		}
+
+		// if ($activity_name === "open_bid") {
+		// 	$contractor_id = $this->input->post('contractor');
+		// 	$bid_proposal = $this->input->post('bid_proposal');
+		// 	if ($this->admin_model->updateOpenBidDate($plan_id, $date, $contractor_id, $bid_proposal)) {
+		// 		$this->session->set_flashdata('success', "Bid Oppening Date Successfully Updated!");
+		// 	}else{
+		// 		$this->session->set_flashdata('error', "Error! Bid Oppening Date Was Not Updated! Try again.");
+		// 	}
+		// }
 
 		// if ($activity_name === "eligibility_check") {
 		// 	$contractor_id = $this->input->post('contractor');

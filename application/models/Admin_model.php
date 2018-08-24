@@ -507,6 +507,24 @@
 			return $query->row_array();
 		}
 
+		public function getObservers(){
+			$this->db->select('*');
+			$this->db->from('observers');
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getObserverDetails($observer_id){
+			$this->db->select('*');
+			$this->db->from('observers');
+			$this->db->where('observer_id', $observer_id);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
 		public function getUsers(){
 			$this->db->select('*');
 			$this->db->from('users');
@@ -755,6 +773,17 @@
 		}		
 	}
 
+	public function insertNewObserver($observer_dept_name){
+		$data = array(
+			'observer_dept_name' => $observer_dept_name
+		);
+
+		if ($this->db->insert('observers', $data)) {
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
+	}
 
 	public function insertNewContractor($businessname, $owner, $address, $contactnumber){
 		$data = array(
@@ -1194,43 +1223,63 @@
 		}
 	}
 
-	public function updateOpenBidDate($plan_id, $date, $contractor_id, $proposed_bid){
-		if ($date != null || !empty($date) || $date != "") {
-			$data = array(
-				'open_bid' => $date,
-				'eligibility_check' => $date
-			);
-			$this->db->where('plan_id', $plan_id);
-			$this->db->update('procact', $data);
-		}
-
-		if ($contractor_id != null || !empty($contractor_id) || $contractor_id != "") {
-			$contractorData = array(
-				'contractor_id' => $contractor_id
-			);
-
-			$this->db->where('plan_id', $plan_id);
-			$this->db->update('project_plan', $contractorData);
-		}
-
-		if ($proposed_bid != null || !empty($proposed_bid) || $proposed_bid != "") {
-			$bidData = array(
-				'proposed_bid' => $proposed_bid
-			);
-
-			$this->db->where('plan_id', $plan_id);
-			$this->db->update('project_plan', $bidData);
-		}
-		
-		$status = array(
-			'eligibility_check' => 'finished',
-			'open_bid' => 'finished'
+	public function updateOpenBidDate($plan_id, $date){
+		$data = array(
+			'open_bid' => $date,
+			'eligibility_check' => $date
 		);
+
 		$this->db->where('plan_id', $plan_id);
-		$this->db->update('project_activity_status', $status);
-		return true;
-		
+		if ($this->db->update('procact', $data)) {
+			$status = array(
+				'open_bid' => 'finished',
+				'eligibility_check' => 'finished'
+			);
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_activity_status', $status);
+			return true;
+		}else{
+			return false;
+		}
 	}
+
+	// public function updateOpenBidDate($plan_id, $date, $contractor_id, $proposed_bid){
+	// 	if ($date != null || !empty($date) || $date != "") {
+	// 		$data = array(
+	// 			'open_bid' => $date,
+	// 			'eligibility_check' => $date
+	// 		);
+	// 		$this->db->where('plan_id', $plan_id);
+	// 		$this->db->update('procact', $data);
+	// 	}
+
+	// 	if ($contractor_id != null || !empty($contractor_id) || $contractor_id != "") {
+	// 		$contractorData = array(
+	// 			'contractor_id' => $contractor_id
+	// 		);
+
+	// 		$this->db->where('plan_id', $plan_id);
+	// 		$this->db->update('project_plan', $contractorData);
+	// 	}
+
+	// 	if ($proposed_bid != null || !empty($proposed_bid) || $proposed_bid != "") {
+	// 		$bidData = array(
+	// 			'proposed_bid' => $proposed_bid
+	// 		);
+
+	// 		$this->db->where('plan_id', $plan_id);
+	// 		$this->db->update('project_plan', $bidData);
+	// 	}
+		
+	// 	$status = array(
+	// 		'eligibility_check' => 'finished',
+	// 		'open_bid' => 'finished'
+	// 	);
+	// 	$this->db->where('plan_id', $plan_id);
+	// 	$this->db->update('project_activity_status', $status);
+	// 	return true;
+		
+	// }
 
 	// public function updateOpenBidDate($plan_id, $date){
 	// 	$data = array(

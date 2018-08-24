@@ -192,6 +192,19 @@ script for document tracking alert
       </li>
 
       <li>
+        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageObservers') ?>">
+          <div class="row">
+            <div class="col-lg-3">
+              <i class="fa fa-users"></i>
+            </div>
+            <div class="col-lg-9 text-left">
+              Observers
+            </div>         
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDocumentsView') ?>">
           <div class="row">
             <div class="col-lg-3">

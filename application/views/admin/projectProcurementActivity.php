@@ -71,12 +71,12 @@ function convertDate($date){
       <div class="row" style="height: 50px">
         <div class="col-lg-12 col-md-12 col-sm-12">
           <?php if (isset($_SESSION['success'])): ?>
-            <div class="text-center alert alert-success">
+            <div class="text-center" style="background: #00cc00; padding: 5px">
               <p><?php echo $_SESSION['success'] ?></p>
             </div>
           <?php endif ?>
           <?php if (isset($_SESSION['error'])): ?>
-            <div class="text-center alert alert-warning">
+            <div class="text-center" style="background: #ff5c33; padding: 5px">
               <p><?php echo $_SESSION['error'] ?></p>
             </div>
           <?php endif ?>
@@ -204,7 +204,7 @@ function convertDate($date){
                 <input type="text" id="openbid" placeholder="<?php echo convertDateTextual($openbid) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="control-label col-lg-5 col-md-5 col-sm-5">Number of Re-bids: </label>
               <div class="col-lg-7 col-md-7 col-sm-7">
                 <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
@@ -234,7 +234,7 @@ function convertDate($date){
               <div class="col-lg-7 col-md-7 col-sm-7">
                 <input type="text" id="bid_proposal" name="bid_proposal" class="form-control" placeholder="<?php echo number_format($projectDetails['proposed_bid'], 2) ?>">
               </div>
-            </div>
+            </div> -->
           </form>
         </div>
 
@@ -495,8 +495,8 @@ function convertDate($date){
           <div class="row procactsubmitcontainer" id="open_bid_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
               <button type="button" class="btn btn-primary procactsubmitbutton" value="openbid,open_bid_form">Submit</button>
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model">Schedule for re-bid/another SVP</button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode">Recommend Project for Review</button> 
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
             </div>
           </div>
 
@@ -510,7 +510,9 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="bid_eval_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button> 
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button>
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
             </div>
           </div>
 
@@ -1000,11 +1002,18 @@ function convertDate($date){
       }
     }
     if (activity == 'openbid') {
-      if (verifyDateOpenBid(inputValue, activity)) {
-        if (validateOpenBidInput(inputValue, bid_submission_start, bid_submission_end)) {
-          proceedSubmitOpenBid('Open-bid Date', inputValue, activityForm);
+      if (verifyDate(inputValue, activity)) {
+        if (compareDates(inputValue, bid_submission_start, bid_submission_end)) {
+          proceedSubmit('Open-bid Date', inputValue, activityForm);
+        }else{
+          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
         }
-      }
+      } 
+      // if (verifyDateOpenBid(inputValue, activity)) {
+      //   if (validateOpenBidInput(inputValue, bid_submission_start, bid_submission_end)) {
+      //     proceedSubmitOpenBid('Open-bid Date', inputValue, activityForm);
+      //   }
+      // }
     }
     if (activity == 'bidevaluation') {
       if (verifyDate(inputValue, activity)) {
