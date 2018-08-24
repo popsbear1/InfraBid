@@ -646,7 +646,7 @@
     console.log(startDate);
     var startDateDay = ("0" + startDate.getDate()).slice(-2);
     var startDateMonth = ("0" + (startDate.getMonth() + 1)).slice(-2);
-    var finalStartDate = (startDateMonth)+"/"+(startDateDay)+"/"+startDate.getFullYear();
+    var finalStartDate = startDate.getFullYear()+"-"+(startDateMonth)+"-"+(startDateDay);
     return finalStartDate;
   }
 
@@ -656,7 +656,7 @@
     console.log(endDate);
     var endDateDay = ("0" + endDate.getDate()).slice(-2);
     var endDateMonth = ("0" + (endDate.getMonth() + 1)).slice(-2);
-    var finalEndDate = (endDateMonth)+"/"+(endDateDay)+"/"+endDate.getFullYear();
+    var finalEndDate = endDate.getFullYear()+"-"+(endDateMonth)+"-"+(endDateDay);
     return finalEndDate;
   }
 
