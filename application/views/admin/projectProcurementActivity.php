@@ -71,13 +71,13 @@ function convertDate($date){
       <div class="row" style="height: 50px">
         <div class="col-lg-12 col-md-12 col-sm-12">
           <?php if (isset($_SESSION['success'])): ?>
-            <div class="text-center" style="background: #00cc00; padding: 5px">
-              <p><?php echo $_SESSION['success'] ?></p>
+            <div class="text-center bg-olive">
+              <p style="padding: 10px"><?php echo $_SESSION['success'] ?></p>
             </div>
           <?php endif ?>
           <?php if (isset($_SESSION['error'])): ?>
-            <div class="text-center" style="background: #ff5c33; padding: 5px">
-              <p><?php echo $_SESSION['error'] ?></p>
+            <div class="text-center bg-maroon">
+              <p style="padding: 10px"><?php echo $_SESSION['error'] ?></p>
             </div>
           <?php endif ?>
         </div>
