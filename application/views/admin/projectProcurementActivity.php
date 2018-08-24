@@ -513,6 +513,7 @@ function convertDate($date){
               <button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
+              <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#selectProjectBidders"><small>Select Bidders</small></button> 
             </div>
           </div>
 
@@ -679,6 +680,52 @@ function convertDate($date){
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Confirm</button>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--     <style>
+.modal-dialog {
+          width: 360px;
+        }
+.modal-header {
+    background-color: #337AB7;
+    padding:16px 16px;
+    color:#FFF;
+    border-bottom:2px dashed #337AB7;
+ }
+</style> -->
+
+
+    <div id="selectProjectBidders" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document" style="width: 800px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;
+            </button>
+            <h5 class="modal-title">Select Project Bidders</h5>
+            
+          </div>
+          <div class="modal-body" style=" height: 500px;overflow-y: scroll;">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-8" style="border: solid">
+                <div>
+                  <?php foreach ($contractors as $contractor): ?>
+                    <div class="checkbox">
+                      <label>
+                      <input type="checkbox" value="">
+                      </label>
+                    </div>
+                  <?php endforeach ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
