@@ -1996,5 +1996,19 @@
 			return false;
 		}
 	}
+
+	public function insertBids($plan_id, $contractor_id, $proposed_bid){
+		$data = array(
+			'plan_id' => $plan_id,
+			'contractor_id' => $contractor_id,
+			'proposed_bid' => $proposed_bid
+		);
+
+		if ($this->db->insert('project_bidders', $data)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 ?>

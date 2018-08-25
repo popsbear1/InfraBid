@@ -2085,6 +2085,18 @@ class Admin extends CI_Controller {
 		redirect('admin/manageMunicipalitiesAndBarangays');	
 	}
 
+	public function addBidders(){
+		$plan_id = $this->session->userdata('plan_id');
+		$bidders = $this->input->post('contractor_id[]');
+		$bids = $this->input->post('bids[]');
+
+		for( $i = 0; $i < sizeOf($bidders); $i++){
+			$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
+		}
+
+		echo json_encode($bidders);
+	}
+
 	public function fpdfView(){
 		$this->load->library('CustomFPDF');
 		$pdf = $this->customfpdf->getInstance();

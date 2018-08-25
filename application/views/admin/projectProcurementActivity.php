@@ -699,7 +699,7 @@ function convertDate($date){
 
 
     <div id="selectProjectBidders" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document" style="width: 800px;">
+      <div class="modal-dialog" role="document" style="width: 1000px;">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -710,22 +710,45 @@ function convertDate($date){
           </div>
           <div class="modal-body" style=" height: 500px;overflow-y: scroll;">
             <div class="row">
-              <div class="col-lg-8 col-md-8 col-sm-8" style="border: solid">
-                <div>
-                  <?php foreach ($contractors as $contractor): ?>
-                    <div class="checkbox">
-                      <label>
-                      <input type="checkbox" value="">
-                      </label>
-                    </div>
-                  <?php endforeach ?>
+              <div class="col-lg-7 col-md-7 col-sm-7">
+                <div class="bg-purple">
+                  <p style="padding: 10px; " class="text-center">Contractor List</p>
                 </div>
+                <table class="table-bordered" id="contractor_table">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Bussiness Name</th>
+                      <th class="text-center">Owner</th>
+                      <th class="text-center"><i class="fa fa-plus"></i></th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-5 col-sm-5 col-md-5">
+                <div class="bg-olive">
+                  <p style="padding: 10px; " class="text-center">Selected Bidders</p>
+                </div>
+                <form id="selected_contractors_form">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <td class="text-center">Bidder</td>
+                        <td class="text-center">Bid Amount</td>
+                      </tr>
+                    </thead>
+                    <tbody id="selected_contractors_container">
+                    
+                    </tbody>
+                  </table>
+                </form>
               </div>
             </div>
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Confirm</button>
+              <button type="submit" class="btn btn-primary" form="selected_contractors_form">Confirm</button>
           </div>
         </div>
       </div>
@@ -813,6 +836,25 @@ function convertDate($date){
               </div>
             </div>
 
+            <div id="contractor_selection_alert" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Alert!!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-center">Contractor Already Included!</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
             <!-- jQuery 3 -->
             <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
@@ -834,12 +876,77 @@ function convertDate($date){
 <script>
 
   $(document).ready(function(){
+
+    var contractors_data = '<?php echo json_encode($contractors) ?>';
+    var contractors = JSON.parse(contractors_data);
+    var selected_contractors = new Array();
+
     $('.procActDateInput').datepicker({
       orientation: 'bottom auto',
       format: 'yyyy-mm-dd',
       autoclose: true
     });
+
+    $('#contractor_table').DataTable({
+      data: contractors,
+      columns: [
+        { data: 'businessname' },
+        { data: 'owner' },
+        {
+          data: null,
+          render: function(data, type, row){
+            return '<button class="btn btn-primary btn-sm contractor_add" value="' + data.contractor_id + '">' +
+                    '<i class="fa fa-plus"></i>' +
+                    '</button>'
+          }
+        }
+      ],
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : false
+    });
+
+    $(document).on('click', '.contractor_add', function(){
+      var contractor_id = $(this).val();
+      if (!selected_contractors.includes(contractor_id)) {
+        selected_contractors.push(contractor_id);
+        console.log(contractor_id);
+        console.log(selected_contractors);
+        var contractor_bussinessname = $(this).parent().prev().prev().html();
+        var bussiness_owner = $(this).parent().prev().html();
+        console.log(contractor_bussinessname);
+        $('#selected_contractors_container').prepend(
+          '<tr>' +
+            '<td>' + contractor_bussinessname + ' - ' + bussiness_owner + '</td>' +
+            '<td>' +
+              '<input name="contractor_id[]" value="' + contractor_id + '" hidden>' +
+              '<input class="form-control" name="bids[]" >' +
+            '</td>' +
+          '</tr>'
+        );
+      }else{
+        $('#contractor_selection_alert').modal('show');
+      }
+    });
+
+    $('#selected_contractors_form').submit(function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url('admin/addBidders') ?>',
+        data: $(this).serialize(),
+        datatype: 'json'
+      }).done(function(response){
+
+      });
+    });
   });
+
+    
 
   var planDates = {
     pre_proc : '<?php echo $pre_proc ?>',
