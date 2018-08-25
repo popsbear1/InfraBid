@@ -550,7 +550,7 @@ function convertDate($date){
               <button type="button" class="btn btn-primary procactsubmitbutton" value="postqual,post_qual_form">Submit</button>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
-              <button type="button" class="btn bg-maroon" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal" >Bid Disqualification</button>
+              <button type="button" class="btn bg-maroon" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal" ><small>Bid Disqualification</small></button>
             </div>
           </div>
 
@@ -559,7 +559,7 @@ function convertDate($date){
               <button type="button" class="btn btn-primary procactsubmitbutton" value="awarddate,award_notice_form">Submit</button>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
-              <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal">Bidder Sanction</button>
+              <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal"><small>Bidder Sanction</small></button>
             </div>
           </div>
 
@@ -811,26 +811,34 @@ function convertDate($date){
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" method="POST" id="projectBidderDisqualificationAndSanctionForm" >
-                    <table class="table table-bordered table-striped">
-                      <thead>
+                  <div class="well">
+                    <div class="form-group">
+                      <label>Current Winning Bidder:</label>
+                      <p class="form-control"><?php echo $projectDetails['businessname'] . ' - ' . $projectDetails['owner'] ?></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Winning Bid:</label>
+                      <p class="form-control"><?php echo $projectDetails['proposed_bid'] ?></p>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Bidder</th>
+                        <th>Proposed Bid</th>
+                        <th>Bid Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($bidders as $bid): ?>
                         <tr>
-                          <th>Bidder</th>
-                          <th>Proposed Bid</th>
-                          <th>Bid Status</th>
+                          <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                          <td><?php echo $bid['proposed_bid'] ?></td>
+                          <td><?php echo $bid['bid_status'] ?></td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach ($bidders as $bid): ?>
-                          <tr>
-                            <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
-                            <td><?php echo $bid['proposed_bid'] ?></td>
-                            <td><?php echo $bid['bid_status'] ?></td>
-                          </tr>
-                        <?php endforeach ?>
-                      </tbody>
-                    </table>
-                  </form>
+                      <?php endforeach ?>
+                    </tbody>
+                  </table>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary">Confirm</button>
