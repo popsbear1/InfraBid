@@ -2001,7 +2001,8 @@
 		$data = array(
 			'plan_id' => $plan_id,
 			'contractor_id' => $contractor_id,
-			'proposed_bid' => $proposed_bid
+			'proposed_bid' => $proposed_bid,
+			'bid_status' => 'active'
 		);
 
 		if ($this->db->insert('project_bidders', $data)) {
@@ -2009,6 +2010,44 @@
 		}else{
 			return false;
 		}
+	}
+
+	public function getProjectBids($plan_id){
+		$this->db->select('*');
+		$this->db->from('project_bidders');
+		$this->db->join('contractors', 'project_bidders.contractor_id = contractors.contractor_id');
+		$this->db->where('plan_id', $plan_id);
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	public function updateCurrentWinningBid($plan_id){
+		$bids = $this->getProjectBids($plan_id);
+		$winning_bid;
+		$contractor_bid = null;
+		foreach ($bids as $bid) {
+			if ($bid['bid_status'] == 'active') {
+				if ($contractor_bid == null) {
+					$contractor_bid = $bid['proposed_bid'];
+					$winning_bid = $bid;
+				}else{
+					if ($bid['proposed_bid'] < $contractor_bid) {
+						$contractor_bid = $bid['proposed_bid'];
+						$winning_bid = $bid;
+					}
+				}
+			}
+		}
+
+		$data = array(
+			'contractor_id' => $winning_bid['contractor_id'],
+			'proposed_bid' => $winning_bid['proposed_bid']
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
 	}
 }
 ?>

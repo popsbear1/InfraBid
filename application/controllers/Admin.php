@@ -684,6 +684,7 @@ class Admin extends CI_Controller {
 		$data['arrayCount'] = count($data['procActDate']);
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
+		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -2094,7 +2095,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
 		}
 
-		echo json_encode($bidders);
+		$this->admin_model->updateCurrentWinningBid($plan_id);
 	}
 
 	public function fpdfView(){

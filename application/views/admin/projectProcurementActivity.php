@@ -303,6 +303,28 @@ function convertDate($date){
               <div class="col-lg-7 col-md-7 col-sm-7">
                 <input type="text" id="bidevaluation" placeholder="<?php echo convertDateTextual($bidevaluation) ?>" name="activity_date" class="form-control procActDateInput">
               </div>
+            </div>
+            <div class="row" style="background: white; overflow-y: scroll; height: 280px">
+              <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 3px">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Bidder</th>
+                      <th>Proposed Bid</th>
+                      <th>Bid Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($bidders as $bid): ?>
+                      <tr>
+                        <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                        <td><?php echo $bid['proposed_bid'] ?></td>
+                        <td><?php echo $bid['bid_status'] ?></td>
+                      </tr>
+                    <?php endforeach ?>
+                  </tbody>
+                </table>
+              </div>
             </div>      
           </form>
         </div>
@@ -510,7 +532,13 @@ function convertDate($date){
 
           <div class="row procactsubmitcontainer" id="bid_eval_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
-              <button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button>
+              <?php 
+                if (empty($bidders)) {
+                  echo '<button type="button" class="btn btn-primary" data-toggle="tooltip" title="Select Bidders First!" disabled>Submit</button>';
+                }else{
+                  echo '<button type="button" class="btn btn-primary procactsubmitbutton" value="bidevaluation,bid_evaluation_form">Submit</button>';
+                }
+              ?>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
               <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#selectProjectBidders"><small>Select Bidders</small></button> 
@@ -684,18 +712,6 @@ function convertDate($date){
         </div>
       </div>
     </div>
-
-<!--     <style>
-.modal-dialog {
-          width: 360px;
-        }
-.modal-header {
-    background-color: #337AB7;
-    padding:16px 16px;
-    color:#FFF;
-    border-bottom:2px dashed #337AB7;
- }
-</style> -->
 
 
     <div id="selectProjectBidders" class="modal" tabindex="-1" role="dialog">
@@ -940,8 +956,8 @@ function convertDate($date){
         url: '<?php echo base_url('admin/addBidders') ?>',
         data: $(this).serialize(),
         datatype: 'json'
-      }).done(function(response){
-
+      }).done(function(){
+        window.location.replace("<?php echo base_url('admin/procurementActivityView') ?>");
       });
     });
   });
