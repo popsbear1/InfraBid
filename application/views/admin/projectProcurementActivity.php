@@ -548,14 +548,18 @@ function convertDate($date){
           <div class="row procactsubmitcontainer"  id="post_qual_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
               <button type="button" class="btn btn-primary procactsubmitbutton" value="postqual,post_qual_form">Submit</button>
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal" >Bid Disqualifide</button>
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
+              <button type="button" class="btn bg-maroon" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal" >Bid Disqualification</button>
             </div>
           </div>
 
           <div class="row procactsubmitcontainer" id="award_notice_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
               <button type="button" class="btn btn-primary procactsubmitbutton" value="awarddate,award_notice_form">Submit</button>
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal">Prepare Sanction Letter</button>
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
+              <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#bidDisqualificationAndSanctinoModal">Bidder Sanction</button>
             </div>
           </div>
 
@@ -808,21 +812,28 @@ function convertDate($date){
                 </div>
                 <div class="modal-body">
                   <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" method="POST" id="projectBidderDisqualificationAndSanctionForm" >
-                    <div class="form-group">
-                      <label>Current Re-bid Count: </label>
-                      <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
-                    </div>
-                    <div class="form-group">
-                      <label>Remark* ;</label>
-                      <textarea name="bidder_saction_disqualification_remark" cols="30" rows="10" class="form-control bidder_saction_disqualification_remark" style="resize: none;"></textarea>
-                    </div>
-                    <input type="text" name="plan_id" value="<?php echo $projectDetails['plan_id'] ?>" hidden>
-                    <input type="text" name="action" id="disqualificationSanction_action" hidden>
+                    <table class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Bidder</th>
+                          <th>Proposed Bid</th>
+                          <th>Bid Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($bidders as $bid): ?>
+                          <tr>
+                            <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                            <td><?php echo $bid['proposed_bid'] ?></td>
+                            <td><?php echo $bid['bid_status'] ?></td>
+                          </tr>
+                        <?php endforeach ?>
+                      </tbody>
+                    </table>
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary dis_qual_btn" value="rebid">RE-BID</button>
-                  <button type="button" class="btn btn-primary dis_qual_btn" value="rereview">RE-REVIEW</button>
+                  <button type="button" class="btn btn-primary">Confirm</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
