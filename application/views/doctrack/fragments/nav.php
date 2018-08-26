@@ -65,6 +65,14 @@
             >
               <a href="<?php echo base_url('capitol/completedDocumentTrackingView')?>">Completed
               </a>
+            </li>
+            <li
+            <?php if ($page == 'disqualification'):?>
+              class="active"
+            <?php endif?>
+            >
+              <a href="<?php echo base_url('capitol/bidDisqualificationView') ?>">Disqualifications
+              </a>
             </li>            
           </ul>
         </div>

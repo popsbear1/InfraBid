@@ -343,6 +343,34 @@
 			return $query->result_array();
 		}
 
+		public function getBidDisqualificationReports(){
+			$this->db->select('*, concat(first_name, " ", middle_name, " ", last_name) as userName, project_bidders.proposed_bid as contractor_bid');
+			$this->db->from('disqualification_records');
+			$this->db->join('project_bidders', 'disqualification_records.project_bid = project_bidders.project_bid');
+			$this->db->join('project_logs', 'disqualification_records.project_log_id = project_logs.project_log_id');
+			$this->db->join('project_plan', 'project_bidders.plan_id = project_plan.plan_id');
+			$this->db->join('contractors', 'project_bidders.contractor_id = contractors.contractor_id');
+			$this->db->join('users', 'project_logs.user_id = users.user_id');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getDisqualifideBidData($plan_id, $contractor_id){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->where('plan_id', $plan_id);
+			$this->db->where('contractor_id', $contractor_id);
+			$this->db->where('project_document.status', 'disqualifide');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+
+		}
+
 		/**
 		* Update Documents
 		*/

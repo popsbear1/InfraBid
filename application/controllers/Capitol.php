@@ -45,6 +45,15 @@ class Capitol extends CI_Controller {
 		$this->load->view('doctrack/fragments/footer');
 	}
 
+	public function bidDisqualificationView(){
+		$page['page'] = 'disqualification';
+		$data['records'] = $this->doctrack_model->getBidDisqualificationReports();
+		$this->load->view('doctrack/fragments/head');
+		$this->load->view('doctrack/fragments/nav', $page);
+		$this->load->view('doctrack/bidDisqualificationView', $data);
+		$this->load->view('doctrack/fragments/footer');	
+	}
+
 
 	public function projectListViewForPOW(){
 		$page['page'] = 'POW';

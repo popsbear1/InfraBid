@@ -2056,7 +2056,7 @@
 
 		$disqualification_data = array(
 			'project_bid' => $project_bid,
-			'log_id' => $log_id
+			'project_log_id' => $log_id
 		);
 
 		$this->db->insert('disqualification_records', $disqualification_data);
@@ -2137,6 +2137,7 @@
 		}
 	}
 	public function updateCurrentWinningBid($plan_id){
+		$bids = $this->getProjectBids($plan_id);
 		$winning_bid;
 		$contractor_bid = null;
 		foreach ($bids as $bid) {
