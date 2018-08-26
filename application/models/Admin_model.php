@@ -2122,8 +2122,7 @@
 		$this->db->update('project_activity_status', $status);
 	}
 
-
-	public function updateCurrentWinningBid($plan_id){
+	public function verifyBidAvailability($plan_id){
 		$bids = $this->getProjectBids($plan_id);
 		$active_bids = 0;
 		foreach ($bids as $bid) {
@@ -2132,33 +2131,35 @@
 			}
 		}
 		if ($active_bids > 0) {
-			$winning_bid;
-			$contractor_bid = null;
-			foreach ($bids as $bid) {
-				if ($bid['bid_status'] == 'active') {
-					if ($contractor_bid == null) {
-						$contractor_bid = $bid['proposed_bid'];
-						$winning_bid = $bid;
-					}else{
-						if ($bid['proposed_bid'] < $contractor_bid) {
-							$contractor_bid = $bid['proposed_bid'];
-							$winning_bid = $bid;
-						}
-					}
-				}
-			}
-
-			$data = array(
-				'contractor_id' => $winning_bid['contractor_id'],
-				'proposed_bid' => $winning_bid['proposed_bid']
-			);
-
-			$this->db->where('plan_id', $plan_id);
-			$this->db->update('project_plan', $data);
 			return true;
 		}else{
 			return false;
 		}
+	}
+	public function updateCurrentWinningBid($plan_id){
+		$winning_bid;
+		$contractor_bid = null;
+		foreach ($bids as $bid) {
+			if ($bid['bid_status'] == 'active') {
+				if ($contractor_bid == null) {
+					$contractor_bid = $bid['proposed_bid'];
+					$winning_bid = $bid;
+				}else{
+					if ($bid['proposed_bid'] < $contractor_bid) {
+						$contractor_bid = $bid['proposed_bid'];
+						$winning_bid = $bid;
+					}
+				}
+			}
+		}
+
+		$data = array(
+			'contractor_id' => $winning_bid['contractor_id'],
+			'proposed_bid' => $winning_bid['proposed_bid']
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
 	}
 }
 ?>

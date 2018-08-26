@@ -1806,15 +1806,18 @@ class Admin extends CI_Controller {
 		$plan_id = $this->input->post('plan_id');
 		$remark = $this->input->post('bidder_saction_disqualification_remark');
 
-		// perform disqualification
-		// record all logs and records
-		// update status etc...
-		$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
+		if ($this->admin_model->verifyBidAvailability($plan_id)) {
 
-		// reset project activity dates and status
-		$this->admin_model->resetProcActivityDatesAndStatus($plan_id);
+			// perform disqualification
+			// record all logs and records
+			// update status etc...
+			$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
 
-		if ($this->admin_model->updateCurrentWinningBid($plan_id)) {
+			// reset project activity dates and status
+			$this->admin_model->resetProcActivityDatesAndStatus($plan_id);
+
+			$this->admin_model->updateCurrentWinningBid($plan_id);
+
 			$data['success'] = true;
 		}
 

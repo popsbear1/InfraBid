@@ -908,6 +908,26 @@ function convertDate($date){
               </div>
             </div>
 
+            <div id="bidderSelectionAlert" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Alert!!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-center">All recorded bidders are disqualifide!</p>
+                    <p class="text-center">This project can either be Re-bid or Re-review.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
             <!-- jQuery 3 -->
             <script src="<?php echo base_url() ?>public/bower_components/jquery/dist/jquery.min.js"></script>
@@ -1506,7 +1526,11 @@ function convertDate($date){
       dataType: 'json',
       success: function(response){
         if (response.success == true) {
-          window.location.href = "<?php echo base_url('admin/projectDetailsView'); ?>";
+          window.location.href = "<?php echo base_url('admin/procurementActivityView'); ?>";
+        }else{
+          $('#disqualifiactionSanctionConfirmationModal').modal('hide');
+          $('#bidDisqualificationAndSanctinoModal').modal('hide');
+          $('#bidderSelectionAlert').modal('show');
         }
       }
     });
