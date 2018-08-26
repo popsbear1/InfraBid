@@ -802,51 +802,71 @@ function convertDate($date){
 
 
         <div id="bidDisqualificationAndSanctinoModal" class="modal" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog" role="document" style="width: 1000px;">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Disqualification</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="well">
-                    <div class="form-group">
-                      <label>Current Winning Bidder:</label>
-                      <p class="form-control"><?php echo $projectDetails['businessname'] . ' - ' . $projectDetails['owner'] ?></p>
+                <span aria-hidden="true">&times;
+                </button>
+                <h5 class="modal-title">Bidde Disqualification/Sanction</h5>
+
+              </div>
+              <div class="modal-body" style=" height: 500px;">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="well">
+                      <div class="form-group">
+                        <label>Current Winning Bidder:</label>
+                        <p class="form-control"><?php echo $projectDetails['businessname'] . ' - ' . $projectDetails['owner'] ?></p>
+                      </div>
+                      <div class="form-group">
+                        <label>Winning Bid:</label>
+                        <p class="form-control"><?php echo $projectDetails['proposed_bid'] ?></p>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label>Winning Bid:</label>
-                      <p class="form-control"><?php echo $projectDetails['proposed_bid'] ?></p>
+                    <div style="height: 260px; overflow-y: scroll;">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Bidder</th>
+                            <th>Proposed Bid</th>
+                            <th>Bid Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php foreach ($bidders as $bid): ?>
+                            <tr>
+                              <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                              <td><?php echo $bid['proposed_bid'] ?></td>
+                              <td><?php echo $bid['bid_status'] ?></td>
+                            </tr>
+                          <?php endforeach ?>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Bidder</th>
-                        <th>Proposed Bid</th>
-                        <th>Bid Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($bidders as $bid): ?>
-                        <tr>
-                          <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
-                          <td><?php echo $bid['proposed_bid'] ?></td>
-                          <td><?php echo $bid['bid_status'] ?></td>
-                        </tr>
-                      <?php endforeach ?>
-                    </tbody>
-                  </table>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label>Current Re-bid Count: </label>
+                      <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Remark/Reason for disqualification or sanction* : </label>
+                      <textarea name="bidder_saction_disqualification_remark" id="bidder_saction_disqualification_remark" cols="30" rows="15" class="form-control" style="resize: none;" form="projectBidderDisqualificationAndSanctionForm" ></textarea>
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Confirm</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+              </div>
+              <div class="modal-footer">
+                <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" id="projectBidderDisqualificationAndSanctionForm">
+                  <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
+                  <button type="button" class="btn btn-primary" id="dis_qual_btn">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
               </div>
             </div>
           </div>
+        </div>
 
 
           <div id="disqualifiactionSanctionConfirmationModal" class="modal" tabindex="-1" role="dialog">
@@ -859,9 +879,7 @@ function convertDate($date){
                     </button>
                   </div>
                   <div class="modal-body">
-                    <h3>ALERT!!!</h3>
-                    <p>Are you sure this project must go through</p>
-                    <h5 class="text-center" style="color: red" id="actionName"></h5>
+                    <p>Proceed with selecting another bidder?</p>
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" form="projectBidderDisqualificationAndSanctionForm">Confirm</button>
@@ -1465,24 +1483,14 @@ function convertDate($date){
   js and ajax for bidder disqualification
   */
 
-  $('.dis_qual_btn').click(function(){
+  $('#dis_qual_btn').click(function(){
     var action = $(this).val();
-    var remark = $('.bidder_saction_disqualification_remark').val();
+    var remark = $('#bidder_saction_disqualification_remark').val();
     if (remark.trim() == "") {
       var message = '<p class="text-danger">Remark field must not be empty!</p>';
-      $(".bidder_saction_disqualification_remark").closest('div.form-group').removeClass('has-error').addClass('has-error').find('.text-danger').remove();
-      $(".bidder_saction_disqualification_remark").after(message);
+      $("#bidder_saction_disqualification_remark").closest('div.form-group').removeClass('has-error').addClass('has-error').find('.text-danger').remove();
+      $("#bidder_saction_disqualification_remark").after(message);
     }else{
-      if (action == 'rebid') {
-        $('#actionName').html('Re-bid / another SVP');
-        $('#disqualificationSanction_action').val('re_bid');
-
-      }
-      if (action == 'rereview') {
-        $('#actionName').html('Project Review');
-        $('#disqualificationSanction_action').val('re_review');
-
-      }
 
       $('#disqualifiactionSanctionConfirmationModal').modal('show');
     }

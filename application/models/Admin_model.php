@@ -1793,6 +1793,8 @@
 		);
 
 		$this->db->insert('project_logs', $data);
+
+		return $this->db->insert_id();
 	}
 
 	public function deleteContractor($contractor_id){
@@ -1997,6 +1999,9 @@
 		}
 	}
 
+
+	//// after this comment are the functions/queries for updating ang managing the bids/bidders of projects
+
 	public function insertBids($plan_id, $contractor_id, $proposed_bid){
 		$data = array(
 			'plan_id' => $plan_id,
@@ -2023,31 +2028,137 @@
 		return $query->result_array();
 	}
 
-	public function updateCurrentWinningBid($plan_id){
-		$bids = $this->getProjectBids($plan_id);
-		$winning_bid;
-		$contractor_bid = null;
-		foreach ($bids as $bid) {
-			if ($bid['bid_status'] == 'active') {
-				if ($contractor_bid == null) {
-					$contractor_bid = $bid['proposed_bid'];
-					$winning_bid = $bid;
-				}else{
-					if ($bid['proposed_bid'] < $contractor_bid) {
-						$contractor_bid = $bid['proposed_bid'];
-						$winning_bid = $bid;
-					}
-				}
-			}
-		}
+	public function disqualifyAndSactionBidder($plan_id, $user_id, $remark){
 
-		$data = array(
-			'contractor_id' => $winning_bid['contractor_id'],
-			'proposed_bid' => $winning_bid['proposed_bid']
+		// record log for disqualification/sanction
+		$log_id = $this->recordProjectLog($plan_id, $user_id, $remark);
+		// get id of to be disqualifide bidder in project_plan table
+		$this->db->select('contractor_id');
+		$this->db->from('project_plan');
+		$this->db->where('plan_id', $plan_id);
+
+		$contractor = $this->db->get();
+
+		$contractor_id = $contractor->row()->contractor_id;
+		// status of all documents related to this contractor and this project will be chnaged to 'disqualifide'
+		$this->UpdateContractorDocumentStatus($plan_id, $contractor_id);
+		// get bid details of disqualifide bidder from project_bidders table
+		$this->db->select('project_bid');
+		$this->db->from('project_bidders');
+		$this->db->where('plan_id', $plan_id);
+		$this->db->where('contractor_id', $contractor_id);
+
+		$bid = $this->db->get();
+
+		$project_bid = $bid->row()->project_bid;
+
+		// record disqualification to disqualification_records
+
+		$disqualification_data = array(
+			'project_bid' => $project_bid,
+			'log_id' => $log_id
+		);
+
+		$this->db->insert('disqualification_records', $disqualification_data);
+
+		// update bid status in project_bidders table to 'disqualifide'
+
+		$status = array(
+			'bid_status' => 'disqualifide'
+		);
+
+		$this->db->where('project_bid', $project_bid);
+		$this->db->update('project_bidders', $status);
+		
+
+	}
+
+	public function UpdateContractorDocumentStatus($plan_id, $contractor_id){
+		$status = array(
+			'status' => 'disqualifide'
 		);
 
 		$this->db->where('plan_id', $plan_id);
-		$this->db->update('project_plan', $data);
+		$this->db->where('contractor_id', $contractor_id);
+		$this->db->update('project_document', $status);
+	}
+
+	public function resetProcActivityDatesAndStatus($plan_id){
+
+		// update dates of activities, reset to null
+		$dates = array(
+			'post_qual' => null,
+			'award_notice' => null,
+			'contract_signing' => null,
+			'authority_approval' => null,
+			'proceed_notice' => null,
+			'delivery_completion' => null,
+			'acceptance_turnover' => null
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('procact', $dates);
+		
+		// update staus of activities reset to pending
+		$status = array(
+			'post_qual' => 'pending',
+			'award_notice' => 'pending',
+			'contract_signing' => 'pending',
+			'proceed_notice' => 'pending',
+			'delivery_completion' => 'pending',
+			'acceptance_turnover' => 'pending'
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_activity_status', $status);
+
+		// update status of authority approval when current status is not 'not_needed'
+		$authority_approval_status = array(
+			'authority_approval' => 'pending'
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->where('authority_approval', 'finished');
+		$this->db->update('project_activity_status', $status);
+	}
+
+
+	public function updateCurrentWinningBid($plan_id){
+		$bids = $this->getProjectBids($plan_id);
+		$active_bids = 0;
+		foreach ($bids as $bid) {
+			if ($bid['bid_status'] == 'active') {
+				$active_bids++;
+			}
+		}
+		if ($active_bids > 0) {
+			$winning_bid;
+			$contractor_bid = null;
+			foreach ($bids as $bid) {
+				if ($bid['bid_status'] == 'active') {
+					if ($contractor_bid == null) {
+						$contractor_bid = $bid['proposed_bid'];
+						$winning_bid = $bid;
+					}else{
+						if ($bid['proposed_bid'] < $contractor_bid) {
+							$contractor_bid = $bid['proposed_bid'];
+							$winning_bid = $bid;
+						}
+					}
+				}
+			}
+
+			$data = array(
+				'contractor_id' => $winning_bid['contractor_id'],
+				'proposed_bid' => $winning_bid['proposed_bid']
+			);
+
+			$this->db->where('plan_id', $plan_id);
+			$this->db->update('project_plan', $data);
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 ?>

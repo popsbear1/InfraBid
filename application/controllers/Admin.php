@@ -1796,7 +1796,7 @@ class Admin extends CI_Controller {
 
 	/**
 	* Bidder disqualification 
-	* review or re-bid
+	* selection of another winning bidder
 	***/
 
 	public function projectBidderDisqualificationAndSunction(){
@@ -1805,53 +1805,16 @@ class Admin extends CI_Controller {
 		$user_id = $this->session->userdata('user_id');
 		$plan_id = $this->input->post('plan_id');
 		$remark = $this->input->post('bidder_saction_disqualification_remark');
-		$action = $this->input->post('action');
 
-		if ($action == 're_bid') {
+		// perform disqualification
+		// record all logs and records
+		// update status etc...
+		$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
 
-			// Update the project rebid count
+		// reset project activity dates and status
+		$this->admin_model->resetProcActivityDatesAndStatus($plan_id);
 
-			$this->admin_model->updateProjectRebidCount($plan_id);
-
-			// Chnage project status to pending
-
-			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
-
-			// Remove current bidder
-
-			$this->admin_model->updateProjectContractor($plan_id);
-
-			// Empty project timeline (revert all dates to null)
-
-			$this->admin_model->resetProjectTimeline($plan_id);
-
-			// Empty project procurement activity (revert all dates to null)
-
-			$this->admin_model->resetProjectProcurementActivity($plan_id);
-
-			// Reset project activity status
-
-			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
-
-			$this->admin_model->resetTimelineProjectStatus($plan_id);
-
-			// Record Log
-
-			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
-
-			$this->session->set_userdata('project_status', 'for_rebid');
-
-			$data['success'] = true;
-		}
-
-		if ($action == 're_review') {
-
-			$this->admin_model->updateProjectStatus($plan_id, 're_review');
-
-			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
-
-			$this->session->set_userdata('project_status', 'for_review');
-
+		if ($this->admin_model->updateCurrentWinningBid($plan_id)) {
 			$data['success'] = true;
 		}
 

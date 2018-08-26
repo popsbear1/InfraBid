@@ -50,6 +50,7 @@
 		public function getExistingDocumentTypes($plan_id){
 			$this->db->select('doc_type_id');
 			$this->db->from('project_document');
+			$this->db->not_like('status', 'disqualifide');
 			$this->db->where('plan_id', $plan_id);
 
 			$existingDocumentsQuery = $this->db->get();
@@ -238,7 +239,8 @@
 			$this->db->from('project_document');
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
-			$this->db->where('project_document.status', 'sent');
+			$this->db->not_like('project_document.current_doc_loc', $user_type);
+			$this->db->not_like('project_document.status', 'disqualifide');
 
 			$query = $this->db->get();
 
@@ -352,10 +354,13 @@
 		* 4. Insert new document log
 		*/
 
+
 		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $department){
+			$contractor_id = $this->getProjectContractor($plan_id);
 			$data = array(
 				'plan_id' => $plan_id,
 				'doc_type_id' => $doc_type_id,
+				'contractor_id' => $contractor_id,
 				'added_by' => $user_id,
 				'current_doc_loc' => $department,
 				'status' => 'received'
@@ -363,6 +368,16 @@
 
 			$this->db->insert('project_document', $data);
 			
+		}
+
+		public function getProjectContractor($plan_id){
+			$this->db->select('contractor_id');
+			$this->db->from('project_plan');
+			$this->db->where('plan_id', $plan_id);
+
+			$contractor = $this->db->get();
+
+			return $contractor->row()->contractor_id;
 		}
 
 		public function insertNewLog($remark, $log_type, $user_id){
@@ -520,5 +535,7 @@
 			$this->db->where('project_document_id', $document_id);
 			$this->db->update('project_document', $data);
 		}
+
+		
 	}
 ?>
