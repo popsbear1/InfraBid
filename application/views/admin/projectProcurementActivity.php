@@ -877,7 +877,7 @@ function convertDate($date){
         </div>
 
         <div id="sendInvitationsModal" class="modal" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document" style=" width: 800px;">
+          <div class="modal-dialog" role="document" style=" width: 1000px;">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -887,7 +887,7 @@ function convertDate($date){
 
               </div>
               <div class="modal-body" style=" height: 500px;">
-                <form action="">
+                <form action="<?php echo base_url('admin/setObservers') ?>" type="POST" id="setObserversForm">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="bg-olive">
@@ -901,60 +901,77 @@ function convertDate($date){
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-12 col-sm-12 col-md-12">
                           <div class="bg-maroon">
-                            <p style="padding: 10px 0px 10px 0px" class="text-center">Select Activity</p>
+                            <p style="padding: 10px 0px 10px 0px" class="text-center">Select Activity and Observers</p>
                           </div>
-                          <div style="background: #dedfe0; height: 150px">
-                            <div class="margin">
-                              <?php if ($projectDetails['pre_bid_invite_date'] == null): ?>
-                                <div class="radio">
-                                  <label><input type="radio" name="invite_activity_name" value="pre_bid">Pre-bid</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div style="background: #dedfe0; height: 160px; overflow-y: auto; overflow-x: hidden;">
+                            <div class="row">
+                              <div class="col-lg-6 col-md-6 col-sm-6">            
+                                <div class="margin">
+                                  <?php if ($projectDetails['pre_bid_invite_date'] == null): ?>
+                                    <div class="radio">
+                                      <label><input type="radio" name="invite_activity_name" value="pre_bid">Pre-bid</label>
+                                    </div>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['pre_bid_invite_date'] != null): ?>
+                                    <p><i class="fa fa-check-square" style="color: green"></i>  Pre-bid</p>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['eligibility_check_invite_date'] == null): ?>
+                                    <div class="radio">
+                                      <label><input type="radio" name="invite_activity_name" value="eligibility">Eligibility Check</label>
+                                    </div>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['eligibility_check_invite_date'] != null): ?>
+                                    <p><i class="fa fa-check-square" style="color: green"></i>  Eligibility Check</p>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['sub_open_invite_date'] == null): ?>
+                                    <div class="radio">
+                                      <label><input type="radio" name="invite_activity_name" value="sub_open">Submission/Open of Bids</label>
+                                    </div>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['sub_open_invite_date'] != null): ?>
+                                    <p><i class="fa fa-check-square" style="color: green"></i>  Submission/Open of Bids</p>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['bid_evaluation_invite_date'] == null): ?>
+                                    <div class="radio">
+                                      <label><input type="radio" name="invite_activity_name" value="bid_evaluation">Bid Evaluation</label>
+                                    </div>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['bid_evaluation_invite_date'] != null): ?>
+                                    <p><i class="fa fa-check-square" style="color: green"></i>  Bid Evaluation</p>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['post_qual_invite_date'] == null): ?>
+                                    <div class="radio">
+                                      <label><input type="radio" name="invite_activity_name" value="post_qual">Post Qualification</label>
+                                    </div>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['post_qual_invite_date'] != null): ?>
+                                    <p><i class="fa fa-check-square" style="color: green"></i>  Post Qualification</p>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['delivery_completion_invite_date'] == null): ?>
+                                    <div class="radio">
+                                      <label><input type="radio" name="invite_activity_name" value="delivery_completion">Delivery/Completion</label>
+                                    </div>
+                                  <?php endif ?>
+                                  <?php if ($projectDetails['delivery_completion_invite_date'] != null): ?>
+                                    <p><i class="fa fa-check-square" style="color: green"></i>  Delivery/Completion</p>
+                                  <?php endif ?>
                                 </div>
-                              <?php endif ?>
-                              <?php if ($projectDetails['pre_bid_invite_date'] != null): ?>
-                                <p><i class="fa fa-check-square" style="color: green"></i>  Pre-bid</p>
-                              <?php endif ?>
-                              <?php if ($projectDetails['eligibility_check_invite_date'] == null): ?>
-                                <div class="radio">
-                                  <label><input type="radio" name="invite_activity_name" value="eligibility">Eligibility Check</label>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="margin">
+                                  <?php foreach ($observers as $observer): ?>
+                                    <div class="checkbox">
+                                      <label><input type="checkbox" class="observer_checkbox" value="<?php echo $observer['observer_id'] . ',' . $observer['observer_dept_name'] ?>"><?php echo $observer['observer_dept_name'] ?></label>
+                                    </div>
+                                  <?php endforeach ?>
                                 </div>
-                              <?php endif ?>
-                              <?php if ($projectDetails['eligibility_check_invite_date'] != null): ?>
-                                <p><i class="fa fa-check-square" style="color: green"></i>  Eligibility Check</p>
-                              <?php endif ?>
-                              <?php if ($projectDetails['sub_open_invite_date'] == null): ?>
-                                <div class="radio">
-                                  <label><input type="radio" name="invite_activity_name" value="sub_open">Submission/Open of Bids</label>
-                                </div>
-                              <?php endif ?>
-                              <?php if ($projectDetails['sub_open_invite_date'] != null): ?>
-                                <p><i class="fa fa-check-square" style="color: green"></i>  Submission/Open of Bids</p>
-                              <?php endif ?>
-                              <?php if ($projectDetails['bid_evaluation_invite_date'] == null): ?>
-                                <div class="radio">
-                                  <label><input type="radio" name="invite_activity_name" value="bid_evaluation">Bid Evaluation</label>
-                                </div>
-                              <?php endif ?>
-                              <?php if ($projectDetails['bid_evaluation_invite_date'] != null): ?>
-                                <p><i class="fa fa-check-square" style="color: green"></i>  Bid Evaluation</p>
-                              <?php endif ?>
-                              <?php if ($projectDetails['post_qual_invite_date'] == null): ?>
-                                <div class="radio">
-                                  <label><input type="radio" name="invite_activity_name" value="post_qual">Post Qualification</label>
-                                </div>
-                              <?php endif ?>
-                              <?php if ($projectDetails['post_qual_invite_date'] != null): ?>
-                                <p><i class="fa fa-check-square" style="color: green"></i>  Post Qualification</p>
-                              <?php endif ?>
-                              <?php if ($projectDetails['delivery_completion_invite_date'] == null): ?>
-                                <div class="radio">
-                                  <label><input type="radio" name="invite_activity_name" value="delivery_completion">Delivery/Completion</label>
-                                </div>
-                              <?php endif ?>
-                              <?php if ($projectDetails['delivery_completion_invite_date'] != null): ?>
-                                <p><i class="fa fa-check-square" style="color: green"></i>  Delivery/Completion</p>
-                              <?php endif ?>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -962,29 +979,25 @@ function convertDate($date){
                       <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                           <div class="bg-purple" style="margin-top: 10px">
-                            <p style="padding: 10px 0px 10px 0px" class="text-center">Select Observers</p>
+                            <p style="padding: 10px 0px 10px 0px" class="text-center">Input Observer Names</p>
                           </div>
-                          <div style="background: #dedfe0; height: 210px">
-                            <div class="margin">
-                              <?php foreach ($observers as $observer): ?>
-                                <div class="checkbox">
-                                  <label><input type="checkbox" value="<?php echo $observer['observer_id'] ?>"><?php echo $observer['observer_dept_name'] ?></label>
-                                </div>
-                              <?php endforeach ?>
+                          <div style="background: #dedfe0; height: 200px; overflow-y: auto; overflow-x: hidden;">
+                            <div class="row" style="padding: 10px">
+                              <div class="col-lg-12 col-md-12 col-sm-12" id="observer_container">
+                                
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
                 </form>
               </div>
               <div class="modal-footer">
-                <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" id="projectBidderDisqualificationAndSanctionForm">
-                  <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
-                  <button type="button" class="btn btn-primary" id="dis_qual_btn">Submit</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </form>
+                <button type="submit" class="btn btn-primary" form="setObserversForm">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -1764,6 +1777,21 @@ function convertDate($date){
     $('#turnover_acceptance_view').removeAttr('hidden');
     $('#acceptance_submit_btn').attr('hidden', false);
   });
+
+  // observer scripts
+
+  $('.observer_checkbox').click(function(){
+    var observer_details = $(this).val().split(',');
+    var observer_id = observer_details[0];
+    var observer_dept_name = observer_details[1];
+    $('#observer_container').append(
+      '<div class="form-group">' +
+        '<label>' + observer_dept_name + '</label>' +
+        '<input type="text" name="observer_id[]" value="' + observer_id + '" hidden>' +
+        '<input class="form-control" type="text" name="observer_name[]">' +
+      '</div>'
+    );
+  })
 
 
 </script>

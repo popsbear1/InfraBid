@@ -2175,5 +2175,15 @@
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
+
+	public function insertActivityObservers($plan_id, $observer_id, $observer_name){
+		$data = array(
+			'plan_id' => $plan_id,
+			'observer_id' => $observer_id,
+			'name_of_observer' => $observer_name
+		);
+
+		$this->db->insert('project_observers', $data);
+	}
 }
 ?>

@@ -2065,6 +2065,19 @@ class Admin extends CI_Controller {
 		$this->admin_model->updateCurrentWinningBid($plan_id);
 	}
 
+	public function setObservers(){
+		$observer_id = $this->input->post('observer_id');
+		$observer_name = $this->input->post('observer_name');
+		$plan_id = $this->input->post('plan_id');
+		$invite_activity_name = $this->input->post('invite_activity_name');
+		
+		for ($i=0; $i < sizeOf($observer_id); $i++) { 
+			$this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i]);
+		}
+
+		redirect('admin/procurementActivityView');
+	}
+
 	public function fpdfView(){
 		$this->load->library('CustomFPDF');
 		$pdf = $this->customfpdf->getInstance();
