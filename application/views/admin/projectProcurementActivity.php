@@ -67,425 +67,433 @@ function convertDate($date){
     <div class="panel-heading">
       <h3 class="panel-title">Activity View</h3>
     </div>
-    <div class="panel-body" style="height: 550px">
-      <div class="row" style="height: 50px">
-        <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="panel-body" style="height: 570px">
+      <div class="row" style="height: 70px">
+        <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12">
+          <button class="btn btn-block btn-app bg-orange" data-toggle="modal" data-target="#sendInvitationsModal" style="margin-left: 0">
+            <i class="fa fa-paper-plane"></i>
+            Send Invites To Observers
+          </button>
+        </div>
+        <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12">
           <?php if (isset($_SESSION['success'])): ?>
             <div class="text-center bg-olive">
-              <p style="padding: 10px"><?php echo $_SESSION['success'] ?></p>
+              <p style="padding: 20px 0px 20px 0px"><?php echo $_SESSION['success'] ?></p>
             </div>
           <?php endif ?>
           <?php if (isset($_SESSION['error'])): ?>
             <div class="text-center bg-maroon">
-              <p style="padding: 10px"><?php echo $_SESSION['error'] ?></p>
+              <p style="padding: 20px 0px 20px 0px"><?php echo $_SESSION['error'] ?></p>
             </div>
           <?php endif ?>
         </div>
       </div>
-      <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12" style="height: 500px">
+      <div class="row">
+        <div class="col-3 col-lg-3 col-md-4 col-sm-5 col-xs-12" style="height: 500px">
 
-        <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
-          <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
-        <?php endif ?>
+          <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
+            <button class="activityBtn btn btn-default btn-block" type="button" id="pre_proc_btn">Pre-Proc Conference</button>
+          <?php endif ?>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="advertisement_btn">Ads/Post of IAEB</button>
 
-        <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
-          <button class="activityBtn btn btn-default btn-block" type="button" id="pre_bid_btn">Pre-bid Conf</button>
-        <?php endif ?>
+          <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
+            <button class="activityBtn btn btn-default btn-block" type="button" id="pre_bid_btn">Pre-bid Conf</button>
+          <?php endif ?>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="open_bid_btn">Sub/Open of Bids</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="open_bid_btn">Sub/Open of Bids</button>
 
-        <!-- <button class="activityBtn btn btn-default btn-block" type="button" id="eligibility_btn">Eligibility Check</button> -->
+          <!-- <button class="activityBtn btn btn-default btn-block" type="button" id="eligibility_btn">Eligibility Check</button> -->
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="bid_eval_btn">Bid Evaluation</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="bid_eval_btn">Bid Evaluation</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="post_qual_btn">Post Qual</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="post_qual_btn">Post Qual</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="award_notice_btn">Notice of Award</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="award_notice_btn">Notice of Award</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="contract_signing_btn">Contract Signing</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="contract_signing_btn">Contract Signing</button>
 
-        <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
-          <button class="activityBtn btn btn-default btn-block" type="button" id="authority_approval_btn">Authority Approval</button>
-        <?php endif ?>
+          <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
+            <button class="activityBtn btn btn-default btn-block" type="button" id="authority_approval_btn">Authority Approval</button>
+          <?php endif ?>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="proceed_notice_btn">Notice to Proceed</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="proceed_notice_btn">Notice to Proceed</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="delivery_completion_btn">Delivery/Completion</button>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="delivery_completion_btn">Delivery/Completion</button>
 
-        <button class="activityBtn btn btn-default btn-block" type="button" id="acceptance_turnover_btn">Acceptance/Turnover</button>
-      </div>
-      <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 480px">
-        <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
-          <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
-            <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>">
-
-            <input type="text" name="activity_name" value="pre_proc" hidden>
-              <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="pre_proc" name="activity_date" placeholder="<?php echo convertDateTextual($pre_proc) ?>" class="form-control procActDateInput">
-                </div>
-              </div>
-            </form> 
-          </div>
-        <?php endif ?>
-
-        <div id="ads_post_view" class="activity_view" hidden="hidden">
-          <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-            <input type="text" name="activity_name" value="advertisement" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $advertisement_start ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Add/Post of IAEB:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $advertisement_end ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="advertisement" placeholder="<?php echo convertDateTextual($advertisement) ?>" name="activity_date" class="form-control procActDateInput">
-              </div>
-            </div>          
-          </form>
+          <button class="activityBtn btn btn-default btn-block" type="button" id="acceptance_turnover_btn">Acceptance/Turnover</button>
         </div>
+        <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 480px;">
+          <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
+            <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
+              <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>">
 
-        <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
-          <div id="pre_bid_view" class ="activity_view" hidden="hidden">
-            <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-              <input type="text" name="activity_name" value="pre_bid" hidden>
+              <input type="text" name="activity_name" value="pre_proc" hidden>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-Procurement Conference *: </label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <input type="text" id="pre_proc" name="activity_date" placeholder="<?php echo convertDateTextual($pre_proc) ?>" class="form-control procActDateInput">
+                  </div>
+                </div>
+              </form> 
+            </div>
+          <?php endif ?>
+
+          <div id="ads_post_view" class="activity_view" hidden="hidden">
+            <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <input type="text" name="activity_name" value="advertisement" hidden>
               <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Pre-bid Conf:</label>
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $pre_bid_start ?></p>
+                  <p class="form-control"><?php echo $advertisement_start ?></p>
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Pre-bid Conf:</label>
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Add/Post of IAEB:</label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $pre_bid_end ?></p>
+                  <p class="form-control"><?php echo $advertisement_end ?></p>
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Ads/Post of IAEB *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="pre_bid" placeholder="<?php echo convertDateTextual($pre_bid) ?>" name="activity_date" class="form-control procActDateInput">
+                  <input type="text" id="advertisement" placeholder="<?php echo convertDateTextual($advertisement) ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
-              </div>
+              </div>          
             </form>
           </div>
-        <?php endif ?>
 
-        <div id="bid_open_view" class="activity_view" hidden="hidden">
-          <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left" autocomplete="off">
+          <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
+            <div id="pre_bid_view" class ="activity_view" hidden="hidden">
+              <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+                <input type="text" name="activity_name" value="pre_bid" hidden>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Pre-bid Conf:</label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <p class="form-control"><?php echo $pre_bid_start ?></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Pre-bid Conf:</label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <p class="form-control"><?php echo $pre_bid_end ?></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">Pre-bid Conf *: </label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <input type="text" id="pre_bid" placeholder="<?php echo convertDateTextual($pre_bid) ?>" name="activity_date" class="form-control procActDateInput">
+                  </div>
+                </div>
+              </form>
+            </div>
+          <?php endif ?>
 
-            <input type="text" name="activity_name" value="open_bid" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Sub/Open of Bids:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $bid_submission_start ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Sub/Open of Bids:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $bid_submission_end ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Sub/Open of Bids *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="openbid" placeholder="<?php echo convertDateTextual($openbid) ?>" name="activity_date" class="form-control procActDateInput">
-              </div>
-            </div>
-            <!-- <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Number of Re-bids: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Select Contractor *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <select name="contractor" id="contractor" class="form-control">
-                  <option hidden selected disabled>
-                    <?php
-                    if ($projectDetails['contractor_id'] == null) {
-                      echo 'Choose Contractor';
-                    }else{
-                      echo $projectDetails['businessname'];
-                    }  
-                    ?>
-                  </option>
-                  <?php foreach ($contractors as $contractor): ?>
-                    <option value="<?php echo $contractor['contractor_id'] ?>"><?php echo $contractor['businessname'] ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Proposed Bid *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="bid_proposal" name="bid_proposal" class="form-control" placeholder="<?php echo number_format($projectDetails['proposed_bid'], 2) ?>">
-              </div>
-            </div> -->
-          </form>
-        </div>
+          <div id="bid_open_view" class="activity_view" hidden="hidden">
+            <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left" autocomplete="off">
 
-        <!-- <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
-          <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-            <input type="text" name="activity_name" value="eligibility_check" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Number of Re-bids: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
+              <input type="text" name="activity_name" value="open_bid" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Sub/Open of Bids:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $bid_submission_start ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Eligibility Check *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="date" id="eligibility" value="<?php echo $eligibility ?>" name="activity_date" class="form-control">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Sub/Open of Bids:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $bid_submission_end ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Select Contractor *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <select name="contractor" id="contractor" class="form-control">
-                  <option hidden selected disabled>
-                    <?php
-                    if ($projectDetails['contractor_id'] == null) {
-                      echo 'Choose Contractor';
-                    }else{
-                      echo $projectDetails['businessname'];
-                    }  
-                    ?>
-                  </option>
-                  <?php foreach ($contractors as $contractor): ?>
-                    <option value="<?php echo $contractor['contractor_id'] ?>"><?php echo $contractor['businessname'] ?></option>
-                  <?php endforeach ?>
-                </select>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Sub/Open of Bids *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="openbid" placeholder="<?php echo convertDateTextual($openbid) ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Proposed Bid *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="bid_proposal" name="bid_proposal" class="form-control" placeholder="<?php echo $projectDetails['proposed_bid'] ?>">
+              <!-- <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Number of Re-bids: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
+                </div>
               </div>
-            </div>
-          </form>
-        </div> -->
-
-        <div id="bid_evaluation_view" class="activity_view" hidden="hidden">
-          <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-            <input type="text" name="activity_name" value="bid_evaluation" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Bid Evaluation:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $bid_evaluation_start ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Bid Evaluation:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $bid_evaluation_end ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Bid Evaluation *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="bidevaluation" placeholder="<?php echo convertDateTextual($bidevaluation) ?>" name="activity_date" class="form-control procActDateInput">
-              </div>
-            </div>
-            <div class="row" style="background: white; overflow-y: scroll; height: 280px">
-              <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 3px">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Bidder</th>
-                      <th>Proposed Bid</th>
-                      <th>Bid Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($bidders as $bid): ?>
-                      <tr>
-                        <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
-                        <td><?php echo $bid['proposed_bid'] ?></td>
-                        <td><?php echo $bid['bid_status'] ?></td>
-                      </tr>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Select Contractor *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <select name="contractor" id="contractor" class="form-control">
+                    <option hidden selected disabled>
+                      <?php
+                      if ($projectDetails['contractor_id'] == null) {
+                        echo 'Choose Contractor';
+                      }else{
+                        echo $projectDetails['businessname'];
+                      }  
+                      ?>
+                    </option>
+                    <?php foreach ($contractors as $contractor): ?>
+                      <option value="<?php echo $contractor['contractor_id'] ?>"><?php echo $contractor['businessname'] ?></option>
                     <?php endforeach ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>      
-          </form>
-        </div>
-
-        <div id="post_qual_view" class ="activity_view" hidden="hidden">
-          <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-            <input type="text" name="activity_name" value="post_qual" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Post Qual: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $post_qualification_start; ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Post Qual: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $post_qualification_end ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Post Qual *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="postqual" placeholder="<?php echo convertDateTextual($postqual) ?>" name="activity_date" class="form-control procActDateInput">
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div id="notice_award_view" class="activity_view" hidden="hidden">
-          <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-            <input type="text" name="activity_name" value="awar_notice" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice of Award:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $award_notice_start ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Notice of Award:</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $award_notice_end ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice of Award *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="awarddate" placeholder="<?php echo convertDateTextual($awarddate) ?>" name="activity_date" class="form-control procActDateInput">
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div id="sign_contract_view" class ="activity_view" hidden="hidden">
-          <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-            <input type="text" name="activity_name" value="contract_signing" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Contract Signing: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $contract_signing_start ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Contract Signing: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $contract_signing_end ?></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Contract Signing *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="contractsigning" placeholder="<?php echo convertDateTextual($contractsigning) ?>" name="activity_date" class="form-control procActDateInput">
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
-          <div id="authority_approval_view" class ="activity_view" hidden="hidden">
-            <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-
-              <input type="text" name="activity_name" value="authority_approval" hidden>
-              <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Authority Approval: </label>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $authority_approval_start ?></p>
+                  </select>
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Authority Approval: </label>
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Proposed Bid *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $authority_approval_end ?></p>
+                  <input type="text" id="bid_proposal" name="bid_proposal" class="form-control" placeholder="<?php echo number_format($projectDetails['proposed_bid'], 2) ?>">
+                </div>
+              </div> -->
+            </form>
+          </div>
+
+          <!-- <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
+            <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+              <input type="text" name="activity_name" value="eligibility_check" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Number of Re-bids: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $projectDetails['re_bid_count'] ?></p>
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Eligibility Check *: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <input type="text" id="authorityapproval" placeholder="<?php echo convertDateTextual($authorityapproval) ?>" name="activity_date" class="form-control procActDateInput">
+                  <input type="date" id="eligibility" value="<?php echo $eligibility ?>" name="activity_date" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Select Contractor *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <select name="contractor" id="contractor" class="form-control">
+                    <option hidden selected disabled>
+                      <?php
+                      if ($projectDetails['contractor_id'] == null) {
+                        echo 'Choose Contractor';
+                      }else{
+                        echo $projectDetails['businessname'];
+                      }  
+                      ?>
+                    </option>
+                    <?php foreach ($contractors as $contractor): ?>
+                      <option value="<?php echo $contractor['contractor_id'] ?>"><?php echo $contractor['businessname'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Proposed Bid *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="bid_proposal" name="bid_proposal" class="form-control" placeholder="<?php echo $projectDetails['proposed_bid'] ?>">
+                </div>
+              </div>
+            </form>
+          </div> -->
+
+          <div id="bid_evaluation_view" class="activity_view" hidden="hidden">
+            <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+              <input type="text" name="activity_name" value="bid_evaluation" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Bid Evaluation:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $bid_evaluation_start ?></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Bid Evaluation:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $bid_evaluation_end ?></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Bid Evaluation *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="bidevaluation" placeholder="<?php echo convertDateTextual($bidevaluation) ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
+              </div>
+              <div class="row" style="background: white; overflow-y: scroll; height: 280px">
+                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 3px">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Bidder</th>
+                        <th>Proposed Bid</th>
+                        <th>Bid Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($bidders as $bid): ?>
+                        <tr>
+                          <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                          <td><?php echo $bid['proposed_bid'] ?></td>
+                          <td><?php echo $bid['bid_status'] ?></td>
+                        </tr>
+                      <?php endforeach ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>      
+            </form>
+          </div>
+
+          <div id="post_qual_view" class ="activity_view" hidden="hidden">
+            <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+              <input type="text" name="activity_name" value="post_qual" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Post Qual: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $post_qualification_start; ?></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Post Qual: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $post_qualification_end ?></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Post Qual *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="postqual" placeholder="<?php echo convertDateTextual($postqual) ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
               </div>
             </form>
           </div>
-        <?php endif ?>
 
-        <div id="proceed_notice_view" class="activity_view" hidden="hidden">
-          <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-            <input type="text" name="activity_name" value="proceed_notice" hidden>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice to Proceed: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $proceed_notice_start ?></p>
+          <div id="notice_award_view" class="activity_view" hidden="hidden">
+            <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <input type="text" name="activity_name" value="awar_notice" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice of Award:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $award_notice_start ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Notice to Proceed: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <p class="form-control"><?php echo $proceed_notice_end ?></p>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Notice of Award:</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $award_notice_end ?></p>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice to Proceed *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="proceednotice" placeholder="<?php echo convertDateTextual($proceednotice) ?>" name="activity_date" class="form-control procActDateInput">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice of Award *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="awarddate" placeholder="<?php echo convertDateTextual($awarddate) ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
 
-        <div id="completion_delivery_view" class ="activity_view" hidden="hidden">
-          <form id="completion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+          <div id="sign_contract_view" class ="activity_view" hidden="hidden">
+            <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
 
-            <input type="text" name="activity_name" value="completion" hidden>
-
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Delivery/Completion *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="completion" placeholder="<?php echo $completion ?>" name="activity_date" class="form-control procActDateInput">
+              <input type="text" name="activity_name" value="contract_signing" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Contract Signing: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $contract_signing_start ?></p>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
-
-        <div id="turnover_acceptance_view" class ="activity_view" hidden="hidden">
-          <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
-            <input type="text" name="activity_name" value="acceptance" hidden>
-
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Acceptance/Turnover *: </label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <input type="text" id="acceptance" placeholder="<?php echo $acceptance ?>" name="activity_date" class="form-control procActDateInput">
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Contract Signing: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $contract_signing_end ?></p>
+                </div>
               </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-lg-5 col-md-5 col-sm-5">Final Remark* :</label>
-              <div class="col-lg-7 col-md-7 col-sm-7">
-                <textarea name="final_remark" id="final_remark" cols="30" rows="10" class="form-control" style="resize: none;"></textarea>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Contract Signing *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="contractsigning" placeholder="<?php echo convertDateTextual($contractsigning) ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
               </div>
+            </form>
+          </div>
+
+          <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
+            <div id="authority_approval_view" class ="activity_view" hidden="hidden">
+              <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+                <input type="text" name="activity_name" value="authority_approval" hidden>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Authority Approval: </label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <p class="form-control"><?php echo $authority_approval_start ?></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Authority Approval: </label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <p class="form-control"><?php echo $authority_approval_end ?></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-lg-5 col-md-5 col-sm-5">Authority Approval *: </label>
+                  <div class="col-lg-7 col-md-7 col-sm-7">
+                    <input type="text" id="authorityapproval" placeholder="<?php echo convertDateTextual($authorityapproval) ?>" name="activity_date" class="form-control procActDateInput">
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
+          <?php endif ?>
+
+          <div id="proceed_notice_view" class="activity_view" hidden="hidden">
+            <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <input type="text" name="activity_name" value="proceed_notice" hidden>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice to Proceed: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $proceed_notice_start ?></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Notice to Proceed: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control"><?php echo $proceed_notice_end ?></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Notice to Proceed *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="proceednotice" placeholder="<?php echo convertDateTextual($proceednotice) ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div id="completion_delivery_view" class ="activity_view" hidden="hidden">
+            <form id="completion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+
+              <input type="text" name="activity_name" value="completion" hidden>
+
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Delivery/Completion *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="completion" placeholder="<?php echo $completion ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div id="turnover_acceptance_view" class ="activity_view" hidden="hidden">
+            <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <input type="text" name="activity_name" value="acceptance" hidden>
+
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Acceptance/Turnover *: </label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <input type="text" id="acceptance" placeholder="<?php echo $acceptance ?>" name="activity_date" class="form-control procActDateInput">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5">Final Remark* :</label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <textarea name="final_remark" id="final_remark" cols="30" rows="10" class="form-control" style="resize: none;"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -856,6 +864,120 @@ function convertDate($date){
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="modal-footer">
+                <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" id="projectBidderDisqualificationAndSanctionForm">
+                  <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
+                  <button type="button" class="btn btn-primary" id="dis_qual_btn">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sendInvitationsModal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document" style=" width: 800px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;
+                </button>
+                <h5 class="modal-title">Set Date Invitation Sent to Observers</h5>
+
+              </div>
+              <div class="modal-body" style=" height: 500px;">
+                <form action="">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="bg-olive">
+                        <p style="padding: 10px 0px 10px 0px" class="text-center">Activities</p>
+                      </div>
+                      <div style="background: #dedfe0; height: 420px">
+                        <div class="margin">
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="bg-maroon">
+                            <p style="padding: 10px 0px 10px 0px" class="text-center">Select Activity</p>
+                          </div>
+                          <div style="background: #dedfe0; height: 150px">
+                            <div class="margin">
+                              <?php if ($projectDetails['pre_bid_invite_date'] == null): ?>
+                                <div class="radio">
+                                  <label><input type="radio" name="invite_activity_name" value="pre_bid">Pre-bid</label>
+                                </div>
+                              <?php endif ?>
+                              <?php if ($projectDetails['pre_bid_invite_date'] != null): ?>
+                                <p><i class="fa fa-check-square" style="color: green"></i>  Pre-bid</p>
+                              <?php endif ?>
+                              <?php if ($projectDetails['eligibility_check_invite_date'] == null): ?>
+                                <div class="radio">
+                                  <label><input type="radio" name="invite_activity_name" value="eligibility">Eligibility Check</label>
+                                </div>
+                              <?php endif ?>
+                              <?php if ($projectDetails['eligibility_check_invite_date'] != null): ?>
+                                <p><i class="fa fa-check-square" style="color: green"></i>  Eligibility Check</p>
+                              <?php endif ?>
+                              <?php if ($projectDetails['sub_open_invite_date'] == null): ?>
+                                <div class="radio">
+                                  <label><input type="radio" name="invite_activity_name" value="sub_open">Submission/Open of Bids</label>
+                                </div>
+                              <?php endif ?>
+                              <?php if ($projectDetails['sub_open_invite_date'] != null): ?>
+                                <p><i class="fa fa-check-square" style="color: green"></i>  Submission/Open of Bids</p>
+                              <?php endif ?>
+                              <?php if ($projectDetails['bid_evaluation_invite_date'] == null): ?>
+                                <div class="radio">
+                                  <label><input type="radio" name="invite_activity_name" value="bid_evaluation">Bid Evaluation</label>
+                                </div>
+                              <?php endif ?>
+                              <?php if ($projectDetails['bid_evaluation_invite_date'] != null): ?>
+                                <p><i class="fa fa-check-square" style="color: green"></i>  Bid Evaluation</p>
+                              <?php endif ?>
+                              <?php if ($projectDetails['post_qual_invite_date'] == null): ?>
+                                <div class="radio">
+                                  <label><input type="radio" name="invite_activity_name" value="post_qual">Post Qualification</label>
+                                </div>
+                              <?php endif ?>
+                              <?php if ($projectDetails['post_qual_invite_date'] != null): ?>
+                                <p><i class="fa fa-check-square" style="color: green"></i>  Post Qualification</p>
+                              <?php endif ?>
+                              <?php if ($projectDetails['delivery_completion_invite_date'] == null): ?>
+                                <div class="radio">
+                                  <label><input type="radio" name="invite_activity_name" value="delivery_completion">Delivery/Completion</label>
+                                </div>
+                              <?php endif ?>
+                              <?php if ($projectDetails['delivery_completion_invite_date'] != null): ?>
+                                <p><i class="fa fa-check-square" style="color: green"></i>  Delivery/Completion</p>
+                              <?php endif ?>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="bg-purple" style="margin-top: 10px">
+                            <p style="padding: 10px 0px 10px 0px" class="text-center">Select Observers</p>
+                          </div>
+                          <div style="background: #dedfe0; height: 210px">
+                            <div class="margin">
+                              <?php foreach ($observers as $observer): ?>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" value="<?php echo $observer['observer_id'] ?>"><?php echo $observer['observer_dept_name'] ?></label>
+                                </div>
+                              <?php endforeach ?>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
               <div class="modal-footer">
                 <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" id="projectBidderDisqualificationAndSanctionForm">

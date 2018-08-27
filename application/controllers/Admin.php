@@ -685,6 +685,7 @@ class Admin extends CI_Controller {
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
+		$data['observers'] = $this->admin_model->getActiveObservers();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);

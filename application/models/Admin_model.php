@@ -515,6 +515,16 @@
 			return $query->result_array();
 		}
 
+		public function getActiveObservers(){
+			$this->db->select('*');
+			$this->db->from('observers');
+			$this->db->where('status', 'active');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function getObserverDetails($currentObserverID){
 			$this->db->select('*');
 			$this->db->from('observers');
@@ -767,6 +777,9 @@
 
 
 			$this->updateTimelineProjectStatus($new_plan_id);
+			if ($ABC < 5000000) {
+				$this->updatePreProctStatus($new_plan_id);
+			}
 			return true;
 		}else{
 			return false;
