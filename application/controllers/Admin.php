@@ -686,6 +686,7 @@ class Admin extends CI_Controller {
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
 		$data['observers'] = $this->admin_model->getActiveObservers();
+		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -2070,9 +2071,28 @@ class Admin extends CI_Controller {
 		$observer_name = $this->input->post('observer_name');
 		$plan_id = $this->input->post('plan_id');
 		$invite_activity_name = $this->input->post('invite_activity_name');
-		
+
 		for ($i=0; $i < sizeOf($observer_id); $i++) { 
-			$this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i]);
+			$this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
+		}
+
+		if ($invite_activity_name == 'pre_bid') {
+			$this->admin_model->updatePreBidInviteDate($plan_id);
+		}
+		if ($invite_activity_name == 'eligibility') {
+			$this->admin_model->updateEligibilityInviteDate($plan_id);
+		}
+		if ($invite_activity_name == 'sub_open') {
+			$this->admin_model->updateSubOpenInviteDate($plan_id);
+		}
+		if ($invite_activity_name == 'bid_evaluation') {
+			$this->admin_model->updateBidEvaluationInviteDate($plan_id);
+		}
+		if ($invite_activity_name == 'post_qual') {
+			$this->admin_model->updatePostQualInviteDate($plan_id);
+		}
+		if ($invite_activity_name == 'delivery_completion') {
+			$this->admin_model->updateDeliveryCompletionInviteDate($plan_id);
 		}
 
 		redirect('admin/procurementActivityView');

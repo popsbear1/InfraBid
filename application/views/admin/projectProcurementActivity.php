@@ -895,7 +895,24 @@ function convertDate($date){
                       </div>
                       <div style="background: #dedfe0; height: 420px">
                         <div class="margin">
-                          
+                          <?php 
+                            $currentActivity = null;
+                            foreach ($activity_observers as $act_observer) {
+                              if ($currentActivity == null) {
+                                $currentActivity = $act_observer['activity_name'];
+                                echo '<h5>' . $act_observer['activity_name'] . ' - ' . $act_observer['invite_date'] . '</h5>';
+                                echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
+                              }else{
+                                if ($currentActivity == $act_observer['activity_name']) {
+                                  echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
+                                }else{
+                                  $currentActivity = $act_observer['activity_name'];
+                                  echo '<h5>' . $act_observer['activity_name'] . ' - ' . $act_observer['invite_date'] . '</h5>';
+                                  echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
+                                }
+                              }
+                            }
+                          ?>
                         </div>
                       </div>
                     </div>

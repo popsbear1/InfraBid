@@ -2176,14 +2176,82 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function insertActivityObservers($plan_id, $observer_id, $observer_name){
+	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name){
 		$data = array(
 			'plan_id' => $plan_id,
 			'observer_id' => $observer_id,
-			'name_of_observer' => $observer_name
+			'name_of_observer' => $observer_name,
+			'activity_name' => $invite_activity_name,
+			'invite_date' => date('Y-m-d H:i:s')
 		);
 
 		$this->db->insert('project_observers', $data);
+	}
+
+	public function updatePreBidInviteDate($plan_id){
+		$data = array(
+			'pre_bid_invite_date' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateEligibilityInviteDate($plan_id){
+		$data = array(
+			'eligibility_check_invite_date' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateSubOpenInviteDate($plan_id){
+		$data = array(
+			'sub_open_invite_date' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateBidEvaluationInviteDate($plan_id){
+		$data = array(
+			'bid_evaluation_invite_date' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updatePostQualInviteDate($plan_id){
+		$data = array(
+			'post_qual_invite_date' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function updateDeliveryCompletionInviteDate($plan_id){
+		$data = array(
+			'delivery_completion_invite_date' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+	}
+
+	public function getActivityObservers($plan_id){
+		$this->db->select('*');
+		$this->db->from('project_observers');
+		$this->db->join('observers', 'project_observers.observer_id = observers.observer_id');
+		$this->db->where('plan_id', $plan_id);
+		$this->db->order_by('activity_name');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
 	}
 }
 ?>
