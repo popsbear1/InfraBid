@@ -887,7 +887,7 @@ function convertDate($date){
 
               </div>
               <div class="modal-body" style=" height: 500px;">
-                <form action="<?php echo base_url('admin/setObservers') ?>" type="POST" id="setObserversForm">
+                <form action="<?php echo base_url('admin/setObservers') ?>" type="POST" id="setObserversForm" autocomplete="off">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="bg-olive">

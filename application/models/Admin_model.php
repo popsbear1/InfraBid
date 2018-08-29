@@ -2176,66 +2176,66 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name){
+	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name, $datetime){
 		$data = array(
 			'plan_id' => $plan_id,
 			'observer_id' => $observer_id,
 			'name_of_observer' => $observer_name,
 			'activity_name' => $invite_activity_name,
-			'invite_date' => date('Y-m-d H:i:s')
+			'invite_date' => $datetime
 		);
 
 		$this->db->insert('project_observers', $data);
 	}
 
-	public function updatePreBidInviteDate($plan_id){
+	public function updatePreBidInviteDate($plan_id, $datetime){
 		$data = array(
-			'pre_bid_invite_date' => date('Y-m-d H:i:s')
+			'pre_bid_invite_date' => $datetime
 		);
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateEligibilityInviteDate($plan_id){
+	public function updateEligibilityInviteDate($plan_id, $datetime){
 		$data = array(
-			'eligibility_check_invite_date' => date('Y-m-d H:i:s')
+			'eligibility_check_invite_date' => $datetime
 		);
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateSubOpenInviteDate($plan_id){
+	public function updateSubOpenInviteDate($plan_id, $datetime){
 		$data = array(
-			'sub_open_invite_date' => date('Y-m-d H:i:s')
+			'sub_open_invite_date' => $datetime
 		);
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateBidEvaluationInviteDate($plan_id){
+	public function updateBidEvaluationInviteDate($plan_id, $datetime){
 		$data = array(
-			'bid_evaluation_invite_date' => date('Y-m-d H:i:s')
+			'bid_evaluation_invite_date' => $datetime
 		);
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updatePostQualInviteDate($plan_id){
+	public function updatePostQualInviteDate($plan_id, $datetime){
 		$data = array(
-			'post_qual_invite_date' => date('Y-m-d H:i:s')
+			'post_qual_invite_date' => $datetime
 		);
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateDeliveryCompletionInviteDate($plan_id){
+	public function updateDeliveryCompletionInviteDate($plan_id, $datetime){
 		$data = array(
-			'delivery_completion_invite_date' => date('Y-m-d H:i:s')
+			'delivery_completion_invite_date' => $datetime
 		);
 
 		$this->db->where('plan_id', $plan_id);

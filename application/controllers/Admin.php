@@ -2067,32 +2067,33 @@ class Admin extends CI_Controller {
 	}
 
 	public function setObservers(){
-		$observer_id = $this->input->post('observer_id');
-		$observer_name = $this->input->post('observer_name');
+		$datetime = date('Y-m-d H:i:s');
+		$observer_id = $this->input->post('observer_id[]');
+		$observer_name = htmlspecialchars(trim($this->input->post('observer_name[]')));
 		$plan_id = $this->input->post('plan_id');
 		$invite_activity_name = $this->input->post('invite_activity_name');
 
 		for ($i=0; $i < sizeOf($observer_id); $i++) { 
-			$this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
+			$this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name, $datetime);
 		}
 
 		if ($invite_activity_name == 'pre_bid') {
-			$this->admin_model->updatePreBidInviteDate($plan_id);
+			$this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'eligibility') {
-			$this->admin_model->updateEligibilityInviteDate($plan_id);
+			$this->admin_model->updateEligibilityInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'sub_open') {
-			$this->admin_model->updateSubOpenInviteDate($plan_id);
+			$this->admin_model->updateSubOpenInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'bid_evaluation') {
-			$this->admin_model->updateBidEvaluationInviteDate($plan_id);
+			$this->admin_model->updateBidEvaluationInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'post_qual') {
-			$this->admin_model->updatePostQualInviteDate($plan_id);
+			$this->admin_model->updatePostQualInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'delivery_completion') {
-			$this->admin_model->updateDeliveryCompletionInviteDate($plan_id);
+			$this->admin_model->updateDeliveryCompletionInviteDate($plan_id, $datetime);
 		}
 
 		redirect('admin/procurementActivityView');
