@@ -2069,16 +2069,23 @@ class Admin extends CI_Controller {
 	public function setObservers(){
 		$datetime = date('Y-m-d H:i:s');
 		$observer_id = $this->input->post('observer_id[]');
-		$observer_name = htmlspecialchars(trim($this->input->post('observer_name[]')));
+		$observer_name = $this->input->post('observer_name[]');
 		$plan_id = $this->input->post('plan_id');
 		$invite_activity_name = $this->input->post('invite_activity_name');
 
+		echo $datetime;
+		echo $invite_activity_name;
+		echo $plan_id;
+
 		for ($i=0; $i < sizeOf($observer_id); $i++) { 
-			$this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name, $datetime);
+			$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
+			echo $observer_id[$i];
+			echo $observer_name[$i];
+			echo $message;
 		}
 
 		if ($invite_activity_name == 'pre_bid') {
-			$this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
+			echo $this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'eligibility') {
 			$this->admin_model->updateEligibilityInviteDate($plan_id, $datetime);
@@ -2096,7 +2103,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateDeliveryCompletionInviteDate($plan_id, $datetime);
 		}
 
-		redirect('admin/procurementActivityView');
+		//redirect('admin/procurementActivityView');
 	}
 
 	public function fpdfView(){

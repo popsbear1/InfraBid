@@ -2176,16 +2176,19 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name, $datetime){
+	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name){
 		$data = array(
 			'plan_id' => $plan_id,
 			'observer_id' => $observer_id,
 			'name_of_observer' => $observer_name,
-			'activity_name' => $invite_activity_name,
-			'invite_date' => $datetime
+			'activity_name' => $invite_activity_name
 		);
 
-		$this->db->insert('project_observers', $data);
+		if(!$this->db->insert('project_observers', $data)){
+			return $this->db->_error_message();
+		}else{
+			return "success";
+		}
 	}
 
 	public function updatePreBidInviteDate($plan_id, $datetime){
@@ -2194,7 +2197,11 @@
 		);
 
 		$this->db->where('plan_id', $plan_id);
-		$this->db->update('project_plan', $data);
+		if(!$this->db->update('project_plan', $data)){
+			return $this->db->_error_message();
+		}else{
+			return 'success';
+		}
 	}
 
 	public function updateEligibilityInviteDate($plan_id, $datetime){
@@ -2247,7 +2254,6 @@
 		$this->db->from('project_observers');
 		$this->db->join('observers', 'project_observers.observer_id = observers.observer_id');
 		$this->db->where('plan_id', $plan_id);
-		$this->db->order_by('activity_name');
 
 		$query = $this->db->get();
 

@@ -887,7 +887,7 @@ function convertDate($date){
 
               </div>
               <div class="modal-body" style=" height: 500px;">
-                <form action="<?php echo base_url('admin/setObservers') ?>" type="POST" id="setObserversForm" autocomplete="off">
+                <form id="setObserversForm" autocomplete="off">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="bg-olive">
@@ -1808,6 +1808,15 @@ function convertDate($date){
         '<input class="form-control" type="text" name="observer_name[]">' +
       '</div>'
     );
+  })
+
+  $('#setObserversForm').submit(function(e){
+
+    $.ajax({
+      type: 'post',
+      url: '<?php echo base_url('admin/setObservers') ?>',
+      data: $(this).serialize()
+    })
   })
 
 
