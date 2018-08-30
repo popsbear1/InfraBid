@@ -758,7 +758,7 @@ function convertDate($date){
                 <div class="bg-olive">
                   <p style="padding: 10px; " class="text-center">Selected Bidders</p>
                 </div>
-                <form id="selected_contractors_form">
+                <form id="selected_contractors_form" autocomplete="off">
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -1801,13 +1801,18 @@ function convertDate($date){
     var observer_details = $(this).val().split(',');
     var observer_id = observer_details[0];
     var observer_dept_name = observer_details[1];
-    $('#observer_container').append(
-      '<div class="form-group">' +
-        '<label>' + observer_dept_name + '</label>' +
-        '<input type="text" name="observer_id[]" value="' + observer_id + '" hidden>' +
-        '<input class="form-control" type="text" name="observer_name[]">' +
-      '</div>'
-    );
+
+    if ($(this).is(':checked')) {
+      $('#observer_container').append(
+        '<div class="form-group" id="' + observer_id + '">' +
+          '<label>' + observer_dept_name + '</label>' +
+          '<input type="text" name="observer_id[]" value="' + observer_id + '" hidden>' +
+          '<input class="form-control" type="text" name="observer_name[]">' +
+        '</div>'
+      );
+    }else{
+      $('#' + observer_id).remove();
+    }
   })
 
   $('#setObserversForm').submit(function(e){
