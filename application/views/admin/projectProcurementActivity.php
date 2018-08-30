@@ -900,14 +900,14 @@ function convertDate($date){
                             foreach ($activity_observers as $act_observer) {
                               if ($currentActivity == null) {
                                 $currentActivity = $act_observer['activity_name'];
-                                echo '<h5>' . $act_observer['activity_name'] . ' - ' . $act_observer['invite_date'] . '</h5>';
+                                echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'Y-m-d H:i:s') . '</h4>';
                                 echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
                               }else{
                                 if ($currentActivity == $act_observer['activity_name']) {
                                   echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
                                 }else{
                                   $currentActivity = $act_observer['activity_name'];
-                                  echo '<h5>' . $act_observer['activity_name'] . ' - ' . $act_observer['invite_date'] . '</h5>';
+                                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'Y-m-d H:i:s') . '</h4>';
                                   echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
                                 }
                               }
@@ -1811,11 +1811,16 @@ function convertDate($date){
   })
 
   $('#setObserversForm').submit(function(e){
-
+    e.preventDefault();
     $.ajax({
       type: 'post',
       url: '<?php echo base_url('admin/setObservers') ?>',
-      data: $(this).serialize()
+      data: $(this).serialize(),
+      dataType: 'json'
+    }).done(function(response){
+      if (response.success == true) {
+        window.location.href = "<?php echo base_url('admin/procurementActivityView'); ?>";
+      }
     })
   })
 

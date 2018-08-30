@@ -686,7 +686,29 @@ class Admin extends CI_Controller {
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
 		$data['observers'] = $this->admin_model->getActiveObservers();
+		
 		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
+		
+		for ($i=0; $i < sizeOf($data['activity_observers']); $i++) { 
+			if ($data['activity_observers'][$i]['activity_name'] == 'pre_bid') {
+				$data['activity_observers'][$i]['activity_name'] = 'Pre-bid';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'eligibility') {
+				$data['activity_observers'][$i]['activity_name'] = 'Eligibility Check';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'sub_open') {
+				$data['activity_observers'][$i]['activity_name'] = 'Submission/Open of Bids';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'bid_evaluation') {
+				$data['activity_observers'][$i]['activity_name'] = 'Bid Evaluation';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'post_qual') {
+				$data['activity_observers'][$i]['activity_name'] = 'Post Qualification';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'delivery_completion') {
+				$data['activity_observers'][$i]['activity_name'] = 'Delivery/Completion';
+			}
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -2073,19 +2095,12 @@ class Admin extends CI_Controller {
 		$plan_id = $this->input->post('plan_id');
 		$invite_activity_name = $this->input->post('invite_activity_name');
 
-		echo $datetime;
-		echo $invite_activity_name;
-		echo $plan_id;
-
 		for ($i=0; $i < sizeOf($observer_id); $i++) { 
 			$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
-			echo $observer_id[$i];
-			echo $observer_name[$i];
-			echo $message;
 		}
 
 		if ($invite_activity_name == 'pre_bid') {
-			echo $this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
+			$this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
 		}
 		if ($invite_activity_name == 'eligibility') {
 			$this->admin_model->updateEligibilityInviteDate($plan_id, $datetime);
@@ -2103,7 +2118,9 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateDeliveryCompletionInviteDate($plan_id, $datetime);
 		}
 
-		//redirect('admin/procurementActivityView');
+		$data['success'] = true;
+
+		echo json_encode($data);
 	}
 
 	public function fpdfView(){
