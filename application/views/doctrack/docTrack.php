@@ -421,7 +421,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12" style="height: 400px; overflow: scroll; overflow-x: auto;">
+          <div class="col-lg-12 col-md-12 col-sm-12" style="height: 400px; overflow: auto;">
             <table class="table table-bordered table-striped" id="documentTableModal">
               <thead>
                 <tr>
@@ -464,7 +464,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-7 col-md-7 col-sm-7" style="height: 400px; overflow: scroll; overflow-x: auto;">
+          <div class="col-lg-7 col-md-7 col-sm-7" style="height: 400px; overflow: auto;">
             <table class="table table-bordered table-striped" id="forwardingLogTable">
               <thead>
                 <tr>
@@ -484,7 +484,7 @@
               </tbody>
             </table>
           </div>
-          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 400px; overflow: scroll; overflow-x: auto;">
+          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 400px; overflow: auto;">
             <table class="table table-bordered table-striped" id="receivingLogTable">
               <thead>
                 <tr>

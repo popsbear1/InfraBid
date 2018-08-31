@@ -63,6 +63,28 @@ function convertDate($date){
 
 <div class="col-lg-9 col-md-9 col-sm-9">
   <h3>Procurement Activity</h3>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label">Contractor: </label>
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <p class="form-control"><?php echo $projectDetails['businessname'] . ' - ' . $projectDetails['owner'] ?></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label">Bid Amount: </label>
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <p class="form-control"><?php echo number_format($projectDetails['proposed_bid'], 2) ?></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Activity View</h3>
@@ -736,7 +758,7 @@ function convertDate($date){
             <h5 class="modal-title">Select Project Bidders</h5>
             
           </div>
-          <div class="modal-body" style=" height: 500px;overflow-y: scroll;">
+          <div class="modal-body" style=" height: 500px;overflow-y: auto;">
             <div class="row">
               <div class="col-lg-7 col-md-7 col-sm-7">
                 <div class="bg-purple">
@@ -755,6 +777,14 @@ function convertDate($date){
                 </table>
               </div>
               <div class="col-lg-5 col-sm-5 col-md-5">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 control-label">ABC:</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                      <p class="form-control input-lg"><?php echo number_format($projectDetails['abc'], 2) ?></p>
+                    </div>
+                  </div>
+                </div>
                 <div class="bg-olive">
                   <p style="padding: 10px; " class="text-center">Selected Bidders</p>
                 </div>
