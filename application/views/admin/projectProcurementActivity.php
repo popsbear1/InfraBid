@@ -1182,12 +1182,12 @@ function convertDate($date){
         type: 'POST',
         url: '<?php echo base_url('admin/addBidders') ?>',
         data: $(this).serialize(),
-        datatype: 'json'
+        dataType: 'json'
       }).done(function(response){
         if (response.success == true) {
           window.location.replace("<?php echo base_url('admin/procurementActivityView') ?>");
         }else{
-          if (response.valid_contractors == false && response.valid_bids == false) {
+          if(response.valid_contractors == false && response.valid_bids == false){
             $('#contractor_selection_alert_message').html('Make sure a contractor is selected and entered bids are numeric and is less than or equal to the project ABC!');
           }
           if(response.valid_contractors == false && response.valid_bids == true){
