@@ -2080,12 +2080,33 @@ class Admin extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id');
 		$bidders = $this->input->post('contractor_id[]');
 		$bids = $this->input->post('bids[]');
+		$abc = $this->input->post('abc');
 
-		for( $i = 0; $i < sizeOf($bidders); $i++){
-			$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
+		$data = array('success' => false, 'valid_contractors' => false, 'valid_bids' => true);
+
+		for ($i=0; $i < sizeOf($bids); $i++) { 
+			if (!is_numeric($bids[$i])) {
+				$data['valid_bids'] = false;
+			}else{
+				if (floatval($bids[$i]) > floatval($abc)) {
+					$data['valid_bids'] = false;
+				}
+			}
 		}
 
-		$this->admin_model->updateCurrentWinningBid($plan_id);
+		if (!empty($bidders)) {
+			$data['valid_contractors'] = true;
+			if($data['valid_bids'] != false){
+				for( $i = 0; $i < sizeOf($bidders); $i++){
+					$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
+				}
+
+				$this->admin_model->updateCurrentWinningBid($plan_id);
+				$data['success'] = true;
+			}
+		}
+		echo json_encode($data);
+				
 	}
 
 	public function setObservers(){
@@ -2095,30 +2116,41 @@ class Admin extends CI_Controller {
 		$plan_id = $this->input->post('plan_id');
 		$invite_activity_name = $this->input->post('invite_activity_name');
 
-		for ($i=0; $i < sizeOf($observer_id); $i++) { 
-			$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
-		}
+		$data = array('success' => false, 'valid_invite_name' => false, 'valid_observers' => false);
 
-		if ($invite_activity_name == 'pre_bid') {
-			$this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
-		}
-		if ($invite_activity_name == 'eligibility') {
-			$this->admin_model->updateEligibilityInviteDate($plan_id, $datetime);
-		}
-		if ($invite_activity_name == 'sub_open') {
-			$this->admin_model->updateSubOpenInviteDate($plan_id, $datetime);
-		}
-		if ($invite_activity_name == 'bid_evaluation') {
-			$this->admin_model->updateBidEvaluationInviteDate($plan_id, $datetime);
-		}
-		if ($invite_activity_name == 'post_qual') {
-			$this->admin_model->updatePostQualInviteDate($plan_id, $datetime);
-		}
-		if ($invite_activity_name == 'delivery_completion') {
-			$this->admin_model->updateDeliveryCompletionInviteDate($plan_id, $datetime);
-		}
+		if ($invite_activity_name != null || $invite_activity_name != "") {
+			$data['valid_invite_name'] = true;
+			if (!empty($observer_id)) {
+				for ($i=0; $i < sizeOf($observer_id); $i++) { 
+					$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
+				}
 
-		$data['success'] = true;
+				if ($invite_activity_name == 'pre_bid') {
+					$this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'eligibility') {
+					$this->admin_model->updateEligibilityInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'sub_open') {
+					$this->admin_model->updateSubOpenInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'bid_evaluation') {
+					$this->admin_model->updateBidEvaluationInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'post_qual') {
+					$this->admin_model->updatePostQualInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'delivery_completion') {
+					$this->admin_model->updateDeliveryCompletionInviteDate($plan_id, $datetime);
+				}
+				$data['valid_observers'] = true;
+				$data['success'] = true;
+			}
+		}else{
+			if (!empty($observer_id)) {
+				$data['valid_observers'] = true;
+			}
+		}
 
 		echo json_encode($data);
 	}

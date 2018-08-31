@@ -770,6 +770,7 @@ function convertDate($date){
                     
                     </tbody>
                   </table>
+                  <input type="text" name="abc" value="<?php echo $projectDetails['abc'] ?>" hidden>
                 </form>
               </div>
             </div>
@@ -893,22 +894,22 @@ function convertDate($date){
                       <div class="bg-olive">
                         <p style="padding: 10px 0px 10px 0px" class="text-center">Activities</p>
                       </div>
-                      <div style="background: #dedfe0; height: 420px">
+                      <div style="background: #dedfe0; height: 420px; padding-top: 5px">
                         <div class="margin">
                           <?php 
                             $currentActivity = null;
                             foreach ($activity_observers as $act_observer) {
                               if ($currentActivity == null) {
                                 $currentActivity = $act_observer['activity_name'];
-                                echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'Y-m-d H:i:s') . '</h4>';
-                                echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
+                                echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y h:i:s a') . '</h4>';
+                                echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                               }else{
                                 if ($currentActivity == $act_observer['activity_name']) {
-                                  echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
+                                  echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                                 }else{
                                   $currentActivity = $act_observer['activity_name'];
-                                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'Y-m-d H:i:s') . '</h4>';
-                                  echo '<p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p>';
+                                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y h:i:s a') . '</h4>';
+                                  echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                                 }
                               }
                             }
@@ -1051,7 +1052,7 @@ function convertDate($date){
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p class="text-center">Contractor Already Included!</p>
+                    <p class="text-center" id="contractor_selection_alert_message"></p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1072,6 +1073,25 @@ function convertDate($date){
                   <div class="modal-body">
                     <p class="text-center">All recorded bidders are disqualifide!</p>
                     <p class="text-center">This project can either be Re-bid or Re-review.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="observerSelectionAlert" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Alert!!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-center" id="observerSelectionAlertMessage"></p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1138,11 +1158,8 @@ function convertDate($date){
       var contractor_id = $(this).val();
       if (!selected_contractors.includes(contractor_id)) {
         selected_contractors.push(contractor_id);
-        console.log(contractor_id);
-        console.log(selected_contractors);
         var contractor_bussinessname = $(this).parent().prev().prev().html();
         var bussiness_owner = $(this).parent().prev().html();
-        console.log(contractor_bussinessname);
         $('#selected_contractors_container').prepend(
           '<tr>' +
             '<td>' + contractor_bussinessname + ' - ' + bussiness_owner + '</td>' +
@@ -1153,6 +1170,7 @@ function convertDate($date){
           '</tr>'
         );
       }else{
+        $('#contractor_selection_alert_message').html('Contractor Already Included!');
         $('#contractor_selection_alert').modal('show');
       }
     });
@@ -1165,8 +1183,21 @@ function convertDate($date){
         url: '<?php echo base_url('admin/addBidders') ?>',
         data: $(this).serialize(),
         datatype: 'json'
-      }).done(function(){
-        window.location.replace("<?php echo base_url('admin/procurementActivityView') ?>");
+      }).done(function(response){
+        if (response.success == true) {
+          window.location.replace("<?php echo base_url('admin/procurementActivityView') ?>");
+        }else{
+          if (response.valid_contractors == false && response.valid_bids == false) {
+            $('#contractor_selection_alert_message').html('Make sure a contractor is selected and entered bids are numeric and is less than or equal to the project ABC!');
+          }
+          if(response.valid_contractors == false && response.valid_bids == true){
+            $('#contractor_selection_alert_message').html('Make sure a contractor is selected!');
+          }
+          if(response.valid_contractors == true && response.valid_bids == false){
+            $('#contractor_selection_alert_message').html('Make sure entered bids are numeric and is less than or equal to the project ABC!');
+          }
+          $('#contractor_selection_alert').modal('show');
+        }
       });
     });
   });
@@ -1494,78 +1525,78 @@ function convertDate($date){
     return true;
   }
 
-  function verifyDateOpenBid(inputValue, activity){
-    if (getValue(activity) == null || getValue(activity) == "") {
-      if (inputValue == null || inputValue == "") {
-        showError(activity, '<p class="text-danger text-center">The input filed should not be empty!!</p>');
-        return false;
-      }else if(inputValue === getValue(activity)){
-        showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
-        return false;
-      }
-    }
-    return true;
-  }
+  // function verifyDateOpenBid(inputValue, activity){
+  //   if (getValue(activity) == null || getValue(activity) == "") {
+  //     if (inputValue == null || inputValue == "") {
+  //       showError(activity, '<p class="text-danger text-center">The input filed should not be empty!!</p>');
+  //       return false;
+  //     }else if(inputValue === getValue(activity)){
+  //       showError(activity, '<p class="text-danger text-center">No changes were made to the value!!</p>');
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
-  function validateOpenBidInput(dateInput, start, end){
-    var dateValidation = compareDates(dateInput, start, end);
-    console.log(dateValidation);
-    var contractorValidation = validateContractor();
-    console.log(contractorValidation);
-    var bidValidation = validateBid();
-    console.log(bidValidation);
-    if (!dateValidation || !contractorValidation || !bidValidation) {
-      if (!dateValidation) {
-        showError('openbid', '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
-      }
-      return false;
-    }else{
-      return true;
-    }
-  }
+  // function validateOpenBidInput(dateInput, start, end){
+  //   var dateValidation = compareDates(dateInput, start, end);
+  //   console.log(dateValidation);
+  //   var contractorValidation = validateContractor();
+  //   console.log(contractorValidation);
+  //   var bidValidation = validateBid();
+  //   console.log(bidValidation);
+  //   if (!dateValidation || !contractorValidation || !bidValidation) {
+  //     if (!dateValidation) {
+  //       showError('openbid', '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+  //     }
+  //     return false;
+  //   }else{
+  //     return true;
+  //   }
+  // }
 
-  function validateBid(){
-    var abc = '<?php echo $projectDetails['abc'] ?>';
-    var proposed_bid = '<?php echo $projectDetails['proposed_bid'] ?>';
-    console.log(abc);
-    console.log(proposed_bid);
-    if (proposed_bid == null || proposed_bid == "") {
-      if (!$('#bid_proposal').val() || $('#bid_proposal').val() == "") {
-        showError('bid_proposal', '<p class="text-danger text-center">The bid proposal input is Required!</p>');
-        return false;
-      }else{
-        if (!isNaN($('#bid_proposal').val())) {
-          if ($('#bid_proposal').val() > abc) {
-            showError('bid_proposal', '<p class="text-danger text-center">Proposed bid must not be higher that the ABC!</p>');
-            return false;
-          }else{
-            removeError('bid_proposal');
-            return true;
-          }
-        }else{
-          showError('bid_proposal', '<p class="text-danger text-center">Proposed bid should be numeric!</p>');
-          return false;
-        }
-      }
-    }else{
-      return true;
-    }
-  }
+  // function validateBid(){
+  //   var abc = '<?php echo $projectDetails['abc'] ?>';
+  //   var proposed_bid = '<?php echo $projectDetails['proposed_bid'] ?>';
+  //   console.log(abc);
+  //   console.log(proposed_bid);
+  //   if (proposed_bid == null || proposed_bid == "") {
+  //     if (!$('#bid_proposal').val() || $('#bid_proposal').val() == "") {
+  //       showError('bid_proposal', '<p class="text-danger text-center">The bid proposal input is Required!</p>');
+  //       return false;
+  //     }else{
+  //       if (!isNaN($('#bid_proposal').val())) {
+  //         if ($('#bid_proposal').val() > abc) {
+  //           showError('bid_proposal', '<p class="text-danger text-center">Proposed bid must not be higher that the ABC!</p>');
+  //           return false;
+  //         }else{
+  //           removeError('bid_proposal');
+  //           return true;
+  //         }
+  //       }else{
+  //         showError('bid_proposal', '<p class="text-danger text-center">Proposed bid should be numeric!</p>');
+  //         return false;
+  //       }
+  //     }
+  //   }else{
+  //     return true;
+  //   }
+  // }
 
-  function validateContractor(){
-    var contractor = '<?php echo $projectDetails['contractor_id'] ?>';
-    if (contractor == null || contractor == "") {
-      if ($('#contractor').val() == "" || !$('#contractor').val()) {
-        showError('contractor', '<p class="text-danger text-center">Contactor input field is required!</p>');
-        return false;
-      }else{
-        removeError('contractor');
-        return true;
-      }
-    }else{
-      return true;
-    }
-  }
+  // function validateContractor(){
+  //   var contractor = '<?php echo $projectDetails['contractor_id'] ?>';
+  //   if (contractor == null || contractor == "") {
+  //     if ($('#contractor').val() == "" || !$('#contractor').val()) {
+  //       showError('contractor', '<p class="text-danger text-center">Contactor input field is required!</p>');
+  //       return false;
+  //     }else{
+  //       removeError('contractor');
+  //       return true;
+  //     }
+  //   }else{
+  //     return true;
+  //   }
+  // }
 
   function getValue(activity){
     return planDates[activity];
@@ -1825,7 +1856,17 @@ function convertDate($date){
     }).done(function(response){
       if (response.success == true) {
         window.location.href = "<?php echo base_url('admin/procurementActivityView'); ?>";
+      }else{
+        if (response.valid_invite_name == false && response.valid_observers == false) {
+          $('#observerSelectionAlertMessage').html('Mage sure that an activity is selected and at least one observer is selected!');
+        }else if (response.valid_invite_name == false && response.valid_observers == true) {
+          $('#observerSelectionAlertMessage').html('Make sure that an activity is selected!');
+        }else if (response.valid_invite_name == true && response.valid_observers == false){
+          $('#observerSelectionAlertMessage').html('Make sure that at least one observer is selected!');
+        }
+        $('#observerSelectionAlert').modal('show');
       }
+
     })
   })
 
