@@ -2259,5 +2259,25 @@
 
 		return $query->result_array();
 	}
+
+	public function getPreBidStatus($plan_id){
+		$this->db->select('pre_bid');
+		$this->db->from('project_activity_status');
+		$this->db->where('plan_id', $plan_id);
+
+		$status = $this->db->get();
+
+		return $status->row()->pre_bid;
+	}
+
+	public function getAuthorityApprovalStatus($plan_id){
+		$this->db->select('authority_approval');
+		$this->db->from('project_activity_status');
+		$this->db->where('plan_id', $plan_id);
+
+		$status = $this->db->get();
+
+		return $status->row()->pre_bid;
+	}
 }
 ?>

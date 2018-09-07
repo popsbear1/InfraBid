@@ -7,6 +7,8 @@
     $color = 'skin-red-light';
   }elseif ($user_type == 'BAC_TWG') {
     $color = 'skin-green-light';
+  }elseif ($user_type == 'PPDO'){
+    $color = 'skin-purple-light';
   }
 ?>
 <body class="hold-transition <?php echo $color ?> layout-top-nav">

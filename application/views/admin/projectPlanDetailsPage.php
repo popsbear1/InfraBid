@@ -1,25 +1,11 @@
 <?php  
-  $preProcDate = date_create($actdates['pre_proc']);
-  $advertisementDate = date_create($actdates['advertisement']);
-  $preBidDate = date_create($actdates['pre_bid']);
-  $eligibilityCheckDate = date_create($actdates['eligibility_check']);
-  $openBidDate = date_create($actdates['open_bid']);
-  $bidEvaluationDate = date_create($actdates['bid_evaluation']);
-  $postQualDate = date_create($actdates['post_qual']);
-  $awardNoticeDate = date_create($actdates['award_notice']);
-  $contractSigningDate = date_create($actdates['contract_signing']);
-  $authorityApprovalDate = date_create($actdates['authority_approval']);
-  $proceedNoticeDate = date_create($actdates['proceed_notice']);
-  $deliveryCompletionDate = date_create($actdates['delivery_completion']);
-  $acceptanceTurnoverDate = date_create($actdates['acceptance_turnover']);
   
-
   function convertDateTextual($date){
     if ($date != null) {
       $timelineDate = date_create($date);
       $formatedTimelineDate = date_format($timelineDate, 'M-d-Y');
     }else{
-      $formatedTimelineDate = null;
+      $formatedTimelineDate = 'None';
     }
 
     return $formatedTimelineDate;
@@ -226,48 +212,48 @@
                         <tbody>
                           <tr>
                             <td>Advertisement</td>
-                            <td><?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['advertisement_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['advertisement_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Pre-bid Conference</td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Submission of Bid</td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Bid Evaluation</td>
-                            <td><?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['bid_evaluation_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['bid_evaluation_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Post Qualification</td>
-                            <td><?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['post_qualification_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['post_qualification_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Issuance of Notice of Award</td>
-                            <td><?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['award_notice_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['award_notice_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Contract Preparation and Signing</td>
-                            <td><?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['contract_signing_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['contract_signing_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Approval by Higher Authority</td>
-                            <td><?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['authority_approval_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['authority_approval_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Notice to Proceed</td>
-                            <td><?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['proceed_notice_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['proceed_notice_end']) ?></td>
                           </tr>
                         </tbody>
                       </table>
@@ -286,13 +272,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Pre-proc Conference</label>
-                            <p class="form-control"><?php echo date_format($preProcDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['pre_proc']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Ads/Post of IAEB</label>
-                            <p class="form-control"><?php echo date_format($advertisementDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['advertisement']) ?></p>
                           </div>
                         </div> 
                       </div>
@@ -300,13 +286,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Pre-bid Cof</label>
-                            <p class="form-control"><?php echo date_format($preBidDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['pre_bid']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Sub/Open of Bids</label>
-                            <p class="form-control"><?php echo date_format($openBidDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['open_bid']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -314,13 +300,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Eligibility Check</label>
-                            <p class="form-control"><?php echo date_format($eligibilityCheckDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['eligibility_check']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Bid Evaluation</label>
-                            <p class="form-control"><?php echo date_format($bidEvaluationDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['bid_evaluation']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -328,13 +314,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Post Qual</label>
-                            <p class="form-control"><?php echo date_format($postQualDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['post_qual']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Notice of Award</label>
-                            <p class="form-control"><?php echo date_format($awardNoticeDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['award_notice']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -342,13 +328,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Contract Signing</label>
-                            <p class="form-control"><?php echo date_format($contractSigningDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['contract_signing']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Notice to Proceed</label>
-                            <p class="form-control"><?php echo date_format($proceedNoticeDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['proceed_notice']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -356,13 +342,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Delivery/Completion</label>
-                            <p class="form-control"><?php echo date_format($deliveryCompletionDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['delivery_completion']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Acceptance/Turnover</label>
-                            <p class="form-control"><?php echo date_format($acceptanceTurnoverDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['acceptance_turnover']) ?></p>
                           </div>
                         </div>
                       </div>   

@@ -1,6 +1,7 @@
 
 <?php 
 
+
 $pre_proc = convertDate($procActDate['pre_proc']);
 $advertisement = convertDate($procActDate['advertisement']);
 $pre_bid = convertDate($procActDate['pre_bid']);
@@ -1420,7 +1421,11 @@ function convertDate($date){
 
     if (activity == 'pre_proc') {
       if (verifyDate(inputValue, activity)) {
-        proceedSubmit('Pre-Proc Date', inputValue, activityForm);
+        if (comparePreProcToAdvertDate(inputValue, advertisement_start)) {
+          proceedSubmit('Pre-Proc Date', inputValue, activityForm);
+        }else{
+          showError(activity, '<p class="text-danger text-center">Date must be earlier than Ads/Post Date</p>');
+        }
       }
     }
     if (activity == 'advertisement') {
@@ -1538,6 +1543,16 @@ function convertDate($date){
     var start_date = new Date(start).getTime();
     var end_date = new Date(end).getTime();
     if (date < start_date || date > end_date) {
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  function comparePreProcToAdvertDate(inputValue, advertisement_start){
+    var date = new Date(inputValue).getTime();
+    var start_date = new Date(advertisement_start).getTime();
+    if (date > start_date) {
       return false;
     }else{
       return true;

@@ -1,11 +1,17 @@
+<!-- 
 
+script for document tracking alert
+
+1. Upon load page: check existence of sessionData (count of alerts).
+2. Get Alert count trough ajax call.
+3. If sessionData count is available, compair value of alert count retrun from ajax call.
+4. else if sessionData not set, get count value of ajax call and set sessionData.
+
+ -->
 <script type="text/javascript">
-  var alertCount = 0;
   $(document).ready(function(){
+    sessionStorage.setItem("name", 'Reuel');
     getAlertCount();
-    if (alertCount > 0) {
-      playAlert()
-    }
     setInterval(getAlertCount, 180000);
   });
 
@@ -17,9 +23,19 @@
 
       $("#alertCount").html(response.alertCount);
       $('#alertHeader').html(response.alertCount + ' project documents to receive');
-      if (response.alertCount > 0 && response.alertCount > alertCount) {
-        alertCount = response.alertCount;
-        playAlert();
+      if (response.alertCount > 0) {
+        
+        if (sessionStorage.getItem("count") != null) {
+          count = parseInt(sessionStorage.getItem("count"));
+          if (response.alertCount > count) {
+            sessionStorage.setItem("count", response.alertCount);
+
+            playAlert();
+          } 
+        }else{
+          sessionStorage.setItem("count", response.alertCount);
+          playAlert();
+        }
       }
     })
   }

@@ -234,6 +234,119 @@
   <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 
+  <!-- modal for data confirmation -->
+  <div id="timelineModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+        </div>
+        <div class="modal-body">
+          <table class='table table-striped table-bordered' style='font-size:13px;'>
+            <thead>
+              <tr>
+                <th class="text-center">Activity</th>
+                <th class="text-center">Start Date</th>
+                <th class="text-center">End Date</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr>
+                <td>Advertisement</td>
+                <td id="addStart"></td>
+                <td id="addEnd"></td>
+              </tr>
+              <tr>
+                <td>Pre-bid Conference</td>
+                <td id="pbcStart"></td>
+                <td id="pbcEnd"></td>
+              </tr>
+              <tr>
+                <td>Submission of Bids</td>
+                <td id="sbStart"></td>
+                <td id="sbEnd"></td>
+              </tr>
+              <tr>
+                <td>Bid Evaluation</td>
+                <td id="beStart"></td>
+                <td id="beEnd"></td>
+              </tr>
+              <tr>
+                <td>Post Qualification</td>
+                <td id="pqStart"></td>
+                <td id="pqEnd"></td>
+              </tr>
+              <tr>
+                <td>Issuance of Notice of Award</td>
+                <td id="inaStart"></td>
+                <td id="inaEnd"></td>
+              </tr>
+              <tr>
+                <td>Contract Preparation and Signing</td>
+                <td id="cpsStart"></td>
+                <td id="cpsEnd"></td>
+              </tr>
+              <tr>
+                <td>Approval by Higher Authority</td>
+                <td id="ahaStart"></td>
+                <td id="ahaEnd"></td>
+              </tr>
+              <tr>
+                <td>Notice to Proceed</td>
+                <td id="ntpStart"></td>
+                <td id="ntpEnd"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="updateProcurementTimelineForm" name="submit" class="btn btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- end of modal -->
+
+<div class="modal fade" id="update_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Warning</h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Input Number of days to add before pressing UPDATE button!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="missing_startdate_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Alert!</h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Select Start Date First!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   <script>
 
     var abc = '<?php echo $projectDetails['abc'] ?>';
@@ -819,117 +932,3 @@
 
 
   </script>
-
-  <!-- modal for data confirmation -->
-  <div id="timelineModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-        </div>
-        <div class="modal-body">
-          <table class='table table-striped table-bordered' style='font-size:13px;'>
-            <thead>
-              <tr>
-                <th class="text-center">Activity</th>
-                <th class="text-center">Start Date</th>
-                <th class="text-center">End Date</th>
-              </tr> 
-            </thead>
-            <tbody>
-              <tr>
-                <td>Advertisement</td>
-                <td id="addStart"></td>
-                <td id="addEnd"></td>
-              </tr>
-              <tr>
-                <td>Pre-bid Conference</td>
-                <td id="pbcStart"></td>
-                <td id="pbcEnd"></td>
-              </tr>
-              <tr>
-                <td>Submission of Bids</td>
-                <td id="sbStart"></td>
-                <td id="sbEnd"></td>
-              </tr>
-              <tr>
-                <td>Bid Evaluation</td>
-                <td id="beStart"></td>
-                <td id="beEnd"></td>
-              </tr>
-              <tr>
-                <td>Post Qualification</td>
-                <td id="pqStart"></td>
-                <td id="pqEnd"></td>
-              </tr>
-              <tr>
-                <td>Issuance of Notice of Award</td>
-                <td id="inaStart"></td>
-                <td id="inaEnd"></td>
-              </tr>
-              <tr>
-                <td>Contract Preparation and Signing</td>
-                <td id="cpsStart"></td>
-                <td id="cpsEnd"></td>
-              </tr>
-              <tr>
-                <td>Approval by Higher Authority</td>
-                <td id="ahaStart"></td>
-                <td id="ahaEnd"></td>
-              </tr>
-              <tr>
-                <td>Notice to Proceed</td>
-                <td id="ntpStart"></td>
-                <td id="ntpEnd"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" form="updateProcurementTimelineForm" name="submit" class="btn btn-primary">Confirm</button>
-        </div>
-      </div>
-    </div>
-  </div>
-      <!-- end of modal -->
-
-<div class="modal fade" id="update_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Warning</h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <p>Input Number of days to add before pressing UPDATE button!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="missing_startdate_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Alert!</h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <p>Select Start Date First!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>

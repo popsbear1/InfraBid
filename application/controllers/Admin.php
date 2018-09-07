@@ -657,16 +657,20 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
-			$this->admin_model->updatePreBidStatus($plan_id, 'not_needed');
-		}else{
-			$this->admin_model->updatePreBidStatus($plan_id, 'pending');
+		if ($this->admin_model->getPreBidStatus($plan_id) != 'finished') {
+			if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
+				$this->admin_model->updatePreBidStatus($plan_id, 'not_needed');
+			}else{
+				$this->admin_model->updatePreBidStatus($plan_id, 'pending');
+			}
 		}
 
-		if ( !isset($_POST['authorityApprovalStart']) || !isset($_POST['authorityApprovalEnd'])) {
-			$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'not_needed');
-		}else{
-			$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'pending');
+		if ($this->admin_model->getAuthorityApprovalStatus($plan_id) != 'finished') {
+			if ( !isset($_POST['authorityApprovalStart']) || !isset($_POST['authorityApprovalEnd'])) {
+				$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'not_needed');
+			}else{
+				$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'pending');
+			}
 		}
 
 		redirect('admin/projectTimelineView');
@@ -1600,7 +1604,7 @@ class Admin extends CI_Controller {
 
 		if ($activity_name === "pre_proc") {
 			if ($this->admin_model->updatePreProcConfDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Pre-Procuremwent Conference Date Successfully Updated!");
+				$this->session->set_flashdata('success', "Pre-Procurement Conference Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Pre-Procuremwent Conference Date Was Not Updated! Try again.");
 			}
