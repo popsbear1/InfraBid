@@ -347,6 +347,18 @@
     </div>
   </div>
 </div>
+<?php 
+  function convertDateTextual($date){
+    if ($date != null) {
+      $timelineDate = date_create($date);
+      $formatedTimelineDate = date_format($timelineDate, 'M-d-Y');
+    }else{
+      $formatedTimelineDate = 'None';
+    }
+
+    return $formatedTimelineDate;
+  }
+?>
   <script>
 
     var abc = '<?php echo $projectDetails['abc'] ?>';
@@ -392,24 +404,24 @@
 
       var timeline_status = '<?php echo $timeLine['timeline_status'] ?>';
       if (timeline_status == 'set') {
-        $('#advertisement_start').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?>");
-        $('#advertisement_end').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?>");
-        $('#preBidStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?>");
-        $('#preBidEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?>");
-        $('#bidSubmissionStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_start']), "M-d-Y") ?>");
-        $('#bidSubmissionEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_end']), "M-d-Y") ?>");
-        $('#bidEvaluationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?>");
-        $('#bidEvaluationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?>");
-        $('#postQualificationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?>");
-        $('#postQualificationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?>");
-        $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?>");
-        $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?>");
-        $('#contractSigningStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?>");
-        $('#contractSigningEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?>");
-        $('#authorityApprovalStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?>");
-        $('#authorityApprovalEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?>");
-        $('#proceedNoticeStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?>");
-        $('#proceedNoticeEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?>");
+        $('#advertisement_start').attr('placeholder', "<?php echo convertDateTextual($timeLine['advertisement_start']) ?>");
+        $('#advertisement_end').attr('placeholder', "<?php echo convertDateTextual($timeLine['advertisement_end']) ?>");
+        $('#preBidStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['pre_bid_start']) ?>");
+        $('#preBidEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['pre_bid_end']) ?>");
+        $('#bidSubmissionStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_submission_start']) ?>");
+        $('#bidSubmissionEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_submission_end']) ?>");
+        $('#bidEvaluationStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_evaluation_start']) ?>");
+        $('#bidEvaluationEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_evaluation_end']) ?>");
+        $('#postQualificationStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['post_qualification_start']) ?>");
+        $('#postQualificationEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['post_qualification_end']) ?>");
+        $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['award_notice_start']) ?>");
+        $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['award_notice_end']) ?>");
+        $('#contractSigningStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['contract_signing_start']) ?>");
+        $('#contractSigningEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['contract_signing_end']) ?>");
+        $('#authorityApprovalStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['authority_approval_start']) ?>");
+        $('#authorityApprovalEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['authority_approval_end']) ?>");
+        $('#proceedNoticeStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['proceed_notice_start']) ?>");
+        $('#proceedNoticeEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['proceed_notice_end']) ?>");
       }
 
       if (timeline_status == 'pending') {

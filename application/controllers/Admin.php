@@ -657,6 +657,10 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
+		// if ($this->admin_model->getPreProcStatus($plan_id) !=) {
+			
+		// }
+
 		if ($this->admin_model->getPreBidStatus($plan_id) != 'finished') {
 			if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
 				$this->admin_model->updatePreBidStatus($plan_id, 'not_needed');
@@ -1772,8 +1776,6 @@ class Admin extends CI_Controller {
 
 			// Reset project activity status
 
-			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
-
 			$this->admin_model->resetTimelineProjectStatus($plan_id);
 
 			// Record Log
@@ -2114,7 +2116,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function setObservers(){
-		$datetime = date('Y-m-d H:i:s');
+		$datetime = $this->input->post('invite_date_input');
 		$observer_id = $this->input->post('observer_id[]');
 		$observer_name = $this->input->post('observer_name[]');
 		$plan_id = $this->input->post('plan_id');

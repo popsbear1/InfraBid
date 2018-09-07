@@ -918,28 +918,28 @@ function convertDate($date){
                 <h5 class="modal-title">Set Date Invitation Sent to Observers</h5>
 
               </div>
-              <div class="modal-body" style=" height: 500px;">
+              <div class="modal-body" style=" height: 550px;">
                 <form id="setObserversForm" autocomplete="off">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="bg-olive">
-                        <p style="padding: 10px 0px 10px 0px" class="text-center">Activities</p>
+                        <p style="padding: 10px 0px 10px 0px" class="text-center">Activity Observers and Invite Dates</p>
                       </div>
-                      <div style="background: #dedfe0; height: 420px; padding-top: 5px">
+                      <div style="background: #dedfe0; height: 470px; padding-top: 5px">
                         <div class="margin">
                           <?php 
                             $currentActivity = null;
                             foreach ($activity_observers as $act_observer) {
                               if ($currentActivity == null) {
                                 $currentActivity = $act_observer['activity_name'];
-                                echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y h:i:s a') . '</h4>';
+                                echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
                                 echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                               }else{
                                 if ($currentActivity == $act_observer['activity_name']) {
                                   echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                                 }else{
                                   $currentActivity = $act_observer['activity_name'];
-                                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y h:i:s a') . '</h4>';
+                                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
                                   echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                                 }
                               }
@@ -1025,9 +1025,21 @@ function convertDate($date){
                           </div>
                         </div>
                       </div>
+                      <div class="row" style="margin-top: 10px">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="form-horizontal">
+                            <div class="form-group">
+                              <label class="control-label col-lg-3 col-md-3 col-sm-3">Date Sent*: </label>
+                              <div class="col-lg-9 col-md-9 col-sm-9">
+                                <input class="form-control" type="text" name="invite_date_input" id="invite_date_input" required>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                          <div class="bg-purple" style="margin-top: 10px">
+                          <div class="bg-purple">
                             <p style="padding: 10px 0px 10px 0px" class="text-center">Input Observer Names</p>
                           </div>
                           <div style="background: #dedfe0; height: 200px; overflow-y: auto; overflow-x: hidden;">
@@ -1152,6 +1164,12 @@ function convertDate($date){
 <script>
 
   $(document).ready(function(){
+
+    $('#invite_date_input').datepicker({
+      orientation: 'bottom auto',
+      format: 'yyyy-mm-dd',
+      autoclose: true
+    })
 
     var contractors_data = '<?php echo json_encode($contractors) ?>';
     var contractors = JSON.parse(contractors_data);

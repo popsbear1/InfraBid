@@ -35,6 +35,12 @@
             <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
               Timeline and Activity Dates
             </button>
+            <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
+              Project Bidders
+            </button>
+            <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
+              Activity Observers
+            </button>
           </div>
         </div>
         <div class="box-body">
@@ -125,7 +131,7 @@
                   <label for="">Abc/PPost Date:</label>
                   <p class="form-control input-sm"><?php 
                                                         if ($actdates['advertisement'] != null) {
-                                                          echo date_format($advertisementDate, "M-d-Y");
+                                                          echo convertDateTextual($actdates['advertisement']);
                                                         }else{
                                                           echo $projectDetails['abc_post_date'];
                                                         } 
@@ -136,7 +142,7 @@
                   <label for="">Sub/open of Date:</label>
                   <p class="form-control input-sm"><?php 
                                                         if ($actdates['open_bid'] != null) {
-                                                          echo date_format($openBidDate, "M-d-Y");
+                                                          echo convertDateTextual($actdates['open_bid']);
                                                         }else{
                                                           echo $projectDetails['sub_open_date'];
                                                         } 
@@ -147,7 +153,7 @@
                   <label for="">Notice of Award Date:</label>
                   <p class="form-control input-sm"><?php 
                                                         if ($actdates['award_notice'] != null) {
-                                                          echo date_format($awardNoticeDate, "M-d-Y");
+                                                          echo convertDateTextual($actdates['award_notice']);
                                                         }else{
                                                           echo $projectDetails['award_notice_date'];
                                                         } 
@@ -158,7 +164,7 @@
                   <label for="">Contract Signing Date:</label>
                   <p class="form-control input-sm"><?php
                                                         if ($actdates['contract_signing'] != null) {
-                                                          echo date_format($contractSigningDate, "M-d-Y");    
+                                                          echo convertDateTextual($actdates['contract_signing']);    
                                                         } else{
                                                           echo $projectDetails['contract_signing_date'];
                                                         } 

@@ -1667,8 +1667,8 @@
 		$this->db->insert('project_activity_status', $timeLine_status_data);
 	}
 
-		public function resetTimelineProjectStatus($plan_id){
-		
+	public function resetTimelineProjectStatus($plan_id){
+		$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
 		$timeLine_status_data = array(
 			'pre_proc' => 'pending',
 			'advertisement' => 'pending',
@@ -1687,6 +1687,10 @@
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_activity_status', $timeLine_status_data);
+
+		if ($abc < 5000000) {
+			$this->updatePreProctStatus($plan_id);
+		}
 	}
 
 	/* update for delete/activate**/
@@ -2279,5 +2283,7 @@
 
 		return $status->row()->pre_bid;
 	}
+
+
 }
 ?>
