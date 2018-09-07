@@ -41,7 +41,7 @@
                     <td class="reight-col">
                       <div style="padding-left: 20px; padding-right: 20px">
                         <button class="btn btn-block bg-olive" id="repapulate_date_btn">
-                        Repapulate Dates
+                        Repopulate Dates
                       </button>
                       </div>
                     </td>

@@ -1786,7 +1786,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
 
 			// disqualification record
-			$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
+			//$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
 			
 			// Remove current bidder
 

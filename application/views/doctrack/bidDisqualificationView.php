@@ -16,9 +16,9 @@
           <tr>
             <th class="text-center">Contractor</th>
             <th class="text-center">Project Title</th>
-            <th class="text-center">Date Disqualifide</th>
+            <th class="text-center">Date Disqualified</th>
             <th class="text-center">Remark</th>
-            <th class="text-center">Disqualifide By</th>
+            <th class="text-center">Disqualified By</th>
             <th class="text-center">ABC</th>
             <th class="text-center">Amount of Bid</th>
             <th class="text-center">Action</th>
@@ -90,7 +90,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×
         </button>
-        <h4 class="modal-title" id="myModalLabel">Disqualifide Bidder Documents</h4>
+        <h4 class="modal-title" id="myModalLabel">Disqualified Bidder Documents</h4>
       </div>
       <div class="modal-body">
         <table width="100%" id="disqual_docu">
