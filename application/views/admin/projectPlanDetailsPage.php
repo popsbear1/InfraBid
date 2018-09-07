@@ -35,10 +35,10 @@
             <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
               Timeline and Activity Dates
             </button>
-            <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
+            <button class="btn btn-lg btn-default details_btn" id="bidders_btn">
               Project Bidders
             </button>
-            <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
+            <button class="btn btn-lg btn-default details_btn" id="observers_btn">
               Activity Observers
             </button>
           </div>
@@ -364,6 +364,46 @@
               </div>
             </div>
           </div>
+          <div class="details_view" id="bidders" hidden="hidden">
+            <table width="100%" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Bidder</th>
+                  <th>Proposed Bid</th>
+                  <th>Bid Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($bidders as $bid): ?>
+                  <tr>
+                    <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                    <td><?php echo $bid['proposed_bid'] ?></td>
+                    <td><?php echo $bid['bid_status'] ?></td>
+                  </tr>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="details_view" id="observers" hidden="hidden">
+            <?php 
+              $currentActivity = null;
+              foreach ($activity_observers as $act_observer) {
+                if ($currentActivity == null) {
+                  $currentActivity = $act_observer['activity_name'];
+                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
+                  echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
+                }else{
+                  if ($currentActivity == $act_observer['activity_name']) {
+                    echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
+                  }else{
+                    $currentActivity = $act_observer['activity_name'];
+                    echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
+                    echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
+                  }
+                }
+              }
+            ?>
+          </div>
         </div>
       </div>
               
@@ -431,6 +471,8 @@
     $('#project_details_btn').css('background', '#48d660');
     $('#project_logs_btn').css('background', '#e59ce3');
     $('#timeline_procact_btn').css('background', '#f29e63');
+    $('#bidders_btn').css('background', '#ff6666');
+    $('#observers_btn').css('background', '#99c2ff');
   }
 
   $('.details_btn').click(function(){
@@ -451,6 +493,16 @@
   $('#timeline_procact_btn').click(function(){
     $('.details_view').prop('hidden', 'hidden');
     $('#timeline_procact').prop('hidden', false);
+  });
+
+  $('#bidders_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#bidders').prop('hidden', false);
+  });
+
+  $('#observers_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#observers').prop('hidden', false);
   });
 </script>
 
