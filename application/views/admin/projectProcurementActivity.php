@@ -149,7 +149,7 @@ function convertDate($date){
         <div class="col-9 col-lg-9 col-md-8 col-sm-7 col-xs-12 well" style="height: 480px;">
           <?php if ($actStatus['pre_proc'] != 'not_needed'): ?>
             <div id="pre_proc_view" class="activity_view form-horizontal" hidden="hidden">
-              <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>">
+              <form id="pre_proc_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" autocomplete="off">
 
               <input type="text" name="activity_name" value="pre_proc" hidden>
                 <div class="form-group">
@@ -163,7 +163,7 @@ function convertDate($date){
           <?php endif ?>
 
           <div id="ads_post_view" class="activity_view" hidden="hidden">
-            <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="advertisement_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
               <input type="text" name="activity_name" value="advertisement" hidden>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Add/Post of IAEB:</label>
@@ -188,7 +188,7 @@ function convertDate($date){
 
           <?php if ($actStatus['pre_bid'] != 'not_needed'): ?>
             <div id="pre_bid_view" class ="activity_view" hidden="hidden">
-              <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <form id="pre_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
                 <input type="text" name="activity_name" value="pre_bid" hidden>
                 <div class="form-group">
                   <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Pre-bid Conf:</label>
@@ -213,7 +213,7 @@ function convertDate($date){
           <?php endif ?>
 
           <div id="bid_open_view" class="activity_view" hidden="hidden">
-            <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left" autocomplete="off">
+            <form id="open_bid_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal" autocomplete="off">
 
               <input type="text" name="activity_name" value="open_bid" hidden>
               <div class="form-group">
@@ -269,7 +269,7 @@ function convertDate($date){
           </div>
 
           <!-- <div id="eligibility_check_view" class ="activity_view" hidden="hidden">
-            <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="eligibility_check_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal">
 
               <input type="text" name="activity_name" value="eligibility_check" hidden>
               <div class="form-group">
@@ -313,7 +313,7 @@ function convertDate($date){
           </div> -->
 
           <div id="bid_evaluation_view" class="activity_view" hidden="hidden">
-            <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="bid_evaluation_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
 
               <input type="text" name="activity_name" value="bid_evaluation" hidden>
               <div class="form-group">
@@ -360,7 +360,7 @@ function convertDate($date){
           </div>
 
           <div id="post_qual_view" class ="activity_view" hidden="hidden">
-            <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="post_qual_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
 
               <input type="text" name="activity_name" value="post_qual" hidden>
               <div class="form-group">
@@ -385,7 +385,7 @@ function convertDate($date){
           </div>
 
           <div id="notice_award_view" class="activity_view" hidden="hidden">
-            <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="award_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
               <input type="text" name="activity_name" value="awar_notice" hidden>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice of Award:</label>
@@ -409,7 +409,7 @@ function convertDate($date){
           </div>
 
           <div id="sign_contract_view" class ="activity_view" hidden="hidden">
-            <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="contract_signing_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
 
               <input type="text" name="activity_name" value="contract_signing" hidden>
               <div class="form-group">
@@ -435,7 +435,7 @@ function convertDate($date){
 
           <?php if ($actStatus['authority_approval'] != 'not_needed'): ?>
             <div id="authority_approval_view" class ="activity_view" hidden="hidden">
-              <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+              <form id="authority_approval_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
 
                 <input type="text" name="activity_name" value="authority_approval" hidden>
                 <div class="form-group">
@@ -461,7 +461,7 @@ function convertDate($date){
           <?php endif ?>
 
           <div id="proceed_notice_view" class="activity_view" hidden="hidden">
-            <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="proceed_notice_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
               <input type="text" name="activity_name" value="proceed_notice" hidden>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice to Proceed: </label>
@@ -485,7 +485,7 @@ function convertDate($date){
           </div>
 
           <div id="completion_delivery_view" class ="activity_view" hidden="hidden">
-            <form id="completion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="completion_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
 
               <input type="text" name="activity_name" value="completion" hidden>
 
@@ -499,7 +499,7 @@ function convertDate($date){
           </div>
 
           <div id="turnover_acceptance_view" class ="activity_view" hidden="hidden">
-            <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal form-label-left">
+            <form id="acceptance_form" method="POST" action="<?php echo base_url('admin/editProcActDate') ?>" class="form-horizontal"  autocomplete="off">
               <input type="text" name="activity_name" value="acceptance" hidden>
 
               <div class="form-group">
@@ -737,7 +737,7 @@ function convertDate($date){
             </div>
           </div>
           <div class="modal-footer">
-            <form action="<?php echo base_url('admin/rebidProjectPlan') ?>" method="POST" id="rebidProjectForm">
+            <form action="<?php echo base_url('admin/rebidProjectPlan') ?>" method="POST" id="rebidProjectForm"  autocomplete="off">
               <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
               
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -824,7 +824,7 @@ function convertDate($date){
                 </button>
               </div>
               <div class="modal-body">
-                <form id="recommendForReviewForm" action="<?php echo base_url('admin/recommendProjectPlanForReview') ?>" method="POST">
+                <form id="recommendForReviewForm" action="<?php echo base_url('admin/recommendProjectPlanForReview') ?>" method="POST"  autocomplete="off">
                   <input type="text" name="plan_id" value="<?php echo $projectDetails['plan_id'] ?>" hidden>
                   <div class="form-group">
                     <label>Remark *: </label>
@@ -898,7 +898,7 @@ function convertDate($date){
                 </div>
               </div>
               <div class="modal-footer">
-                <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" id="projectBidderDisqualificationAndSanctionForm">
+                <form action="<?php echo base_url('admin/projectBidderDisqualificationAndSunction') ?>" id="projectBidderDisqualificationAndSanctionForm"  autocomplete="off">
                   <input type="text" value="<?php echo $projectDetails['plan_id'] ?>" name="plan_id" hidden>
                   <button type="button" class="btn btn-primary" id="dis_qual_btn">Submit</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

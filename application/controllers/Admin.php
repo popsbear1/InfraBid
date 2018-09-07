@@ -395,6 +395,26 @@ class Admin extends CI_Controller {
 		$data['actdates'] = $this->admin_model->getProcActivityDates($plan_id);
 		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
 		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
+		for ($i=0; $i < sizeOf($data['activity_observers']); $i++) { 
+			if ($data['activity_observers'][$i]['activity_name'] == 'pre_bid') {
+				$data['activity_observers'][$i]['activity_name'] = 'Pre-bid';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'eligibility') {
+				$data['activity_observers'][$i]['activity_name'] = 'Eligibility Check';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'sub_open') {
+				$data['activity_observers'][$i]['activity_name'] = 'Submission/Open of Bids';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'bid_evaluation') {
+				$data['activity_observers'][$i]['activity_name'] = 'Bid Evaluation';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'post_qual') {
+				$data['activity_observers'][$i]['activity_name'] = 'Post Qualification';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'delivery_completion') {
+				$data['activity_observers'][$i]['activity_name'] = 'Delivery/Completion';
+			}
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -1764,9 +1784,17 @@ class Admin extends CI_Controller {
 			// Chnage project status to pending
 
 			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
+
+			// disqualification record
+			$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
+			
 			// Remove current bidder
 
 			$this->admin_model->updateProjectContractor($plan_id);
+
+			//disqualify all bids
+
+			$this->admin_model->disqualifyAllBids($plan_id);
 
 			// Empty project timeline (revert all dates to null)
 
@@ -1779,6 +1807,10 @@ class Admin extends CI_Controller {
 			// Reset project activity status
 
 			$this->admin_model->resetTimelineProjectStatus($plan_id);
+
+			// Reset project activity invite dates
+
+			$this->admin_model->resetActivityInviteDates($plan_id);
 
 			// Record Log
 

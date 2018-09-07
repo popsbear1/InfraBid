@@ -2139,6 +2139,31 @@
 		$this->db->update('project_activity_status', $status);
 	}
 
+	public function resetActivityInviteDates($plan_id){
+		$data = array(
+			'pre_bid_invite_date' => null,
+			'eligibility_check_invite_date' => null,
+			'sub_open_invite_date' => null,
+			'bid_evaluation_invite_date' => null,
+			'post_qual_invite_date' => null,
+			'delivery_completion_invite_date' => null,
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_plan', $data);
+
+		$this->updateInviteClass($plan_id);
+	}
+
+	public function updateInviteClass($plan_id){
+		$class = array(
+			'invite_class' => 'renewed'
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_observers', $class);
+	}
+
 	public function verifyBidAvailability($plan_id){
 		$bids = $this->getProjectBids($plan_id);
 		$active_bids = 0;
@@ -2178,6 +2203,15 @@
 
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_plan', $data);
+	}
+
+	public function disqualifyAllBids($plan_id){
+		$data = array(
+			'bid_status' => 'disqualifide'
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_bidders', $data);
 	}
 
 	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name){
@@ -2258,6 +2292,7 @@
 		$this->db->from('project_observers');
 		$this->db->join('observers', 'project_observers.observer_id = observers.observer_id');
 		$this->db->where('plan_id', $plan_id);
+		$this->db->where('invite_class', 'valid');
 
 		$query = $this->db->get();
 

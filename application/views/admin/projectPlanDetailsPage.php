@@ -365,7 +365,7 @@
             </div>
           </div>
           <div class="details_view" id="bidders" hidden="hidden">
-            <table width="100%" class="table table-bordered table-striped">
+            <table width="100%" class="table table-bordered table-striped" id="bidders_table">
               <thead>
                 <tr>
                   <th>Bidder</th>
@@ -446,6 +446,14 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function(){
+    $('#bidders_table').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : false
+    });
     $('#timeline_table').DataTable({
       'paging'      : false,
       'lengthChange': false,
