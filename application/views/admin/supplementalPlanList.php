@@ -293,7 +293,7 @@
           { 
             data: null,
             render: function ( data, type, row ) {
-              if (data.project_status == 'pending') {
+              if (data.project_status == 'pending' || data.project_status == 'for_rebid') {
                 return  '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
                           '<input name="project_type" value="' + data.project_type + '" hidden>' +
                           '<div class="btn-group">' +
@@ -418,22 +418,26 @@
             { 
               data: null,
               render: function ( data, type, row ) {
-                return '<div class="row">' +
-                        '<div class="col-lg-6 col-md-6 col-sm-6">' +
-                          '<form method="GET" action="<?php echo base_url('admin/editSupplementalPlanView') ?>">' +
+                if (data.project_status == 'pending' || data.project_status == 'for_rebid') {
+                  return  '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
                             '<input name="project_type" value="' + data.project_type + '" hidden>' +
-                            '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                              '<i class="fa fa-pencil"></i>' +
+                            '<div class="btn-group">' +
+                              '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                                '<i class="fa fa-pencil"></i>' +
+                              '</button>' +
+                              '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
+                                '<i class="fa fa-trash"></i>' +
+                              '</button>' +
+                            '</div>' +
+                          '</form>';
+                }else{
+                  return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                            '<input type="text" name="prev_loc" value="supplementalPlanView" hidden/>' +
+                            '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                              '<i class="fa fa-eye"></i>' +
                             '</button>' +
-                          '</form>' +
-                        '</div>' +
-                        '<div class="col-lg-6 col-md-6 col-sm-6">' +
-                          '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
-                            '<i class="fa fa-trash"></i>' +
-                          '</button>' +
-                        '</div>' +      
-                      '</div>'
-                      ;
+                          '</form>';
+                }
               }
             }
         ],

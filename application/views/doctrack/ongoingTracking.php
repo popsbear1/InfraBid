@@ -8,7 +8,7 @@
   <div class="box">
     <div class="box-header">
       <h2 class="box-title"><i class="fa fa-list"></i> Project Plan Records</h2>
-      <small>(Listed here are those projects whith status of Onprocess or For rebid.)</small>
+      <small>(Listed here are those projects whith status of Onprocess.)</small>
     </div>
     <div class="box-body">
       <table class="table table-striped table-bordered" id="documentTable">
