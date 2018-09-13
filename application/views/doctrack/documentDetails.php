@@ -247,6 +247,9 @@
                   <?php if ($this->session->userdata('user_type') != 'PEO'): ?>
                     <option value="PEO">PEO</option>
                   <?php endif ?>
+                  <?php if ($this->session->userdata('user_type') != 'PPDO'): ?>
+                    <option value="PPDO">PPDO</option>
+                  <?php endif ?>
               </select>
             </div>
             <div class="form-group">
@@ -290,7 +293,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-7 col-md-7 col-sm-7"  style="height: 500px; overflow: scroll;">
+          <div class="col-lg-7 col-md-7 col-sm-7"  style="height: 500px; overflow: auto;">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -312,7 +315,7 @@
               </tbody>
             </table>
           </div>
-          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 500px; overflow: scroll;">
+          <div class="col-lg-5 col-md-5 col-sm-5"  style="height: 500px; overflow: auto;">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>

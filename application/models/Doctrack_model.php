@@ -50,6 +50,7 @@
 		public function getExistingDocumentTypes($plan_id){
 			$this->db->select('doc_type_id');
 			$this->db->from('project_document');
+			$this->db->not_like('status', 'disqualifide');
 			$this->db->where('plan_id', $plan_id);
 
 			$existingDocumentsQuery = $this->db->get();
@@ -66,9 +67,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
-			$this->db->where('pow_ready', 'true');
 			$this->db->where('project_plan.status', 'onprocess');
-			$this->db->or_where('project_plan.status', 'for_rebid');
 
 			$query = $this->db->get();
 
@@ -107,7 +106,6 @@
 			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
 			$this->db->where('pow_ready', 'true');
 			$this->db->where('project_plan.status', 'onprocess');
-			$this->db->or_where('project_plan.status', 'for_rebid');
 
 			$query = $this->db->get();
 
@@ -227,6 +225,7 @@
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->join('users', 'project_document.added_by = users.user_id');
 			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->not_like('project_document.status', 'disqualifide');
 
 			$query = $this->db->get();
 
@@ -238,7 +237,8 @@
 			$this->db->from('project_document');
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->where('project_document.plan_id', $plan_id);
-			$this->db->where('project_document.status', 'sent');
+			$this->db->not_like('project_document.current_doc_loc', $user_type);
+			$this->db->not_like('project_document.status', 'disqualifide');
 
 			$query = $this->db->get();
 
@@ -273,6 +273,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->where('project_document.status', 'sent');
 			$this->db->where('current_doc_loc', $user_type);
+			$this->db->group_by('project_document.plan_id');
 			$this->db->group_by('project_document.receiver');
 
 			$query = $this->db->get();
@@ -341,6 +342,34 @@
 			return $query->result_array();
 		}
 
+		public function getBidDisqualificationReports(){
+			$this->db->select('*, concat(first_name, " ", middle_name, " ", last_name) as userName, project_bidders.proposed_bid as contractor_bid');
+			$this->db->from('disqualification_records');
+			$this->db->join('project_bidders', 'disqualification_records.project_bid = project_bidders.project_bid');
+			$this->db->join('project_logs', 'disqualification_records.project_log_id = project_logs.project_log_id');
+			$this->db->join('project_plan', 'project_bidders.plan_id = project_plan.plan_id');
+			$this->db->join('contractors', 'project_bidders.contractor_id = contractors.contractor_id');
+			$this->db->join('users', 'project_logs.user_id = users.user_id');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getDisqualifideBidData($plan_id, $contractor_id){
+			$this->db->select('*');
+			$this->db->from('project_document');
+			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
+			$this->db->where('plan_id', $plan_id);
+			$this->db->where('contractor_id', $contractor_id);
+			$this->db->where('project_document.status', 'disqualifide');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+
+		}
+
 		/**
 		* Update Documents
 		*/
@@ -352,10 +381,13 @@
 		* 4. Insert new document log
 		*/
 
+
 		public function addProjectDocument($plan_id, $doc_type_id, $user_id, $department){
+			$contractor_id = $this->getProjectContractor($plan_id);
 			$data = array(
 				'plan_id' => $plan_id,
 				'doc_type_id' => $doc_type_id,
+				'contractor_id' => $contractor_id,
 				'added_by' => $user_id,
 				'current_doc_loc' => $department,
 				'status' => 'received'
@@ -363,6 +395,16 @@
 
 			$this->db->insert('project_document', $data);
 			
+		}
+
+		public function getProjectContractor($plan_id){
+			$this->db->select('contractor_id');
+			$this->db->from('project_plan');
+			$this->db->where('plan_id', $plan_id);
+
+			$contractor = $this->db->get();
+
+			return $contractor->row()->contractor_id;
 		}
 
 		public function insertNewLog($remark, $log_type, $user_id){
@@ -520,5 +562,7 @@
 			$this->db->where('project_document_id', $document_id);
 			$this->db->update('project_document', $data);
 		}
+
+		
 	}
 ?>

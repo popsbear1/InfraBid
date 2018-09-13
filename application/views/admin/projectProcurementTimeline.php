@@ -38,7 +38,13 @@
                     <td class="left-col"><b class="pull-right">ADS/Post:</b></td>
                     <td class="center"><input type="text" class="form-control text-center" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td class="center"><input type="text" class="form-control text-center" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td class="reight-col"></td>
+                    <td class="reight-col">
+                      <div style="padding-left: 20px; padding-right: 20px">
+                        <button class="btn btn-block bg-olive" id="repapulate_date_btn">
+                        Repopulate Dates
+                      </button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="left-col">
@@ -234,6 +240,131 @@
   <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 
+  <!-- modal for data confirmation -->
+  <div id="timelineModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
+        </div>
+        <div class="modal-body">
+          <table class='table table-striped table-bordered' style='font-size:13px;'>
+            <thead>
+              <tr>
+                <th class="text-center">Activity</th>
+                <th class="text-center">Start Date</th>
+                <th class="text-center">End Date</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr>
+                <td>Advertisement</td>
+                <td id="addStart"></td>
+                <td id="addEnd"></td>
+              </tr>
+              <tr>
+                <td>Pre-bid Conference</td>
+                <td id="pbcStart"></td>
+                <td id="pbcEnd"></td>
+              </tr>
+              <tr>
+                <td>Submission of Bids</td>
+                <td id="sbStart"></td>
+                <td id="sbEnd"></td>
+              </tr>
+              <tr>
+                <td>Bid Evaluation</td>
+                <td id="beStart"></td>
+                <td id="beEnd"></td>
+              </tr>
+              <tr>
+                <td>Post Qualification</td>
+                <td id="pqStart"></td>
+                <td id="pqEnd"></td>
+              </tr>
+              <tr>
+                <td>Issuance of Notice of Award</td>
+                <td id="inaStart"></td>
+                <td id="inaEnd"></td>
+              </tr>
+              <tr>
+                <td>Contract Preparation and Signing</td>
+                <td id="cpsStart"></td>
+                <td id="cpsEnd"></td>
+              </tr>
+              <tr>
+                <td>Approval by Higher Authority</td>
+                <td id="ahaStart"></td>
+                <td id="ahaEnd"></td>
+              </tr>
+              <tr>
+                <td>Notice to Proceed</td>
+                <td id="ntpStart"></td>
+                <td id="ntpEnd"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" form="updateProcurementTimelineForm" name="submit" class="btn btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- end of modal -->
+
+<div class="modal fade" id="update_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Warning</h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Input Number of days to add before pressing UPDATE button!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="missing_startdate_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Alert!</h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Select Start Date First!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php 
+  function convertDateTextual($date){
+    if ($date != null) {
+      $timelineDate = date_create($date);
+      $formatedTimelineDate = date_format($timelineDate, 'M-d-Y');
+    }else{
+      $formatedTimelineDate = 'None';
+    }
+
+    return $formatedTimelineDate;
+  }
+?>
   <script>
 
     var abc = '<?php echo $projectDetails['abc'] ?>';
@@ -247,8 +378,6 @@
       $('#preBidNumber').prop('disabled', true);
       $('#preBidUpdateBtn').prop('disabled', true);  
     }
-
-
 
     $('#timelineModalConfirmBtn').click(function(e){
       $('#addStart').html($('#advertisement_start').val());
@@ -279,25 +408,45 @@
 
       var timeline_status = '<?php echo $timeLine['timeline_status'] ?>';
       if (timeline_status == 'set') {
-        $('#advertisement_start').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?>");
-        $('#advertisement_end').attr('placeholder', "<?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?>");
-        $('#preBidStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?>");
-        $('#preBidEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?>");
-        $('#bidSubmissionStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_start']), "M-d-Y") ?>");
-        $('#bidSubmissionEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_submission_end']), "M-d-Y") ?>");
-        $('#bidEvaluationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?>");
-        $('#bidEvaluationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?>");
-        $('#postQualificationStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?>");
-        $('#postQualificationEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?>");
-        $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?>");
-        $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?>");
-        $('#contractSigningStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?>");
-        $('#contractSigningEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?>");
-        $('#authorityApprovalStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?>");
-        $('#authorityApprovalEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?>");
-        $('#proceedNoticeStart').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?>");
-        $('#proceedNoticeEnd').attr('placeholder', "<?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?>");
+        $('#advertisement_start').attr('placeholder', "<?php echo convertDateTextual($timeLine['advertisement_start']) ?>");
+        $('#advertisement_end').attr('placeholder', "<?php echo convertDateTextual($timeLine['advertisement_end']) ?>");
+        $('#preBidStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['pre_bid_start']) ?>");
+        $('#preBidEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['pre_bid_end']) ?>");
+        $('#bidSubmissionStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_submission_start']) ?>");
+        $('#bidSubmissionEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_submission_end']) ?>");
+        $('#bidEvaluationStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_evaluation_start']) ?>");
+        $('#bidEvaluationEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['bid_evaluation_end']) ?>");
+        $('#postQualificationStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['post_qualification_start']) ?>");
+        $('#postQualificationEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['post_qualification_end']) ?>");
+        $('#awardNoticeIssuanceStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['award_notice_start']) ?>");
+        $('#awardNoticeIssuanceEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['award_notice_end']) ?>");
+        $('#contractSigningStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['contract_signing_start']) ?>");
+        $('#contractSigningEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['contract_signing_end']) ?>");
+        $('#authorityApprovalStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['authority_approval_start']) ?>");
+        $('#authorityApprovalEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['authority_approval_end']) ?>");
+        $('#proceedNoticeStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['proceed_notice_start']) ?>");
+        $('#proceedNoticeEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['proceed_notice_end']) ?>");
       }
+
+      var repapulateStartDate = '<?php echo date_format(date_create($timeLine['advertisement_start']), 'm/d/Y') ?>'
+      var advertisement_start = '<?php echo $timeLine['advertisement_start'] ?>';
+      var advertisement_end = '<?php echo $timeLine['advertisement_end'] ?>';
+      var preBidStart = '<?php echo $timeLine['pre_bid_start'] ?>';
+      var preBidEnd = '<?php echo $timeLine['pre_bid_end'] ?>';
+      var bidSubmissionStart = '<?php echo $timeLine['bid_submission_start'] ?>';
+      var bidSubmissionEnd = '<?php echo $timeLine['bid_submission_end'] ?>';
+      var bidEvaluationStart = '<?php echo $timeLine['bid_evaluation_start'] ?>';
+      var bidEvaluationEnd = '<?php echo $timeLine['bid_evaluation_end'] ?>';
+      var postQualificationStart = '<?php echo $timeLine['post_qualification_start'] ?>';
+      var postQualificationEnd = '<?php echo $timeLine['post_qualification_end'] ?>';
+      var awardNoticeIssuanceStart = '<?php echo $timeLine['award_notice_start'] ?>';
+      var awardNoticeIssuanceEnd = '<?php echo $timeLine['award_notice_end'] ?>';
+      var contractSigningStart = '<?php echo $timeLine['contract_signing_start'] ?>';
+      var contractSigningEnd = '<?php echo $timeLine['contract_signing_end'] ?>';
+      var authorityApprovalStart = '<?php echo $timeLine['authority_approval_start'] ?>';
+      var authorityApprovalEnd = '<?php echo $timeLine['authority_approval_end'] ?>';
+      var proceedNoticeStart = '<?php echo $timeLine['proceed_notice_start'] ?>';
+      var proceedNoticeEnd = '<?php echo $timeLine['proceed_notice_end'] ?>';
 
       if (timeline_status == 'pending') {
         $('#advertisement_start').attr('placeholder', "None");
@@ -319,8 +468,32 @@
         $('#proceedNoticeStart').attr('placeholder', "None");
         $('#proceedNoticeEnd').attr('placeholder', "None");
       }
+
+      $('#repapulate_date_btn').click(function(){
+      $('#startDate').val(repapulateStartDate);
+      $('#advertisement_start').val(advertisement_start);
+      $('#advertisement_end').val(advertisement_end);
+      $('#preBidStart').val(preBidStart);
+      $('#preBidEnd').val(preBidEnd);
+      $('#bidSubmissionStart').val(bidSubmissionStart);
+      $('#bidSubmissionEnd').val(bidSubmissionEnd);
+      $('#bidEvaluationStart').val(bidEvaluationStart);
+      $('#bidEvaluationEnd').val(bidEvaluationEnd);
+      $('#postQualificationStart').val(postQualificationStart);
+      $('#postQualificationEnd').val(postQualificationEnd);
+      $('#awardNoticeIssuanceStart').val(awardNoticeIssuanceStart);
+      $('#awardNoticeIssuanceEnd').val(awardNoticeIssuanceEnd);
+      $('#contractSigningStart').val(contractSigningStart);
+      $('#contractSigningEnd').val(contractSigningEnd);
+      $('#authorityApprovalStart').val(authorityApprovalStart);
+      $('#authorityApprovalEnd').val(authorityApprovalEnd);
+      $('#proceedNoticeStart').val(proceedNoticeStart);
+      $('#proceedNoticeEnd').val(proceedNoticeEnd);
+    })
         
     });
+
+    
 
   var advertisementMinBase;
   var advertisementMaxBase;
@@ -819,117 +992,3 @@
 
 
   </script>
-
-  <!-- modal for data confirmation -->
-  <div id="timelineModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Confirm Input Values</h4>
-        </div>
-        <div class="modal-body">
-          <table class='table table-striped table-bordered' style='font-size:13px;'>
-            <thead>
-              <tr>
-                <th class="text-center">Activity</th>
-                <th class="text-center">Start Date</th>
-                <th class="text-center">End Date</th>
-              </tr> 
-            </thead>
-            <tbody>
-              <tr>
-                <td>Advertisement</td>
-                <td id="addStart"></td>
-                <td id="addEnd"></td>
-              </tr>
-              <tr>
-                <td>Pre-bid Conference</td>
-                <td id="pbcStart"></td>
-                <td id="pbcEnd"></td>
-              </tr>
-              <tr>
-                <td>Submission of Bids</td>
-                <td id="sbStart"></td>
-                <td id="sbEnd"></td>
-              </tr>
-              <tr>
-                <td>Bid Evaluation</td>
-                <td id="beStart"></td>
-                <td id="beEnd"></td>
-              </tr>
-              <tr>
-                <td>Post Qualification</td>
-                <td id="pqStart"></td>
-                <td id="pqEnd"></td>
-              </tr>
-              <tr>
-                <td>Issuance of Notice of Award</td>
-                <td id="inaStart"></td>
-                <td id="inaEnd"></td>
-              </tr>
-              <tr>
-                <td>Contract Preparation and Signing</td>
-                <td id="cpsStart"></td>
-                <td id="cpsEnd"></td>
-              </tr>
-              <tr>
-                <td>Approval by Higher Authority</td>
-                <td id="ahaStart"></td>
-                <td id="ahaEnd"></td>
-              </tr>
-              <tr>
-                <td>Notice to Proceed</td>
-                <td id="ntpStart"></td>
-                <td id="ntpEnd"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" form="updateProcurementTimelineForm" name="submit" class="btn btn-primary">Confirm</button>
-        </div>
-      </div>
-    </div>
-  </div>
-      <!-- end of modal -->
-
-<div class="modal fade" id="update_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Warning</h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <p>Input Number of days to add before pressing UPDATE button!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="missing_startdate_warning" tabindex="-1" role="dialog" aria-labelledby="update_warning" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Alert!</h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <p>Select Start Date First!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>

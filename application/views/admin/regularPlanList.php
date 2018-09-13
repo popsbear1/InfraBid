@@ -269,7 +269,6 @@
 <script>
   var plans_data = '<?php echo json_encode($plans) ?>';
   var plans = JSON.parse(plans_data);
-  console.log(plans);
   $(document).ready(function(){
       $('#regular_plan_table').DataTable({
         data: plans,

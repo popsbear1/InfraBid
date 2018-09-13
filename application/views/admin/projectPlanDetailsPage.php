@@ -1,25 +1,11 @@
 <?php  
-  $preProcDate = date_create($actdates['pre_proc']);
-  $advertisementDate = date_create($actdates['advertisement']);
-  $preBidDate = date_create($actdates['pre_bid']);
-  $eligibilityCheckDate = date_create($actdates['eligibility_check']);
-  $openBidDate = date_create($actdates['open_bid']);
-  $bidEvaluationDate = date_create($actdates['bid_evaluation']);
-  $postQualDate = date_create($actdates['post_qual']);
-  $awardNoticeDate = date_create($actdates['award_notice']);
-  $contractSigningDate = date_create($actdates['contract_signing']);
-  $authorityApprovalDate = date_create($actdates['authority_approval']);
-  $proceedNoticeDate = date_create($actdates['proceed_notice']);
-  $deliveryCompletionDate = date_create($actdates['delivery_completion']);
-  $acceptanceTurnoverDate = date_create($actdates['acceptance_turnover']);
   
-
   function convertDateTextual($date){
     if ($date != null) {
       $timelineDate = date_create($date);
       $formatedTimelineDate = date_format($timelineDate, 'M-d-Y');
     }else{
-      $formatedTimelineDate = null;
+      $formatedTimelineDate = 'None';
     }
 
     return $formatedTimelineDate;
@@ -48,6 +34,12 @@
             </button>
             <button class="btn btn-lg btn-default details_btn" id="timeline_procact_btn">
               Timeline and Activity Dates
+            </button>
+            <button class="btn btn-lg btn-default details_btn" id="bidders_btn">
+              Project Bidders
+            </button>
+            <button class="btn btn-lg btn-default details_btn" id="observers_btn">
+              Activity Observers
             </button>
           </div>
         </div>
@@ -139,7 +131,7 @@
                   <label for="">Abc/PPost Date:</label>
                   <p class="form-control input-sm"><?php 
                                                         if ($actdates['advertisement'] != null) {
-                                                          echo date_format($advertisementDate, "M-d-Y");
+                                                          echo convertDateTextual($actdates['advertisement']);
                                                         }else{
                                                           echo $projectDetails['abc_post_date'];
                                                         } 
@@ -150,7 +142,7 @@
                   <label for="">Sub/open of Date:</label>
                   <p class="form-control input-sm"><?php 
                                                         if ($actdates['open_bid'] != null) {
-                                                          echo date_format($openBidDate, "M-d-Y");
+                                                          echo convertDateTextual($actdates['open_bid']);
                                                         }else{
                                                           echo $projectDetails['sub_open_date'];
                                                         } 
@@ -161,7 +153,7 @@
                   <label for="">Notice of Award Date:</label>
                   <p class="form-control input-sm"><?php 
                                                         if ($actdates['award_notice'] != null) {
-                                                          echo date_format($awardNoticeDate, "M-d-Y");
+                                                          echo convertDateTextual($actdates['award_notice']);
                                                         }else{
                                                           echo $projectDetails['award_notice_date'];
                                                         } 
@@ -172,7 +164,7 @@
                   <label for="">Contract Signing Date:</label>
                   <p class="form-control input-sm"><?php
                                                         if ($actdates['contract_signing'] != null) {
-                                                          echo date_format($contractSigningDate, "M-d-Y");    
+                                                          echo convertDateTextual($actdates['contract_signing']);    
                                                         } else{
                                                           echo $projectDetails['contract_signing_date'];
                                                         } 
@@ -226,48 +218,48 @@
                         <tbody>
                           <tr>
                             <td>Advertisement</td>
-                            <td><?php echo date_format(date_create($timeLine['advertisement_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['advertisement_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['advertisement_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['advertisement_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Pre-bid Conference</td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Submission of Bid</td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['pre_bid_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['pre_bid_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Bid Evaluation</td>
-                            <td><?php echo date_format(date_create($timeLine['bid_evaluation_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['bid_evaluation_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['bid_evaluation_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['bid_evaluation_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Post Qualification</td>
-                            <td><?php echo date_format(date_create($timeLine['post_qualification_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['post_qualification_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['post_qualification_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['post_qualification_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Issuance of Notice of Award</td>
-                            <td><?php echo date_format(date_create($timeLine['award_notice_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['award_notice_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['award_notice_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['award_notice_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Contract Preparation and Signing</td>
-                            <td><?php echo date_format(date_create($timeLine['contract_signing_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['contract_signing_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['contract_signing_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['contract_signing_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Approval by Higher Authority</td>
-                            <td><?php echo date_format(date_create($timeLine['authority_approval_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['authority_approval_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['authority_approval_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['authority_approval_end']) ?></td>
                           </tr>
                           <tr>
                             <td>Notice to Proceed</td>
-                            <td><?php echo date_format(date_create($timeLine['proceed_notice_start']), "M-d-Y") ?></td>
-                            <td><?php echo date_format(date_create($timeLine['proceed_notice_end']), "M-d-Y") ?></td>
+                            <td><?php echo convertDateTextual($timeLine['proceed_notice_start']) ?></td>
+                            <td><?php echo convertDateTextual($timeLine['proceed_notice_end']) ?></td>
                           </tr>
                         </tbody>
                       </table>
@@ -286,13 +278,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Pre-proc Conference</label>
-                            <p class="form-control"><?php echo date_format($preProcDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['pre_proc']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Ads/Post of IAEB</label>
-                            <p class="form-control"><?php echo date_format($advertisementDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['advertisement']) ?></p>
                           </div>
                         </div> 
                       </div>
@@ -300,13 +292,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Pre-bid Cof</label>
-                            <p class="form-control"><?php echo date_format($preBidDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['pre_bid']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Sub/Open of Bids</label>
-                            <p class="form-control"><?php echo date_format($openBidDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['open_bid']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -314,13 +306,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Eligibility Check</label>
-                            <p class="form-control"><?php echo date_format($eligibilityCheckDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['eligibility_check']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Bid Evaluation</label>
-                            <p class="form-control"><?php echo date_format($bidEvaluationDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['bid_evaluation']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -328,13 +320,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Post Qual</label>
-                            <p class="form-control"><?php echo date_format($postQualDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['post_qual']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Notice of Award</label>
-                            <p class="form-control"><?php echo date_format($awardNoticeDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['award_notice']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -342,13 +334,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Contract Signing</label>
-                            <p class="form-control"><?php echo date_format($contractSigningDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['contract_signing']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Notice to Proceed</label>
-                            <p class="form-control"><?php echo date_format($proceedNoticeDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['proceed_notice']) ?></p>
                           </div>
                         </div>
                       </div>
@@ -356,13 +348,13 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Delivery/Completion</label>
-                            <p class="form-control"><?php echo date_format($deliveryCompletionDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['delivery_completion']) ?></p>
                           </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                           <div class="form-group">
                             <label for="">Acceptance/Turnover</label>
-                            <p class="form-control"><?php echo date_format($acceptanceTurnoverDate, "M-d-Y") ?></p>
+                            <p class="form-control"><?php echo convertDateTextual($actdates['acceptance_turnover']) ?></p>
                           </div>
                         </div>
                       </div>   
@@ -371,6 +363,46 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="details_view" id="bidders" hidden="hidden">
+            <table width="100%" class="table table-bordered table-striped" id="bidders_table">
+              <thead>
+                <tr>
+                  <th>Bidder</th>
+                  <th>Proposed Bid</th>
+                  <th>Bid Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($bidders as $bid): ?>
+                  <tr>
+                    <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                    <td><?php echo $bid['proposed_bid'] ?></td>
+                    <td><?php echo $bid['bid_status'] ?></td>
+                  </tr>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
+          <div class="details_view" id="observers" hidden="hidden">
+            <?php 
+              $currentActivity = null;
+              foreach ($activity_observers as $act_observer) {
+                if ($currentActivity == null) {
+                  $currentActivity = $act_observer['activity_name'];
+                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
+                  echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
+                }else{
+                  if ($currentActivity == $act_observer['activity_name']) {
+                    echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
+                  }else{
+                    $currentActivity = $act_observer['activity_name'];
+                    echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
+                    echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
+                  }
+                }
+              }
+            ?>
           </div>
         </div>
       </div>
@@ -414,6 +446,14 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function(){
+    $('#bidders_table').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : false,
+      'info'        : false,
+      'autoWidth'   : false
+    });
     $('#timeline_table').DataTable({
       'paging'      : false,
       'lengthChange': false,
@@ -439,6 +479,8 @@
     $('#project_details_btn').css('background', '#48d660');
     $('#project_logs_btn').css('background', '#e59ce3');
     $('#timeline_procact_btn').css('background', '#f29e63');
+    $('#bidders_btn').css('background', '#ff6666');
+    $('#observers_btn').css('background', '#99c2ff');
   }
 
   $('.details_btn').click(function(){
@@ -459,6 +501,16 @@
   $('#timeline_procact_btn').click(function(){
     $('.details_view').prop('hidden', 'hidden');
     $('#timeline_procact').prop('hidden', false);
+  });
+
+  $('#bidders_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#bidders').prop('hidden', false);
+  });
+
+  $('#observers_btn').click(function(){
+    $('.details_view').prop('hidden', 'hidden');
+    $('#observers').prop('hidden', false);
   });
 </script>
 

@@ -162,6 +162,11 @@
                 <i class="fa fa-file"></i> <span>Completed</span>
                 </a>               
               </li>
+              <li>
+                <a href="<?php echo base_url('doctrack/bidDisqualificationView') ?>">
+                <i class="fa fa-file"></i> <span>Disqualification</span>
+                </a>               
+              </li>
             </ul>
           </li>
         </ul>

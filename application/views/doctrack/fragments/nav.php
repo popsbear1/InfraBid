@@ -7,6 +7,8 @@
     $color = 'skin-red-light';
   }elseif ($user_type == 'BAC_TWG') {
     $color = 'skin-green-light';
+  }elseif ($user_type == 'PPDO'){
+    $color = 'skin-purple-light';
   }
 ?>
 <body class="hold-transition <?php echo $color ?> layout-top-nav">
@@ -64,6 +66,14 @@
             <?php endif?>
             >
               <a href="<?php echo base_url('capitol/completedDocumentTrackingView')?>">Completed
+              </a>
+            </li>
+            <li
+            <?php if ($page == 'disqualification'):?>
+              class="active"
+            <?php endif?>
+            >
+              <a href="<?php echo base_url('capitol/bidDisqualificationView') ?>">Disqualifications
               </a>
             </li>            
           </ul>

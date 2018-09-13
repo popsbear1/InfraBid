@@ -49,6 +49,22 @@ class Doctrack extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
+	public function bidDisqualificationView(){
+		$data['records'] = $this->doctrack_model->getBidDisqualificationReports();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('doctrack/bidDisqualificationView', $data);
+		$this->load->view('admin/fragments/footer');	
+	}
+
+	public function getDisqualifideBidData(){
+		$plan_id = $this->input->get('plan_id');
+		$contractor_id = $this->input->get('contractor_id');
+
+		$data['record'] = $this->doctrack_model->getDisqualifideBidData($plan_id, $contractor_id);
+		echo json_encode($data);
+	}
+
 	public function documentDetailsView(){
 		$plan_id = $this->session->userdata('plan_id_doctrack');
 		$user_type = $this->session->userdata('user_type');

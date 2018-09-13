@@ -393,6 +393,28 @@ class Admin extends CI_Controller {
 		$data['logs'] = $this->admin_model->getProjectLogs($plan_id);
 		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
 		$data['actdates'] = $this->admin_model->getProcActivityDates($plan_id);
+		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
+		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
+		for ($i=0; $i < sizeOf($data['activity_observers']); $i++) { 
+			if ($data['activity_observers'][$i]['activity_name'] == 'pre_bid') {
+				$data['activity_observers'][$i]['activity_name'] = 'Pre-bid';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'eligibility') {
+				$data['activity_observers'][$i]['activity_name'] = 'Eligibility Check';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'sub_open') {
+				$data['activity_observers'][$i]['activity_name'] = 'Submission/Open of Bids';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'bid_evaluation') {
+				$data['activity_observers'][$i]['activity_name'] = 'Bid Evaluation';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'post_qual') {
+				$data['activity_observers'][$i]['activity_name'] = 'Post Qualification';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'delivery_completion') {
+				$data['activity_observers'][$i]['activity_name'] = 'Delivery/Completion';
+			}
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -657,16 +679,25 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
-			$this->admin_model->updatePreBidStatus($plan_id, 'not_needed');
-		}else{
-			$this->admin_model->updatePreBidStatus($plan_id, 'pending');
+
+		if ($this->admin_model->getProjectStatus($plan_id)->status == 'for_rebid') {
+			$this->admin_model->updateProjectStatus($plan_id, 're_process');
 		}
 
-		if ( !isset($_POST['authorityApprovalStart']) || !isset($_POST['authorityApprovalEnd'])) {
-			$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'not_needed');
-		}else{
-			$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'pending');
+		if ($this->admin_model->getPreBidStatus($plan_id) != 'finished') {
+			if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
+				$this->admin_model->updatePreBidStatus($plan_id, 'not_needed');
+			}else{
+				$this->admin_model->updatePreBidStatus($plan_id, 'pending');
+			}
+		}
+
+		if ($this->admin_model->getAuthorityApprovalStatus($plan_id) != 'finished') {
+			if ( !isset($_POST['authorityApprovalStart']) || !isset($_POST['authorityApprovalEnd'])) {
+				$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'not_needed');
+			}else{
+				$this->admin_model->updateAuthorityApprovalStatus($plan_id, 'pending');
+			}
 		}
 
 		redirect('admin/projectTimelineView');
@@ -684,6 +715,31 @@ class Admin extends CI_Controller {
 		$data['arrayCount'] = count($data['procActDate']);
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
+		$data['bidders'] = $this->admin_model->getCurrentProjectBids($plan_id);
+		$data['observers'] = $this->admin_model->getActiveObservers();
+		
+		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
+		
+		for ($i=0; $i < sizeOf($data['activity_observers']); $i++) { 
+			if ($data['activity_observers'][$i]['activity_name'] == 'pre_bid') {
+				$data['activity_observers'][$i]['activity_name'] = 'Pre-bid';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'eligibility') {
+				$data['activity_observers'][$i]['activity_name'] = 'Eligibility Check';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'sub_open') {
+				$data['activity_observers'][$i]['activity_name'] = 'Submission/Open of Bids';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'bid_evaluation') {
+				$data['activity_observers'][$i]['activity_name'] = 'Bid Evaluation';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'post_qual') {
+				$data['activity_observers'][$i]['activity_name'] = 'Post Qualification';
+			}
+			if ($data['activity_observers'][$i]['activity_name'] == 'delivery_completion') {
+				$data['activity_observers'][$i]['activity_name'] = 'Delivery/Completion';
+			}
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/fragments/projectPlanNavigation', $projectNavControl);
@@ -1575,7 +1631,7 @@ class Admin extends CI_Controller {
 
 		if ($activity_name === "pre_proc") {
 			if ($this->admin_model->updatePreProcConfDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Pre-Procuremwent Conference Date Successfully Updated!");
+				$this->session->set_flashdata('success', "Pre-Procurement Conference Date Successfully Updated!");
 			}else{
 				$this->session->set_flashdata('error', "Error! Pre-Procuremwent Conference Date Was Not Updated! Try again.");
 			}
@@ -1729,9 +1785,19 @@ class Admin extends CI_Controller {
 			// Chnage project status to pending
 
 			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
+
+			// disqualification record
+			if ($this->admin_model->winningBidderExist($plan_id)) {
+				$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
+			}
+			
 			// Remove current bidder
 
 			$this->admin_model->updateProjectContractor($plan_id);
+
+			//disqualify all bids
+
+			$this->admin_model->inactiveAllBids($plan_id);
 
 			// Empty project timeline (revert all dates to null)
 
@@ -1743,9 +1809,11 @@ class Admin extends CI_Controller {
 
 			// Reset project activity status
 
-			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
-
 			$this->admin_model->resetTimelineProjectStatus($plan_id);
+
+			// Reset project activity invite dates
+
+			$this->admin_model->resetActivityInviteDates($plan_id);
 
 			// Record Log
 
@@ -1795,7 +1863,7 @@ class Admin extends CI_Controller {
 
 	/**
 	* Bidder disqualification 
-	* review or re-bid
+	* selection of another winning bidder
 	***/
 
 	public function projectBidderDisqualificationAndSunction(){
@@ -1804,52 +1872,18 @@ class Admin extends CI_Controller {
 		$user_id = $this->session->userdata('user_id');
 		$plan_id = $this->input->post('plan_id');
 		$remark = $this->input->post('bidder_saction_disqualification_remark');
-		$action = $this->input->post('action');
 
-		if ($action == 're_bid') {
+		if ($this->admin_model->verifyBidAvailability($plan_id)) {
 
-			// Update the project rebid count
+			// perform disqualification
+			// record all logs and records
+			// update status etc...
+			$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
 
-			$this->admin_model->updateProjectRebidCount($plan_id);
+			// reset project activity dates and status
+			$this->admin_model->resetProcActivityDatesAndStatus($plan_id);
 
-			// Chnage project status to pending
-
-			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
-
-			// Remove current bidder
-
-			$this->admin_model->updateProjectContractor($plan_id);
-
-			// Empty project timeline (revert all dates to null)
-
-			$this->admin_model->resetProjectTimeline($plan_id);
-
-			// Empty project procurement activity (revert all dates to null)
-
-			$this->admin_model->resetProjectProcurementActivity($plan_id);
-
-			// Reset project activity status
-
-			$abc = $this->admin_model->getCurrentABC($plan_id)->abc;
-
-			$this->admin_model->resetTimelineProjectStatus($plan_id);
-
-			// Record Log
-
-			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
-
-			$this->session->set_userdata('project_status', 'for_rebid');
-
-			$data['success'] = true;
-		}
-
-		if ($action == 're_review') {
-
-			$this->admin_model->updateProjectStatus($plan_id, 're_review');
-
-			$this->admin_model->recordProjectLog($plan_id, $user_id, $remark);
-
-			$this->session->set_userdata('project_status', 'for_review');
+			$this->admin_model->updateCurrentWinningBid($plan_id);
 
 			$data['success'] = true;
 		}
@@ -2083,6 +2117,85 @@ class Admin extends CI_Controller {
 		$this->admin_model->updateMunicipalitiesAndBarangays($municipality_id, 'activate');
 
 		redirect('admin/manageMunicipalitiesAndBarangays');	
+	}
+
+	public function addBidders(){
+		$plan_id = $this->session->userdata('plan_id');
+		$bidders = $this->input->post('contractor_id[]');
+		$bids = $this->input->post('bids[]');
+		$abc = $this->input->post('abc');
+
+		$data = array('success' => false, 'valid_contractors' => false, 'valid_bids' => true);
+
+		for ($i=0; $i < sizeOf($bids); $i++) { 
+			if (!is_numeric($bids[$i])) {
+				$data['valid_bids'] = false;
+			}else{
+				if (floatval($bids[$i]) > floatval($abc)) {
+					$data['valid_bids'] = false;
+				}
+			}
+		}
+
+		if (!empty($bidders)) {
+			$data['valid_contractors'] = true;
+			if($data['valid_bids'] != false){
+				for( $i = 0; $i < sizeOf($bidders); $i++){
+					$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
+				}
+
+				$this->admin_model->updateCurrentWinningBid($plan_id);
+				$data['success'] = true;
+			}
+		}
+		echo json_encode($data);
+				
+	}
+
+	public function setObservers(){
+		$datetime = $this->input->post('invite_date_input');
+		$observer_id = $this->input->post('observer_id[]');
+		$observer_name = $this->input->post('observer_name[]');
+		$plan_id = $this->input->post('plan_id');
+		$invite_activity_name = $this->input->post('invite_activity_name');
+
+		$data = array('success' => false, 'valid_invite_name' => false, 'valid_observers' => false);
+
+		if ($invite_activity_name != null || $invite_activity_name != "") {
+			$data['valid_invite_name'] = true;
+			if (!empty($observer_id)) {
+				for ($i=0; $i < sizeOf($observer_id); $i++) { 
+					$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
+				}
+
+				if ($invite_activity_name == 'pre_bid') {
+					$this->admin_model->updatePreBidInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'eligibility') {
+					$this->admin_model->updateEligibilityInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'sub_open') {
+					$this->admin_model->updateSubOpenInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'bid_evaluation') {
+					$this->admin_model->updateBidEvaluationInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'post_qual') {
+					$this->admin_model->updatePostQualInviteDate($plan_id, $datetime);
+				}
+				if ($invite_activity_name == 'delivery_completion') {
+					$this->admin_model->updateDeliveryCompletionInviteDate($plan_id, $datetime);
+				}
+				$data['valid_observers'] = true;
+				$data['success'] = true;
+			}
+		}else{
+			if (!empty($observer_id)) {
+				$data['valid_observers'] = true;
+			}
+		}
+
+		echo json_encode($data);
 	}
 
 	public function fpdfView(){
