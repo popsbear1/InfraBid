@@ -679,9 +679,10 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->updateProjectTimeline($plan_id, $advertisement_start, $advertisement_end, $pre_bid_start, $pre_bid_end, $bid_submission_start, $bid_submission_end, $bid_evaluation_start, $bid_evaluation_end, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end);
 
-		// if ($this->admin_model->getPreProcStatus($plan_id) !=) {
-			
-		// }
+
+		if ($this->admin_model->getProjectStatus($plan_id)->status == 'for_rebid') {
+			$this->admin_model->updateProjectStatus($plan_id, 're_process');
+		}
 
 		if ($this->admin_model->getPreBidStatus($plan_id) != 'finished') {
 			if ( !isset($_POST['preBidStart']) || !isset($_POST['preBidEnd'])) {
@@ -714,7 +715,7 @@ class Admin extends CI_Controller {
 		$data['arrayCount'] = count($data['procActDate']);
 		$data['contractors'] = $this->admin_model->getContractors();
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
-		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
+		$data['bidders'] = $this->admin_model->getCurrentProjectBids($plan_id);
 		$data['observers'] = $this->admin_model->getActiveObservers();
 		
 		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
@@ -1786,7 +1787,9 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateProjectStatus($plan_id, 're_bid');
 
 			// disqualification record
-			//$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
+			if ($this->admin_model->winningBidderExist($plan_id)) {
+				$this->admin_model->disqualifyAndSactionBidder($plan_id, $user_id, $remark);
+			}
 			
 			// Remove current bidder
 
@@ -1794,7 +1797,7 @@ class Admin extends CI_Controller {
 
 			//disqualify all bids
 
-			$this->admin_model->disqualifyAllBids($plan_id);
+			$this->admin_model->inactiveAllBids($plan_id);
 
 			// Empty project timeline (revert all dates to null)
 

@@ -8,7 +8,7 @@
   <div class="box">
     <div class="box-header">
       <h2 class="box-title"><i class="fa fa-list"></i> Project Plan Records</h2>
-      <small>(Listed Here are Those Projects which POW and can is currently being processed.)</small>
+      <small>(Listed Here are Those Projects with POW and is currently being processed.)</small>
     </div>
     <div class="box-body">
       <table class="table table-striped table-bordered" id="documentTable">

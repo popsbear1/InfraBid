@@ -67,9 +67,7 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
-			$this->db->where('pow_ready', 'true');
 			$this->db->where('project_plan.status', 'onprocess');
-			$this->db->or_where('project_plan.status', 'for_rebid');
 
 			$query = $this->db->get();
 
@@ -108,7 +106,6 @@
 			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
 			$this->db->where('pow_ready', 'true');
 			$this->db->where('project_plan.status', 'onprocess');
-			$this->db->or_where('project_plan.status', 'for_rebid');
 
 			$query = $this->db->get();
 
@@ -228,6 +225,7 @@
 			$this->db->join('document_type', 'project_document.doc_type_id = document_type.doc_type_id');
 			$this->db->join('users', 'project_document.added_by = users.user_id');
 			$this->db->where('project_document.plan_id', $plan_id);
+			$this->db->not_like('project_document.status', 'disqualifide');
 
 			$query = $this->db->get();
 

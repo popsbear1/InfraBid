@@ -334,9 +334,23 @@ function convertDate($date){
                   <input type="text" id="bidevaluation" placeholder="<?php echo convertDateTextual($bidevaluation) ?>" name="activity_date" class="form-control procActDateInput">
                 </div>
               </div>
-              <div class="row" style="background: white; overflow-y: scroll; height: 280px">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="pull-left">
+                    <p style="color: red"><small>List of bidders must be complete before selection. A single chance is given for selection of bidders.</small></p>
+                  </div>
+                  <?php if (!empty($bidders)): ?>
+                    <button type="button" class="btn bg-purple pull-right" disabled><small>Select Bidders</small></button>
+                  <?php endif ?>
+                  <?php if (empty($bidders)): ?>
+                    
+                    <button type="button" class="btn bg-purple pull-right" data-toggle="modal" data-target="#selectProjectBidders"><small>Select Bidders</small></button>
+                  <?php endif ?>
+                </div>
+              </div> 
+              <div class="row" style="background: white; overflow-y: scroll; height: 250px">
                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 3px">
-                  <table class="table table-bordered table-striped">
+                  <table width="100%" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Bidder</th>
@@ -572,7 +586,6 @@ function convertDate($date){
               ?>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rebid_svp_model"><small>Schedule for re-bid/another SVP</small></button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#recommendForReviewMode"><small>Recommend Project for Review</small></button> 
-              <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#selectProjectBidders"><small>Select Bidders</small></button> 
             </div>
           </div>
 
@@ -848,7 +861,7 @@ function convertDate($date){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;
                 </button>
-                <h5 class="modal-title">Bidde Disqualification/Sanction</h5>
+                <h5 class="modal-title">Bidder Disqualification/Sanction</h5>
 
               </div>
               <div class="modal-body" style=" height: 500px;">

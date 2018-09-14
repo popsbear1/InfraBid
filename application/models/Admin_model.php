@@ -1595,6 +1595,12 @@
 
 	public function updateProjectStatus($plan_id, $action){
 
+		if ($action == 're_process') {
+			$data = array(
+				'status' => 'onprocess'
+			);
+		}
+
 		if ($action == 're_bid') {
 			$data = array(
 				'status' => 'for_rebid',
@@ -2034,6 +2040,18 @@
 		}
 	}
 
+	public function getCurrentProjectBids($plan_id){
+		$this->db->select('*');
+		$this->db->from('project_bidders');
+		$this->db->join('contractors', 'project_bidders.contractor_id = contractors.contractor_id');
+		$this->db->where('plan_id', $plan_id);
+		$this->db->not_like('bid_status', 'inactive');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
 	public function getProjectBids($plan_id){
 		$this->db->select('*');
 		$this->db->from('project_bidders');
@@ -2043,6 +2061,20 @@
 		$query = $this->db->get();
 
 		return $query->result_array();
+	}
+
+	public function winningBidderExist($plan_id){
+		$this->db->select('contractor_id');
+		$this->db->from('project_plan');
+		$this->db->where('plan_id', $plan_id);
+
+		$query = $this->db->get();
+
+		if ($query->row()->contractor_id == null) {
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	public function disqualifyAndSactionBidder($plan_id, $user_id, $remark){
@@ -2064,6 +2096,7 @@
 		$this->db->from('project_bidders');
 		$this->db->where('plan_id', $plan_id);
 		$this->db->where('contractor_id', $contractor_id);
+		$this->db->not_like('bid_status', 'inactive');
 
 		$bid = $this->db->get();
 
@@ -2205,9 +2238,9 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function disqualifyAllBids($plan_id){
+	public function inactiveAllBids($plan_id){
 		$data = array(
-			'bid_status' => 'disqualifide'
+			'bid_status' => 'inactive'
 		);
 
 		$this->db->where('plan_id', $plan_id);
