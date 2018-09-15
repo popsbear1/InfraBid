@@ -390,14 +390,14 @@
               foreach ($activity_observers as $act_observer) {
                 if ($currentActivity == null) {
                   $currentActivity = $act_observer['activity_name'];
-                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
+                  echo '<h4>' . $act_observer['activity_name'] . ' - ' . convertDateTextual($act_observer['invite_date']) . '</h4>';
                   echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                 }else{
                   if ($currentActivity == $act_observer['activity_name']) {
                     echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                   }else{
                     $currentActivity = $act_observer['activity_name'];
-                    echo '<h4>' . $act_observer['activity_name'] . ' - ' . date_format(date_create($act_observer['invite_date']), 'M-d-Y') . '</h4>';
+                    echo '<h4>' . $act_observer['activity_name'] . ' - ' . convertDateTextual($act_observer['invite_date']) . '</h4>';
                     echo '<div class="margin"><p>' . $act_observer['observer_dept_name'] . ' - ' . $act_observer['name_of_observer'] . '</p></div>';
                   }
                 }

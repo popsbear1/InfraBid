@@ -36,8 +36,8 @@
                 <tbody>
                   <tr>
                     <td class="left-col"><b class="pull-right">ADS/Post:</b></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td class="reight-col">
                       <div style="padding-left: 20px; padding-right: 20px">
                         <button class="btn btn-block bg-olive" id="repapulate_date_btn">
@@ -67,11 +67,11 @@
                         </div>
                       </div>
                     </td>
-                    <td class="center"><input type="text" class="form-control text-center" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td class="center"><input type="text" class="form-control text-center" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td class="row-col">
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="preBidNumber" min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="preBidNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="preBidUpdateBtn" type="button">Update</button>
@@ -80,11 +80,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Submission of bid:</b></td>
-                    <td><input type="text" class="form-control text-center" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="bidSubmissionNumber" min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="bidSubmissionNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="bidSubmissionUpdateBtn" type="button">Update</button>
@@ -93,11 +93,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Bid Evaluation:</b></td>
-                    <td><input type="text" class="form-control text-center" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="bidEvaluationNumber" min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="bidEvaluationNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="bidEvaluationUpdateBtn" type="button">Update</button>
@@ -106,11 +106,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Post Qualification:</b></td>
-                    <td><input type="text" class="form-control text-center" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="postQualificationNumber"  min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="postQualificationNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="postQualificationUpdateBtn" type="button">Update</button>
@@ -119,11 +119,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="awardNoticeIssuanceUpdateBtn" type="button">Update</button>
@@ -132,11 +132,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                    <td><input type="text" class="form-control text-center" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="contractSigningNumber"  min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="contractSigningNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="contractSigningUpdateBtn" type="button">Update</button>
@@ -164,11 +164,11 @@
                         </div>
                       </div>
                     </td>
-                    <td><input type="text" class="form-control text-center" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="authorityApprovalNumber" min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="authorityApprovalNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn" type="button">Update</button>
@@ -177,11 +177,11 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Notice to Proceed:</b></td>
-                    <td><input type="text" class="form-control text-center" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
+                    <td><input type="text" class="form-control text-center" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm" autocomplete="off" disabled></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="proceedNoticeNumber" min="0" autocomplete="off">
+                        <input type="number" class="form-control" id="proceedNoticeNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block" id="proceedNoticeUpdateBtn" type="button">Update</button>

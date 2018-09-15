@@ -124,7 +124,7 @@
           </div>
         </div>
         <div class="box-footer text-center">
-          <button type="button" id="editPlanFormSubmitBtn" class="btn btn-primary" >Submit</button>
+          <button type="submit" id="editPlanFormSubmitBtn" class="btn btn-primary" form="editPlanForm" >Submit</button>
         </div>
       </div>
     </section>
@@ -229,9 +229,34 @@
     }
   });
 
-  $('#editPlanFormSubmitBtn').click(function(){
-    
-  });
+
+    //ajax ti editing of regular plan atoy
+  $('#editPlanFormSubmitBtn').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: $('#addPlanForm').attr('action'),
+      data: $('#addPlanForm').serialize(),
+      dataType: 'json'
+    }).done(function(response){
+      if (response.success == true) {
+        alert('success');
+      }else{
+        $.each(response.messages, function(key, value) {
+          var element = $('#' + key);
+          
+          element.closest('div.form-group')
+          .removeClass('has-error')
+          .addClass(value.length > 0 ? 'has-error' : 'has-success')
+          .find('.text-danger')
+          .remove();
+          
+          element.after(value);
+        });
+      }
+    })
+  })
 </script>
 
 

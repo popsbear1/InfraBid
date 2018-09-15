@@ -534,7 +534,7 @@ class Admin extends CI_Controller {
 		echo json_encode($data);
 	}
 
-		public function addSupplementalPlan(){
+	public function addSupplementalPlan(){
 
 		$data = array('success' => false, 'messages' => array());
 
@@ -2165,7 +2165,7 @@ class Admin extends CI_Controller {
 			$data['valid_invite_name'] = true;
 			if (!empty($observer_id)) {
 				for ($i=0; $i < sizeOf($observer_id); $i++) { 
-					$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name);
+					$message = $this->admin_model->insertActivityObservers($plan_id, $observer_id[$i], $observer_name[$i], $invite_activity_name, $datetime);
 				}
 
 				if ($invite_activity_name == 'pre_bid') {
@@ -2196,15 +2196,6 @@ class Admin extends CI_Controller {
 		}
 
 		echo json_encode($data);
-	}
-
-	public function fpdfView(){
-		$this->load->library('CustomFPDF');
-		$pdf = $this->customfpdf->getInstance();
-		$pdf->AliasNbPages();
-		$pdf->AddPage('L','A4',0);
-		$pdf->headerTable();
-		$pdf->Output(); 
 	}
 
 }

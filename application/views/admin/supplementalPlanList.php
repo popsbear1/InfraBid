@@ -293,7 +293,7 @@
           { 
             data: null,
             render: function ( data, type, row ) {
-              if (data.project_status == 'pending' || data.project_status == 'for_rebid') {
+              if (data.project_status == 'pending') {
                 return  '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
                           '<input name="project_type" value="' + data.project_type + '" hidden>' +
                           '<div class="btn-group">' +
@@ -418,7 +418,7 @@
             { 
               data: null,
               render: function ( data, type, row ) {
-                if (data.project_status == 'pending' || data.project_status == 'for_rebid') {
+                if (data.project_status == 'pending') {
                   return  '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
                             '<input name="project_type" value="' + data.project_type + '" hidden>' +
                             '<div class="btn-group">' +

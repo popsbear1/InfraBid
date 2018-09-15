@@ -1009,6 +1009,10 @@
 
 		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
+
+		if ($ABC < 5000000) {
+			$this->updatePreProctStatus($currentPlanID);
+		}
 	}
 
 	public function updateSource($source, $currentPlanID){
@@ -2247,12 +2251,13 @@
 		$this->db->update('project_bidders', $data);
 	}
 
-	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name){
+	public function insertActivityObservers($plan_id, $observer_id, $observer_name, $invite_activity_name, $date){
 		$data = array(
 			'plan_id' => $plan_id,
 			'observer_id' => $observer_id,
 			'name_of_observer' => $observer_name,
-			'activity_name' => $invite_activity_name
+			'activity_name' => $invite_activity_name,
+			'invite_date' => $date
 		);
 
 		if(!$this->db->insert('project_observers', $data)){

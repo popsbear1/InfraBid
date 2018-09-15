@@ -1538,7 +1538,7 @@ function convertDate($date){
     }
     if (activity == 'proceednotice') {
       if (verifyDate(inputValue, activity)) {
-        if (compareDates(inputValue, proceed_notice_start, proceed_notice_start)) {
+        if (compareDates(inputValue, proceed_notice_start, proceed_notice_end)) {
           proceedSubmit('Proceed Notice Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
