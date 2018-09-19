@@ -115,11 +115,10 @@
                     <i class="fa fa-search"></i>
                     Find
                   </button>
-                    <a href="<?php echo base_url('print/printApp') ?>" button class="btn btn-success btn-sm" id="printBtn" type="button">
-                      <i class="fa fa-print"></i>
-                      Print
-                    </button>
-                    </a>
+                  <button class="btn btn-success btn-sm" id="printBtn" type="button">
+                    <i class="fa fa-print"></i>
+                    Print
+                  </button>
                 </div>
               </div>
             </div>
@@ -203,11 +202,77 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.rowGroup.min.js"></script>
 
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="confirmPrintingModal">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Printing Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Selected Filters for Report</p>
+        <form action="<?php echo base_url('reports/printApp') ?>" method="GET" id="printForm">
+          <table with="100%" id="filter_table">
+            <thead>
+              <tr>
+                <th>Filter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Year</td>
+                <td><input type="text" id="year_value" name="year_value" style="border: none"></td>
+              </tr>
+              <tr>
+                <td>APP Type</td>
+                <td><input type="text" id="apptype_value" name="apptype_value" style="border: none"></td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td><input type="text" id="status_value" name="status_value" style="border: none"></td>
+              </tr>
+              <tr>
+                <td>Municipality</td>
+                <td><input type="text" id="municipality_value" name="municipality_value" style="border: none"></td>
+              </tr>
+              <tr>
+                <td>Source</td>
+                <td><input type="text" id="source_value" name="source_value" style="border: none"></td>
+              </tr>
+              <tr>
+                <td>Type</td>
+                <td><input type="text" id="type_value" name="type_value" style="border: none"></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="printForm" class="btn btn-primary">Confirm</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   var plan_data = '<?php echo json_encode($plans) ?>';
   var plans = JSON.parse(plan_data);
   $(document).ready( 
     function () {
+      $('#filter_table').DataTable({
+        'paging'      : false,
+        'lengthChange': true,
+        'searching'   : false,
+        'ordering'    : false,
+        'info'        : false,
+        'autoWidth'   : false
+      });
       $('#plan_table').DataTable({
         data: plans,
         columns: [
@@ -375,5 +440,26 @@
       });
 
     })
+  });
+
+  $('#printBtn').click(function(e){
+
+
+    var year = $('#year').val();
+    var apptype = $('#apptype').val();
+    var status= $('#status').val();
+    var municipality = $('#municipality').val();
+    var source = $('#source').val();
+    var type = $('#type').val();
+
+    $('#year_value').val(year);
+    $('#apptype_value').val(apptype);
+    $('#status_value').val(status);
+    $('#municipality_value').val(municipality);
+    $('#source_value').val(source);
+    $('#type_value').val(type);
+
+    $('#confirmPrintingModal').modal('show');
+
   });
 </script>
