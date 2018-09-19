@@ -394,6 +394,7 @@ class Admin extends CI_Controller {
 		$data['timeLine'] = $this->admin_model->getProjectTimeline($plan_id);
 		$data['actdates'] = $this->admin_model->getProcActivityDates($plan_id);
 		$data['bidders'] = $this->admin_model->getProjectBids($plan_id);
+		$data['past_bidders'] = $this->admin_model->getProjectPastBids($plan_id);
 		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
 		for ($i=0; $i < sizeOf($data['activity_observers']); $i++) { 
 			if ($data['activity_observers'][$i]['activity_name'] == 'pre_bid') {

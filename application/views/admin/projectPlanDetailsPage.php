@@ -175,7 +175,7 @@
             </div>
           </div>
           <div class="details_view" id="project_logs" hidden="hidden">
-            <table class="table table-striped table-bordered" id="remark_table" >
+            <table class="table table-striped table-bordered details_table">
               <thead>
                 <tr>
                   <th class="text-center">User</th>
@@ -207,7 +207,7 @@
                   </div>
                   <div class="box-body">
                     <div style="height: 450px">
-                      <table class="table table-striped table-bordered" id="timeline_table">
+                      <table class="table table-striped table-bordered details_table">
                         <thead>
                           <tr>
                             <th class="text-center">Activity</th>
@@ -365,24 +365,50 @@
             </div>
           </div>
           <div class="details_view" id="bidders" hidden="hidden">
-            <table width="100%" class="table table-bordered table-striped" id="bidders_table">
-              <thead>
-                <tr>
-                  <th>Bidder</th>
-                  <th>Proposed Bid</th>
-                  <th>Bid Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($bidders as $bid): ?>
-                  <tr>
-                    <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
-                    <td><?php echo $bid['proposed_bid'] ?></td>
-                    <td><?php echo $bid['bid_status'] ?></td>
-                  </tr>
-                <?php endforeach ?>
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4>Current Bidders</h4>
+                <table width="100%" class="table table-bordered table-striped details_table">
+                  <thead>
+                    <tr>
+                      <th>Bidder</th>
+                      <th>Proposed Bid</th>
+                      <th>Bid Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($bidders as $bid): ?>
+                      <tr>
+                        <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                        <td><?php echo $bid['proposed_bid'] ?></td>
+                        <td><?php echo $bid['bid_status'] ?></td>
+                      </tr>
+                    <?php endforeach ?>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4>Past Bidders</h4>
+                <table width="100%" class="table table-bordered table-striped details_table">
+                  <thead>
+                    <tr>
+                      <th>Bidder</th>
+                      <th>Proposed Bid</th>
+                      <th>Bid Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($past_bidders as $bid): ?>
+                      <tr>
+                        <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                        <td><?php echo $bid['proposed_bid'] ?></td>
+                        <td><?php echo $bid['bid_status'] ?></td>
+                      </tr>
+                    <?php endforeach ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
           <div class="details_view" id="observers" hidden="hidden">
             <?php 
@@ -446,23 +472,7 @@
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function(){
-    $('#bidders_table').DataTable({
-      'paging'      : false,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : false,
-      'info'        : false,
-      'autoWidth'   : false
-    });
-    $('#timeline_table').DataTable({
-      'paging'      : false,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : false,
-      'info'        : false,
-      'autoWidth'   : false
-    });
-    $('#remark_table').DataTable({
+    $('.details_table').DataTable({
       'paging'      : false,
       'lengthChange': false,
       'searching'   : false,

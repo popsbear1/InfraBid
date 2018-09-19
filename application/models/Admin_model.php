@@ -2104,6 +2104,19 @@
 		$this->db->from('project_bidders');
 		$this->db->join('contractors', 'project_bidders.contractor_id = contractors.contractor_id');
 		$this->db->where('plan_id', $plan_id);
+		$this->db->not_like('bid_status', 'inactive');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	public function getProjectPastBids($plan_id){
+		$this->db->select('*');
+		$this->db->from('project_bidders');
+		$this->db->join('contractors', 'project_bidders.contractor_id = contractors.contractor_id');
+		$this->db->where('plan_id', $plan_id);
+		$this->db->where('bid_status', 'inactive');
 
 		$query = $this->db->get();
 
@@ -2215,8 +2228,8 @@
 		);
 
 		$this->db->where('plan_id', $plan_id);
-		$this->db->where('authority_approval', 'finished');
-		$this->db->update('project_activity_status', $status);
+		$this->db->not_like('authority_approval', 'not_needed');
+		$this->db->update('project_activity_status', $authority_approval_status);
 	}
 
 	public function resetActivityInviteDates($plan_id){
