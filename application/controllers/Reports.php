@@ -14,6 +14,7 @@
 	        $this->load->add_package_path( APPPATH . 'third_party/fpdf');
 	        $this->load->library('pdf');
 	        $this->load->model('admin_model');
+	        $this->load->add_package_path(APPPATH. 'controllers/cellfit');
 	    }
 
 		public function printApp()
@@ -35,13 +36,17 @@
 	        $header = array('No.', 'PROJ. NO.', 'PROCUREMENT PROGRAMS/PROJECTS', 'PMO/END USER/LOCATION', 'MODE OF PROCUREMENT', 'ABC/POST OF IB/REI', 'SUB/OPEN OF BIDS', 'NOTICE OF AWARDS', 'CONTRACT SIGNING', 'SOURCE OF FUNDS', 'TOTAL', 'MOOE', 'CO', 'REMARKS');
 
 	        foreach($header as $col)
-		        $this->pdf->Cell(22,7,$col,1);
-		    $this->pdf->Ln();
+	        	$this->pdf->Cell(10,5,$col[0],1,0);
+	        	$this->pdf->Cell(10,5,$col[1],1,0);
+	        	$this->pdf->Cell(10,5,$col[2],1,0);
+	        	$this->pdf->Cell(10,5,$col[3],1,0);
+	        	$this->pdf->Cell(10,5,$col[4],1,0);
+			    $this->pdf->Ln();
 
 		    foreach ($data as $row) {
 		    	foreach($row as $col)
-		            $this->pdf->Cell(22,6,$col,1);
-		        $this->pdf->Ln();
+		            $this->pdf->Cell(10,5,$col[0],1,0,"C");
+		        	$this->pdf->Ln();
 		    }
 	        
 	        $this->pdf->Output( 'page.pdf' , 'I' );

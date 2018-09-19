@@ -20,6 +20,7 @@
             <th class="text-center">Source of Fund</th>
             <th class="text-center">Date POW Added</th>
             <th class="text-center">Contractor</th>
+            <th class="text-center">Bid Amount</th>
             <th class="text-center">Status</th>
             <th class="text-center">Action</th>
           </tr>
@@ -34,6 +35,7 @@
               <td><?php echo $plan['date_pow_added'] ?></td>
               <td><?php echo $plan['owner'] ?></td>
               <td><?php echo $plan['projectstatus'] ?></td>
+              <td><?php echo $plan['proposed_bid']?></td>
               <td class="text-center">
                 <form action="<?php if($this->session->userdata('user_type') == 'BAC_SEC'){ echo base_url('doctrack/setCurrentPlanID'); }else{ echo base_url('capitol/setCurrentPlanID'); } ?>" method="POST">
                   <input type="text" name="plan_id" value="<?php echo $plan['plan_id'] ?>" hidden>
