@@ -28,6 +28,7 @@
                 <th>ABC</th>
                 <th>Contractor</th>
                 <th>Source of Fund</th>
+                <th>Bid Amount</th>
                 <th>Sender</th>
                 <th style="width: 160px">Action</th>
               </tr>
@@ -46,12 +47,14 @@
                 <th>ABC</th>
                 <th>Contractor</th>
                 <th>Source of Fund</th>
+                <th>Bid Amount</th>
                 <th>Sender</th>
                 <th style="width: 150px">Action</th>
               </tr>
             </thead> 
             <tbody>
               <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -74,6 +77,7 @@
                 <th>ABC</th>
                 <th>Contractor</th>
                 <th>Source of Fund</th>
+                <th>Bid Amount</th>
                 <th>Destination</th>
                 <th>Action</th>
               </tr>
@@ -88,6 +92,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+
               </tr>
             </tbody>
           </table>
