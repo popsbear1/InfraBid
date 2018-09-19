@@ -35,8 +35,8 @@
                 <tbody>
                   <tr>
                     <td class="left-col"><b class="pull-right">ADS/Post:</b></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center timelinedateinput" id="advertisement_start" name="advertisement_start" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center timelinedateinput" id="advertisement_end" name="advertisement_end" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td class="reight-col">
                       <div style="padding-left: 20px; padding-right: 20px">
                         <button class="btn btn-block bg-olive" id="repapulate_date_btn">
@@ -66,8 +66,8 @@
                         </div>
                       </div>
                     </td>
-                    <td class="center"><input type="text" class="form-control text-center" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td class="center"><input type="text" class="form-control text-center" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center timelinedateinput" id="preBidStart" name="preBidStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td class="center"><input type="text" class="form-control text-center timelinedateinput" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td class="row-col">
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="preBidNumber" min="1" autocomplete="off">
@@ -79,8 +79,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Submission of bid:</b></td>
-                    <td><input type="text" class="form-control text-center" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="bidSubmissionStart" name="bidSubmissionStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="bidSubmissionNumber" min="1" autocomplete="off">
@@ -92,8 +92,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Bid Evaluation:</b></td>
-                    <td><input type="text" class="form-control text-center" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="bidEvaluationStart" name="bidEvaluationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="bidEvaluationNumber" min="1" autocomplete="off">
@@ -105,8 +105,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Post Qualification:</b></td>
-                    <td><input type="text" class="form-control text-center" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="postQualificationStart" name="postQualificationStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="postQualificationNumber"  min="1" autocomplete="off">
@@ -118,8 +118,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Issuance of Notice of Awards:</b></td>
-                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="awardNoticeIssuanceStart" name="awardNoticeIssuanceStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="1" autocomplete="off">
@@ -131,8 +131,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Contract Preparation and Signing:</b></td>
-                    <td><input type="text" class="form-control text-center" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="contractSigningStart" name="contractSigningStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="contractSigningNumber"  min="1" autocomplete="off">
@@ -163,8 +163,8 @@
                         </div>
                       </div>
                     </td>
-                    <td><input type="text" class="form-control text-center" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="authorityApprovalStart" name="authorityApprovalStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="authorityApprovalNumber" min="1" autocomplete="off">
@@ -176,8 +176,8 @@
                   </tr>
                   <tr>
                     <td><b class="pull-right">Notice to Proceed:</b></td>
-                    <td><input type="text" class="form-control text-center" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
-                    <td><input type="text" class="form-control text-center" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="proceedNoticeStart" name="proceedNoticeStart" form="updateProcurementTimelineForm" autocomplete="off"></td>
+                    <td><input type="text" class="form-control text-center timelinedateinput" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
                         <input type="number" class="form-control" id="proceedNoticeNumber" min="1" autocomplete="off">
@@ -367,46 +367,71 @@
 ?>
   <script>
 
-    var abc = '<?php echo $projectDetails['abc'] ?>';
-
-    if (abc < 1000000) {
-      $('#noPreBid').attr('checked', true);
-      $('#preBidStart').prop('value', '');
-      $('#preBidEnd').prop('value', '');
-      $('#preBidStart').prop('disabled', true);
-      $('#preBidEnd').prop('disabled', true);
-      $('#preBidNumber').prop('disabled', true);
-      $('#preBidUpdateBtn').prop('disabled', true);  
-    }
-
-    $('#timelineModalConfirmBtn').click(function(e){
-      $('#addStart').html($('#advertisement_start').val());
-      $('#addEnd').html($('#advertisement_end').val());
-      $('#pbcStart').html($('#preBidStart').val());
-      $('#pbcEnd').html($('#preBidEnd').val());
-      $('#sbStart').html($('#bidSubmissionStart').val());
-      $('#sbEnd').html($('#bidSubmissionEnd').val());
-      $('#beStart').html($('#bidEvaluationStart').val());
-      $('#beEnd').html($('#bidEvaluationEnd').val());
-      $('#pqStart').html($('#postQualificationStart').val());
-      $('#pqEnd').html($('#postQualificationEnd').val());
-      $('#inaStart').html($('#awardNoticeIssuanceStart').val());
-      $('#inaEnd').html($('#awardNoticeIssuanceEnd').val());
-      $('#cpsStart').html($('#contractSigningStart').val());
-      $('#cpsEnd').html($('#contractSigningEnd').val());
-      $('#ahaStart').html($('#authorityApprovalStart').val());
-      $('#ahaEnd').html($('#authorityApprovalEnd').val());
-      $('#ntpStart').html($('#proceedNoticeStart').val());
-      $('#ntpEnd').html($('#proceedNoticeEnd').val());
-    });
-
     $(document).ready(function(){
 
       $('#startDate').datepicker({
         autoclose: true,
       });
 
+      /**
+      |---------------------------
+      |Prevents user to type on the timeline date input fields
+      |---------------------------
+      ***/
+      $('.timelinedateinput').keypress(function(e) {
+          e.preventDefault();
+      });
+
+
+      //------------------------------------------------
+
+      var abc = '<?php echo $projectDetails['abc'] ?>';
+
+      var repapulateStartDate = '<?php echo date_format(date_create($timeLine['advertisement_start']), 'm/d/Y') ?>'
+      var advertisement_start = '<?php echo $timeLine['advertisement_start'] ?>';
+      var advertisement_end = '<?php echo $timeLine['advertisement_end'] ?>';
+      var preBidStart = '<?php echo $timeLine['pre_bid_start'] ?>';
+      var preBidEnd = '<?php echo $timeLine['pre_bid_end'] ?>';
+      var bidSubmissionStart = '<?php echo $timeLine['bid_submission_start'] ?>';
+      var bidSubmissionEnd = '<?php echo $timeLine['bid_submission_end'] ?>';
+      var bidEvaluationStart = '<?php echo $timeLine['bid_evaluation_start'] ?>';
+      var bidEvaluationEnd = '<?php echo $timeLine['bid_evaluation_end'] ?>';
+      var postQualificationStart = '<?php echo $timeLine['post_qualification_start'] ?>';
+      var postQualificationEnd = '<?php echo $timeLine['post_qualification_end'] ?>';
+      var awardNoticeIssuanceStart = '<?php echo $timeLine['award_notice_start'] ?>';
+      var awardNoticeIssuanceEnd = '<?php echo $timeLine['award_notice_end'] ?>';
+      var contractSigningStart = '<?php echo $timeLine['contract_signing_start'] ?>';
+      var contractSigningEnd = '<?php echo $timeLine['contract_signing_end'] ?>';
+      var authorityApprovalStart = '<?php echo $timeLine['authority_approval_start'] ?>';
+      var authorityApprovalEnd = '<?php echo $timeLine['authority_approval_end'] ?>';
+      var proceedNoticeStart = '<?php echo $timeLine['proceed_notice_start'] ?>';
+      var proceedNoticeEnd = '<?php echo $timeLine['proceed_notice_end'] ?>';
+
+      var pre_proc_status = '<?php echo $actStatus['pre_proc'] ?>';
+      var advertisement_status = '<?php echo $actStatus['advertisement'] ?>';
+      var pre_bid_status = '<?php echo $actStatus['pre_bid'] ?>';
+      var eligibility_status = '<?php echo $actStatus['eligibility_check'] ?>';
+      var open_bid_status = '<?php echo $actStatus['open_bid'] ?>';
+      var bid_evaluation_status = '<?php echo $actStatus['bid_evaluation'] ?>';
+      var post_qual_status = '<?php echo $actStatus['post_qual'] ?>';
+      var award_notice_status = '<?php echo $actStatus['award_notice'] ?>';
+      var contract_signing_status = '<?php echo $actStatus['contract_signing'] ?>';
+      var authority_approval_status = '<?php echo $actStatus['authority_approval'] ?>';
+      var proceed_notice_status = '<?php echo $actStatus['proceed_notice'] ?>';
+      var delivery_completion_status = '<?php echo $actStatus['delivery_completion'] ?>';
+      var acceptance_turnover_status = '<?php echo $actStatus['acceptance_turnover'] ?>';
+
       var timeline_status = '<?php echo $timeLine['timeline_status'] ?>';
+
+      if (abc < 1000000) {
+        $('#noPreBid').attr('checked', true);
+        $('#preBidStart').prop('value', '');
+        $('#preBidEnd').prop('value', '');
+        $('#preBidStart').prop('disabled', true);
+        $('#preBidEnd').prop('disabled', true);
+        $('#preBidNumber').prop('disabled', true);
+        $('#preBidUpdateBtn').prop('disabled', true);  
+      }
 
       if (timeline_status == 'set') {
         $('#advertisement_start').attr('placeholder', "<?php echo convertDateTextual($timeLine['advertisement_start']) ?>");
@@ -427,6 +452,46 @@
         $('#authorityApprovalEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['authority_approval_end']) ?>");
         $('#proceedNoticeStart').attr('placeholder', "<?php echo convertDateTextual($timeLine['proceed_notice_start']) ?>");
         $('#proceedNoticeEnd').attr('placeholder', "<?php echo convertDateTextual($timeLine['proceed_notice_end']) ?>");
+
+        if (pre_bid_status != 'pending') {
+          $('#preBidNumber').attr('disabled', 'disabled');
+          $('#preBidUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (open_bid_status != 'pending') {
+          $('#bidSubmissionNumber').attr('disabled', 'disabled');
+          $('#bidSubmissionUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (bid_evaluation_status != 'pending') {
+          $('#bidEvaluationNumber').attr('disabled', 'disabled');
+          $('#bidEvaluationUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (post_qual_status != 'pending') {
+          $('#postQualificationNumber').attr('disabled', 'disabled');
+          $('#postQualificationUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (award_notice_status != 'pending') {
+          $('#awardNoticeIssuanceNumber').attr('disabled', 'disabled');
+          $('#awardNoticeIssuanceUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (contract_signing_status != 'pending') {
+          $('#contractSigningNumber').attr('disabled', 'disabled');
+          $('#contractSigningUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (authority_approval_status != 'pending') {
+          $('#authorityApprovalNumber').attr('disabled', 'disabled');
+          $('#authorityApprovalUpdateBtn').attr('disabled', 'disabled');
+        }
+
+        if (proceed_notice_status != 'pending') {
+          $('#proceedNoticeNumber').attr('disabled', 'disabled');
+          $('#proceedNoticeUpdateBtn').attr('disabled', 'disabled');
+        }
       }
 
       if (timeline_status == 'pending') {
@@ -449,27 +514,6 @@
         $('#proceedNoticeStart').attr('placeholder', "None");
         $('#proceedNoticeEnd').attr('placeholder', "None");
       }
-
-      var repapulateStartDate = '<?php echo date_format(date_create($timeLine['advertisement_start']), 'm/d/Y') ?>'
-      var advertisement_start = '<?php echo $timeLine['advertisement_start'] ?>';
-      var advertisement_end = '<?php echo $timeLine['advertisement_end'] ?>';
-      var preBidStart = '<?php echo $timeLine['pre_bid_start'] ?>';
-      var preBidEnd = '<?php echo $timeLine['pre_bid_end'] ?>';
-      var bidSubmissionStart = '<?php echo $timeLine['bid_submission_start'] ?>';
-      var bidSubmissionEnd = '<?php echo $timeLine['bid_submission_end'] ?>';
-      var bidEvaluationStart = '<?php echo $timeLine['bid_evaluation_start'] ?>';
-      var bidEvaluationEnd = '<?php echo $timeLine['bid_evaluation_end'] ?>';
-      var postQualificationStart = '<?php echo $timeLine['post_qualification_start'] ?>';
-      var postQualificationEnd = '<?php echo $timeLine['post_qualification_end'] ?>';
-      var awardNoticeIssuanceStart = '<?php echo $timeLine['award_notice_start'] ?>';
-      var awardNoticeIssuanceEnd = '<?php echo $timeLine['award_notice_end'] ?>';
-      var contractSigningStart = '<?php echo $timeLine['contract_signing_start'] ?>';
-      var contractSigningEnd = '<?php echo $timeLine['contract_signing_end'] ?>';
-      var authorityApprovalStart = '<?php echo $timeLine['authority_approval_start'] ?>';
-      var authorityApprovalEnd = '<?php echo $timeLine['authority_approval_end'] ?>';
-      var proceedNoticeStart = '<?php echo $timeLine['proceed_notice_start'] ?>';
-      var proceedNoticeEnd = '<?php echo $timeLine['proceed_notice_end'] ?>';
-
 
       $('#repapulate_date_btn').click(function(){
         $('#startDate').val(repapulateStartDate);
@@ -495,22 +539,40 @@
         advertisementMinBase = 0;
         advertisementMaxBase = getDateDiff(repapulateStartDate, advertisement_end);
         console.log(advertisementMaxBase);
-        prebidMinBase;
-        prebidMaxBase;
-        bidSubmissionMinBase;
-        bidSubmissionMaxBase;
-        bidEvaluationMinBase;
-        bidEvaluationMaxBase;
-        postQualificationMinBase;
-        postQualificationMaxBase;
-        awardNoticeIssuanceMinBase;
-        awardNoticeIssuanceMaxBase;
-        contractSigningMinBase;
-        contractSigningMaxBase;
-        authorityApprovalMinBase;
-        authorityApprovalMaxBase;
-        proceedNoticeMinBase;
-        proceedNoticeMaxBase;
+        prebidMinBase = getDateDiff(repapulateStartDate, preBidStart);
+        console.log(prebidMinBase);
+        prebidMaxBase = getDateDiff(repapulateStartDate, preBidEnd);
+        console.log(prebidMaxBase);
+        bidSubmissionMinBase = getDateDiff(repapulateStartDate, bidSubmissionStart);
+        console.log(bidSubmissionMinBase);
+        bidSubmissionMaxBase = getDateDiff(repapulateStartDate, bidSubmissionEnd);
+        console.log(bidSubmissionMaxBase);
+        bidEvaluationMinBase = getDateDiff(repapulateStartDate, bidEvaluationStart);
+        console.log(bidEvaluationMinBase);
+        bidEvaluationMaxBase = getDateDiff(repapulateStartDate, bidEvaluationEnd);
+        console.log(bidEvaluationMaxBase);
+        postQualificationMinBase = getDateDiff(repapulateStartDate, postQualificationStart);
+        console.log(postQualificationMinBase);
+        postQualificationMaxBase = getDateDiff(repapulateStartDate, postQualificationEnd);
+        console.log(postQualificationMaxBase);
+        awardNoticeIssuanceMinBase = getDateDiff(repapulateStartDate, awardNoticeIssuanceStart);
+        console.log(awardNoticeIssuanceMinBase);
+        awardNoticeIssuanceMaxBase = getDateDiff(repapulateStartDate, awardNoticeIssuanceEnd);
+        console.log(awardNoticeIssuanceMaxBase);
+        contractSigningMinBase = getDateDiff(repapulateStartDate, contractSigningStart);
+        console.log(contractSigningMinBase);
+        contractSigningMaxBase = getDateDiff(repapulateStartDate, contractSigningEnd);
+        console.log(contractSigningMaxBase);
+        authorityApprovalMinBase = getDateDiff(repapulateStartDate, authorityApprovalStart);
+        console.log(authorityApprovalMinBase);
+        authorityApprovalMaxBase = getDateDiff(repapulateStartDate, authorityApprovalEnd);
+        console.log(authorityApprovalMaxBase);
+        proceedNoticeMinBase = getDateDiff(repapulateStartDate, proceedNoticeStart);
+        console.log(proceedNoticeMinBase);
+        proceedNoticeMaxBase = getDateDiff(repapulateStartDate, proceedNoticeEnd);
+        console.log(proceedNoticeMaxBase);
+
+        $('#timelineModalConfirmBtn').prop('disabled', false);
       })
 
       function getDateDiff(startDate, date){
@@ -526,10 +588,7 @@
 
         // Convert back to days and return
         return Math.round(difference_ms/ONEDAY);
-      }
-
-
-          
+      }    
     });
 
     
@@ -892,6 +951,10 @@
       
   });
 
+
+
+
+
   function setDatesToEarliestPossibleTime(startDate){
     setAdvertisementDate(startDate, 0, 7);
     setPreBidDate(startDate, 8, 8);
@@ -1028,6 +1091,27 @@
     $('#proceedNoticeStart').val(setStartDate(startDate, min));
     $('#proceedNoticeEnd').val(setEndDate(startDate, max));
   }
+
+    $('#timelineModalConfirmBtn').click(function(e){
+      $('#addStart').html($('#advertisement_start').val());
+      $('#addEnd').html($('#advertisement_end').val());
+      $('#pbcStart').html($('#preBidStart').val());
+      $('#pbcEnd').html($('#preBidEnd').val());
+      $('#sbStart').html($('#bidSubmissionStart').val());
+      $('#sbEnd').html($('#bidSubmissionEnd').val());
+      $('#beStart').html($('#bidEvaluationStart').val());
+      $('#beEnd').html($('#bidEvaluationEnd').val());
+      $('#pqStart').html($('#postQualificationStart').val());
+      $('#pqEnd').html($('#postQualificationEnd').val());
+      $('#inaStart').html($('#awardNoticeIssuanceStart').val());
+      $('#inaEnd').html($('#awardNoticeIssuanceEnd').val());
+      $('#cpsStart').html($('#contractSigningStart').val());
+      $('#cpsEnd').html($('#contractSigningEnd').val());
+      $('#ahaStart').html($('#authorityApprovalStart').val());
+      $('#ahaEnd').html($('#authorityApprovalEnd').val());
+      $('#ntpStart').html($('#proceedNoticeStart').val());
+      $('#ntpEnd').html($('#proceedNoticeEnd').val());
+    });
 
 
   </script>
