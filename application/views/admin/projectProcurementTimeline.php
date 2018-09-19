@@ -495,6 +495,22 @@
         advertisementMinBase = 0;
         advertisementMaxBase = getDateDiff(repapulateStartDate, advertisement_end);
         console.log(advertisementMaxBase);
+        prebidMinBase;
+        prebidMaxBase;
+        bidSubmissionMinBase;
+        bidSubmissionMaxBase;
+        bidEvaluationMinBase;
+        bidEvaluationMaxBase;
+        postQualificationMinBase;
+        postQualificationMaxBase;
+        awardNoticeIssuanceMinBase;
+        awardNoticeIssuanceMaxBase;
+        contractSigningMinBase;
+        contractSigningMaxBase;
+        authorityApprovalMinBase;
+        authorityApprovalMaxBase;
+        proceedNoticeMinBase;
+        proceedNoticeMaxBase;
       })
 
       function getDateDiff(startDate, date){
