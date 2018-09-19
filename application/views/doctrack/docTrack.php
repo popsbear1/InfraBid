@@ -28,7 +28,6 @@
                 <th>ABC</th>
                 <th>Contractor</th>
                 <th>Source of Fund</th>
-                <th>Bid Amount</th>
                 <th>Sender</th>
                 <th style="width: 160px">Action</th>
               </tr>
@@ -47,14 +46,12 @@
                 <th>ABC</th>
                 <th>Contractor</th>
                 <th>Source of Fund</th>
-                <th>Bid Amount</th>
                 <th>Sender</th>
                 <th style="width: 150px">Action</th>
               </tr>
             </thead> 
             <tbody>
               <tr>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -77,14 +74,12 @@
                 <th>ABC</th>
                 <th>Contractor</th>
                 <th>Source of Fund</th>
-                <th>Bid Amount</th>
                 <th>Destination</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -299,7 +294,7 @@
           { data: 'businessname' },
           { data: 'source' },
           { data: 'current_doc_loc' },
-          {
+            {
             data: null,
             render: function (data, type, row) {
               return '<div class="btn-group">' +
