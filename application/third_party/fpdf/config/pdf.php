@@ -118,7 +118,7 @@ $config['head_subtitle'] = 'coding the world since 1983';
 |
 | Set 'page' in your language
 */
-$config['footer_page_literal'] = 'Página';
+$config['footer_page_literal'] = 'Page';
 
 /*
 | -------------------------------------------------------------------
