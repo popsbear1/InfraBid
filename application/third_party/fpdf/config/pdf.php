@@ -100,7 +100,7 @@ $config['logo'] = 'assets/img/logo.jpg';
 |
 | Main page's Title
 */
-$config['head_title'] = '@pedroruizhidalg';
+$config['head_title'] = 'Benguet Provinicial Government';
 
 /*
 | -------------------------------------------------------------------
@@ -109,7 +109,7 @@ $config['head_title'] = '@pedroruizhidalg';
 |
 | Main page's Subitle
 */
-$config['head_subtitle'] = 'coding the world since 1983';
+$config['head_subtitle'] = 'ANNUAL PROCUREMENT PLAN 2018';
 
 /*
 | -------------------------------------------------------------------

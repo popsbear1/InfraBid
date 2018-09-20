@@ -359,7 +359,15 @@ function AddPage($orientation='', $size='', $rotation=0)
 
 function Header()
 {
-	// To be implemented in your own inherited class
+	$this->Image('logo.png',10,6,30);
+    // Arial bold 15
+    $this->SetFont('Arial','B',15);
+    // Move to the right
+    $this->Cell(80);
+    // Title
+    $this->Cell(30,10,'Title',1,0,'C');
+    // Line break
+    $this->Ln(20);
 }
 
 function Footer()

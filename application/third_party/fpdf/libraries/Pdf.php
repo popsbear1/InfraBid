@@ -71,16 +71,16 @@ class Pdf extends FPDF
     **/
     function header()
     {
-        $this->Image($this->logo,10,8,22);
+        $this->Image($this->logo,10,8,22,'C');
         $this->SetFont( 'Arial' , 'B' ,13 );
         $this->Cell(30);
 
-        $this->Cell(120,10,$this->head_title,0,0,'C');
+        $this->Cell(0,0,$this->head_title,0,0,'C');
         $this->Ln('5');
         $this->SetFont('Arial','B',8);
         $this->Cell(30);
 
-        $this->Cell(120,10,$this->head_subtitle,0,0,'C');
+        $this->Cell(0,0 ,$this->head_subtitle,0,0,'C');
         $this->Ln(20);
     }
 
