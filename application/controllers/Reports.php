@@ -27,7 +27,7 @@
 			$source = $this->input->get('source_value');
 			$type = $this->input->get('type_value');
 
-			$data = $this->admin_model->getOngoingProjectPlan($year, $apptype, $status, $municipality, $source, $type);
+			$data = $this->admin_model->getOngoingProjectPlanPrinting($year, $apptype, $status, $municipality, $source, $type);
 
 	        $this->pdf = new Pdf();
 	        $this->pdf->Add_Page('L',array(215.9, 330.2),0);
@@ -110,32 +110,102 @@
 
 	        $this->pdf->setFont('Times', '', '8');
 
-		    foreach ($data as $row) {
-		    	$count = 1;
-		    	$this->pdf->Cell(10,10,$count,1,0,'C');
+	        $count = 1;
+
+		    for ( $i = 0; $i < sizeof($data); $i++) {
+		    	
+		    	
+		    	// if ($this->pdf->GetStringWidth($data[$i]['project_no']) > 11) {
+		    	// 	$xPosition = $this->pdf->GetX();
+	      //   		$yPosition = $this->pdf->GetY();
+
+	      //   		$this->pdf->MultiCell(11, 5, $data[$i]['project_no'], 1, 'C');
+	      //   		$this->pdf->SetXY($xPosition + 11, $yPosition);
+		    	// }
+		    	$row = array(
+		    		$count,
+		    		$data[$i]['project_no'], 
+		    		$data[$i]['project_title'], 
+		    		$data[$i]['municipality'], 
+		    		$data[$i]['mode'], 
+		    		$data[$i]['abc_post_date'], 
+		    		$data[$i]['sub_open_date'], 
+		    		$data[$i]['award_notice_date'], 
+		    		$data[$i]['contract_signing_date'], 
+		    		$data[$i]['source'], 
+		    		$data[$i]['abc'], 
+		    		'none',
+		    		'none',
+		    		'none'
+		    	);
+
+		    	$rowWidth = array(
+		    		10,
+		    		11, 
+		    		60, 
+		    		20, 
+		    		20, 
+		    		20, 
+		    		20, 
+		    		20, 
+		    		20, 
+		    		20, 
+		    		20,
+		    		20,
+		    		20,
+		    		25
+		    	);
+
+		    	$heightArray = $this->getFinalHight($rowWidth, $row);
+		    	//echo json_encode($heightArray);
+		    	$height = max($heightArray) * 10;
+		    	$yPosition = $this->pdf->GetY();
+		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
+	        		if ($heightArray[$j] > 1) {
+	        			$xPosition = $this->pdf->GetX();
+						//$this->pdf->SetY($height);
+						
+						$h = $height/$heightArray[$j];	        		
+
+		        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'C');
+
+		        		$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+	        		}else{
+	        			$this->pdf->Cell($rowWidth[$j], $height, $row[$j], 1, 0, 'C');
+	        		}
+		    	}
+
 		    	$count++;
-		    	$this->pdf->Cell(11, 10, $row['project_no'], 1, 0, 'C');
-		    	$this->pdf->Cell(60, 10, $row['project_title'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['municipality'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['mode'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['abc_post_date'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['sub_open_date'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['award_notice_date'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['contract_signing_date'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['source'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, $row['abc'], 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, 'none', 1, 0, 'C');
-		    	$this->pdf->Cell(20, 10, 'none', 1, 0, 'C');
-		    	$this->pdf->Cell(25, 10, 'none', 1, 0, 'C');
 
 		    	$this->pdf->Ln();
 		        	
 		    }
 	        
-	        $this->pdf->Output( 'page.pdf' , 'I' );
+	        $this->pdf->Output( 'page.pdf' , 'I' );        
 
-	        
+		}
 
+		function getFinalHight($width, $data){
+			$this->pdf->setFont('Times', '', '8');
+			$rowCount = array();
+			for ($i=0; $i < sizeof($data); $i++) { 
+				$stringWidth = $this->pdf->GetStringWidth($data[$i]);
+				if ($stringWidth > $width[$i]) {
+					$count = 0;
+					$w = $stringWidth;
+					$y = $stringWidth;
+					while($y > 0){
+						
+						$y = $w - $width[$i];
+						$w = $y;
+						$count++;
+					}
+					array_push($rowCount, $count);
+				}else{
+					array_push($rowCount, 1);
+				}
+			}
+			return $rowCount;
 		}
 	}
 
