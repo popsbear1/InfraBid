@@ -124,31 +124,28 @@
 	        $this->pdf->setFont('Times', '', '8');
 
 	        $count = 1;
+	        $currentProjectType = $data[0]['project_type'];
+	        $this->projectTypeRow($data[0]['project_type']);
 	        $currentAccountClass = $data[0]['fund_id'];
+	        $this->fundNameRow($data[0]['source']);
 	        $mooeTotal = 0; 
 	        $coTotal = 0;
 	        $total = 0;
 	        $overallTotal = 0;
 
 		    for ( $i = 0; $i < sizeof($data); $i++) {
+
+		    	if ($data[$i]['project_type'] != $currentProjectType) {
+		    		$this->projectTypeRow($data[$i]['project_type']);
+		    		$currentProjectType = $data[$i]['project_type'];
+		    	}
 		    	
 		    	if ($data[$i]['fund_id'] != $currentAccountClass) {
-		    		$this->pdf->Cell(10, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(60, 5, 'SUB TOTAL', 1, 0, 'R');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, $mooeTotal, 1, 0, 'C');
-		    		$this->pdf->Cell(20, 5, $coTotal, 1, 0, 'C');
-		    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
-		    		$this->pdf->Ln();
+		    		
+		    		$this->subTotalRow($mooeTotal, $coTotal);
+		    		$this->fundNameRow($data[$i]['source']);
 
+		    		$currentAccountClass = $data[$i]['fund_id'];
 		    		$mooeTotal = 0;
 		    		$coTotal = 0;
 		    	}
@@ -165,8 +162,8 @@
 		    		$data[$i]['contract_signing_date'], 
 		    		$data[$i]['source'], 
 		    		number_format($data[$i]['abc'],2), 
-		    		$data[$i]['mooe'],
-		    		$data[$i]['co'],
+		    		number_format($data[$i]['mooe'], 2),
+		    		number_format($data[$i]['co'], 2),
 		    		$data[$i]['remark']
 		    	);
 
@@ -188,13 +185,12 @@
 		    	);
 
 		    	$heightArray = $this->getFinalHight($rowWidth, $row);
-		    	//echo json_encode($heightArray);
 		    	$height = max($heightArray) * 5;
-		    	$yPosition = $this->pdf->GetY();
+		    	
 		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
 	        		if ($heightArray[$j] > 1) {
+	        			$yPosition = $this->pdf->GetY();
 	        			$xPosition = $this->pdf->GetX();
-						//$this->pdf->SetY($height);
 						
 						$h = $height/$heightArray[$j];	        		
 
@@ -212,11 +208,88 @@
 
 		    	$mooeTotal = $mooeTotal + $data[$i]['mooe'];
 		    	$coTotal = $coTotal + $data[$i]['co'];
+
 		        	
 		    }
+
+		    $this->subTotalRow($mooeTotal, $coTotal);
 	        
 	        $this->pdf->Output( 'page.pdf' , 'I' );        
 
+		}
+
+		function subTotalRow($mooeTotal, $coTotal){
+			$this->pdf->setFont('Times', 'B', '8');
+			
+			if ($mooeTotal > 0) {
+				$formatedMooeTotal = number_format($mooeTotal, 2);
+			}else{
+				$formatedMooeTotal = '-';
+			}
+
+			if ($coTotal > 0) {
+				$formatedCoTotal = number_format($coTotal, 2);
+			}else{
+				$formatedCoTotal = '-';
+			}			
+
+			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(60, 5, 'SUB TOTAL', 1, 0, 'R');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
+    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->setFont('Times', '', '8');
+    		$this->pdf->Ln();
+		}
+
+		function fundNameRow($fund){
+			$this->pdf->setFont('Times', 'B', '8');
+						
+			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
+			$this->pdf->Cell(11, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(60, 5, $fund, 1, 0, 'L');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->setFont('Times', '', '8');
+    		$this->pdf->Ln();
+		}
+
+		function projectTypeRow($project_type){
+			$this->pdf->setFont('Times', 'B', '10');
+						
+			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(71, 5, $project_type, 1, 0, 'L');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->setFont('Times', '', '8');
+    		$this->pdf->Ln();
 		}
 
 		function getFinalHight($width, $data){
