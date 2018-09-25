@@ -168,7 +168,7 @@
 		}
 
 		public function getOngoingProjectPlanPrinting($year, $apptype, $status, $municipality, $source, $type){
-			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc');
+			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');

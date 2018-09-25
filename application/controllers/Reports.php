@@ -29,6 +29,19 @@
 
 			$data = $this->admin_model->getOngoingProjectPlanPrinting($year, $apptype, $status, $municipality, $source, $type);
 
+			for ($i=0; $i < sizeof($data); $i++) { 
+				if ($data[$i]['classification'] == 'Capital Outlay') {
+					$data[$i]['mooe'] = 0;
+					$data[$i]['co'] = $data[$i]['abc'];
+					$data[$i]['remark'] = '-';
+				}
+				if ($data[$i]['classification'] == 'MOOE'){
+					$data[$i]['mooe'] = $data[$i]['abc'];
+					$data[$i]['co'] = 0;
+					$data[$i]['remark'] = '-';
+				}
+			}
+
 	        $this->pdf = new Pdf();
 	        $this->pdf->Add_Page('L',array(215.9, 330.2),0);
 	        $this->pdf->AliasNbPages();
@@ -111,17 +124,35 @@
 	        $this->pdf->setFont('Times', '', '8');
 
 	        $count = 1;
+	        $currentAccountClass = $data[0]['fund_id'];
+	        $mooeTotal = 0; 
+	        $coTotal = 0;
+	        $total = 0;
+	        $overallTotal = 0;
 
 		    for ( $i = 0; $i < sizeof($data); $i++) {
 		    	
-		    	
-		    	// if ($this->pdf->GetStringWidth($data[$i]['project_no']) > 11) {
-		    	// 	$xPosition = $this->pdf->GetX();
-	      //   		$yPosition = $this->pdf->GetY();
+		    	if ($data[$i]['fund_id'] != $currentAccountClass) {
+		    		$this->pdf->Cell(10, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(60, 5, 'SUB TOTAL', 1, 0, 'R');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, $mooeTotal, 1, 0, 'C');
+		    		$this->pdf->Cell(20, 5, $coTotal, 1, 0, 'C');
+		    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+		    		$this->pdf->Ln();
 
-	      //   		$this->pdf->MultiCell(11, 5, $data[$i]['project_no'], 1, 'C');
-	      //   		$this->pdf->SetXY($xPosition + 11, $yPosition);
-		    	// }
+		    		$mooeTotal = 0;
+		    		$coTotal = 0;
+		    	}
+
 		    	$row = array(
 		    		$count,
 		    		$data[$i]['project_no'], 
@@ -133,10 +164,10 @@
 		    		$data[$i]['award_notice_date'], 
 		    		$data[$i]['contract_signing_date'], 
 		    		$data[$i]['source'], 
-		    		$data[$i]['abc'], 
-		    		'none',
-		    		'none',
-		    		'none'
+		    		number_format($data[$i]['abc'],2), 
+		    		$data[$i]['mooe'],
+		    		$data[$i]['co'],
+		    		$data[$i]['remark']
 		    	);
 
 		    	$rowWidth = array(
@@ -158,7 +189,7 @@
 
 		    	$heightArray = $this->getFinalHight($rowWidth, $row);
 		    	//echo json_encode($heightArray);
-		    	$height = max($heightArray) * 10;
+		    	$height = max($heightArray) * 5;
 		    	$yPosition = $this->pdf->GetY();
 		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
 	        		if ($heightArray[$j] > 1) {
@@ -178,6 +209,9 @@
 		    	$count++;
 
 		    	$this->pdf->Ln();
+
+		    	$mooeTotal = $mooeTotal + $data[$i]['mooe'];
+		    	$coTotal = $coTotal + $data[$i]['co'];
 		        	
 		    }
 	        
@@ -194,8 +228,7 @@
 					$count = 0;
 					$w = $stringWidth;
 					$y = $stringWidth;
-					while($y > 0){
-						
+					while($y >= 0 || $y > -5){		
 						$y = $w - $width[$i];
 						$w = $y;
 						$count++;
