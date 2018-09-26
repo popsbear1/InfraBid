@@ -88,25 +88,39 @@
 	        $this->fundNameRow($data[0]['source']);
 	        $mooeTotal = 0; 
 	        $coTotal = 0;
-	        $total = 0;
-	        $overallTotal = 0;
+	        $totalAbc = 0;
+	        $totalMOOE = 0;
+	        $totalCO = 0;
+	        $overallTotalAbc = 0;
+	        $overallTotalMOOE = 0;
+	        $overallTotalCO = 0;
 
 		    for ( $i = 0; $i < sizeof($data); $i++) {
 
 		    	if ($data[$i]['project_type'] != $currentProjectType) {
+		    		$this->subTotalRow($mooeTotal, $coTotal);
+		    		$this->totalRow($totalAbc, $totalMOOE, $totalCO);
 		    		$this->projectTypeRow($data[$i]['project_type']);
 		    		$currentProjectType = $data[$i]['project_type'];
-		    	}
-		    	
-		    	if ($data[$i]['fund_id'] != $currentAccountClass) {
-		    		
-		    		$this->subTotalRow($mooeTotal, $coTotal);
-		    		$this->fundNameRow($data[$i]['source']);
-
-		    		$currentAccountClass = $data[$i]['fund_id'];
+		    		$totalAbc = 0;
+			        $totalMOOE = 0;
+			        $totalCO = 0;
+			        $currentAccountClass = $data[$i]['fund_id'];
 		    		$mooeTotal = 0;
 		    		$coTotal = 0;
+		    	}else{
+		    		if ($data[$i]['fund_id'] != $currentAccountClass) {
+		    		
+			    		$this->subTotalRow($mooeTotal, $coTotal);
+			    		$this->fundNameRow($data[$i]['source']);
+
+			    		$currentAccountClass = $data[$i]['fund_id'];
+			    		$mooeTotal = 0;
+			    		$coTotal = 0;
+			    	}
 		    	}
+		    	
+		    	
 
 		    	$row = array(
 		    		$count,
@@ -167,10 +181,20 @@
 		    	$mooeTotal = $mooeTotal + $data[$i]['mooe'];
 		    	$coTotal = $coTotal + $data[$i]['co'];
 
+		    	$totalAbc = $totalAbc + $data[$i]['abc'];
+		    	$totalMOOE = $totalMOOE + $data[$i]['mooe'];
+		    	$totalCO = $totalCO + $data[$i]['co'];
+
+		    	$overallTotalAbc = $overallTotalAbc + $data[$i]['abc'];
+		        $overallTotalMOOE = $overallTotalMOOE + $data[$i]['mooe'];
+		        $overallTotalCO = $overallTotalCO + $data[$i]['co'];
+
 		        	
 		    }
 
 		    $this->subTotalRow($mooeTotal, $coTotal);
+		    $this->totalRow($totalAbc, $totalMOOE, $totalCO);
+		    $this->grandTotalRow($overallTotalAbc, $overallTotalMOOE, $overallTotalCO);
 	        
 	        $this->pdf->Output( 'page.pdf' , 'I' );        
 
@@ -278,6 +302,72 @@
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
+    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->setFont('Times', '', '8');
+    		$this->pdf->Ln();
+		}
+
+		function totalRow($totalAbc, $totalMOOE, $totalCO){
+			$this->pdf->setFont('Times', 'B', '10');
+			
+			if ($totalMOOE > 0) {
+				$formatedMooeTotal = number_format($totalMOOE, 2);
+			}else{
+				$formatedMooeTotal = '-';
+			}
+
+			if ($totalCO > 0) {
+				$formatedCoTotal = number_format($totalCO, 2);
+			}else{
+				$formatedCoTotal = '-';
+			}			
+
+			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(60, 5, 'TOTAL', 1, 0, 'R');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, number_format($totalAbc), 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
+    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->setFont('Times', '', '8');
+    		$this->pdf->Ln();
+		}
+
+		function grandTotalRow($overallTotalAbc, $overallTotalMOOE, $overallTotalCO){
+			$this->pdf->setFont('Times', 'B', '12');
+			
+			if ($overallTotalMOOE > 0) {
+				$formatedMooeTotal = number_format($overallTotalMOOE, 2);
+			}else{
+				$formatedMooeTotal = '-';
+			}
+
+			if ($overallTotalCO > 0) {
+				$formatedCoTotal = number_format($overallTotalCO, 2);
+			}else{
+				$formatedCoTotal = '-';
+			}			
+
+			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(60, 5, 'Grand TOTAL', 1, 0, 'R');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(20, 5, number_format($overallTotalAbc), 1, 0, 'C');
     		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
     		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
     		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
