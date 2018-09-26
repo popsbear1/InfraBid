@@ -2,7 +2,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-default" href="<?php if($project_type == 'regular'){
+          <a class="btn btn-default" id="back" name="back" href="<?php if($project_type == 'regular'){
             echo base_url('admin/regularPlanListView');
           }else{
             echo base_url('admin/supplementalPlanListView');
@@ -165,8 +165,16 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
+
+  $('#back').ready(function(){
+    $("back").click(function(event){
+        event.preventDefault();
+        alert("Was preventDefault() called: " + event.isDefaultPrevented());
+    });
+  });
     //Date picker
   $('#year').datepicker({
     autoclose: true,

@@ -1066,7 +1066,7 @@
 
 	public function updateProject_year($year, $currentPlanID){
 		$data = array(
-			'year' => $year
+			'project_year' => $year
 		);
 
 		$this->db->where('plan_id', $currentPlanID);
