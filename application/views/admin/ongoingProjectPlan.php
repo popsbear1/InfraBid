@@ -214,7 +214,7 @@
       </div>
       <div class="modal-body">
         <p class="text-center">Selected Filters for Report</p>
-        <form action="<?php echo base_url('reports/printApp') ?>" method="GET" id="printForm">
+        <form action="<?php echo base_url('reports/printOngoingAPP') ?>" method="GET" id="printForm">
           <table with="100%" id="filter_table">
             <thead>
               <tr>

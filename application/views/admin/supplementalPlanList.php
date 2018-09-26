@@ -229,7 +229,7 @@
       </div>
       <div class="modal-body">
         <p class="text-center">Selected Filters for Report</p>
-        <form action="<?php echo base_url('reports/printApp') ?>" method="GET" id="printForm">
+        <form action="<?php echo base_url('reports/printSupplementalAPP') ?>" method="GET" id="printForm">
           <table with="100%" id="filter_table">
             <thead>
               <tr>
@@ -243,8 +243,8 @@
                 <td><input type="text" id="year_value" name="year_value" style="border: none"></td>
               </tr>
               <tr>
-                <td>APP Type</td>
-                <td><input type="text" id="apptype_value" name="apptype_value" style="border: none"></td>
+                <td>Procurement Mode</td>
+                <td><input type="text" id="mode_value" name="mode_value" style="border: none"></td>
               </tr>
               <tr>
                 <td>Status</td>
@@ -547,14 +547,14 @@
 
 
     var year = $('#year').val();
-    var apptype = $('#apptype').val();
+    var mode = $('#mode').val();
     var status= $('#status').val();
     var municipality = $('#municipality').val();
     var source = $('#source').val();
     var type = $('#type').val();
 
     $('#year_value').val(year);
-    $('#apptype_value').val(apptype);
+    $('#mode_value').val(mode);
     $('#status_value').val(status);
     $('#municipality_value').val(municipality);
     $('#source_value').val(source);
