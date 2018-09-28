@@ -425,6 +425,46 @@ class Admin extends CI_Controller {
 
 	public function procActStatusView(){
 		$data['projects'] = $this->admin_model->getAllProjectActivityStatus();
+
+		for ($i=0; $i < sizeof($data['projects']); $i++) { 
+			
+			if ($data['projects'][$i]['pre_proc_date'] != null) {
+				$data['projects'][$i]['pre_proc'] = $data['projects'][$i]['pre_proc_date'];
+			}
+			if ($data['projects'][$i]['advertisement_date'] != null) {
+				$data['projects'][$i]['advertisement'] = $data['projects'][$i]['advertisement_date'];
+			}
+			if ($data['projects'][$i]['pre_bid_date'] != null) {
+				$data['projects'][$i]['pre_bid'] = $data['projects'][$i]['pre_bid_date'];
+			}
+			if ($data['projects'][$i]['eligibility_check_date'] != null) {
+				$data['projects'][$i]['eligibility_check'] = $data['projects'][$i]['eligibility_check_date'];
+			}
+			if ($data['projects'][$i]['open_bid_date'] != null) {
+				$data['projects'][$i]['open_bid'] = $data['projects'][$i]['open_bid_date'];
+			}
+			if ($data['projects'][$i]['bid_evaluation_date'] != null) {
+				$data['projects'][$i]['bid_evaluation'] = $data['projects'][$i]['bid_evaluation_date'];
+			}
+			if ($data['projects'][$i]['post_qual_date'] != null) {
+				$data['projects'][$i]['post_qual'] = $data['projects'][$i]['post_qual_date'];
+			}
+			if ($data['projects'][$i]['award_notice_date'] != null) {
+				$data['projects'][$i]['award_notice'] = $data['projects'][$i]['award_notice_date'];
+			}
+			if ($data['projects'][$i]['contract_signing_date'] != null) {
+				$data['projects'][$i]['contract_signing'] = $data['projects'][$i]['contract_signing_date'];
+			}
+			if ($data['projects'][$i]['proceed_notice_date'] != null) {
+				$data['projects'][$i]['proceed_notice'] = $data['projects'][$i]['proceed_notice_date'];
+			}
+			if ($data['projects'][$i]['delivery_completion_date'] != null) {
+				$data['projects'][$i]['delivery_completion'] = $data['projects'][$i]['delivery_completion_date'];
+			}
+			if ($data['projects'][$i]['acceptance_turnover_date'] != null) {
+				$data['projects'][$i]['acceptance_turnover'] = $data['projects'][$i]['acceptance_turnover_date'];
+			}
+		}
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/procActStatus', $data);

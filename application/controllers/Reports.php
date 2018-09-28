@@ -119,8 +119,18 @@
 			    		$coTotal = 0;
 			    	}
 		    	}
-		    	
-		    	
+
+		    	if ($data[$i]['mooe'] <= 0) {
+		    		$mooe = '-';
+		    	}else{
+		    		$mooe = number_format($data[$i]['mooe'], 2);
+		    	}
+
+		    	if ($data[$i]['co'] <= 0) {
+		    		$co = '-';
+		    	}else{
+		    		$co = number_format($data[$i]['co'], 2);
+		    	}
 
 		    	$row = array(
 		    		$count,
@@ -134,8 +144,8 @@
 		    		$data[$i]['contract_signing_date'], 
 		    		$data[$i]['source'], 
 		    		number_format($data[$i]['abc'],2), 
-		    		number_format($data[$i]['mooe'], 2),
-		    		number_format($data[$i]['co'], 2),
+		    		$mooe,
+		    		$co,
 		    		$data[$i]['remark']
 		    	);
 

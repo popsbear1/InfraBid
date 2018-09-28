@@ -799,9 +799,10 @@
 		}
 
 		public function getAllProjectActivityStatus(){
-			$this->db->select('*');
-			$this->db->from('project_activity_status');
-			$this->db->join('project_plan', 'project_activity_status.plan_id = project_plan.plan_id');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, project_plan.project_type, project_activity_status.pre_proc, project_activity_status.advertisement, project_activity_status.pre_bid, project_activity_status.eligibility_check, project_activity_status.open_bid, project_activity_status.bid_evaluation, project_activity_status.post_qual, project_activity_status.award_notice, project_activity_status.contract_signing, project_activity_status.authority_approval, project_activity_status.proceed_notice, project_activity_status.delivery_completion, project_activity_status.acceptance_turnover, procact.pre_proc as pre_proc_date, procact.advertisement as advertisement_date, procact.pre_bid as pre_bid_date, procact.eligibility_check as eligibility_check_date, procact.open_bid as open_bid_date, procact.bid_evaluation as bid_evaluation_date, procact.post_qual as post_qual_date, procact.award_notice as award_notice_date, procact.contract_signing as contract_signing_date, procact.authority_approval as authority_approval_date, procact.proceed_notice as proceed_notice_date, procact.delivery_completion as delivery_completion_date, procact.acceptance_turnover as acceptance_turnover_date');
+			$this->db->from('project_plan');
+			$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
+			$this->db->join('procact', 'project_plan.plan_id = procact.plan_id');
 			$this->db->not_like('project_plan.status', 'pending');
 			$this->db->or_not_like('project_plan.status', 'completed');
 			$this->db->or_not_like('project_plan.status', 'for_review');
