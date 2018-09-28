@@ -760,8 +760,6 @@ function convertDate($date){
         </div>
       </div>
     </div>
-
-
     <div id="selectProjectBidders" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document" style="width: 1000px;">
         <div class="modal-content">
@@ -821,12 +819,29 @@ function convertDate($date){
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" form="selected_contractors_form">Confirm</button>
+              <button type="button" class="btn btn-default" id="smallModal">Confirm</button>
           </div>
         </div>
       </div>
     </div>
 
+      <div id="smallModal" class="modal fade" role="dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you chose the right bidders?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" form="selected_contractors_form">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
       <div id="recommendForReviewMode" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
