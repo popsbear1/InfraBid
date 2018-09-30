@@ -115,6 +115,10 @@
                     <label>Contract Signing <span style="color: red">* </span>:</label>
                     <input type="text" class="form-control" name="contract_signing_date" id="contract_signing_date" placeholder="mm-yyyy">
                   </div>
+                  <div class="form-group">
+                    <label> Remarks <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="remarks" id="remarks" placeholder="Input Remarks here ...">
+                  </div>
                 </div>
               </div> 
             </form>
