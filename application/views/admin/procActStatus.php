@@ -112,11 +112,18 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
+<script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
 <script type="text/javascript">
 	var projectsData = '<?php echo json_encode($projects); ?>';
 	var projects = JSON.parse(projectsData);
 	console.log(projects);
 	$('#projectListTable').DataTable({
+		dom: 'Bfrtip',
+		buttons: [
+			'print'
+		],
 		data: projects,
 		columns: [
 			{
