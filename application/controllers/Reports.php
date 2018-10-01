@@ -163,10 +163,10 @@
 		    		20,
 		    		20,
 		    		20,
-		    		25
+		    		30
 		    	);
 
-		    	$heightArray = $this->getFinalHight($rowWidth, $row);
+		    	$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', '', '8');
 		    	$height = max($heightArray) * 5;
 		    	
 		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
@@ -281,13 +281,12 @@
 	        $xPosition = $this->pdf->GetX();
 	        $yPosition = $this->pdf->GetY();
 
-	        $this->pdf->Cell(25, 20, 'REMARKS', 1, 0, 'C');
+	        $this->pdf->Cell(30, 20, 'REMARKS', 1, 0, 'C');
 
 	        $this->pdf->Ln();
 		}
 
 		function subTotalRow($mooeTotal, $coTotal){
-			$this->pdf->setFont('Times', 'B', '8');
 			
 			if ($mooeTotal > 0) {
 				$formatedMooeTotal = number_format($mooeTotal, 2);
@@ -299,28 +298,64 @@
 				$formatedCoTotal = number_format($coTotal, 2);
 			}else{
 				$formatedCoTotal = '-';
-			}			
+			}
 
-			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(60, 5, 'SUB TOTAL', 1, 0, 'R');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
-    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
-    		$this->pdf->setFont('Times', '', '8');
+			$row = array(
+	    		'',
+	    		'',
+	    		'SUB TOTAL',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		$formatedMooeTotal,
+	    		$formatedCoTotal,
+	    		''
+	    	);
+
+	    	$rowWidth = array(
+	    		10,
+	    		11, 
+	    		60, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20,
+	    		20,
+	    		20,
+	    		30
+	    	);				
+
+    		$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', 'B', '8');
+	    	$height = max($heightArray) * 5;
+	    	
+	    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
+        		if ($heightArray[$j] > 1) {
+        			$yPosition = $this->pdf->GetY();
+        			$xPosition = $this->pdf->GetX();
+					
+					$h = $height/$heightArray[$j];	        		
+
+	        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'R');
+
+	        		$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+        		}else{
+        			$this->pdf->Cell($rowWidth[$j], $height, $row[$j], 1, 0, 'R');
+        		}
+	    	}
+	    	$this->pdf->setFont('Times', '', '8');
     		$this->pdf->Ln();
 		}
 
 		function totalRow($totalAbc, $totalMOOE, $totalCO){
-			$this->pdf->setFont('Times', 'B', '10');
 			
 			if ($totalMOOE > 0) {
 				$formatedMooeTotal = number_format($totalMOOE, 2);
@@ -334,26 +369,63 @@
 				$formatedCoTotal = '-';
 			}			
 
-			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(60, 5, 'TOTAL', 1, 0, 'R');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, number_format($totalAbc), 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
-    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
-    		$this->pdf->setFont('Times', '', '8');
-    		$this->pdf->Ln();
+    		$row = array(
+	    		'',
+	    		'',
+	    		'TOTAL',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		number_format($totalAbc),
+	    		$formatedMooeTotal,
+	    		$formatedCoTotal,
+	    		''
+	    	);
+
+	    	$rowWidth = array(
+	    		10,
+	    		11, 
+	    		60, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20,
+	    		20,
+	    		20,
+	    		30
+	    	);
+
+	    	$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', 'B', '8');
+	    	$height = max($heightArray) * 5;
+	    	
+	    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
+        		if ($heightArray[$j] > 1) {
+        			$yPosition = $this->pdf->GetY();
+        			$xPosition = $this->pdf->GetX();
+					
+					$h = $height/$heightArray[$j];	        		
+
+	        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'R');
+
+	        		$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+        		}else{
+        			$this->pdf->Cell($rowWidth[$j], $height, $row[$j], 1, 0, 'R');
+        		}
+	    	}
+
+	    	$this->pdf->setFont('Times', '', '8');
+    		$this->pdf->Ln();	
 		}
 
 		function grandTotalRow($overallTotalAbc, $overallTotalMOOE, $overallTotalCO){
-			$this->pdf->setFont('Times', 'B', '12');
 			
 			if ($overallTotalMOOE > 0) {
 				$formatedMooeTotal = number_format($overallTotalMOOE, 2);
@@ -367,20 +439,59 @@
 				$formatedCoTotal = '-';
 			}			
 
-			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(11, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(60, 5, 'Grand TOTAL', 1, 0, 'R');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, number_format($overallTotalAbc), 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, $formatedMooeTotal, 1, 0, 'C');
-    		$this->pdf->Cell(20, 5, $formatedCoTotal, 1, 0, 'C');
-    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+
+    		$row = array(
+	    		'',
+	    		'',
+	    		'Grand TOTAL',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		'',
+	    		number_format($overallTotalAbc),
+	    		$formatedMooeTotal,
+	    		$formatedCoTotal,
+	    		''
+	    	);
+
+	    	$rowWidth = array(
+	    		10,
+	    		11, 
+	    		60, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20, 
+	    		20,
+	    		20,
+	    		20,
+	    		30
+	    	);
+
+	    	$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', 'B', '10');
+	    	$height = max($heightArray) * 5;
+	    	
+	    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
+        		if ($heightArray[$j] > 1) {
+        			$yPosition = $this->pdf->GetY();
+        			$xPosition = $this->pdf->GetX();
+					
+					$h = $height/$heightArray[$j];	        		
+
+	        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'R');
+
+	        		$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+        		}else{
+        			$this->pdf->Cell($rowWidth[$j], $height, $row[$j], 1, 0, 'R');
+        		}
+	    	}
+
     		$this->pdf->setFont('Times', '', '8');
     		$this->pdf->Ln();
 		}
@@ -401,7 +512,7 @@
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(30, 5, '', 1, 0, 'C');
     		$this->pdf->setFont('Times', '', '8');
     		$this->pdf->Ln();
 		}
@@ -421,13 +532,13 @@
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(25, 5, '', 1, 0, 'C');
+    		$this->pdf->Cell(30, 5, '', 1, 0, 'C');
     		$this->pdf->setFont('Times', '', '8');
     		$this->pdf->Ln();
 		}
 
-		function getFinalHight($width, $data){
-			$this->pdf->setFont('Times', '', '8');
+		function getFinalHight($width, $data, $font, $emphasis, $size){
+			$this->pdf->setFont($font, $emphasis, $size);
 			$rowCount = array();
 			for ($i=0; $i < sizeof($data); $i++) { 
 				$stringWidth = $this->pdf->GetStringWidth($data[$i]);
