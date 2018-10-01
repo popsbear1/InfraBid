@@ -39,7 +39,7 @@
 					<th>Project</th>
 				<th>Project Type</th>
 				<th>Pre-Proc Conference</th>
-				<th>Ads/Post of IAEB</th>
+				<th>Posting</th>
 				<th>Pre-bid Conference</th>
 				<th>Eligibility Check</th>
 				<th>Sub/Open of Bids</th>

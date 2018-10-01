@@ -20,8 +20,8 @@
             <th class="text-center">Source of Fund</th>
             <th class="text-center">Date POW Added</th>
             <th class="text-center">Contractor</th>
-            <th class="text-center">Bid Amount</th>
             <th class="text-center">Status</th>
+            <th class="text-center">Bid Amount</th>
             <th class="text-center">Action</th>
           </tr>
         </thead>
