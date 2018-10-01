@@ -139,7 +139,7 @@
                       <th class="text-center">Project Title</th>
                       <th class="text-center">Location</th>
                       <th class="text-center">Mode of Procurement</th>
-                      <th class="text-center">ADS/POST OF IB/REI</th>
+                      <th class="text-center">Posting</th>
                       <th class="text-center">SUB/ OPEN OF BIDS</th>
                       <th class="text-center">NOTICE OF AWARD</th>
                       <th class="text-center">CONTRACT SIGNING</th>
