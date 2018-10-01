@@ -386,7 +386,7 @@
 	    		'',
 	    		'',
 	    		'',
-	    		number_format($totalAbc),
+	    		number_format($totalAbc, 2),
 	    		$formatedMooeTotal,
 	    		$formatedCoTotal,
 	    		''
@@ -457,7 +457,7 @@
 	    		'',
 	    		'',
 	    		'',
-	    		number_format($overallTotalAbc),
+	    		number_format($overallTotalAbc, 2),
 	    		$formatedMooeTotal,
 	    		$formatedCoTotal,
 	    		''
