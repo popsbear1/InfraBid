@@ -33,7 +33,7 @@ class User extends CI_Controller {
 			$this->session->set_userdata('last_name', $userData['last_name']);
 			$this->session->set_userdata('user_type', $userData['user_type']);
 
-			if ($userData['user_type'] === 'BAC_SEC') {
+			if ($userData['user_type'] === 'BAC_SEC' || $userData['user_type'] === 'GUEST') {
 				redirect('admin');
 			}else{
 				redirect('Capitol');

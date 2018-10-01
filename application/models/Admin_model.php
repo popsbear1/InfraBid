@@ -86,7 +86,7 @@
 		}
 
 		public function getRegularPlanForPrinting($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type');
+			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -134,7 +134,6 @@
 			$this->db->join('procurement_mode', 'project_plan.mode_id = procurement_mode.mode_id');
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
-			$this->db->join('project_logs', 'project_plan.plan_id = project_logs.project_log_id');
 			$this->db->join('procact', 'project_plan.plan_id = procact.plan_id');
 			$this->db->where('project_plan.project_type', 'supplementary');
 			if ($year != null) {
@@ -167,7 +166,7 @@
 		}
 
 		public function getSupplementalPlanForPrinting($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type');
+			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -250,7 +249,7 @@
 		}
 
 		public function getOngoingProjectPlanPrinting($year, $apptype, $status, $municipality, $source, $type){
-			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type');
+			$this->db->select('project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -829,7 +828,7 @@
 	* All functions bellow are used to insert data on Database.
 	**/
 		//Function for inserting new project.
-	public function insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date){
+	public function insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark){
 
 		$data = array(
 			'date_added' => $date_added,
@@ -847,6 +846,7 @@
 			'sub_open_date' => $sub_open_date,
 			'award_notice_date' => $award_notice_date,
 			'contract_signing_date' => $contract_signing_date,
+			'remark' => $remark,
 			'status' => 'pending',
 			'project_type' => 'regular',
 			'pow_ready' => 'false'
@@ -872,7 +872,7 @@
 	}
 
 	
-	public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date){
+	public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark){
 
 		$data = array(
 			'date_added' => $date_added,
@@ -890,6 +890,7 @@
 			'sub_open_date' => $sub_open_date,
 			'award_notice_date' => $award_notice_date,
 			'contract_signing_date' => $contract_signing_date,
+			'remark' => $remark,
 			'status' => 'pending',
 			'project_type' => 'supplementary',
 			'pow_ready' => 'false'

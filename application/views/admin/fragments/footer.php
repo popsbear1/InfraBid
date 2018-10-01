@@ -82,143 +82,145 @@ script for document tracking alert
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-light">
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a class="text-center">Manage</a></li>
-    </ul>
+  <?php if ($_SESSION['user_type'] == 'BAC_SEC'): ?>
+      <aside class="control-sidebar control-sidebar-light">
+      <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li><a class="text-center">Manage</a></li>
+      </ul>
 
-    <ul class="sidebar-menu" data-widget="tree">
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageContractorsView') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-users"></i>
+      <ul class="sidebar-menu" data-widget="tree">
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageContractorsView') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Contractor
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Contractor
-            </div>         
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageFundsView') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-money"></i>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageFundsView') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-money"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Funds
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Funds
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageProjectTypeView') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-list"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageProjectTypeView') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-list"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Project Types
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Project Types
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-list"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageMunicipalitiesAndBarangays') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-list"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Municipalities
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Municipalities
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageAccountClassifications') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-file"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageAccountClassifications') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-file"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Account Classifications
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Account Classifications
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageProcurementMode') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-list"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageProcurementMode') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-list"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Procurement Mode
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Procurement Mode
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDatabaseView') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-list"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDatabaseView') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-list"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Database
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Database
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageUsers') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-users"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageUsers') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Users
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Users
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageObserversView') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-users"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageObserversView') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Observers
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Observers
-            </div>         
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <li>
-        <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDocumentsView') ?>">
-          <div class="row">
-            <div class="col-lg-3">
-              <i class="fa fa-list"></i>
+        <li>
+          <a class="btn btn-default btn-block" href="<?php echo base_url('admin/manageDocumentsView') ?>">
+            <div class="row">
+              <div class="col-lg-3">
+                <i class="fa fa-list"></i>
+              </div>
+              <div class="col-lg-9 text-left">
+                Documents
+              </div>         
             </div>
-            <div class="col-lg-9 text-left">
-              Documents
-            </div>         
-          </div>
-        </a>
-      </li>
-    </ul>
+          </a>
+        </li>
+      </ul>
 
-  </aside>
+    </aside>
+  <?php endif ?>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
    immediately after the control sidebar -->

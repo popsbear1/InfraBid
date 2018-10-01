@@ -34,7 +34,7 @@
               <a href="<?php echo base_url('capitol/docTrackView') ?>">Doc Track
               </a>
             </li>
-            <?php if ($this->session->userdata('user_type') == 'PEO'): ?>
+            <?php if ($this->session->userdata('user_type') == 'PEO' || $this->session->userdata('user_type') == 'PPDO'): ?>
               <li 
               <?php if ($page == 'POW'): ?>
                 class="active"

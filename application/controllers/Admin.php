@@ -16,6 +16,14 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		if ($this->session->userdata('user_type') == 'BAC_SEC') {
+			redirect('admin/home');
+		}else{
+			redirect('admin/procActStatusView');
+		}
+	}
+
+	public function home(){
 		$cur_date = date('Y-m-d');
 		$end = date_format(date_add(date_create($cur_date),date_interval_create_from_date_string("2 days")), 'Y-m-d');
 
@@ -53,9 +61,7 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/home', $data);
 		$this->load->view('admin/fragments/footer');
-
 	}
-
 	public function getPlanDateRange(){
 		$start_date = date_format(date_create($this->input->get('start_date')), 'Y-m-d');
 		$end_date = date_format(date_create($this->input->get('end_date')), 'Y-m-d');
@@ -521,6 +527,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('sub_open_date', 'sub/open of bids', 'trim|required');
 		$this->form_validation->set_rules('award_notice_date', 'notice of award', 'trim|required');
 		$this->form_validation->set_rules('contract_signing_date', 'contract signing', 'trim|required');
+		$this->form_validation->set_rules('remarks', 'Remark', 'trim');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
@@ -543,8 +550,9 @@ class Admin extends CI_Controller {
 			$award_notice_date = date_format($award_notice_date, 'M-Y');
 			$contract_signing_date = date_create_from_format('m-Y', $this->input->post('contract_signing_date'));
 			$contract_signing_date = date_format($contract_signing_date, 'M-Y');
+			$remark = htmlspecialchars($this->input->post('remarks'));
 
-			if ($this->admin_model->insertNewRegularProject($date_added, $year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date)) {
+			if ($this->admin_model->insertNewRegularProject($date_added, $year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark)) {
 				$data['success'] = true;
 			}
 
@@ -594,6 +602,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('sub_open_date', 'sub/open of bids', 'trim|required');
 		$this->form_validation->set_rules('award_notice_date', 'notice of award', 'trim|required');
 		$this->form_validation->set_rules('contract_signing_date', 'contract signing', 'trim|required');
+		$this->form_validation->set_rules('remarks', 'Remark', 'trim');
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
@@ -616,9 +625,10 @@ class Admin extends CI_Controller {
 			$award_notice_date = date_format($award_notice_date, 'M-Y');
 			$contract_signing_date = date_create_from_format('m-Y', $this->input->post('contract_signing_date'));
 			$contract_signing_date = date_format($contract_signing_date, 'M-Y');
+			$remark = htmlspecialchars($this->input->post('remarks'));
 
 
-			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date)) {
+			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark)) {
 				$data['success'] = true;
 			}
 

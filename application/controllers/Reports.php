@@ -64,12 +64,10 @@
 				if ($data[$i]['classification'] == 'Capital Outlay') {
 					$data[$i]['mooe'] = 0;
 					$data[$i]['co'] = $data[$i]['abc'];
-					$data[$i]['remark'] = '-';
 				}
 				if ($data[$i]['classification'] == 'MOOE'){
 					$data[$i]['mooe'] = $data[$i]['abc'];
 					$data[$i]['co'] = 0;
-					$data[$i]['remark'] = '-';
 				}
 			}
 
@@ -168,6 +166,7 @@
 
 		    	$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', '', '8');
 		    	$height = max($heightArray) * 5;
+		    	$lastCell = 'cell';
 		    	
 		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
 	        		if ($heightArray[$j] > 1) {
@@ -178,7 +177,12 @@
 
 		        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'C');
 
-		        		$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+		        		
+		        		if (sizeof($rowWidth) - $j == 1) {
+		        			$lastCell = 'multiCell';
+		        		}else{
+		        			$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+		        		}
 	        		}else{
 	        			$this->pdf->Cell($rowWidth[$j], $height, $row[$j], 1, 0, 'C');
 	        		}
@@ -186,7 +190,9 @@
 
 		    	$count++;
 
-		    	$this->pdf->Ln();
+		    	if ($lastCell == 'cell') {
+		    		$this->pdf->Ln();
+		    	}
 
 		    	$mooeTotal = $mooeTotal + $data[$i]['mooe'];
 		    	$coTotal = $coTotal + $data[$i]['co'];
@@ -521,7 +527,7 @@
 			$this->pdf->setFont('Times', 'B', '10');
 						
 			$this->pdf->Cell(10, 5, '', 1, 0, 'C');
-    		$this->pdf->Cell(71, 5, $project_type, 1, 0, 'L');
+    		$this->pdf->Cell(71, 5, ucwords($project_type), 1, 0, 'L');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');
     		$this->pdf->Cell(20, 5, '', 1, 0, 'C');

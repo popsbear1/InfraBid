@@ -12,12 +12,22 @@
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
-      <a href="<?php echo base_url('admin') ?>" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>I</b>PB</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Infra</b>PB</span>
-      </a>
+      <?php if ($_SESSION['user_type'] == 'BAC_SEC'): ?>
+        <a href="<?php echo base_url('admin') ?>" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>I</b>PB</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Infra</b>PB</span>
+        </a>
+      <?php endif ?>
+      <?php if ($_SESSION['user_type'] == 'GUEST'): ?>
+        <a href="#" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>I</b>PB</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Infra</b>PB</span>
+        </a>
+      <?php endif ?>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -27,37 +37,39 @@
         <audio src="<?php echo base_url('public/sound/alert.mp3')?>" id="alertSound"></audio>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown notifications-menu">
-              <!-- Menu toggle button -->
-              <a href="#" class="dropdown-toggle" id="alertBtn" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
-                <span class="label label-success" id="alertCount"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header text-center" id="alertHeader"></li>
-                <li class="header">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                      <small class="fa fa-tasks"> Project Name</small>
+            <?php if ($_SESSION['user_type'] == 'BAC_SEC'): ?>
+              <!-- Messages: style can be found in dropdown.less-->
+              <li class="dropdown notifications-menu">
+                <!-- Menu toggle button -->
+                <a href="#" class="dropdown-toggle" id="alertBtn" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-success" id="alertCount"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header text-center" id="alertHeader"></li>
+                  <li class="header">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                        <small class="fa fa-tasks"> Project Name</small>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                        <small class="fa fa-user"> Sender</small>
+                      </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                      <small class="fa fa-user"> Sender</small>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <!-- inner menu: contains the messages -->
-                  <ul class="menu" id="alertMenu">
-                    <li><!-- start message -->
-                      
-                    </li>
-                    <!-- end message -->
-                  </ul>
-                  <!-- /.menu -->
-                </li>
-              </ul>
-            </li>
+                  </li>
+                  <li>
+                    <!-- inner menu: contains the messages -->
+                    <ul class="menu" id="alertMenu">
+                      <li><!-- start message -->
+                        
+                      </li>
+                      <!-- end message -->
+                    </ul>
+                    <!-- /.menu -->
+                  </li>
+                </ul>
+              </li>
+            <?php endif ?>
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -108,67 +120,71 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-          <li class="header">PROCESS</li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-list"></i>
-              <span>APP View</span>
-              <span class="pull-right-container">
-                <i class="fa fa-cogs"></i>
-              </span>
-            </a>
-            <ul class=treeview-menu>
-              <li><a href="<?php echo base_url('admin/regularPlanListView') ?>">Regular Plan</a></li>
-              <li><a href="<?php echo base_url('admin/supplementalPlanListView') ?>">Supplemental Plan</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="<?php echo base_url('admin/ongoingProjectPlanView') ?>">
-              <i class="fa fa-tasks"></i> <span>For Procurement</span>
-            </a>
-          </li>
+          <?php if ($_SESSION['user_type'] == 'BAC_SEC'): ?>
+            <li class="header">PROCESS</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-list"></i>
+                <span>APP View</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-cogs"></i>
+                </span>
+              </a>
+              <ul class=treeview-menu>
+                <li><a href="<?php echo base_url('admin/regularPlanListView') ?>">Regular Plan</a></li>
+                <li><a href="<?php echo base_url('admin/supplementalPlanListView') ?>">Supplemental Plan</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="<?php echo base_url('admin/ongoingProjectPlanView') ?>">
+                <i class="fa fa-tasks"></i> <span>For Procurement</span>
+              </a>
+            </li>
+          <?php endif ?>
           <li>
             <a href="<?php echo base_url('admin/procActStatusView') ?>">
               <i class="fa fa-list"></i> <span>Project Status Check</span>
             </a>
           </li>
-          <li class="header">Document Management</li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-file"></i>
-              <span>Document</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li>
-                <a href="<?php echo base_url('doctrack/docTrackView') ?>">
-                  <i class="fa fa-file"></i> <span>Doc Track</span>
-                </a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('doctrack/projectListView') ?>">
-                  <i class="fa fa-file"></i> <span>Add Document</span>
-                </a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('doctrack/ongoingDocumentTrackingView') ?>">
-                  <i class="fa fa-file"></i> <span>Ongoing</span>
-                </a>
-              </li>
-              <li>
-                <a href="<?php echo base_url('doctrack/completedDocumentTrackingView') ?>">
-                <i class="fa fa-file"></i> <span>Completed</span>
-                </a>               
-              </li>
-              <li>
-                <a href="<?php echo base_url('doctrack/bidDisqualificationView') ?>">
-                <i class="fa fa-file"></i> <span>Disqualification</span>
-                </a>               
-              </li>
-            </ul>
-          </li>
+          <?php if ($_SESSION['user_type'] == 'BAC_SEC'): ?>
+            <li class="header">Document Management</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-file"></i>
+                <span>Document</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a href="<?php echo base_url('doctrack/docTrackView') ?>">
+                    <i class="fa fa-file"></i> <span>Doc Track</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('doctrack/projectListView') ?>">
+                    <i class="fa fa-file"></i> <span>Add Document</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('doctrack/ongoingDocumentTrackingView') ?>">
+                    <i class="fa fa-file"></i> <span>Ongoing</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('doctrack/completedDocumentTrackingView') ?>">
+                  <i class="fa fa-file"></i> <span>Completed</span>
+                  </a>               
+                </li>
+                <li>
+                  <a href="<?php echo base_url('doctrack/bidDisqualificationView') ?>">
+                  <i class="fa fa-file"></i> <span>Disqualification</span>
+                  </a>               
+                </li>
+              </ul>
+            </li>
+          <?php endif ?>
         </ul>
       </section>
       <!-- /.sidebar -->

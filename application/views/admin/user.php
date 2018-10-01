@@ -148,6 +148,7 @@
                 <option value="PEO">PEO</option>
                 <option value="PGO">PGO</option>
                 <option value="PPDO">PPDO</option>
+                <option value="GUEST">GUEST</option>
               </select>
             </div>
           </div>

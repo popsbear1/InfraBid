@@ -19,19 +19,13 @@
 
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="form-group">
-                        <label>Date Added <span style="color: red">* </span>:</label>
-                        <input type="text" class="form-control" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="form-group">
-                        <label>Project Year <span style="color: red">* </span>:</label>
-                        <input type="text" class="form-control" id="year" name="year" value="<?php echo $currentYear ?>">
-                      </div>
-                    </div>
+                  <div class="form-group">
+                    <label>Date Added <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" id="date_added" name="date_added" value="<?php echo $currentDate ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Project Year <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" id="year" name="year" value="<?php echo $currentYear ?>">
                   </div>
                   <div class="form-group">
                     <label>Project Number <span style="color: red">* </span>:</label>
