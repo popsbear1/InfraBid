@@ -460,25 +460,25 @@
       var table = $('#supplemental_plan_table').DataTable({
         data: response.plans,
         columns: [
-            { data: 'project_no' },
-            { data: 'project_title' },
+            { data: "project_no" },
+            { data: "project_title" },
             { 
               data: null,
               render: function(data, type, row){
                 return data.barangay + ', ' + data.municipality;
               },
-              editField: ['barangay', 'municipality']
+              editField: ["barangay", "municipality"]
             },
-            { data: 'mode' },
-            { data: 'abc_post_date' },
-            { data: 'sub_open_date' },
-            { data: 'award_notice_date' },
-            { data: 'contract_signing_date' },
-            { data: 'source' },
-            { data: 'type' },
-            { data: 'abc' },
-            { data: 'project_year' },
-            { data: 'project_status'},
+            { data: "mode" },
+            { data: "abc_post_date" },
+            { data: "sub_open_date" },
+            { data: "award_notice_date" },
+            { data: "contract_signing_date" },
+            { data: "source" },
+            { data: "type" },
+            { data: "abc" },
+            { data: "project_year" },
+            { data: "project_status"},
             { 
               data: null,
               render: function ( data, type, row ) {
