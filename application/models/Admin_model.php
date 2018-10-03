@@ -777,6 +777,26 @@
 			return $query->row_array();
 		}
 
+		public function getSectors(){
+			$this->db->select('*');
+			$this->db->from('sectors');
+			$this->db->order_by('sector_name ASC');
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getSectorDetails($sector_id){
+			$this->db->select('*');
+			$this->db->from('sectors');
+			$this->db->where('sector_id', $sector_id);
+
+			$query = $this->db->get();
+
+			return $query->row_array();
+		}
+
 		public function getProjectPlanStatus($plan_id){
 			$this->db->select('status');
 			$this->db->from('project_plan');
@@ -1050,6 +1070,19 @@
 			return false;
 		}
 
+	}
+
+	public function insertSector($sector_name, $sector_type){
+		$data = array(
+			'sector_name' => $sector_name,
+			'sector_type' => $sector_type
+		);
+
+		if ($this->db->insert('sectors', $data)) {
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
 	}
 
 

@@ -28,12 +28,20 @@
                     <input type="text" class="form-control" id="year" name="year" value="<?php echo $currentYear ?>">
                   </div>
                   <div class="form-group">
+                    <label>Year Funded <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" id="year_funded" name="year_funded" value="<?php echo $currentYear ?>">
+                  </div>
+                  <div class="form-group">
                     <label>Project Number <span style="color: red">* </span>:</label>
                     <input type="text" id="project_no" value="" name="project_no" class="form-control" placeholder="Input project number here ... ">
                   </div>
                   <div class="form-group">
                     <label>Project Title <span style="color: red">* </span>:</label>
                     <input type="text" id="project_title" value="" name="project_title" class="form-control" placeholder="Input project title here ... ">
+                  </div>
+                  <div class="form-group">
+                    <label>Office: </label>
+                    <input type="text" id="office_name" value="" name="office_name" class="form-control" placeholder="Input office name here ... ">
                   </div>
                   <div class="form-group">
                     <label>Municipality <span style="color: red">* </span>:</label>
@@ -60,6 +68,8 @@
                       <?php endforeach ?>
                     </select>
                   </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="form-group">
                     <label>Mode of Procurement <span style="color: red">* </span>:</label>
                     <select class="form-control" id="mode" name ="mode">
@@ -69,8 +79,6 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="form-group">
                     <label>Approved Budget Cost (ABC) <span style="color: red">* </span>:</label>
                     <input type="text" id="ABC" value="" name="ABC"  class="form-control" placeholder="Input ABC here ... ">

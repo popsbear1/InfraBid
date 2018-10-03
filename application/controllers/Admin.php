@@ -514,8 +514,10 @@ class Admin extends CI_Controller {
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
+		$this->form_validation->set_rules('year_funded', 'Year Funded', 'trim|required');
 		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
+		$this->form_validation->set_rules('office_name', 'Office Name', 'trim');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
@@ -528,6 +530,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('award_notice_date', 'notice of award', 'trim|required');
 		$this->form_validation->set_rules('contract_signing_date', 'contract signing', 'trim|required');
 		$this->form_validation->set_rules('remarks', 'Remark', 'trim');
+
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run()) {
@@ -1555,10 +1558,50 @@ class Admin extends CI_Controller {
 		redirect('admin/editProcurementView');
 
 	}
+	/** Manage Sectors*/
+
+	public function manageSectorsView(){
+		$data['sectors'] = $this->admin_model->getSectors();
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/manageSectors', $data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function addSectors(){
+		$data = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules('sector_name', 'Sector Name', 'trim|required');
+		$this->form_validation->set_rules('sector_type', 'Sector Type', 'trim|required');
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run()) {
+			$sector_name = htmlspecialchars($this->input->post('sector_name'));
+			$sector_type = htmlspecialchars($this->input->post('sector_type'));
+			$return_value = $this->admin_model->insertSector($sector_name,$sector_type);
+			
+			if (!$return_value) {
+				$data['success'] = 'failed';
+			}else{
+				$data['sector'] = $this->admin_model->getSectorDetails($return_value);
+				$data['success'] = true;
+			}
+
+		}else{
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+			if (!isset($_POST['sector_type'])) {
+				$data['messages']['sector_type'] = '<p class="text-danger">The Sector Type field is required!</p>';
+			}
+		}
+	
+		echo json_encode($data);
+	}
 
 	/** Start of Manage Documents */
 
-		public function manageDocumentsView(){
+	public function manageDocumentsView(){
 		$data['document_type'] = $this->admin_model->getDocument();
 		$this->load->view('admin/fragments/head');
 		$this->load->view('admin/fragments/nav');
