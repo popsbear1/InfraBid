@@ -40,8 +40,18 @@
                     <input type="text" id="project_title" value="" name="project_title" class="form-control" placeholder="Input project title here ... ">
                   </div>
                   <div class="form-group">
-                    <label>Office: </label>
-                    <input type="text" id="office_name" value="" name="office_name" class="form-control" placeholder="Input office name here ... ">
+                    <div class="row">
+                      <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>Sector: </label>
+                      </div>
+                      <div class="col-lg-10 col-md-10 col-sm-10">
+                        <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="barangay_development">Barangay Development</label>
+                        <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="office">Office</label>
+                      </div>
+                    </div>
+                    <select class="form-control" id="sector_name" name="sector_name">
+                      <option hidden disabled selected>Select Sector.....</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Municipality <span style="color: red">* </span>:</label>
@@ -172,7 +182,18 @@
     format: 'yyyy'
   })
 
-  $('#date_added').datepicker();
+  //Date picker
+  $('#year_funded').datepicker({
+    autoclose: true,
+    orientation: 'bottom auto',
+    minViewMode: 2,
+    format: 'yyyy'
+  })
+
+  $('#date_added').datepicker({
+    autoclose: true,
+    format: 'yyyy-mm-dd'
+  });
 
   $('#abc_post_date').datepicker({
     autoclose: true,
@@ -226,6 +247,28 @@
       }
     }
   });
+
+
+  //sector selection
+  $('.sector_type_btn').click(function(e){
+    e.preventDefault();
+
+    var sector_type = $(this).val();
+
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo base_url('admin/getSectorsByType') ?>',
+      data: {sector_type: sector_type},
+      dataType: 'json'
+    }).done(function(response){
+      $('#sector_name').empty();
+      for (var i = response.sectors.length - 1; i >= 0; i--){
+        $('#sector_name').append(
+          '<option class="barangay" value="' + response.sectors[i]['sector_id'] + '">' +  response.sectors[i]['sector_name'] + '</option>'
+        );
+      }
+    })
+  })
 
   //ajax ti adding of regular plan atoy
   $('#addSupplementalPlanForm').submit(function(e){

@@ -45,11 +45,11 @@
                         <label>Sector: </label>
                       </div>
                       <div class="col-lg-10 col-md-10 col-sm-10">
-                        <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="barangayDevelopment">Barangay Development</label>
+                        <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="barangay_development">Barangay Development</label>
                         <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="office">Office</label>
                       </div>
                     </div>
-                    <select class="form-control" id="sector_name" id="sector_name">
+                    <select class="form-control" id="sector_name" name="sector_name">
                       <option hidden disabled selected>Select Sector.....</option>
                     </select>
                   </div>
@@ -181,7 +181,18 @@
     format: 'yyyy'
   })
 
-  $('#date_added').datepicker();
+  //Date picker
+  $('#year_funded').datepicker({
+    autoclose: true,
+    orientation: 'bottom auto',
+    minViewMode: 2,
+    format: 'yyyy'
+  })
+
+  $('#date_added').datepicker({
+    autoclose: true,
+    format: 'yyyy-mm-dd'
+  });
 
   $('#abc_post_date').datepicker({
     autoclose: true,
@@ -248,7 +259,12 @@
       data: {sector_type: sector_type},
       dataType: 'json'
     }).done(function(response){
-      
+      $('#sector_name').empty();
+      for (var i = response.sectors.length - 1; i >= 0; i--){
+        $('#sector_name').append(
+          '<option class="barangay" value="' + response.sectors[i]['sector_id'] + '">' +  response.sectors[i]['sector_name'] + '</option>'
+        );
+      }
     })
   })
   //ajax ti adding of regular plan atoy

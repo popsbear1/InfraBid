@@ -360,7 +360,7 @@
             data: null,
             render: function ( data, type, row ) {
               if (data.project_status == 'pending') {
-                return  '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
+                return  '<form method="GET" action="<?php echo base_url('admin/setIDForEdit') ?>">' +
                           '<input name="project_type" value="' + data.project_type + '" hidden>' +
                           '<div class="btn-group">' +
                             '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
@@ -485,7 +485,7 @@
               data: null,
               render: function ( data, type, row ) {
                 if (data.project_status == 'pending') {
-                  return  '<form method="GET" action="<?php echo base_url('admin/editPlanView') ?>">' +
+                  return  '<form method="GET" action="<?php echo base_url('admin/setIDForEdit') ?>">' +
                             '<input name="project_type" value="' + data.project_type + '" hidden>' +
                             '<div class="btn-group">' +
                               '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +

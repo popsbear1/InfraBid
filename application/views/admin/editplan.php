@@ -22,19 +22,17 @@
             <form id="editPlanForm" method="POST" action="<?php echo base_url('admin/editPlan') ?>" autocomplete="off">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="form-group">
-                        <label>Date Added <span style="color: red">* </span>:</label>
-                        <input type="text" class="form-control" id="date_added" name="date_added" placeholder="<?php echo $projectDetails['date_added'] ?>">
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="form-group">
-                        <label>Project Year <span style="color: red">* </span>:</label>
-                        <input type="text" class="form-control" id="year" name="year" placeholder="<?php echo $projectDetails['project_year'] ?>">
-                      </div>
-                    </div>
+                  <div class="form-group">
+                    <label>Date Added <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" id="date_added" name="date_added" placeholder="<?php echo $projectDetails['date_added'] ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Project Year <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" id="year" name="year" placeholder="<?php echo $projectDetails['project_year'] ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Year Funded <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" id="year_funded" name="year_funded" placeholder="<?php echo $projectDetails['year_funded'] ?>">
                   </div>
                   <div class="form-group">
                     <label>Project Number <span style="color: red">* </span>:</label>
@@ -43,6 +41,20 @@
                   <div class="form-group">
                     <label>Project Title <span style="color: red">* </span>:</label>
                     <input type="text" id="project_title" value="" name="project_title" class="form-control" placeholder="<?php echo $projectDetails['project_title'] ?>">
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>Sector: </label>
+                      </div>
+                      <div class="col-lg-10 col-md-10 col-sm-10">
+                        <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="barangay_development">Barangay Development</label>
+                        <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="office">Office</label>
+                      </div>
+                    </div>
+                    <select class="form-control" id="sector_name" name="sector_name">
+                      <option hidden disabled selected><?php echo $projectDetails['sector_name'] ?></option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Municipality <span style="color: red">* </span>:</label>
@@ -69,6 +81,8 @@
                       <?php endforeach ?>
                     </select>
                   </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="form-group">
                     <label>Mode of Procurement <span style="color: red">* </span>:</label>
                     <select class="form-control" id="mode" name ="mode">
@@ -78,8 +92,6 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="form-group">
                     <label>Approved Budget Cost (ABC) <span style="color: red">* </span>:</label>
                     <input type="text" id="ABC" value="" name="ABC"  class="form-control" placeholder="<?php echo number_format($projectDetails['abc'], 2) ?>">
@@ -118,6 +130,10 @@
                     <label>Contract Signing <span style="color: red">* </span>:</label>
                     <input type="text" class="form-control" name="contract_signing_date" id="contract_signing_date" placeholder="<?php echo $projectDetails['contract_signing_date'] ?>">
                   </div>
+                  <div class="form-group">
+                    <label> Remarks <span style="color: red">* </span>:</label>
+                    <input type="text" class="form-control" name="remarks" id="remarks" placeholder="<?php echo $projectDetails['remark'] ?>">
+                  </div>
                 </div>
               </div> 
             </form>
@@ -139,9 +155,6 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url() ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="<?php echo base_url() ?>public/bower_components/raphael/raphael.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/morris.js/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="<?php echo base_url() ?>public/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -151,8 +164,6 @@
 <script src="<?php echo base_url() ?>public/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="<?php echo base_url() ?>public/bower_components/moment/min/moment.min.js"></script>
-<script src="<?php echo base_url() ?>public/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
 <script src="<?php echo base_url() ?>public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url() ?>public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
@@ -165,25 +176,28 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
-
-
-  $('#back').ready(function(){
-    $("back").click(function(event){
-        event.preventDefault();
-        alert("Was preventDefault() called: " + event.isDefaultPrevented());
-    });
-  });
     //Date picker
   $('#year').datepicker({
     autoclose: true,
     orientation: 'bottom auto',
     minViewMode: 2,
     format: 'yyyy'
-  })
+  });
 
-  $('#date_added').datepicker();
+    //Date picker
+  $('#year_funded').datepicker({
+    autoclose: true,
+    orientation: 'bottom auto',
+    minViewMode: 2,
+    format: 'yyyy'
+  });
+
+  $('#date_added').datepicker({
+    autoclose: true,
+    format: 'yyyy-mm-dd'
+  });
 
   $('#abc_post_date').datepicker({
     autoclose: true,
@@ -225,31 +239,50 @@
   console.log(barangays[1]['municipality_id']);
 
   $('#municipality').change(function(e){
-    $('#barangaySelection').empty();
+    $('#barangay').empty();
     var municipality_id = $(this).val();
 
     for (var i = barangays.length - 1; i >= 0; i--) {
       if (municipality_id == barangays[i]['municipality_id']) {
-        $('#barangaySelection').append(
+        $('#barangay').append(
           '<option class="barangay" value="' + barangays[i]['barangay_id'] + '">' +  barangays[i]['barangay'] + ' - ' + barangays[i]['barangay_code'] + '</option>'
         );
       }
     }
   });
 
+ //sector selection
+  $('.sector_type_btn').click(function(e){
+    e.preventDefault();
 
+    var sector_type = $(this).val();
+
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo base_url('admin/getSectorsByType') ?>',
+      data: {sector_type: sector_type},
+      dataType: 'json'
+    }).done(function(response){
+      $('#sector_name').empty();
+      for (var i = response.sectors.length - 1; i >= 0; i--){
+        $('#sector_name').append(
+          '<option class="barangay" value="' + response.sectors[i]['sector_id'] + '">' +  response.sectors[i]['sector_name'] + '</option>'
+        );
+      }
+    })
+  })
     //ajax ti editing of regular plan atoy
-  $('#editPlanFormSubmitBtn').submit(function(e){
+  $('#editPlanForm').submit(function(e){
     e.preventDefault();
 
     $.ajax({
       type: 'POST',
-      url: $('#addPlanForm').attr('action'),
-      data: $('#addPlanForm').serialize(),
+      url: $('#editPlanForm').attr('action'),
+      data: $('#editPlanForm').serialize(),
       dataType: 'json'
     }).done(function(response){
       if (response.success == true) {
-        alert('success');
+        window.location.replace('<?php echo base_url('admin/editPlanView') ?>');
       }else{
         $.each(response.messages, function(key, value) {
           var element = $('#' + key);
