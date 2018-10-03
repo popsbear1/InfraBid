@@ -28,8 +28,8 @@
               <td class="text-center"><?php echo $sector['sector_status'] ?></td>
               <td class="text-center">
                 <div class="btn-group">
-                  <form method="POST" action="<?php echo base_url('admin/setCurrentDocumentID') ?>">
-                    <button class="btn btn-success pull-right" id="documentID" name="documentID" value="<?php echo $sector['sector_id'] ?>" type="submit">
+                  <form method="POST" action="<?php echo base_url('admin/setCurrentSectorID') ?>">
+                    <button class="btn btn-success pull-right" id="sectorID" name="sectorID" value="<?php echo $sector['sector_id'] ?>" type="submit">
                       <i class="fa fa-edit">Edit</i>
                     </button>
                   </form>
@@ -37,22 +37,22 @@
 
                 <div class="btn-group">
                   <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST" id="delete_document">
-                    <input type="text" name="document_id" value="<?php echo $sector['sector_id']?>" hidden>
+                    <input type="text" name="sector_id" value="<?php echo $sector['sector_id']?>" hidden>
                       <button class="btn btn-danger" type="submit">Delete</button>                       
                   </form>
                 </div>
 
                 <div class="btn-group">
                   <?php if ($sector['sector_status']=='active'): ?>
-                      <form action="<?php echo base_url('admin/deactivateDocumentType') ?>" method="POST">
-                        <input type="text" name="document_id" value="<?php echo $sector['sector_id'] ?>" hidden>
+                      <form action="<?php echo base_url('admin/deactivateSectorType') ?>" method="POST">
+                        <input type="text" name="sector_id" value="<?php echo $sector['sector_id'] ?>" hidden>
                       <button class="btn btn-default btn-block" name="delete" id="delete">Deactivate</button>
                     </form>                          
                   <?php endif ?>
 
                   <?php if ($sector['sector_status']=='inactive'): ?>
-                      <form action="<?php echo base_url('admin/activateDocumentType') ?>" method="POST">
-                        <input type="text" name="document_id" value="<?php echo $sector['sector_id'] ?>" hidden>
+                      <form action="<?php echo base_url('admin/activateSectorType') ?>" method="POST">
+                        <input type="text" name="sector_id" value="<?php echo $sector['sector_id'] ?>" hidden>
                       <button class="btn btn-default btn-block" name="delete" id="delete">Activate</button>
                     </form>                          
                   <?php endif ?>

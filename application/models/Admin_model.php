@@ -787,10 +787,10 @@
 			return $query->result_array();
 		}
 
-		public function getSectorDetails($sector_id){
+		public function getSectorDetails($currentSectorID){
 			$this->db->select('*');
 			$this->db->from('sectors');
-			$this->db->where('sector_id', $sector_id);
+			$this->db->where('sector_id', $currentSectorID);
 
 			$query = $this->db->get();
 
@@ -1185,6 +1185,7 @@
 		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
+
 
 	public function updateAccount($account, $currentPlanID){
 		$data = array(
@@ -1713,6 +1714,24 @@
 		$this->db->update('document_type', $data);
 	}
 
+	public function updateSectorDetails($sector_name, $currentSectorID){
+		$data = array(
+			'sector_name' => $sector_name,
+		);
+
+		$this->db->where('sector_id', $currentSectorID);
+		$this->db->update('sectors', $data);
+	}	
+
+	public function updateSectorType($sector_type, $currectSectorID){
+		$data = array(
+			'sector_type'=> $sector_type
+		);
+
+		$this->db->where('sector_id', $currentSectorID);
+		$this->db->update('sectors',$data);
+	}
+
 	public function updateObserverDetails($observer_dept_name, $currentObserverID){
 		$data = array(
 			'observer_dept_name' => $observer_dept_name
@@ -1956,6 +1975,22 @@
 
 		$this->db->where('doc_type_id', $doc_type_id);
 		$this->db->update('document_type', $data);
+	}
+
+	public function updateSectorTypeStatus($sector_id, $action){
+
+		if ($action=='deactivate') {
+			$data = array(
+				'sector_status' => 'inactive'
+			);
+		}else{
+			$data = array(
+				'sector_status' => 'active'
+			);
+		}
+
+		$this->db->where('sector_id', $sector_id);
+		$this->db->update('sectors', $data);
 	}
 
 	public function updateObserverStatus($observer_id, $action){
