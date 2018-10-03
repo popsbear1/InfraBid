@@ -517,7 +517,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('year_funded', 'Year Funded', 'trim|required');
 		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
-		$this->form_validation->set_rules('office_name', 'Office Name', 'trim');
+		$this->form_validation->set_rules('sector_name', 'sector_name', 'trim');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
@@ -536,8 +536,14 @@ class Admin extends CI_Controller {
 		if ($this->form_validation->run()) {
 			$date_added = htmlspecialchars($this->input->post('date_added'));
 			$year = htmlspecialchars($this->input->post('year'));
+			$year_funded = htmlspecialchars($this->input->post('year_funded'));
 			$project_no = htmlspecialchars($this->input->post('project_no'));
 			$project_title = htmlspecialchars($this->input->post('project_title'));
+			if (!isset($_POST['sector_name'])) {
+				$sector_id = null;
+			}else{
+				$sector_id = htmlspecialchars($this->input->post('sector_name'));
+			}
 			$municipality = htmlspecialchars($this->input->post('municipality'));
 			$barangay = htmlspecialchars($this->input->post('barangay'));
 			$type = htmlspecialchars($this->input->post('type'));
@@ -555,7 +561,7 @@ class Admin extends CI_Controller {
 			$contract_signing_date = date_format($contract_signing_date, 'M-Y');
 			$remark = htmlspecialchars($this->input->post('remarks'));
 
-			if ($this->admin_model->insertNewRegularProject($date_added, $year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark)) {
+			if ($this->admin_model->insertNewRegularProject($date_added, $year, $year_funded, $project_no, $project_title, $sector_id, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark)) {
 				$data['success'] = true;
 			}
 
@@ -592,8 +598,10 @@ class Admin extends CI_Controller {
 
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
+		$this->form_validation->set_rules('year_funded', 'Year Funded', 'trim|required');
 		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
+		$this->form_validation->set_rules('sector_name', 'sector_name', 'trim');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
@@ -611,8 +619,15 @@ class Admin extends CI_Controller {
 		if ($this->form_validation->run()) {
 			$date_added = htmlspecialchars($this->input->post('date_added'));
 			$year = htmlspecialchars($this->input->post('year'));
+			$year_funded = htmlspecialchars($this->input->post('year_funded'));
 			$project_no = htmlspecialchars($this->input->post('project_no'));
 			$project_title = htmlspecialchars($this->input->post('project_title'));
+			if (!isset($_POST['sector_name'])) {
+				$sector_id = null;
+			}else{
+				$sector_id = htmlspecialchars($this->input->post('sector_name'));
+			}
+			$sector_id = htmlspecialchars($this->input->post('sector_name'));
 			$municipality = htmlspecialchars($this->input->post('municipality'));
 			$barangay = htmlspecialchars($this->input->post('barangay'));
 			$type = htmlspecialchars($this->input->post('type'));
@@ -631,7 +646,7 @@ class Admin extends CI_Controller {
 			$remark = htmlspecialchars($this->input->post('remarks'));
 
 
-			if ($this->admin_model->insertNewSupplementalProject($date_added,$year,$project_no,$project_title,$municipality,$barangay,$type,$mode,$ABC,$source,$account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark)) {
+			if ($this->admin_model->insertNewSupplementalProject($date_added,$year, $year_funded, $project_no,$project_title, $sector_id, $municipality,$barangay,$type,$mode,$ABC,$source,$account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark)) {
 				$data['success'] = true;
 			}
 
@@ -663,8 +678,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function editPlanView(){
-		$plan_id = $this->input->get('plan_id');
-		$data['project_type'] = $this->input->get('project_type');
+		$plan_id = $this->session->userdata('plan_id_edit');
+		$data['project_type'] = $this->session->userdata('type_for_printing');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
@@ -678,21 +693,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');	
 	}
 
-	public function editSupplementalPlanView(){
-		$plan_id = $this->input->get('plan_id');
-		$data['project_type'] = $this->input->get('project_type');
-		$data['municipalities'] = $this->admin_model->getMunicipalities();
-		$data['barangays'] = $this->admin_model->getBarangays();
-		$data['projTypes'] = $this->admin_model->getProjectType();
-		$data['sourceFunds'] = $this->admin_model->getSupplementalFunds();
-		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
-		$data['modes'] = $this->admin_model->getProcurementMode();
-		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
-		$this->load->view('admin/fragments/head');
-		$this->load->view('admin/fragments/nav');
-		$this->load->view('admin/editPlan', $data);
-		$this->load->view('admin/fragments/footer');	
-	}
 	public function projectTimelineView(){
 		$projectNavControl['pageName'] = "timeline";
 		$plan_id = $this->session->userdata('plan_id');
@@ -815,86 +815,195 @@ class Admin extends CI_Controller {
 		redirect('admin/projectDetailsView');
 	}
 
+	public function setIDForEdit(){
+		$plan_id = $this->input->get('plan_id');
+		$project_type = $this->input->get('project_type');
+		$this->session->set_userdata('plan_id_edit', $plan_id);
+		$this->session->set_userdata('type_for_printing', $project_type);
+
+		redirect('admin/editPlanView');
+
+	}
+
 	public function editPlan(){
-		$currentPlanID = $this->session->userdata('plan_id');
+		$currentPlanID = $this->session->userdata('plan_id_edit');
+
+		$data = array('success' => false, 'messages' => array());
+
 		if (!empty($_POST['date_added']) && $_POST['date_added'] != null) {
-			$date_added = $this->input->post('date_added');
-			$this->admin_model->updateDate_added($date_added, $currentPlanID);
+			$this->form_validation->set_rules('date_added', 'Date Added', 'trim');
 		}
 
 		if (!empty($_POST['year']) && $_POST['year'] != null) {
-			$year = $this->input->post('year');
-			$this->admin_model->updateProject_year($year, $currentPlanID);
+			$this->form_validation->set_rules('year', 'year', 'trim');
+		}
+
+		if (!empty($_POST['year_funded']) && $_POST['year_funded'] != null) {
+			$this->form_validation->set_rules('year_funded', 'year_funded', 'trim');
 		}
 
 		if (!empty($_POST['project_no']) && $_POST['project_no'] != null) {
-			$project_no = $this->input->post('project_no');
-			$this->admin_model->updateProject_no($project_no, $currentPlanID);
+			$this->form_validation->set_rules('project_no', 'project_no', 'trim');
 		}
 
 		if (!empty($_POST['project_title']) && $_POST['project_title'] != null) {
-			$project_title = $this->input->post('project_title');
-			$this->admin_model->updateProject_title($project_title, $currentPlanID);
+			$this->form_validation->set_rules('project_title', 'project_title', 'trim');
+		}
+
+		if (isset($_POST['sector_name'])) {
+			$this->form_validation->set_rules('sector_name', 'sector_name', 'trim');
 		}
 
 		if (isset($_POST['municipality'])) {
-			$municipality = $this->input->post('municipality');
-			$this->admin_model->updateMunicipality($municipality, $currentPlanID);
+			$this->form_validation->set_rules('municipality', 'municipality', 'trim|required');
 		}
 
 		if (isset($_POST['barangay'])) {
-			$barangay = $this->input->post('barangay');
-			$this->admin_model->updateBarangay($barangay, $currentPlanID);
+			$this->form_validation->set_rules('barangay', 'barangay', 'trim|required');
 		}
 
 		if (isset($_POST['type'])) {
-			$type = $this->input->post('type');
-			$this->admin_model->updateType($type, $currentPlanID);
+			$this->form_validation->set_rules('type', 'type', 'trim|required');
 		}
 
 		if (isset($_POST['mode'])) {
-			$mode = $this->input->post('mode');
-			$this->admin_model->updateMode($mode, $currentPlanID);
+			$this->form_validation->set_rules('mode', 'mode', 'trim|required');
 		}
 
 		if (!empty($_POST['ABC']) && $_POST['ABC'] != null) {
-			$ABC = $this->input->post('ABC');
-			$this->admin_model->updateABC($ABC, $currentPlanID);
+			$this->form_validation->set_rules('ABC', 'ABC', 'trim|is_natural');
 		}
 
 		if (isset($_POST['source'])) {
-			$source = $this->input->post('source');
-			$this->admin_model->updateSource($source, $currentPlanID);
+			$this->form_validation->set_rules('source', 'source', 'trim|required');
 		}
 
 		if (isset($_POST['account'])) {
-			$account = $this->input->post('account');
-			$this->admin_model->updateAccount($account, $currentPlanID);
+			$this->form_validation->set_rules('account', 'account', 'trim|required');
 		}
 
 		if (!empty($_POST['abc_post_date']) && $_POST['abc_post_date'] != null) {
-			$abc_post_date = $this->input->post('abc_post_date');
-			$this->admin_model->update_abc_post_date($abc_post_date, $currentPlanID);
+			$this->form_validation->set_rules('abc_post_date', 'abc_post_date', 'trim');
 		}
 
 		if (!empty($_POST['award_notice_date']) && $_POST['award_notice_date'] != null) {
-			$award_notice_date = $this->input->post('award_notice_date');
-			$this->admin_model->update_award_notice_date($award_notice_date, $currentPlanID);
+			$this->form_validation->set_rules('award_notice_date', 'award_notice_date', 'trim');
 		}
 		
 		if (!empty($_POST['contract_signing_date']) && $_POST['contract_signing_date'] != null) {
-			$contract_signing_date = $this->input->post('contract_signing_date');
-			$this->admin_model->update_contract_signing_date($contract_signing_date, $currentPlanID);
+			$this->form_validation->set_rules('contract_signing_date', 'contract_signing_date', 'trim');
 		}
 
 		if (!empty($_POST['sub_open_date']) && $_POST['sub_open_date'] != null) {
-			$sub_open_date = $this->input->post('sub_open_date');
-			$this->admin_model->update_sub_open_date($sub_open_date, $currentPlanID);
+			$this->form_validation->set_rules('sub_open_date', 'sub_open_date', 'trim');
 		}
 
-		$this->session->set_flashdata('success', 'Plan Details Updated.');
+		if (!empty($_POST['remarks']) && $_POST['remarks'] != null) {
+			$this->form_validation->set_rules('remarks', 'Remark', 'trim');
+		}
+		
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-		redirect('admin/editPlanView');
+		
+		if ($this->form_validation->run()) {
+			if (!empty($_POST['date_added']) && $_POST['date_added'] != null) {
+				$date_added = $this->input->post('date_added');
+				$this->admin_model->updateDate_added($date_added, $currentPlanID);
+			}
+
+			if (!empty($_POST['year']) && $_POST['year'] != null) {
+				$year = $this->input->post('year');
+				$this->admin_model->updateProject_year($year, $currentPlanID);
+			}
+
+			if (!empty($_POST['year_funded']) && $_POST['year_funded'] != null) {
+				$year_funded = $this->input->post('year_funded');
+				$this->admin_model->updateProject_year_funded($year_funded, $currentPlanID);
+			}
+
+			if (!empty($_POST['project_no']) && $_POST['project_no'] != null) {
+				$project_no = $this->input->post('project_no');
+				$this->admin_model->updateProject_no($project_no, $currentPlanID);
+			}
+
+			if (!empty($_POST['project_title']) && $_POST['project_title'] != null) {
+				$project_title = $this->input->post('project_title');
+				$this->admin_model->updateProject_title($project_title, $currentPlanID);
+			}
+
+			if (isset($_POST['sector_name'])) {
+				$sector_id = $this->input->post('sector_name');
+				$this->admin_model->updateSector($sector_id, $currentPlanID);
+			}
+
+			if (isset($_POST['municipality'])) {
+				$municipality = $this->input->post('municipality');
+				$this->admin_model->updateMunicipality($municipality, $currentPlanID);
+			}
+
+			if (isset($_POST['barangay'])) {
+				$barangay = $this->input->post('barangay');
+				$this->admin_model->updateBarangay($barangay, $currentPlanID);
+			}
+
+			if (isset($_POST['type'])) {
+				$type = $this->input->post('type');
+				$this->admin_model->updateType($type, $currentPlanID);
+			}
+
+			if (isset($_POST['mode'])) {
+				$mode = $this->input->post('mode');
+				$this->admin_model->updateMode($mode, $currentPlanID);
+			}
+
+			if (!empty($_POST['ABC']) && $_POST['ABC'] != null) {
+				$ABC = $this->input->post('ABC');
+				$this->admin_model->updateABC($ABC, $currentPlanID);
+			}
+
+			if (isset($_POST['source'])) {
+				$source = $this->input->post('source');
+				$this->admin_model->updateSource($source, $currentPlanID);
+			}
+
+			if (isset($_POST['account'])) {
+				$account = $this->input->post('account');
+				$this->admin_model->updateAccount($account, $currentPlanID);
+			}
+
+			if (!empty($_POST['abc_post_date']) && $_POST['abc_post_date'] != null) {
+				$abc_post_date = $this->input->post('abc_post_date');
+				$this->admin_model->update_abc_post_date($abc_post_date, $currentPlanID);
+			}
+
+			if (!empty($_POST['award_notice_date']) && $_POST['award_notice_date'] != null) {
+				$award_notice_date = $this->input->post('award_notice_date');
+				$this->admin_model->update_award_notice_date($award_notice_date, $currentPlanID);
+			}
+			
+			if (!empty($_POST['contract_signing_date']) && $_POST['contract_signing_date'] != null) {
+				$contract_signing_date = $this->input->post('contract_signing_date');
+				$this->admin_model->update_contract_signing_date($contract_signing_date, $currentPlanID);
+			}
+
+			if (!empty($_POST['sub_open_date']) && $_POST['sub_open_date'] != null) {
+				$sub_open_date = $this->input->post('sub_open_date');
+				$this->admin_model->update_sub_open_date($sub_open_date, $currentPlanID);
+			}
+
+			if (!empty($_POST['remarks']) && $_POST['remarks'] != null) {
+				$remark = $this->input->post('remarks');
+				$this->admin_model->update_remark($remark, $currentPlanID);
+			}
+
+			$data['success'] = true;
+		}else{
+			foreach ($_POST as $key => $value) {
+				$data['messages'][$key] = form_error($key);
+			}
+		}
+		
+		echo json_encode($data);
 	}
 
 
@@ -1566,6 +1675,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/nav');
 		$this->load->view('admin/manageSectors', $data);
 		$this->load->view('admin/fragments/footer');
+	}
+
+	public function getSectorsByType(){
+		$sector_type = $this->input->get('sector_type');
+
+		$data['sectors'] = $this->admin_model->getSectorsByType($sector_type);
+
+		echo json_encode($data);
 	}
 
 	public function addSectors(){
