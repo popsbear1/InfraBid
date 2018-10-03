@@ -1782,6 +1782,39 @@ class Admin extends CI_Controller {
 		redirect('admin/editDocumentsView');
 	}
 
+	public function setCurrentSectorID(){
+		$sectorID = $this->input->post('sectorID');
+
+		$this->session->set_userdata('sector_id', $sectorID);
+
+		redirect('admin/editSectorsView');
+	}
+
+	public function editSectorsView(){
+		$currentSectorID = $this->session->userdata('sector_id');
+		$data['sectorDetail'] = $this->admin_model->getSectorDetails($currentSectorID);
+		$this->load->view('admin/fragments/head');
+		$this->load->view('admin/fragments/nav');
+		$this->load->view('admin/editSectors',$data);
+		$this->load->view('admin/fragments/footer');
+	}
+
+	public function editSectors(){
+		$currentSectorID = $this->session->userdata('sector_id');
+		if (!empty(trim($_POST['sector_name']))) {
+			$sector_name = $this->input->post('sector_name');
+			$this->admin_model->updateSectorDetails($sector_name,$currentSectorID);
+		}
+
+		if (!empty($_POST['sector_type'])) {
+			$sector_type = $this->input->post('sector_type');
+			$this->admin_model->updateSectorType($sector_type,$currentSectorID);
+		}
+
+		$this->session->set_flashdata('success', 'Sector Details Successfully Updated.');
+		redirect('admin/editSectorsView');
+	}
+
 	public function editObserversView(){
 		$setCurrentObserverID = $this->session->userdata('observer_id');
 		$data['observerDetail'] = $this->admin_model->getObserverDetails($setCurrentObserverID);
@@ -2122,6 +2155,20 @@ class Admin extends CI_Controller {
 
 		redirect('admin/manageDocumentsView');		
 
+	}
+
+	public function deactivateSectorType(){
+		$sector_id=$this->input->post('sector_id');
+		$this->admin_model->updateSectorTypeStatus($sector_id, 'deactivate');
+
+		redirect('admin/manageSectorsView');
+	}
+
+	public function activateSectorType(){
+		$sector_id=$this->input->post('sector_id');
+		$this->admin_model->updateSectorTypeStatus($sector_id, 'activate');
+
+		redirect('admin/manageSectorsView');
 	}
 
 	public function activateDocumentType(){

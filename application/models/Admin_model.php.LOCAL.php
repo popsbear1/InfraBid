@@ -537,7 +537,6 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->join('contractors', 'project_plan.contractor_id = contractors.contractor_id', 'left');
-			$this->db->join('sectors', 'project_plan.sector_id = sectors.sector_id', 'left');
 			$this->db->where('plan_id', $plan_id);
 
 			$query = $this->db->get();
@@ -788,21 +787,7 @@
 			return $query->result_array();
 		}
 
-<<<<<<< HEAD
 		public function getSectorDetails($currentSectorID){
-=======
-		public function getSectorsByType($sector_type){
-			$this->db->select('*');
-			$this->db->from('sectors');
-			$this->db->where('sector_type', $sector_type);
-
-			$query = $this->db->get();
-
-			return $query->result_array();
-		}
-
-		public function getSectorDetails($sector_id){
->>>>>>> d7f6c491ebf865342e7eaa845fdeab78309aa61b
 			$this->db->select('*');
 			$this->db->from('sectors');
 			$this->db->where('sector_id', $currentSectorID);
@@ -862,15 +847,13 @@
 	* All functions bellow are used to insert data on Database.
 	**/
 		//Function for inserting new project.
-	public function insertNewRegularProject($date_added, $project_year, $year_funded, $project_no, $project_title, $sector_id, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark){
+	public function insertNewRegularProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark){
 
 		$data = array(
 			'date_added' => $date_added,
 			'project_year' => $project_year,
-			'year_funded' => $year_funded,
 			'project_no' => $project_no,
 			'project_title' => $project_title,
-			'sector_id' => $sector_id,
 			'municipality_id' => $municipality,
 			'barangay_id' => $barangay,
 			'projtype_id' => $type,
@@ -908,15 +891,13 @@
 	}
 
 	
-	public function insertNewSupplementalProject($date_added, $project_year, $year_funded, $project_no, $project_title, $sector_id, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark){
+	public function insertNewSupplementalProject($date_added, $project_year, $project_no, $project_title, $municipality, $barangay, $type, $mode, $ABC, $source, $account, $abc_post_date, $sub_open_date, $award_notice_date, $contract_signing_date, $remark){
 
 		$data = array(
 			'date_added' => $date_added,
 			'project_year' => $project_year,
-			'year_funded' => $year_funded,
 			'project_no' => $project_no,
 			'project_title' => $project_title,
-			'sector_id' => $sector_id,
 			'municipality_id' => $municipality,
 			'barangay_id' => $barangay,
 			'projtype_id' => $type,
@@ -1128,15 +1109,6 @@
 		$this->db->update('project_plan', $data);
 	}
 
-	public function updateProject_year_funded($year_funded, $currentPlanID){
-		$data = array(
-			'year_funded' => $year_funded
-		);
-
-		$this->db->where('plan_id', $currentPlanID);
-		$this->db->update('project_plan', $data);
-	}
-
 	public function updateProject_no($project_no, $currentPlanID){
 		$data = array(
 			'project_no' => $project_no
@@ -1145,15 +1117,6 @@
 		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 
-	}
-
-	public function updateSector($sector_id, $currentPlanID){
-		$data = array(
-			'sector_id' => $sector_id
-		);
-
-		$this->db->where('plan_id', $currentPlanID);
-		$this->db->update('project_plan', $data);
 	}
 
 	public function updateProject_title($project_title, $currentPlanID){
@@ -1693,15 +1656,6 @@
 		);
 
 		$this->db->where('plan_id', $plan_id);
-		$this->db->update('project_plan', $data);
-	}
-
-	public function update_remark($remark, $currentPlanID){
-		$data = array(
-			'remark' => $remark
-		);
-
-		$this->db->where('plan_id', $currentPlanID);
 		$this->db->update('project_plan', $data);
 	}
 
