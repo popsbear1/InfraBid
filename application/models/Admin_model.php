@@ -788,9 +788,6 @@
 			return $query->result_array();
 		}
 
-<<<<<<< HEAD
-		public function getSectorDetails($currentSectorID){
-=======
 		public function getSectorsByType($sector_type){
 			$this->db->select('*');
 			$this->db->from('sectors');
@@ -801,8 +798,8 @@
 			return $query->result_array();
 		}
 
-		public function getSectorDetails($sector_id){
->>>>>>> d7f6c491ebf865342e7eaa845fdeab78309aa61b
+		public function getSectorDetails($currentSectorID){
+
 			$this->db->select('*');
 			$this->db->from('sectors');
 			$this->db->where('sector_id', $currentSectorID);
