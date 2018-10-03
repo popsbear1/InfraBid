@@ -49,9 +49,16 @@
                         <label class="radio-inline"><input class="sector_type_btn" type="radio" name="sector_type" value="office">Office</label>
                       </div>
                     </div>
-                    <select class="form-control" id="sector_name" name="sector_name">
-                      <option hidden disabled selected>Select Sector.....</option>
-                    </select>
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="button" id="sector_btn">
+                          <i class="fa fa-close"></i>
+                        </button>
+                      </div>
+                      <select class="form-control" id="sector_name" name="sector_name">
+                        <option hidden disabled selected>Select Sector.....</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label>Municipality <span style="color: red">* </span>:</label>
@@ -224,6 +231,10 @@
     startView: 'months',
     minViewMode: 'months',
     orientation: 'top auto'
+  });
+
+  $('#sector_btn').click(function(){
+    $('#sector_name').empty();
   });
 
   //Script for displaying/sorting/etc dagijy kwa barangays kanu
