@@ -1806,7 +1806,7 @@ class Admin extends CI_Controller {
 			$this->admin_model->updateSectorDetails($sector_name,$currentSectorID);
 		}
 
-		if (!empty($_POST['sector_type'])) {
+		if (isset($_POST['sector_type'])) {
 			$sector_type = $this->input->post('sector_type');
 			$this->admin_model->updateSectorType($sector_type,$currentSectorID);
 		}
@@ -2145,6 +2145,15 @@ class Admin extends CI_Controller {
 			$data['success'] = true;
 		}
 
+		echo json_encode($data);
+	}
+
+	public function deleteSectorType(){
+		$data['success'] = false;
+		$sector_id=$this->input->post('sector_id');
+		if ($this->admin_model->deleteSectorType($sector_id)){
+			$data['success'] = true;
+		}
 		echo json_encode($data);
 	}
 

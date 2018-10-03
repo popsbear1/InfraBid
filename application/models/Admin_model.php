@@ -1939,6 +1939,16 @@
 		}
 	}
 
+	public function deleteSectorType($sector_id){
+
+		$this->db->where('sector_id', $sector_id);
+		if($this->db->delete('sectors')){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public function deleteObservers($observer_id){
 
 		$this->db->where('observer_id', $observer_id);

@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <?php foreach ($sectors as $sector): ?>
-            <tr id="<?php echo 'document' . $sector['sector_id'] ?>">
+            <tr id="<?php echo 'sector' . $sector['sector_id'] ?>">
               <td class="text-center"><?php echo $sector['sector_name'] ?></td>
               <td class="text-center"><?php echo $sector['sector_type'] ?></td>
               <td class="text-center"><?php echo $sector['sector_status'] ?></td>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="btn-group">
-                  <form action="<?php echo base_url('admin/deleteDocumentType') ?>" method="POST" id="delete_document">
+                  <form action="<?php echo base_url('admin/deleteSectorType') ?>" method="POST" id="delete_sector">
                     <input type="text" name="sector_id" value="<?php echo $sector['sector_id']?>" hidden>
                       <button class="btn btn-danger" type="submit">Delete</button>                       
                   </form>
@@ -130,7 +130,7 @@
                   <select id="sector_type" name="sector_type" class="form-control">
                     <option hidden disabled selected>Choose Sector Type....</option>
                     <option value="office">Office</option>
-                    <option value="BarangayDevelopment">Barangay Development</option>
+                    <option value="barangay_development">Barangay Development</option>
                   </select>
                 </div>
               </div>
@@ -188,10 +188,10 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Documents</h4>
+        <h4 class="modal-title">Sectors</h4>
       </div>
       <div class="modal-body text-center">
-        <p>Successfully added Document!</p>
+        <p>Successfully added Sector!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -208,13 +208,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Documents</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Sectors</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-center">
-        <p>Error adding Document!</p>
+        <p>Error adding Sector!</p>
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -289,14 +289,14 @@
     });
   });
 
-  $(document).on('submit', '#delete_document', function(e){
+  $(document).on('submit', '#delete_sector', function(e){
     e.preventDefault();
 
     var form_name = $(this).attr('id');
     console.log(form_name);
-    var document_id =  $(this).find("input[name='document_id']").val();
-    console.log(document_id);
-    var row_id = 'document' + document_id;
+    var sector_id =  $(this).find("input[name='sector_id']").val();
+    console.log(sector_id);
+    var row_id = 'sector' + sector_id;
 
     $.ajax({
       type: 'POST',
