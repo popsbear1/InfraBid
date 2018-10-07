@@ -488,7 +488,7 @@
         			$yPosition = $this->pdf->GetY();
         			$xPosition = $this->pdf->GetX();
 					
-					$h = $height/$heightArray[$j];	        		
+					$h = round($height/$heightArray[$j], 0, PHP_ROUND_HALF_UP);	        		
 
 	        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'R');
 
@@ -549,14 +549,10 @@
 			for ($i=0; $i < sizeof($data); $i++) { 
 				$stringWidth = $this->pdf->GetStringWidth($data[$i]);
 				if ($stringWidth > $width[$i]) {
-					$count = 0;
-					$w = $stringWidth;
-					$y = $stringWidth;
-					while($y >= 0 || $y > -5){		
-						$y = $w - $width[$i];
-						$w = $y;
-						$count++;
-					}
+					$count = round(($stringWidth/$width[$i]), 0, PHP_ROUND_HALF_UP)+1;
+					array_push($rowCount, $count);
+				}else if($stringWidth == $width[$i]){
+					$count = $stringWidth/$width[$i];
 					array_push($rowCount, $count);
 				}else{
 					array_push($rowCount, 1);

@@ -261,7 +261,7 @@
 </div>
 
 <script>
-  var plan_data = '<?php echo json_encode($plans) ?>';
+  var plan_data = '<?php echo json_encode($plans, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>';
   var plans = JSON.parse(plan_data);
   $(document).ready( 
     function () {

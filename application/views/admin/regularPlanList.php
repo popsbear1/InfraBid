@@ -323,8 +323,9 @@
 </div>
 
 <script>
-  var plans_data = '<?php echo json_encode($plans) ?>';
+  var plans_data = '<?php echo json_encode($plans, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>';
   var plans = JSON.parse(plans_data);
+  console.log(plans);
   $(document).ready(function(){
       $('#filter_table').DataTable({
         'paging'      : false,
@@ -334,6 +335,7 @@
         'info'        : false,
         'autoWidth'   : false
       });
+
       $('#regular_plan_table').DataTable({
         data: plans,
         columns: [
