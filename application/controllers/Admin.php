@@ -196,7 +196,7 @@ class Admin extends CI_Controller {
 		}
 		$data['count_total']['total_abc'] = number_format($data['count_total']['total_abc'], 2);
 
-		echo json_encode($data);
+		echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	}
 
 	public function supplementalPlanListView(){
@@ -291,7 +291,7 @@ class Admin extends CI_Controller {
 		}
 		$data['count_total']['total_abc'] = number_format($data['count_total']['total_abc'], 2);
 
-		echo json_encode($data);
+		echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	}
 
 	public function ongoingProjectPlanView(){
@@ -386,7 +386,7 @@ class Admin extends CI_Controller {
 		}
 		$data['count_total']['total_abc'] = number_format($data['count_total']['total_abc'], 2);
 
-		echo json_encode($data);
+		echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	}
 
 
