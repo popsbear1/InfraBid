@@ -679,11 +679,16 @@ class Admin extends CI_Controller {
 
 	public function editPlanView(){
 		$plan_id = $this->session->userdata('plan_id_edit');
-		$data['project_type'] = $this->session->userdata('type_for_printing');
+		$data['project_type'] = $this->session->userdata('type_for_edit');
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['barangays'] = $this->admin_model->getBarangays();
 		$data['projTypes'] = $this->admin_model->getProjectType();
 		$data['sourceFunds'] = $this->admin_model->getRegularFunds();
+		if ($this->session->userdata('type_for_edit') == 'regular') {
+			$data['sourceFunds'] = $this->admin_model->getRegularFunds();
+		}else{
+			$data['sourceFunds'] = $this->admin_model->getSupplementalFunds();
+		}
 		$data['accounts'] = $this->admin_model->getActiveAccountClassification();
 		$data['modes'] = $this->admin_model->getProcurementMode();
 		$data['projectDetails'] = $this->admin_model->getPlanDetails($plan_id);
@@ -819,7 +824,7 @@ class Admin extends CI_Controller {
 		$plan_id = $this->input->get('plan_id');
 		$project_type = $this->input->get('project_type');
 		$this->session->set_userdata('plan_id_edit', $plan_id);
-		$this->session->set_userdata('type_for_printing', $project_type);
+		$this->session->set_userdata('type_for_edit', $project_type);
 
 		redirect('admin/editPlanView');
 

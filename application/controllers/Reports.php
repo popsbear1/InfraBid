@@ -165,7 +165,9 @@
 		    	);
 
 		    	$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', '', '8');
+		    	//echo (json_encode($heightArray));
 		    	$height = max($heightArray) * 5;
+		    	//echo (json_encode($height));
 		    	$lastCell = 'cell';
 		    	
 		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
@@ -548,8 +550,13 @@
 			$rowCount = array();
 			for ($i=0; $i < sizeof($data); $i++) { 
 				$stringWidth = $this->pdf->GetStringWidth($data[$i]);
+				$stringWidth = round($stringWidth,  0, PHP_ROUND_HALF_UP); 
 				if ($stringWidth > $width[$i]) {
-					$count = round(($stringWidth/$width[$i]), 0, PHP_ROUND_HALF_UP)+1;
+					
+					$r = $stringWidth % $width[$i];
+					$w = $stringWidth - $r;
+					$count = ($w / $width[$i]) + 1;
+
 					array_push($rowCount, $count);
 				}else if($stringWidth == $width[$i]){
 					$count = $stringWidth/$width[$i];
