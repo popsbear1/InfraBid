@@ -109,7 +109,7 @@ $config['head_title'] = 'Benguet Provinicial Government';
 |
 | Main page's Subitle
 */
-$config['head_subtitle'] = 'ANNUAL PROCUREMENT PLAN 2018';
+$config['head_subtitle'] = 'ANNUAL PROCUREMENT PLAN';
 
 /*
 | -------------------------------------------------------------------

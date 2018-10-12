@@ -74,16 +74,16 @@
 	        $this->pdf = new Pdf();
 	        $this->pdf->Add_Page('L',array(215.9, 330.2),0);
 	        $this->pdf->AliasNbPages();
+	        $this->pdf->SetAutoPageBreak('off');
 
 	        $this->tablehead();
-
-	        $this->pdf->setFont('Times', '', '8');
 
 	        $count = 1;
 	        $currentProjectType = $data[0]['project_type'];
 	        $this->projectTypeRow($data[0]['project_type']);
 	        $currentAccountClass = $data[0]['fund_id'];
 	        $this->fundNameRow($data[0]['source']);
+	        $abcTotal = 0;
 	        $mooeTotal = 0; 
 	        $coTotal = 0;
 	        $totalAbc = 0;
@@ -93,10 +93,17 @@
 	        $overallTotalMOOE = 0;
 	        $overallTotalCO = 0;
 
+	        $pageHeight = $this->pdf->GetPageHeight();
+
 		    for ( $i = 0; $i < sizeof($data); $i++) {
+		    	$currentYPosition = $this->pdf->GetY();
+		    	if (($pageHeight - $currentYPosition) < 35) {
+		    		$this->pdf->Add_Page('L',array(215.9, 330.2),0);
+		    		$this->tablehead();
+		    	}
 
 		    	if ($data[$i]['project_type'] != $currentProjectType) {
-		    		$this->subTotalRow($mooeTotal, $coTotal);
+		    		$this->subTotalRow($abcTotal, $mooeTotal, $coTotal);
 		    		$this->totalRow($totalAbc, $totalMOOE, $totalCO);
 		    		$this->projectTypeRow($data[$i]['project_type']);
 		    		$currentProjectType = $data[$i]['project_type'];
@@ -104,15 +111,17 @@
 			        $totalMOOE = 0;
 			        $totalCO = 0;
 			        $currentAccountClass = $data[$i]['fund_id'];
+			        $abcTotal = 0;
 		    		$mooeTotal = 0;
 		    		$coTotal = 0;
 		    	}else{
 		    		if ($data[$i]['fund_id'] != $currentAccountClass) {
 		    		
-			    		$this->subTotalRow($mooeTotal, $coTotal);
+			    		$this->subTotalRow($abcTotal, $mooeTotal, $coTotal);
 			    		$this->fundNameRow($data[$i]['source']);
 
 			    		$currentAccountClass = $data[$i]['fund_id'];
+			    		$abcTotal = 0;
 			    		$mooeTotal = 0;
 			    		$coTotal = 0;
 			    	}
@@ -164,38 +173,42 @@
 		    		30
 		    	);
 
-		    	$heightArray = $this->getFinalHight($rowWidth, $row, 'Times', '', '8');
-		    	//echo (json_encode($heightArray));
-		    	$height = max($heightArray) * 5;
-		    	//echo (json_encode($height));
-		    	$lastCell = 'cell';
-		    	
-		    	for ($j=0; $j < sizeof($rowWidth); $j++) { 
-	        		if ($heightArray[$j] > 1) {
-	        			$yPosition = $this->pdf->GetY();
-	        			$xPosition = $this->pdf->GetX();
-						
-						$h = $height/$heightArray[$j];	        		
+		    	$dataArray = $this->processData($rowWidth, $row, 'Times', '', '8');
 
-		        		$this->pdf->MultiCell($rowWidth[$j], $h, $row[$j], 1, 'C');
+		   		$dataArraySize = array();
 
-		        		
-		        		if (sizeof($rowWidth) - $j == 1) {
-		        			$lastCell = 'multiCell';
-		        		}else{
-		        			$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
-		        		}
-	        		}else{
-	        			$this->pdf->Cell($rowWidth[$j], $height, $row[$j], 1, 0, 'C');
-	        		}
-		    	}
+		   		for ($k=0; $k < sizeof($dataArray); $k++) { 
+		   			array_push($dataArraySize, sizeof($dataArray[$k]));
+		   		}
 
-		    	$count++;
+		   		$height = max($dataArraySize) * 5;
 
-		    	if ($lastCell == 'cell') {
-		    		$this->pdf->Ln();
-		    	}
+		   		for ($j=0; $j < sizeof($dataArray); $j++) {
+		   			$yPosition = $this->pdf->GetY();
+	        		$xPosition = $this->pdf->GetX(); 
+		   			if ($dataArraySize[$j] == 1) {
+		   				$this->pdf->Cell($rowWidth[$j], $height, $dataArray[$j][0], 1, 0, 'C');
+		   			}else{
 
+		   				$h = $height/$dataArraySize[$j];
+		   				for ($g=0; $g < sizeof($dataArray[$j]); $g++) { 
+		   					if ($g == 0) {
+		   						$this->pdf->Cell($rowWidth[$j], $h, $dataArray[$j][$g], 'LTR', 2, 'C');
+		   					}else if((sizeof($dataArray[$j])-1) == $g){
+		   						$this->pdf->Cell($rowWidth[$j], $h, $dataArray[$j][$g], 'LRB', 0, 'C');
+		   					}else{
+		   						$this->pdf->Cell($rowWidth[$j], $h, $dataArray[$j][$g], 'LR', 2, 'C');
+		   					}
+		   				}
+		   				$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+		   			}
+		   		}
+
+		   		$count++;
+
+		   		$this->pdf->Ln();
+
+		   		$abcTotal = $abcTotal + $data[$i]['abc'];
 		    	$mooeTotal = $mooeTotal + $data[$i]['mooe'];
 		    	$coTotal = $coTotal + $data[$i]['co'];
 
@@ -210,7 +223,7 @@
 		        	
 		    }
 
-		    $this->subTotalRow($mooeTotal, $coTotal);
+		    $this->subTotalRow($abcTotal, $mooeTotal, $coTotal);
 		    $this->totalRow($totalAbc, $totalMOOE, $totalCO);
 		    $this->grandTotalRow($overallTotalAbc, $overallTotalMOOE, $overallTotalCO);
 	        
@@ -290,11 +303,12 @@
 	        $yPosition = $this->pdf->GetY();
 
 	        $this->pdf->Cell(30, 20, 'REMARKS', 1, 0, 'C');
+	        $this->pdf->setFont('Times', '', '8');
 
 	        $this->pdf->Ln();
 		}
 
-		function subTotalRow($mooeTotal, $coTotal){
+		function subTotalRow($abcTotal, $mooeTotal, $coTotal){
 			
 			if ($mooeTotal > 0) {
 				$formatedMooeTotal = number_format($mooeTotal, 2);
@@ -319,7 +333,7 @@
 	    		'',
 	    		'',
 	    		'',
-	    		'',
+	    		number_format($abcTotal, 2),
 	    		$formatedMooeTotal,
 	    		$formatedCoTotal,
 	    		''
@@ -545,28 +559,95 @@
     		$this->pdf->Ln();
 		}
 
+		/**
+		+------------------------------
+		+ 1. Explode data to be placed in an array
+		+ 2. Check if string line is > the width given
+		+ 3. if >, empty the string and place current value of array 
+		*/
+
 		function getFinalHight($width, $data, $font, $emphasis, $size){
 			$this->pdf->setFont($font, $emphasis, $size);
 			$rowCount = array();
-			for ($i=0; $i < sizeof($data); $i++) { 
+			for ($i=0; $i < sizeof($data); $i++) {
+				
+				$lineCount = 1;
 				$stringWidth = $this->pdf->GetStringWidth($data[$i]);
-				$stringWidth = round($stringWidth,  0, PHP_ROUND_HALF_UP); 
-				if ($stringWidth > $width[$i]) {
-					
-					$r = $stringWidth % $width[$i];
-					$w = $stringWidth - $r;
-					$count = ($w / $width[$i]) + 1;
 
-					array_push($rowCount, $count);
-				}else if($stringWidth == $width[$i]){
-					$count = $stringWidth/$width[$i];
-					array_push($rowCount, $count);
-				}else{
-					array_push($rowCount, 1);
+				if ($stringWidth >= $width[$i]) {
+					$stringArray = explode(" ", $data[$i]);
+					$stringLine = '';
+					for ($j=0; $j < sizeof($stringArray); $j++) {
+						$stringLine = $stringLine . $stringArray[$j] . ' ';
+						$stringLineWidth = $this->pdf->GetStringWidth($stringLine);
+						if ($stringLineWidth >= $width[$i]) {
+							$lineCount++;
+							$stringLine = '';
+							$stringLine = $stringArray[$j] . ' ';  	
+						} 
+					}
 				}
+					
+
+				array_push($rowCount, $lineCount); 
+
 			}
 			return $rowCount;
 		}
+
+
+		/****
+		+-------------------------------------------------------------
+		+ 1. Get Data Explode
+		+ 2. 
+		+-------------------------------------------------------------
+		**/
+		function processData($width, $data, $font, $emphasis, $size){
+			$this->pdf->setFont($font, $emphasis, $size);
+			$processedData = array();
+			$dataArray = array();
+			$stringLine = '';
+
+			for ($i=0; $i < sizeof($data); $i++) { 
+				$explodedData = explode(' ', $data[$i]);
+				for ($j=0; $j < sizeof($explodedData); $j++) {
+					if ($this->pdf->GetStringWidth($explodedData[$j]) > $width[$i]) {
+						$splitString = str_split($explodedData[$j]);
+						$splitCut = '';
+						for ($n=0; $n < sizeof($splitString); $n++) {
+							$ss = $splitCut . $splitString[$n];  
+							if ($this->pdf->GetStringWidth($ss) >= $width[$i]) {
+							 	array_push($dataArray, $splitCut);
+							 	$splitCut = 0;
+							 	$splitCut = $splitString[$n];
+							}else{
+								$splitCut = $ss;
+							} 
+						}
+						if (!empty($splitCut)) {
+							array_push($dataArray, $splitCut);
+						}
+					}else{
+						$s = $stringLine . $explodedData[$j] . ' '; 
+						if ($this->pdf->GetStringWidth($s) >= $width[$i]) {
+							array_push($dataArray, $stringLine);
+							$stringLine = '';
+							$stringLine = $explodedData[$j] . ' ';
+						}else{
+							$stringLine = $s;
+						}
+					}
+				}
+				if (!empty($stringLine)) {
+					array_push($dataArray, $stringLine);
+				}
+				array_push($processedData, $dataArray);
+				$dataArray = array();
+				$stringLine = '';
+			}
+			return $processedData;
+		}
+
 	}
 
 ?>
