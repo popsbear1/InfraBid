@@ -177,9 +177,12 @@
 
 		   		$dataArraySize = array();
 
+
+
 		   		for ($k=0; $k < sizeof($dataArray); $k++) { 
 		   			array_push($dataArraySize, sizeof($dataArray[$k]));
 		   		}
+		   		//echo json_encode($dataArraySize);
 
 		   		$height = max($dataArraySize) * 5;
 
@@ -200,7 +203,9 @@
 		   						$this->pdf->Cell($rowWidth[$j], $h, $dataArray[$j][$g], 'LR', 2, 'C');
 		   					}
 		   				}
-		   				$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+		   				if ((sizeof($dataArray) - 1) != $j) {
+		   					$this->pdf->SetXY($xPosition + $rowWidth[$j], $yPosition);
+		   				}
 		   			}
 		   		}
 
