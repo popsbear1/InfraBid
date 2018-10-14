@@ -117,6 +117,7 @@ class Admin extends CI_Controller {
 		$data['sources'] = $this->admin_model->getRegularFunds();
 		$data['types'] = $this->admin_model->getProjectType();
 		$data['modes'] = $this->admin_model->getProcurementMode();
+		$data['sectors'] = $this->admin_model->getSectors();
 		$data['count_total'] = $this->admin_model->getRegularProjectPlanCountTotal($year, $mode, $status, $municipality,$source,$projecttype);
 		for($i=0; $i < count($data['plans']); $i++) {
 			if ($data['plans'][$i]['advertisement'] != null) {
@@ -515,7 +516,8 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
 		$this->form_validation->set_rules('year_funded', 'Year Funded', 'trim|required');
-		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|is_unique[project_plan.project_no]');
+		$this->form_validation->set_message('is_unique', 'This project number is already in use!');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('sector_name', 'sector_name', 'trim');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');
@@ -599,7 +601,8 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('date_added', 'Date', 'trim|required');
 		$this->form_validation->set_rules('year', 'Project year', 'trim|required|is_natural');
 		$this->form_validation->set_rules('year_funded', 'Year Funded', 'trim|required');
-		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required');
+		$this->form_validation->set_rules('project_no', 'Project Number', 'trim|required|is_unique[project_plan.project_no]');
+		$this->form_validation->set_message('is_unique', 'This project number is already in use!');
 		$this->form_validation->set_rules('project_title', 'Project Title', 'trim|required');
 		$this->form_validation->set_rules('sector_name', 'sector_name', 'trim');
 		$this->form_validation->set_rules('municipality', 'Municipality', 'trim|required');

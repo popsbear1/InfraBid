@@ -45,7 +45,7 @@
 		}
 
 		public function getRegularPlan($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -85,7 +85,7 @@
 		}
 
 		public function getRegularPlanForPrinting($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -125,7 +125,7 @@
 		}
 
 		public function getSupplementalPlan($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -165,7 +165,7 @@
 		}
 
 		public function getSupplementalPlanForPrinting($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -205,7 +205,7 @@
 		}
 
 		public function getOngoingProjectPlan($year, $apptype, $status, $municipality, $source, $type){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -248,7 +248,7 @@
 		}
 
 		public function getOngoingProjectPlanPrinting($year, $apptype, $status, $municipality, $source, $type){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_title, municipality, mode, abc_post_date, sub_open_date, award_notice_date, contract_signing_date, source, abc, classification, project_plan.fund_id, project_plan.project_type, project_plan.remark, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
