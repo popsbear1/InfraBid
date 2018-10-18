@@ -116,6 +116,35 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-lg-2 col-md-2 col-lg-offset-4">
+                <label for="year">Year Funded: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="year_funded_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <input type="text" id="year_funded" class="form-control input-sm" value="<?php echo $year ?>">
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2">
+                <label for="year">Sector: </label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" id="sector_btn">
+                      <i class="fa fa-close"></i>
+                    </button>
+                  </div>
+                  <select name="sector" id="sector" class="form-control input-sm">
+                    <option hidden disabled selected>Choose Sector</option>
+                    <?php foreach ($sectors as $sector): ?>
+                      <option value="<?php echo $sector['sector_id'] ?>"><?php echo $sector['sector_name'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 text-center" style="padding: 10px">
                 <div class="form-group">
                   <label><small>Action:</small></label>
@@ -144,10 +173,13 @@
                       <th class="text-center">NOTICE OF AWARD</th>
                       <th class="text-center">CONTRACT SIGNING</th>
                       <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Fund ID</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
                       <th class="text-center">Project Year</th>
                       <th class="text-center">Status</th>
+                      <th class="text-center">Sector</th>
+                      <th class="text-center">Sector ID</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -322,7 +354,6 @@
 <script>
   var plans_data = '<?php echo json_encode($plans, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>';
   var plans = JSON.parse(plans_data);
-  console.log(plans);
   $(document).ready(function(){
       $('#filter_table').DataTable({
         'paging'      : false,
@@ -350,6 +381,7 @@
           { data: "award_notice_date" },
           { data: "contract_signing_date" },
           { data: "source" },
+          { data: "fund_id" },
           { data: "type" },
           { data: "abc" },
           { data: "project_year" },
@@ -380,7 +412,14 @@
             }
           }
         ],
-        order: [[8, 'asc']],
+        columnDefs: [
+            {
+                "targets": [ 9 ],
+                "visible": false,
+                "searchable": false
+            }
+        ],
+        order: [[9, 'asc']],
         rowGroup: {
           startRender: null,
           endRender: function (rows, group) {
@@ -409,12 +448,31 @@
         orientation: 'bottom auto'
       });
 
+      $('#year_funded').datepicker({
+        autoclose: true,
+        format: 'yyyy',
+        startView: 'years',
+        minViewMode: 'years',
+        orientation: 'bottom auto'
+      });
+
+
       $('#year').attr('placeholder', 'yyyy');
+
+      $('#year_funded').attr('placeholder', 'yyyy');
   });
 
 
   $('#year_btn').click(function(){
     $('#year').val('');
+  });
+
+  $('#year_funded_btn').click(function(){
+    $('#year_funded').val('');
+  });
+
+  $('#sector_btn').click(function(){
+    $('#sector').val('');
   });
 
   $('#mode_btn').click(function(){
@@ -445,89 +503,95 @@
     var municipality = $('#municipality').val();
     var source = $('#source').val();
     var type = $('#type').val();
+    var year_funded = $('#year_funded').val();
+    var sector = $('#sector').val();
 
     $('#supplemental_plan_table').DataTable().destroy();
 
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url("admin/getFilteredSupplementalPlanData") ?>',
-      data: { year: year, mode: mode, status: status, municipality: municipality, source: source, type: type},
-      dataType: 'json'
-    }).done(function(response){
-      $('#project_count').html(response.count_total['project_count']);
-      $('#total_abc').html(response.count_total['total_abc']);
-      $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
-      var table = $('#supplemental_plan_table').DataTable({
-        data: response.plans,
-        columns: [
-            { data: "project_no" },
-            { data: "project_title" },
-            { 
-              data: null,
-              render: function(data, type, row){
-                return data.barangay + ', ' + data.municipality;
+    if (sector) {
+
+    }else{
+      $.ajax({
+        type: 'GET',
+        url: '<?php echo base_url("admin/getFilteredSupplementalPlanData") ?>',
+        data: { year: year, mode: mode, status: status, municipality: municipality, source: source, type: type},
+        dataType: 'json'
+      }).done(function(response){
+        $('#project_count').html(response.count_total['project_count']);
+        $('#total_abc').html(response.count_total['total_abc']);
+        $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
+        var table = $('#supplemental_plan_table').DataTable({
+          data: response.plans,
+          columns: [
+              { data: "project_no" },
+              { data: "project_title" },
+              { 
+                data: null,
+                render: function(data, type, row){
+                  return data.barangay + ', ' + data.municipality;
+                },
+                editField: ["barangay", "municipality"]
               },
-              editField: ["barangay", "municipality"]
-            },
-            { data: "mode" },
-            { data: "abc_post_date" },
-            { data: "sub_open_date" },
-            { data: "award_notice_date" },
-            { data: "contract_signing_date" },
-            { data: "source" },
-            { data: "type" },
-            { data: "abc" },
-            { data: "project_year" },
-            { data: "project_status"},
-            { 
-              data: null,
-              render: function ( data, type, row ) {
-                if (data.project_status == 'pending') {
-                  return  '<form method="GET" action="<?php echo base_url('admin/setIDForEdit') ?>">' +
-                            '<input name="project_type" value="' + data.project_type + '" hidden>' +
-                            '<div class="btn-group">' +
-                              '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                                '<i class="fa fa-pencil"></i>' +
+              { data: "mode" },
+              { data: "abc_post_date" },
+              { data: "sub_open_date" },
+              { data: "award_notice_date" },
+              { data: "contract_signing_date" },
+              { data: "source" },
+              { data: "type" },
+              { data: "abc" },
+              { data: "project_year" },
+              { data: "project_status"},
+              { 
+                data: null,
+                render: function ( data, type, row ) {
+                  if (data.project_status == 'pending') {
+                    return  '<form method="GET" action="<?php echo base_url('admin/setIDForEdit') ?>">' +
+                              '<input name="project_type" value="' + data.project_type + '" hidden>' +
+                              '<div class="btn-group">' +
+                                '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                                  '<i class="fa fa-pencil"></i>' +
+                                '</button>' +
+                                '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
+                                  '<i class="fa fa-trash"></i>' +
+                                '</button>' +
+                              '</div>' +
+                            '</form>';
+                  }else{
+                    return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                              '<input type="text" name="prev_loc" value="supplementalPlanView" hidden/>' +
+                              '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                                '<i class="fa fa-eye"></i>' +
                               '</button>' +
-                              '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
-                                '<i class="fa fa-trash"></i>' +
-                              '</button>' +
-                            '</div>' +
-                          '</form>';
-                }else{
-                  return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
-                            '<input type="text" name="prev_loc" value="supplementalPlanView" hidden/>' +
-                            '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
-                              '<i class="fa fa-eye"></i>' +
-                            '</button>' +
-                          '</form>';
+                            '</form>';
+                  }
                 }
               }
-            }
-        ],
-        order: [[8, 'asc']],
-        rowGroup: {
-          startRender: null,
-          endRender: function (rows, group) {
-            var total = rows
-            .data()
-            .pluck('abc')
-            .reduce( function (a, b) {
-              return a + b*1;
-            }, 0);
+          ],
+          order: [[8, 'asc']],
+          rowGroup: {
+            startRender: null,
+            endRender: function (rows, group) {
+              var total = rows
+              .data()
+              .pluck('abc')
+              .reduce( function (a, b) {
+                return a + b*1;
+              }, 0);
 
-            return $('<tr/>')
-            .append('<td colspan="10"> Total for ' + group + '</td>')
-            .append('<td>' + total + '</td>')
-            .append('<td/>')
-            .append('<td/>')
-            .append('<td/>');
-          },
-          dataSrc: 'source'
-        }
-      });
+              return $('<tr/>')
+              .append('<td colspan="10"> Total for ' + group + '</td>')
+              .append('<td>' + total + '</td>')
+              .append('<td/>')
+              .append('<td/>')
+              .append('<td/>');
+            },
+            dataSrc: 'source'
+          }
+        });
 
-    })
+      })
+    }
   });
 
   $(document).on('click', '.delete_btn', function(){
