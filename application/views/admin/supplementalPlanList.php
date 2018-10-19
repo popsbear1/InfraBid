@@ -176,6 +176,7 @@
                       <th class="text-center">Fund ID</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">abc</th>
                       <th class="text-center">Project Year</th>
                       <th class="text-center">Status</th>
                       <th class="text-center">Sector</th>
@@ -383,9 +384,12 @@
           { data: "source" },
           { data: "fund_id" },
           { data: "type" },
+          { data: 'formated_abc' },
           { data: "abc" },
           { data: "project_year" },
           { data: "project_status"},
+          { data: "sector_name" },
+          { data: "sector_id" },
           { 
             data: null,
             render: function ( data, type, row ) {
@@ -415,6 +419,26 @@
         columnDefs: [
             {
                 "targets": [ 9 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 12 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 14 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 15 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 16 ],
                 "visible": false,
                 "searchable": false
             }
@@ -508,18 +532,17 @@
 
     $('#supplemental_plan_table').DataTable().destroy();
 
-    if (sector) {
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo base_url("admin/getFilteredSupplementalPlanData") ?>',
+      data: { year: year, mode: mode, status: status, municipality: municipality, source: source, type: type, year_funded: year_funded, sector: sector},
+      dataType: 'json'
+    }).done(function(response){
+      $('#project_count').html(response.count_total['project_count']);
+      $('#total_abc').html(response.count_total['total_abc']);
+      $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
 
-    }else{
-      $.ajax({
-        type: 'GET',
-        url: '<?php echo base_url("admin/getFilteredSupplementalPlanData") ?>',
-        data: { year: year, mode: mode, status: status, municipality: municipality, source: source, type: type},
-        dataType: 'json'
-      }).done(function(response){
-        $('#project_count').html(response.count_total['project_count']);
-        $('#total_abc').html(response.count_total['total_abc']);
-        $('#total_abc_word_format').html("(" + response.count_total['total_abc_word_format'] + ")");
+      if (sector != null) {
         var table = $('#supplemental_plan_table').DataTable({
           data: response.plans,
           columns: [
@@ -538,10 +561,14 @@
               { data: "award_notice_date" },
               { data: "contract_signing_date" },
               { data: "source" },
+              { data: "fund_id" },
               { data: "type" },
+              { data: "formated_abc" },
               { data: "abc" },
               { data: "project_year" },
               { data: "project_status"},
+              { data: "sector_name" },
+              { data: "sector_id" },
               { 
                 data: null,
                 render: function ( data, type, row ) {
@@ -568,7 +595,124 @@
                 }
               }
           ],
-          order: [[8, 'asc']],
+          columnDefs: [
+              {
+                  "targets": [ 9 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 12 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 14 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 15 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 16 ],
+                  "visible": false,
+                  "searchable": false
+              }
+          ],
+          order: [[14, 'asc']],
+          rowGroup: {
+            startRender: function (rows, group) {
+
+              return $('<tr/>')
+              .prepend('<td colspan="17">' + group + '</td>')
+            },
+            dataSrc: 'sector_name'
+          }
+        });
+      }else{
+        var table = $('#supplemental_plan_table').DataTable({
+          data: response.plans,
+          columns: [
+              { data: "project_no" },
+              { data: "project_title" },
+              { 
+                data: null,
+                render: function(data, type, row){
+                  return data.barangay + ', ' + data.municipality;
+                },
+                editField: ["barangay", "municipality"]
+              },
+              { data: "mode" },
+              { data: "abc_post_date" },
+              { data: "sub_open_date" },
+              { data: "award_notice_date" },
+              { data: "contract_signing_date" },
+              { data: "source" },
+              { data: "fund_id" },
+              { data: "type" },
+              { data: "formated_abc" },
+              { data: "abc" },
+              { data: "project_year" },
+              { data: "project_status"},
+              { data: "sector_name" },
+              { data: "sector_id" },
+              { 
+                data: null,
+                render: function ( data, type, row ) {
+                  if (data.project_status == 'pending') {
+                    return  '<form method="GET" action="<?php echo base_url('admin/setIDForEdit') ?>">' +
+                              '<input name="project_type" value="' + data.project_type + '" hidden>' +
+                              '<div class="btn-group">' +
+                                '<button class="btn btn-primary btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                                  '<i class="fa fa-pencil"></i>' +
+                                '</button>' +
+                                '<button class="btn btn-danger btn-sm delete_btn" type="button" name="plan_id" value="' + data.plan_id + ',' + data.project_status + ',' + data.project_title + ',' + data.project_type + '">' +
+                                  '<i class="fa fa-trash"></i>' +
+                                '</button>' +
+                              '</div>' +
+                            '</form>';
+                  }else{
+                    return '<form method="POST" action="<?php echo base_url('admin/setCurrentPlanID') ?>">' +
+                              '<input type="text" name="prev_loc" value="supplementalPlanView" hidden/>' +
+                              '<button class="btn btn-info btn-sm" type="submit" name="plan_id" value="' + data.plan_id + '">' +
+                                '<i class="fa fa-eye"></i>' +
+                              '</button>' +
+                            '</form>';
+                  }
+                }
+              }
+          ],
+          columnDefs: [
+              {
+                  "targets": [ 9 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 12 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 14 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 15 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 16 ],
+                  "visible": false,
+                  "searchable": false
+              }
+          ],
+          order: [[9, 'asc']],
           rowGroup: {
             startRender: null,
             endRender: function (rows, group) {
@@ -589,9 +733,10 @@
             dataSrc: 'source'
           }
         });
+      }
 
-      })
-    }
+    })
+
   });
 
   $(document).on('click', '.delete_btn', function(){

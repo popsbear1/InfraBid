@@ -440,6 +440,11 @@
                 "targets": [ 15 ],
                 "visible": false,
                 "searchable": false
+            },
+            {
+                "targets": [ 16 ],
+                "visible": false,
+                "searchable": false
             }
         ],
         order: [[9, 'asc']],
@@ -561,6 +566,7 @@
               { data: 'source' },
               { data: "fund_id" },
               { data: 'type' },
+              { data: 'formated_abc' },
               { data: 'abc' },
               { data: 'project_year' },
               { data: 'project_status' },
@@ -594,7 +600,6 @@
           ],
           order: [[14, 'asc']],
           rowGroup: {
-            startRender: null,
             startRender: function (rows, group) {
 
               return $('<tr/>')
@@ -609,12 +614,22 @@
                   "searchable": false
               },
               {
+                  "targets": [ 12 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
                   "targets": [ 14 ],
                   "visible": false,
                   "searchable": false
               },
               {
                   "targets": [ 15 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 16 ],
                   "visible": false,
                   "searchable": false
               }
@@ -641,6 +656,7 @@
               { data: 'source' },
               { data: "fund_id" },
               { data: 'type' },
+              { data: 'formated_abc' },
               { data: 'abc' },
               { data: 'project_year' },
               { data: 'project_status' },
@@ -679,12 +695,22 @@
                   "searchable": false
               },
               {
+                  "targets": [ 12 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
                   "targets": [ 14 ],
                   "visible": false,
                   "searchable": false
               },
               {
                   "targets": [ 15 ],
+                  "visible": false,
+                  "searchable": false
+              },
+              {
+                  "targets": [ 16 ],
                   "visible": false,
                   "searchable": false
               }

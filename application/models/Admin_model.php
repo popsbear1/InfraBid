@@ -133,8 +133,8 @@
 			return $query->result_array();
 		}
 
-		public function getSupplementalPlan($year, $mode, $status, $municipality,$source,$projecttype){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay');
+		public function getSupplementalPlan($year, $mode, $status, $municipality, $source, $projecttype, $year_funded, $sector){
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, project_plan.fund_id, funds.source, projtype.type, project_plan.abc, FORMAT(project_plan.abc, 2) as formated_abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay, project_plan.sector_id, sectors.sector_name');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');
@@ -143,9 +143,18 @@
 			$this->db->join('funds', 'project_plan.fund_id = funds.fund_id');
 			$this->db->join('account_classification', 'project_plan.account_id = account_classification.account_id');
 			$this->db->join('procact', 'project_plan.plan_id = procact.plan_id');
+			$this->db->join('sectors','project_plan.sector_id = sectors.sector_id', 'left');
 			$this->db->where('project_plan.project_type', 'supplementary');
 			if ($year != null) {
 				$this->db->where('project_year', $year);
+			}
+
+			if ($year_funded != null) {
+				$this->db->where('year_funded', $year_funded);
+			}
+
+			if ($sector != null) {
+				$this->db->where('project_plan.sector_id', $sector);
 			}
 
 			if ($mode != null) {

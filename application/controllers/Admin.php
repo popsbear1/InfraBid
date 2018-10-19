@@ -217,8 +217,10 @@ class Admin extends CI_Controller {
 		$municipality = null;
 		$source = null;
 		$projecttype = null;
+		$year_funded = null;
+		$sector = null;
 		$data['year'] = date('Y');
-		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $projecttype);
+		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $projecttype, $year_funded, $sector);
 		$data['municipalities'] = $this->admin_model->getMunicipalities();
 		$data['sources'] = $this->admin_model->getSupplementalFunds();
 		$data['types'] = $this->admin_model->getProjectType();
@@ -259,6 +261,8 @@ class Admin extends CI_Controller {
 		$municipality = $this->input->get('municipality');
 		$source = $this->input->get('source');
 		$type = $this->input->get('type');
+		$year_funded = $this->input->get('year_funded');
+		$sector = $this->input->get('sector');
 
 		if (empty($year)) {
 			$year = null;
@@ -279,7 +283,15 @@ class Admin extends CI_Controller {
 			$type = null;
 		}
 
-		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $type);
+		if (empty($year_funded)) {
+			$year_funded  = null;
+		}
+
+		if (empty($sector)) {
+			$sector = null;
+		}
+
+		$data['plans'] = $this->admin_model->getSupplementalPlan($year, $mode, $status, $municipality, $source, $type, $year_funded, $sector);
 
 		$data['count_total'] = $this->admin_model->getSupplementalProjectPlanCountTotal($year, $mode, $status, $municipality, $source, $type);
 		for($i=0; $i < count($data['plans']); $i++) {
