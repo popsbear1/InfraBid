@@ -223,7 +223,7 @@
 		}
 
 		public function getOngoingProjectPlan($year, $apptype, $status, $municipality, $source, $type){
-			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, funds.source, projtype.type, project_plan.abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay');
+			$this->db->select('project_plan.plan_id, project_plan.project_no, project_plan.project_title, , project_plan.status as project_status, municipalities.municipality, procurement_mode.mode, project_plan.abc_post_date, project_plan.sub_open_date, project_plan.award_notice_date, project_plan.contract_signing_date, project_plan.fund_id, funds.source, projtype.type, project_plan.abc, FORMAT(project_plan.abc, 2) as formated_abc, project_plan.project_year, procact.advertisement, procact.open_bid, procact.award_notice, procact.contract_signing, project_plan.project_type, barangays.barangay');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');

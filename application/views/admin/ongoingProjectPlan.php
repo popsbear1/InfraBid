@@ -136,8 +136,10 @@
                       <th class="text-center">NOTICE OF AWARD</th>
                       <th class="text-center">CONTRACT SIGNING</th>
                       <th class="text-center">Source of Fund</th>
+                      <th class="text-center">Fund id</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
+                      <th class="text-center">abc</th>
                       <th class="text-center">Project Year</th>
                       <th class="text-center">Status</th>
                       <th class="text-center">Edit</th>
@@ -291,7 +293,9 @@
             { data: 'award_notice_date' },
             { data: 'contract_signing_date' },
             { data: 'source' },
+            { data: 'fund_id' },
             { data: 'type' },
+            { data: 'formated_abc' },
             { data: 'abc' },
             { data: 'project_year' },
             { data: 'project_status'},
@@ -307,7 +311,19 @@
               }
             }
         ],
-        order: [[8, 'asc']],
+        columnDefs: [
+          {
+                "targets": [ 9 ],
+                "visible": false,
+                "searchable": false
+          },
+          {
+              "targets": [ 12 ],
+              "visible": false,
+              "searchable": false
+          }
+        ],
+        order: [[9, 'asc']],
         rowGroup: {
           startRender: null,
           endRender: function (rows, group) {
@@ -320,7 +336,7 @@
 
             return $('<tr/>')
             .append('<td colspan="10"> Total for ' + group + '</td>')
-            .append('<td>' + total + '</td>')
+            .append('<td>' + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td>')
             .append('<td/>')
             .append('<td/>')
             .append('<td/>');
@@ -430,7 +446,7 @@
 
             return $('<tr/>')
             .append('<td colspan="10"> Total for ' + group + '</td>')
-            .append('<td>' + total + '</td>')
+            .append('<td>' + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td>')
             .append('<td/>')
             .append('<td/>')
             .append('<td/>');

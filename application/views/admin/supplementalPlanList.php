@@ -456,7 +456,7 @@
 
             return $('<tr/>')
             .append('<td colspan="10"> Total for ' + group + '</td>')
-            .append('<td>' + total + '</td>')
+            .append('<td>' + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td>')
             .append('<td/>')
             .append('<td/>')
             .append('<td/>');
@@ -725,7 +725,7 @@
 
               return $('<tr/>')
               .append('<td colspan="10"> Total for ' + group + '</td>')
-              .append('<td>' + total + '</td>')
+              .append('<td>' + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td>')
               .append('<td/>')
               .append('<td/>')
               .append('<td/>');
