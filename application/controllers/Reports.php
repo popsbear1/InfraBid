@@ -143,7 +143,7 @@
 		    		$count,
 		    		$data[$i]['project_no'], 
 		    		$data[$i]['project_title'], 
-		    		$data[$i]['municipality'], 
+		    		$data[$i]['barangay'] . ', ' . $data[$i]['municipality'], 
 		    		$data[$i]['mode'], 
 		    		$data[$i]['abc_post_date'], 
 		    		$data[$i]['sub_open_date'], 
