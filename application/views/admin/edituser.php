@@ -37,28 +37,23 @@
       <form id="editUsersForm" method="POST" action="<?php echo base_url('admin/editUsers') ?>" data-parsley-validate class="form-horizontal form-label-left">
 
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
-            <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12" required>
+            <input type="text" step="any"  id="firstname" placeholder="<?php echo $userDetails['first_name']; ?>" name="firstname" class="form-control col-md-7 col-xs-12">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Middle Name
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">Middle Name</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" step="any"  id="middlename" placeholder="<?php echo $userDetails['middle_name']; ?>" name="middlename" class="form-control col-md-7 col-xs-12">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name  
-            <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12" required>
+            <input type="text" step="any"  id="lastname" placeholder="<?php echo $userDetails['last_name']; ?>" name="lastname" class="form-control col-md-7 col-xs-12">
           </div>
         </div>
 
@@ -76,6 +71,21 @@
             </select>
           </div>
         </div>
+        
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="username" placeholder="<?php echo $userDetails['username']; ?>" name="username" class="form-control col-md-7 col-xs-12">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" step="any"  id="password" placeholder="<?php echo $userDetails['password']; ?>" name="password" class="form-control col-md-7 col-xs-12">
+          </div>
+        </div>
+
       </form> 
     </div>
     <div class="box-footer text-center">
@@ -125,6 +135,8 @@
          $('#middleN').html($('#middlename').val());
          $('#lastN').html($('#lastname').val());
          $('#userT').html($('#usertype').val());
+         $('#user_name').html($('#username').val());
+         $('#user_pass').html($('#password').val());
        });
 
       });
@@ -162,6 +174,14 @@
                 <tr>
                   <td>User Type</td>
                   <td><span id="userT"></span></td>
+                </tr>
+                <tr>
+                  <td>Username</td>
+                  <td><span id="user_name"></span></td>
+                </tr>
+                <tr>
+                  <td>Password</td>
+                  <td><span id="user_pass"></span></td>
                 </tr>
               </tbody>
             </table>

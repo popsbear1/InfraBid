@@ -343,7 +343,7 @@
 		}
 
 		public function getBidDisqualificationReports(){
-			$this->db->select('*, concat(first_name, " ", middle_name, " ", last_name) as userName, project_bidders.proposed_bid as contractor_bid');
+			$this->db->select('*, concat(first_name, " ", middle_name, " ", last_name) as userName, project_bidders.proposed_bid as contractor_bid, project_logs.remark as dis_remark');
 			$this->db->from('disqualification_records');
 			$this->db->join('project_bidders', 'disqualification_records.project_bid = project_bidders.project_bid');
 			$this->db->join('project_logs', 'disqualification_records.project_log_id = project_logs.project_log_id');

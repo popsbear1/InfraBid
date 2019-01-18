@@ -97,7 +97,7 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label>Approved Budget Cost (ABC) <span style="color: red">* </span>:</label>
+                    <label>Approved Budget Cost (ABC) <span style="color: red">* </span>: <small>(Decimal Format)</small></label>
                     <input type="text" id="ABC" value="" name="ABC"  class="form-control" placeholder="Input ABC here ... ">
                   </div>
                   <div class="form-group">

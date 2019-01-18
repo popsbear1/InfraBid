@@ -547,7 +547,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
 		$this->form_validation->set_rules('mode', 'Mode of Procurement', 'trim|required');
-		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|is_natural');
+		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|decimal');
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
 		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
 		$this->form_validation->set_rules('abc_post_date', 'abc/post of ib/rei', 'trim|required');
@@ -632,7 +632,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('barangay', 'Barangay', 'trim|required');
 		$this->form_validation->set_rules('type', 'Project Type', 'trim|required');
 		$this->form_validation->set_rules('mode', 'Mode of Procurement', 'trim|required');
-		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|is_natural');
+		$this->form_validation->set_rules('ABC', 'Approval Budget Cost(ABC)', 'trim|required|decimal');
 		$this->form_validation->set_rules('source', 'Source of Fund', 'trim|required');
 		$this->form_validation->set_rules('account', 'Account Classification', 'trim|required');
 		$this->form_validation->set_rules('abc_post_date', 'abc/post of ib/rei', 'trim|required');
@@ -1363,6 +1363,14 @@ class Admin extends CI_Controller {
 		if(!empty($_POST['usertype'])) {
 			$usertype = $this->input->post('usertype');
 			$this->admin_model->updateUserType($usertype, $userID);
+		}
+		if(!empty($_POST['username'])) {
+			$username = $this->input->post('username');
+			$this->admin_model->updateUsername($username, $userID);
+		}
+		if(!empty($_POST['password'])) {
+			$password = $this->input->post('password');
+			$this->admin_model->updatePassword($password, $userID);
 		}
 
 		$this->session->set_flashdata('success', 'Successfully Updated.');

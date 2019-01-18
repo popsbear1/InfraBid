@@ -30,7 +30,7 @@
               <td><?php echo $record['businessname'] . ' - ' . $record['owner'] ?></td>
               <td><?php echo $record['project_no'] . ' - ' . $record['project_title'] ?></td>
               <td><?php echo date_format(date_create($record['log_date']), 'M-d-y') ?></td>
-              <td><?php echo $record['remark'] ?></td>
+              <td><?php echo $record['dis_remark'] ?></td>
               <td><?php echo $record['userName'] ?></td>
               <td><?php echo number_format($record['abc'], 2) ?></td>
               <td><?php echo number_format($record['contractor_bid'], 2) ?></td>

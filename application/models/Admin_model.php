@@ -694,7 +694,6 @@
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where('user_id', $userID);
-			$this->db->order_by('last_name ASC');
 			$query = $this->db->get();
 
 			return $query->row_array();
@@ -1332,6 +1331,24 @@
 	public function updateUserType($usertype, $userID){
 		$data = array(
 			'user_type' => $usertype
+		);
+
+		$this->db->where('user_id', $userID);
+		$this->db->update('users', $data);
+	}
+
+	public function updateUsername($username, $userID){
+		$data = array(
+			'username' => $username
+		);
+
+		$this->db->where('user_id', $userID);
+		$this->db->update('users', $data);
+	}
+
+	public function updatePassword($password, $userID){
+		$data = array(
+			'password' => $password
 		);
 
 		$this->db->where('user_id', $userID);
