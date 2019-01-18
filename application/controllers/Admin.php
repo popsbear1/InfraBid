@@ -902,7 +902,7 @@ class Admin extends CI_Controller {
 		}
 
 		if (!empty($_POST['ABC']) && $_POST['ABC'] != null) {
-			$this->form_validation->set_rules('ABC', 'ABC', 'trim|is_natural');
+			$this->form_validation->set_rules('ABC', 'ABC', 'trim|decimal');
 		}
 
 		if (isset($_POST['source'])) {
