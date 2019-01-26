@@ -85,7 +85,6 @@ class Doctrack extends CI_Controller {
 		$plan_id = $this->input->post('plan_id');
 
 		$data['plan_details'] = $this->doctrack_model->getProjectPlanDetails($plan_id);
-
 		echo json_encode($data);
 	}
 

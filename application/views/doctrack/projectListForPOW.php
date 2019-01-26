@@ -89,76 +89,89 @@
         </div>
       </div>
       <div class="modal-body">
-        <div style="background-color:#D76969; text-align: center; padding: 7px 10px; margin-bottom: 5px; ">
-          <h6>Project Plan Details</h6>
+        <div style="background-color:#a8aeaf; text-align: center; padding: 7px 10px; margin-bottom: 5px; ">
+          <h6><strong>Project Plan Details</strong></h6>
         </div>
         <div class="form-horizontal well">
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Date Added: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="date_added"></p>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2 col-sm-2"><small>Project Title: </small></label>
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                  <textarea class="form-control" id="project_title" rows="3" disabled="" style="resize: none">
+                      
+                  </textarea>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Project Year: </label>
+          <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="project_year"></p>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Project Number: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="project_number"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Location: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="location"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Project Year: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="project_year"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Type of Project: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="type_project"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Account Classification: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="account_classicifation"></p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Project Number: </label>
             <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="project_number"></p>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Date Added: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="date_added"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Mode of Procurement: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="mode_procurement"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Approved Budget Cost: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="approved_budget_cost"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Source of Fund: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="source_fund"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-5 col-md-5 col-sm-5"><small>Project Classification: </small></label>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                  <p class="form-control" id="project_type"></p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Project Title</label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="project_title"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Location: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="location"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Type of Project: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="type_project"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Mode of Procurement: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="mode_procurement"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Approved Budget Cost: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="approved_budget_cost"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Source of Fund: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="source_fund"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Account Classification: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="account_classicifation"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-lg-3 col-md-3 col-sm-3">Project Type: </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <p class="form-control" id="project_type"></p>
-            </div>
-          </div>
+          </div>  
+          
         </div>
       </div>
       <div class="modal-footer">      

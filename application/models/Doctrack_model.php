@@ -12,7 +12,7 @@
 		}
 
 		public function getProjectPlanDetails($plan_id){
-			$this->db->select('*');
+			$this->db->select('*, DATE_FORMAT(date_added, "%M %d %Y") as date_added, FORMAT(abc, 2) as abc');
 			$this->db->from('project_plan');
 			$this->db->join('municipalities', 'project_plan.municipality_id = municipalities.municipality_id');
 			$this->db->join('barangays', 'project_plan.barangay_id = barangays.barangay_id');

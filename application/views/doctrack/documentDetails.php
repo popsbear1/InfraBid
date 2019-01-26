@@ -79,14 +79,14 @@
                   </div>
                   <div style="padding: 7px 10px;margin:0 5px 0 5px; border-width: 1px;border-style: groove;">               
                     <div class="row">
-                      <div class="col-lg-4 col-md-4 col-sm-4">
+                      <div class="col-lg-8 col-md-8 col-sm-8">
                         <div class="form-group ">
                           <label>Project Number:</label>
                           <p class="form-control"><?php echo $projectdetails['project_no'] ?></p>
                         </div> 
                         <div class="form-group">
                             <label>Project Title:</label>
-                            <p class="form-control"><?php echo $projectdetails['project_title'] ?></p>
+                            <textarea class="form-control" rows="7" style="resize: none"><?php echo $projectdetails['project_title'] ?></textarea>
                         </div>
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-4">
@@ -98,8 +98,6 @@
                           <label>Contractor's Name:</label>
                           <p class="form-control"><?php echo $projectdetails['owner'] ?></p>
                         </div>
-                      </div>
-                      <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="form-group">
                           <label>Contractor's Address:</label>
                           <p class="form-control"><?php echo $projectdetails['address'] ?></p>
