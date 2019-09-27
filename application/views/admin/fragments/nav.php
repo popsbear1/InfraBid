@@ -86,7 +86,7 @@
                   </p>
                 </li>
                 <!-- Menu Footer-->
-                <li class="user-footer bg-primary">
+                <li class="user-footer bg-info">
                   <div class="pull-right">
                     <a href="<?php echo base_url('user/logout') ?>" class="btn btn-success btn-flat">Sign out</a>
                   </div>
