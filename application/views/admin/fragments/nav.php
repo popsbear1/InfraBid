@@ -124,7 +124,7 @@
                 <i class="fa fa-list"></i>
                 <span>APP View</span>
                 <span class="pull-right-container">
-                  <i class="fa fa-cogs"></i>
+                  <i class="fa fa-eye"></i>
                 </span>
               </a>
               <ul class=treeview-menu>
@@ -148,7 +148,7 @@
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-file"></i>
-                <span>Document</span>
+                <span>Documents</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
