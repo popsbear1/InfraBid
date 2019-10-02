@@ -3,16 +3,12 @@
 application/cache/*
 !application/cache/index.html
 
-application/config/database.php
-
 application/logs/*
 !application/logs/index.html
 
 !application/*/.htaccess
 
 composer.lock
-
-system/database/DB_driver.php
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
