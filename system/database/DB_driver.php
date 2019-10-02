@@ -142,7 +142,7 @@ abstract class CI_DB_driver {
 	 *
 	 * @var	int
 	 */
-	public $port			= '';
+	public $port			= '3308';
 
 	/**
 	 * Persistent connection flag
