@@ -136,10 +136,8 @@
                       <th class="text-center">NOTICE OF AWARD</th>
                       <th class="text-center">CONTRACT SIGNING</th>
                       <th class="text-center">Source of Fund</th>
-                      <th class="text-center">Fund id</th>
                       <th class="text-center">Type of Project</th>
                       <th class="text-center">Approved Budget Cost</th>
-                      <th class="text-center">abc</th>
                       <th class="text-center">Project Year</th>
                       <th class="text-center">Status</th>
                       <th class="text-center">Edit</th>
@@ -293,10 +291,8 @@
             { data: 'award_notice_date' },
             { data: 'contract_signing_date' },
             { data: 'source' },
-            { data: 'fund_id' },
             { data: 'type' },
             { data: 'formated_abc' },
-            { data: 'abc' },
             { data: 'project_year' },
             { data: 'project_status'},
             { 
@@ -310,18 +306,6 @@
                         '</form>';
               }
             }
-        ],
-        columnDefs: [
-          {
-                "targets": [ 9 ],
-                "visible": false,
-                "searchable": false
-          },
-          {
-              "targets": [ 12 ],
-              "visible": false,
-              "searchable": false
-          }
         ],
         order: [[9, 'asc']],
         rowGroup: {
@@ -419,7 +403,7 @@
             { data: 'contract_signing_date' },
             { data: 'source' },
             { data: 'type' },
-            { data: 'abc' },
+            { data: 'formated_abc' },
             { data: 'project_year' },
             { data: 'project_status'},
             { 

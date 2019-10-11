@@ -136,7 +136,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-right">
-                    <a href="<?php echo base_url('user/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="<?php echo base_url('user/logout') ?>" class="btn btn-success btn-flat">Sign out</a>
                   </div>
                 </li>
               </ul>

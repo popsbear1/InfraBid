@@ -358,8 +358,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/fragments/footer');
 	}
 
-
-
 	public function getFilteredOngoingPlanData(){
 		$year = $this->input->get('year');
 		$apptype = $this->input->get('apptype');
@@ -413,6 +411,11 @@ class Admin extends CI_Controller {
 		echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	}
 
+	public function getFilteredProcurementMonitoringStatus(){
+		$find_activity = $this->input->get('find_activity');
+		$data['projects'] = $this->admin_model->getFinishedProjects($find_activity);
+		echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+	}
 
 	public function projectDetailsView(){
 		$projectNavControl['pageName'] = "details";
