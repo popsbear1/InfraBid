@@ -266,11 +266,11 @@
 		}
 
 		public function getFinishedProjects($find_activity) {
-			$spec_activity = 'project_activity_status.'.$find_activity;
+			$spec_activity = 'project_activity_status.'.$find_activity.' != ';
 			$this->db->select('project_plan.project_no, project_plan.project_title, project_activity_status.pre_proc, project_activity_status.advertisement, project_plan.project_type, project_activity_status.pre_proc, project_activity_status.advertisement, project_activity_status.pre_bid, project_activity_status.eligibility_check, project_activity_status.open_bid, project_activity_status.bid_evaluation, project_activity_status.post_qual, project_activity_status.award_notice, project_activity_status.contract_signing, project_activity_status.proceed_notice, project_activity_status.delivery_completion, project_activity_status.acceptance_turnover');
 			$this->db->from('project_plan');
 			$this->db->join('project_activity_status', 'project_plan.plan_id = project_activity_status.plan_id');
-			$this->db->where($spec_activity, 'not_needed');
+			$this->db->where($spec_activity, 'pending');
 			$this->db->order_by('project_plan.plan_id');
 			$query = $this->db->get();
 
