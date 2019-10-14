@@ -1,3 +1,6 @@
+<?php if ($_SESSION['user_type'] !== 'BAC_SEC'){
+  header('Location: ..\index.php');
+} ?>
 <section class="content-header">
   <h2>Add Municipality and Barangay</h2>
 </section>

@@ -2,7 +2,9 @@
   #btn-app{
     height: 50px
   }
-
+<?php if ($_SESSION['user_type'] !== 'BAC_SEC'){
+  header('Location: ../capitol/docTrackView');
+} ?>
 </style>
 <section class="content">
   <div class="row">

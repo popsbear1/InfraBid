@@ -1,4 +1,6 @@
-
+<?php if ($_SESSION['user_type'] !== 'BAC_SEC'){
+  header('Location: ..\index.php');
+} ?>
       <div class="col-lg-9 col-md-9 col-sm-9">
         <h3>Project Timeline:</h3>
         <form action="<?php echo base_url('admin/updateProcurementTimeline') ?>" method="POST" id="updateProcurementTimelineForm">

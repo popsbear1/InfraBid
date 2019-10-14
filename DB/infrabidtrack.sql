@@ -1970,7 +1970,7 @@ INSERT INTO `projtype` (`projtype_id`, `type`, `status`) VALUES
 (8, 'Footbridges', 'active'),
 (9, 'Footpath/Foot Trail', 'active'),
 (10, 'Multi-Purpose Shed/Waiting Shed', 'active'),
-(11, 'Multi-Purpose Gym/Basketball Count', 'active'),
+(11, 'Multi-Purpose Gym/Basketball Court', 'active'),
 (12, 'Drainage Canal', 'active'),
 (13, 'Flood Control/Riprapping/Slope Protection', 'active'),
 (14, 'Provincial Road', 'active'),

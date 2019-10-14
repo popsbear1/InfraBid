@@ -1,3 +1,6 @@
+<?php if ($_SESSION['user_type'] !== 'BAC_SEC'){
+  header('Location: ..\index.php');
+} ?>
 <?php  
   
   function convertDateTextual($date){
@@ -16,6 +19,7 @@
     width: 250px;
     height: 60px;
   }
+
 </style>
     <section class="content">
       <div class="row">

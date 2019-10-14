@@ -1,3 +1,6 @@
+<?php if ($_SESSION['user_type'] !== 'BAC_SEC'){
+  header('Location: ..\index.php');
+} ?>
   <link href="<?php echo base_url() ?>public/timeline/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <script src="<?php echo base_url() ?>public/timeline/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>public/timeline/jquery-ui.min.js"></script>

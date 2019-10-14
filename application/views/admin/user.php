@@ -1,4 +1,6 @@
-
+<?php if ($_SESSION['user_type'] !== 'BAC_SEC'){
+  header('Location: ..\index.php');
+} ?>
 <section class="content">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
