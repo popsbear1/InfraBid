@@ -72,7 +72,7 @@
                     <td class="center"><input type="text" class="form-control text-center timelinedateinput" id="preBidEnd" name="preBidEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td class="row-col">
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="preBidNumber" min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="preBidNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="preBidUpdateBtn" type="button" disabled="true">Update</button>
@@ -85,7 +85,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="bidSubmissionEnd" name="bidSubmissionEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="bidSubmissionNumber" min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="bidSubmissionNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="bidSubmissionUpdateBtn" type="button" disabled="true">Update</button>
@@ -98,7 +98,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="bidEvaluationEnd" name="bidEvaluationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="bidEvaluationNumber" min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="bidEvaluationNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="bidEvaluationUpdateBtn" type="button" disabled="true">Update</button>
@@ -111,7 +111,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="postQualificationEnd" name="postQualificationEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="postQualificationNumber"  min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="postQualificationNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="postQualificationUpdateBtn" type="button" disabled="true">Update</button>
@@ -124,7 +124,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="awardNoticeIssuanceEnd" name="awardNoticeIssuanceEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="awardNoticeIssuanceNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="awardNoticeIssuanceUpdateBtn" type="button" disabled="true">Update</button>
@@ -137,7 +137,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="contractSigningEnd" name="contractSigningEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="contractSigningNumber"  min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="contractSigningNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="contractSigningUpdateBtn" type="button" disabled="true">Update</button>
@@ -169,7 +169,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="authorityApprovalEnd" name="authorityApprovalEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="authorityApprovalNumber" min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="authorityApprovalNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="authorityApprovalUpdateBtn" type="button" disabled="true">Update</button>
@@ -182,7 +182,7 @@
                     <td><input type="text" class="form-control text-center timelinedateinput" id="proceedNoticeEnd" name="proceedNoticeEnd" form="updateProcurementTimelineForm" autocomplete="off"></td>
                     <td>
                       <div class="col-lg-6">
-                        <input type="number" class="form-control" id="proceedNoticeNumber" min="1" autocomplete="off">
+                        <input type="number" class="form-control inpt-no-days" id="proceedNoticeNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
                         <button class="btn btn-info btn-block btn-dates" id="proceedNoticeUpdateBtn" type="button" disabled="true">Update</button>
@@ -578,6 +578,7 @@
         $('#startOverBtn').prop('disabled', false);
         $('.btn-dates').prop('disabled', false);
         $('.rad-dates').prop('disabled', false);
+        $('.inpt-no-days').val('');
         $(this).prop('disabled', true);
       })
 
@@ -956,7 +957,9 @@
         setDatesToEarliestPossibleTime(startDate);  
       }
     }
-      
+
+    $('.inpt-no-days').val('');
+    $('#repapulate_date_btn').prop('disabled', false);
   });
 
 
