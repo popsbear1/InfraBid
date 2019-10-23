@@ -16,3 +16,7 @@
   text-align: left;
   vertical-align: middle;
 }
+
+.custom-input-sm {
+  height: auto !important;
+}
