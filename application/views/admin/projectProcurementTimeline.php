@@ -20,7 +20,7 @@
               <button id="timeLineComputeBtn" type="button" class="btn btn-default btn-block">Compute/Reset to Earliest Possible Time</button>
             </div>
             <div class="col-lg-3">
-              <button class="btn btn-default btn-block" type="button" id="startOverBtn">Start Over</button>
+              <button class="btn btn-default btn-block" type="button" id="startOverBtn" disabled="true">Start Over</button>
             </div>
           </div>
           <div class="row">
@@ -60,11 +60,11 @@
                         </div>
                         <div class="col-md-4">
                           <label for="yesPreBid" class="text-center">Yes</label>
-                          <input type="radio" name="pre-bid" id="yesPreBid" class="text-center" checked="checked">
+                          <input type="radio" name="pre-bid" id="yesPreBid" class="text-center rad-dates" disabled="true" checked="checked">
                         </div>
                         <div class="col-md-4">
                           <label for="noPreBid" class="text-center">No</label>
-                          <input type="radio" name="pre-bid" id="noPreBid" class="text-center">
+                          <input type="radio" name="pre-bid" id="noPreBid" class="text-center rad-dates" disabled="true">
                         </div>
                       </div>
                     </td>
@@ -75,7 +75,7 @@
                         <input type="number" class="form-control" id="preBidNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="preBidUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="preBidUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -88,7 +88,7 @@
                         <input type="number" class="form-control" id="bidSubmissionNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="bidSubmissionUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="bidSubmissionUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -101,7 +101,7 @@
                         <input type="number" class="form-control" id="bidEvaluationNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="bidEvaluationUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="bidEvaluationUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -114,7 +114,7 @@
                         <input type="number" class="form-control" id="postQualificationNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="postQualificationUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="postQualificationUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -127,7 +127,7 @@
                         <input type="number" class="form-control" id="awardNoticeIssuanceNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="awardNoticeIssuanceUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="awardNoticeIssuanceUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -140,7 +140,7 @@
                         <input type="number" class="form-control" id="contractSigningNumber"  min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="contractSigningUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="contractSigningUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -157,11 +157,11 @@
                         </div>
                         <div class="col-md-4">
                           <label for="yesPreBid" class="text-center">Yes</label>
-                          <input type="radio" name="approval" id="yesApproval" class="text-center" checked="checked">
+                          <input type="radio" name="approval" id="yesApproval" class="text-center rad-dates" disabled="true" checked="checked">
                         </div>
                         <div class="col-md-4">
                           <label for="noPreBid" class="text-center">No</label>
-                          <input type="radio" name="approval" id="noApproval" class="text-center">
+                          <input type="radio" name="approval" id="noApproval" class="text-center rad-dates" disabled="true">
                         </div>
                       </div>
                     </td>
@@ -172,7 +172,7 @@
                         <input type="number" class="form-control" id="authorityApprovalNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="authorityApprovalUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="authorityApprovalUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -185,7 +185,7 @@
                         <input type="number" class="form-control" id="proceedNoticeNumber" min="1" autocomplete="off">
                       </div>
                       <div class="col-lg-6">
-                        <button class="btn btn-info btn-block" id="proceedNoticeUpdateBtn" type="button">Update</button>
+                        <button class="btn btn-info btn-block btn-dates" id="proceedNoticeUpdateBtn" type="button" disabled="true">Update</button>
                       </div>
                     </td>
                   </tr>
@@ -575,6 +575,10 @@
         console.log(proceedNoticeMaxBase);
 
         $('#timelineModalConfirmBtn').prop('disabled', false);
+        $('#startOverBtn').prop('disabled', false);
+        $('.btn-dates').prop('disabled', false);
+        $('.rad-dates').prop('disabled', false);
+        $(this).prop('disabled', true);
       })
 
       function getDateDiff(startDate, date){
@@ -911,6 +915,8 @@
 
   $('#startOverBtn').click(function(event){
     $(':input').val('');
+    $('#repapulate_date_btn').prop('disabled', false);
+    $(this).prop('disabled', true);
   });
 
   function setStartDate(date, interval){
