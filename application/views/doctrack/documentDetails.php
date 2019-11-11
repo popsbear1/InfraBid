@@ -69,7 +69,7 @@
                 <?php endif ?>
                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addProjectDocumentModal">
                   <i class="fa fa-plus"></i>
-                  Add Item
+                  Add Document
                 </button>
               </div>
               <div class="row">

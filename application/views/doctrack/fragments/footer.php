@@ -55,13 +55,13 @@ script for document tracking alert
 
         $('#alertMenu').prepend(
           '<li>' +
-            '<a href="#">' +
+            '<a href="<?php echo base_url('admin/completedDocumentTrackingView')?>">' +
               '<div class="row">' +
                 '<div class="col-lg-6 col-md-6 col-sm-6 text-center">' +
                   '<small>' + response.alerts[i]['project_title'] + '</small>' + 
                 '</div>' +
                 '<div class="col-lg-6 col-md-6 col-sm-6 text-center">' +
-                  '<midium><b>' + response.alerts[i]['current_doc_loc'] + '</midium></b>' +
+                  '<medium><b>' + response.alerts[i]['current_doc_loc'] + '</medium></b>' +
                 '</div>' +
               '</div>' +
             '</a>' +
