@@ -816,7 +816,7 @@ function convertDate($date){
                       <tr>
                         <td class="text-center">Bidder</td>
                         <td class="text-center">Bid Amount</td>
-                        <td class="text-center"><i class="fa fa-plus"></i></td>
+                        <td class="text-center"><i class="fa fa-minus"></i></td>
                       </tr>
                     </thead>
                     <tbody id="selected_contractors_container">
