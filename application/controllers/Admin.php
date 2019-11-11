@@ -2461,6 +2461,39 @@ class Admin extends CI_Controller {
 				
 	}
 
+		public function clearBidders(){
+		$plan_id = $this->session->userdata('plan_id');
+		$bidders = $this->input->delete('contractor_id[]');
+		$bids = $this->input->delete('bids[]');
+		$abc = $this->input->delete('abc');
+
+		$data = array('success' => false, 'valid_contractors' => false, 'valid_bids' => true);
+
+		for ($i=0; $i < sizeOf($bids); $i++) { 
+			if (!is_numeric($bids[$i])) {
+				$data['valid_bids'] = false;
+			}else{
+				if (floatval($bids[$i]) > floatval($abc)) {
+					$data['valid_bids'] = false;
+				}
+			}
+		}
+
+		if (!empty($bidders)) {
+			$data['valid_contractors'] = true;
+			if($data['valid_bids'] != false){
+				for( $i = 0; $i < sizeOf($bidders); $i++){
+					$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
+				}
+
+				$this->admin_model->updateCurrentWinningBid($plan_id);
+				$data['success'] = true;
+			}
+		}
+		echo json_encode($data);
+				
+	}
+
 	public function setObservers(){
 		$datetime = $this->input->post('invite_date_input');
 		$observer_id = $this->input->post('observer_id[]');

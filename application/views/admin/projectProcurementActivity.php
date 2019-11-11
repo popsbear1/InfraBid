@@ -341,8 +341,9 @@ function convertDate($date){
                   <div class="pull-left">
                     <p style="color: red"><small>List of bidders must be complete before selection. A single chance is given for selection of bidders.</small></p>
                   </div>
-                  <?php if (!empty($bidders)): ?>
-                    <button type="button" class="btn bg-purple pull-right" disabled><small>Select Bidders</small></button>
+                  <?php if (!empty($bidders)): 
+                          unset($_POST)?>
+                    <button type="button" class="btn bg-purple pull-right" data-toggle="modal" data-target="#selectProjectBidders"><small>Select Bidders</small></button>
                   <?php endif ?>
                   <?php if (empty($bidders)): ?>
                     
@@ -542,6 +543,12 @@ function convertDate($date){
           <p class="text-right">Actions:</p>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9">
+
+          <div class="row procactsubmitcontainer" id="pre_proc_submit_btn" hidden="hidden">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
+              <button type="button" class="btn btn-primary procactsubmitbutton" value="pre_proc,pre_proc_form">Submit</button>
+            </div>
+          </div>
 
           <div class="row procactsubmitcontainer" id="pre_proc_submit_btn" hidden="hidden">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-center">
@@ -782,8 +789,9 @@ function convertDate($date){
                   <thead>
                     <tr>
                       <th class="text-center">Bussiness Name</th>
-                      <th class="text-center">Owner</th>
                       <th class="text-center"><i class="fa fa-plus"></i></th>
+                      <th class="text-center">Owner</th>
+                      
                     </tr>
                   </thead>
                   <tbody class="text-center">
@@ -808,6 +816,7 @@ function convertDate($date){
                       <tr>
                         <td class="text-center">Bidder</td>
                         <td class="text-center">Bid Amount</td>
+                        <td class="text-center"><i class="fa fa-plus"></i></td>
                       </tr>
                     </thead>
                     <tbody id="selected_contractors_container">
@@ -822,6 +831,7 @@ function convertDate($date){
           <div class="modal-footer">
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#smallModal">Confirm</button>
+              <button type="button" class="btn btn-default" id="clear-bids" data-toggle="modal">Clear Current Bids</button>
           </div>
         </div>
       </div>
@@ -909,7 +919,7 @@ function convertDate($date){
                         <tbody>
                           <?php foreach ($bidders as $bid): ?>
                             <tr>
-                              <td><?php echo $bid['businessname'] . ' - ' . $bid['owner'] ?></td>
+                              <td><?php echo $bid['businessname'] . ' - ' . $bid['owner']?></td>
                               <td><?php echo $bid['proposed_bid'] ?></td>
                               <td><?php echo $bid['bid_status'] ?></td>
                             </tr>
@@ -1245,16 +1255,47 @@ function convertDate($date){
         $('#selected_contractors_container').prepend(
           '<tr>' +
             '<td>' + contractor_bussinessname + ' - ' + bussiness_owner + '</td>' +
+            
             '<td>' +
-              '<input name="contractor_id[]" value="' + contractor_id + '" hidden>' +
-              '<input class="form-control" name="bids[]" >' +
+              '<input class="dingus" name="contractor_id[]" value="' + contractor_id + '" hidden>' +
+              '<input class="dingus form-control" name="bids[]" >' +
             '</td>' +
+            '<td><button class="btn btn-primary btn-sm contractor_remove"><i class="fa fa-minus"></i></button><td>' +
           '</tr>'
         );
       }else{
         $('#contractor_selection_alert_message').html('Contractor Already Included!');
         $('#contractor_selection_alert').modal('show');
       }
+    });
+
+    $(document).on("click", ".contractor_remove", function(){
+       var contractor_id = $(this).val();
+       selected_contractors.pop(contractor_id);
+       $(this).parent().parent().remove();
+    }); 
+    $(document).on("click", "#clear-bids", function(){
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url('admin/clearBidders') ?>',
+        data: $(this).serialize(),
+        dataType: 'json'
+      }).done(function(response){
+        if (response.success == true) {
+          window.location.replace("<?php echo base_url('admin/procurementActivityView') ?>");
+        }else{
+          if(response.valid_contractors == false && response.valid_bids == false){
+            $('#contractor_selection_alert_message').html('Make sure a contractor is selected and entered bids are numeric and is less than or equal to the project ABC!');
+          }
+          if(response.valid_contractors == false && response.valid_bids == true){
+            $('#contractor_selection_alert_message').html('Make sure a contractor is selected!');
+          }
+          if(response.valid_contractors == true && response.valid_bids == false){
+            $('#contractor_selection_alert_message').html('Make sure entered bids are numeric and is less than or equal to the project ABC!');
+          }
+          $('#contractor_selection_alert').modal('show');
+        }
+      });
     });
 
     $('#selected_contractors_form').submit(function(e){
@@ -1282,6 +1323,8 @@ function convertDate($date){
         }
       });
     });
+ 
+ 
   });
 
     
