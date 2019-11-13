@@ -1588,6 +1588,10 @@
 			$status = array(
 				'post_qual' => 'finished'
 			);
+			if (is_null($data['post_qual'])) {
+				$status['post_qual'] = 'pending';
+			}
+			
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_activity_status', $status);
 			return true;
@@ -1606,6 +1610,9 @@
 			$status = array(
 				'award_notice' => 'finished'
 			);
+			if (is_null($data['award_notice'])) {
+				$status['award_notice'] = 'pending';
+			}
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_activity_status', $status);
 			return true;
@@ -1624,6 +1631,9 @@
 			$status = array(
 				'contract_signing' => 'finished'
 			);
+			if (is_null($data['contract_signing'])) {
+				$status['contract_signing'] = 'pending';
+			}
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_activity_status', $status);
 			return true;
@@ -1642,6 +1652,9 @@
 			$status = array(
 				'authority_approval' => 'finished'
 			);
+			if (is_null($data['authority_approval'])) {
+				$status['authority_approval'] = 'pending';
+			}
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_activity_status', $status);
 			return true;
@@ -1660,6 +1673,9 @@
 			$status = array(
 				'proceed_notice' => 'finished'
 			);
+			if (is_null($data['proceed_notice'])) {
+				$status['proceed_notice'] = 'pending';
+			}
 			$this->db->where('plan_id', $plan_id);
 			$this->db->update('project_activity_status', $status);
 			return true;
@@ -1866,6 +1882,101 @@
 		$this->db->where('plan_id', $plan_id);
 		$this->db->update('project_timeline', $data);
 		$this->session->set_userdata('timeLine_status', 'set');
+	}
+	public function updateAfterPostQualTimeline($plan_id, $post_qualification_start, $post_qualification_end, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
+		$data = array(
+			'timeLine_status' => 'set',
+			'post_qualification_start' => $post_qualification_start, 
+			'post_qualification_end' => $post_qualification_end,
+			'award_notice_start' => $award_notice_start,
+			'award_notice_end' => $award_notice_end,
+			'contract_signing_start' => $contract_signing_start,
+			'contract_signing_end' => $contract_signing_end,
+			'authority_approval_start' => $authority_approval_start,
+			'authority_approval_end' => $authority_approval_end,
+			'proceed_notice_start' => $proceed_notice_start,
+			'proceed_notice_end' => $proceed_notice_end
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		$this->db->update('project_timeline', $data);
+		$this->session->set_userdata('timeLine_status', 'set');
+	}
+
+	public function updateAfterAwardNoticeTimeline($plan_id, $award_notice_start, $award_notice_end, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
+		$data = array(
+			'award_notice_start' => $award_notice_start,
+			'award_notice_end' => $award_notice_end,
+			'contract_signing_start' => $contract_signing_start,
+			'contract_signing_end' => $contract_signing_end,
+			'authority_approval_start' => $authority_approval_start,
+			'authority_approval_end' => $authority_approval_end,
+			'proceed_notice_start' => $proceed_notice_start,
+			'proceed_notice_end' => $proceed_notice_end
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('project_timeline', $data)) {
+			$this->session->set_userdata('timeLine_status', 'set');
+			return true;
+		} else {
+			return false;
+		}		
+		
+	}
+
+	public function updateAfterContractSigningTimeline($plan_id, $contract_signing_start, $contract_signing_end, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
+		$data = array(
+			'timeLine_status' => 'set',
+			'contract_signing_start' => $contract_signing_start,
+			'contract_signing_end' => $contract_signing_end,
+			'authority_approval_start' => $authority_approval_start,
+			'authority_approval_end' => $authority_approval_end,
+			'proceed_notice_start' => $proceed_notice_start,
+			'proceed_notice_end' => $proceed_notice_end
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('project_timeline', $data)) {
+			$this->session->set_userdata('timeLine_status', 'set');
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+	public function updateAfterAuthorityApprovalTimeline($plan_id, $authority_approval_start, $authority_approval_end, $proceed_notice_start, $proceed_notice_end){
+		$data = array(
+			'timeLine_status' => 'set',
+			'authority_approval_start' => $authority_approval_start,
+			'authority_approval_end' => $authority_approval_end,
+			'proceed_notice_start' => $proceed_notice_start,
+			'proceed_notice_end' => $proceed_notice_end
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('project_timeline', $data)) {
+			$this->session->set_userdata('timeLine_status', 'set');
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+	public function updateAfterProceedNoticeTimeline($plan_id, $proceed_notice_start, $proceed_notice_end){
+		$data = array(
+			'timeLine_status' => 'set',
+			'proceed_notice_start' => $proceed_notice_start,
+			'proceed_notice_end' => $proceed_notice_end
+		);
+
+		$this->db->where('plan_id', $plan_id);
+		if ($this->db->update('project_timeline', $data)) {
+			$this->session->set_userdata('timeLine_status', 'set');
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function updateProjectStatus($plan_id, $action){

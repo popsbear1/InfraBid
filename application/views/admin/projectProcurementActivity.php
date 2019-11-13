@@ -36,7 +36,7 @@ $contract_signing_end = convertDateTextual($timeline['contract_signing_end']);
 $authority_approval_start = convertDateTextual($timeline['authority_approval_start']);
 $authority_approval_end = convertDateTextual($timeline['authority_approval_end']);
 $proceed_notice_start = convertDateTextual($timeline['proceed_notice_start']);
-$proceed_notice_end = convertDateTextual($timeline['proceed_notice_end']); 
+$proceed_notice_end = convertDateTextual($timeline['proceed_notice_end']);
 
 function convertDateTextual($date){
   if ($date != null) {
@@ -341,8 +341,7 @@ function convertDate($date){
                   <div class="pull-left">
                     <p style="color: red"><small>List of bidders must be complete before selection. A single chance is given for selection of bidders.</small></p>
                   </div>
-                  <?php if (!empty($bidders)): 
-                          unset($_POST)?>
+                  <?php if (!empty($bidders)): unset($_POST)?>
                     <button type="button" class="btn bg-purple pull-right" data-toggle="modal" data-target="#selectProjectBidders"><small>Select Bidders</small></button>
                   <?php endif ?>
                   <?php if (empty($bidders)): ?>
@@ -383,13 +382,15 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Post Qual: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $post_qualification_start; ?></p>
+                  <input type="text" id="startpostqual" placeholder="<?php echo convertDateTextual($post_qualification_start) ?>" name="activity_date_start" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $post_qualification_start; ?></p> -->
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Post Qual: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $post_qualification_end ?></p>
+                  <input type="text" id="endpostqual" placeholder="<?php echo convertDateTextual($post_qualification_end) ?>" name="activity_date_end" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $post_qualification_end ?></p> -->
                 </div>
               </div>
               <div class="form-group">
@@ -407,13 +408,15 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice of Award:</label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $award_notice_start ?></p>
+                  <input type="text" id="startawarddate" placeholder="<?php echo convertDateTextual($award_notice_start) ?>" name="activity_date_start" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $award_notice_start ?></p> -->
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Notice of Award:</label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $award_notice_end ?></p>
+                  <input type="text" id="endawarddate" placeholder="<?php echo convertDateTextual($award_notice_end) ?>" name="activity_date_end" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $award_notice_end ?></p> -->
                 </div>
               </div>
               <div class="form-group">
@@ -432,13 +435,15 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Contract Signing: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $contract_signing_start ?></p>
+                  <input type="text" id="startcontractsigning" placeholder="<?php echo convertDateTextual($contract_signing_start) ?>" name="activity_date_start" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $contract_signing_start ?></p> -->
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Contract Signing: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $contract_signing_end ?></p>
+                  <input type="text" id="endcontractsigning" placeholder="<?php echo convertDateTextual($contract_signing_end) ?>" name="activity_date_end" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $contract_signing_end ?></p> -->
                 </div>
               </div>
               <div class="form-group">
@@ -458,13 +463,15 @@ function convertDate($date){
                 <div class="form-group">
                   <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Authority Approval: </label>
                   <div class="col-lg-7 col-md-7 col-sm-7">
-                    <p class="form-control"><?php echo $authority_approval_start ?></p>
+                    <input type="text" id="startauthorityapproval" placeholder="<?php echo convertDateTextual($authority_approval_start) ?>" name="activity_date_start" class="form-control procActDateInput">
+                    <!-- <p class="form-control"><?php echo $authority_approval_start ?></p> -->
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Authority Approval: </label>
                   <div class="col-lg-7 col-md-7 col-sm-7">
-                    <p class="form-control"><?php echo $authority_approval_end ?></p>
+                    <input type="text" id="endauthorityapproval" placeholder="<?php echo convertDateTextual($authority_approval_end) ?>" name="activity_date_end" class="form-control procActDateInput">
+                    <!-- <p class="form-control"><?php echo $authority_approval_end ?></p> -->
                   </div>
                 </div>
                 <div class="form-group">
@@ -483,13 +490,15 @@ function convertDate($date){
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">Start Date of Notice to Proceed: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $proceed_notice_start ?></p>
+                  <input type="text" id="startproceednotice" placeholder="<?php echo convertDateTextual($proceed_notice_start) ?>" name="activity_date_start" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $proceed_notice_start ?></p> -->
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-lg-5 col-md-5 col-sm-5">End Date of Notice to Proceed: </label>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                  <p class="form-control"><?php echo $proceed_notice_end ?></p>
+                  <input type="text" id="endproceednotice" placeholder="<?php echo convertDateTextual($proceed_notice_end) ?>" name="activity_date_end" class="form-control procActDateInput">
+                  <!-- <p class="form-control"><?php echo $proceed_notice_end ?></p> -->
                 </div>
               </div>
               <div class="form-group">
@@ -1365,6 +1374,10 @@ function convertDate($date){
   var proceed_notice_start = '<?php echo $timeline['proceed_notice_start'] ?>';
   var proceed_notice_end = '<?php echo $timeline['proceed_notice_end'] ?>'; 
 
+  var new_post_qualification_start, new_post_qualification_end, new_award_notice_start, new_award_notice_end,new_contract_signing_start, new_contract_signing_end, new_authority_approval_start, new_authority_approval_end, new_proceed_notice_start, new_proceed_notice_end = '';
+
+  var start_date, end_date, prev_act_date = '';
+
   var activity_status = [
     {
       actname : 'pre_proc_status', 
@@ -1426,32 +1439,27 @@ function convertDate($date){
       if (activity_status[i].status == 'pending') {
         var index = i + 1;
         for (var j = index; j < activity_status.length; j++) {
-          activity_status[j].status = 'comming';
+          activity_status[j].status = 'coming';
         }
       }
       
     }
 
     for (var i = 0; i < activity_status.length; i++) {
-      console.log(activity_status[i].actname + ' ' + activity_status[i].status);
-    }
-
-    for (var i = 0; i < activity_status.length; i++) {
       if (activity_status[i].actname == 'pre_proc_status') {
-        setActivityView(activity_status[i].status, '#pre_proc_btn', '#pre_proc_view', '#pre_proc_submit_btn');
-        
+        setActivityView(activity_status[i].status, '#pre_proc_btn', '#pre_proc_view', '#pre_proc_submit_btn'); 
       }
 
       if (activity_status[i].actname == 'advertisement_status') {
-        setActivityView(activity_status[i].status, '#advertisement_btn', '#ads_post_view', '#advertisement_submit_btn');
+        setActivityView(activity_status[i].status, '#advertisement_btn', '#ads_post_view', '#advertisement_submit_btn', '#advertisement', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'pre_bid_status') {
-        setActivityView(activity_status[i].status, '#pre_bid_btn', '#pre_bid_view', '#pre_bid_submit_btn');
+        setActivityView(activity_status[i].status, '#pre_bid_btn', '#pre_bid_view', '#pre_bid_submit_btn', '#pre_bid', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'open_bid_status') {
-        setActivityView(activity_status[i].status, '#open_bid_btn', '#bid_open_view', '#open_bid_submit_btn');
+        setActivityView(activity_status[i].status, '#open_bid_btn', '#bid_open_view', '#open_bid_submit_btn', '#openbid', prevActStatus(activity_status[i].actname));
       }
 
       // if (activity_status[i].actname == 'eligibility_check_status') {
@@ -1459,59 +1467,94 @@ function convertDate($date){
       // }
 
       if (activity_status[i].actname == 'bid_evaluation_status') {
-        setActivityView(activity_status[i].status, '#bid_eval_btn', '#bid_evaluation_view', '#bid_eval_submit_btn');
+        setActivityView(activity_status[i].status, '#bid_eval_btn', '#bid_evaluation_view', '#bid_eval_submit_btn', '#bidevaluation', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'post_qual_status') {
-        setActivityView(activity_status[i].status, '#post_qual_btn', '#post_qual_view', '#post_qual_submit_btn');
+        setActivityView(activity_status[i].status, '#post_qual_btn', '#post_qual_view', '#post_qual_submit_btn', '#postqual', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'award_notice_status') {
-        setActivityView(activity_status[i].status, '#award_notice_btn', '#notice_award_view', '#award_notice_submit_btn');
+        setActivityView(activity_status[i].status, '#award_notice_btn', '#notice_award_view', '#award_notice_submit_btn', '#awarddate', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'contract_signing_status') {
-        setActivityView(activity_status[i].status, '#contract_signing_btn', '#sign_contract_view', '#contract_signing_submit_btn');
+        setActivityView(activity_status[i].status, '#contract_signing_btn', '#sign_contract_view', '#contract_signing_submit_btn', '#contractsigning', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'authority_approval_status') {
-        setActivityView(activity_status[i].status, '#authority_approval_btn', '#authority_approval_view', '#authority_approval_submit_btn');
+        setActivityView(activity_status[i].status, '#authority_approval_btn', '#authority_approval_view', '#authority_approval_submit_btn', '#authorityapproval', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'proceed_notice_status') {
-        setActivityView(activity_status[i].status, '#proceed_notice_btn', '#proceed_notice_view', '#proceed_notice_submit_btn');
+        setActivityView(activity_status[i].status, '#proceed_notice_btn', '#proceed_notice_view', '#proceed_notice_submit_btn', '#proceednotice', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'delivery_completion_status') {
-        setActivityView(activity_status[i].status, '#delivery_completion_btn', '#completion_delivery_view', '#completion_submit_btn');
+        setActivityView(activity_status[i].status, '#delivery_completion_btn', '#completion_delivery_view', '#completion_submit_btn', '#completion', prevActStatus(activity_status[i].actname));
       }
 
       if (activity_status[i].actname == 'acceptance_turnover_status') {
-        setActivityView(activity_status[i].status, '#acceptance_turnover_btn', '#turnover_acceptance_view', '#acceptance_submit_btn');
+        setActivityView(activity_status[i].status, '#acceptance_turnover_btn', '#turnover_acceptance_view', '#acceptance_submit_btn', '#final_remark', prevActStatus(activity_status[i].actname));
       }
     }
   })
 
-  function setActivityView(status, btnID, viewID, submitID){
+  function setActivityView(status, btnID, viewID, submitID, inputID, prevActStatus){
     if (status == 'finished') {
       $(btnID).addClass('btn-success');
-    }else if(status == 'pending'){
+      $(btnID).prop('disabled', '');
+      if (inputID !== undefined) {
+        $(inputID).prop('disabled', 'disabled');
+      } 
+    } else if(status == 'pending' && prevActStatus == 'finished') {
       setButtonStyle(btnID);
       $(viewID).removeAttr('hidden');
       $(submitID).removeAttr('hidden');
-    }else if(status == 'comming'){
+      $(btnID).prop('disabled', '');
+    } else {
       $(btnID).prop('disabled', 'disabled');
     }
   }
 
-        
+  function prevActStatus(activity_status_actname) {
+    for (var i = 1; i < activity_status.length; i++) {
+      if (activity_status[i].actname === activity_status_actname) {
+        return activity_status[i - 1].status;
+        break;
+      }
+    }
+  }
+
+  var inputValue = '';
+  var isAdjustableActivity = false;
+  var adjustableActivities = ['postqual','awarddate','contractsigning','authorityapproval','proceednotice'];
 
   $('.procactsubmitbutton').click(function(event){
     var activityArray = $(this).val().split(",");
     var activity = activityArray[0];
     var activityForm = activityArray[1];
-    inputElement = $('#' + activity);
-    inputValue = inputElement.val();
+    var setDateElement = $('#' + activity);
+    var setDateValue = setDateElement.val();
+    for (var x = 0; x < adjustableActivities.length; x++) {
+      if (activity === adjustableActivities[x]) {
+        isAdjustableActivity = true;
+        break;
+      }
+    }
+    if (isAdjustableActivity == 'true') {
+      var endDateElement = $('#end' + activity);
+      var endDateValue = endDateElement.val();
+      if (setDateValue === endDateValue) {
+        inputValue = endDateValue;
+      } else {
+        inputValue = setDateValue;
+      }
+    } else {
+      inputValue = setDateValue;
+    }
+    
+    var errormsg = '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>';
 
     if (activity == 'pre_proc') {
       if (verifyDate(inputValue, activity)) {
@@ -1519,7 +1562,7 @@ function convertDate($date){
           proceedSubmit('Pre-Proc Date', inputValue, activityForm);
         }else{
           showError(activity, '<p class="text-danger text-center">Date must be earlier than Ads/Post Date</p>');
-        }
+        } 
       }
     }
     if (activity == 'advertisement') {
@@ -1527,7 +1570,7 @@ function convertDate($date){
         if (compareDates(inputValue, advertisement_start, advertisement_end)) {
           proceedSubmit('Advertisement Date', inputValue, activityForm);
         }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+          showError(activity, errormsg);
         }
       }
     }
@@ -1536,7 +1579,7 @@ function convertDate($date){
         if (compareDates(inputValue, pre_bid_start, pre_bid_end)) {
           proceedSubmit('Pre-bid Date', inputValue, activityForm);
         }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+          showError(activity, errormsg);
         }
       }
     }
@@ -1545,7 +1588,7 @@ function convertDate($date){
         if (compareDates(inputValue, bid_submission_start, bid_submission_end)) {
           proceedSubmit('Open-bid Date', inputValue, activityForm);
         }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+          showError(activity, errormsg);
         }
       } 
       // if (verifyDateOpenBid(inputValue, activity)) {
@@ -1559,53 +1602,127 @@ function convertDate($date){
         if (compareDates(inputValue, bid_evaluation_start, bid_evaluation_end)) {
           proceedSubmit('Bid Evaluation Date', inputValue, activityForm);
         }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+          showError(activity, errormsg);
         }
       }    
     }
     if (activity == 'postqual') {
-      if (verifyDate(inputValue, activity)) {
-        if (compareDates(inputValue, post_qualification_start, post_qualification_end)) {
-          proceedSubmit('Post Qualification Date', inputValue, activityForm);
-        }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+      if ($('#startpostqual').val().length === 0) {
+        new_post_qualification_start = post_qualification_start;
+      } else {
+        new_post_qualification_start = $('#startpostqual').val();
+      }
+      if ($('#endpostqual').val().length === 0) {
+        new_post_qualification_end = post_qualification_end;
+      } else {
+        new_post_qualification_end = $('#endpostqual').val();
+      }
+      if (compareEntryDates(new_post_qualification_start, new_post_qualification_end)) {
+        if (verifyDate(inputValue, activity)) {
+          if (compareDates(inputValue, new_post_qualification_start, new_post_qualification_end)) {
+            proceedSubmit('Post Qualification Date', inputValue, activityForm);
+          }else{
+            showError(activity, errormsg);
+          }
         }
+      } else {
+        alert('Starting date must not be later than ending date.');
       }
     }
     if (activity == 'awarddate') {
-      if (verifyDate(inputValue, activity)) {
-        if (compareDates(inputValue, award_notice_start, award_notice_end)) {
-          proceedSubmit('Award Date', inputValue, activityForm);
-        }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+      if ($('#startawarddate').val().length === 0) {
+        new_award_notice_start = award_notice_start;
+      } else {
+        new_award_notice_start = $('#startawarddate').val();
+      }
+      if ($('#endawarddate').val().length === 0) {
+        new_award_notice_end = award_notice_end;
+      } else {
+        new_award_notice_end = $('#endawarddate').val();
+      }
+      if (compareEntryDates(new_award_notice_start, new_award_notice_end)) {
+        if (verifyDate(inputValue, activity)) {
+          if (compareDates(inputValue, new_award_notice_start, new_award_notice_end)) {
+            proceedSubmit('Award Date', inputValue, activityForm);
+            alert('Date is valid!');
+          }else{
+            showError(activity, errormsg);
+          }
         }
+      } else {
+        alert('Starting date must not be later than ending date.');
       }
     }
     if (activity == 'contractsigning') {
-      if (verifyDate(inputValue, activity)) {
-        if (compareDates(inputValue, contract_signing_start, contract_signing_end)) {
-          proceedSubmit('Contact Signing Date', inputValue, activityForm);
-        }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+      if ($('#startcontractsigning').val().length === 0) {
+        new_contract_signing_start = contract_signing_start;
+      } else {
+        new_contract_signing_start = $('#startcontractsigning').val();
+      }
+      if ($('#endcontractsigning').val().length === 0) {
+        new_contract_signing_end = contract_signing_end;
+      } else {
+        new_contract_signing_end = $('#endcontractsigning').val();
+      }
+      if (compareEntryDates(new_contract_signing_start, new_contract_signing_end)) {
+        if (verifyDate(inputValue, activity)) {
+          if (compareDates(inputValue, new_contract_signing_start, new_contract_signing_end)) {
+            proceedSubmit('Contact Signing Date', inputValue, activityForm);
+            alert('Date is valid!');
+          }else{
+            showError(activity, errormsg);
+          }
         }
+      } else {
+        alert('Starting date must not be later than ending date.');
       }
     }
     if (activity == 'authorityapproval') {
-      if (verifyDate(inputValue, activity)) {
-        if (compareDates(inputValue, authority_approval_start, authority_approval_end)) {
-          proceedSubmit('Authority Approval Date', inputValue, activityForm);
-        }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+      if ($('#startauthorityapproval').val().length === 0) {
+        new_authority_approval_start = authority_approval_start;
+      } else {
+        new_authority_approval_start = $('#startauthorityapproval').val();
+      }
+      if ($('#endauthorityapproval').val().length === 0) {
+        new_authority_approval_end = authority_approval_end;
+      } else {
+        new_authority_approval_end = $('#endauthorityapproval').val();
+      }
+      if (compareEntryDates(new_authority_approval_start, new_authority_approval_end)) {
+        if (verifyDate(inputValue, activity)) {
+          if (compareDates(inputValue, new_authority_approval_start, new_authority_approval_end)) {
+            proceedSubmit('Authority Approval Date', inputValue, activityForm);
+            alert('Date is valid!');
+          }else{
+            showError(activity, errormsg);
+          }
         }
+      } else {
+        alert('Starting date must not be later than ending date.');
       }
     }
     if (activity == 'proceednotice') {
-      if (verifyDate(inputValue, activity)) {
-        if (compareDates(inputValue, proceed_notice_start, proceed_notice_end)) {
-          proceedSubmit('Proceed Notice Date', inputValue, activityForm);
-        }else{
-          showError(activity, '<p class="text-danger text-center">Date must be in range of the starting and ending date!!</p>');
+      if ($('#startproceednotice').val().length === 0) {
+        new_proceed_notice_start = proceed_notice_start;
+      } else {
+        new_proceed_notice_start = $('#startproceednotice').val();
+      }
+      if ($('#endproceednotice').val().length === 0) {
+        new_proceed_notice_end = proceed_notice_end;
+      } else {
+        new_proceed_notice_end = $('#endproceednotice').val();
+      }
+      if (compareEntryDates(new_proceed_notice_start, new_proceed_notice_end)) {
+        if (verifyDate(inputValue, activity)) {
+          if (compareDates(inputValue, new_proceed_notice_start, new_proceed_notice_end)) {
+            proceedSubmit('Proceed Notice Date', inputValue, activityForm);
+            alert('Date is valid!');
+          }else{
+            showError(activity, errormsg);
+          }
         }
+      } else {
+        alert('Starting date must not be later than ending date.');
       }
     }
     if (activity == 'completion') {
@@ -1664,6 +1781,17 @@ function convertDate($date){
     return true;
   }
 
+  function compareEntryDates(start, end, prev_act) {
+    prev_act_date = new Date(prev_act).getTime();
+    start_date = new Date(start).getTime();
+    end_date = new Date(end).getTime();
+    if (start_date > end_date || start_date <= prev_act_date) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
   // function verifyDateOpenBid(inputValue, activity){
   //   if (getValue(activity) == null || getValue(activity) == "") {
   //     if (inputValue == null || inputValue == "") {

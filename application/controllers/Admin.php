@@ -805,6 +805,8 @@ class Admin extends CI_Controller {
 		$data['timeline'] = $this->admin_model->getProjectTimeline($plan_id);
 		$data['bidders'] = $this->admin_model->getCurrentProjectBids($plan_id);
 		$data['observers'] = $this->admin_model->getActiveObservers();
+		$this->session->set_userdata('plan_dates', $data['procActDate']);
+		$this->session->set_userdata('plan_timeline', $data['timeline']);
 		
 		$data['activity_observers'] = $this->admin_model->getActivityObservers($plan_id);
 		
@@ -1912,8 +1914,13 @@ class Admin extends CI_Controller {
 	public function editProcActDate(){
 		$user_id = $this->session->userdata('user_id');
 		$plan_id = $this->session->userdata('plan_id');
+		$plan_dates = $this->session->userdata('plan_dates');
+		$plan_timeline = $this->session->userdata('plan_timeline');
 		$date = $this->input->post('activity_date');
+		$start_date = $this->input->post('activity_date_start');
+		$end_date = $this->input->post('activity_date_end');
 		$activity_name = $this->input->post('activity_name');
+		$to_adjust = 0;
 
 		if ($activity_name === "pre_proc") {
 			if ($this->admin_model->updatePreProcConfDate($plan_id, $date)) {
@@ -1977,42 +1984,92 @@ class Admin extends CI_Controller {
 		}
 
 		if ($activity_name === "post_qual") {
-			if ($this->admin_model->updatePostQualDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
-			}else{
-				$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
+			if ( strtotime($plan_timeline['bid_evaluation_end']) < strtotime($start_date) ) {
+				$to_adjust = abs(strtotime($end_date) - strtotime($plan_timeline['bin_evaluation_end']) - 86400);
+				if ($this->admin_model->updatePostQualDate($plan_id, $date)) {
+					if ($this->admin_model->updateAfterPostQualTimeline($plan_id, $start_date, $end_date, date('Y-m-d', strtotime($plan_timeline['award_notice_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['award_notice_end']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['contract_signing_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['contract_signing_end']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['authority_approval_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['authority_approval_end']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_end']) + $to_adjust))) {
+						$this->session->set_flashdata('success', "Post Qualification Date Successfully Updated!");
+					} else {
+						$this->session->set_flashdata('error', "Error! Timeline failed to adjust! Try again!");
+						$this->admin_model->updatePostQualDate($plan_id, NULL);
+					} 
+				}else{
+					$this->session->set_flashdata('error', "Error! Post Qualification Date Was Not Updated! Try again.");
+				}
+			} else {
+				$this->session->set_flashdata('error', "Post Qualification starting date must be after the Bid Evaluation end date.");
 			}
 		}
 
 		if ($activity_name === "awar_notice") {
-			if ($this->admin_model->updateAwardNoticeDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Notice of Award Date Successfully Updated!");
-			}else{
-				$this->session->set_flashdata('error', "Error! Notice of Award Date Was Not Updated! Try again.");
+			if ( strtotime($plan_timeline['post_qualification_end']) < strtotime($start_date) ) {
+				$to_adjust = abs(strtotime($end_date) - strtotime($plan_timeline['post_qualification_end']) - 86400);
+				if ($this->admin_model->updateAwardNoticeDate($plan_id, $date)) {
+					if ($this->admin_model->updateAfterAwardNoticeTimeline($plan_id, $start_date, $end_date, date('Y-m-d', strtotime($plan_timeline['contract_signing_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['contract_signing_end']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['authority_approval_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['authority_approval_end']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_end']) + $to_adjust))) {
+						$this->session->set_flashdata('success', "Notice of Award Date Successfully Updated!");
+					} else {
+						$this->session->set_flashdata('error', "Error! Timeline failed to adjust! Try again!");
+						$this->admin_model->updateAwardNoticeDate($plan_id, NULL);
+					}
+				} else {
+					$this->session->set_flashdata('error', "Error! Notice of Award Date Was Not Updated! Try again.");
+				}
+			} else {
+				$this->session->set_flashdata('error', "Notice of Award starting date must be after the Post Qualification end date.");
 			}
 		}
 
 		if ($activity_name === "contract_signing") {
-			if ($this->admin_model->updateContractSigningDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Contract Signing Date successfully Updated!");
-			}else{
-				$this->session->set_flashdata('error', "Error! Contract Signing Date was not Updated! Try again.");
+			if ( strtotime($plan_timeline['award_notice_end']) < strtotime($start_date) ) {
+				$to_adjust = abs(strtotime($end_date) - strtotime($plan_timeline['award_notice_end']) - 86400);
+				if ($this->admin_model->updateContractSigningDate($plan_id, $date)) {
+					if ($this->admin_model->updateAfterContractSigningTimeline($plan_id, $start_date, $end_date, date('Y-m-d', strtotime($plan_timeline['authority_approval_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['authority_approval_end']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_end']) + $to_adjust))) {
+						$this->session->set_flashdata('success', "Contract Signing Date successfully Updated!");
+					} else {
+						$this->session->set_flashdata('error', "Error! Timeline failed to adjust! Try again!");
+						$this->admin_model->updateContractSigningDate($plan_id, NULL);
+					}
+				}else{
+					$this->session->set_flashdata('error', "Error! Contract Signing Date was not Updated! Try again.");
+				}
+			} else {
+				$this->session->set_flashdata('error', "Contract Signing starting date must be after the Notice of Award end date.");
 			}
 		}
 
 		if ($activity_name === "authority_approval") {
-			if ($this->admin_model->updateAuthorityApprovalDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Approval of Higher Authority Date successfully Updated!");
-			}else{
-				$this->session->set_flashdata('error', "Error! Approval of Higher Authority Date was not Updated! Try again.");
+			if ( strtotime($plan_timeline['contract_signing_end']) < strtotime($start_date) ) {
+				$to_adjust = abs(strtotime(strtotime($end_date) - $plan_timeline['contract_signing_end']) - 86400);
+				if ($this->admin_model->updateAuthorityApprovalDate($plan_id, $date)) {
+					if ($this->admin_model->updateAfterAuthorityApprovalTimeline($plan_id, $start_date, $end_date, date('Y-m-d', strtotime($plan_timeline['proceed_notice_start']) + $to_adjust), date('Y-m-d', strtotime($plan_timeline['proceed_notice_end']) + $to_adjust))) {
+						$this->session->set_flashdata('success', "Approval of Higher Authority Date successfully Updated!");
+					} else {
+						$this->session->set_flashdata('error', "Error! Timeline failed to adjust! Try again!");
+						$this->admin_model->updateAuthorityApprovalDate($plan_id, NULL);
+					}
+				}else{
+					$this->session->set_flashdata('error', "Error! Approval of Higher Authority Date was not Updated! Try again.");
+				}
+			} else {
+				$this->session->set_flashdata('error', "Approval of Higher Authority starting date must be after the Contract Signing end date.");
 			}
 		}						
 
 		if ($activity_name === "proceed_notice") {
-			if ($this->admin_model->updateProceedNoticeDate($plan_id, $date)) {
-				$this->session->set_flashdata('success', "Issuance of Notice to Procced Date Successfully Updated!");
-			}else{
-				$this->session->set_flashdata('error', "Error! Issuance of Notice to Procced Date Was Not Updated! Try again.");
+			if ( strtotime($plan_timeline['authority_approval_end']) < strtotime($start_date) ) {
+				$to_adjust = abs(strtotime($end_date) - strtotime($plan_timeline['authority_approval_end']) - 86400);		
+				if ($this->admin_model->updateProceedNoticeDate($plan_id, $date)) {
+					if ($this->admin_model->updateAfterProceedNoticeTimeline($plan_id, $start_date, $end_date)) {
+						$this->session->set_flashdata('success', "Issuance of Notice to Proceed Date Successfully Updated!");
+					} else {
+						$this->session->set_flashdata('error', "Error! Timeline failed to adjust! Try again!");
+						$this->admin_model->updateProceedNoticeDate($plan_id, NULL);
+					}
+				}else{
+					$this->session->set_flashdata('error', "Error! Issuance of Notice to Proceed Date Was Not Updated! Try again.");
+				}
+			} else {
+				$this->session->set_flashdata('error', "Issue of Notice to Proceed starting date must be after the Approval of Higher Authority end date.");
 			}
 		}						
 
