@@ -1727,12 +1727,21 @@ function convertDate($date){
     }
     if (activity == 'completion') {
       if (verifyDate(inputValue, activity)) {
-        proceedSubmit('Delivery/Completion', inputValue, activityForm);
+        if (compareDatetoLast(inputValue, proceed_notice_end)) {
+          proceedSubmit('Delivery/Completion', inputValue, activityForm);
+        }else{
+          alert('Completion date must not be earlier or on last day of Notice of Proceed.')
+        }
       }
     }
     if (activity == 'acceptance') {
       if (verifyDate(inputValue, activity)) {
-        proceedSubmit('Acceptance?Turnover', inputValue, activityForm);
+        var completionDate = planDates['completion'];
+        if (compareDatetoLast(inputValue, completionDate)) {
+          proceedSubmit('Acceptance/Turnover', inputValue, activityForm);
+        }else{
+          alert('Completion date must not be earlier or on the Delivery/Completion date.');
+        }
       } 
     }
 
@@ -1756,6 +1765,16 @@ function convertDate($date){
     if (date < start_date || date > end_date) {
       return false;
     }else{
+      return true;
+    }
+  }
+
+  function compareDatetoLast(dateInput, end) {
+    var date = new Date(dateInput).getTime();
+    var end_date = new Date(end).getTime();
+    if (date <= end_date) {
+      return false;
+    } else {
       return true;
     }
   }
