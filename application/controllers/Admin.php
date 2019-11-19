@@ -2487,9 +2487,22 @@ class Admin extends CI_Controller {
 
 	public function addBidders(){
 		$plan_id = $this->session->userdata('plan_id');
-		$bidders = $this->input->post('contractor_id[]');
-		$bids = $this->input->post('bids[]');
-		$abc = $this->input->post('abc');
+		$abc = $_POST['abc'];
+		$contractors_to_add = $_POST['contractors_to_add'];
+		$contractors_to_remove = $_POST['contractors_to_remove'];
+		$bidders_to_add = [];
+		$bids = [];
+
+		for ($i = 0; $i < sizeOf($contractors_to_add); $i++) {
+			array_push($bidders_to_add, $contractors_to_add[$i]['contractor_id']);
+			array_push($bids, $contractors_to_add[$i]['bid']);
+		}
+
+		if (!empty($contractors_to_remove)) {
+			for ($i = 0; $i < sizeOf($contractors_to_remove); $i++) {
+				$this->admin_model->deleteBidders($plan_id, $contractors_to_remove[$i]['contractor_id']);
+			}
+		}
 
 		$data = array('success' => false, 'valid_contractors' => false, 'valid_bids' => true);
 
@@ -2503,11 +2516,11 @@ class Admin extends CI_Controller {
 			}
 		}
 
-		if (!empty($bidders)) {
+		if (!empty($bidders_to_add)) {
 			$data['valid_contractors'] = true;
 			if($data['valid_bids'] != false){
-				for( $i = 0; $i < sizeOf($bidders); $i++){
-					$this->admin_model->insertBids($plan_id, $bidders[$i], $bids[$i]);
+				for( $i = 0; $i < sizeOf($bidders_to_add); $i++){
+					$this->admin_model->insertBids($plan_id, $bidders_to_add[$i], $bids[$i]);
 				}
 
 				$this->admin_model->updateCurrentWinningBid($plan_id);
@@ -2518,7 +2531,7 @@ class Admin extends CI_Controller {
 				
 	}
 
-		public function clearBidders(){
+	public function clearBidders(){
 		$plan_id = $this->session->userdata('plan_id');
 		$bidders = $this->input->delete('contractor_id[]');
 		$bids = $this->input->delete('bids[]');

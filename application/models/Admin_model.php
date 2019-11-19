@@ -2452,6 +2452,13 @@
 		}
 	}
 
+	public function deleteBidders($plan_id, $contractor_id){
+		$this->db->where('plan_id', $plan_id);
+		$this->db->where('contractor_id', $contractor_id);
+		$this->db->where('bid_status', 'active');
+		$this->db->delete('project_bidders');
+	}
+
 	public function getCurrentProjectBids($plan_id){
 		$this->db->select('*');
 		$this->db->from('project_bidders');

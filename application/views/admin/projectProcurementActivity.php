@@ -797,7 +797,7 @@ function convertDate($date){
                 <table class="table-bordered" id="contractor_table">
                   <thead>
                     <tr>
-                      <th class="text-center">Bussiness Name</th>
+                      <th class="text-center">Business Name</th>
                       <th class="text-center"><i class="fa fa-plus"></i></th>
                       <th class="text-center">Owner</th>
                       
@@ -1255,19 +1255,25 @@ function convertDate($date){
       'autoWidth'   : false
     });
 
+    var current_contractors = <?php echo json_encode($bidders) ?>;
+    var contractors_to_add = [];
+    var contractors_to_remove = [];
+    var contractor_details = {};
+    var abc = 0;
+
     $(document).on('click', '.contractor_add', function(){
       var contractor_id = $(this).val();
       if (!selected_contractors.includes(contractor_id)) {
         selected_contractors.push(contractor_id);
-        var contractor_bussinessname = $(this).parent().prev().prev().html();
-        var bussiness_owner = $(this).parent().prev().html();
+        var contractor_businessname = $(this).parent().prev().prev().html();
+        var business_owner = $(this).parent().prev().html();
         $('#selected_contractors_container').prepend(
           '<tr>' +
-            '<td>' + contractor_bussinessname + ' - ' + bussiness_owner + '</td>' +
+            '<td>' + contractor_businessname + ' - ' + business_owner + '</td>' +
             
             '<td>' +
-              '<input class="dingus" name="contractor_id[]" value="' + contractor_id + '" hidden>' +
-              '<input class="dingus form-control" name="bids[]" >' +
+              '<input class="dingus" name="contractor_id" value="' + contractor_id + '" hidden>' +
+              '<input class="dingus form-control" name="bids" >' +
             '</td>' +
             '<td><button class="btn btn-primary btn-sm contractor_remove"><i class="fa fa-minus"></i></button><td>' +
           '</tr>'
@@ -1283,6 +1289,7 @@ function convertDate($date){
        selected_contractors.pop(contractor_id);
        $(this).parent().parent().remove();
     }); 
+
     $(document).on("click", "#clear-bids", function(){
       $.ajax({
         type: 'POST',
@@ -1310,10 +1317,36 @@ function convertDate($date){
     $('#selected_contractors_form').submit(function(e){
       e.preventDefault();
 
+      selected_contractors = JSON.parse(JSON.stringify($(this).serializeArray()));
+      
+      for (var k = 0; k < selected_contractors.length - 1; k++) {
+        if (k % 2 === 0) {
+          contractor_details['contractor_id'] = selected_contractors[k].value;
+        } else {
+          contractor_details['bid'] = selected_contractors[k].value;
+          contractors_to_add.push(contractor_details);
+          contractor_details = {};
+        }
+      }
+
+      abc = selected_contractors[(selected_contractors.length - 1)].value
+
+      for (var l = 0; l < contractors_to_add.length; l++) {
+        for (var m = 0; m < current_contractors.length; m++) {
+          if (parseInt(contractors_to_add[l].contractor_id) === parseInt(current_contractors[m].contractor_id)) {
+            contractors_to_remove.push(current_contractors[m]);
+          }
+        }
+      }
+    
       $.ajax({
         type: 'POST',
         url: '<?php echo base_url('admin/addBidders') ?>',
-        data: $(this).serialize(),
+        data: {
+          contractors_to_add: contractors_to_add,
+          contractors_to_remove: contractors_to_remove,
+          abc: abc
+        },
         dataType: 'json'
       }).done(function(response){
         if (response.success == true) {
@@ -1507,7 +1540,7 @@ function convertDate($date){
       if (inputID !== undefined) {
         $(inputID).prop('disabled', 'disabled');
       } 
-    } else if(status == 'pending' && prevActStatus == 'finished') {
+    } else if(status == 'pending' && (prevActStatus == 'finished' || 'null' )) {
       setButtonStyle(btnID);
       $(viewID).removeAttr('hidden');
       $(submitID).removeAttr('hidden');
