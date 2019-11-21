@@ -1318,7 +1318,7 @@ function convertDate($date){
       e.preventDefault();
 
       selected_contractors = JSON.parse(JSON.stringify($(this).serializeArray()));
-      
+          
       for (var k = 0; k < selected_contractors.length - 1; k++) {
         if (k % 2 === 0) {
           contractor_details['contractor_id'] = selected_contractors[k].value;
@@ -1331,14 +1331,16 @@ function convertDate($date){
 
       abc = selected_contractors[(selected_contractors.length - 1)].value
 
-      for (var l = 0; l < contractors_to_add.length; l++) {
-        for (var m = 0; m < current_contractors.length; m++) {
-          if (parseInt(contractors_to_add[l].contractor_id) === parseInt(current_contractors[m].contractor_id)) {
-            contractors_to_remove.push(current_contractors[m]);
+      if (current_contractors.length !== 0) {
+        for (var l = 0; l < contractors_to_add.length; l++) {
+          for (var m = 0; m < current_contractors.length; m++) {
+            if (parseInt(contractors_to_add[l].contractor_id) === parseInt(current_contractors[m].contractor_id)) {
+              contractors_to_remove.push(current_contractors[m]);
+            }
           }
         }
       }
-    
+
       $.ajax({
         type: 'POST',
         url: '<?php echo base_url('admin/addBidders') ?>',
@@ -1349,6 +1351,7 @@ function convertDate($date){
         },
         dataType: 'json'
       }).done(function(response){
+        console.log(response);
         if (response.success == true) {
           window.location.replace("<?php echo base_url('admin/procurementActivityView') ?>");
         }else{

@@ -2489,23 +2489,22 @@ class Admin extends CI_Controller {
 		$plan_id = $this->session->userdata('plan_id');
 		$abc = $_POST['abc'];
 		$contractors_to_add = $_POST['contractors_to_add'];
-		$contractors_to_remove = $_POST['contractors_to_remove'];
 		$bidders_to_add = [];
 		$bids = [];
+		$data = array('success' => false, 'valid_contractors' => false, 'valid_bids' => true);
 
-		for ($i = 0; $i < sizeOf($contractors_to_add); $i++) {
-			array_push($bidders_to_add, $contractors_to_add[$i]['contractor_id']);
-			array_push($bids, $contractors_to_add[$i]['bid']);
-		}
-
-		if (!empty($contractors_to_remove)) {
+		if (isset($_POST['contractors_to_remove'])) {
+			$contractors_to_remove = $_POST['contractors_to_remove'];
 			for ($i = 0; $i < sizeOf($contractors_to_remove); $i++) {
 				$this->admin_model->deleteBidders($plan_id, $contractors_to_remove[$i]['contractor_id']);
 			}
 		}
-
-		$data = array('success' => false, 'valid_contractors' => false, 'valid_bids' => true);
-
+		
+		for ($i = 0; $i < sizeOf($contractors_to_add); $i++) {
+			array_push($bidders_to_add, $contractors_to_add[$i]['contractor_id']);
+			array_push($bids, $contractors_to_add[$i]['bid']);
+		}
+		
 		for ($i=0; $i < sizeOf($bids); $i++) { 
 			if (!is_numeric($bids[$i])) {
 				$data['valid_bids'] = false;
